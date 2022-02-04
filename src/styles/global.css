@@ -1,0 +1,127 @@
+body {
+    background-color: #FFFFFB;
+    font-family: "Source Serif Pro",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: #33342e;
+}
+
+a, a:hover, a:active, .page-link {
+    color: #8F0D56;
+}
+
+.page-item.active .page-link {
+    background-color: #8F0D56;
+    border-color: #8F0D56;
+}
+
+.float-right {
+    text-align: right;
+}
+
+.recharts-cartesian-axis-tick {    
+    font-size: 0.8rem;
+}
+
+.state { /* must go before choropleth classes */
+  fill: #aaa;
+  stroke: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.choropleth0 {
+    fill: #FFDE16;
+    background: #FFDE16;
+}
+
+.choropleth1 {
+    fill: #FD9014;
+    background: #FD9014;
+}
+
+.choropleth2 {
+    fill: #EF4C39;
+    background: #EF4C39;
+}
+
+.choropleth3 {
+    fill: #8F0D56;
+    background: #8F0D56;
+}
+
+.choroplethNull {
+    fill: #aaa;
+    background: #aaa;
+}
+
+.legendKey {
+    display: flex;
+    margin: 5px 0px;
+}
+
+.keyColor {
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+}
+
+.keyText {
+    font-size: 14px;
+    display: inline-block;
+}
+
+.jobTable {
+    overflow: auto;
+    display: block;
+    table-layout: auto;
+}
+
+.table-controls > label {
+    width: 100%; /* label contstrains searchbar width */
+}
+
+#frames {
+  fill: none;
+  stroke: grey;
+}
+
+.sunrise-green {
+    color: #19975c;
+}
+
+.sunrise-nav {
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.nav-link {
+    color: #8F0D56 !important;
+}
+
+.nav-text {
+    text-decoration: none !important;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #000000;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+    background-color: #8F0D56;
+    border-color: #8F0D56;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: none;
+}
+
+.table td, .table th {
+    border-top: 1px solid #dee2e6;
+}
+
+footer {
+    text-align: center;
+}

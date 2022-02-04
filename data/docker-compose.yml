@@ -1,0 +1,10 @@
+version: '2.4'
+
+services:
+  make:
+    image: decarbonize-etl
+    container_name: decarbonize-etl
+    build: .
+    volumes:
+      - .:/app
+    entrypoint: bash -c "make clean && make all"
