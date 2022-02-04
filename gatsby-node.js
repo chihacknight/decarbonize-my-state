@@ -23,18 +23,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const jobDetailTemplate = path.resolve(`src/templates/job-detail.js`)
-  result.data.allOccupationsJson.edges.forEach(({ node }) => {
-    const path = 'job/' + node.occupation_slug
-    createPage({
-      path,
-      component: jobDetailTemplate,
-      context: {
-        pagePath: node.occupation_slug
-      },
-    })
-  })
-
   const placeNames = [
     "alabama",
     "alaska",

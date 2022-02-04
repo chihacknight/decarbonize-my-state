@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Who benefits from climate ambition?`,
-    description: `What occupations benefit most from ambitious climate policy? Who holds these jobs today? Explore and compare nearly 600 occupations, including over 100 common green jobs.`,
-    author: `Data for Progress + Kyle Gracey + Brittany Bennett`,
-    url: `https://greenjobsdata.com`,
+    title: `What does it take to decarbonize your state?`,
+    description: ``,
+    author: `Chi Hack Night`,
+    url: `https://state-decarbonize.netlify.app`,
     image: `/socialcard.png`
   },
   plugins: [

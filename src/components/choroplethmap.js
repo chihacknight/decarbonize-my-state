@@ -146,7 +146,6 @@ const ChoroplethMap = ({occupation, sidebar = true}) => {
                   {occupation.green_job ? <strong className={ 'sunrise-green' }><FaCheck /> common green job</strong> : <strong>Not a common green job</strong>} <Link to={`/about#green-job-faq`} state={{ greenJobFAQ: true }}><FaInfoCircle /></Link><br />
                   Total employed: {intcomma(occupation.total_employed)}<br />
                   <Link to={`/job/${occupation.occupation_slug}`}>Learn more &raquo;</Link>
-                  <br /><Link to={`/compare/?job1=${occupation.occupation_slug}`}>Compare to other occupations &raquo;</Link>
                 </p>
                 <hr />
                 <h6># of workers per 10,000 employees in state/territory</h6>

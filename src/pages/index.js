@@ -30,11 +30,11 @@ const IndexPage = ({data}) => {
 
   return (
     <Layout>
-      <SEO title="Who benefits from climate ambition?" />
+      <SEO title="What does it take to decarbonize your state?" />
 
       <h3 className='text-center'>
         <strong>
-          What occupations benefit most from ambitious climate policy? Who holds these jobs today? Explore and compare nearly 600 occupations, including over 100 common green jobs.<br /><br />Not familiar with green jobs? <Link to="/about">Learn more about this project</Link>
+        What does it take to decarbonize your state?<br />
         </strong>
       </h3><br />
 
