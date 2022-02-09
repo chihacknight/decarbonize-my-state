@@ -1,8 +1,5 @@
 import sys
-import csv
-import json
 import pandas as pd
-from slugify import slugify
 
 from utils import group_df_by_emissions
 

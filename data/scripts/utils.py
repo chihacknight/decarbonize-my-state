@@ -25,6 +25,7 @@ def group_df_by_emissions(emissions_data):
     for bucket in buckets:
         emissions_data['%_'+bucket] = round(emissions_data[bucket] / emissions_data[buckets].sum(axis=1), 2) * 100
     
+    # rename state & year so they are lower case
     emissions_data.rename(columns={'State':'state', 'Year':'year'}, inplace=True)
 
     #keep only relevant columns for our stats right now
@@ -32,8 +33,6 @@ def group_df_by_emissions(emissions_data):
 
     # set state and year as a multi index
     emissions_data.set_index(['state', 'year'], inplace=True)
-    
-    #emissions_data.drop(['state', 'year'],inplace=True, axis=1)
 
     return emissions_data[cols_to_keep]
 
