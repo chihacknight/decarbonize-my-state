@@ -1,241 +1,40 @@
-states_territories = [
-    'alabama',
-    'alaska',
-    'arizona',
-    'arkansas',
-    'california',
-    'colorado',
-    'connecticut',
-    'delaware',
-    'district-of-columbia',
-    'florida',
-    'georgia',
-    'guam',
-    'hawaii',
-    'idaho',
-    'illinois',
-    'indiana',
-    'iowa',
-    'kansas',
-    'kentucky',
-    'louisiana',
-    'maine',
-    'maryland',
-    'massachusetts',
-    'michigan',
-    'minnesota',
-    'mississippi',
-    'missouri',
-    'montana',
-    'nebraska',
-    'nevada',
-    'new-hampshire',
-    'new-jersey',
-    'new-mexico',
-    'new-york',
-    'north-carolina',
-    'north-dakota',
-    'ohio',
-    'oklahoma',
-    'oregon',
-    'pennsylvania',
-    'puerto-rico',
-    'rhode-island',
-    'south-carolina',
-    'south-dakota',
-    'tennessee',
-    'texas',
-    'utah',
-    'vermont',
-    'virgin-islands',
-    'virginia',
-    'washington',
-    'west-virginia',
-    'wisconsin',
-    'wyoming'
-]
+import pandas as pd
 
-fieldnames = [
-    'sort-order',
-    'occupation-slug',
-    'occupation',
-    'total-employed',
-    'perc-women',
-    'perc-white',
-    'perc-black-aa',
-    'perc-asian',
-    'perc-hispanic-latino',
-    'perc-union',
-    'age-16-19',
-    'age-20-24',
-    'age-25-34',
-    'age-35-44',
-    'age-45-54',
-    'age-55-64',
-    'age-65-plus',
-    'age-median',
-    'weekly-earnings',
-    'states-total-employed',
-    'alabama',
-    'alaska',
-    'arizona',
-    'arkansas',
-    'california',
-    'colorado',
-    'connecticut',
-    'delaware',
-    'district-of-columbia',
-    'florida',
-    'georgia',
-    'guam',
-    'hawaii',
-    'idaho',
-    'illinois',
-    'indiana',
-    'iowa',
-    'kansas',
-    'kentucky',
-    'louisiana',
-    'maine',
-    'maryland',
-    'massachusetts',
-    'michigan',
-    'minnesota',
-    'mississippi',
-    'missouri',
-    'montana',
-    'nebraska',
-    'nevada',
-    'new-hampshire',
-    'new-jersey',
-    'new-mexico',
-    'new-york',
-    'north-carolina',
-    'north-dakota',
-    'ohio',
-    'oklahoma',
-    'oregon',
-    'pennsylvania',
-    'puerto-rico',
-    'rhode-island',
-    'south-carolina',
-    'south-dakota',
-    'tennessee',
-    'texas',
-    'utah',
-    'vermont',
-    'virgin-islands',
-    'virginia',
-    'washington',
-    'west-virginia',
-    'wisconsin',
-    'wyoming',
-    'education',
-    'experience',
-    'training',
-    'green-job'
-]
+# define function to perform the grouping calculations on a dataframe
+# returns the cleaned grouped df
+def group_df_by_emissions(emissions_data):
+    dirty_power = ['emission_sub_electric']
+    buildings = ['emission_sub_residential', 'emission_sub_commercial']
+    transportation = ['emission_sub_transportation']
+    dumps_farms_industrial = ['emission_by_waste', 'emission_sub_industrial', 'emission_by_agriculture']
+    fuels = ['emission_sub_fugitive', 'emission_by_bunker_fuel']
 
-def processRow(row):
-    # states total employed is the accurate value and will be used 
-   #row['total-employed'] = strToInt(row['states-total-employed'])
-   #row.pop('states-total-employed', None)
+    columns_list = [['dirty_power', dirty_power], 
+                    ['buildings', buildings],
+                    ['transportation', transportation], 
+                    ['dumps_farms_industrial', dumps_farms_industrial], 
+                    ['fuels', fuels]]
+
+    # build each bucketed totals
+    for calc in columns_list: 
+        emissions_data[calc[0]] = emissions_data.loc[:, calc[1]].sum(axis=1)
     
-    age_rows = [
-        'age-16-19',
-        'age-20-24',
-        'age-25-34',
-        'age-35-44',
-        'age-45-54',
-        'age-55-64',
-        'age-65-plus'
-    ]
+    # just rewrite a buckets list to concat through, sheer laziness here
+    buckets = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial'] # emitted fuels from the totals for now
+    # build the bucket % makeup for that year
+    for bucket in buckets:
+        emissions_data['%_'+bucket] = round(emissions_data[bucket] / emissions_data[buckets].sum(axis=1), 2) * 100
 
-    total_age = 0
-    for index in age_rows:
-        total_age += strToInt(row[index])
+    return emissions_data
 
-    for index in age_rows:
-        row[index] = calcPercent(row[index], total_age)
+# define function to perform the grouping calculations on a dataframe
+# returns the cleaned grouped df
+def group_df_by_generation(generation_data):
+    columns_list = ['coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
 
-    # Convert to floats
-    for index in [
-        'perc-women',
-        'perc-white',
-        'perc-black-aa',
-        'perc-asian',
-        'perc-hispanic-latino',
-        'perc-union',
-        'age-median'
-    ]:
-        row[index] = strToFloat(row[index])
+    # build each bucketed totals
+    for calc in columns_list: 
+        generation_data[calc+'_%'] = round(generation_data[calc] / generation_data[columns_list].sum(axis=1), 2) * 100
 
-    # Convert string to ints
-    for index in [
-        'weekly-earnings'
-    ]:
-        row[index] = strToInt(row[index])
-
-    for index in states_territories:
-        row[index] = strToInt(row[index])
-
-    # Handle #N/A values
-    for index in [
-        'education',
-        'experience',
-        'training'
-    ]:
-        row[index] = strFormat(row[index])
-
-    row['green-job'] = True if row['green-job'] == '1' else False
-
-    return row
-
-def thousandsToInt(string):
-    try:
-        return int(string.replace(',', '')) * 1000
-    except ValueError:
-        return None
-
-
-def strToFloat(string):
-    try:
-        return float(string)
-    except ValueError:
-        return None
-
-
-def calcPercent(top, bottom):
-    top = strToInt(top)
-    bottom = strToInt(bottom)
-
-    if top and bottom:
-        return round(float(top) / bottom * 100, 1)
-    else:
-        return None
-
-# Despite the name, this actually calculates jobs per ten thousand
-def calcPerThousand(top, bottom):
-    top = strToInt(top)
-    bottom = strToInt(bottom)
+    return generation_data
     
-    if top and bottom:
-        return round(float(top) / bottom * 10000, 1)
-    else:
-        return None
-
-def strToInt(s):
-    if s is None or isinstance(s, int):
-        return s
-    s = s.replace('$', '').replace(',', '')
-    
-    try:
-        return int(s)
-    except ValueError:
-        return None
-
-def strFormat(string):
-    if string == "#N/A":
-        return None
-    else:
-        return string
