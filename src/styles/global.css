@@ -70,12 +70,6 @@ a, a:hover, a:active, .page-link {
     display: inline-block;
 }
 
-.jobTable {
-    overflow: auto;
-    display: block;
-    table-layout: auto;
-}
-
 .table-controls > label {
     width: 100%; /* label contstrains searchbar width */
 }
