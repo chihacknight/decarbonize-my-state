@@ -9,4 +9,4 @@ if __name__ == '__main__':
     generation_data = pd.read_csv(input1)
     generation_out = group_df_by_generation(generation_data)
     
-    print(generation_out.to_json())
+    print(generation_out)

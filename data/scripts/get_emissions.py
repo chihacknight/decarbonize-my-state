@@ -9,4 +9,4 @@ if __name__ == '__main__':
     us_emissions = pd.read_csv(input1)
     emissons_out = group_df_by_emissions(us_emissions)
     
-    print(emissons_out.to_json())
+    print(emissons_out)

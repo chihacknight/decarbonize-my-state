@@ -1,4 +1,9 @@
 import pandas as pd
+import json
+
+### Setting Test DataFrames to more easily test functions
+#us_emissions = pd.read_csv('../raw/us_emissions_2000_2018.csv')
+#us_generation = pd.read_csv('../raw/us_electric_generation_2001_20.csv')
 
 # define function to perform the grouping calculations on a dataframe
 # returns the cleaned grouped df
@@ -19,7 +24,8 @@ def group_df_by_emissions(emissions_data):
     for calc in columns_list: 
         emissions_data[calc[0]] = emissions_data.loc[:, calc[1]].sum(axis=1)
     
-    # just rewrite a buckets list to concat through, sheer laziness here
+    # this section is going to calculate `%_of_total`
+    # it's not currently being used, but can be accessed if you add '%_whatever_the_calculation_is' to the `cols_to_keep` object
     buckets = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial'] # emitted fuels from the totals for now
     # build the bucket % makeup for that year
     for bucket in buckets:
@@ -29,23 +35,128 @@ def group_df_by_emissions(emissions_data):
     emissions_data.rename(columns={'State':'state', 'Year':'year'}, inplace=True)
 
     #keep only relevant columns for our stats right now
-    cols_to_keep = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial']
+    cols_to_keep = ['state', 'year', 'dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial']
 
-    # set state and year as a multi index
-    emissions_data.set_index(['state', 'year'], inplace=True)
+    prepped_dictionary = json_data_builder(emissions_data[cols_to_keep])
 
-    return emissions_data[cols_to_keep]
+    return json.dumps(prepped_dictionary)
 
 # define function to perform the grouping calculations on a dataframe
 # returns the cleaned grouped df
 def group_df_by_generation(generation_data):
+    # first, i'll calculate % of total
     columns_list = ['coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
 
     # build each bucketed totals
     for calc in columns_list: 
         generation_data[calc+'_%'] = round(generation_data[calc] / generation_data[columns_list].sum(axis=1), 2) * 100
 
-    generation_data.set_index(['state', 'year'], inplace=True)
+    # replace the state_abbreviations with their full name to match the emissions data
+    generation_data['state'] = generation_data['state'].replace(dict(map(reversed, us_state_to_abbrev.items())))
 
-    return generation_data[columns_list]
+    cols_to_keep = ['state', 'year', 'coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
+
+    prepped_dictionary = json_data_builder(generation_data[cols_to_keep])
+
+    return json.dumps(prepped_dictionary)
+
+# this function takes in a dataframe object, and reformats it to match our needs as a json object
+def json_data_builder(dataframe):
+    '''
+    Goal:
+        For every state, we will subset the dataframe to just that state
+        using the to_dict method with the `records` param will return all a list of 
+        dictionaries in the following format:
     
+    [{
+      'year': 2001,
+        'metric': value
+       etc...},
+      {
+        'year':2002,
+        'metric': value
+         etc...
+    }]
+
+    So at that point, all we need to do is set larger key for that whole list as whatever the state is
+    And then then json_object matches the format we need. 
+    '''
+    # initiate empty json object to iterate with
+    json_object = {}
+
+    # grab list of unique states for for_loop
+    unique_states = list(set(dataframe['state']))
+    
+    for state in unique_states:
+        state_df = dataframe.loc[dataframe['state']==state]
+        # need to set state as the index here, so it's not duplicated in our final json
+        state_df.set_index('state', inplace=True)
+        
+        state_json = state_df.to_dict('records')
+        # set the initial json_object
+        json_object[state] = state_json
+
+    return json_object
+
+# using this object to align our us state names with their abbreviation
+# code copied from https://gist.github.com/rogerallen/1583593
+# to invert it, simply run `dict(map(reversed, us_state_to_abbrev.items()))`
+us_state_to_abbrev = {
+    "Alabama": "AL",
+    "Alaska": "AK",
+    "Arizona": "AZ",
+    "Arkansas": "AR",
+    "California": "CA",
+    "Colorado": "CO",
+    "Connecticut": "CT",
+    "Delaware": "DE",
+    "Florida": "FL",
+    "Georgia": "GA",
+    "Hawaii": "HI",
+    "Idaho": "ID",
+    "Illinois": "IL",
+    "Indiana": "IN",
+    "Iowa": "IA",
+    "Kansas": "KS",
+    "Kentucky": "KY",
+    "Louisiana": "LA",
+    "Maine": "ME",
+    "Maryland": "MD",
+    "Massachusetts": "MA",
+    "Michigan": "MI",
+    "Minnesota": "MN",
+    "Mississippi": "MS",
+    "Missouri": "MO",
+    "Montana": "MT",
+    "Nebraska": "NE",
+    "Nevada": "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    "Ohio": "OH",
+    "Oklahoma": "OK",
+    "Oregon": "OR",
+    "Pennsylvania": "PA",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    "Tennessee": "TN",
+    "Texas": "TX",
+    "Utah": "UT",
+    "Vermont": "VT",
+    "Virginia": "VA",
+    "Washington": "WA",
+    "West Virginia": "WV",
+    "Wisconsin": "WI",
+    "Wyoming": "WY",
+    "District of Columbia": "DC",
+    "American Samoa": "AS",
+    "Guam": "GU",
+    "Northern Mariana Islands": "MP",
+    "Puerto Rico": "PR",
+    "United States Minor Outlying Islands": "UM",
+    "U.S. Virgin Islands": "VI",
+} 
