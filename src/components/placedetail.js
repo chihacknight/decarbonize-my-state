@@ -1,29 +1,17 @@
 import React, { useState } from "react"
 import StackedBarChart from "../components/stackedbar"
-import { SVGMap } from "react-svg-map"
-import USMap from "../images/svg/usaStatesTerritories.js"
+import ChoroplethMap from "./choroplethmap"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 
-const PlaceDetail = ({location, placesData}) => {
+const PlaceDetail = ({location, placesData, emissions}) => {
   const currentPlace = location.pathname.split("/").pop()
   const [placeData, setPlaceData] = useState(placesData[currentPlace])
-  console.log(placeData)
-
-  const getClass = (location) => {
-    if (location.id === currentPlace)
-    {return `svg-map__location state choropleth1`}
-    else
-    {return "svg-map__location state"}
-  }
 
   return (
     <div className='row d-flex flex-row'>
       <div className='col-12 col-lg-4'>
         <h1 className='mr-4 mb-3'>{placeData.name}</h1>
-        <SVGMap
-          map={USMap}
-          locationClassName={getClass}
-        />
+        <ChoroplethMap emissions={emissions} sidebar={false} selected_location={currentPlace}/>
       </div>
       <div className='col-12 col-lg-8'>
         <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>

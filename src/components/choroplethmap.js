@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Row, Col } from "react-bootstrap"
 import { SVGMap } from "react-svg-map"
-import { Link, navigate  } from "gatsby"
+import { navigate } from "gatsby"
 
 import USMap from "../images/svg/usaStatesTerritories.js"
 import jenks from "./jenks"
@@ -68,6 +68,7 @@ const mouseMove = (event, setActiveRegion, setTooltipStyle) => {
 }
 
 const handleClick = (event, activeRegion) => {
+  console.log(activeRegion.id)
   navigate(`/place/${activeRegion.id}`)
 }
 
@@ -76,7 +77,7 @@ const getBuckets = (emissions, numBuckets) => {
   return buckets
 }
 
-const ChoroplethMap = ({emissions, sidebar = true}) => {
+const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
   const [activeRegion, setActiveRegion] = useState({id: undefined, name: undefined})
   const [tooltipStyle, setTooltipStyle] = useState({display: "none"})
   const [buckets, setBuckets] = useState([])
@@ -92,6 +93,10 @@ const ChoroplethMap = ({emissions, sidebar = true}) => {
       if (location.id === "frames") {
         return "svg-map__location"
       }
+      var mapClass = "svg-map__location state"
+      if (location.id === selected_location) {
+        mapClass += " mapSelected"
+      }
       const buckets = getBuckets(emissions, 4)
       const locationData = emissions[convertSlug(location.name)]
       let bucket
@@ -106,7 +111,7 @@ const ChoroplethMap = ({emissions, sidebar = true}) => {
       } else if (locationData >= buckets[0]) {
         bucket = 0
       }
-      return `svg-map__location state choropleth${bucket}`
+      return mapClass + ` choropleth${bucket}`
     }
     return `svg-map__location state`
   }
@@ -144,7 +149,7 @@ const ChoroplethMap = ({emissions, sidebar = true}) => {
             </div>
           </Col>: null
         }
-        <Col lg={{span: 9, offset: (emissions && sidebar ? 0 : 3)}}>
+        <Col lg={{span: (sidebar ? 9 : 12)}}>
           <SVGMap
             map={USMap}
             locationClassName={getClass}

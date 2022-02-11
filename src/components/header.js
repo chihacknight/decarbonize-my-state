@@ -12,10 +12,8 @@ const Header = ({ siteTitle }) => (
       marginBottom: `1.45rem`
     }}
   >
-    <a class="nav-text" href="https://dataforprogress.org" target="_blank" rel="noreferrer">
-      <Link className="nav-text" to="">&nbsp;&nbsp;&nbsp;</Link>
-      <Link className="nav-text" to="/">{siteTitle}</Link>
-    </a>
+    <Link className="nav-text" to="">&nbsp;&nbsp;&nbsp;</Link>
+    <Link className="nav-text" to="/">{siteTitle}</Link>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ml-auto">

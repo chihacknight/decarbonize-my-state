@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PlaceDetail from "../components/placedetail"
 import convertSlug from "../components/convertslug"
+import get_2018_emissions from "../components/get_2018_emissions"
 
 const places = [
   "alabama",
@@ -92,11 +93,11 @@ const getPlacesData = (data) => {
 }
 
 const PlaceDetailPage = ({location, data}) => {
-
+  const emissions_2018 = get_2018_emissions(data)
   return (
     <Layout>
       <SEO />
-      <PlaceDetail location={location} placesData={getPlacesData(data)}/>
+      <PlaceDetail location={location} placesData={getPlacesData(data)} emissions={emissions_2018}/>
     </Layout>
   )
 }

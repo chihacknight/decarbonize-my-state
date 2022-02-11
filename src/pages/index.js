@@ -5,24 +5,17 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import StackedBarChart from "../components/stackedbar"
 import ChoroplethMap from "../components/choroplethmap"
+import get_2018_emissions from "../components/get_2018_emissions"
 
 
 const IndexPage = ({data}) => {
-
   // console.log(data.finalJson)
 
-  // unpack the us emissions data for 2018 and total up all 4 categories by state
-  var emissions_2018 = {}
-  for (var key of Object.keys(data.finalJson)) {
-    var year_data = data.finalJson[key].filter(v => v.year == 2018)[0]
-    if (key != "United_States")
-      emissions_2018[key] = Math.round(year_data.dirty_power + year_data.buildings + year_data.transportation + year_data.dumps_farms_industrial)
-  }
-
   // prep data for US bar chart
-  var us_emissions = data.finalJson["United_States"]
-
-  console.log(us_emissions)
+  const us_emissions = data.finalJson["United_States"]
+  
+  // prep data for choropleth map
+  const emissions_2018 = get_2018_emissions(data)
 
   return (
     <Layout>
@@ -42,7 +35,7 @@ const IndexPage = ({data}) => {
         </strong>
       </h2><br />
 
-      <p class='pt-4'></p>
+      <p className='pt-4'></p>
       <ChoroplethMap emissions={emissions_2018} />
       <br /><br />
     </Layout>

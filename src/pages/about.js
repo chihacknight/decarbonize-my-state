@@ -4,11 +4,6 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const AboutPage = ({data, location}) => {
-  const checkURL = () => {
-    const greenJobsDefinition = location.state ? location.state.greenJobFAQ : false
-    console.log(greenJobsDefinition)
-    return greenJobsDefinition
-  }
 
   return (
     <Layout>

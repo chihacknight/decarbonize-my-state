@@ -53,6 +53,11 @@ a, a:hover, a:active, .page-link {
     background: #aaa;
 }
 
+.mapSelected {
+    stroke:#421B49;
+    stroke-width:4;
+}
+
 .legendKey {
     display: flex;
     margin: 5px 0px;
