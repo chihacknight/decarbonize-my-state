@@ -22,17 +22,17 @@ const StackedBarChart = ({emissions_data}) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="dirty_power" name="Dirty power" stackId="a" fill="#e41a1c" />
-          <Bar dataKey="buildings" name="Buildings" stackId="a" fill="#377eb8" />
-          <Bar dataKey="transportation" name="Transportation" stackId="a" fill="#4daf4a" />
-          <Bar dataKey="dumps_farms_industrial" name="Dumps, farms, industrial" stackId="a" fill="#984ea3" />
+          <Bar dataKey="dumps_farms_industrial" name="Dumps, farms, industrial" stackId="a" fill="#B121D9" />
+          <Bar dataKey="transportation" name="Transportation" stackId="a" fill="#49D921" />
+          <Bar dataKey="buildings" name="Buildings" stackId="a" fill="#21A5D9" />
+          <Bar dataKey="dirty_power" name="Dirty power" stackId="a" fill="#D95521" />
         </BarChart>
       </ResponsiveContainer>
     )
   }
   else {
     return (
-      <span class='float-right'>Data not available</span>
+      <span className='float-right'>Data not available</span>
     )
   }
 }
