@@ -1,46 +1,26 @@
 import React, { useState, useEffect } from "react"
 import { Row, Col } from "react-bootstrap"
-import { intcomma } from "journalize"
-import { FaCheck, FaInfoCircle } from "react-icons/fa"
 import { SVGMap } from "react-svg-map"
 import { Link, navigate  } from "gatsby"
 
 import USMap from "../images/svg/usaStatesTerritories.js"
-import stateValues from "./statevalues"
 import jenks from "./jenks"
+import convertSlug from "./convertslug.js"
 
-const CustomHover = ({ occupation, activeRegion }) => {
-  if (occupation) {
-    if (occupation[activeRegion.id] === null || occupation[activeRegion.id] === '') {
-      return (
-        <>
-          <strong>{activeRegion.name}</strong><br />
-          Data not available for {occupation.occupation}
-        </>
-      )
-    } else {
-      if (occupation.occupation) {
-        return (
-          <>
-            <strong>{activeRegion.name}</strong><br />
-            {occupation[activeRegion.id + '_perthousand']} employees in this occupation per 10,000 jobs<br />
-            {intcomma(occupation[activeRegion.id])} employees total in this occupation
-          </>
-        )
-      } else {
-        return (
-          <>
-            <strong>{activeRegion.name}</strong><br />
-            {occupation[activeRegion.id + '_perthousand']}% all green jobs here<br />
-            {intcomma(occupation[activeRegion.id])} total workers employed
-          </>
-        )
-      }
-      
-    }
+const CustomHover = ({ emissions, activeRegion }) => {
+  if (emissions[convertSlug(activeRegion.name)] != null) {
+    return (
+      <>
+        <strong>{activeRegion.name}</strong><br />
+        {emissions[convertSlug(activeRegion.name)]} MTCO2e
+      </>
+    )
   } else {
     return (
-      `Select an occupation above`
+      <>
+        <strong>{activeRegion.name}</strong><br />
+        Data not available
+      </>
     )
   }
 }
@@ -91,29 +71,29 @@ const handleClick = (event, activeRegion) => {
   navigate(`/place/${activeRegion.id}`)
 }
 
-const getBuckets = (occupation, numBuckets) => {
-  const buckets = jenks(stateValues(occupation), numBuckets)
+const getBuckets = (emissions, numBuckets) => {
+  const buckets = jenks(Object.values(emissions), numBuckets)
   return buckets
 }
 
-const ChoroplethMap = ({occupation, sidebar = true}) => {
+const ChoroplethMap = ({emissions, sidebar = true}) => {
   const [activeRegion, setActiveRegion] = useState({id: undefined, name: undefined})
   const [tooltipStyle, setTooltipStyle] = useState({display: "none"})
   const [buckets, setBuckets] = useState([])
 
   useEffect(() => {
-    if (occupation) {
-      setBuckets(getBuckets(occupation, 4))
+    if (emissions) {
+      setBuckets(getBuckets(emissions, 4))
     }
-  }, [occupation])
+  }, [emissions])
 
   const getClass = (location) => {
-    if (occupation) {
+    if (emissions) {
       if (location.id === "frames") {
         return "svg-map__location"
       }
-      const buckets = getBuckets(occupation, 4)
-      const locationData = occupation[location.id + '_perthousand']
+      const buckets = getBuckets(emissions, 4)
+      const locationData = emissions[convertSlug(location.name)]
       let bucket
       if (locationData === null) {
         bucket = "Null"
@@ -134,29 +114,12 @@ const ChoroplethMap = ({occupation, sidebar = true}) => {
   return (
     <>
       <div style={tooltipStyle}>
-        <CustomHover occupation={occupation} activeRegion={activeRegion}/>
+        <CustomHover emissions={emissions} activeRegion={activeRegion}/>
       </div>
       <Row>
-        {occupation && sidebar ?
+        {emissions && sidebar ?
           <Col lg={3}>
-            { occupation.occupation ?
-              <>
-                <h4><Link to={`/job/${occupation.occupation_slug}`}>{ occupation.occupation }</Link></h4>
-                <p>
-                  {occupation.green_job ? <strong className={ 'sunrise-green' }><FaCheck /> common green job</strong> : <strong>Not a common green job</strong>} <Link to={`/about#green-job-faq`} state={{ greenJobFAQ: true }}><FaInfoCircle /></Link><br />
-                  Total employed: {intcomma(occupation.total_employed)}<br />
-                  <Link to={`/job/${occupation.occupation_slug}`}>Learn more &raquo;</Link>
-                </p>
-                <hr />
-                <h6># of workers per 10,000 employees in state/territory</h6>
-              </> : 
-              <>
-                <h4>Which states and territories have the most green jobs?</h4>
-                <hr />
-                <h6>Percentage of common green jobs</h6>
-              </>
-            }
-                
+            <h6>Metric tons of carbon dioxide equivalent (MTCO2e) emissions in 2018</h6>
             {buckets.map((bucket, i) => {
               const colorClass = `keyColor choropleth${i}`
               const bucketInfo = bucket === null ? 
@@ -181,7 +144,7 @@ const ChoroplethMap = ({occupation, sidebar = true}) => {
             </div>
           </Col>: null
         }
-        <Col lg={{span: 9, offset: (occupation && sidebar ? 0 : 3)}}>
+        <Col lg={{span: 9, offset: (emissions && sidebar ? 0 : 3)}}>
           <SVGMap
             map={USMap}
             locationClassName={getClass}

@@ -29,23 +29,23 @@ a, a:hover, a:active, .page-link {
 }
 
 .choropleth0 {
-    fill: #FFDE16;
-    background: #FFDE16;
+    fill: #fed98e;
+    background: #fed98e;
 }
 
 .choropleth1 {
-    fill: #FD9014;
-    background: #FD9014;
+    fill: #fe9929;
+    background: #fe9929;
 }
 
 .choropleth2 {
-    fill: #EF4C39;
-    background: #EF4C39;
+    fill: #d95f0e;
+    background: #d95f0e;
 }
 
 .choropleth3 {
-    fill: #8F0D56;
-    background: #8F0D56;
+    fill: #993404;
+    background: #993404;
 }
 
 .choroplethNull {
@@ -68,12 +68,6 @@ a, a:hover, a:active, .page-link {
 .keyText {
     font-size: 14px;
     display: inline-block;
-}
-
-.jobTable {
-    overflow: auto;
-    display: block;
-    table-layout: auto;
 }
 
 .table-controls > label {

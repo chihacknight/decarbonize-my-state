@@ -4,25 +4,6 @@ const path = require("path")
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  const result = await graphql(
-    `
-      {
-        allOccupationsJson {
-          edges {
-            node {
-              occupation_slug
-            }
-          }
-        }
-      }
-    `
-  )
-
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
-
   const placeNames = [
     "alabama",
     "alaska",

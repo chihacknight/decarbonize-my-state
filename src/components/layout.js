@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
       </main>
       <footer>
         <hr />
-        <p>&#169; 2021 <a href="https://dataforprogress.org" target="_blank" rel="noreferrer">Data for Progress</a>. Website by <a href="https://datamade.us" target="_blank" rel="noreferrer">DataMade</a> and <a href="https://www.sunrisemovement.org/" target="_blank" rel="noreferrer">Sunrise Movement</a>.</p>
+        <p>&#169; 2022 A project from <a href="https://chihacknight.org" target="_blank" rel="noreferrer">Chi Hack Night</a></p>
       </footer>
     </>
   )

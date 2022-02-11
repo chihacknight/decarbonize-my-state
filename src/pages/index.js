@@ -1,74 +1,50 @@
 import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
-import { Typeahead } from "react-bootstrap-typeahead"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import StackedBarChart from "../components/stackedbar"
 import ChoroplethMap from "../components/choroplethmap"
-import JobTable from "../components/jobtable"
-import stateValues from "../components/statevalues"
-import occupation_json from '../../static/initial_occupations.json'
 
 
 const IndexPage = ({data}) => {
-  // filter out occupations that have no state data
-  const occupations = data.allOccupationsJson.nodes.filter((occ) => {
-    const allValues = stateValues(occ)
-    const allNums = allValues.filter(v => typeof v !== "string")
-    return allNums.some(num => typeof num === "number")
-  })
 
-  const [occupation,setOccupation] = useState(null)
-  
-  useEffect(() => {
-    const homeOccupations = occupations.filter(occupation =>
-      occupation_json.occupations.includes(occupation.occupation_slug))
+  // console.log(data.finalJson)
 
-    const randomIndex = Math.floor(Math.random() * homeOccupations.length)
-    setOccupation(homeOccupations[randomIndex])
-  },[])
+  // unpack the us emissions data for 2018 and total up all 4 categories by state
+  var emissions_2018 = {}
+  for (var key of Object.keys(data.finalJson)) {
+    var year_data = data.finalJson[key].filter(v => v.year == 2018)[0]
+    if (key != "United_States")
+      emissions_2018[key] = Math.round(year_data.dirty_power + year_data.buildings + year_data.transportation + year_data.dumps_farms_industrial)
+  }
+
+  // prep data for US bar chart
+  var us_emissions = data.finalJson["United_States"]
+
+  console.log(us_emissions)
 
   return (
     <Layout>
       <SEO title="What does it take to decarbonize your state?" />
 
-      <h3 className='text-center'>
+      <h2 className='text-center'>
+        <strong>
+        We have 28 years to reduce our emissions to zero<br />
+        </strong>
+      </h2><br />
+
+      <StackedBarChart emissions_data={us_emissions}/>
+      <br /><br /><br />
+      <h2 className='text-center'>
         <strong>
         What does it take to decarbonize your state?<br />
         </strong>
-      </h3><br />
+      </h2><br />
 
-      <Typeahead
-        clearButton
-        highlightOnlyResult
-        selected={occupations.filter(o => {
-          if (occupation) {
-            return o.occupation_slug === occupation.occupation_slug
-          } else {
-            return null
-          }
-        })}
-        id="map-occupation"
-        placeholder="Search by occupation ..."
-        options={occupations}
-        labelKey={(option) => `${option.occupation}`}
-        size="large"
-        onChange={(option) => {
-          if (option !== undefined) {
-            if (option.length === 0) {
-              setOccupation(null)
-            } else {
-              setOccupation(option[0])
-            }
-          }
-        }}
-      />
       <p class='pt-4'></p>
-      <ChoroplethMap occupation={occupation} />
+      <ChoroplethMap emissions={emissions_2018} />
       <br /><br />
-      <JobTable
-        data={data}
-      />
     </Layout>
   )
 }
@@ -76,237 +52,372 @@ const IndexPage = ({data}) => {
 export default IndexPage
 
 export const query = graphql`
-  query IndexQuery {
-    allOccupationsJson(sort: {fields: occupation}) {
-      nodes {
-        alabama_concentration
-        alaska_concentration
-        arizona_concentration
-        arkansas_concentration
-        california_concentration
-        colorado_concentration
-        connecticut_concentration
-        delaware_concentration
-        district_of_columbia_concentration
-        florida_concentration
-        georgia_concentration
-        guam_concentration
-        hawaii_concentration
-        idaho_concentration
-        illinois_concentration
-        indiana_concentration
-        iowa_concentration
-        kansas_concentration
-        kentucky_concentration
-        louisiana_concentration
-        maine_concentration
-        maryland_concentration
-        massachusetts_concentration
-        michigan_concentration
-        minnesota_concentration
-        mississippi_concentration
-        missouri_concentration
-        montana_concentration
-        nebraska_concentration
-        nevada_concentration
-        new_hampshire_concentration
-        new_jersey_concentration
-        new_mexico_concentration
-        new_york_concentration
-        north_carolina_concentration
-        north_dakota_concentration
-        ohio_concentration
-        oklahoma_concentration
-        oregon_concentration
-        pennsylvania_concentration
-        puerto_rico_concentration
-        rhode_island_concentration
-        south_carolina_concentration
-        south_dakota_concentration
-        tennessee_concentration
-        texas_concentration
-        utah_concentration
-        vermont_concentration
-        virgin_islands_concentration
-        virginia_concentration
-        washington_concentration
-        west_virginia_concentration
-        wisconsin_concentration
-        wyoming_concentration
-        alabama_perthousand
-        alaska_perthousand
-        arizona_perthousand
-        arkansas_perthousand
-        california_perthousand
-        colorado_perthousand
-        connecticut_perthousand
-        delaware_perthousand
-        district_of_columbia_perthousand
-        florida_perthousand
-        georgia_perthousand
-        guam_perthousand
-        hawaii_perthousand
-        idaho_perthousand
-        illinois_perthousand
-        indiana_perthousand
-        iowa_perthousand
-        kansas_perthousand
-        kentucky_perthousand
-        louisiana_perthousand
-        maine_perthousand
-        maryland_perthousand
-        massachusetts_perthousand
-        michigan_perthousand
-        minnesota_perthousand
-        mississippi_perthousand
-        missouri_perthousand
-        montana_perthousand
-        nebraska_perthousand
-        nevada_perthousand
-        new_hampshire_perthousand
-        new_jersey_perthousand
-        new_mexico_perthousand
-        new_york_perthousand
-        north_carolina_perthousand
-        north_dakota_perthousand
-        ohio_perthousand
-        oklahoma_perthousand
-        oregon_perthousand
-        pennsylvania_perthousand
-        puerto_rico_perthousand
-        rhode_island_perthousand
-        south_carolina_perthousand
-        south_dakota_perthousand
-        tennessee_perthousand
-        texas_perthousand
-        utah_perthousand
-        vermont_perthousand
-        virgin_islands_perthousand
-        virginia_perthousand
-        washington_perthousand
-        west_virginia_perthousand
-        wisconsin_perthousand
-        wyoming_perthousand
-        alabama
-        alaska
-        arizona
-        arkansas
-        california
-        colorado
-        connecticut
-        delaware
-        district_of_columbia
-        florida
-        georgia
-        guam
-        hawaii
-        idaho
-        illinois
-        indiana
-        iowa
-        kansas
-        kentucky
-        louisiana
-        maine
-        maryland
-        massachusetts
-        michigan
-        minnesota
-        mississippi
-        missouri
-        montana
-        nebraska
-        nevada
-        new_hampshire
-        new_jersey
-        new_mexico
-        new_york
-        north_carolina
-        north_dakota
-        ohio
-        oklahoma
-        oregon
-        pennsylvania
-        puerto_rico
-        rhode_island
-        south_carolina
-        south_dakota
-        tennessee
-        texas
-        utah
-        vermont
-        virgin_islands
-        virginia
-        washington
-        west_virginia
-        wisconsin
-        wyoming
-        occupation
-        occupation_slug
-        green_job
-        perc_women
-        perc_white
-        perc_black_aa
-        perc_hispanic_latino
-        perc_asian
-        weekly_earnings
-        total_employed
-      }
-    } totalsJson {
-      alabama
-      alaska
-      arizona
-      arkansas
-      california
-      colorado
-      connecticut
-      delaware
-      district_of_columbia
-      florida
-      georgia
-      guam
-      hawaii
-      idaho
-      illinois
-      indiana
-      iowa
-      kansas
-      kentucky
-      louisiana
-      maine
-      maryland
-      massachusetts
-      michigan
-      minnesota
-      mississippi
-      missouri
-      montana
-      nebraska
-      nevada
-      new_hampshire
-      new_jersey
-      new_mexico
-      new_york
-      north_carolina
-      north_dakota
-      ohio
-      oklahoma
-      oregon
-      pennsylvania
-      puerto_rico
-      rhode_island
-      south_carolina
-      south_dakota
-      tennessee
-      texas
-      utah
-      vermont
-      virgin_islands
-      virginia
-      washington
-      west_virginia
-      wisconsin
-      wyoming
+query IndexQuery {
+  finalJson {
+    Alabama {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Alaska {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Arizona {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Arkansas {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    California {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Colorado {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Connecticut {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Delaware {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    District_Of_Columbia {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Florida {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Georgia {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Hawaii {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Idaho {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Illinois {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Indiana {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Iowa {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Kansas {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Kentucky {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Louisiana {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Maine {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Maryland {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Massachusetts {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Michigan {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Minnesota {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Mississippi {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Missouri {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Montana {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Nebraska {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Nevada {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    New_Hampshire {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    New_Jersey {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    New_Mexico {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    New_York {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    North_Carolina {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    North_Dakota {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Ohio {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Oklahoma {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Oregon {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Pennsylvania {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Rhode_Island {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    South_Carolina {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    South_Dakota {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Tennessee {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Texas {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    United_States {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Utah {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Vermont {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Virginia {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Washington {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    West_Virginia {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Wisconsin {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
+    }
+    Wyoming {
+      year
+      dirty_power
+      buildings
+      transportation
+      dumps_farms_industrial
     }
   }
+}
 `
