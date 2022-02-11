@@ -86,7 +86,7 @@ const getPlacesData = (data) => {
     allPlacesData[place]['name'] = placeTitle
 
     // grab the state total employed from totals
-    allPlacesData[place]['data'] = data.finalJson[convertSlug(place)]
+    allPlacesData[place]['emissions'] = data.finalJson[convertSlug(place)]
   })
   return allPlacesData
 }

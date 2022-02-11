@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
-import { Typeahead } from "react-bootstrap-typeahead"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import StackedBarChart from "../components/stackedbar"
 import ChoroplethMap from "../components/choroplethmap"
 
 
@@ -11,6 +11,7 @@ const IndexPage = ({data}) => {
 
   // console.log(data.finalJson)
 
+  // unpack the us emissions data for 2018 and total up all 4 categories by state
   var emissions_2018 = {}
   for (var key of Object.keys(data.finalJson)) {
     var year_data = data.finalJson[key].filter(v => v.year == 2018)[0]
@@ -18,17 +19,28 @@ const IndexPage = ({data}) => {
       emissions_2018[key] = Math.round(year_data.dirty_power + year_data.buildings + year_data.transportation + year_data.dumps_farms_industrial)
   }
 
-  console.log(emissions_2018)
+  // prep data for US bar chart
+  var us_emissions = data.finalJson["United_States"]
+
+  console.log(us_emissions)
 
   return (
     <Layout>
       <SEO title="What does it take to decarbonize your state?" />
 
-      <h3 className='text-center'>
+      <h2 className='text-center'>
+        <strong>
+        We have 28 years to reduce our emissions to zero<br />
+        </strong>
+      </h2><br />
+
+      <StackedBarChart emissions_data={us_emissions}/>
+      <br /><br /><br />
+      <h2 className='text-center'>
         <strong>
         What does it take to decarbonize your state?<br />
         </strong>
-      </h3><br />
+      </h2><br />
 
       <p class='pt-4'></p>
       <ChoroplethMap emissions={emissions_2018} />

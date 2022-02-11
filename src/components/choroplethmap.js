@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { Row, Col } from "react-bootstrap"
-import { intcomma } from "journalize"
-import { FaCheck, FaInfoCircle } from "react-icons/fa"
 import { SVGMap } from "react-svg-map"
 import { Link, navigate  } from "gatsby"
 
