@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PlaceDetail from "../components/placedetail"
+import convertSlug from "../components/convertslug"
 
 const places = [
   "alabama",
@@ -85,26 +86,7 @@ const getPlacesData = (data) => {
     allPlacesData[place]['name'] = placeTitle
 
     // grab the state total employed from totals
-    allPlacesData[place]['total'] = data.totalsJson[place]
-
-    // populate ranks for each occupation
-    allPlacesData[place]['ranks'] = []
-    data.allOccupationsJson.nodes.forEach((occ, j) => {
-      if (occ.green_job && occ[place + '_concentration']) {
-        const occ_rank = {}
-        occ_rank['occupation'] = occ.occupation
-        occ_rank['occupation_slug'] = occ.occupation_slug
-        occ_rank['total_employed'] = occ[place]
-        occ_rank['concentration'] = occ[place + '_concentration']
-        allPlacesData[place]['ranks'].push(occ_rank)
-      }
-    })
-    // sort by total employed, descending
-    allPlacesData[place]['ranks'].sort((a,b) => b.concentration-a.concentration)
-    // set the rank in the object
-    allPlacesData[place]['ranks'].forEach((occ, j) => {
-      allPlacesData[place]['ranks'][j]['rank'] = j + 1
-    })
+    allPlacesData[place]['data'] = data.finalJson[convertSlug(place)]
   })
   return allPlacesData
 }

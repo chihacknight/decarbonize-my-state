@@ -5,7 +5,6 @@ import { Typeahead } from "react-bootstrap-typeahead"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ChoroplethMap from "../components/choroplethmap"
-import stateValues from "../components/statevalues"
 
 
 const IndexPage = ({data}) => {

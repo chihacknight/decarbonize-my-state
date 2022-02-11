@@ -7,14 +7,7 @@ import { Link, navigate  } from "gatsby"
 
 import USMap from "../images/svg/usaStatesTerritories.js"
 import jenks from "./jenks"
-
-const convertSlug = (key) => {
-  if (key === undefined || key === null)
-    return null
-  else {
-    return key.replace(" of "," Of ").replace(/ /g,"_")
-  }
-}
+import convertSlug from "./convertslug.js"
 
 const CustomHover = ({ emissions, activeRegion }) => {
   if (emissions[convertSlug(activeRegion.name)] != null) {
