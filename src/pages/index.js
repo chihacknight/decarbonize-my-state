@@ -12,7 +12,7 @@ const IndexPage = ({data}) => {
   // console.log(data.finalJson)
 
   // prep data for US bar chart
-  const us_emissions = data.finalJson["United_States"]
+  const us_emissions = data.finalJson["united_states"]
   
   // prep data for choropleth map
   const emissions_2018 = get_2018_emissions(data)
@@ -47,364 +47,364 @@ export default IndexPage
 export const query = graphql`
 query IndexQuery {
   finalJson {
-    Alabama {
+    alabama {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Alaska {
+    alaska {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Arizona {
+    arizona {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Arkansas {
+    arkansas {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    California {
+    california {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Colorado {
+    colorado {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Connecticut {
+    connecticut {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Delaware {
+    delaware {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    District_Of_Columbia {
+    district_of_columbia {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Florida {
+    florida {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Georgia {
+    georgia {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Hawaii {
+    hawaii {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Idaho {
+    idaho {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Illinois {
+    illinois {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Indiana {
+    indiana {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Iowa {
+    iowa {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Kansas {
+    kansas {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Kentucky {
+    kentucky {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Louisiana {
+    louisiana {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Maine {
+    maine {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Maryland {
+    maryland {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Massachusetts {
+    massachusetts {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Michigan {
+    michigan {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Minnesota {
+    minnesota {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Mississippi {
+    mississippi {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Missouri {
+    missouri {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Montana {
+    montana {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Nebraska {
+    nebraska {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Nevada {
+    nevada {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    New_Hampshire {
+    new_hampshire {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    New_Jersey {
+    new_jersey {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    New_Mexico {
+    new_mexico {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    New_York {
+    new_york {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    North_Carolina {
+    north_carolina {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    North_Dakota {
+    north_dakota {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Ohio {
+    ohio {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Oklahoma {
+    oklahoma {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Oregon {
+    oregon {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Pennsylvania {
+    pennsylvania {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Rhode_Island {
+    rhode_island {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    South_Carolina {
+    south_carolina {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    South_Dakota {
+    south_dakota {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Tennessee {
+    tennessee {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Texas {
+    texas {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    United_States {
+    united_states {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Utah {
+    utah {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Vermont {
+    vermont {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Virginia {
+    virginia {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Washington {
+    washington {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    West_Virginia {
+    west_virginia {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Wisconsin {
+    wisconsin {
       year
       dirty_power
       buildings
       transportation
       dumps_farms_industrial
     }
-    Wyoming {
+    wyoming {
       year
       dirty_power
       buildings

@@ -5,14 +5,13 @@ import { navigate } from "gatsby"
 
 import USMap from "../images/svg/usaStatesTerritories.js"
 import jenks from "./jenks"
-import convertSlug from "./convertslug.js"
 
 const CustomHover = ({ emissions, activeRegion }) => {
-  if (emissions[convertSlug(activeRegion.name)] != null) {
+  if (emissions[activeRegion.id] != null) {
     return (
       <>
         <strong>{activeRegion.name}</strong><br />
-        {emissions[convertSlug(activeRegion.name)]} MTCO2e
+        {emissions[activeRegion.id]} MTCO2e
       </>
     )
   } else {
@@ -98,7 +97,7 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
         mapClass += " mapSelected"
       }
       const buckets = getBuckets(emissions, 4)
-      const locationData = emissions[convertSlug(location.name)]
+      const locationData = emissions[location.id]
       let bucket
       if (locationData === null) {
         bucket = "Null"
