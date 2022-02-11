@@ -30,9 +30,13 @@ def group_df_by_emissions(emissions_data):
     # build the bucket % makeup for that year
     for bucket in buckets:
         emissions_data['%_'+bucket] = round(emissions_data[bucket] / emissions_data[buckets].sum(axis=1), 2) * 100
+        # round the main value by it's nearest 1st decimal point
+        emissions_data[bucket] = emissions_data[bucket].apply(lambda value: round(value,1))
     
     # rename state & year so they are lower case
     emissions_data.rename(columns={'State':'state', 'Year':'year'}, inplace=True)
+    emissions_data['state'] = emissions_data['state'].apply(lambda state: state.lower())
+    emissions_data['state'] = emissions_data['state'].apply(lambda state: state.replace(" ", "_"))
 
     #keep only relevant columns for our stats right now
     cols_to_keep = ['state', 'year', 'dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial']
@@ -50,9 +54,13 @@ def group_df_by_generation(generation_data):
     # build each bucketed totals
     for calc in columns_list: 
         generation_data[calc+'_%'] = round(generation_data[calc] / generation_data[columns_list].sum(axis=1), 2) * 100
+        # round the value to it's nearest first decimal
+        generation_data[calc] = generation_data[calc].apply(lambda value: round(value,1))
 
     # replace the state_abbreviations with their full name to match the emissions data
     generation_data['state'] = generation_data['state'].replace(dict(map(reversed, us_state_to_abbrev.items())))
+    generation_data['state'] = generation_data['state'].apply(lambda state: state.lower())
+    generation_data['state'] = generation_data['state'].apply(lambda state: state.replace(" ", "_"))
 
     cols_to_keep = ['state', 'year', 'coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
 
