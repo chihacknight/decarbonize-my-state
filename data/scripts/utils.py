@@ -11,14 +11,13 @@ def group_df_by_emissions(emissions_data):
     dirty_power = ['emission_sub_electric']
     buildings = ['emission_sub_residential', 'emission_sub_commercial']
     transportation = ['emission_sub_transportation']
-    dumps_farms_industrial = ['emission_by_waste', 'emission_sub_industrial', 'emission_by_agriculture']
-    fuels = ['emission_sub_fugitive', 'emission_by_bunker_fuel']
+    dumps_farms_industrial_other = ['emission_by_waste', 'emission_sub_industrial', 
+                                    'emission_by_industrial', 'emission_by_agriculture', 'emission_sub_fugitive']
 
     columns_list = [['dirty_power', dirty_power], 
                     ['buildings', buildings],
                     ['transportation', transportation], 
-                    ['dumps_farms_industrial', dumps_farms_industrial], 
-                    ['fuels', fuels]]
+                    ['dumps_farms_industrial_other', dumps_farms_industrial_other]]
 
     # build each bucketed totals
     for calc in columns_list: 
@@ -26,7 +25,7 @@ def group_df_by_emissions(emissions_data):
     
     # this section is going to calculate `%_of_total`
     # it's not currently being used, but can be accessed if you add '%_whatever_the_calculation_is' to the `cols_to_keep` object
-    buckets = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial'] # emitted fuels from the totals for now
+    buckets = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial_other'] # emitted fuels from the totals for now
     # build the bucket % makeup for that year
     for bucket in buckets:
         emissions_data['%_'+bucket] = round(emissions_data[bucket] / emissions_data[buckets].sum(axis=1), 2) * 100
@@ -39,7 +38,7 @@ def group_df_by_emissions(emissions_data):
     emissions_data['state'] = emissions_data['state'].apply(lambda state: state.replace(" ", "_"))
 
     #keep only relevant columns for our stats right now
-    cols_to_keep = ['state', 'year', 'dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial']
+    cols_to_keep = ['state', 'year', 'dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial_other']
 
     prepped_dictionary = json_data_builder(emissions_data[cols_to_keep])
 
