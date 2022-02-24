@@ -11,7 +11,7 @@ const CustomHover = ({ emissions, activeRegion }) => {
     return (
       <>
         <strong>{activeRegion.name}</strong><br />
-        {emissions[activeRegion.id]} MTCO2e
+        {emissions[activeRegion.id]} MMTCO2e
       </>
     )
   } else {
@@ -123,14 +123,14 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
       <Row>
         {emissions && sidebar ?
           <Col lg={3}>
-            <h6>Metric tons of carbon dioxide equivalent (MTCO2e) emissions in 2018</h6>
+            <h6>Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions in 2018</h6>
             {buckets.map((bucket, i) => {
               const colorClass = `keyColor choropleth${i}`
               const bucketInfo = bucket === null ? 
-                `0 - ${buckets[i + 1]}` :
+                `0 - ${buckets[i + 1] - 1}` :
                 (buckets[i + 2] ? 
-                  `${bucket} - ${buckets[i + 1]}` : 
-                  `${bucket} - ${buckets[i + 1]}`
+                  `${bucket} - ${buckets[i + 1] - 1}` : 
+                  `${bucket} - ${buckets[i + 1] - 1}`
                 )
               return (
                 <div key={i}>
