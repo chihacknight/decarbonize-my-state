@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 const barColors = [
   "#984ea3",
@@ -45,10 +45,21 @@ const CustomTooltip = ({ active, payload, label }) => {
 const TooltipItem = ({ payload, index }) => {
   return (
     <tr>
-      <td><span style={{color: barColors[index]}}>
-      {payload[index].name}</span></td>
-      <td><span style={{color: barColors[index]}} className='float-right'>{calcPercent(payload, index)}%</span></td>
-      <td><span style={{color: barColors[index]}} className='float-right'>{(payload[index].value.toFixed(1)).toLocaleString('en-US')}</span></td>
+      <td>
+        <span style={{color: barColors[index]}}>
+          {payload[index].name}
+        </span>
+      </td>
+      <td>
+        <span style={{color: barColors[index]}} className='float-right'>  
+          {calcPercent(payload, index)}%
+        </span>
+      </td>
+      <td>
+        <span style={{color: barColors[index]}} className='float-right'>
+          {(payload[index].value.toFixed(1)).toLocaleString('en-US')}
+        </span>
+      </td>
     </tr>
   )
 }
@@ -57,7 +68,7 @@ function getTotal (payload) {
   return payload[0].value + payload[1].value + payload[2].value + payload[3].value
 }
 
-function calcPercent(payload, index) {
+function calcPercent (payload, index) {
   return (100 * payload[index].value.toFixed(1) / getTotal(payload)).toFixed(1)
 }
 
