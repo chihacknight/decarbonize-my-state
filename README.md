@@ -46,7 +46,15 @@ When you run `docker-compose up` locally, ESLint makes sure you're following the
 
 If you want to check the linter on its own you can run:
 
-`docker-compose run --rm app run test`
+```
+docker-compose run --rm app run test
+```
+
+To auto-fix, run this command with `--fix` like so:
+
+```
+docker-compose run --rm app run test --fix
+```
 
 ## Data processing
 
