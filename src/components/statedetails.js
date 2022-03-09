@@ -3,7 +3,7 @@ import StackedBarChart from "../components/stackedbar"
 import ChoroplethMap from "./choroplethmap"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 
-const PlaceDetail = ({location, placesData, emissions}) => {
+const StateDetails = ({location, placesData, emissions}) => {
   const currentPlace = location.pathname.split("/").pop()
   const [placeData, setPlaceData] = useState(placesData[currentPlace])
 
@@ -21,4 +21,4 @@ const PlaceDetail = ({location, placesData, emissions}) => {
   )
 }
 
-export default PlaceDetail
+export default StateDetails
