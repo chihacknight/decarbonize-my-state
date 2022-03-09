@@ -7,7 +7,6 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import StateDetails from "../components/statedetails"
 import get_2018_emissions from "../components/get_2018_emissions"
 
 const places = [
@@ -97,11 +96,11 @@ const getPlacesData = (data) => {
 
 const StateDetailsPage = ({location, data}) => {
   const emissions_2018 = get_2018_emissions(data)
-  console.log('location', location);
+  console.log('location', location)
   const currentPlace = location.pathname.split("/")[1]
 
-  const placesData = getPlacesData(data);
-  const emissions= emissions_2018;
+  const placesData = getPlacesData(data)
+  const emissions= emissions_2018
 
   const [placeData, setPlaceData] = useState(placesData[currentPlace])
 
@@ -109,16 +108,16 @@ const StateDetailsPage = ({location, data}) => {
     <Layout>
       <SEO />
 
-        <div className='row d-flex flex-row'>
-          <div className='col-12 col-lg-4'>
-            <h1 className='mr-4 mb-3'>{placeData.name}</h1>
-            <ChoroplethMap emissions={emissions} sidebar={false} selected_location={currentPlace}/>
-          </div>
-          <div className='col-12 col-lg-8'>
-            <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-            <StackedBarChart emissions_data={placeData.emissions}/>
-          </div>
+      <div className='row d-flex flex-row'>
+        <div className='col-12 col-lg-4'>
+          <h1 className='mr-4 mb-3'>{placeData.name}</h1>
+          <ChoroplethMap emissions={emissions} sidebar={false} selected_location={currentPlace}/>
         </div>
+        <div className='col-12 col-lg-8'>
+          <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
+          <StackedBarChart emissions_data={placeData.emissions}/>
+        </div>
+      </div>
     </Layout>
   )
 }
