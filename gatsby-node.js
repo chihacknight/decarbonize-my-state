@@ -61,7 +61,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "wyoming"
   ]
 
-  const StateDetailsTemplate = path.resolve(`src/templates/state-details.js`)
+  const StateDetailsTemplate = path.resolve(`src/components/state-details.js`)
   placeNames.forEach(name => {
     const path = name
 
