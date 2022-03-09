@@ -1,7 +1,8 @@
 # %%
-!pip install osmium
 import osmium
 import requests 
+import pandas as pd
+import json
 # %%
 
 # All US states currnetly included in geofabrik's OSM extracts
@@ -51,7 +52,7 @@ states = [
     {"state":"South Dakota", "fips":"46"},
     {"state":"Tennessee", "fips":"47"},
     {"state":"Texas", "fips":"48"},
-    {"state":"United States Virgin Islands", "fips":"78"},
+    {"state":"US Virgin Islands", "fips":"78"},
     {"state":"Utah", "fips":"49"},
     {"state":"Vermont", "fips":"50"},
     {"state":"Virginia", "fips":"51"},
@@ -107,9 +108,27 @@ def get_state_num_buildings(state):
     return b.buildings
     
 # %%
-# if __name__ == "__main__":
-for idx, state in enumerate(states):
-    num_osm_buildings = get_state_num_buildings(state['state'])
-    states[idx]['num_osm_buildings'] = num_osm_buildings
-pd.DataFrame(states).to_csv('buildings/osm_buildings.csv', index=False)
+if __name__ == "__main__":
+    # for idx, state in enumerate(states):
+    #     num_osm_buildings = get_state_num_buildings(state['state'])
+    #     states[idx]['num_osm_buildings'] = num_osm_buildings
+    pd.DataFrame(states).to_csv('../../raw/osm_buildings.csv', index=False)
+# %%
+    osm_buildings = pd.DataFrame(states)
+    ms_buildings = pd.read_csv('../../raw/microsoft_footprints.csv')
+    ms_buildings['Microsoft Footprint Count'] = ms_buildings['Microsoft Footprint Count'].str.replace(',','').astype('int64')# %%
+
+    # %%
+    merged = osm_buildings.merge(ms_buildings, how="left", left_on="state", right_on="State").dropna()
+    merged = merged.drop(columns={"state"})
+    # %%
+    output = merged[['State','Microsoft Footprint Count']]
+    output['State'] = output['State'].str.replace(' ', '_').str.lower().dropna()
+# %%
+    output_as_json = {}
+    for i in range(0, len(output)):
+        row = output.iloc[i]
+        output_as_json[row['State']] = {"buildings_count": round(row['Microsoft Footprint Count']) }
+    with open('../../final/buildings_count.json', 'w') as f:
+        f.write(json.dumps(output_as_json))
 # %%
