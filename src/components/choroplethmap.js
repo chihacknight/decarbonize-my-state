@@ -68,7 +68,7 @@ const mouseMove = (event, setActiveRegion, setTooltipStyle) => {
 
 const handleClick = (event, activeRegion) => {
   console.log(activeRegion.id)
-  navigate(`/place/${activeRegion.id}`)
+  navigate(`/${activeRegion.id}`)
 }
 
 const getBuckets = (emissions, numBuckets) => {
