@@ -101,16 +101,30 @@ const currentYear = new Date().getFullYear();
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1);
 
 const StateDetailsPage = ({location, data}) => {
-  const emissions_2018 = get_2018_emissions(data)
   const currentPlace = location.pathname.split("/")[1]
-
+  const countryEmissions = get_2018_emissions(data)
   const placesData = getPlacesData(data)
-  const emissions= emissions_2018
-  const currentPlaceData = placesData[currentPlace];
 
-  const placeTitle = currentPlaceData.name;
+  const currPlaceData = placesData[currentPlace];
 
-  const [placeData, setPlaceData] = useState(currentPlaceData)
+  // Get the last year of emissions data we have to use for showing the
+  // breakdown of how much emission comes from each source in this state
+  const placeEmissions = currPlaceData.emissions[currPlaceData.emissions.length - 1];
+
+  const totalLatestEmissions = placeEmissions.buildings +
+    placeEmissions.dirty_power +
+    placeEmissions.dumps_farms_industrial_other +
+    placeEmissions.transportation;
+
+
+
+  const buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1);
+  const powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1);
+  const transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1);
+
+  const placeTitle = currPlaceData.name;
+
+  const [placeData, setPlaceData] = useState(currPlaceData)
 
   return (
     <Layout>
@@ -118,44 +132,168 @@ const StateDetailsPage = ({location, data}) => {
 
       <div className='col-12 c-4'>
         <h1 className='mr-4 mb-3'>{placeData.name}</h1>
-        <ChoroplethMap emissions={emissions} sidebar={false} selected_location={currentPlace}/>
+        <ChoroplethMap emissions={countryEmissions} sidebar={false} selected_location={currentPlace}/>
       </div>
+
+      {/* Intro Section */}
       <div className='col-12'>
-        <p class="h1 mt-5 mb-5">
+        <p className="h1 mt-5 mb-5">
           To get to <strong>zero</strong> by 2050, {placeTitle} must
           cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
         </p>
 
-        <p class="h4 font-weight-bold">Emissions in {placeTitle}</p>
-        <p class="h6 text-muted">
+        <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
+        <p className="h6 text-muted">
           Metric tons of carbon dioxide equivalent (MTCO2e) emissions
           </p>
         <StackedBarChart emissions_data={placeData.emissions}/>
 
-        <p class="h1 text-center mt-5">We can do it. Here's how.</p>
+        <p className="h1 text-center mt-5">We can do it. Here's how.</p>
 
-        <hr/>
+        <hr className="mt-5"/>
       </div>
+
+      {/* Buildings Section */}
       <div className='col-12'>
-        <h2 class="h5">Buildings</h2>
+        <h2 className="h4 mt-4 ml-5 font-weight-bold">Buildings</h2>
 
-        <strong>?%</strong>
+        <p className="h3 mt-5">
+          <strong>{buildingsPrcnt}%</strong> of emissions in {placeTitle} comes from buildings.
+        </p>
 
-        <hr/>
+        <p className="h4 mt-5 text-muted">
+          [insert state emissions graph highlighting buildings]
+        </p>
+
+        <p>
+          Mostly from heating them.
+
+          ?% of the pollution of your typical home comes from heating your space, water, and food.
+        </p>
+
+        <p className="h3 mt-5">
+          To stop this pollution, we need to electrify our furnaces, water boilers, and stoves.
+        </p>
+
+        <p className="h3 mt-5">
+          And we need to do this for all ? buildings in {placeTitle}<br/>
+          (That's around ? per year)
+        </p>
+
+        <p className="h3 mt-5">
+          That will solve {buildingsPrcnt}% of the problem.
+        </p>
+
+        <p className="h4 mt-5 text-muted">
+          [insert state emissions graph highlighting buildings]
+        </p>
+
+        <hr className="mt-5"/>
       </div>
+
+      {/* Transportation Section */}
       <div className='col-12'>
-        <h2 class="h5">Getting around</h2>
+        <h2 className="h4 mt-4 ml-5 font-weight-bold">Getting around</h2>
 
-        <strong>?%</strong>
+        <p className="h3 mt-5">
+          <strong>{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
+        </p>
 
-        <hr/>
+        <p className="h4 mt-5 text-muted">
+          [insert state emissions graph highlighting transportation]
+        </p>
+
+        <p>Mostly from our cars</p>
+
+        <p className="h3 mt-5">
+          To cut this pollution, replace your car with an EV.
+        </p>
+
+        <p className="h3 mt-5">
+          And we need to do this for all ? cars in {placeTitle}<br/>
+          (That's around ? a year.)
+        </p>
+
+        <p className="h3 mt-5">
+          That will solve {transportPrcnt}% of the problem.
+        </p>
+
+        <p className="h4 mt-5 text-muted">
+          [insert state emissions graph highlighting transportation]
+        </p>
+
+        <hr className="mt-5"/>
       </div>
+
+      {/* Power Section */}
       <div className='col-12'>
-        <h2 class="h5">Power generation</h2>
+        <h2 className="h4 mt-4 ml-5 font-weight-bold">Power generation</h2>
 
-        <strong>?%</strong>
+        <p className="h3 mt-5">
+          <strong>{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
+        </p>
 
-        <hr/>
+        <p className="h4 mt-5 text-muted">
+          [insert state emissions graph highlighting power]
+        </p>
+
+        <p className="h3 mt-5">
+          Specifically from coal and gas plants.
+        </p>
+
+        <p className="h3 mt-5">
+          To cut this pollution, we need to replace dirty power plants with
+          clean ones. (mostly wind and solar)
+        </p>
+
+        <p className="h3 mt-5">
+          And we need to do this for all <strong>? coal plants in {placeTitle}</strong>
+        </p>
+
+        <p className="h3 mt-5">
+          ...and all <strong>? gas plants</strong>.
+        </p>
+
+        <p className="h3 mt-5">
+          ...and help those workers find good jobs.
+        </p>
+
+        <p className="h3 mt-5">
+          But wait! Remember how we electrified all cars and buildings?
+        </p>
+
+        <p className="h3 mt-5">
+          Our machines don't pollute now, because they run on electricity!
+        </p>
+
+        <p className="h3 mt-5">
+          But that means we need to make more power for those new electric
+          machines - <strong>twice</strong> as much power as we make now!
+        </p>
+
+        <p className="h3 mt-5">
+          And <strong>all of it needs to be clean power!</strong>
+        </p>
+
+        <p className="h3 mt-5">
+          So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br/>
+          (That's ? a year)
+        </p>
+
+        <p className="h4 mt-5 text-muted">
+          [insert animated map here]
+        </p>
+
+
+        <p className="h3 mt-5">
+          That will solve {powerPrcnt}% of the problem.
+        </p>
+
+        <p className="h4 mt-5 text-muted">
+          [insert state emissions graph highlighting power]
+        </p>
+
+        <hr className="mt-5"/>
       </div>
     </Layout>
   )
