@@ -107,10 +107,10 @@ const StateDetailsPage = ({location, data}) => {
 
   const currPlaceData = placesData[currentPlace]
 
-  let buildingsPrcnt, powerPrcnt, transportPrcnt;
+  let buildingsPrcnt, powerPrcnt, transportPrcnt
 
   // NOTE: We don't have emissions for all states (like Guam)
-  const placeAllEmissions = currPlaceData.emissions;
+  const placeAllEmissions = currPlaceData.emissions
 
   if (placeAllEmissions) {
     // Get the last year of emissions data we have to use for showing the
