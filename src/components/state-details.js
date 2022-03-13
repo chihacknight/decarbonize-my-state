@@ -94,29 +94,68 @@ const getPlacesData = (data) => {
   return allPlacesData
 }
 
+const currentYear = new Date().getFullYear();
+
+// We want to get to 0 by 2050 and we use our current emissions as a start,
+// so the % to cut by is 100 divided by the number of years we have
+const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1);
+
 const StateDetailsPage = ({location, data}) => {
   const emissions_2018 = get_2018_emissions(data)
-  console.log('location', location)
   const currentPlace = location.pathname.split("/")[1]
 
   const placesData = getPlacesData(data)
   const emissions= emissions_2018
+  const currentPlaceData = placesData[currentPlace];
 
-  const [placeData, setPlaceData] = useState(placesData[currentPlace])
+  const placeTitle = currentPlaceData.name;
+
+  const [placeData, setPlaceData] = useState(currentPlaceData)
 
   return (
     <Layout>
       <SEO />
 
-      <div className='row d-flex flex-row'>
-        <div className='col-12 col-lg-4'>
-          <h1 className='mr-4 mb-3'>{placeData.name}</h1>
-          <ChoroplethMap emissions={emissions} sidebar={false} selected_location={currentPlace}/>
-        </div>
-        <div className='col-12 col-lg-8'>
-          <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-          <StackedBarChart emissions_data={placeData.emissions}/>
-        </div>
+      <div className='col-12 c-4'>
+        <h1 className='mr-4 mb-3'>{placeData.name}</h1>
+        <ChoroplethMap emissions={emissions} sidebar={false} selected_location={currentPlace}/>
+      </div>
+      <div className='col-12'>
+        <p class="h1 mt-5 mb-5">
+          To get to <strong>zero</strong> by 2050, {placeTitle} must
+          cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
+        </p>
+
+        <p class="h4 font-weight-bold">Emissions in {placeTitle}</p>
+        <p class="h6 text-muted">
+          Metric tons of carbon dioxide equivalent (MTCO2e) emissions
+          </p>
+        <StackedBarChart emissions_data={placeData.emissions}/>
+
+        <p class="h1 text-center mt-5">We can do it. Here's how.</p>
+
+        <hr/>
+      </div>
+      <div className='col-12'>
+        <h2 class="h5">Buildings</h2>
+
+        <strong>?%</strong>
+
+        <hr/>
+      </div>
+      <div className='col-12'>
+        <h2 class="h5">Getting around</h2>
+
+        <strong>?%</strong>
+
+        <hr/>
+      </div>
+      <div className='col-12'>
+        <h2 class="h5">Power generation</h2>
+
+        <strong>?%</strong>
+
+        <hr/>
       </div>
     </Layout>
   )
