@@ -116,8 +116,6 @@ const StateDetailsPage = ({location, data}) => {
     placeEmissions.dumps_farms_industrial_other +
     placeEmissions.transportation
 
-
-
   const buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1)
   const powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1)
   const transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1)
@@ -188,6 +186,22 @@ const StateDetailsPage = ({location, data}) => {
           [insert state emissions graph highlighting buildings]
         </p>
 
+        <div className="action-panel">
+          <h3 className="h4 font-weight-bold">What should I do?</h3>
+
+          {/* TODO: Make these link somewhere */}
+          <ul className="mt-3 pl-4 mb-0">
+            <li>
+              <a href="http://example.com">First, electrify your building(s)</a>
+            </li>
+            <li>
+              <a href="http://example.com">
+                Then push your local politicians to electrify the rest
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <hr className="mt-5"/>
       </div>
 
@@ -221,6 +235,24 @@ const StateDetailsPage = ({location, data}) => {
         <p className="h4 mt-5 text-muted">
           [insert state emissions graph highlighting transportation]
         </p>
+
+        <div className="action-panel">
+          <h3 className="h4 font-weight-bold">What should I do?</h3>
+
+          {/* TODO: Make these link somewhere */}
+          <ul className="mt-3 pl-4 mb-0">
+            <li>
+              <a href="http://example.com">
+                If you have a car, buy an EV
+              </a>
+            </li>
+            <li>
+              <a href="http://example.com">
+                Then push your local politicians to electrify the rest
+              </a>
+            </li>
+          </ul>
+        </div>
 
         <hr className="mt-5"/>
       </div>
@@ -293,7 +325,21 @@ const StateDetailsPage = ({location, data}) => {
           [insert state emissions graph highlighting power]
         </p>
 
-        <hr className="mt-5"/>
+        <div className="action-panel">
+          <h3 className="h4 font-weight-bold">What should I do?</h3>
+
+          {/* TODO: Make these link somewhere */}
+          <ul className="mt-3 pl-4 mb-0">
+            <li>
+              <a href="http://example.com">Install solar panels and a battery in your building</a>
+            </li>
+            <li>
+              <a href="http://example.com">
+                Support the construction of grid-scale wind and solar
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </Layout>
   )

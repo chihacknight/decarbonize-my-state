@@ -126,7 +126,13 @@ footer {
 }
 
 .custom-tooltip {
-	background-color: white;
-	padding: 5px;
-	box-shadow: 0 1px 2px #bdbdbd;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 0 1px 2px #bdbdbd;
+}
+
+.action-panel {
+    padding: 2rem;
+    margin:  3rem 0;
+    background-color: #f3f3f3;
 }
