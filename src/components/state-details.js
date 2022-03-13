@@ -107,18 +107,25 @@ const StateDetailsPage = ({location, data}) => {
 
   const currPlaceData = placesData[currentPlace]
 
-  // Get the last year of emissions data we have to use for showing the
-  // breakdown of how much emission comes from each source in this state
-  const placeEmissions = currPlaceData.emissions[currPlaceData.emissions.length - 1]
+  let buildingsPrcnt, powerPrcnt, transportPrcnt;
 
-  const totalLatestEmissions = placeEmissions.buildings +
-    placeEmissions.dirty_power +
-    placeEmissions.dumps_farms_industrial_other +
-    placeEmissions.transportation
+  // NOTE: We don't have emissions for all states (like Guam)
+  const placeAllEmissions = currPlaceData.emissions;
 
-  const buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1)
-  const powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1)
-  const transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1)
+  if (placeAllEmissions) {
+    // Get the last year of emissions data we have to use for showing the
+    // breakdown of how much emission comes from each source in this state
+    const placeEmissions = placeAllEmissions[placeAllEmissions.length - 1]
+
+    const totalLatestEmissions = placeEmissions.buildings +
+      placeEmissions.dirty_power +
+      placeEmissions.dumps_farms_industrial_other +
+      placeEmissions.transportation
+
+    buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1)
+    powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1)
+    transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1)
+  }
 
   const placeTitle = currPlaceData.name
 
@@ -132,6 +139,8 @@ const StateDetailsPage = ({location, data}) => {
         <h1 className='mr-4 mb-3'>{placeData.name}</h1>
         <ChoroplethMap emissions={countryEmissions} sidebar={false} selected_location={currentPlace}/>
       </div>
+
+      { !placeData.emissions }
 
       {/* Intro Section */}
       <div className='col-12'>
