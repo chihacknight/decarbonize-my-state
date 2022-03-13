@@ -17,7 +17,7 @@ a, a:hover, a:active, .page-link {
     text-align: right;
 }
 
-.recharts-cartesian-axis-tick {    
+.recharts-cartesian-axis-tick {
     font-size: 0.8rem;
 }
 
@@ -53,9 +53,10 @@ a, a:hover, a:active, .page-link {
     background: #aaa;
 }
 
-.mapSelected {
-    stroke:#421B49;
-    stroke-width:4;
+/* Style focused <path> elements or selected state */
+path:focus, .mapSelected {
+    stroke: #421B49;
+    stroke-width: 4;
 }
 
 .legendKey {

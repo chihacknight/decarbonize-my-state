@@ -128,7 +128,7 @@ const StateDetailsPage = ({location, data}) => {
     <Layout>
       <SEO />
 
-      <div className='col-12 c-4'>
+      <div className='col-6'>
         <h1 className='mr-4 mb-3'>{placeData.name}</h1>
         <ChoroplethMap emissions={countryEmissions} sidebar={false} selected_location={currentPlace}/>
       </div>
