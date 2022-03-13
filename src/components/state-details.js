@@ -94,35 +94,35 @@ const getPlacesData = (data) => {
   return allPlacesData
 }
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear()
 
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1);
+const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
   const currentPlace = location.pathname.split("/")[1]
   const countryEmissions = get_2018_emissions(data)
   const placesData = getPlacesData(data)
 
-  const currPlaceData = placesData[currentPlace];
+  const currPlaceData = placesData[currentPlace]
 
   // Get the last year of emissions data we have to use for showing the
   // breakdown of how much emission comes from each source in this state
-  const placeEmissions = currPlaceData.emissions[currPlaceData.emissions.length - 1];
+  const placeEmissions = currPlaceData.emissions[currPlaceData.emissions.length - 1]
 
   const totalLatestEmissions = placeEmissions.buildings +
     placeEmissions.dirty_power +
     placeEmissions.dumps_farms_industrial_other +
-    placeEmissions.transportation;
+    placeEmissions.transportation
 
 
 
-  const buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1);
-  const powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1);
-  const transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1);
+  const buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1)
+  const powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1)
+  const transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1)
 
-  const placeTitle = currPlaceData.name;
+  const placeTitle = currPlaceData.name
 
   const [placeData, setPlaceData] = useState(currPlaceData)
 
@@ -145,7 +145,7 @@ const StateDetailsPage = ({location, data}) => {
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
           Metric tons of carbon dioxide equivalent (MTCO2e) emissions
-          </p>
+        </p>
         <StackedBarChart emissions_data={placeData.emissions}/>
 
         <p className="h1 text-center mt-5">We can do it. Here's how.</p>
