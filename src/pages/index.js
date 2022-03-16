@@ -17,27 +17,63 @@ const IndexPage = ({data}) => {
   // prep data for choropleth map
   const emissions_2018 = get_2018_emissions(data)
 
+  // TODO: Extract currentYear and cutPerYearPrcnt to common place
+  const currentYear = new Date().getFullYear()
+
+  // We want to get to 0 by 2050 and we use our current emissions as a start,
+  // so the % to cut by is 100 divided by the number of years we have
+  const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
+
   return (
     <Layout>
       <SEO title="What does it take to decarbonize your state?" />
 
-      <h2 className='text-center'>
-        <strong>
-        We have 28 years to reduce our emissions to zero<br />
-        </strong>
-      </h2><br />
+      <div className="main-header">
+        <h1 className='h1 text-center'>
+          What does it take to decarbonize your state?
+        </h1>
+        <p className="h5 text-center mt-4">
+          It's easier than you think!
+        </p>
+      </div>
+
+      <hr></hr>
+
+      <p className="h1 mt-5 mb-5 text-center">
+        To get to <strong>zero</strong> by 2050, the US must cut climate
+        pollution by <strong>{cutPerYearPrcnt} a year.</strong>
+      </p>
 
       <StackedBarChart emissions_data={us_emissions}/>
-      <br /><br /><br />
-      <h2 className='text-center'>
-        <strong>
-        What does it take to decarbonize your state?<br />
-        </strong>
-      </h2><br />
 
-      <p className='pt-4'></p>
+      <p className='h2 text-center mt-5 mb-5'>
+        When it comes to solving the climate crisis there's one main thing
+      </p>
+
+      <div className="d-flex align-items-center">
+        <div className="h2">
+          [stacked bar graph of emissions source]
+        </div>
+
+        <div className="ml-5">
+          <p className="h3 font-weight-bold mt-5 mb-5">
+            CLEAN ELECTRIFICATION
+          </p>
+
+          <p>...and then there's everything else</p>
+        </div>
+      </div>
+
+
+      <p className="h2 text-center mt-5">
+        The levers of change are at the state level and each state is different
+      </p>
+
+      <p className="text-center mt-2 mb-5">
+        Click on your state to see what it takes to decarbonize by 2050
+      </p>
+
       <ChoroplethMap emissions={emissions_2018} />
-      <br /><br />
     </Layout>
   )
 }
