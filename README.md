@@ -121,4 +121,4 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 ### 💫 Deploy
 
-DataMade deploys static sites using Netlify. This project's staging URL is https://state-by-state-decarbonization.netlify.app/
+DataMade deploys static sites using Netlify. This project's staging URL is https://state-decarbonize.netlify.app/
