@@ -17,7 +17,7 @@ a, a:hover, a:active, .page-link {
     text-align: right;
 }
 
-.recharts-cartesian-axis-tick {    
+.recharts-cartesian-axis-tick {
     font-size: 0.8rem;
 }
 
@@ -53,9 +53,10 @@ a, a:hover, a:active, .page-link {
     background: #aaa;
 }
 
-.mapSelected {
-    stroke:#421B49;
-    stroke-width:4;
+/* Style focused <path> elements or selected state */
+path:focus, .mapSelected {
+    stroke: #421B49;
+    stroke-width: 4;
 }
 
 .legendKey {
@@ -126,7 +127,13 @@ footer {
 }
 
 .custom-tooltip {
-	background-color: white;
-	padding: 5px;
-	box-shadow: 0 1px 2px #bdbdbd;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 0 1px 2px #bdbdbd;
+}
+
+.action-panel {
+    padding: 2rem;
+    margin:  3rem 0;
+    background-color: #f3f3f3;
 }
