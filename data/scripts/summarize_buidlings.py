@@ -58,6 +58,7 @@ output = output.drop(columns={"geoid"})
 output['res-count'] = output['res-count'].astype('int64')
 output['com-count'] = output['com-count'].astype('int64')
 output = output.rename(columns={
+    'State': 'state',
     'res-count':'nrelRes', 
     'com-count':'nrelCom',
     "Microsoft Footprint Count": "buildings",
@@ -74,7 +75,7 @@ output = output.rename(columns={
     
     })
 # %%
-output['State'] = output['State'].str.replace(' ','_').str.lower()
+output['state'] = output['state'].str.replace(' ','_').str.lower()
 # %%
-output.round(2).to_csv('../final/buildings_data.csv', index=False)
+output.round(2).to_csv('../raw/buildings_data.csv', index=False)
 # %%

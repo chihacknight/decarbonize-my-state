@@ -1,4 +1,4 @@
-State,buildings,nrelRes,nrelCom,resNonElHeating,comNonElHeating,resNonElWaterHeating,resNonElWaterHeating,resNonElRange,pctResNonElHeating,pctComNonElHeating,pctResNonElWaterHeating,pctComNonElWaterHeating,pctResNonElRange
+state,buildings,nrelRes,nrelCom,resNonElHeating,comNonElHeating,resNonElWaterHeating,resNonElWaterHeating,resNonElRange,pctResNonElHeating,pctComNonElHeating,pctResNonElWaterHeating,pctComNonElWaterHeating,pctResNonElRange
 alabama,2455168,9125,5286,3136,2894,3010,2069,2481,34.37,54.75,32.99,39.14,27.19
 arizona,2738732,11975,5981,4643,3030,5834,2158,4277,38.77,50.66,48.72,36.08,35.72
 arkansas,1571198,5538,3333,2764,2131,2364,1363,1731,49.91,63.94,42.69,40.89,31.26

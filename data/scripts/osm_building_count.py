@@ -112,4 +112,4 @@ if __name__ == "__main__":
     for idx, state in enumerate(states):
         num_osm_buildings = get_state_num_buildings(state['state'])
         states[idx]['num_osm_buildings'] = num_osm_buildings
-    pd.DataFrame(states).to_csv('../../raw/osm_buildings.csv', index=False)
+    pd.DataFrame(states).to_csv('../raw/osm_buildings.csv', index=False)
