@@ -4,7 +4,12 @@ body {
     color: #33342e;
 }
 
-a, a:hover, a:active, .page-link {
+.main-header {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+a, a:hover, a:active, a:focus, .page-link {
     color: #8F0D56;
 }
 
