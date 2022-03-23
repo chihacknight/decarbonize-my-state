@@ -1,7 +1,15 @@
+/* Import stateface for state icons */
 @import 'stateface/stateface.css';
+
+/** Import Lato Google font with specific weights */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
 
 :root {
     --brand-color: #8F0D56;
+}
+
+body, * {
+    font-family: 'Lato', sans-serif;
 }
 
 body {
@@ -9,6 +17,17 @@ body {
     font-family: "Source Serif Pro",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     color: #33342e;
 }
+
+/**
+ * Extra large spacing options
+ */
+.mt-6 { margin-top: 4rem; }
+.mb-6 { margin-bottom: 4rem; }
+
+/**
+ * Allow use of 900 level font weight
+ */
+.font-weight-boldest { font-weight: 900; }
 
 .main-header {
     margin-top: 10rem;
