@@ -122,7 +122,9 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
       <Row>
         {emissions && sidebar ?
           <Col lg={3}>
-            <h6>Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions in 2018</h6>
+            <div className="h6 mt-5 mb-3 font-weight-bold">
+              Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions in 2018
+            </div>
             {buckets.map((bucket, i) => {
               const colorClass = `keyColor choropleth${i}`
               const bucketInfo = bucket === null ? 

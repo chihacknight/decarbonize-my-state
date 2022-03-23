@@ -65,16 +65,18 @@ const IndexPage = ({data}) => {
         </div>
       </div>
 
-
-      <p className="h2 text-center mt-5">
-        The levers of change are at the state level and each state is different
+      <p className="h1 text-center mt-7 font-weight-bold">
+        The levers of change are at the state level, <br className="d-none d-lg-block" />
+        and each state is different.
       </p>
 
-      <p className="text-center mt-2 mb-5">
+      <p className="text-center mt-2 mb-7">
         Click on your state to see what it takes to decarbonize by 2050
       </p>
 
-      <ChoroplethMap emissions={emissions_2018} />
+      <div className="mb-7">
+        <ChoroplethMap emissions={emissions_2018} />
+      </div>
     </Layout>
   )
 }
