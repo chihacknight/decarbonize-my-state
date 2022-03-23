@@ -4,8 +4,10 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import StackedBarChart from "../components/stackedbar"
+import SingleBarChart from "../components/singlebar"
 import ChoroplethMap from "../components/choroplethmap"
 import get_2018_emissions from "../components/get_2018_emissions"
+import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
 
 const IndexPage = ({data}) => {
@@ -13,7 +15,9 @@ const IndexPage = ({data}) => {
 
   // prep data for US bar chart
   const us_emissions = data.finalJson["united_states"]
-  
+  const us_2018_emissions = [get_2018_emissions_group(data)]
+
+
   // prep data for choropleth map
   const emissions_2018 = get_2018_emissions(data)
 
@@ -44,11 +48,12 @@ const IndexPage = ({data}) => {
         pollution by <strong>{cutPerYearPrcnt} a year.</strong>
       </p>
 
-      <StackedBarChart emissions_data={us_emissions}/>
+      <SingleBarChart emissions_data={us_2018_emissions}/>
 
       <p className='h2 text-center mt-5 mb-5'>
         When it comes to solving the climate crisis there's one main thing
       </p>
+
 
       <div className="d-flex align-items-center">
         <div className="h2">
