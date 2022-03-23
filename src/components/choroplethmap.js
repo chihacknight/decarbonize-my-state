@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap"
 import { SVGMap } from "react-svg-map"
 import { navigate } from "gatsby"
 
-import USMap from "../images/svg/usaStatesTerritories.js"
+import USMap from "../images/svg/usaStatesNoTerritories.js"
 import jenks from "./jenks"
 
 const CustomHover = ({ emissions, activeRegion }) => {
