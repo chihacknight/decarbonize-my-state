@@ -12,8 +12,7 @@ const Header = ({ siteTitle }) => (
       marginBottom: `1.45rem`
     }}
   >
-    <Link className="nav-text" to="">&nbsp;&nbsp;&nbsp;</Link>
-    <Link className="nav-text" to="/">{siteTitle}</Link>
+    <Link className="nav-text text-body" to="/">{siteTitle}</Link>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ml-auto">

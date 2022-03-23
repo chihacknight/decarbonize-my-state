@@ -1,5 +1,9 @@
 @import 'stateface/stateface.css';
 
+:root {
+    --brand-color: #8F0D56;
+}
+
 body {
     background-color: #FFFFFB;
     font-family: "Source Serif Pro",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -11,13 +15,9 @@ body {
     margin-bottom: 10rem;
 }
 
-a, a:hover, a:active, a:focus, .page-link {
-    color: #8F0D56;
-}
-
 .page-item.active .page-link {
-    background-color: #8F0D56;
-    border-color: #8F0D56;
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
 }
 
 .float-right {
@@ -100,20 +100,11 @@ path:focus, .mapSelected {
     border-bottom: 1px solid #aaaaaa;
 }
 
-.nav-link {
-    color: #8F0D56 !important;
-}
-
 .nav-text {
-    text-decoration: none !important;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: #000000;
-}
-
-.navbar-brand {
+    text-decoration: none;
+    text-transform: capitalize;
     font-weight: bold;
-    text-transform: uppercase;
+    color: #000000;
 }
 
 .table-bordered, .table-bordered td, .table-bordered th {
