@@ -1,4 +1,3 @@
-import "./styles.css";
 import React from "react";
 import {
   BarChart,
@@ -11,40 +10,26 @@ import {
 
 const barColors = ["#685e4a", "#b7b7b7", "#d9d9d9", "#f3f3f3"];
 
-/*Sample emissions_data to show data structure
-componsent is currently written for the specific case and not
-the general case.  Data MUST be in this format!
-*/
-const emissions_data = [
-  {
-    buildings: [50.2, "Buildings"],
-    dirty_power: [34.7, "DirtyPower"],
-    dumps_farms_industrial_other: [141.5, "Dumps, Farms, Other"],
-    transportation: [50.3, "Transportation"]
-  }
-];
+function getTotal (payload) {
+  return payload[0].value + payload[1].value + payload[2].value + payload[3].value
+}
 
-// Determine total and category percentages
-var total = emissions_data[0].buildings[0] + emissions_data[0].dirty_power[0];
-total =
-  total +
-  emissions_data[0].dumps_farms_industrial_other[0] +
-  emissions_data[0].transportation[0];
+function calcPercent (payload, index) {
+  return (100 * payload[index].value.toFixed(1) / getTotal(payload)).toFixed(1)
+}
 
-emissions_data[0].buildings[1] = emissions_data[0].buildings[1] + " " +
-  Math.round((100 * emissions_data[0].buildings[0]) / total) + "%";
+// const renderLabel = (props, text) =>{
+//   const { x, y, width, height, value } = props
+//   return (
+//     <span>{text}: {value}</span>
+//     )
+// }
 
-emissions_data[0].dirty_power[1] = emissions_data[0].dirty_power[1] + " " +
-  Math.round((100 * emissions_data[0].dirty_power[0]) / total) + "%";
+const getLabel=(props, label) => {return  label}
 
-emissions_data[0].dumps_farms_industrial_other[1] = emissions_data[0].dumps_farms_industrial_other[1] + " " +
-  Math.round((100 * emissions_data[0].dumps_farms_industrial_other[0]) / total) + "%";
-
-emissions_data[0].transportation[1] = emissions_data[0].transportation[1] + " " +
-  Math.round((100 * emissions_data[0].transportation[0]) / total) + "%";
 
 //Render the stacked bar.
-  export default function App() {
+  export default function SingleBarChart({emissions_data}) {
   return (
     <BarChart
       barSize={250}
@@ -70,23 +55,25 @@ emissions_data[0].transportation[1] = emissions_data[0].transportation[1] + " " 
         }}
       />
       <Bar
-        dataKey="dumps_farms_industrial_other[0]"
+        dataKey="dumps_farms_industrial_other"
         stackId="a"
         fill={barColors[0]}
       >
-        <LabelList
-          dataKey="dumps_farms_industrial_other[1]"
+         <LabelList
+          content={props => getLabel(props, 'Dumps, Farms, Industrial & Other')}
           position="insideTopLeft"
-        />
+        /> 
       </Bar>
-      <Bar dataKey="transportation[0]" stackId="a" fill={barColors[1]}>
-        <LabelList dataKey="transportation[1]" position="insideTopLeft" />
+     <Bar dataKey="transportation" stackId="a" fill={barColors[1]}>
+        <LabelList 
+        content={props => getLabel(props, 'Transportation')}
+        position="insideTopLeft" /> 
       </Bar>
-      <Bar dataKey="buildings[0]" stackId="a" fill={barColors[2]}>
-        <LabelList dataKey="buildings[1]" position="insideTopLeft" />
+       <Bar dataKey="buildings" stackId="a" fill={barColors[2]}>
+        <LabelList content={props => getLabel(props, 'Buildings')} position="insideTopLeft" />
       </Bar>
-      <Bar dataKey="dirty_power[0]" stackId="a" fill={barColors[3]}>
-        <LabelList dataKey="dirty_power[1]" position="insideTopLeft" />
+      <Bar dataKey="dirty_power" stackId="a" fill={barColors[3]}>
+        <LabelList content={props => getLabel(props, 'Dirty Power')} position="insideTopLeft" />
       </Bar>
     </BarChart>
   );
