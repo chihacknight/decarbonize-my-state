@@ -67,7 +67,6 @@ const mouseMove = (event, setActiveRegion, setTooltipStyle) => {
 }
 
 const handleClick = (event, activeRegion) => {
-  console.log(activeRegion.id)
   navigate(`/${activeRegion.id}`)
 }
 
