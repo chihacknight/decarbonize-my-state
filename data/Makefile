@@ -1,5 +1,5 @@
 
-GENERATED_FILES = final/emissions.json
+GENERATED_FILES = final/emissions.json final/buildings.json
 
 all: $(GENERATED_FILES)
 
