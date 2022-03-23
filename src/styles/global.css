@@ -1,21 +1,44 @@
+/* Import stateface for state icons */
+@import 'stateface/stateface.css';
+
+/** Import Lato Google font with specific weights */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
+
+:root {
+    --brand-color: #8F0D56;
+}
+
+body, * {
+    font-family: 'Lato', sans-serif;
+}
+
 body {
     background-color: #FFFFFB;
     font-family: "Source Serif Pro",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     color: #33342e;
 }
 
+/**
+ * Extra large spacing options
+ */
+.mt-6 { margin-top: 4rem; }
+.mb-6 { margin-bottom: 4rem; }
+.mt-7 { margin-top: 6rem; }
+.mb-7 { margin-bottom: 6rem; }
+
+/**
+ * Allow use of 900 level font weight
+ */
+.font-weight-boldest { font-weight: 900; }
+
 .main-header {
     margin-top: 10rem;
     margin-bottom: 10rem;
 }
 
-a, a:hover, a:active, a:focus, .page-link {
-    color: #8F0D56;
-}
-
 .page-item.active .page-link {
-    background-color: #8F0D56;
-    border-color: #8F0D56;
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
 }
 
 .float-right {
@@ -66,14 +89,15 @@ path:focus, .mapSelected {
 
 .legendKey {
     display: flex;
-    margin: 5px 0px;
+    align-items: center;
+    margin: 0.5rem 0;
 }
 
 .keyColor {
     display: inline-block;
-    height: 15px;
-    width: 15px;
-    margin-right: 5px;
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
 }
 
 .keyText {
@@ -98,25 +122,11 @@ path:focus, .mapSelected {
     border-bottom: 1px solid #aaaaaa;
 }
 
-.nav-link {
-    color: #8F0D56 !important;
-}
-
 .nav-text {
-    text-decoration: none !important;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: #000000;
-}
-
-.navbar-brand {
+    text-decoration: none;
+    text-transform: capitalize;
     font-weight: bold;
-    text-transform: uppercase;
-}
-
-.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
-    background-color: #8F0D56;
-    border-color: #8F0D56;
+    color: #000000;
 }
 
 .table-bordered, .table-bordered td, .table-bordered th {

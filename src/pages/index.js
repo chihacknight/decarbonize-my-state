@@ -33,19 +33,20 @@ const IndexPage = ({data}) => {
       <SEO title="What does it take to decarbonize your state?" />
 
       <div className="main-header">
-        <h1 className='h1 text-center'>
-          What does it take to decarbonize your state?
+        <h1 className='display-4 text-center font-weight-bold'>
+          What does it take to<br className="d-none d-lg-block"/>
+          decarbonize your state?
         </h1>
-        <p className="h5 text-center mt-4">
-          It's easier than you think!
+        <p className="h3 text-center mt-4">
+          The answer is less complicated than you think.
         </p>
       </div>
 
       <hr></hr>
 
       <p className="h1 mt-5 mb-5 text-center">
-        To get to <strong>zero</strong> by 2050, the US must cut climate
-        pollution by <strong>{cutPerYearPrcnt} a year.</strong>
+        To get to <strong>zero</strong> by 2050, the US must <br className="d-none d-lg-block" />
+        cut climate pollution by <strong>{cutPerYearPrcnt} a year.</strong>
       </p>
 
       <SingleBarChart emissions_data={us_2018_emissions}/>
@@ -61,7 +62,7 @@ const IndexPage = ({data}) => {
         </div>
 
         <div className="ml-5">
-          <p className="h3 font-weight-bold mt-5 mb-5">
+          <p className="h3 font-weight-boldest mt-5 mb-5">
             CLEAN ELECTRIFICATION
           </p>
 
@@ -69,16 +70,18 @@ const IndexPage = ({data}) => {
         </div>
       </div>
 
-
-      <p className="h2 text-center mt-5">
-        The levers of change are at the state level and each state is different
+      <p className="h1 text-center mt-7 font-weight-bold">
+        The levers of change are at the state level, <br className="d-none d-lg-block" />
+        and each state is different.
       </p>
 
-      <p className="text-center mt-2 mb-5">
+      <p className="text-center mt-2 mb-7">
         Click on your state to see what it takes to decarbonize by 2050
       </p>
 
-      <ChoroplethMap emissions={emissions_2018} />
+      <div className="mb-7">
+        <ChoroplethMap emissions={emissions_2018} />
+      </div>
     </Layout>
   )
 }

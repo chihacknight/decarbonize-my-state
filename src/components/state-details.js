@@ -21,7 +21,6 @@ const places = [
   "district_of_columbia",
   "florida",
   "georgia",
-  "guam",
   "hawaii",
   "idaho",
   "illinois",
@@ -50,7 +49,6 @@ const places = [
   "oklahoma",
   "oregon",
   "pennsylvania",
-  "puerto_rico",
   "rhode_island",
   "south_carolina",
   "south_dakota",
@@ -58,7 +56,6 @@ const places = [
   "texas",
   "utah",
   "vermont",
-  "virgin_islands",
   "virginia",
   "washington",
   "west_virginia",
@@ -135,18 +132,22 @@ const StateDetailsPage = ({location, data}) => {
     <Layout>
       <SEO />
 
+      <a className="btn btn-outline-secondary mb-5" href="/">Back to map</a>
+
       <div className='col-6'>
-        <h1 className='mr-4 mb-3'>{placeData.name}</h1>
-        <ChoroplethMap emissions={countryEmissions} sidebar={false} selected_location={currentPlace}/>
+        <h1 className='display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold'>
+          <span className={ 'display-2 mr-4 sf-' + placeData.name.toLowerCase() } aria-hidden="true"></span>
+          {placeData.name}
+        </h1>
       </div>
 
       { !placeData.emissions }
 
       {/* Intro Section */}
       <div className='col-12'>
-        <p className="h1 mt-5 mb-5">
-          To get to <strong>zero</strong> by 2050, {placeTitle} must
-          cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
+        <p className="h1 font-weight-light mt-6 mb-6">
+          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}<br/>
+          must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
         </p>
 
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
@@ -155,17 +156,17 @@ const StateDetailsPage = ({location, data}) => {
         </p>
         <StackedBarChart emissions_data={placeData.emissions}/>
 
-        <p className="h1 text-center mt-5">We can do it. Here's how.</p>
+        <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
         <hr className="mt-5"/>
       </div>
 
       {/* Buildings Section */}
       <div className='col-12'>
-        <h2 className="h4 mt-4 ml-5 font-weight-bold">Buildings</h2>
+        <h2 className="h3 mt-5 font-weight-bold">Buildings</h2>
 
         <p className="h3 mt-5">
-          <strong>{buildingsPrcnt}%</strong> of emissions in {placeTitle} comes from buildings.
+          <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of emissions in {placeTitle} comes from buildings.
         </p>
 
         <p className="h4 mt-5 text-muted">
@@ -216,10 +217,10 @@ const StateDetailsPage = ({location, data}) => {
 
       {/* Transportation Section */}
       <div className='col-12'>
-        <h2 className="h4 mt-4 ml-5 font-weight-bold">Getting around</h2>
+        <h2 className="h3 mt-5 font-weight-bold">Getting Around</h2>
 
         <p className="h3 mt-5">
-          <strong>{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
+          <strong className="font-weight-bold">{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
         </p>
 
         <p className="h4 mt-5 text-muted">
@@ -268,10 +269,10 @@ const StateDetailsPage = ({location, data}) => {
 
       {/* Power Section */}
       <div className='col-12'>
-        <h2 className="h4 mt-4 ml-5 font-weight-bold">Power generation</h2>
+        <h2 className="h3 mt-5 font-weight-bold">Power Generation</h2>
 
         <p className="h3 mt-5">
-          <strong>{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
+          <strong className="font-weight-bold">{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
         </p>
 
         <p className="h4 mt-5 text-muted">
@@ -288,11 +289,11 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          And we need to do this for all <strong>? coal plants in {placeTitle}</strong>
+          And we need to do this for all <strong className="font-weight-bold">? coal plants in {placeTitle}</strong>
         </p>
 
         <p className="h3 mt-5">
-          ...and all <strong>? gas plants</strong>.
+          ...and all <strong className="font-weight-bold">? gas plants</strong>.
         </p>
 
         <p className="h3 mt-5">
@@ -309,11 +310,11 @@ const StateDetailsPage = ({location, data}) => {
 
         <p className="h3 mt-5">
           But that means we need to make more power for those new electric
-          machines - <strong>twice</strong> as much power as we make now!
+          machines - <strong className="font-weight-bold">twice</strong> as much power as we make now!
         </p>
 
         <p className="h3 mt-5">
-          And <strong>all of it needs to be clean power!</strong>
+          And <strong className="font-weight-bold">all of it needs to be clean power!</strong>
         </p>
 
         <p className="h3 mt-5">
