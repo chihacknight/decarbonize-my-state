@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 import { BarChart, Bar, XAxis, YAxis, LabelList, CartesianGrid } from "recharts"
 
 const getLabel=(props, label) => { return label }
 
-export default function SingleBarChart({emissions_data}) {
+export default function SingleBarChart ({emissions_data}) {
   return (
     <BarChart
       barSize={250}
@@ -30,7 +30,7 @@ export default function SingleBarChart({emissions_data}) {
       <Bar dataKey="dumps_farms_industrial_other" stackId="a" fill="#98886c">
         <LabelList content={props => getLabel(props, 'Dumps, Farms, Industrial & Other')} position="insideTopLeft" /> 
       </Bar>
-     <Bar dataKey="transportation" stackId="a" fill="#b7b7b7">
+      <Bar dataKey="transportation" stackId="a" fill="#b7b7b7">
         <LabelList content={props => getLabel(props, 'Transportation')} position="insideTopLeft" /> 
       </Bar>
       <Bar dataKey="buildings" stackId="a" fill="#d9d9d9">
