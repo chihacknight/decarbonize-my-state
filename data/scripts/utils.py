@@ -68,7 +68,7 @@ def group_df_by_generation(generation_data):
     return json.dumps(prepped_dictionary)
 
 # this function takes in a dataframe object, and reformats it to match our needs as a json object
-def json_data_builder(dataframe):
+def json_data_builder(dataframe, is_array=True):
     '''
     Goal:
         For every state, we will subset the dataframe to just that state
@@ -101,13 +101,26 @@ def json_data_builder(dataframe):
         
         state_json = state_df.to_dict('records')
         # set the initial json_object
-        json_object[state] = state_json
+        if is_array:
+            json_object[state] = state_json
+        else: 
+            json_object[state] = state_json[0]
 
     return json_object
 
 # using this object to align our us state names with their abbreviation
 # code copied from https://gist.github.com/rogerallen/1583593
 # to invert it, simply run `dict(map(reversed, us_state_to_abbrev.items()))`
+
+def get_and_clean_csv(path_to_csv, state_col="state", cols_to_keep=None):
+    df = pd.read_csv(path_to_csv)
+    df[state_col] = df[state_col].str.lower().str.replace(' ', '_')
+    if cols_to_keep is None:
+        return df
+    else:
+        return df[cols_to_keep]
+
+
 us_state_to_abbrev = {
     "Alabama": "AL",
     "Alaska": "AK",
