@@ -135,9 +135,13 @@ const StateDetailsPage = ({location, data}) => {
     <Layout>
       <SEO />
 
+      <a className="btn btn-outline-secondary mb-5" href="/">Back to map</a>
+
       <div className='col-6'>
-        <h1 className='mr-4 mb-3'>{placeData.name}</h1>
-        <ChoroplethMap emissions={countryEmissions} sidebar={false} selected_location={currentPlace}/>
+        <h1 className='display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold'>
+          <span className={ 'display-2 mr-4 sf-' + placeData.name.toLowerCase() } aria-hidden="true"></span>
+          {placeData.name}
+        </h1>
       </div>
 
       { !placeData.emissions }

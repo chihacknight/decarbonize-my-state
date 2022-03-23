@@ -1,3 +1,5 @@
+@import 'stateface/stateface.css';
+
 body {
     background-color: #FFFFFB;
     font-family: "Source Serif Pro",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -112,11 +114,6 @@ path:focus, .mapSelected {
 .navbar-brand {
     font-weight: bold;
     text-transform: uppercase;
-}
-
-.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
-    background-color: #8F0D56;
-    border-color: #8F0D56;
 }
 
 .table-bordered, .table-bordered td, .table-bordered th {
