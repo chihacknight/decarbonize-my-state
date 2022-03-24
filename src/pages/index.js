@@ -49,7 +49,7 @@ const IndexPage = ({data}) => {
         cut climate pollution by <strong>{cutPerYearPrcnt} a year.</strong>
       </p>
 
-      <SingleBarChart emissions_data={us_2018_emissions}/>
+      <StackedBarChart emissions_data={us_emissions}/>
 
       <p className='h2 text-center mt-5 mb-5'>
         When it comes to solving the climate crisis there's one main thing
@@ -57,9 +57,7 @@ const IndexPage = ({data}) => {
 
 
       <div className="d-flex align-items-center">
-        <div className="h2">
-          [stacked bar graph of emissions source]
-        </div>
+        <SingleBarChart emissions_data={us_2018_emissions}/>
 
         <div className="ml-5">
           <p className="h3 font-weight-boldest mt-5 mb-5">
