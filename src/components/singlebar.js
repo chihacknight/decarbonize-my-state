@@ -24,15 +24,6 @@ export default function SingleBarChart ({emissions_data}) {
       }}
     >
       <CartesianGrid strokeDasharray="0 99" />
-      <YAxis
-        axisLine={false}
-        tickLine={false}
-        label={{
-          angle: -90,
-          value: "CO2 (million metric tons)",
-          position: "insideBottomLeft"
-        }}
-      />
       <Bar dataKey="dumps_farms_industrial_other" stackId="a" fill="#98886c">
         <LabelList valueAccessor={entry => getLabel(entry, totalEmissions, 'dumps_farms_industrial_other', 'Dumps, Farms, Industrial & Other')} position="insideTopLeft" /> 
       </Bar>
