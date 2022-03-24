@@ -8,7 +8,7 @@ export default function SingleBarChart ({emissions_data}) {
   // sum all emissions fields except year
   const totalEmissions = Object.entries(emissions_data[0])
     .filter(([key,_val]) => key !== 'year')
-    .reduce((acc, [_key,val]) => acc + val, 0);
+    .reduce((acc, [_key,val]) => acc + val, 0)
 
   return (
     <BarChart
