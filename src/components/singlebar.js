@@ -1,5 +1,5 @@
 import React from "react"
-import { BarChart, Bar, XAxis, YAxis, LabelList, CartesianGrid } from "recharts"
+import { BarChart, Bar, LabelList, CartesianGrid } from "recharts"
 
 const getPct = (value, total) => { return Math.round((value/total)*100) }
 const getLabel = (entry, total, field, label) => { return `${label}: ${getPct(entry[field], total)}%` }
