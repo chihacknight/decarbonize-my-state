@@ -40,7 +40,7 @@ def group_df_by_emissions(emissions_data):
     #keep only relevant columns for our stats right now
     cols_to_keep = ['state', 'year', 'dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial_other']
 
-    prepped_dictionary = json_data_builder(emissions_data[cols_to_keep])
+    prepped_dictionary = json_data_builder(emissions_data[cols_to_keep], 'emissions')
 
     return json.dumps(prepped_dictionary)
 
@@ -63,12 +63,12 @@ def group_df_by_generation(generation_data):
 
     cols_to_keep = ['state', 'year', 'coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
 
-    prepped_dictionary = json_data_builder(generation_data[cols_to_keep])
+    prepped_dictionary = json_data_builder(generation_data[cols_to_keep], 'generation')
 
     return json.dumps(prepped_dictionary)
 
 # this function takes in a dataframe object, and reformats it to match our needs as a json object
-def json_data_builder(dataframe, is_array=True):
+def json_data_builder(dataframe, outer_tag="default", is_array=True):
     '''
     Goal:
         For every state, we will subset the dataframe to just that state
@@ -106,7 +106,10 @@ def json_data_builder(dataframe, is_array=True):
         else: 
             json_object[state] = state_json[0]
 
-    return json_object
+    # outer tag output object
+    output_object = {}
+    output_object[outer_tag] = json_object
+    return output_object
 
 # using this object to align our us state names with their abbreviation
 # code copied from https://gist.github.com/rogerallen/1583593

@@ -8,6 +8,6 @@ if __name__ == '__main__':
     cols_to_keep = ["state","buildings"]
     # ,nrelRes,nrelCom,resNonElHeating,comNonElHeating,resNonElWaterHeating,resNonElWaterHeating,resNonElRange,pctResNonElHeating,pctComNonElHeating,pctResNonElWaterHeating,pctComNonElWaterHeating,pctResNonElRange
     us_buildings = get_and_clean_csv(path_to_data, state_col="state", cols_to_keep=cols_to_keep)
-    output = json.dumps(json_data_builder(us_buildings, is_array=False))
+    output = json.dumps(json_data_builder(us_buildings, 'buildings', is_array=False))
 
     print(output)
