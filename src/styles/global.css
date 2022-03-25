@@ -160,4 +160,5 @@ footer {
 .single-bar-chart text {
     font-size: 0.9rem;
     font-weight: bold;
+    fill: #181818;
 }

@@ -30,9 +30,13 @@ const GraphHeight = 350
  *   year: number;
  * }
  *
- * @param {boolean} showLines
+ * @param {boolean} showLines Whether we should show the electrification
+ *  highlight lines, used on the homepage to show what share of emissions can be
+ *  handled by Clean Electrification
+ *
+ * @param {string} activeKey An optional key
  */
-export default function SingleBarChart ({ emissionsData, showLines }) {
+export default function SingleBarChart ({ emissionsData, showLines, activeKeys }) {
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
     .filter(([key,_val]) => key !== 'year')
@@ -45,6 +49,43 @@ export default function SingleBarChart ({ emissionsData, showLines }) {
   const electrificationPrcnt = 100 * (1 - (nonElectrificationPrcnt / 100))
 
   const LabelOffset = 12
+
+  const BarsConfig = {
+    other: {
+      key: 'dumps_farms_industrial_other',
+      text: 'Farms, Industrial & Other',
+      fill: '#98886c',
+      // This categoy cannot be electrified so make the activeFill red to be
+      // clearly bad
+      activeFill: '#ff0000',
+    },
+    transport: {
+      key: 'transportation',
+      text: 'Transportation',
+      fill: '#b7b7b7',
+      activeFill: '#4caf50',
+    },
+    buildings: {
+      key: 'buildings',
+      text: 'Buildings',
+      fill: '#d9d9d9',
+      activeFill: '#6ebf70',
+    },
+    power: {
+      key: 'dirty_power',
+      text: 'Dirty Power',
+      fill: '#f3f3f3',
+      activeFill: '#a3d7a4',
+    }
+  };
+
+  if (activeKeys) {
+    const activeConfig = Object.values(BarsConfig).forEach(config => {
+      if (activeKeys.includes(config.key)) {
+        config.fill = config.activeFill;
+      }
+    });
+  }
 
   return (
     <div className="single-bar-chart">
@@ -63,31 +104,39 @@ export default function SingleBarChart ({ emissionsData, showLines }) {
         { /* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */ }
         <YAxis domain={['dataMin', 'dataMax']} hide={ true } />
         <CartesianGrid strokeDasharray="0 99" />
-        <Bar dataKey="dumps_farms_industrial_other" stackId="main" fill="#98886c">
+        <Bar dataKey={ BarsConfig.other.key }
+          fill={ BarsConfig.other.fill }
+          stackId="main">
           <LabelList
             valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, 'dumps_farms_industrial_other', 'Farms, Industrial & Other')}
+              getLabel(entry, emissionsTotal, BarsConfig.other.key, BarsConfig.other.text)}
             position="insideTopLeft"
             offset={LabelOffset}/>
         </Bar>
-        <Bar dataKey="transportation" stackId="main" fill="#b7b7b7">
+        <Bar dataKey={ BarsConfig.transport.key }
+          fill={ BarsConfig.transport.fill }
+          stackId="main">
           <LabelList
             valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, 'transportation', 'Transportation')}
+              getLabel(entry, emissionsTotal, BarsConfig.transport.key, BarsConfig.transport.text)}
             position="insideTopLeft"
             offset={LabelOffset}/>
         </Bar>
-        <Bar dataKey="buildings" stackId="main" fill="#d9d9d9">
+        <Bar dataKey={ BarsConfig.buildings.key }
+          fill={ BarsConfig.buildings.fill }
+          stackId="main">
           <LabelList
             valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, 'buildings', 'Buildings')}
+              getLabel(entry, emissionsTotal, BarsConfig.buildings.key, BarsConfig.buildings.text)}
             position="insideTopLeft"
             offset={LabelOffset}/>
         </Bar>
-        <Bar dataKey="dirty_power" stackId="main" fill="#f3f3f3">
+        <Bar dataKey={ BarsConfig.power.key }
+          fill={ BarsConfig.power.fill }
+          stackId="main">
           <LabelList
             valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, 'dirty_power', 'Dirty Power')}
+              getLabel(entry, emissionsTotal, BarsConfig.power.key, BarsConfig.power.text)}
             position="insideTopLeft"
             offset={LabelOffset}/>
         </Bar>

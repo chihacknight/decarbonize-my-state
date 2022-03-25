@@ -170,11 +170,11 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of emissions in {placeTitle} comes from buildings.
         </p>
 
-        <p className="h4 mt-5 text-muted">
-          <SingleBarChart emissionsData={placeEmissions}/>
-
-          [insert state emissions graph highlighting buildings]
-        </p>
+        <div className="h4 mt-5 text-muted">
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKeys={ [ 'buildings' ] } />
+        </div>
 
         <p>
           Mostly from heating them.
@@ -196,7 +196,9 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h4 mt-5 text-muted">
-          [insert state emissions graph highlighting buildings]
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKeys={ [ 'buildings' ] } />
         </p>
 
         <div className="action-panel">
@@ -227,7 +229,9 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h4 mt-5 text-muted">
-          [insert state emissions graph highlighting transportation]
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKeys={ [ 'transportation' ] } />
         </p>
 
         <p>Mostly from our cars</p>
@@ -246,7 +250,9 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h4 mt-5 text-muted">
-          [insert state emissions graph highlighting transportation]
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKeys={[ 'buildings', 'transportation' ]} />
         </p>
 
         <div className="action-panel">
@@ -279,7 +285,9 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h4 mt-5 text-muted">
-          [insert state emissions graph highlighting power]
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKeys={[ 'dirty_power' ]} />
         </p>
 
         <p className="h3 mt-5">
@@ -335,7 +343,9 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h4 mt-5 text-muted">
-          [insert state emissions graph highlighting power]
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
         </p>
 
         <div className="action-panel">
