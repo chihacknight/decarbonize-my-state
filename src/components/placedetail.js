@@ -4,7 +4,7 @@ import ChoroplethMap from "./choroplethmap"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 
 const PlaceDetail = ({location, placesData, emissions}) => {
-  const currentPlace = location.pathname.split("/").pop()
+  const currentPlace = location.pathname.split("/").slice(0,-1).pop()
   const [placeData, setPlaceData] = useState(placesData[currentPlace])
 
   return (
