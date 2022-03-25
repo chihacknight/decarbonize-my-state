@@ -135,7 +135,7 @@ const StateDetailsPage = ({location, data}) => {
 
       <a className="btn btn-outline-secondary mb-5" href="/">Back to map</a>
 
-      <div className='col-6'>
+      <div className='col-12'>
         <h1 className='display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold'>
           <span className={ 'display-2 mr-4 sf-' + stateFaceClass } aria-hidden="true"></span>
           {placeData.name}
