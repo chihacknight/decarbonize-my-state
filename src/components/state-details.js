@@ -6,7 +6,6 @@ import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import get_2018_emissions from "../components/get_2018_emissions"
 
 const places = [
   "alabama",
@@ -98,7 +97,6 @@ const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
   const currentPlace = location.pathname.split("/")[1]
-  const countryEmissions = get_2018_emissions(data)
   const placesData = getPlacesData(data)
 
   const currPlaceData = placesData[currentPlace]
@@ -108,7 +106,7 @@ const StateDetailsPage = ({location, data}) => {
   // NOTE: We don't have emissions for all states (like Guam)
   const placeAllEmissions = currPlaceData.emissions
 
-  let placeEmissions;
+  let placeEmissions
 
   if (placeAllEmissions) {
     // Get the last year of emissions data we have to use for showing the

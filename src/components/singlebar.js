@@ -77,14 +77,14 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
       fill: '#f3f3f3',
       activeFill: '#a3d7a4',
     }
-  };
+  }
 
   if (activeKeys) {
-    const activeConfig = Object.values(BarsConfig).forEach(config => {
+    Object.values(BarsConfig).forEach(config => {
       if (activeKeys.includes(config.key)) {
-        config.fill = config.activeFill;
+        config.fill = config.activeFill
       }
-    });
+    })
   }
 
   return (
@@ -143,7 +143,7 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
         <ReferenceArea shape={
           <ElectrificationLines
             electrificationPrcnt={electrificationPrcnt}/>}
-            showLines={showLines} />
+        showLines={showLines} />
       </BarChart>
     </div>
   )
@@ -161,7 +161,7 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
  */
 function ElectrificationLines ({ electrificationPrcnt, showLines }) {
   if (!showLines) {
-    return null;
+    return null
   }
 
   const LineWidth = 50
