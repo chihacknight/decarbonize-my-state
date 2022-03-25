@@ -107,9 +107,7 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
             json_object[state] = state_json[0]
 
     # outer tag output object
-    output_object = {}
-    output_object[outer_tag] = json_object
-    return output_object
+    return json_object
 
 # using this object to align our us state names with their abbreviation
 # code copied from https://gist.github.com/rogerallen/1583593
