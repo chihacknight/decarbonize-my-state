@@ -9,17 +9,15 @@ import ChoroplethMap from "../components/choroplethmap"
 import get_2018_emissions from "../components/get_2018_emissions"
 import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
-
 const IndexPage = ({data}) => {
-  // console.log(data.finalJson)
+  // Prep data for emissions over time chart
+  const emissionsOverTime = data.finalJson["united_states"]
 
-  // prep data for US bar chart
-  const us_emissions = data.finalJson["united_states"]
-  const us_2018_emissions = [get_2018_emissions_group(data)]
+  // Prep data for the SingleBarChart breaking down emissions by category
+  const us2018Emissions = get_2018_emissions_group(data)
 
-
-  // prep data for choropleth map
-  const emissions_2018 = get_2018_emissions(data)
+  // Prep data for choropleth map
+  const emissions2018 = get_2018_emissions(data)
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
@@ -49,22 +47,21 @@ const IndexPage = ({data}) => {
         cut climate pollution by <strong>{cutPerYearPrcnt} a year.</strong>
       </p>
 
-      <StackedBarChart emissions_data={us_emissions}/>
+      <StackedBarChart emissions_data={emissionsOverTime}/>
 
-      <p className='h2 text-center mt-5 mb-5'>
-        When it comes to solving the climate crisis there's one main thing
+      <p className='h2 text-center mt-7 mb-5'>
+        To do that (and solve the climate crisis) there's one main thing
       </p>
 
-
-      <div className="d-flex align-items-center">
-        <SingleBarChart emissions_data={us_2018_emissions}/>
+      <div className="d-flex justify-content-center mt-7">
+        <SingleBarChart emissionsData={us2018Emissions} showLines={true} />
 
         <div className="ml-5">
-          <p className="h3 font-weight-boldest mt-5 mb-5">
-            CLEAN ELECTRIFICATION
+          <p className="h1 font-weight-boldest mt-6 mb-7">
+            Clean <br/> Electrification!
           </p>
 
-          <p>...and then there's everything else</p>
+          <p className="h3">...and then there's everything else</p>
         </div>
       </div>
 
@@ -78,7 +75,7 @@ const IndexPage = ({data}) => {
       </p>
 
       <div className="mb-7">
-        <ChoroplethMap emissions={emissions_2018} />
+        <ChoroplethMap emissions={emissions2018} />
       </div>
     </Layout>
   )

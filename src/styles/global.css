@@ -152,3 +152,12 @@ footer {
     margin:  3rem 0;
     background-color: #f3f3f3;
 }
+
+
+/**
+ * SingleBarChart styling
+ */
+.single-bar-chart text {
+    font-size: 0.9rem;
+    font-weight: bold;
+}

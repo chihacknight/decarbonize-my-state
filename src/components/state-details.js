@@ -1,10 +1,9 @@
 import React, { useState } from "react"
-import StackedBarChart from "../components/stackedbar"
-import ChoroplethMap from "../components/choroplethmap"
+import { graphql } from "gatsby"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 
-import { graphql } from "gatsby"
-
+import StackedBarChart from "../components/stackedbar"
+import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import get_2018_emissions from "../components/get_2018_emissions"
@@ -109,10 +108,12 @@ const StateDetailsPage = ({location, data}) => {
   // NOTE: We don't have emissions for all states (like Guam)
   const placeAllEmissions = currPlaceData.emissions
 
+  let placeEmissions;
+
   if (placeAllEmissions) {
     // Get the last year of emissions data we have to use for showing the
     // breakdown of how much emission comes from each source in this state
-    const placeEmissions = placeAllEmissions[placeAllEmissions.length - 1]
+    placeEmissions = placeAllEmissions[placeAllEmissions.length - 1]
 
     const totalLatestEmissions = placeEmissions.buildings +
       placeEmissions.dirty_power +
@@ -126,7 +127,7 @@ const StateDetailsPage = ({location, data}) => {
 
   const placeTitle = currPlaceData.name
 
-  const [placeData, setPlaceData] = useState(currPlaceData)
+  const [ placeData ] = useState(currPlaceData)
 
   return (
     <Layout>
@@ -170,6 +171,8 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h4 mt-5 text-muted">
+          <SingleBarChart emissionsData={placeEmissions}/>
+
           [insert state emissions graph highlighting buildings]
         </p>
 
