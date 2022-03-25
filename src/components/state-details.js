@@ -127,6 +127,8 @@ const StateDetailsPage = ({location, data}) => {
 
   const [ placeData ] = useState(currPlaceData)
 
+  const stateFaceClass = placeData.name.toLowerCase().replaceAll(' ', '-');
+
   return (
     <Layout>
       <SEO />
@@ -135,7 +137,7 @@ const StateDetailsPage = ({location, data}) => {
 
       <div className='col-6'>
         <h1 className='display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold'>
-          <span className={ 'display-2 mr-4 sf-' + placeData.name.toLowerCase() } aria-hidden="true"></span>
+          <span className={ 'display-2 mr-4 sf-' + stateFaceClass } aria-hidden="true"></span>
           {placeData.name}
         </h1>
       </div>
