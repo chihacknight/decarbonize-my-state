@@ -1,4 +1,3 @@
-import "./styles.css";
 import React from "react";
 import {
   AreaChart,
@@ -48,7 +47,7 @@ const data = [
   }
 ];
 
-export default function SimpleAreaChart({emissions_data}) {
+export default function SimpleAreaChart() {
   return (
     <AreaChart
       width={500}
