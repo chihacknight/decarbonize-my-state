@@ -48,7 +48,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "eslint ."
+    "test": "eslint src"
   },
   "repository": {
     "type": "git",

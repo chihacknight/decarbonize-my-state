@@ -16,7 +16,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "district_of_columbia",
     "florida",
     "georgia",
-    "guam",
     "hawaii",
     "idaho",
     "illinois",
@@ -45,7 +44,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "oklahoma",
     "oregon",
     "pennsylvania",
-    "puerto_rico",
     "rhode_island",
     "south_carolina",
     "south_dakota",
@@ -53,7 +51,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "texas",
     "utah",
     "vermont",
-    "virgin_islands",
     "virginia",
     "washington",
     "west_virginia",
@@ -61,12 +58,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "wyoming"
   ]
 
-  const placeDetailTemplate = path.resolve(`src/templates/place-detail.js`)
+  const StateDetailsTemplate = path.resolve(`src/components/state-details.js`)
   placeNames.forEach(name => {
-    const path = 'place/' + name
+    const path = name
+
     createPage({
       path,
-      component: placeDetailTemplate
+      component: StateDetailsTemplate
     })
   })
 }
