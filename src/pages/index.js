@@ -11,15 +11,14 @@ import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
 
 const IndexPage = ({data}) => {
-  // console.log(data.finalJson)
-
+  // console.log(data)
   // prep data for US bar chart
-  const us_emissions = data.finalJson["united_states"]
-  const us_2018_emissions = [get_2018_emissions_group(data)]
+  const us_emissions = data.emissionsJson["united_states"]
+  const us_2018_emissions = [get_2018_emissions_group(data.emissionsJson)]
 
 
   // prep data for choropleth map
-  const emissions_2018 = get_2018_emissions(data)
+  const emissions_2018 = get_2018_emissions(data.emissionsJson)
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
@@ -88,7 +87,7 @@ export default IndexPage
 
 export const query = graphql`
 query IndexQuery {
-  finalJson {
+  emissionsJson {
     alabama {
       year
       dirty_power

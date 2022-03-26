@@ -86,7 +86,7 @@ const getPlacesData = (data) => {
     allPlacesData[place]['name'] = placeTitle
 
     // grab the state total employed from totals
-    allPlacesData[place]['emissions'] = data.finalJson[place]
+    allPlacesData[place]['emissions'] = data[place]
   })
   return allPlacesData
 }
@@ -99,8 +99,8 @@ const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
   const currentPlace = location.pathname.split("/")[1]
-  const countryEmissions = get_2018_emissions(data)
-  const placesData = getPlacesData(data)
+  const countryEmissions = get_2018_emissions(data.emissionsJson)
+  const placesData = getPlacesData(data.emissionsJson)
 
   const currPlaceData = placesData[currentPlace]
 
@@ -359,7 +359,7 @@ export default StateDetailsPage
 
 export const query = graphql`
 query PlaceQuery {
-  finalJson {
+  emissionsJson {
     alabama {
       year
       dirty_power

@@ -1,0 +1,54 @@
+state,fips,num_osm_buildings
+Alabama,01,211754
+Alaska,02,120746
+Arizona,04,804984
+Arkansas,05,59843
+California,06,2875151
+Colorado,08,564302
+Connecticut,09,1403992
+Delaware,10,27401
+District of Columbia,11,154674
+Florida,12,2424472
+Georgia,13,1755983
+Hawaii,15,80252
+Idaho,16,335507
+Illinois,17,1042991
+Indiana,18,387255
+Iowa,19,127260
+Kansas,20,231001
+Kentucky,21,640288
+Louisiana,22,244538
+Maine,23,98446
+Maryland,24,1041830
+Massachusetts,25,2572490
+Michigan,26,414615
+Minnesota,27,312742
+Mississippi,28,277841
+Missouri,29,190275
+Montana,30,279722
+Nebraska,31,84629
+Nevada,32,74010
+New Hampshire,33,144403
+New Jersey,34,441339
+New Mexico,35,297628
+New York,36,2575749
+North Carolina,37,1310176
+North Dakota,38,308640
+Ohio,39,636120
+Oklahoma,40,103924
+Oregon,41,620810
+Pennsylvania,42,663531
+Puerto Rico,72,1434363
+Rhode Island,44,98252
+South Carolina,45,301010
+South Dakota,46,40021
+Tennessee,47,139933
+Texas,48,2492567
+US Virgin Islands,78,44818
+Utah,49,143057
+Vermont,50,45468
+Virginia,51,1153434
+Washington,53,971935
+West Virginia,54,189699
+Wisconsin,55,1301068
+Wyoming,56,89449
