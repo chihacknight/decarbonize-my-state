@@ -11,10 +11,10 @@ import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
 
 const IndexPage = ({data}) => {
-  // console.log(data.finalJson)
+  // console.log(data)
   // prep data for US bar chart
   const us_emissions = data.emissionsJson["united_states"]
-  const us_2018_emissions = [get_2018_emissions_group(data)]
+  const us_2018_emissions = [get_2018_emissions_group(data.emissionsJson)]
 
 
   // prep data for choropleth map
