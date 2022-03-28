@@ -5,52 +5,37 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip
+  Tooltip,
+  Legend,
+  Label
 } from "recharts";
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 0
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 0
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    
-  },
-  {
-    name: "Page D",
-    uv: 2000,
-    pv: 2000
-  
-  },
-  {
-    name: "Page E",
-    
-    pv: 4800
-  },
-  {
-    name: "Page F",
-    
-    pv: 3800
-  },
-  {
-    name: "Page G",
-    
-    pv: 4300
-  }
-];
+export default function SimpleAreaChart(emissions_data) {
 
-export default function SimpleAreaChart() {
+  const annualhistoricalEmissions = Object.values(emissions_data)[0].map((item) => {
+    var data = { year: item.year, hist: 0 }
+    data.hist = Math.round(Object.entries(item)
+      .filter(([key, _val]) => key !== 'year')
+      .reduce((acc, [_key, val]) => acc + val, 0))
+    return data
+  })
+
+  const currYear = new Date().getFullYear()
+  const yearsLeft = 2050 - currYear
+  const reduceFrom = annualhistoricalEmissions[annualhistoricalEmissions.length - 1].hist
+  var projection = []
+
+
+  for (let step = 0; step < (yearsLeft + 1); step++) {
+    if (step == 0) { projection.push({ year: currYear, hist: reduceFrom, projected: reduceFrom }) }
+    else { projection.push({ year: step + currYear, projected: Math.round(reduceFrom - reduceFrom * step / yearsLeft )}) }
+  }
+
+  var data = annualhistoricalEmissions.concat(projection)
+ 
   return (
     <AreaChart
-      width={500}
+      width={800}
       height={400}
       data={data}
       margin={{
@@ -60,25 +45,30 @@ export default function SimpleAreaChart() {
         bottom: 0
       }}
     >
+      <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" />
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="year" >
+      <Label value="Year" offset={0} position="insideBottom"/> 
+      </XAxis>
       <YAxis />
       <Tooltip />
       <Area
         type="monotone"
-        dataKey="uv"
+        dataKey="hist"
         stackId="1"
-        stroke="#8884d8"
-        fill="#8884d8"
+        stroke="#b65c00"
+        fill="#e8ceb3"
+        name="Emissions"
       />
       <Area
         type="monotone"
-        dataKey="pv"
+        dataKey="projected"
         stackId="2"
-        stroke="#82ca9d"
-        fill="#82ca9d"
+        stroke="#36a654"
+        fill="#c1e5cb"
+        name="Projection"
       />
-      
+
     </AreaChart>
   );
 }

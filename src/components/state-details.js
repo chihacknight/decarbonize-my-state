@@ -8,6 +8,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import get_2018_emissions from "../components/get_2018_emissions"
+import SimpleAreaChart from "../components/simpleareachart"
 
 const places = [
   "alabama",
@@ -115,6 +116,7 @@ const StateDetailsPage = ({location, data}) => {
         </div>
         <div className='col-12 col-lg-8'>
           <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
+          <SimpleAreaChart emissions_data={placeData.emissions}/>
           <StackedBarChart emissions_data={placeData.emissions}/>
         </div>
       </div>

@@ -27,6 +27,7 @@ const IndexPage = ({data}) => {
         We have 28 years to reduce our emissions to zero<br />
         </strong>
       </h2><br />
+      Total US climate pollution
       <SimpleAreaChart emissions_data={us_emissions}/>
       <StackedBarChart emissions_data={us_emissions}/>
       <br /><br /><br />
