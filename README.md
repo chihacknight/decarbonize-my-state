@@ -2,6 +2,9 @@
 
 Chi Hack Night data visualization project to measure the state and progress of decarbonization for all States in the USA.
 
+- [Running project notes](https://docs.google.com/document/d/14gs7gO9YmBgIWOMd7oGXmIF1XRwfBIt8jGTOpn8udjg/edit#heading=h.n9cfl96c3r81)
+- [Wireframes](https://app.moqups.com/pcSQvUMmsyAa1SN58KaKg1EKuYRs8iRX/view/page/a68639957)
+
 This is a Gatsby app built on top of the [DataMade Gatsby starter template](https://github.com/datamade/how-to/tree/master/docker/templates), which was adapted from the [default Gatsby starter repo](https://github.com/gatsbyjs/gatsby-starter-default).
 
 ### 💾 Requirements
@@ -121,4 +124,4 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 ### 💫 Deploy
 
-DataMade deploys static sites using Netlify. This project's staging URL is https://state-by-state-decarbonization.netlify.app/
+DataMade deploys static sites using Netlify. This project's staging URL is [state-decarbonize.netlify.app](https://state-decarbonize.netlify.app/).
