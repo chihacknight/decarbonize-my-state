@@ -10,26 +10,14 @@ import get_2018_emissions from "../components/get_2018_emissions"
 import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
 const IndexPage = ({data}) => {
-// <<<<<<< HEAD
-//   // Prep data for emissions over time chart
-//   const emissionsOverTime = data.finalJson["united_states"]
-// =======
-  // console.log(data)
-  // prep data for US bar chart
+ // Prep data for emissions over time chart
   const emissionsOverTime = data.emissionsJson["united_states"]
-  const us2018Emissions = get_2018_emissions_group(data.emissionsJson)
-// >>>>>>> main
 
   // Prep data for the SingleBarChart breaking down emissions by category
-  // const us2018Emissions = get_2018_emissions_group(data)
+  const us2018Emissions = get_2018_emissions_group(data.emissionsJson)
 
-// <<<<<<< HEAD
-//   // Prep data for choropleth map
-//   const emissions2018 = get_2018_emissions(data)
-// =======
-  // prep data for choropleth map
+  // Prep data for choropleth map
   const emissions2018 = get_2018_emissions(data.emissionsJson)
-// >>>>>>> main
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
@@ -56,7 +44,7 @@ const IndexPage = ({data}) => {
 
       <p className="h1 mt-5 mb-5 text-center">
         To get to <strong>zero</strong> by 2050, the US must <br className="d-none d-lg-block" />
-        cut climate pollution by <strong>{cutPerYearPrcnt} a year.</strong>
+        cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
 
       <StackedBarChart emissions_data={emissionsOverTime}/>
