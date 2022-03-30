@@ -98,7 +98,6 @@ const currentYear = new Date().getFullYear()
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
-  console.log(data)
   const currentPlace = location.pathname.split("/")[1]
   const countryEmissions = get_2018_emissions(data.emissionsJson)
   const placesData = getPlacesData(data.emissionsJson)
@@ -123,7 +122,15 @@ const StateDetailsPage = ({location, data}) => {
   
   const {
     buildings
-  } = data.buildings[currentPlace]
+  } = data.buildingsJson[currentPlace]
+  
+  const buildingsCountStr = buildings !== undefined
+    ? buildings.toLocaleString('en')
+    : '?'
+
+  const buildingsPerYear = buildings !== undefined
+    ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
+    : '?'
 
   let buildingsPrcnt, powerPrcnt, transportPrcnt
 
@@ -205,8 +212,8 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          And we need to do this for all ? buildings in {placeTitle}<br/>
-          (That's around ? per year)
+          And we need to do this for all {buildingsCountStr} buildings in {placeTitle}<br/>
+          (That's around {buildingsPerYear} per year)
         </p>
 
         <p className="h3 mt-5">
@@ -955,6 +962,164 @@ query PlaceQuery {
     wyoming {
       Cars_All
       EV_Registration
+    }
+  }
+  buildingsJson {
+    alabama {
+      buildings
+    }
+    alaska {
+      buildings
+    }
+    arizona {
+      buildings
+    }
+    arkansas {
+      buildings
+    }
+    california {
+      buildings
+    }
+    colorado {
+      buildings
+    }
+    connecticut {
+      buildings
+    }
+    delaware {
+      buildings
+    }
+    district_of_columbia {
+      buildings
+    }
+    florida {
+      buildings
+    }
+    georgia {
+      buildings
+    }
+    hawaii {
+      buildings
+    }
+    idaho {
+      buildings
+    }
+    illinois {
+      buildings
+    }
+    indiana {
+      buildings
+    }
+    iowa {
+      buildings
+    }
+    kansas {
+      buildings
+    }
+    kentucky {
+      buildings
+    }
+    louisiana {
+      buildings
+    }
+    maine {
+      buildings
+    }
+    maryland {
+      buildings
+    }
+    massachusetts {
+      buildings
+    }
+    michigan {
+      buildings
+    }
+    minnesota {
+      buildings
+    }
+    mississippi {
+      buildings
+    }
+    missouri {
+      buildings
+    }
+    montana {
+      buildings
+    }
+    nebraska {
+      buildings
+    }
+    nevada {
+      buildings
+    }
+    new_hampshire {
+      buildings
+    }
+    new_jersey {
+      buildings
+    }
+    new_mexico {
+      buildings
+    }
+    new_york {
+      buildings
+    }
+    north_carolina {
+      buildings
+    }
+    north_dakota {
+      buildings
+    }
+    ohio {
+      buildings
+    }
+    oklahoma {
+      buildings
+    }
+    oregon {
+      buildings
+    }
+    pennsylvania {
+      buildings
+    }
+    rhode_island {
+      buildings
+    }
+    south_carolina {
+      buildings
+    }
+    south_dakota {
+      buildings
+    }
+    tennessee {
+      buildings
+    }
+    texas {
+      buildings
+    }
+    united_states {
+      buildings
+    }
+    utah {
+      buildings
+    }
+    vermont {
+      buildings
+    }
+    virginia {
+      buildings
+    }
+    washington {
+      buildings
+    }
+    west_virginia {
+      buildings
+    }
+    wisconsin {
+      buildings
+    }
+    wyoming {
+      buildings
     }
   }
 }
