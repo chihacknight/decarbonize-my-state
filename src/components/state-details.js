@@ -171,35 +171,39 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <div className="row mt-5">
-          <div className="col-6">
+          { /* Make SingleBarChart full width on mobile */ }
+          <div className="col-12-med">
             <SingleBarChart
               emissionsData={placeEmissions}
               activeKey='buildings' />
           </div>
 
-          <div className="col">
+          <div className="col h3 mt-6">
             <p>
               Mostly from heating them.
-
-              ?% of the pollution of your typical home comes from heating your space, water, and food.
             </p>
 
-            <p className="h3 mt-5">
-              To stop this pollution, we need to electrify our furnaces, water boilers, and stoves.
-            </p>
-
-            <p className="h3 mt-5">
-              And we need to do this for all ? buildings in {placeTitle}
-              (That's around ? per year)
+            <p className="mt-4">
+              ?% of the pollution of your typical home comes from heating your
+              space, water, and food.
             </p>
           </div>
         </div>
 
         <p className="h3 mt-5">
+          To stop this pollution, we need to electrify our furnaces, water boilers, and stoves.
+        </p>
+
+        <p className="h3 mt-5">
+          And we need to do this for all ? buildings in {placeTitle} (that's
+          around ? per year)
+        </p>
+
+        <p className="h3 mt-7 font-weight-bold text-center">
           That will solve {buildingsPrcnt}% of the problem.
         </p>
 
-        <div className="mt-5">
+        <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
             emissionsData={placeEmissions}
             greenKeys={ [ 'buildings' ] } />
@@ -232,28 +236,33 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
         </p>
 
-        <div className="mt-5">
-          <SingleBarChart
-            emissionsData={placeEmissions}
-            activeKey='transportation' />
+        <div className="row mt-5">
+          { /* Make SingleBarChart full width on mobile */ }
+          <div className="col-12-med">
+            <SingleBarChart
+              emissionsData={placeEmissions}
+              activeKey='transportation' />
+          </div>
+
+          <div className="col">
+            <p>Mostly from our cars</p>
+
+            <p className="h3 mt-5">
+              To cut this pollution, replace your car with an EV.
+            </p>
+
+            <p className="h3 mt-5">
+              And we need to do this for all ? cars in {placeTitle}
+              (That's around ? a year.)
+            </p>
+          </div>
         </div>
 
-        <p>Mostly from our cars</p>
-
-        <p className="h3 mt-5">
-          To cut this pollution, replace your car with an EV.
-        </p>
-
-        <p className="h3 mt-5">
-          And we need to do this for all ? cars in {placeTitle}
-          (That's around ? a year.)
-        </p>
-
-        <p className="h3 mt-5">
+        <p className="h3 mt-7 font-weight-bold text-center">
           That will solve another {transportPrcnt}% of the problem.
         </p>
 
-        <div className="mt-5">
+        <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
             emissionsData={placeEmissions}
             greenKeys={[ 'buildings', 'transportation' ]} />
@@ -288,20 +297,25 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
         </p>
 
-        <div className="mt-5">
-          <SingleBarChart
-            emissionsData={placeEmissions}
-            activeKey='dirty_power' />
+        <div className="row mt-5">
+          { /* Make SingleBarChart full width on mobile */ }
+          <div className="col-12-med">
+            <SingleBarChart
+              emissionsData={placeEmissions}
+              activeKey='dirty_power' />
+          </div>
+
+          <div className="col">
+            <p className="h3 mt-5">
+              Specifically from coal and gas plants.
+            </p>
+
+            <p className="h3 mt-5">
+              To cut this pollution, we need to replace dirty power plants with
+              clean ones. (mostly wind and solar)
+            </p>
+          </div>
         </div>
-
-        <p className="h3 mt-5">
-          Specifically from coal and gas plants.
-        </p>
-
-        <p className="h3 mt-5">
-          To cut this pollution, we need to replace dirty power plants with
-          clean ones. (mostly wind and solar)
-        </p>
 
         <p className="h3 mt-5">
           And we need to do this for all <strong className="font-weight-bold">? coal plants in {placeTitle}</strong>
@@ -342,11 +356,11 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
 
-        <p className="h3 mt-5">
+        <p className="h3 mt-7 font-weight-bold text-center">
           That will solve another {powerPrcnt}% of the problem.
         </p>
 
-        <div className="mt-5">
+        <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
             emissionsData={placeEmissions}
             greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
