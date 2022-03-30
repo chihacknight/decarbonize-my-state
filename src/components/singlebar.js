@@ -53,7 +53,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
   const nonElectrificationPrcnt = getPct(emissionsData.dumps_farms_industrial_other, emissionsTotal)
   const electrificationPrcnt = 100 * (1 - (nonElectrificationPrcnt / 100))
 
-  const activeFill = '#ff5722';
+  const activeFill = '#ff5722'
 
   /**
    * Configuration for the colors for each bar graph bar as well as their data
@@ -95,7 +95,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
     right: 200,
     left: 0,
     bottom: 0
-  };
+  }
 
   BarWidth = 150
   GraphWidth = 400
@@ -110,14 +110,14 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
       right: 100,
       left: 0,
       bottom: 0
-    };
+    }
   }
 
   // If on state details, shorten text labels
   if (!homeView) {
-    BarsConfig.power.text = 'Power';
-    BarsConfig.transport.text = 'Transport';
-    BarsConfig.other.text = 'Other';
+    BarsConfig.power.text = 'Power'
+    BarsConfig.transport.text = 'Transport'
+    BarsConfig.other.text = 'Other'
   }
 
   if (greenKeys) {
@@ -129,13 +129,13 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
   }
 
   if (activeKey) {
-    const activeConfig = Object.values(BarsConfig).find(config => config.key === activeKey);
+    const activeConfig = Object.values(BarsConfig).find(config => config.key === activeKey)
 
     if (activeConfig) {
       activeConfig.fill = activeFill
     }
     else {
-      console.error('Bad activeKey!', activeKey);
+      console.error('Bad activeKey!', activeKey)
     }
   }
 

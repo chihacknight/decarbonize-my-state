@@ -127,7 +127,7 @@ const StateDetailsPage = ({location, data}) => {
 
   const [ placeData ] = useState(currPlaceData)
 
-  const stateFaceClass = placeData.name.toLowerCase().replaceAll(' ', '-');
+  const stateFaceClass = placeData.name.toLowerCase().replaceAll(' ', '-')
 
   return (
     <Layout>

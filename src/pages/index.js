@@ -10,7 +10,7 @@ import get_2018_emissions from "../components/get_2018_emissions"
 import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
 const IndexPage = ({data}) => {
- // Prep data for emissions over time chart
+  // Prep data for emissions over time chart
   const emissionsOverTime = data.emissionsJson["united_states"]
 
   // Prep data for the SingleBarChart breaking down emissions by category
