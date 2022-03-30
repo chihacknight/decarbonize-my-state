@@ -212,8 +212,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          And we need to do this for all {buildingsCountStr} buildings in {placeTitle}<br/>
-          (That's around {buildingsPerYear} per year)
+          And we need to do this for all {buildingsCountStr} buildings in {placeTitle} (That's around {buildingsPerYear} per year)
         </p>
 
         <p className="h3 mt-5">
