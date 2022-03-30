@@ -54,7 +54,7 @@ const IndexPage = ({data}) => {
       </p>
 
       <div className="d-flex justify-content-center mt-7">
-        <SingleBarChart emissionsData={us2018Emissions} showLines={true} />
+        <SingleBarChart emissionsData={us2018Emissions} homeView={true} />
 
         <div className="ml-5">
           <p className="h1 font-weight-boldest mt-6 mb-7">

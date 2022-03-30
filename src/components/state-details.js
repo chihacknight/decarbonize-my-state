@@ -118,9 +118,9 @@ const StateDetailsPage = ({location, data}) => {
       placeEmissions.dumps_farms_industrial_other +
       placeEmissions.transportation
 
-    buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(1)
-    powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(1)
-    transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(1)
+    buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(0)
+    powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(0)
+    transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(0)
   }
 
   const placeTitle = currPlaceData.name
@@ -195,11 +195,11 @@ const StateDetailsPage = ({location, data}) => {
           That will solve {buildingsPrcnt}% of the problem.
         </p>
 
-        <p className="h4 mt-5 text-muted">
+        <div className="h4 mt-5 text-muted">
           <SingleBarChart
             emissionsData={placeEmissions}
             activeKeys={ [ 'buildings' ] } />
-        </p>
+        </div>
 
         <div className="action-panel">
           <h3 className="h4 font-weight-bold">What should I do?</h3>
@@ -228,11 +228,11 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
         </p>
 
-        <p className="h4 mt-5 text-muted">
+        <div className="h4 mt-5 text-muted">
           <SingleBarChart
             emissionsData={placeEmissions}
             activeKeys={ [ 'transportation' ] } />
-        </p>
+        </div>
 
         <p>Mostly from our cars</p>
 
@@ -246,14 +246,14 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          That will solve {transportPrcnt}% of the problem.
+          That will solve another {transportPrcnt}% of the problem.
         </p>
 
-        <p className="h4 mt-5 text-muted">
+        <div className="h4 mt-5 text-muted">
           <SingleBarChart
             emissionsData={placeEmissions}
             activeKeys={[ 'buildings', 'transportation' ]} />
-        </p>
+        </div>
 
         <div className="action-panel">
           <h3 className="h4 font-weight-bold">What should I do?</h3>
@@ -284,11 +284,11 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
         </p>
 
-        <p className="h4 mt-5 text-muted">
+        <div className="h4 mt-5 text-muted">
           <SingleBarChart
             emissionsData={placeEmissions}
             activeKeys={[ 'dirty_power' ]} />
-        </p>
+        </div>
 
         <p className="h3 mt-5">
           Specifically from coal and gas plants.
@@ -339,14 +339,14 @@ const StateDetailsPage = ({location, data}) => {
 
 
         <p className="h3 mt-5">
-          That will solve {powerPrcnt}% of the problem.
+          That will solve another {powerPrcnt}% of the problem.
         </p>
 
-        <p className="h4 mt-5 text-muted">
+        <div className="h4 mt-5 text-muted">
           <SingleBarChart
             emissionsData={placeEmissions}
             activeKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
-        </p>
+        </div>
 
         <div className="action-panel">
           <h3 className="h4 font-weight-bold">What should I do?</h3>

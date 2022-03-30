@@ -1,5 +1,5 @@
 import React from "react"
-import { BarChart, Bar, LabelList, CartesianGrid, ReferenceArea, YAxis } from "recharts"
+import { BarChart, Bar, LabelList, ReferenceArea, YAxis } from "recharts"
 
 /* Calculate a rounded percentage given a value and the total it's out of */
 const getPct = (value, total) => { return Math.round((value/total)*100) }
@@ -12,9 +12,9 @@ const getLabel = (entry, total, field, label) => {
 /**
  * Create constants for bar and graph dimensions for calculating lines
  */
-const BarWidth = 275
-const GraphWidth = 375
-const GraphHeight = 350
+let BarWidth
+let GraphWidth
+let GraphHeight
 
 /**
  * A vertically stacked bar chart intended to show the groups of different
@@ -30,13 +30,14 @@ const GraphHeight = 350
  *   year: number;
  * }
  *
- * @param {boolean} showLines Whether we should show the electrification
- *  highlight lines, used on the homepage to show what share of emissions can be
- *  handled by Clean Electrification
+ * @param {boolean} homeView Whether this is the homepage bar graph, which
+ * is showing US emissions breakdown (which never has, say 1% for buildings) and
+ * should show the electrification highlight lines to show what share of
+ * emissions can be handled by Clean Electrification
  *
  * @param {string} activeKey An optional key
  */
-export default function SingleBarChart ({ emissionsData, showLines, activeKeys }) {
+export default function SingleBarChart ({ emissionsData, homeView, activeKeys }) {
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
     .filter(([key,_val]) => key !== 'year')
@@ -48,8 +49,10 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
   const nonElectrificationPrcnt = getPct(emissionsData.dumps_farms_industrial_other, emissionsTotal)
   const electrificationPrcnt = 100 * (1 - (nonElectrificationPrcnt / 100))
 
-  const LabelOffset = 12
-
+  /**
+   * Configuration for the colors for each bar graph bar as well as their data
+   * key and label text
+   */
   const BarsConfig = {
     other: {
       key: 'dumps_farms_industrial_other',
@@ -57,26 +60,58 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
       fill: '#98886c',
       // This categoy cannot be electrified so make the activeFill red to be
       // clearly bad
-      activeFill: '#ff0000',
+      activeFill: '#cabd98',
     },
     transport: {
       key: 'transportation',
       text: 'Transportation',
-      fill: '#b7b7b7',
+      fill: '#a6a6a6',
       activeFill: '#4caf50',
     },
     buildings: {
       key: 'buildings',
       text: 'Buildings',
-      fill: '#d9d9d9',
+      fill: '#c2c2c2',
       activeFill: '#6ebf70',
     },
     power: {
       key: 'dirty_power',
       text: 'Dirty Power',
-      fill: '#f3f3f3',
+      fill: '#dcdcdc',
       activeFill: '#a3d7a4',
     }
+  }
+
+  const LabelOffset = 12
+  let LabelPosition = 'right'
+  let GraphMargin = {
+    top: 0,
+    right: 200,
+    left: 0,
+    bottom: 0
+  };
+
+  BarWidth = 150
+  GraphWidth = 400
+  GraphHeight = 350
+
+  if (homeView) {
+    LabelPosition = 'insideTopLeft'
+    BarWidth = 275
+    GraphWidth = 375
+    GraphMargin = {
+      top: 0,
+      right: 100,
+      left: 0,
+      bottom: 0
+    };
+  }
+
+  // If on state details, shorten text labels
+  if (!homeView) {
+    BarsConfig.power.text = 'Power';
+    BarsConfig.transport.text = 'Transport';
+    BarsConfig.other.text = 'Other';
   }
 
   if (activeKeys) {
@@ -94,23 +129,17 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
         width={ GraphWidth }
         height={ GraphHeight}
         data={[emissionsData]}
-        margin={{
-          top: 0,
-          right: 100,
-          left: 0,
-          bottom: 0
-        }}
+        margin={ GraphMargin }
       >
         { /* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */ }
         <YAxis domain={['dataMin', 'dataMax']} hide={ true } />
-        <CartesianGrid strokeDasharray="0 99" />
         <Bar dataKey={ BarsConfig.other.key }
           fill={ BarsConfig.other.fill }
           stackId="main">
           <LabelList
             valueAccessor={entry =>
               getLabel(entry, emissionsTotal, BarsConfig.other.key, BarsConfig.other.text)}
-            position="insideTopLeft"
+            position={LabelPosition}
             offset={LabelOffset}/>
         </Bar>
         <Bar dataKey={ BarsConfig.transport.key }
@@ -119,7 +148,7 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
           <LabelList
             valueAccessor={entry =>
               getLabel(entry, emissionsTotal, BarsConfig.transport.key, BarsConfig.transport.text)}
-            position="insideTopLeft"
+            position={LabelPosition}
             offset={LabelOffset}/>
         </Bar>
         <Bar dataKey={ BarsConfig.buildings.key }
@@ -128,7 +157,7 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
           <LabelList
             valueAccessor={entry =>
               getLabel(entry, emissionsTotal, BarsConfig.buildings.key, BarsConfig.buildings.text)}
-            position="insideTopLeft"
+            position={LabelPosition}
             offset={LabelOffset}/>
         </Bar>
         <Bar dataKey={ BarsConfig.power.key }
@@ -137,13 +166,13 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
           <LabelList
             valueAccessor={entry =>
               getLabel(entry, emissionsTotal, BarsConfig.power.key, BarsConfig.power.text)}
-            position="insideTopLeft"
+            position={LabelPosition}
             offset={LabelOffset}/>
         </Bar>
         <ReferenceArea shape={
           <ElectrificationLines
             electrificationPrcnt={electrificationPrcnt}/>}
-        showLines={showLines} />
+        homeView={homeView} />
       </BarChart>
     </div>
   )
@@ -159,8 +188,8 @@ export default function SingleBarChart ({ emissionsData, showLines, activeKeys }
  * 3. A vertical line connecting the right endpoints of #1 and #2
  * 4. A horizontal line going right from the center point of #3
  */
-function ElectrificationLines ({ electrificationPrcnt, showLines }) {
-  if (!showLines) {
+function ElectrificationLines ({ electrificationPrcnt, homeView }) {
+  if (!homeView) {
     return null
   }
 
