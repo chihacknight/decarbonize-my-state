@@ -35,9 +35,13 @@ let GraphHeight
  * should show the electrification highlight lines to show what share of
  * emissions can be handled by Clean Electrification
  *
- * @param {string} activeKey An optional key
+ * @param {string} activeKey        An optional key indicating which key to
+ * highlight in orange (indicating you are on this section)
+ *
+ * @param {Array<string>} greenKeys Optional array of keys to show in green,
+ * indicating they have been electrified.
  */
-export default function SingleBarChart ({ emissionsData, homeView, activeKeys }) {
+export default function SingleBarChart ({ emissionsData, homeView, activeKey, greenKeys }) {
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
     .filter(([key,_val]) => key !== 'year')
@@ -49,6 +53,8 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKeys })
   const nonElectrificationPrcnt = getPct(emissionsData.dumps_farms_industrial_other, emissionsTotal)
   const electrificationPrcnt = 100 * (1 - (nonElectrificationPrcnt / 100))
 
+  const activeFill = '#ff5722';
+
   /**
    * Configuration for the colors for each bar graph bar as well as their data
    * key and label text
@@ -58,27 +64,27 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKeys })
       key: 'dumps_farms_industrial_other',
       text: 'Farms, Industrial & Other',
       fill: '#98886c',
-      // This categoy cannot be electrified so make the activeFill red to be
+      // This categoy cannot be electrified so make the greenFill red to be
       // clearly bad
-      activeFill: '#cabd98',
+      greenFill: '#cabd98',
     },
     transport: {
       key: 'transportation',
       text: 'Transportation',
       fill: '#a6a6a6',
-      activeFill: '#4caf50',
+      greenFill: '#4caf50',
     },
     buildings: {
       key: 'buildings',
       text: 'Buildings',
       fill: '#c2c2c2',
-      activeFill: '#6ebf70',
+      greenFill: '#6ebf70',
     },
     power: {
       key: 'dirty_power',
       text: 'Dirty Power',
       fill: '#dcdcdc',
-      activeFill: '#a3d7a4',
+      greenFill: '#a3d7a4',
     }
   }
 
@@ -114,12 +120,23 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKeys })
     BarsConfig.other.text = 'Other';
   }
 
-  if (activeKeys) {
+  if (greenKeys) {
     Object.values(BarsConfig).forEach(config => {
-      if (activeKeys.includes(config.key)) {
-        config.fill = config.activeFill
+      if (greenKeys.includes(config.key)) {
+        config.fill = config.greenFill
       }
     })
+  }
+
+  if (activeKey) {
+    const activeConfig = Object.values(BarsConfig).find(config => config.key === activeKey);
+
+    if (activeConfig) {
+      activeConfig.fill = activeFill
+    }
+    else {
+      console.error('Bad activeKey!', activeKey);
+    }
   }
 
   return (

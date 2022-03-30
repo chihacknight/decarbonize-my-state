@@ -170,35 +170,39 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of emissions in {placeTitle} comes from buildings.
         </p>
 
-        <div className="h4 mt-5 text-muted">
-          <SingleBarChart
-            emissionsData={placeEmissions}
-            activeKeys={ [ 'buildings' ] } />
+        <div className="row mt-5">
+          <div className="col-6">
+            <SingleBarChart
+              emissionsData={placeEmissions}
+              activeKey='buildings' />
+          </div>
+
+          <div className="col">
+            <p>
+              Mostly from heating them.
+
+              ?% of the pollution of your typical home comes from heating your space, water, and food.
+            </p>
+
+            <p className="h3 mt-5">
+              To stop this pollution, we need to electrify our furnaces, water boilers, and stoves.
+            </p>
+
+            <p className="h3 mt-5">
+              And we need to do this for all ? buildings in {placeTitle}
+              (That's around ? per year)
+            </p>
+          </div>
         </div>
-
-        <p>
-          Mostly from heating them.
-
-          ?% of the pollution of your typical home comes from heating your space, water, and food.
-        </p>
-
-        <p className="h3 mt-5">
-          To stop this pollution, we need to electrify our furnaces, water boilers, and stoves.
-        </p>
-
-        <p className="h3 mt-5">
-          And we need to do this for all ? buildings in {placeTitle}<br/>
-          (That's around ? per year)
-        </p>
 
         <p className="h3 mt-5">
           That will solve {buildingsPrcnt}% of the problem.
         </p>
 
-        <div className="h4 mt-5 text-muted">
+        <div className="mt-5">
           <SingleBarChart
             emissionsData={placeEmissions}
-            activeKeys={ [ 'buildings' ] } />
+            greenKeys={ [ 'buildings' ] } />
         </div>
 
         <div className="action-panel">
@@ -228,10 +232,10 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
         </p>
 
-        <div className="h4 mt-5 text-muted">
+        <div className="mt-5">
           <SingleBarChart
             emissionsData={placeEmissions}
-            activeKeys={ [ 'transportation' ] } />
+            activeKey='transportation' />
         </div>
 
         <p>Mostly from our cars</p>
@@ -241,7 +245,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          And we need to do this for all ? cars in {placeTitle}<br/>
+          And we need to do this for all ? cars in {placeTitle}
           (That's around ? a year.)
         </p>
 
@@ -249,10 +253,10 @@ const StateDetailsPage = ({location, data}) => {
           That will solve another {transportPrcnt}% of the problem.
         </p>
 
-        <div className="h4 mt-5 text-muted">
+        <div className="mt-5">
           <SingleBarChart
             emissionsData={placeEmissions}
-            activeKeys={[ 'buildings', 'transportation' ]} />
+            greenKeys={[ 'buildings', 'transportation' ]} />
         </div>
 
         <div className="action-panel">
@@ -284,10 +288,10 @@ const StateDetailsPage = ({location, data}) => {
           <strong className="font-weight-bold">{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
         </p>
 
-        <div className="h4 mt-5 text-muted">
+        <div className="mt-5">
           <SingleBarChart
             emissionsData={placeEmissions}
-            activeKeys={[ 'dirty_power' ]} />
+            activeKey='dirty_power' />
         </div>
 
         <p className="h3 mt-5">
@@ -342,10 +346,10 @@ const StateDetailsPage = ({location, data}) => {
           That will solve another {powerPrcnt}% of the problem.
         </p>
 
-        <div className="h4 mt-5 text-muted">
+        <div className="mt-5">
           <SingleBarChart
             emissionsData={placeEmissions}
-            activeKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
+            greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
         </div>
 
         <div className="action-panel">
