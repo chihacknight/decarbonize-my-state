@@ -7,12 +7,14 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
+  ReferenceLine,
   Label
 } from "recharts";
 
-export default function SimpleAreaChart(emissions_data) {
+export default function SimpleAreaChart({emissions_data}) {
 
-  const annualhistoricalEmissions = Object.values(emissions_data)[0].map((item) => {
+  const annualhistoricalEmissions = emissions_data.map((item) => {
     var data = { year: item.year, hist: 0 }
     data.hist = Math.round(Object.entries(item)
       .filter(([key, _val]) => key !== 'year')
@@ -34,6 +36,7 @@ export default function SimpleAreaChart(emissions_data) {
   var data = annualhistoricalEmissions.concat(projection)
  
   return (
+    <ResponsiveContainer width="100%" height={500}>
     <AreaChart
       width={800}
       height={400}
@@ -45,7 +48,7 @@ export default function SimpleAreaChart(emissions_data) {
         bottom: 0
       }}
     >
-      <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" />
+      {/* <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" /> */}
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="year" >
       <Label value="Year" offset={0} position="insideBottom"/> 
@@ -68,7 +71,9 @@ export default function SimpleAreaChart(emissions_data) {
         fill="#c1e5cb"
         name="Projection"
       />
-
+    <ReferenceLine x="2018" stroke="none" label={{value:"Emissions", angle:90, fill:"#b65c00"}} />
+    <ReferenceLine x="2024" stroke="none" label={{value:"Projections", angle:90, fill:"#36a654"}} />
     </AreaChart>
+    </ResponsiveContainer>
   );
 }
