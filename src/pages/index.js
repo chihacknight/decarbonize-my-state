@@ -4,10 +4,9 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import StackedBarChart from "../components/stackedbar"
-import SimpleAreaChart from "../components/simpleareachart"
 import ChoroplethMap from "../components/choroplethmap"
 import get_2018_emissions from "../components/get_2018_emissions"
-
+import SimpleAreaChart from "../components/simpleareachart"
 
 const IndexPage = ({data}) => {
   // console.log(data.finalJson)
