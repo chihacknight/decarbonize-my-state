@@ -302,12 +302,13 @@ const StateDetailsPage = ({location, data}) => {
         {
           // Show special section if power emissions are zero
           powerPrcnt === '0' &&
-          <div>
-            <p className="h4 mt-7 text-center font-weight-bold">
-              {placeTitle} has no emissions from making power, it's doing great!
+          <div className="mt-8 mb-8 text-center">
+            <p className="h3 font-weight-bold">
+              {placeTitle} has no emissions from making power,
+              it's doing great! 😎
             </p>
 
-            <p className="h6 mt-3 mb-7 text-center">
+            <p className="h5 mt-3">
               Check out another state to see how they can cut their power
               emissions to zero.
             </p>
@@ -319,6 +320,62 @@ const StateDetailsPage = ({location, data}) => {
             powerPrcnt={powerPrcnt} /> }
 
         <hr className="mt-5"/>
+      </div>
+
+      {/* Other Section */}
+      <div className='col-12'>
+        <h2 className="h3 mt-5 font-weight-bold">Other Emissions</h2>
+
+        <p className="h3 mt-5">
+          The last <strong className="font-weight-bold">{otherPrcnt}%</strong> of
+          emissions in {placeTitle} comes other sources
+        </p>
+
+        <div className="row mt-5">
+          { /* Make SingleBarChart full width on mobile */ }
+          <div className="col-12-med">
+            <SingleBarChart
+              emissionsData={placeEmissions}
+              activeKey='dumps_farms_industrial_other' />
+          </div>
+
+          <div className="col">
+            <p className="h3 mt-5">
+              This includes industry, landfills, and farming.
+            </p>
+
+            <p className="mt-3">
+              There's no one solution to solve these problems, but there are a
+              lot of great ideas!
+            </p>
+
+            <p>
+              These include:
+            </p>
+
+            <ul>
+              <li>Regenerative agriculture to sequester carbon in soil</li>
+              <li>Composting to reduce landfill methane emissions</li>
+              <li>
+                New techniques for manufacturing
+                CO<sub>2</sub> emitting materials, like concrete
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <hr className="mt-5" />
+
+        <section className="text-center mb-8">
+          <div className="h1 mt-7 font-weight-bold">
+            And that's it! 🎉
+          </div>
+
+          <p className="h4 mt-4">
+           We hope this gives you some ideas for what you can do to get your state
+           to zero emissions!
+          </p>
+        </section>
       </div>
     </Layout>
   )
