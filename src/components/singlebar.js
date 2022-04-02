@@ -91,7 +91,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
   const LabelOffset = 12
   let LabelPosition = 'right'
   let GraphMargin = {
-    top: 0,
+    top: 10,
     right: 200,
     left: 0,
     bottom: 0
@@ -101,6 +101,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
   GraphWidth = 400
   GraphHeight = 350
 
+  // Apply custom styling with interior labels for homepage chart
   if (homeView) {
     LabelPosition = 'insideTopLeft'
     BarWidth = 275
@@ -120,6 +121,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
     BarsConfig.other.text = 'Other'
   }
 
+  // If greenKeys are specified, switch those bars' fill to their greenFill color
   if (greenKeys) {
     Object.values(BarsConfig).forEach(config => {
       if (greenKeys.includes(config.key)) {
@@ -128,8 +130,10 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
     })
   }
 
+  // If activeKey is specified, switch that bar's fill to its activeKey color
   if (activeKey) {
-    const activeConfig = Object.values(BarsConfig).find(config => config.key === activeKey)
+    const activeConfig = Object.values(BarsConfig)
+      .find(config => config.key === activeKey)
 
     if (activeConfig) {
       activeConfig.fill = activeFill
@@ -150,48 +154,82 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
       >
         { /* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */ }
         <YAxis domain={['dataMin', 'dataMax']} hide={ true } />
-        <Bar dataKey={ BarsConfig.other.key }
-          fill={ BarsConfig.other.fill }
-          stackId="main">
-          <LabelList
-            valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, BarsConfig.other.key, BarsConfig.other.text)}
-            position={LabelPosition}
-            offset={LabelOffset}/>
-        </Bar>
-        <Bar dataKey={ BarsConfig.transport.key }
-          fill={ BarsConfig.transport.fill }
-          stackId="main">
-          <LabelList
-            valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, BarsConfig.transport.key, BarsConfig.transport.text)}
-            position={LabelPosition}
-            offset={LabelOffset}/>
-        </Bar>
-        <Bar dataKey={ BarsConfig.buildings.key }
-          fill={ BarsConfig.buildings.fill }
-          stackId="main">
-          <LabelList
-            valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, BarsConfig.buildings.key, BarsConfig.buildings.text)}
-            position={LabelPosition}
-            offset={LabelOffset}/>
-        </Bar>
-        <Bar dataKey={ BarsConfig.power.key }
-          fill={ BarsConfig.power.fill }
-          stackId="main">
-          <LabelList
-            valueAccessor={entry =>
-              getLabel(entry, emissionsTotal, BarsConfig.power.key, BarsConfig.power.text)}
-            position={LabelPosition}
-            offset={LabelOffset}/>
-        </Bar>
+        {
+          // Only show other bar if it was passed (non-zero)
+          emissionsData[BarsConfig.other.key] &&
+            <Bar dataKey={ BarsConfig.other.key }
+              fill={ BarsConfig.other.fill }
+              stackId="main">
+              <LabelList
+                valueAccessor={entry =>
+                  getLabel(entry, emissionsTotal, BarsConfig.other.key, BarsConfig.other.text)}
+                position={LabelPosition}
+                offset={LabelOffset}/>
+            </Bar>
+        }
+        {
+          // Only show transport bar if it was passed (non-zero)
+          emissionsData[BarsConfig.transport.key] &&
+            <Bar dataKey={ BarsConfig.transport.key }
+              fill={ BarsConfig.transport.fill }
+              stackId="main">
+              <LabelList
+                valueAccessor={entry =>
+                  getLabel(entry, emissionsTotal, BarsConfig.transport.key, BarsConfig.transport.text)}
+                position={LabelPosition}
+                offset={LabelOffset}/>
+            </Bar>
+        }
+        {
+          // Only show power bar if it was passed (non-zero)
+          emissionsData[BarsConfig.buildings.key] &&
+            <Bar dataKey={ BarsConfig.buildings.key }
+              fill={ BarsConfig.buildings.fill }
+              stackId="main">
+              <LabelList
+                valueAccessor={entry =>
+                  getLabel(entry, emissionsTotal, BarsConfig.buildings.key, BarsConfig.buildings.text)}
+                position={LabelPosition}
+                offset={LabelOffset}/>
+            </Bar>
+        }
+        {
+          // Only show power bar if it was passed (non-zero)
+          emissionsData[BarsConfig.power.key] &&
+            <Bar dataKey={ BarsConfig.power.key }
+              fill={ BarsConfig.power.fill }
+              stackId="main">
+              <LabelList
+                valueAccessor={entry =>
+                  getLabel(entry, emissionsTotal, BarsConfig.power.key, BarsConfig.power.text)}
+                position={LabelPosition}
+                offset={LabelOffset}/>
+            </Bar>
+        }
         <ReferenceArea shape={
           <ElectrificationLines
             electrificationPrcnt={electrificationPrcnt}/>}
-        homeView={homeView} />
+            homeView={homeView} />
       </BarChart>
     </div>
+  )
+}
+
+function BarWithLabel({ barConfig, emissionsData }) {
+  if (!emissionsData[barConfig.key]) {
+    return null;
+  }
+
+  return (
+    <Bar dataKey={ barConfig.key }
+      fill={ barConfig.fill }
+      stackId="main">
+      <LabelList
+        valueAccessor={entry =>
+          getLabel(entry, emissionsTotal, barConfig.key, barConfig.text)}
+        position={LabelPosition}
+        offset={LabelOffset}/>
+    </Bar>
   )
 }
 

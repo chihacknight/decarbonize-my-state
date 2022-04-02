@@ -121,6 +121,20 @@ const StateDetailsPage = ({location, data}) => {
     buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(0)
     powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(0)
     transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(0)
+
+    // Check if any percentages are 0% and remove those from being graphed, as
+    // it looks confusing
+    if (buildingsPrcnt === '0') {
+      delete placeEmissions.buildings
+    }
+
+    if (powerPrcnt === '0') {
+      delete placeEmissions.dirty_power
+    }
+
+    if (transportPrcnt === '0') {
+      delete placeEmissions.transportation
+    }
   }
 
   const placeTitle = currPlaceData.name
