@@ -192,12 +192,12 @@ const StateDetailsPage = ({location, data}) => {
               activeKey='buildings' />
           </div>
 
-          <div className="col h3 mt-6">
-            <p>
+          <div className="col h3">
+            <p className="mt-5">
               Mostly from heating them.
             </p>
 
-            <p className="mt-4">
+            <p className="mt-5">
               ?% of the pollution of your typical home comes from heating your
               space, water, and food.
             </p>
@@ -258,14 +258,16 @@ const StateDetailsPage = ({location, data}) => {
               activeKey='transportation' />
           </div>
 
-          <div className="col">
-            <p>Mostly from our cars</p>
+          <div className="col h3">
+            <p className="mt-5">
+              Mostly from our cars.
+            </p>
 
-            <p className="h3 mt-5">
+            <p className="mt-5">
               To cut this pollution, replace your car with an EV.
             </p>
 
-            <p className="h3 mt-5">
+            <p className="mt-5">
               And we need to do this for all ? cars in {placeTitle}
               (That's around ? a year.)
             </p>
