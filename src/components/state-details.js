@@ -101,7 +101,7 @@ const StateDetailsPage = ({location, data}) => {
 
   const currPlaceData = placesData[currentPlace]
 
-  let buildingsPrcnt, powerPrcnt, transportPrcnt
+  let buildingsPrcnt, powerPrcnt, transportPrcnt, otherPrcnt
 
   // NOTE: We don't have emissions for all states (like Guam)
   const placeAllEmissions = currPlaceData.emissions
@@ -121,20 +121,7 @@ const StateDetailsPage = ({location, data}) => {
     buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(0)
     powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(0)
     transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(0)
-
-    // Check if any percentages are 0% and remove those from being graphed, as
-    // it looks confusing
-    if (buildingsPrcnt === '0') {
-      delete placeEmissions.buildings
-    }
-
-    if (powerPrcnt === '0') {
-      delete placeEmissions.dirty_power
-    }
-
-    if (transportPrcnt === '0') {
-      delete placeEmissions.transportation
-    }
+    otherPrcnt = (placeEmissions.dumps_farms_industrial_other / totalLatestEmissions * 100).toFixed(0)
   }
 
   const placeTitle = currPlaceData.name
@@ -181,7 +168,8 @@ const StateDetailsPage = ({location, data}) => {
         <h2 className="h3 mt-5 font-weight-bold">Buildings</h2>
 
         <p className="h3 mt-5">
-          <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of emissions in {placeTitle} comes from buildings.
+          <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of
+          emissions in {placeTitle} comes from buildings.
         </p>
 
         <div className="row mt-5">
@@ -247,7 +235,8 @@ const StateDetailsPage = ({location, data}) => {
         <h2 className="h3 mt-5 font-weight-bold">Getting Around</h2>
 
         <p className="h3 mt-5">
-          <strong className="font-weight-bold">{transportPrcnt}%</strong> of emissions in {placeTitle} comes from cars, trucks, and planes.
+          <strong className="font-weight-bold">{transportPrcnt}%</strong> of
+          emissions in {placeTitle} comes from cars, trucks, and planes.
         </p>
 
         <div className="row mt-5">
@@ -309,100 +298,134 @@ const StateDetailsPage = ({location, data}) => {
       <div className='col-12'>
         <h2 className="h3 mt-5 font-weight-bold">Power Generation</h2>
 
-        <p className="h3 mt-5">
-          <strong className="font-weight-bold">{powerPrcnt}%</strong> of emissions in {placeTitle} comes from making power.
-        </p>
 
-        <div className="row mt-5">
-          { /* Make SingleBarChart full width on mobile */ }
-          <div className="col-12-med">
-            <SingleBarChart
-              emissionsData={placeEmissions}
-              activeKey='dirty_power' />
-          </div>
-
-          <div className="col">
-            <p className="h3 mt-5">
-              Specifically from coal and gas plants.
+        {
+          // Show special section if power emissions are zero
+          powerPrcnt === '0' &&
+          <div>
+            <p className="h4 mt-7 text-center font-weight-bold">
+              {placeTitle} has no emissions from making power, it's doing great!
             </p>
 
-            <p className="h3 mt-5">
-              To cut this pollution, we need to replace dirty power plants with
-              clean ones. (mostly wind and solar)
+            <p className="h6 mt-3 mb-7 text-center">
+              Check out another state to see how they can cut their power
+              emissions to zero.
             </p>
           </div>
-        </div>
+        }
+        { powerPrcnt > 0 && <HowToCleanPowerSection
+            placeEmissions={placeEmissions}
+            placeTitle={placeTitle}
+            powerPrcnt={powerPrcnt} /> }
 
-        <p className="h3 mt-5">
-          And we need to do this for all <strong className="font-weight-bold">? coal plants in {placeTitle}</strong>
-        </p>
-
-        <p className="h3 mt-5">
-          ...and all <strong className="font-weight-bold">? gas plants</strong>.
-        </p>
-
-        <p className="h3 mt-5">
-          ...and help those workers find good jobs.
-        </p>
-
-        <p className="h3 mt-5">
-          But wait! Remember how we electrified all cars and buildings?
-        </p>
-
-        <p className="h3 mt-5">
-          Our machines don't pollute now, because they run on electricity!
-        </p>
-
-        <p className="h3 mt-5">
-          But that means we need to make more power for those new electric
-          machines - <strong className="font-weight-bold">twice</strong> as much power as we make now!
-        </p>
-
-        <p className="h3 mt-5">
-          And <strong className="font-weight-bold">all of it needs to be clean power!</strong>
-        </p>
-
-        <p className="h3 mt-5">
-          So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br/>
-          (That's ? a year)
-        </p>
-
-        <p className="h4 mt-5 text-muted">
-          [insert animated map here]
-        </p>
-
-
-        <p className="h3 mt-7 font-weight-bold text-center">
-          That will solve another {powerPrcnt}% of the problem.
-        </p>
-
-        <div className="mt-5 d-flex justify-content-center">
-          <SingleBarChart
-            emissionsData={placeEmissions}
-            greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
-        </div>
-
-        <div className="action-panel">
-          <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-          {/* TODO: Make these link somewhere */}
-          <ul className="mt-3 pl-4 mb-0">
-            <li>
-              <a href="http://example.com">Install solar panels and a battery in your building</a>
-            </li>
-            <li>
-              <a href="http://example.com">
-                Support the construction of grid-scale wind and solar
-              </a>
-            </li>
-          </ul>
-        </div>
+        <hr className="mt-5"/>
       </div>
     </Layout>
   )
 }
-
 export default StateDetailsPage
+
+/**
+ * The section for how to clean up a state's power grid
+ */
+function HowToCleanPowerSection({
+  placeEmissions,
+  placeTitle,
+  powerPrcnt,
+}) {
+  return (
+    <div>
+      <p className="h3 mt-5">
+        <strong className="font-weight-bold">{powerPrcnt}%</strong> of
+        emissions in {placeTitle} comes from making power.
+      </p>
+
+      <div className="row mt-5">
+        { /* Make SingleBarChart full width on mobile */ }
+        <div className="col-12-med">
+          <SingleBarChart
+            emissionsData={placeEmissions}
+            activeKey='dirty_power' />
+        </div>
+
+        <div className="col">
+          <p className="h3 mt-5">
+            Specifically from coal and gas plants.
+          </p>
+
+          <p className="h3 mt-5">
+            To cut this pollution, we need to replace dirty power plants with
+            clean ones. (mostly wind and solar)
+          </p>
+        </div>
+      </div>
+
+      <p className="h3 mt-5">
+        And we need to do this for all <strong className="font-weight-bold">? coal plants in {placeTitle}</strong>
+      </p>
+
+      <p className="h3 mt-5">
+        ...and all <strong className="font-weight-bold">? gas plants</strong>.
+      </p>
+
+      <p className="h3 mt-5">
+        ...and help those workers find good jobs.
+      </p>
+
+      <p className="h3 mt-5">
+        But wait! Remember how we electrified all cars and buildings?
+      </p>
+
+      <p className="h3 mt-5">
+        Our machines don't pollute now, because they run on electricity!
+      </p>
+
+      <p className="h3 mt-5">
+        But that means we need to make more power for those new electric
+        machines - <strong className="font-weight-bold">twice</strong> as much power as we make now!
+      </p>
+
+      <p className="h3 mt-5">
+        And <strong className="font-weight-bold">all of it needs to be clean power!</strong>
+      </p>
+
+      <p className="h3 mt-5">
+        So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br/>
+        (That's ? a year)
+      </p>
+
+      <p className="h4 mt-5 text-muted">
+        [insert animated map here]
+      </p>
+
+      <p className="h3 mt-7 font-weight-bold text-center">
+        That will solve another {powerPrcnt}% of the problem.
+      </p>
+
+      <div className="mt-5 d-flex justify-content-center">
+        <SingleBarChart
+          emissionsData={placeEmissions}
+          greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
+      </div>
+
+      <div className="action-panel">
+        <h3 className="h4 font-weight-bold">What should I do?</h3>
+
+        {/* TODO: Make these link somewhere */}
+        <ul className="mt-3 pl-4 mb-0">
+          <li>
+            <a href="http://example.com">Install solar panels and a battery in your building</a>
+          </li>
+          <li>
+            <a href="http://example.com">
+              Support the construction of grid-scale wind and solar
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 export const query = graphql`
 query PlaceQuery {

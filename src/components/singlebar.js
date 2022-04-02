@@ -155,7 +155,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
         { /* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */ }
         <YAxis domain={['dataMin', 'dataMax']} hide={ true } />
         {
-          // Only show other bar if it was passed (non-zero)
+          // Only show other bar if it's non-zero
           emissionsData[BarsConfig.other.key] &&
             <Bar dataKey={ BarsConfig.other.key }
               fill={ BarsConfig.other.fill }
@@ -168,7 +168,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
             </Bar>
         }
         {
-          // Only show transport bar if it was passed (non-zero)
+          // Only show transport bar if it's non-zero
           emissionsData[BarsConfig.transport.key] &&
             <Bar dataKey={ BarsConfig.transport.key }
               fill={ BarsConfig.transport.fill }
@@ -181,7 +181,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
             </Bar>
         }
         {
-          // Only show power bar if it was passed (non-zero)
+          // Only show power bar if it's non-zero
           emissionsData[BarsConfig.buildings.key] &&
             <Bar dataKey={ BarsConfig.buildings.key }
               fill={ BarsConfig.buildings.fill }
@@ -194,7 +194,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
             </Bar>
         }
         {
-          // Only show power bar if it was passed (non-zero)
+          // Only show power bar if it's non-zero
           emissionsData[BarsConfig.power.key] &&
             <Bar dataKey={ BarsConfig.power.key }
               fill={ BarsConfig.power.fill }
