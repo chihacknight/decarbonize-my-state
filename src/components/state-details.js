@@ -315,9 +315,9 @@ const StateDetailsPage = ({location, data}) => {
           </div>
         }
         { powerPrcnt > 0 && <HowToCleanPowerSection
-            placeEmissions={placeEmissions}
-            placeTitle={placeTitle}
-            powerPrcnt={powerPrcnt} /> }
+          placeEmissions={placeEmissions}
+          placeTitle={placeTitle}
+          powerPrcnt={powerPrcnt} /> }
 
         <hr className="mt-5"/>
       </div>
@@ -385,7 +385,7 @@ export default StateDetailsPage
 /**
  * The section for how to clean up a state's power grid
  */
-function HowToCleanPowerSection({
+function HowToCleanPowerSection ({
   placeEmissions,
   placeTitle,
   powerPrcnt,

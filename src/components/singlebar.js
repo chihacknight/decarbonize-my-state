@@ -209,27 +209,9 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
         <ReferenceArea shape={
           <ElectrificationLines
             electrificationPrcnt={electrificationPrcnt}/>}
-            homeView={homeView} />
+        homeView={homeView} />
       </BarChart>
     </div>
-  )
-}
-
-function BarWithLabel({ barConfig, emissionsData }) {
-  if (!emissionsData[barConfig.key]) {
-    return null;
-  }
-
-  return (
-    <Bar dataKey={ barConfig.key }
-      fill={ barConfig.fill }
-      stackId="main">
-      <LabelList
-        valueAccessor={entry =>
-          getLabel(entry, emissionsTotal, barConfig.key, barConfig.text)}
-        position={LabelPosition}
-        offset={LabelOffset}/>
-    </Bar>
   )
 }
 
