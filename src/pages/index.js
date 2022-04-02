@@ -32,7 +32,7 @@ const IndexPage = ({data}) => {
 
       <div className="main-header">
         <h1 className='display-4 text-center font-weight-bold'>
-          What does it take to<br className="d-none d-lg-block"/>
+          What does it take to <br className="d-none d-lg-block"/>
           decarbonize your state?
         </h1>
         <p className="h3 text-center mt-4">
@@ -43,7 +43,8 @@ const IndexPage = ({data}) => {
       <hr></hr>
 
       <p className="h1 mt-5 mb-5 text-center">
-        To get to <strong>zero</strong> by 2050, the US must <br className="d-none d-lg-block" />
+        To get to <strong>zero</strong> by
+        2050, the US must <br className="d-none d-lg-block" />
         cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
 
@@ -66,7 +67,8 @@ const IndexPage = ({data}) => {
       </div>
 
       <p className="h1 text-center mt-7 font-weight-bold">
-        The levers of change are at the state level, <br className="d-none d-lg-block" />
+        The levers of change are at the
+        state level, <br className="d-none d-lg-block" />
         and each state is different.
       </p>
 
