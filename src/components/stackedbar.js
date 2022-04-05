@@ -13,7 +13,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="custom-tooltip">
         <strong>{label}</strong><br />
-        <table class='table table-sm table-bordered'>
+        <table className='table table-sm table-bordered'>
           <thead>
             <tr>
               <th>Source</th>
