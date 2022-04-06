@@ -151,7 +151,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-          <SimpleAreaChart emissions_data={placeData.emissions}/>
+        <SimpleAreaChart emissions_data={placeData.emissions}/>
 
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
@@ -198,23 +198,23 @@ const StateDetailsPage = ({location, data}) => {
         <p className="h4 mt-5 text-muted">
           [insert state emissions graph highlighting buildings]
         </p>
-        </div>
-        <div className="action-panel">
-          <h3 className="h4 font-weight-bold">What should I do?</h3>
+      </div>
+      <div className="action-panel">
+        <h3 className="h4 font-weight-bold">What should I do?</h3>
 
-          {/* TODO: Make these link somewhere */}
-          <ul className="mt-3 pl-4 mb-0">
-            <li>
-              <a href="http://example.com">First, electrify your building(s)</a>
-            </li>
-            <li>
-              <a href="http://example.com">
+        {/* TODO: Make these link somewhere */}
+        <ul className="mt-3 pl-4 mb-0">
+          <li>
+            <a href="http://example.com">First, electrify your building(s)</a>
+          </li>
+          <li>
+            <a href="http://example.com">
                 Then push your local politicians to electrify the rest
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className='col-12 col-lg-8'>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className='col-12 col-lg-8'>
           
 
         <hr className="mt-5"/>
