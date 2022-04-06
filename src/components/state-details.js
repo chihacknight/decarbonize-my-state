@@ -98,8 +98,36 @@ const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 const StateDetailsPage = ({location, data}) => {
   const currentPlace = location.pathname.split("/")[1]
   const placesData = getPlacesData(data.emissionsJson)
-
   const currPlaceData = placesData[currentPlace]
+
+  const {
+    Cars_All: carsAll,
+    EV_Registration: evRegistration,
+  } = data.vehiclesJson[currentPlace]
+
+  const carsCountStr = carsAll !== undefined 
+    ? carsAll.toLocaleString('en') 
+    : '?'
+
+  const carsPerYear = carsAll !== undefined 
+    ? Math.ceil(carsAll * cutPerYearPrcnt / 100).toLocaleString('en') 
+    : '?'
+    
+  const evCountStr = evRegistration !== undefined 
+    ? evRegistration.toLocaleString('en') 
+    : '?'
+  
+  const {
+    buildings
+  } = data.buildingsJson[currentPlace]
+  
+  const buildingsCountStr = buildings !== undefined
+    ? buildings.toLocaleString('en')
+    : '?'
+
+  const buildingsPerYear = buildings !== undefined
+    ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
+    : '?'
 
   let buildingsPrcnt, powerPrcnt, transportPrcnt, otherPrcnt
 
@@ -197,8 +225,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          And we need to do this for all ? buildings in {placeTitle} (that's
-          around ? per year)
+          And we need to do this for all {buildingsCountStr} buildings in {placeTitle} (That's around {buildingsPerYear} per year)
         </p>
 
         <p className="h3 mt-7 font-weight-bold text-center">
@@ -257,8 +284,9 @@ const StateDetailsPage = ({location, data}) => {
             </p>
 
             <p className="mt-5">
-              And we need to do this for all ? cars in {placeTitle}
-              (That's around ? a year.)
+              And we need to do this for all {carsCountStr} cars 
+              in {placeTitle} (That's around {carsPerYear} a year. 
+              Excluding the {evCountStr} EVs already in {placeTitle})
             </p>
           </div>
         </div>
@@ -850,6 +878,374 @@ query PlaceQuery {
       buildings
       transportation
       dumps_farms_industrial_other
+    }
+  }
+  vehiclesJson {
+    alabama {
+      Cars_All
+      EV_Registration
+    }
+    alaska {
+      Cars_All
+      EV_Registration
+    }
+    arizona {
+      Cars_All
+      EV_Registration
+    }
+    arkansas {
+      Cars_All
+      EV_Registration
+    }
+    california {
+      Cars_All
+      EV_Registration
+    }
+    colorado {
+      Cars_All
+      EV_Registration
+    }
+    connecticut {
+      Cars_All
+      EV_Registration
+    }
+    delaware {
+      Cars_All
+      EV_Registration
+    }
+    district_of_columbia {
+      Cars_All
+      EV_Registration
+    }
+    florida {
+      Cars_All
+      EV_Registration
+    }
+    georgia {
+      Cars_All
+      EV_Registration
+    }
+    hawaii {
+      Cars_All
+      EV_Registration
+    }
+    idaho {
+      Cars_All
+      EV_Registration
+    }
+    illinois {
+      Cars_All
+      EV_Registration
+    }
+    indiana {
+      Cars_All
+      EV_Registration
+    }
+    iowa {
+      Cars_All
+      EV_Registration
+    }
+    kansas {
+      Cars_All
+      EV_Registration
+    }
+    kentucky {
+      Cars_All
+      EV_Registration
+    }
+    louisiana {
+      Cars_All
+      EV_Registration
+    }
+    maine {
+      Cars_All
+      EV_Registration
+    }
+    maryland {
+      Cars_All
+      EV_Registration
+    }
+    massachusetts {
+      Cars_All
+      EV_Registration
+    }
+    michigan {
+      Cars_All
+      EV_Registration
+    }
+    minnesota {
+      Cars_All
+      EV_Registration
+    }
+    mississippi {
+      Cars_All
+      EV_Registration
+    }
+    missouri {
+      Cars_All
+      EV_Registration
+    }
+    montana {
+      Cars_All
+      EV_Registration
+    }
+    nebraska {
+      Cars_All
+      EV_Registration
+    }
+    nevada {
+      Cars_All
+      EV_Registration
+    }
+    new_hampshire {
+      Cars_All
+      EV_Registration
+    }
+    new_jersey {
+      Cars_All
+      EV_Registration
+    }
+    new_mexico {
+      Cars_All
+      EV_Registration
+    }
+    new_york {
+      Cars_All
+      EV_Registration
+    }
+    north_carolina {
+      Cars_All
+      EV_Registration
+    }
+    north_dakota {
+      Cars_All
+      EV_Registration
+    }
+    ohio {
+      Cars_All
+      EV_Registration
+    }
+    oklahoma {
+      Cars_All
+      EV_Registration
+    }
+    oregon {
+      Cars_All
+      EV_Registration
+    }
+    pennsylvania {
+      Cars_All
+      EV_Registration
+    }
+    rhode_island {
+      Cars_All
+      EV_Registration
+    }
+    south_carolina {
+      Cars_All
+      EV_Registration
+    }
+    south_dakota {
+      Cars_All
+      EV_Registration
+    }
+    tennessee {
+      Cars_All
+      EV_Registration
+    }
+    texas {
+      Cars_All
+      EV_Registration
+    }
+    united_states {
+      Cars_All
+      EV_Registration
+    }
+    utah {
+      Cars_All
+      EV_Registration
+    }
+    vermont {
+      Cars_All
+      EV_Registration
+    }
+    virginia {
+      Cars_All
+      EV_Registration
+    }
+    washington {
+      Cars_All
+      EV_Registration
+    }
+    west_virginia {
+      Cars_All
+      EV_Registration
+    }
+    wisconsin {
+      Cars_All
+      EV_Registration
+    }
+    wyoming {
+      Cars_All
+      EV_Registration
+    }
+  }
+  buildingsJson {
+    alabama {
+      buildings
+    }
+    alaska {
+      buildings
+    }
+    arizona {
+      buildings
+    }
+    arkansas {
+      buildings
+    }
+    california {
+      buildings
+    }
+    colorado {
+      buildings
+    }
+    connecticut {
+      buildings
+    }
+    delaware {
+      buildings
+    }
+    district_of_columbia {
+      buildings
+    }
+    florida {
+      buildings
+    }
+    georgia {
+      buildings
+    }
+    hawaii {
+      buildings
+    }
+    idaho {
+      buildings
+    }
+    illinois {
+      buildings
+    }
+    indiana {
+      buildings
+    }
+    iowa {
+      buildings
+    }
+    kansas {
+      buildings
+    }
+    kentucky {
+      buildings
+    }
+    louisiana {
+      buildings
+    }
+    maine {
+      buildings
+    }
+    maryland {
+      buildings
+    }
+    massachusetts {
+      buildings
+    }
+    michigan {
+      buildings
+    }
+    minnesota {
+      buildings
+    }
+    mississippi {
+      buildings
+    }
+    missouri {
+      buildings
+    }
+    montana {
+      buildings
+    }
+    nebraska {
+      buildings
+    }
+    nevada {
+      buildings
+    }
+    new_hampshire {
+      buildings
+    }
+    new_jersey {
+      buildings
+    }
+    new_mexico {
+      buildings
+    }
+    new_york {
+      buildings
+    }
+    north_carolina {
+      buildings
+    }
+    north_dakota {
+      buildings
+    }
+    ohio {
+      buildings
+    }
+    oklahoma {
+      buildings
+    }
+    oregon {
+      buildings
+    }
+    pennsylvania {
+      buildings
+    }
+    rhode_island {
+      buildings
+    }
+    south_carolina {
+      buildings
+    }
+    south_dakota {
+      buildings
+    }
+    tennessee {
+      buildings
+    }
+    texas {
+      buildings
+    }
+    united_states {
+      buildings
+    }
+    utah {
+      buildings
+    }
+    vermont {
+      buildings
+    }
+    virginia {
+      buildings
+    }
+    washington {
+      buildings
+    }
+    west_virginia {
+      buildings
+    }
+    wisconsin {
+      buildings
+    }
+    wyoming {
+      buildings
     }
   }
 }
