@@ -6,6 +6,8 @@ import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import SimpleAreaChart from "../components/simpleareachart"
+
 
 const slugToTitle = (placeName) => {
   const words = placeName.split('_')
@@ -28,16 +30,20 @@ const currentYear = new Date().getFullYear()
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
+  // place info and string
   const currentPlace = location.pathname.split("/")[1]
+  // clean up title as needed
+  const placeTitle = slugToTitle(currentPlace)
+  const stateFaceClass = currentPlace.toLowerCase().replaceAll(' ', '-')
 
   // Each json loads in as an allSomethingJson and is filtered for 
   // data relevant to this state, which is great!
   // the first edge node will have the relevant data, 
   // so we can just take the first index
-  // const buildings = data.allBuildingsJson.edges[0].node.buildings
+
+  // #### EMISSIONS #### 
   const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear
   const latestEmissions = emissionsByYear[emissionsByYear.length - 1]
-  
   // desstructure out the different emissions categories for simplicity below
   const {
     buildings: buildingsEmissions,
@@ -52,10 +58,32 @@ const StateDetailsPage = ({location, data}) => {
   const powerPrcnt = (dirtyPowerEmissions / sumOfEmissions * 100).toFixed(0)
   const transportPrcnt = (transportionEmissions / sumOfEmissions * 100).toFixed(0)
   const otherPrcnt = (farmsDumpsOtherEmissions / sumOfEmissions * 100).toFixed(0)
+
   
-  // clean up title as needed
-  const placeTitle = slugToTitle(currentPlace)
-  const stateFaceClass = currentPlace.toLowerCase().replaceAll(' ', '-')
+  // #### VEHICLES #### 
+  const {
+    Cars_All: carsAll,
+    EV_Registration: evRegistration,
+  } = data.allVehiclesJson.edges[0].node.buildings
+  const carsCountStr = carsAll !== undefined 
+    ? carsAll.toLocaleString('en') 
+    : '?'
+  const carsPerYear = carsAll !== undefined 
+    ? Math.ceil(carsAll * cutPerYearPrcnt / 100).toLocaleString('en') 
+    : '?'
+  const evCountStr = evRegistration !== undefined 
+    ? evRegistration.toLocaleString('en') 
+    : '?'
+
+  // #### BUILDINGS ####
+  const buildings = data.allBuildingsJson.edges[0].node.buildings
+  const buildingsCountStr = buildings !== undefined
+    ? buildings.toLocaleString('en')
+    : '?'
+  const buildingsPerYear = buildings !== undefined
+    ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
+    : '?'
+
 
   return (
     <Layout>
@@ -79,13 +107,15 @@ const StateDetailsPage = ({location, data}) => {
           must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
         </p>
 
+        <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
+        <SimpleAreaChart emissions_data={placeData.emissions}/>
+
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
           Metric tons of carbon dioxide equivalent (MTCO2e) emissions
         </p>
-        <StackedBarChart emissions_data={emissionsByYear}/>
-
-        <p className="h1 font-weight-bold text-center mt-5">We can do it.  Here's how.</p>
+  
+        <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
         <hr className="mt-5"/>
       </div>
@@ -124,8 +154,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <p className="h3 mt-5">
-          And we need to do this for all ? buildings in {placeTitle} (that's
-          around ? per year)
+          And we need to do this for all {buildingsCountStr} buildings in {placeTitle} (That's around {buildingsPerYear} per year)
         </p>
 
         <p className="h3 mt-7 font-weight-bold text-center">
@@ -138,21 +167,20 @@ const StateDetailsPage = ({location, data}) => {
             greenKeys={ [ 'buildings' ] } />
         </div>
 
-        <div className="action-panel">
-          <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-          {/* TODO: Make these link somewhere */}
-          <ul className="mt-3 pl-4 mb-0">
-            <li>
-              <a href="http://example.com">First, electrify your building(s)</a>
-            </li>
-            <li>
-              <a href="http://example.com">
+        {/* TODO: Make these link somewhere */}
+        <ul className="mt-3 pl-4 mb-0">
+          <li>
+            <a href="http://example.com">First, electrify your building(s)</a>
+          </li>
+          <li>
+            <a href="http://example.com">
                 Then push your local politicians to electrify the rest
-              </a>
-            </li>
-          </ul>
-        </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className='col-12 col-lg-8'>
+          
 
         <hr className="mt-5"/>
       </div>
@@ -184,8 +212,9 @@ const StateDetailsPage = ({location, data}) => {
             </p>
 
             <p className="mt-5">
-              And we need to do this for all ? cars in {placeTitle}
-              (That's around ? a year.)
+              And we need to do this for all {carsCountStr} cars 
+              in {placeTitle} (That's around {carsPerYear} a year. 
+              Excluding the {evCountStr} EVs already in {placeTitle})
             </p>
           </div>
         </div>
@@ -417,7 +446,6 @@ query StateQuery($state: String) {
     edges {
       node {
         buildings
-        state
       }
     }
   }
@@ -431,7 +459,16 @@ query StateQuery($state: String) {
           transportation
           year
         }
-        state
+      }
+    }
+  }
+  allVehiclesJson(filter: {state: {eq: $state}}) {
+    edges {
+      node {
+        emissionsByYear {
+          Cars_All
+          EV_Registration
+        }
       }
     }
   }

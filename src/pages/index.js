@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import StackedBarChart from "../components/stackedbar"
@@ -26,6 +25,7 @@ const getCleanData = (data) => {
   }
   return mutableDataObj
 }
+import SimpleAreaChart from "../components/simpleareachart"
 
 const IndexPage = ({data}) => {
   const cleanData = getCleanData(data)
@@ -68,8 +68,8 @@ const IndexPage = ({data}) => {
         2050, the US must <br className="d-none d-lg-block" />
         cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
-
-      <StackedBarChart emissions_data={emissionsOverTime}/>
+      Total US climate pollution
+      <SimpleAreaChart emissions_data={emissionsOverTime}/>
 
       <p className='h2 text-center mt-7 mb-5'>
         To do that (and solve the climate crisis) there's one main thing
