@@ -9,16 +9,15 @@ import ChoroplethMap from "../components/choroplethmap"
 import get_2018_emissions from "../components/get_2018_emissions"
 import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
-
 const IndexPage = ({data}) => {
-  // console.log(data)
-  // prep data for US bar chart
-  const us_emissions = data.emissionsJson["united_states"]
-  const us_2018_emissions = [get_2018_emissions_group(data.emissionsJson)]
+  // Prep data for emissions over time chart
+  const emissionsOverTime = data.emissionsJson["united_states"]
 
+  // Prep data for the SingleBarChart breaking down emissions by category
+  const us2018Emissions = get_2018_emissions_group(data.emissionsJson)
 
-  // prep data for choropleth map
-  const emissions_2018 = get_2018_emissions(data.emissionsJson)
+  // Prep data for choropleth map
+  const emissions2018 = get_2018_emissions(data.emissionsJson)
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
@@ -33,7 +32,7 @@ const IndexPage = ({data}) => {
 
       <div className="main-header">
         <h1 className='display-4 text-center font-weight-bold'>
-          What does it take to<br className="d-none d-lg-block"/>
+          What does it take to <br className="d-none d-lg-block"/>
           decarbonize your state?
         </h1>
         <p className="h3 text-center mt-4">
@@ -44,31 +43,32 @@ const IndexPage = ({data}) => {
       <hr></hr>
 
       <p className="h1 mt-5 mb-5 text-center">
-        To get to <strong>zero</strong> by 2050, the US must <br className="d-none d-lg-block" />
-        cut climate pollution by <strong>{cutPerYearPrcnt} a year.</strong>
+        To get to <strong>zero</strong> by
+        2050, the US must <br className="d-none d-lg-block" />
+        cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
 
-      <StackedBarChart emissions_data={us_emissions}/>
+      <StackedBarChart emissions_data={emissionsOverTime}/>
 
-      <p className='h2 text-center mt-5 mb-5'>
-        When it comes to solving the climate crisis there's one main thing
+      <p className='h2 text-center mt-7 mb-5'>
+        To do that (and solve the climate crisis) there's one main thing
       </p>
 
-
-      <div className="d-flex align-items-center">
-        <SingleBarChart emissions_data={us_2018_emissions}/>
+      <div className="d-flex justify-content-center mt-7">
+        <SingleBarChart emissionsData={us2018Emissions} homeView={true} />
 
         <div className="ml-5">
-          <p className="h3 font-weight-boldest mt-5 mb-5">
-            CLEAN ELECTRIFICATION
+          <p className="h1 font-weight-boldest mt-6 mb-7">
+            Clean <br/> Electrification!
           </p>
 
-          <p>...and then there's everything else</p>
+          <p className="h3">...and then there's everything else</p>
         </div>
       </div>
 
       <p className="h1 text-center mt-7 font-weight-bold">
-        The levers of change are at the state level, <br className="d-none d-lg-block" />
+        The levers of change are at the
+        state level, <br className="d-none d-lg-block" />
         and each state is different.
       </p>
 
@@ -77,7 +77,7 @@ const IndexPage = ({data}) => {
       </p>
 
       <div className="mb-7">
-        <ChoroplethMap emissions={emissions_2018} />
+        <ChoroplethMap emissions={emissions2018} />
       </div>
     </Layout>
   )
