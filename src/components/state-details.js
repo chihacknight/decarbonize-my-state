@@ -6,6 +6,8 @@ import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import SimpleAreaChart from "../components/simpleareachart"
+
 
 const places = [
   "alabama",
@@ -180,12 +182,14 @@ const StateDetailsPage = ({location, data}) => {
           must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
         </p>
 
+        <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
+        <SimpleAreaChart emissions_data={placeData.emissions}/>
+
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
           Metric tons of carbon dioxide equivalent (MTCO2e) emissions
         </p>
-        <StackedBarChart emissions_data={placeData.emissions}/>
-
+  
         <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
         <hr className="mt-5"/>
@@ -238,21 +242,20 @@ const StateDetailsPage = ({location, data}) => {
             greenKeys={ [ 'buildings' ] } />
         </div>
 
-        <div className="action-panel">
-          <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-          {/* TODO: Make these link somewhere */}
-          <ul className="mt-3 pl-4 mb-0">
-            <li>
-              <a href="http://example.com">First, electrify your building(s)</a>
-            </li>
-            <li>
-              <a href="http://example.com">
+        {/* TODO: Make these link somewhere */}
+        <ul className="mt-3 pl-4 mb-0">
+          <li>
+            <a href="http://example.com">First, electrify your building(s)</a>
+          </li>
+          <li>
+            <a href="http://example.com">
                 Then push your local politicians to electrify the rest
-              </a>
-            </li>
-          </ul>
-        </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div className='col-12 col-lg-8'>
+          
 
         <hr className="mt-5"/>
       </div>
