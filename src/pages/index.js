@@ -3,18 +3,20 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import StackedBarChart from "../components/stackedbar"
+import SingleBarChart from "../components/singlebar"
 import ChoroplethMap from "../components/choroplethmap"
 import get_2018_emissions from "../components/get_2018_emissions"
-import SimpleAreaChart from "../components/simpleareachart"
+import get_2018_emissions_group from "../components/get_2018_emissions_group"
 
 const IndexPage = ({data}) => {
-  // console.log(data.finalJson)
+  // Prep data for emissions over time chart
+  const emissionsOverTime = data.emissionsJson["united_states"]
 
-  // prep data for US bar chart
-  const us_emissions = data.finalJson["united_states"]
-  
-  // prep data for choropleth map
-  const emissions_2018 = get_2018_emissions(data)
+  // Prep data for the SingleBarChart breaking down emissions by category
+  const us2018Emissions = get_2018_emissions_group(data.emissionsJson)
+
+  // Prep data for choropleth map
+  const emissions2018 = get_2018_emissions(data.emissionsJson)
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
@@ -28,53 +30,56 @@ const IndexPage = ({data}) => {
       <SEO title="What does it take to decarbonize your state?" />
 
       <div className="main-header">
-        <h1 className='h1 text-center'>
-          What does it take to decarbonize your state?
+        <h1 className='display-4 text-center font-weight-bold'>
+          What does it take to <br className="d-none d-lg-block"/>
+          decarbonize your state?
         </h1>
-        <p className="h5 text-center mt-4">
-          It's easier than you think!
+        <p className="h3 text-center mt-4">
+          The answer is less complicated than you think.
         </p>
       </div>
 
       <hr></hr>
 
       <p className="h1 mt-5 mb-5 text-center">
-        To get to <strong>zero</strong> by 2050, the US must cut climate
-        pollution by <strong>{cutPerYearPrcnt} a year.</strong>
+        To get to <strong>zero</strong> by
+        2050, the US must <br className="d-none d-lg-block" />
+        cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
       Total US climate pollution
       <SimpleAreaChart emissions_data={us_emissions}/>
 
-      <StackedBarChart emissions_data={us_emissions}/>
+      <StackedBarChart emissions_data={emissionsOverTime}/>
 
-      <p className='h2 text-center mt-5 mb-5'>
-        When it comes to solving the climate crisis there's one main thing
+      <p className='h2 text-center mt-7 mb-5'>
+        To do that (and solve the climate crisis) there's one main thing
       </p>
 
-      <div className="d-flex align-items-center">
-        <div className="h2">
-          [stacked bar graph of emissions source]
-        </div>
+      <div className="d-flex justify-content-center mt-7">
+        <SingleBarChart emissionsData={us2018Emissions} homeView={true} />
 
         <div className="ml-5">
-          <p className="h3 font-weight-bold mt-5 mb-5">
-            CLEAN ELECTRIFICATION
+          <p className="h1 font-weight-boldest mt-6 mb-7">
+            Clean <br/> Electrification!
           </p>
 
-          <p>...and then there's everything else</p>
+          <p className="h3">...and then there's everything else</p>
         </div>
       </div>
 
-
-      <p className="h2 text-center mt-5">
-        The levers of change are at the state level and each state is different
+      <p className="h1 text-center mt-7 font-weight-bold">
+        The levers of change are at the
+        state level, <br className="d-none d-lg-block" />
+        and each state is different.
       </p>
 
-      <p className="text-center mt-2 mb-5">
+      <p className="text-center mt-2 mb-7">
         Click on your state to see what it takes to decarbonize by 2050
       </p>
 
-      <ChoroplethMap emissions={emissions_2018} />
+      <div className="mb-7">
+        <ChoroplethMap emissions={emissions2018} />
+      </div>
     </Layout>
   )
 }
@@ -83,7 +88,7 @@ export default IndexPage
 
 export const query = graphql`
 query IndexQuery {
-  finalJson {
+  emissionsJson {
     alabama {
       year
       dirty_power
