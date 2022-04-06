@@ -32,7 +32,7 @@ const IndexPage = ({data}) => {
   const emissionsOverTime = cleanData["united_states"].emissionsByYear
 
   // Prep data for the SingleBarChart breaking down emissions by category
-  const barChartData = getLatestUsData(cleanData)
+  const barChartData = getLatestUsData(cleanData)[0]
 
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
@@ -43,7 +43,7 @@ const IndexPage = ({data}) => {
   // We want to get to 0 by 2050 and we use our current emissions as a start,
   // so the % to cut by is 100 divided by the number of years we have
   const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
-
+  
   return (
     <Layout>
       <SEO title="What does it take to decarbonize your state?" />
