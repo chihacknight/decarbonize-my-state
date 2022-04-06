@@ -6,18 +6,39 @@ import SEO from "../components/seo"
 import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import ChoroplethMap from "../components/choroplethmap"
-import get_2018_emissions from "../components/get_2018_emissions"
-import get_2018_emissions_group from "../components/get_2018_emissions_group"
+import {getLatestEmissions, getLatestUsData} from "../components/getLatestEmissions"
+
+const getCleanData = (data) => {
+  let mutableDataObj = {};
+  for (let i=0; i<data.allEmissionsJson.edges.length;i++){
+    const stateName = data.allEmissionsJson.edges[i].node.state;
+    mutableDataObj[stateName] = {
+      emissionsByYear: data.allEmissionsJson.edges[i].node.emissionsByYear,
+    }
+    // pattern for pulling other data, for future reference!
+    // const buildingsData = data.allBuildingsJson.edges.find(row => row.node.state === stateName);
+    // if (buildingsData) {
+    //   mutableDataObj[stateName] = {
+    //     ...mutableDataObj[stateName],
+    //     ...buildingsData.node
+    //   }
+    // }
+  }
+  return mutableDataObj
+}
 
 const IndexPage = ({data}) => {
+  const cleanData = getCleanData(data)
+  // debugger;
   // Prep data for emissions over time chart
-  const emissionsOverTime = data.emissionsJson["united_states"]
+  const emissionsOverTime = cleanData["united_states"].emissionsByYear
 
   // Prep data for the SingleBarChart breaking down emissions by category
-  const us2018Emissions = get_2018_emissions_group(data.emissionsJson)
+  const barChartData = getLatestUsData(cleanData)
 
   // Prep data for choropleth map
-  const emissions2018 = get_2018_emissions(data.emissionsJson)
+  const mapData = getLatestEmissions(cleanData)
+  debugger;
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
@@ -55,7 +76,7 @@ const IndexPage = ({data}) => {
       </p>
 
       <div className="d-flex justify-content-center mt-7">
-        <SingleBarChart emissionsData={us2018Emissions} homeView={true} />
+        <SingleBarChart emissionsData={barChartData} homeView={true} />
 
         <div className="ml-5">
           <p className="h1 font-weight-boldest mt-6 mb-7">
@@ -77,7 +98,7 @@ const IndexPage = ({data}) => {
       </p>
 
       <div className="mb-7">
-        <ChoroplethMap emissions={emissions2018} />
+        <ChoroplethMap emissions={mapData} />
       </div>
     </Layout>
   )
@@ -86,372 +107,28 @@ const IndexPage = ({data}) => {
 export default IndexPage
 
 export const query = graphql`
-query IndexQuery {
-  emissionsJson {
-    alabama {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
+  query MyQuery {
+    allBuildingsJson {
+      edges {
+        node {
+          buildings
+          state
+        }
+      }
     }
-    alaska {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    arizona {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    arkansas {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    california {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    colorado {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    connecticut {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    delaware {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    district_of_columbia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    florida {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    georgia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    hawaii {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    idaho {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    illinois {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    indiana {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    iowa {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    kansas {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    kentucky {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    louisiana {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    maine {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    maryland {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    massachusetts {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    michigan {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    minnesota {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    mississippi {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    missouri {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    montana {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    nebraska {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    nevada {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_hampshire {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_jersey {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_mexico {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_york {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    north_carolina {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    north_dakota {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    ohio {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    oklahoma {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    oregon {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    pennsylvania {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    rhode_island {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    south_carolina {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    south_dakota {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    tennessee {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    texas {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    united_states {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    utah {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    vermont {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    virginia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    washington {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    west_virginia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    wisconsin {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    wyoming {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
+    allEmissionsJson {
+      edges {
+        node {
+          state
+          emissionsByYear {
+            buildings
+            dumps_farms_industrial_other
+            dirty_power
+            transportation
+            year
+          }
+        }
+      }
     }
   }
-}
 `
