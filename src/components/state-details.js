@@ -1,8 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
-
-import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"

@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   ReferenceLine,
   Label
@@ -29,7 +28,7 @@ export default function SimpleAreaChart ({emissions_data}) {
 
 
   for (let step = 0; step < (yearsLeft + 1); step++) {
-    if (step == 0) { projection.push({ year: currYear, hist: reduceFrom, projected: reduceFrom }) }
+    if (step === 0) { projection.push({ year: currYear, hist: reduceFrom, projected: reduceFrom }) }
     else { projection.push({ year: step + currYear, projected: Math.round(reduceFrom - reduceFrom * step / yearsLeft)}) }
   }
 

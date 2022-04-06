@@ -2,10 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import ChoroplethMap from "../components/choroplethmap"
 import {getLatestEmissions, getLatestUsData} from "../components/getLatestEmissions"
+import SimpleAreaChart from "../components/simpleareachart"
 
 const getCleanData = (data) => {
   let mutableDataObj = {}
@@ -25,7 +25,6 @@ const getCleanData = (data) => {
   }
   return mutableDataObj
 }
-import SimpleAreaChart from "../components/simpleareachart"
 
 const IndexPage = ({data}) => {
   const cleanData = getCleanData(data)
