@@ -129,7 +129,7 @@ const StateDetailsPage = ({location, data}) => {
     ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
     : '?'
 
-  let buildingsPrcnt, powerPrcnt, transportPrcnt
+  let buildingsPrcnt, powerPrcnt, transportPrcnt, otherPrcnt
 
   // NOTE: We don't have emissions for all states (like Guam)
   const placeAllEmissions = currPlaceData.emissions
