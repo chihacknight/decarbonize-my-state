@@ -29,7 +29,6 @@ import SimpleAreaChart from "../components/simpleareachart"
 
 const IndexPage = ({data}) => {
   const cleanData = getCleanData(data)
-  // debugger;
   // Prep data for emissions over time chart
   const emissionsOverTime = cleanData["united_states"].emissionsByYear
 
@@ -38,7 +37,6 @@ const IndexPage = ({data}) => {
 
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
-  debugger
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()

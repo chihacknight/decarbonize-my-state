@@ -64,7 +64,9 @@ const StateDetailsPage = ({location, data}) => {
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
-  } = data.allVehiclesJson.edges[0].node.buildings
+  } = data.allVehiclesJson.edges[0].node
+
+  // string formatting
   const carsCountStr = carsAll !== undefined 
     ? carsAll.toLocaleString('en') 
     : '?'
@@ -76,7 +78,11 @@ const StateDetailsPage = ({location, data}) => {
     : '?'
 
   // #### BUILDINGS ####
-  const buildings = data.allBuildingsJson.edges[0].node.buildings
+  const {
+    buildings
+  } = data.allBuildingsJson.edges[0].node
+
+  // string formatting
   const buildingsCountStr = buildings !== undefined
     ? buildings.toLocaleString('en')
     : '?'
@@ -108,7 +114,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-        <SimpleAreaChart emissions_data={placeData.emissions}/>
+        <SimpleAreaChart emissions_data={emissionsByYear}/>
 
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
@@ -465,10 +471,8 @@ query StateQuery($state: String) {
   allVehiclesJson(filter: {state: {eq: $state}}) {
     edges {
       node {
-        emissionsByYear {
-          Cars_All
-          EV_Registration
-        }
+        Cars_All
+        EV_Registration
       }
     }
   }
