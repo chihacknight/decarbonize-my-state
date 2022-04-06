@@ -9,9 +9,9 @@ import ChoroplethMap from "../components/choroplethmap"
 import {getLatestEmissions, getLatestUsData} from "../components/getLatestEmissions"
 
 const getCleanData = (data) => {
-  let mutableDataObj = {};
-  for (let i=0; i<data.allEmissionsJson.edges.length;i++){
-    const stateName = data.allEmissionsJson.edges[i].node.state;
+  let mutableDataObj = {}
+  for (let i=0; i<data.allEmissionsJson.edges.length;i++) {
+    const stateName = data.allEmissionsJson.edges[i].node.state
     mutableDataObj[stateName] = {
       emissionsByYear: data.allEmissionsJson.edges[i].node.emissionsByYear,
     }
@@ -38,7 +38,7 @@ const IndexPage = ({data}) => {
 
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
-  debugger;
+  debugger
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()

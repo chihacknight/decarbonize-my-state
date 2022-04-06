@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 
@@ -6,60 +6,6 @@ import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-
-const places = [
-  "alabama",
-  "alaska",
-  "arizona",
-  "arkansas",
-  "california",
-  "colorado",
-  "connecticut",
-  "delaware",
-  "district_of_columbia",
-  "florida",
-  "georgia",
-  "hawaii",
-  "idaho",
-  "illinois",
-  "indiana",
-  "iowa",
-  "kansas",
-  "kentucky",
-  "louisiana",
-  "maine",
-  "maryland",
-  "massachusetts",
-  "michigan",
-  "minnesota",
-  "mississippi",
-  "missouri",
-  "montana",
-  "nebraska",
-  "nevada",
-  "new_hampshire",
-  "new_jersey",
-  "new_mexico",
-  "new_york",
-  "north_carolina",
-  "north_dakota",
-  "ohio",
-  "oklahoma",
-  "oregon",
-  "pennsylvania",
-  "rhode_island",
-  "south_carolina",
-  "south_dakota",
-  "tennessee",
-  "texas",
-  "utah",
-  "vermont",
-  "virginia",
-  "washington",
-  "west_virginia",
-  "wisconsin",
-  "wyoming"
-]
 
 const slugToTitle = (placeName) => {
   const words = placeName.split('_')
@@ -76,36 +22,19 @@ const slugToTitle = (placeName) => {
   return words.join(' ')
 }
 
-const getPlacesData = (data) => {
-  console.log(data)
-  debugger;
-  const allPlacesData = {}
-  places.forEach((place, i) => {
-    const placeTitle = slugToTitle(place)
-    allPlacesData[place] = {}
-    allPlacesData[place]['name'] = placeTitle
-
-    // grab the state total employed from totals
-    allPlacesData[place]['emissions'] = data[place]
-  })
-  return allPlacesData
-}
-
 const currentYear = new Date().getFullYear()
-
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
-  
   const currentPlace = location.pathname.split("/")[1]
 
   // Each json loads in as an allSomethingJson and is filtered for 
   // data relevant to this state, which is great!
   // the first edge node will have the relevant data, 
   // so we can just take the first index
-  const buildings = data.allBuildingsJson.edges[0].node.buildings
+  // const buildings = data.allBuildingsJson.edges[0].node.buildings
   const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear
   const latestEmissions = emissionsByYear[emissionsByYear.length - 1]
   
@@ -115,7 +44,7 @@ const StateDetailsPage = ({location, data}) => {
     dirty_power: dirtyPowerEmissions,
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
     transportation: transportionEmissions
-  } = latestEmissions;
+  } = latestEmissions
   
   // sum, then make nice percentages
   const sumOfEmissions = buildingsEmissions + dirtyPowerEmissions + farmsDumpsOtherEmissions + transportionEmissions
