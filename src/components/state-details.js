@@ -6,6 +6,7 @@ import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import SimpleAreaChart from "../components/simpleareachart"
 
 
 const places = [
@@ -160,8 +161,7 @@ const StateDetailsPage = ({location, data}) => {
         <p className="h6 text-muted">
           Metric tons of carbon dioxide equivalent (MTCO2e) emissions
         </p>
-        <StackedBarChart emissions_data={placeData.emissions}/>
-
+  
         <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
         <hr className="mt-5"/>
