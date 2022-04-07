@@ -64,7 +64,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path,
-      component: StateDetailsTemplate
+      component: StateDetailsTemplate,
+      context: {
+        state: name
+      }
     })
   })
 }

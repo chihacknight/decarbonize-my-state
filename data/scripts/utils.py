@@ -89,7 +89,7 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
     And then then json_object matches the format we need. 
     '''
     # initiate empty json object to iterate with
-    json_object = {}
+    json_object = []
 
     # grab list of unique states for for_loop
     unique_states = list(set(dataframe['state']))
@@ -97,15 +97,21 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
     for state in unique_states:
         state_df = dataframe.loc[dataframe['state']==state]
         # need to set state as the index here, so it's not duplicated in our final json
-        state_df.set_index('state', inplace=True)
-        
-        state_json = state_df.to_dict('records')
-        # set the initial json_object
         if is_array:
-            json_object[state] = state_json
-        else: 
-            json_object[state] = state_json[0]
+            state_df.set_index('state', inplace=True)
+            state_json = state_df.to_dict('records')
+            json_object.append({"state": state, "emissionsByYear": state_json})
+        else:
+            state_json = state_df.to_dict('records')[0]
+            json_object.append(state_json)
+        # if not is_array:
+        #     state_json = state_json[0]
 
+        # state_json['state'] = state
+        # set the initial json_object
+        # if is_array:
+        #     json_object.append(state_json)
+        # else: 
     # outer tag output object
     return json_object
 

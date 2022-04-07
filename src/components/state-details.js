@@ -1,67 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
-
-import StackedBarChart from "../components/stackedbar"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 
-
-const places = [
-  "alabama",
-  "alaska",
-  "arizona",
-  "arkansas",
-  "california",
-  "colorado",
-  "connecticut",
-  "delaware",
-  "district_of_columbia",
-  "florida",
-  "georgia",
-  "hawaii",
-  "idaho",
-  "illinois",
-  "indiana",
-  "iowa",
-  "kansas",
-  "kentucky",
-  "louisiana",
-  "maine",
-  "maryland",
-  "massachusetts",
-  "michigan",
-  "minnesota",
-  "mississippi",
-  "missouri",
-  "montana",
-  "nebraska",
-  "nevada",
-  "new_hampshire",
-  "new_jersey",
-  "new_mexico",
-  "new_york",
-  "north_carolina",
-  "north_dakota",
-  "ohio",
-  "oklahoma",
-  "oregon",
-  "pennsylvania",
-  "rhode_island",
-  "south_carolina",
-  "south_dakota",
-  "tennessee",
-  "texas",
-  "utah",
-  "vermont",
-  "virginia",
-  "washington",
-  "west_virginia",
-  "wisconsin",
-  "wyoming"
-]
 
 const slugToTitle = (placeName) => {
   const words = placeName.split('_')
@@ -78,87 +22,72 @@ const slugToTitle = (placeName) => {
   return words.join(' ')
 }
 
-const getPlacesData = (data) => {
-  const allPlacesData = {}
-  places.forEach((place, i) => {
-    const placeTitle = slugToTitle(place)
-    allPlacesData[place] = {}
-    allPlacesData[place]['name'] = placeTitle
-
-    // grab the state total employed from totals
-    allPlacesData[place]['emissions'] = data[place]
-  })
-  return allPlacesData
-}
-
 const currentYear = new Date().getFullYear()
-
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
+  // place info and string
   const currentPlace = location.pathname.split("/")[1]
-  const placesData = getPlacesData(data.emissionsJson)
-  const currPlaceData = placesData[currentPlace]
+  // clean up title as needed
+  const placeTitle = slugToTitle(currentPlace)
+  const stateFaceClass = currentPlace.toLowerCase().replaceAll(' ', '-')
 
+  // Each json loads in as an allSomethingJson and is filtered for 
+  // data relevant to this state, which is great!
+  // the first edge node will have the relevant data, 
+  // so we can just take the first index
+
+  // #### EMISSIONS #### 
+  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear
+  const latestEmissions = emissionsByYear[emissionsByYear.length - 1]
+  // desstructure out the different emissions categories for simplicity below
+  const {
+    buildings: buildingsEmissions,
+    dirty_power: dirtyPowerEmissions,
+    dumps_farms_industrial_other: farmsDumpsOtherEmissions,
+    transportation: transportionEmissions
+  } = latestEmissions
+  
+  // sum, then make nice percentages
+  const sumOfEmissions = buildingsEmissions + dirtyPowerEmissions + farmsDumpsOtherEmissions + transportionEmissions
+  const buildingsPrcnt = (buildingsEmissions / sumOfEmissions * 100).toFixed(0)
+  const powerPrcnt = (dirtyPowerEmissions / sumOfEmissions * 100).toFixed(0)
+  const transportPrcnt = (transportionEmissions / sumOfEmissions * 100).toFixed(0)
+  const otherPrcnt = (farmsDumpsOtherEmissions / sumOfEmissions * 100).toFixed(0)
+
+  
+  // #### VEHICLES #### 
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
-  } = data.vehiclesJson[currentPlace]
+  } = data.allVehiclesJson.edges[0].node
 
+  // string formatting
   const carsCountStr = carsAll !== undefined 
     ? carsAll.toLocaleString('en') 
     : '?'
-
   const carsPerYear = carsAll !== undefined 
     ? Math.ceil(carsAll * cutPerYearPrcnt / 100).toLocaleString('en') 
     : '?'
-    
   const evCountStr = evRegistration !== undefined 
     ? evRegistration.toLocaleString('en') 
     : '?'
-  
+
+  // #### BUILDINGS ####
   const {
     buildings
-  } = data.buildingsJson[currentPlace]
-  
+  } = data.allBuildingsJson.edges[0].node
+
+  // string formatting
   const buildingsCountStr = buildings !== undefined
     ? buildings.toLocaleString('en')
     : '?'
-
   const buildingsPerYear = buildings !== undefined
     ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
     : '?'
 
-  let buildingsPrcnt, powerPrcnt, transportPrcnt, otherPrcnt
-
-  // NOTE: We don't have emissions for all states (like Guam)
-  const placeAllEmissions = currPlaceData.emissions
-
-  let placeEmissions
-
-  if (placeAllEmissions) {
-    // Get the last year of emissions data we have to use for showing the
-    // breakdown of how much emission comes from each source in this state
-    placeEmissions = placeAllEmissions[placeAllEmissions.length - 1]
-
-    const totalLatestEmissions = placeEmissions.buildings +
-      placeEmissions.dirty_power +
-      placeEmissions.dumps_farms_industrial_other +
-      placeEmissions.transportation
-
-    buildingsPrcnt = (placeEmissions.buildings / totalLatestEmissions * 100).toFixed(0)
-    powerPrcnt = (placeEmissions.dirty_power / totalLatestEmissions * 100).toFixed(0)
-    transportPrcnt = (placeEmissions.transportation / totalLatestEmissions * 100).toFixed(0)
-    otherPrcnt = (placeEmissions.dumps_farms_industrial_other / totalLatestEmissions * 100).toFixed(0)
-  }
-
-  const placeTitle = currPlaceData.name
-
-  const [ placeData ] = useState(currPlaceData)
-
-  const stateFaceClass = placeData.name.toLowerCase().replaceAll(' ', '-')
 
   return (
     <Layout>
@@ -169,11 +98,11 @@ const StateDetailsPage = ({location, data}) => {
       <div className='col-12'>
         <h1 className='display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold'>
           <span className={ 'display-2 mr-4 sf-' + stateFaceClass } aria-hidden="true"></span>
-          {placeData.name}
+          { placeTitle }
         </h1>
       </div>
 
-      { !placeData.emissions }
+      {/* { !placeData.emissions } */}
 
       {/* Intro Section */}
       <div className='col-12'>
@@ -183,7 +112,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-        <SimpleAreaChart emissions_data={placeData.emissions}/>
+        <SimpleAreaChart emissions_data={emissionsByYear}/>
 
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
@@ -208,7 +137,7 @@ const StateDetailsPage = ({location, data}) => {
           { /* Make SingleBarChart full width on mobile */ }
           <div className="col-12-med">
             <SingleBarChart
-              emissionsData={placeEmissions}
+              emissionsData={latestEmissions}
               activeKey='buildings' />
           </div>
 
@@ -238,7 +167,7 @@ const StateDetailsPage = ({location, data}) => {
 
         <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
-            emissionsData={placeEmissions}
+            emissionsData={latestEmissions}
             greenKeys={ [ 'buildings' ] } />
         </div>
 
@@ -273,7 +202,7 @@ const StateDetailsPage = ({location, data}) => {
           { /* Make SingleBarChart full width on mobile */ }
           <div className="col-12-med">
             <SingleBarChart
-              emissionsData={placeEmissions}
+              emissionsData={latestEmissions}
               activeKey='transportation' />
           </div>
 
@@ -300,7 +229,7 @@ const StateDetailsPage = ({location, data}) => {
 
         <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
-            emissionsData={placeEmissions}
+            emissionsData={latestEmissions}
             greenKeys={[ 'buildings', 'transportation' ]} />
         </div>
 
@@ -346,7 +275,7 @@ const StateDetailsPage = ({location, data}) => {
           </div>
         }
         { powerPrcnt > 0 && <HowToCleanPowerSection
-          placeEmissions={placeEmissions}
+          latestEmissions={latestEmissions}
           placeTitle={placeTitle}
           powerPrcnt={powerPrcnt} /> }
 
@@ -366,7 +295,7 @@ const StateDetailsPage = ({location, data}) => {
           { /* Make SingleBarChart full width on mobile */ }
           <div className="col-12-med">
             <SingleBarChart
-              emissionsData={placeEmissions}
+              emissionsData={latestEmissions}
               activeKey='dumps_farms_industrial_other' />
           </div>
 
@@ -417,7 +346,7 @@ export default StateDetailsPage
  * The section for how to clean up a state's power grid
  */
 function HowToCleanPowerSection ({
-  placeEmissions,
+  latestEmissions,
   placeTitle,
   powerPrcnt,
 }) {
@@ -432,7 +361,7 @@ function HowToCleanPowerSection ({
         { /* Make SingleBarChart full width on mobile */ }
         <div className="col-12-med">
           <SingleBarChart
-            emissionsData={placeEmissions}
+            emissionsData={latestEmissions}
             activeKey='dirty_power' />
         </div>
 
@@ -492,7 +421,7 @@ function HowToCleanPowerSection ({
 
       <div className="mt-5 d-flex justify-content-center">
         <SingleBarChart
-          emissionsData={placeEmissions}
+          emissionsData={latestEmissions}
           greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
       </div>
 
@@ -516,740 +445,35 @@ function HowToCleanPowerSection ({
 }
 
 export const query = graphql`
-query PlaceQuery {
-  emissionsJson {
-    alabama {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    alaska {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    arizona {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    arkansas {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    california {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    colorado {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    connecticut {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    delaware {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    district_of_columbia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    florida {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    georgia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    hawaii {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    idaho {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    illinois {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    indiana {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    iowa {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    kansas {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    kentucky {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    louisiana {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    maine {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    maryland {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    massachusetts {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    michigan {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    minnesota {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    mississippi {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    missouri {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    montana {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    nebraska {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    nevada {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_hampshire {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_jersey {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_mexico {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    new_york {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    north_carolina {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    north_dakota {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    ohio {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    oklahoma {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    oregon {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    pennsylvania {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    rhode_island {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    south_carolina {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    south_dakota {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    tennessee {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    texas {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    united_states {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    utah {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    vermont {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    virginia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    washington {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    west_virginia {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    wisconsin {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
-    }
-    wyoming {
-      year
-      dirty_power
-      buildings
-      transportation
-      dumps_farms_industrial_other
+query StateQuery($state: String) {
+  allBuildingsJson(filter: {state: {eq: $state}}) {
+    edges {
+      node {
+        buildings
+      }
     }
   }
-  vehiclesJson {
-    alabama {
-      Cars_All
-      EV_Registration
-    }
-    alaska {
-      Cars_All
-      EV_Registration
-    }
-    arizona {
-      Cars_All
-      EV_Registration
-    }
-    arkansas {
-      Cars_All
-      EV_Registration
-    }
-    california {
-      Cars_All
-      EV_Registration
-    }
-    colorado {
-      Cars_All
-      EV_Registration
-    }
-    connecticut {
-      Cars_All
-      EV_Registration
-    }
-    delaware {
-      Cars_All
-      EV_Registration
-    }
-    district_of_columbia {
-      Cars_All
-      EV_Registration
-    }
-    florida {
-      Cars_All
-      EV_Registration
-    }
-    georgia {
-      Cars_All
-      EV_Registration
-    }
-    hawaii {
-      Cars_All
-      EV_Registration
-    }
-    idaho {
-      Cars_All
-      EV_Registration
-    }
-    illinois {
-      Cars_All
-      EV_Registration
-    }
-    indiana {
-      Cars_All
-      EV_Registration
-    }
-    iowa {
-      Cars_All
-      EV_Registration
-    }
-    kansas {
-      Cars_All
-      EV_Registration
-    }
-    kentucky {
-      Cars_All
-      EV_Registration
-    }
-    louisiana {
-      Cars_All
-      EV_Registration
-    }
-    maine {
-      Cars_All
-      EV_Registration
-    }
-    maryland {
-      Cars_All
-      EV_Registration
-    }
-    massachusetts {
-      Cars_All
-      EV_Registration
-    }
-    michigan {
-      Cars_All
-      EV_Registration
-    }
-    minnesota {
-      Cars_All
-      EV_Registration
-    }
-    mississippi {
-      Cars_All
-      EV_Registration
-    }
-    missouri {
-      Cars_All
-      EV_Registration
-    }
-    montana {
-      Cars_All
-      EV_Registration
-    }
-    nebraska {
-      Cars_All
-      EV_Registration
-    }
-    nevada {
-      Cars_All
-      EV_Registration
-    }
-    new_hampshire {
-      Cars_All
-      EV_Registration
-    }
-    new_jersey {
-      Cars_All
-      EV_Registration
-    }
-    new_mexico {
-      Cars_All
-      EV_Registration
-    }
-    new_york {
-      Cars_All
-      EV_Registration
-    }
-    north_carolina {
-      Cars_All
-      EV_Registration
-    }
-    north_dakota {
-      Cars_All
-      EV_Registration
-    }
-    ohio {
-      Cars_All
-      EV_Registration
-    }
-    oklahoma {
-      Cars_All
-      EV_Registration
-    }
-    oregon {
-      Cars_All
-      EV_Registration
-    }
-    pennsylvania {
-      Cars_All
-      EV_Registration
-    }
-    rhode_island {
-      Cars_All
-      EV_Registration
-    }
-    south_carolina {
-      Cars_All
-      EV_Registration
-    }
-    south_dakota {
-      Cars_All
-      EV_Registration
-    }
-    tennessee {
-      Cars_All
-      EV_Registration
-    }
-    texas {
-      Cars_All
-      EV_Registration
-    }
-    united_states {
-      Cars_All
-      EV_Registration
-    }
-    utah {
-      Cars_All
-      EV_Registration
-    }
-    vermont {
-      Cars_All
-      EV_Registration
-    }
-    virginia {
-      Cars_All
-      EV_Registration
-    }
-    washington {
-      Cars_All
-      EV_Registration
-    }
-    west_virginia {
-      Cars_All
-      EV_Registration
-    }
-    wisconsin {
-      Cars_All
-      EV_Registration
-    }
-    wyoming {
-      Cars_All
-      EV_Registration
+  allEmissionsJson(filter: {state: {eq: $state}}) {
+    edges {
+      node {
+        emissionsByYear {
+          dirty_power
+          buildings
+          dumps_farms_industrial_other
+          transportation
+          year
+        }
+      }
     }
   }
-  buildingsJson {
-    alabama {
-      buildings
-    }
-    alaska {
-      buildings
-    }
-    arizona {
-      buildings
-    }
-    arkansas {
-      buildings
-    }
-    california {
-      buildings
-    }
-    colorado {
-      buildings
-    }
-    connecticut {
-      buildings
-    }
-    delaware {
-      buildings
-    }
-    district_of_columbia {
-      buildings
-    }
-    florida {
-      buildings
-    }
-    georgia {
-      buildings
-    }
-    hawaii {
-      buildings
-    }
-    idaho {
-      buildings
-    }
-    illinois {
-      buildings
-    }
-    indiana {
-      buildings
-    }
-    iowa {
-      buildings
-    }
-    kansas {
-      buildings
-    }
-    kentucky {
-      buildings
-    }
-    louisiana {
-      buildings
-    }
-    maine {
-      buildings
-    }
-    maryland {
-      buildings
-    }
-    massachusetts {
-      buildings
-    }
-    michigan {
-      buildings
-    }
-    minnesota {
-      buildings
-    }
-    mississippi {
-      buildings
-    }
-    missouri {
-      buildings
-    }
-    montana {
-      buildings
-    }
-    nebraska {
-      buildings
-    }
-    nevada {
-      buildings
-    }
-    new_hampshire {
-      buildings
-    }
-    new_jersey {
-      buildings
-    }
-    new_mexico {
-      buildings
-    }
-    new_york {
-      buildings
-    }
-    north_carolina {
-      buildings
-    }
-    north_dakota {
-      buildings
-    }
-    ohio {
-      buildings
-    }
-    oklahoma {
-      buildings
-    }
-    oregon {
-      buildings
-    }
-    pennsylvania {
-      buildings
-    }
-    rhode_island {
-      buildings
-    }
-    south_carolina {
-      buildings
-    }
-    south_dakota {
-      buildings
-    }
-    tennessee {
-      buildings
-    }
-    texas {
-      buildings
-    }
-    united_states {
-      buildings
-    }
-    utah {
-      buildings
-    }
-    vermont {
-      buildings
-    }
-    virginia {
-      buildings
-    }
-    washington {
-      buildings
-    }
-    west_virginia {
-      buildings
-    }
-    wisconsin {
-      buildings
-    }
-    wyoming {
-      buildings
+  allVehiclesJson(filter: {state: {eq: $state}}) {
+    edges {
+      node {
+        Cars_All
+        EV_Registration
+      }
     }
   }
 }
+
 `
