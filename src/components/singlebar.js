@@ -208,8 +208,9 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
         }
         <ReferenceArea shape={
           <ElectrificationLines
-            electrificationPrcnt={electrificationPrcnt}/>}
-        homeView={homeView} />
+            electrificationPrcnt={electrificationPrcnt}
+            homeView={homeView} />
+        }/>
       </BarChart>
     </div>
   )
