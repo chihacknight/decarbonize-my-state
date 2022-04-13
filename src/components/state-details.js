@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Scrollspy from "react-scrollspy"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
@@ -28,6 +29,12 @@ const currentYear = new Date().getFullYear()
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 const StateDetailsPage = ({location, data}) => {
+  /**
+   * Properties to pass to the main desktop graph, which updates as you scroll
+   */
+  let scrollGraphActiveKey = 'buildings';
+  let scrollGraphGreenKeys = [];
+
   // place info and string
   const currentPlace = location.pathname.split("/")[1]
   // clean up title as needed
@@ -57,7 +64,6 @@ const StateDetailsPage = ({location, data}) => {
   const transportPrcnt = (transportionEmissions / sumOfEmissions * 100).toFixed(0)
   const otherPrcnt = (farmsDumpsOtherEmissions / sumOfEmissions * 100).toFixed(0)
 
-  
   // #### VEHICLES #### 
   const {
     Cars_All: carsAll,
@@ -88,6 +94,55 @@ const StateDetailsPage = ({location, data}) => {
     ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
     : '?'
 
+  function scrollTargetUpdated(scrollTarget) {
+    console.log('scrollTargetUpdated!', scrollTarget);
+    console.log('scrollGraphActiveKey', scrollGraphActiveKey, 'greenKeys', scrollGraphGreenKeys);
+
+    if (!scrollTarget) {
+      scrollGraphActiveKey = 'buildings';
+      scrollGraphGreenKeys = [];
+      return;
+    }
+
+    const targetId = scrollTarget.id;
+
+    console.log('targetId', targetId);
+
+    if (!targetId) {
+      console.error('Scroll target had no ID! Element was:', scrollTarget);
+      return;
+    }
+
+    if (targetId === 'bld-intro') {
+      scrollGraphActiveKey = 'buildings';
+      scrollGraphGreenKeys = [];
+    }
+    else if (targetId === 'bld-end') {
+      scrollGraphActiveKey = '';
+      scrollGraphGreenKeys = [ 'buildings' ];
+      console.log('set buildings end!');
+    }
+    else if (targetId === 'trnsprt-intro') {
+      scrollGraphActiveKey = 'transportation';
+      scrollGraphGreenKeys = [];
+    }
+    else if (targetId === 'trnsprt-end') {
+      scrollGraphActiveKey = '';
+      scrollGraphGreenKeys = ['buildings', 'transportation'];
+    }
+    else if (targetId === 'power-intro') {
+      scrollGraphActiveKey = 'dirty_power';
+      scrollGraphGreenKeys = [];
+    }
+    else if (targetId === 'power-end') {
+      scrollGraphActiveKey = '';
+      scrollGraphGreenKeys = ['buildings', 'transportation', 'dirty_power'];
+    }
+    else if (targetId === 'other') {
+      scrollGraphActiveKey = 'dumps_farms_industrial_other';
+      scrollGraphGreenKeys = [];
+    }
+  }
 
   return (
     <Layout>
@@ -123,17 +178,35 @@ const StateDetailsPage = ({location, data}) => {
       </div>
 
       <div className="row">
-        { /* Our main chart for desktop ONLY (others are hidden) */ }
+        { /**
+           * Our main chart for desktop ONLY (others are hidden) this chart
+           * should update as you scroll
+           */ }
         <div className="col-4 sticky-cont d-none d-xl-block">
+          Green: { scrollGraphGreenKeys }
+
           <SingleBarChart
             isSticky={true}
             emissionsData={latestEmissions}
-            greenKeys={ [ 'buildings' ] } />
+            activeKey={scrollGraphActiveKey}
+            greenKeys={scrollGraphGreenKeys} />
         </div>
-        {/* Right column on desktop, full width on mobile */}
-        <div className="col-12 col-xl-8">
+
+        {/*
+          * Right column on desktop, full width on mobile. This is a scroll spy
+          * container to update the left graph
+          */}
+        <Scrollspy
+          items={ [
+            'bld-intro', 'bld-end',
+            'trnsprt-intro', 'trnsprt-end',
+            'power-intro', 'power-end',
+            'other'] }
+          currentClassName="is-current"
+          onUpdate={target => scrollTargetUpdated(target)}
+          className="col-12 col-xl-8">
           {/* Buildings Section */}
-          <h2 className="h3 mt-5 font-weight-bold">Buildings</h2>
+          <h2 className="h3 mt-5 font-weight-bold" id="bld-intro">Buildings</h2>
 
           <p className="h3 mt-5">
             <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of
@@ -164,10 +237,11 @@ const StateDetailsPage = ({location, data}) => {
           </p>
 
           <p className="h3 mt-5">
-            And we need to do this for all {buildingsCountStr} buildings in {placeTitle} (That's around {buildingsPerYear} per year)
+            And we need to do this for all {buildingsCountStr}
+            buildings in {placeTitle} (That's around {buildingsPerYear} per year)
           </p>
 
-          <p className="h3 mt-7 font-weight-bold text-center">
+          <p className="h3 mt-7 font-weight-bold text-center" id="bld-end">
             That will solve {buildingsPrcnt}% of the problem.
           </p>
 
@@ -197,7 +271,9 @@ const StateDetailsPage = ({location, data}) => {
 
           {/* Transportation Section */}
           <div className='col-12'>
-            <h2 className="h3 mt-5 font-weight-bold">Getting Around</h2>
+            <h2 className="h3 mt-5 font-weight-bold" id="trnsprt-intro">
+              Getting Around
+            </h2>
 
             <p className="h3 mt-5">
               <strong className="font-weight-bold">{transportPrcnt}%</strong> of
@@ -229,7 +305,7 @@ const StateDetailsPage = ({location, data}) => {
               </div>
             </div>
 
-            <p className="h3 mt-7 font-weight-bold text-center">
+            <p className="h3 mt-7 font-weight-bold text-center" id="trnsprt-end">
               That will solve another {transportPrcnt}% of the problem.
             </p>
 
@@ -262,7 +338,9 @@ const StateDetailsPage = ({location, data}) => {
 
           {/* Power Section */}
           <div className='col-12'>
-            <h2 className="h3 mt-5 font-weight-bold">Power Generation</h2>
+            <h2 className="h3 mt-5 font-weight-bold" id="power-intro">
+              Power Generation
+            </h2>
 
             {
               // Show special section if power emissions are zero
@@ -289,7 +367,9 @@ const StateDetailsPage = ({location, data}) => {
 
           {/* Other Section */}
           <div className='col-12'>
-            <h2 className="h3 mt-5 font-weight-bold">Other Emissions</h2>
+            <h2 className="h3 mt-5 font-weight-bold" id="other-intro">
+              Other Emissions
+            </h2>
 
             <p className="h3 mt-5">
               The last <strong className="font-weight-bold">{otherPrcnt}%</strong> of
@@ -329,7 +409,7 @@ const StateDetailsPage = ({location, data}) => {
               </div>
             </div>
           </div>
-        </div>
+        </Scrollspy>
       </div>
 
       <hr className="mt-7" />
@@ -422,7 +502,7 @@ function HowToCleanPowerSection ({
         [insert animated map here]
       </p>
 
-      <p className="h3 mt-7 font-weight-bold text-center">
+      <p className="h3 mt-7 font-weight-bold text-center" id="power-end">
         That will solve another {powerPrcnt}% of the problem.
       </p>
 
@@ -450,6 +530,7 @@ function HowToCleanPowerSection ({
     </div>
   )
 }
+
 
 export const query = graphql`
 query StateQuery($state: String) {
