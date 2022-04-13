@@ -98,6 +98,11 @@ export default function StateDetailsPage ({location, data}) {
     let activeKey = 'buildings'
     let greenKeys = []
 
+    // Make sure we don't try using the scrollTarget if it's null
+    if (!scrollTarget) {
+      return;
+    }
+
     const targetId = scrollTarget.id
 
     if (!targetId) {
