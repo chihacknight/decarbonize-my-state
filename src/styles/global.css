@@ -157,6 +157,19 @@ footer {
 
 
 /**
+ * Styling for the sticky graph container
+ */
+.sticky-cont {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    align-self: start;
+    margin-top: 7rem;
+    top: 30%;
+}
+
+/**
  * SingleBarChart styling
  */
 .single-bar-chart text {
