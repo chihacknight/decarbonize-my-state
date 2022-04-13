@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
@@ -28,12 +28,12 @@ const currentYear = new Date().getFullYear()
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
-const StateDetailsPage = ({location, data}) => {
+export default function StateDetailsPage({location, data}) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
-  let scrollGraphActiveKey = 'buildings';
-  let scrollGraphGreenKeys = [];
+  const [scrollGraphActiveKey, setGraphActiveKey] = useState('buildings');
+  const [scrollGraphGreenKeys, setGraphGreenKeys] = useState([]);
 
   // place info and string
   const currentPlace = location.pathname.split("/")[1]
@@ -95,18 +95,16 @@ const StateDetailsPage = ({location, data}) => {
     : '?'
 
   function scrollTargetUpdated(scrollTarget) {
-    console.log('scrollTargetUpdated!', scrollTarget);
-    console.log('scrollGraphActiveKey', scrollGraphActiveKey, 'greenKeys', scrollGraphGreenKeys);
+    let activeKey = 'buildings';
+    let greenKeys = [];
 
     if (!scrollTarget) {
-      scrollGraphActiveKey = 'buildings';
-      scrollGraphGreenKeys = [];
+      activeKey = 'buildings';
+      greenKeys = [];
       return;
     }
 
     const targetId = scrollTarget.id;
-
-    console.log('targetId', targetId);
 
     if (!targetId) {
       console.error('Scroll target had no ID! Element was:', scrollTarget);
@@ -114,34 +112,36 @@ const StateDetailsPage = ({location, data}) => {
     }
 
     if (targetId === 'bld-intro') {
-      scrollGraphActiveKey = 'buildings';
-      scrollGraphGreenKeys = [];
+      activeKey = 'buildings';
+      greenKeys = [];
     }
     else if (targetId === 'bld-end') {
-      scrollGraphActiveKey = '';
-      scrollGraphGreenKeys = [ 'buildings' ];
-      console.log('set buildings end!');
+      activeKey = '';
+      greenKeys = [ 'buildings' ];
     }
     else if (targetId === 'trnsprt-intro') {
-      scrollGraphActiveKey = 'transportation';
-      scrollGraphGreenKeys = [];
+      activeKey = 'transportation';
+      greenKeys = [];
     }
     else if (targetId === 'trnsprt-end') {
-      scrollGraphActiveKey = '';
-      scrollGraphGreenKeys = ['buildings', 'transportation'];
+      activeKey = '';
+      greenKeys = ['buildings', 'transportation'];
     }
     else if (targetId === 'power-intro') {
-      scrollGraphActiveKey = 'dirty_power';
-      scrollGraphGreenKeys = [];
+      activeKey = 'dirty_power';
+      greenKeys = [];
     }
     else if (targetId === 'power-end') {
-      scrollGraphActiveKey = '';
-      scrollGraphGreenKeys = ['buildings', 'transportation', 'dirty_power'];
+      activeKey = '';
+      greenKeys = ['buildings', 'transportation', 'dirty_power'];
     }
     else if (targetId === 'other') {
-      scrollGraphActiveKey = 'dumps_farms_industrial_other';
-      scrollGraphGreenKeys = [];
+      activeKey = 'dumps_farms_industrial_other';
+      greenKeys = [];
     }
+
+    setGraphActiveKey(activeKey);
+    setGraphGreenKeys(greenKeys);
   }
 
   return (
@@ -183,8 +183,6 @@ const StateDetailsPage = ({location, data}) => {
            * should update as you scroll
            */ }
         <div className="col-4 sticky-cont d-none d-xl-block">
-          Green: { scrollGraphGreenKeys }
-
           <SingleBarChart
             isSticky={true}
             emissionsData={latestEmissions}
@@ -201,7 +199,7 @@ const StateDetailsPage = ({location, data}) => {
             'bld-intro', 'bld-end',
             'trnsprt-intro', 'trnsprt-end',
             'power-intro', 'power-end',
-            'other'] }
+            'other-intro'] }
           currentClassName="is-current"
           onUpdate={target => scrollTargetUpdated(target)}
           className="col-12 col-xl-8">
@@ -427,7 +425,6 @@ const StateDetailsPage = ({location, data}) => {
     </Layout>
   )
 }
-export default StateDetailsPage
 
 /**
  * The section for how to clean up a state's power grid
