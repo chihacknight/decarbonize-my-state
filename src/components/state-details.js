@@ -136,7 +136,7 @@ export default function StateDetailsPage ({location, data}) {
       activeKey = ''
       greenKeys = ['buildings', 'transportation', 'dirty_power']
     }
-    else if (targetId === 'other') {
+    else if (targetId === 'other-intro') {
       activeKey = 'dumps_farms_industrial_other'
       greenKeys = []
     }
@@ -202,7 +202,7 @@ export default function StateDetailsPage ({location, data}) {
             'power-intro', 'power-end',
             'other-intro'] }
           currentClassName="is-current"
-          onUpdate={target => scrollTargetUpdated(target)}
+          onUpdate={scrollTargetUpdated}
           className="col-12 col-xl-8">
           {/* Buildings Section */}
           <h2 className="h3 mt-5 font-weight-bold" id="bld-intro">Buildings</h2>
