@@ -28,12 +28,12 @@ const currentYear = new Date().getFullYear()
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
-export default function StateDetailsPage({location, data}) {
+export default function StateDetailsPage ({location, data}) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
-  const [scrollGraphActiveKey, setGraphActiveKey] = useState('buildings');
-  const [scrollGraphGreenKeys, setGraphGreenKeys] = useState([]);
+  const [scrollGraphActiveKey, setGraphActiveKey] = useState('buildings')
+  const [scrollGraphGreenKeys, setGraphGreenKeys] = useState([])
 
   // place info and string
   const currentPlace = location.pathname.split("/")[1]
@@ -94,54 +94,50 @@ export default function StateDetailsPage({location, data}) {
     ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
     : '?'
 
-  function scrollTargetUpdated(scrollTarget) {
-    let activeKey = 'buildings';
-    let greenKeys = [];
+  function scrollTargetUpdated (scrollTarget) {
+    let activeKey = 'buildings'
+    let greenKeys = []
 
-    if (!scrollTarget) {
-      activeKey = 'buildings';
-      greenKeys = [];
-      return;
-    }
-
-    const targetId = scrollTarget.id;
+    const targetId = scrollTarget.id
 
     if (!targetId) {
-      console.error('Scroll target had no ID! Element was:', scrollTarget);
-      return;
+      console.error('Scroll target had no ID! Element was:', scrollTarget)
+      setGraphActiveKey(activeKey)
+      setGraphGreenKeys(greenKeys)
+      return
     }
 
     if (targetId === 'bld-intro') {
-      activeKey = 'buildings';
-      greenKeys = [];
+      activeKey = 'buildings'
+      greenKeys = []
     }
     else if (targetId === 'bld-end') {
-      activeKey = '';
-      greenKeys = [ 'buildings' ];
+      activeKey = ''
+      greenKeys = [ 'buildings' ]
     }
     else if (targetId === 'trnsprt-intro') {
-      activeKey = 'transportation';
-      greenKeys = [];
+      activeKey = 'transportation'
+      greenKeys = []
     }
     else if (targetId === 'trnsprt-end') {
-      activeKey = '';
-      greenKeys = ['buildings', 'transportation'];
+      activeKey = ''
+      greenKeys = ['buildings', 'transportation']
     }
     else if (targetId === 'power-intro') {
-      activeKey = 'dirty_power';
-      greenKeys = [];
+      activeKey = 'dirty_power'
+      greenKeys = []
     }
     else if (targetId === 'power-end') {
-      activeKey = '';
-      greenKeys = ['buildings', 'transportation', 'dirty_power'];
+      activeKey = ''
+      greenKeys = ['buildings', 'transportation', 'dirty_power']
     }
     else if (targetId === 'other') {
-      activeKey = 'dumps_farms_industrial_other';
-      greenKeys = [];
+      activeKey = 'dumps_farms_industrial_other'
+      greenKeys = []
     }
 
-    setGraphActiveKey(activeKey);
-    setGraphGreenKeys(greenKeys);
+    setGraphActiveKey(activeKey)
+    setGraphGreenKeys(greenKeys)
   }
 
   return (
