@@ -121,6 +121,9 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
 
 def get_and_clean_csv(path_to_csv, state_col="state", cols_to_keep=None):
     df = pd.read_csv(path_to_csv)
+
+    # replace abbreviated states with full names
+    df[state_col] = df[state_col].replace(dict(map(reversed, us_state_to_abbrev.items())))
     df[state_col] = df[state_col].str.lower().str.replace(' ', '_')
     if cols_to_keep is None:
         return df
