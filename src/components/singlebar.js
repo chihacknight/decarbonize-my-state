@@ -168,6 +168,19 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
             </Bar>
         }
         {
+          // Only show power bar if it's non-zero
+          emissionsData[BarsConfig.power.key] &&
+            <Bar dataKey={ BarsConfig.power.key }
+              fill={ BarsConfig.power.fill }
+              stackId="main">
+              <LabelList
+                valueAccessor={entry =>
+                  getLabel(entry, emissionsTotal, BarsConfig.power.key, BarsConfig.power.text)}
+                position={LabelPosition}
+                offset={LabelOffset}/>
+            </Bar>
+        }
+        {
           // Only show transport bar if it's non-zero
           emissionsData[BarsConfig.transport.key] &&
             <Bar dataKey={ BarsConfig.transport.key }
@@ -181,7 +194,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
             </Bar>
         }
         {
-          // Only show power bar if it's non-zero
+          // Only show buildings bar if it's non-zero
           emissionsData[BarsConfig.buildings.key] &&
             <Bar dataKey={ BarsConfig.buildings.key }
               fill={ BarsConfig.buildings.fill }
@@ -193,19 +206,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
                 offset={LabelOffset}/>
             </Bar>
         }
-        {
-          // Only show power bar if it's non-zero
-          emissionsData[BarsConfig.power.key] &&
-            <Bar dataKey={ BarsConfig.power.key }
-              fill={ BarsConfig.power.fill }
-              stackId="main">
-              <LabelList
-                valueAccessor={entry =>
-                  getLabel(entry, emissionsTotal, BarsConfig.power.key, BarsConfig.power.text)}
-                position={LabelPosition}
-                offset={LabelOffset}/>
-            </Bar>
-        }
+
         <ReferenceArea shape={
           <ElectrificationLines
             electrificationPrcnt={electrificationPrcnt}
