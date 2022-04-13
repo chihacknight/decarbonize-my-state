@@ -141,11 +141,11 @@ const StateDetailsPage = ({location, data}) => {
           </p>
 
           <div className="row mt-5">
-          <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
-            <SingleBarChart
-              emissionsData={latestEmissions}
-              greenKeys={ [ 'buildings' ] } />
-          </div>
+            <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+              <SingleBarChart
+                emissionsData={latestEmissions}
+                greenKeys={ [ 'buildings' ] } />
+            </div>
 
             <div className="col h3">
               <p className="mt-5">
