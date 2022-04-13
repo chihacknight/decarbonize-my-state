@@ -100,7 +100,7 @@ export default function StateDetailsPage ({location, data}) {
 
     // Make sure we don't try using the scrollTarget if it's null
     if (!scrollTarget) {
-      return;
+      return
     }
 
     const targetId = scrollTarget.id
