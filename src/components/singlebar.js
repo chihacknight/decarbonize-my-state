@@ -159,6 +159,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
           emissionsData[BarsConfig.other.key] &&
             <Bar dataKey={ BarsConfig.other.key }
               fill={ BarsConfig.other.fill }
+              isAnimationActive={false}
               stackId="main">
               <LabelList
                 valueAccessor={entry =>
@@ -172,6 +173,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
           emissionsData[BarsConfig.power.key] &&
             <Bar dataKey={ BarsConfig.power.key }
               fill={ BarsConfig.power.fill }
+              isAnimationActive={false}
               stackId="main">
               <LabelList
                 valueAccessor={entry =>
@@ -185,6 +187,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
           emissionsData[BarsConfig.transport.key] &&
             <Bar dataKey={ BarsConfig.transport.key }
               fill={ BarsConfig.transport.fill }
+              isAnimationActive={false}
               stackId="main">
               <LabelList
                 valueAccessor={entry =>
@@ -198,6 +201,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
           emissionsData[BarsConfig.buildings.key] &&
             <Bar dataKey={ BarsConfig.buildings.key }
               fill={ BarsConfig.buildings.fill }
+              isAnimationActive={false}
               stackId="main">
               <LabelList
                 valueAccessor={entry =>
