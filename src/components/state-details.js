@@ -32,8 +32,7 @@ export default function StateDetailsPage ({location, data}) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
-  const [scrollGraphActiveKey, setGraphActiveKey] = useState('buildings')
-  const [scrollGraphGreenKeys, setGraphGreenKeys] = useState([])
+  const [scrollGraphSettings, setScrollGraphSettings] = useState({ active: 'buildings', green: [] })
 
   // place info and string
   const currentPlace = location.pathname.split("/")[1]
@@ -107,8 +106,7 @@ export default function StateDetailsPage ({location, data}) {
 
     if (!targetId) {
       console.error('Scroll target had no ID! Element was:', scrollTarget)
-      setGraphActiveKey(activeKey)
-      setGraphGreenKeys(greenKeys)
+      setScrollGraphSettings({ active: activeKey, green: greenKeys })
       return
     }
 
@@ -141,8 +139,7 @@ export default function StateDetailsPage ({location, data}) {
       greenKeys = []
     }
 
-    setGraphActiveKey(activeKey)
-    setGraphGreenKeys(greenKeys)
+    setScrollGraphSettings({ active: activeKey, green: greenKeys })
   }
 
   return (
@@ -187,8 +184,8 @@ export default function StateDetailsPage ({location, data}) {
           <SingleBarChart
             isSticky={true}
             emissionsData={latestEmissions}
-            activeKey={scrollGraphActiveKey}
-            greenKeys={scrollGraphGreenKeys} />
+            activeKey={scrollGraphSettings.active}
+            greenKeys={scrollGraphSettings.green} />
         </div>
 
         {/*
