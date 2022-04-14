@@ -8,6 +8,6 @@ if __name__ == '__main__':
     cols_to_keep = ["fossil_fuel_category","state", "plant_name", "utility_name", "county", "capacity_mw"]
     power_plants = get_and_clean_csv(path_to_data, state_col="state", cols_to_keep=cols_to_keep)
 
-    output = json.dumps(json_data_builder(power_plants, 'power_plants', is_array=False))
+    output = json.dumps(json_data_builder(power_plants, 'power_plants', is_array=True, array_key="power_plants"))
 
     print(output)
