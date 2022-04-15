@@ -222,7 +222,8 @@ export default function StateDetailsPage ({location, data}) {
             </p>
 
             <div className="row mt-5">
-              <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+              { /* Make SingleBarChart full width on mobile */ }
+              <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey={'buildings'} />
@@ -293,7 +294,7 @@ export default function StateDetailsPage ({location, data}) {
 
             <div className="row mt-5">
               { /* Make SingleBarChart full width on mobile */ }
-              <div className="col-12-med d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey='transportation' />
@@ -363,7 +364,7 @@ export default function StateDetailsPage ({location, data}) {
 
             <div className="row mt-5">
               { /* Make SingleBarChart full width on mobile */ }
-              <div className="col-12-med d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey='dirty_power' />
@@ -485,7 +486,7 @@ export default function StateDetailsPage ({location, data}) {
 
             <div className="row mt-5">
               { /* Make SingleBarChart full width on mobile */ }
-              <div className="col-12-med d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey='dumps_farms_industrial_other' />
