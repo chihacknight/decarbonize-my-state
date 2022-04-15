@@ -177,3 +177,8 @@ footer {
     font-weight: bold;
     fill: #181818;
 }
+
+/** Animate graph color changes */
+.single-bar-chart .recharts-rectangle {
+    transition: fill 0.4s;
+}
