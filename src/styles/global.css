@@ -182,3 +182,26 @@ footer {
 .single-bar-chart .recharts-rectangle {
     transition: fill 0.4s;
 }
+
+/**
+ * State Details Page
+ */
+
+/** Fade sections in and out */
+.state-details-main .scrollable-sect { transition: opacity 0.3s; }
+
+/* Fade out sections that are not the current one */
+.state-details-main .scrollable-sect:not(.is-current) { opacity: 0.5; }
+
+/*
+ * The last section never gets the .is-current class for some reason, so use the
+ * sibling selector to make sure it is faded in after the previous one is
+ * scrolled-past
+ */
+.state-details-main div#power-end.scrolled-past + div { opacity: 1 !important; }
+
+@media (min-width: 1200px) {
+    /* On desktop, don't apply margin to row elements, since they don't
+       on the big screen layout anything */
+    .state-details-main .row { margin-top: 0 !important; }
+}
