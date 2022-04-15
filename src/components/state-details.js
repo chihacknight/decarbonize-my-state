@@ -173,17 +173,15 @@ export default function StateDetailsPage ({location, data}) {
           must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
         </p>
 
-        <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-        <SimpleAreaChart emissions_data={emissionsByYear}/>
-
-        <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
-        <p className="h6 text-muted">
-          Metric tons of carbon dioxide equivalent (MTCO2e) emissions
+        <h2 className="h4 font-weight-bold">Emissions in {placeTitle}</h2>
+        <p className="h6">
+          Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
+        <SimpleAreaChart emissions_data={emissionsByYear}/>
 
         <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
-        <hr className="mt-5 mb-7"/>
+        <hr className="mt-7 mb-7"/>
       </div>
 
       <div className="row state-details-main">
@@ -279,7 +277,7 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-5 mb-7"/>
+            <hr className="mt-7 mb-7"/>
           </div>
 
           {/* Transportation Section */}
@@ -348,7 +346,7 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-5 mb-7"/>
+            <hr className="mt-7 mb-7"/>
           </div>
 
           {/* Power Section */}
@@ -450,7 +448,7 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-5 mb-7"/>
+            <hr className="mt-7 mb-7"/>
           </div>}
 
           { /* Show special section if power emissions are zero */ }
@@ -470,7 +468,7 @@ export default function StateDetailsPage ({location, data}) {
                 emissions to zero.
               </p>
 
-              <hr className="mt-5 mb-7"/>
+              <hr className="mt-7 mb-7"/>
             </div>
           </div> }
 

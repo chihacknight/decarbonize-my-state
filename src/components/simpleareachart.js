@@ -41,16 +41,16 @@ export default function SimpleAreaChart ({emissions_data}) {
         height={400}
         data={data}
         margin={{
-          top: 10,
+          top: 30,
           right: 30,
           left: 0,
-          bottom: 0
+          bottom: 30
         }}
       >
         {/* <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" /> */}
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="year" >
-          <Label value="Year" offset={0} position="insideBottom"/> 
+          <Label value="Year" offset={-15} position="insideBottom"/>
         </XAxis>
         <YAxis />
         <Tooltip />
