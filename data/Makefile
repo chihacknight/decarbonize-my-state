@@ -1,12 +1,12 @@
 
-GENERATED_FILES = final/emissions/emissions.json final/buildings/buildings.json final/vehicles/vehicles.json
+GENERATED_FILES = final/emissions/emissions.json final/buildings/buildings.json final/vehicles/vehicles.json final/power_plants/power_plants.json
 
 all: $(GENERATED_FILES)
 
 clean:
 	rm -rf final/*
 
-OUT = final/emissions final/buildings final/vehicles
+OUT = final/emissions final/buildings final/vehicles final/power_plants
 
 $(shell   mkdir -p $(OUT))
 
@@ -18,3 +18,6 @@ final/buildings/buildings.json : raw/buildings_data.csv
 	
 final/vehicles/vehicles.json : raw/vehicles_data.csv
 	python scripts/get_vehicles.py $< > $@
+
+final/power_plants/power_plants.json : raw/power_plants_and_communities.csv
+	python scripts/get_power_plants.py $< > $@
