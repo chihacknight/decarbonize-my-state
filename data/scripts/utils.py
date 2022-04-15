@@ -68,7 +68,7 @@ def group_df_by_generation(generation_data):
     return json.dumps(prepped_dictionary)
 
 # this function takes in a dataframe object, and reformats it to match our needs as a json object
-def json_data_builder(dataframe, outer_tag="default", is_array=True):
+def json_data_builder(dataframe, outer_tag="default", is_array=True, array_key="emissionsByYear"):
     '''
     Goal:
         For every state, we will subset the dataframe to just that state
@@ -88,6 +88,7 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
     So at that point, all we need to do is set larger key for that whole list as whatever the state is
     And then then json_object matches the format we need. 
     '''
+    dataframe=dataframe.applymap(lambda x: "" if pd.isnull(x) else x)
     # initiate empty json object to iterate with
     json_object = []
 
@@ -100,18 +101,11 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
         if is_array:
             state_df.set_index('state', inplace=True)
             state_json = state_df.to_dict('records')
-            json_object.append({"state": state, "emissionsByYear": state_json})
+            json_object.append({"state": state, array_key: state_json})
         else:
             state_json = state_df.to_dict('records')[0]
             json_object.append(state_json)
-        # if not is_array:
-        #     state_json = state_json[0]
 
-        # state_json['state'] = state
-        # set the initial json_object
-        # if is_array:
-        #     json_object.append(state_json)
-        # else: 
     # outer tag output object
     return json_object
 
@@ -121,6 +115,9 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True):
 
 def get_and_clean_csv(path_to_csv, state_col="state", cols_to_keep=None):
     df = pd.read_csv(path_to_csv)
+
+    # replace abbreviated states with full names
+    df[state_col] = df[state_col].replace(dict(map(reversed, us_state_to_abbrev.items())))
     df[state_col] = df[state_col].str.lower().str.replace(' ', '_')
     if cols_to_keep is None:
         return df
