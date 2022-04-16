@@ -161,12 +161,12 @@ footer {
  */
 .sticky-cont {
     position: sticky;
-    top: 0;
-    background-color: white;
     z-index: 100;
+    top: 30%;
     align-self: start;
     margin-top: 7rem;
-    top: 30%;
+    margin-bottom: 5rem;
+    background-color: white;
 }
 
 /**
@@ -191,16 +191,25 @@ footer {
        on the big screen layout anything */
     .state-details-main .row { margin-top: 0 !important; }
 
-    /** Fade sections in and out */
-    .state-details-main .scrollable-sect { transition: opacity 0.3s; }
-
-    /* Dim sections that are not the current one */
-    .state-details-main .scrollable-sect:not(.is-current) { opacity: 0.5; }
+    /** Add transparent border to all sections so we can animate it in without
+     * shifting content */
+    .state-details-main .scrollable-sect {
+        padding: 2rem;
+        border-left: solid transparent 0.5rem;
+        transition: border-color 0.4s;
+    }
 
     /*
-     * The last section never gets the .is-current class for some reason, so use the
+     * Style the active section.
+     *
+     * NOTE: The last section never gets the .is-current class for some reason, so use the
      * sibling selector to make sure it is faded in after the previous one is
      * scrolled-past
      */
-    .state-details-main div#power-end.scrolled-past + div { opacity: 1 !important; }
+    .state-details-main .scrollable-sect.is-current,
+    .state-details-main div#power-end.scrolled-past + div {
+        border-color: #ff5722;
+    }
+
+     { opacity: 1 !important; }
 }

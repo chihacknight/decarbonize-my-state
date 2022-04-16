@@ -213,8 +213,8 @@ export default function StateDetailsPage ({location, data}) {
           onUpdate={scrollTargetUpdated}
           className="col-12 col-xl-8">
           {/* Buildings Section */}
-          <div id="bld-main" className="scrollable-sect">
-            <h2 className="h3 mt-5 font-weight-bold">Buildings</h2>
+          <div id="bld-main" className="scrollable-sect mt-5">
+            <h2 className="h3 font-weight-bold">Buildings</h2>
 
             <p className="h3 mt-5">
               <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of
@@ -251,8 +251,8 @@ export default function StateDetailsPage ({location, data}) {
             </p>
           </div>
 
-          <div id="bld-end" className="scrollable-sect">
-            <p className="h3 mt-8 font-weight-bold text-center">
+          <div id="bld-end" className="scrollable-sect mt-8 mb-7">
+            <p className="h3 font-weight-bold text-center">
               That will solve {buildingsPrcnt}% of the problem.
             </p>
 
@@ -278,12 +278,12 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-7 mb-7"/>
+            <hr className="mt-7"/>
           </div>
 
           {/* Transportation Section */}
           <div id="trnsprt-main" className="scrollable-sect">
-            <h2 className="h3 mt-5 font-weight-bold">
+            <h2 className="h3 font-weight-bold">
               Getting Around
             </h2>
 
@@ -318,8 +318,8 @@ export default function StateDetailsPage ({location, data}) {
             </div>
           </div>
 
-          <div id="trnsprt-end" className="scrollable-sect">
-            <p className="h3 mt-8 font-weight-bold text-center">
+          <div id="trnsprt-end" className="scrollable-sect mt-8 mb-7">
+            <p className="h3 font-weight-bold text-center">
               That will solve another {transportPrcnt}% of the problem.
             </p>
 
@@ -347,13 +347,14 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-7 mb-7"/>
+            <hr className="mt-7"/>
           </div>
 
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
-          { powerPrcnt > 0 && <div id="power-main" className="scrollable-sect">
-            <h2 className="h3 mt-5 font-weight-bold">
+          { powerPrcnt > 0 &&
+          <div id="power-main" className="scrollable-sect mt-5">
+            <h2 className="h3 font-weight-bold">
                 Power Generation
             </h2>
 
@@ -422,8 +423,8 @@ export default function StateDetailsPage ({location, data}) {
           </div> }
           { /* Show standard outro section if power emissions are zero */ }
           { powerPrcnt > 0 &&
-          <div id="power-end" className="scrollable-sect">
-            <p className="h3 mt-8 font-weight-bold text-center">
+          <div id="power-end" className="scrollable-sect mt-8 mb-7">
+            <p className="h3 font-weight-bold text-center">
               That will solve another {powerPrcnt}% of the problem.
             </p>
 
@@ -449,13 +450,13 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-7 mb-7"/>
+            <hr className="mt-7"/>
           </div>}
 
           { /* Show special section if power emissions are zero */ }
           { powerPrcnt === '0' &&
-          <div id="power-main" className="scrollable-sect">
-            <h2 className="h3 mt-5 font-weight-bold">
+          <div id="power-main" className="scrollable-sect mt-5 mb-7">
+            <h2 className="h3 font-weight-bold">
               Power Generation
             </h2>
             <div className="mt-6 mb-8 text-center">
@@ -469,13 +470,13 @@ export default function StateDetailsPage ({location, data}) {
                 emissions to zero.
               </p>
 
-              <hr className="mt-7 mb-7"/>
+              <hr className="mt-7"/>
             </div>
           </div> }
 
           {/* Other Section */}
-          <div id="other-main" className="scrollable-sect">
-            <h2 className="h3 mt-5 font-weight-bold">
+          <div id="other-main" className="scrollable-sect mt-5">
+            <h2 className="h3 font-weight-bold">
               Other Emissions
             </h2>
 
