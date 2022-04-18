@@ -164,8 +164,10 @@ footer {
     z-index: 100;
     top: 30%;
     align-self: start;
+    padding-left: 0;
     margin-top: 7rem;
     margin-bottom: 5rem;
+    margin-right: 5rem;
     background-color: white;
 }
 
@@ -194,7 +196,7 @@ footer {
     /** Add transparent border to all sections so we can animate it in without
      * shifting content */
     .state-details-main .scrollable-sect {
-        padding: 2rem;
+        padding: 2rem 0 2rem 2rem;
         border-left: solid transparent 0.5rem;
         transition: border-color 0.4s;
     }

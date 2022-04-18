@@ -62,29 +62,29 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
   const BarsConfig = {
     other: {
       key: 'dumps_farms_industrial_other',
-      text: 'Farms, Industrial & Other',
-      fill: '#98886c',
-      // This categoy cannot be electrified so make the greenFill red to be
+      text: '🏭 Farms, Industrial & Other',
+      fill: '#ad8669',
+      // This category cannot be electrified so make the greenFill red to be
       // clearly bad
-      greenFill: '#cabd98',
+      greenFill: '#ff0000',
     },
     transport: {
       key: 'transportation',
-      text: 'Transportation',
-      fill: '#a6a6a6',
-      greenFill: '#4caf50',
-    },
-    buildings: {
-      key: 'buildings',
-      text: 'Buildings',
+      text: '🚗 Transportation',
       fill: '#c2c2c2',
       greenFill: '#6ebf70',
     },
-    power: {
-      key: 'dirty_power',
-      text: 'Dirty Power',
+    buildings: {
+      key: 'buildings',
+      text: '🏠 Buildings',
       fill: '#dcdcdc',
       greenFill: '#a3d7a4',
+    },
+    power: {
+      key: 'dirty_power',
+      text: '🔌 Dirty Power',
+      fill: '#a6a6a6',
+      greenFill: '#4caf50',
     }
   }
 
@@ -116,9 +116,10 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
 
   // If on state details, shorten text labels
   if (!homeView) {
-    BarsConfig.power.text = 'Power'
-    BarsConfig.transport.text = 'Transport'
-    BarsConfig.other.text = 'Other'
+    BarsConfig.power.text = '🔌 Power'
+    BarsConfig.buildings.text = '🏠 Buildings'
+    BarsConfig.transport.text = '🚗 Transport'
+    BarsConfig.other.text = '🏭 Other'
   }
 
   // If greenKeys are specified, switch those bars' fill to their greenFill color

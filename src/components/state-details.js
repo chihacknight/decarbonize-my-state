@@ -131,7 +131,7 @@ export default function StateDetailsPage ({location, data}) {
     }
     else if (targetId === 'trnsprt-main') {
       activeKey = 'transportation'
-      greenKeys = []
+      greenKeys = [ 'buildings' ]
     }
     else if (targetId === 'trnsprt-end') {
       activeKey = ''
@@ -139,7 +139,7 @@ export default function StateDetailsPage ({location, data}) {
     }
     else if (targetId === 'power-main') {
       activeKey = 'dirty_power'
-      greenKeys = []
+      greenKeys = ['buildings', 'transportation']
     }
     else if (targetId === 'power-end') {
       activeKey = ''
@@ -147,7 +147,7 @@ export default function StateDetailsPage ({location, data}) {
     }
     else if (targetId === 'other-main') {
       activeKey = 'dumps_farms_industrial_other'
-      greenKeys = []
+      greenKeys = ['buildings', 'transportation', 'dirty_power']
     }
 
     setScrollGraphSettings({ active: activeKey, green: greenKeys })
@@ -190,6 +190,10 @@ export default function StateDetailsPage ({location, data}) {
            * should update as you scroll
            */ }
         <div className="col-4 sticky-cont d-none d-xl-block">
+          <div className="graph-title font-weight-bold mb-3">
+            CO<sub>2</sub> Equivalent Emissions in {placeTitle} by Source
+          </div>
+
           <SingleBarChart
             isSticky={true}
             emissionsData={latestEmissions}
@@ -211,10 +215,10 @@ export default function StateDetailsPage ({location, data}) {
             'other-main'] }
           currentClassName="is-current"
           onUpdate={scrollTargetUpdated}
-          className="col-12 col-xl-8">
+          className="col-12 col-xl-7">
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">Buildings</h2>
+            <h2 className="h3 font-weight-bold">🏠 Buildings</h2>
 
             <p className="h3 mt-5">
               <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of
@@ -247,7 +251,7 @@ export default function StateDetailsPage ({location, data}) {
 
             <p className="h3 mt-5">
               And we need to do this for all {buildingsCountStr}
-              buildings in {placeTitle} (That's around {buildingsPerYear} per year)
+              buildings in {placeTitle}. That's around {buildingsPerYear} per year.
             </p>
           </div>
 
@@ -284,7 +288,7 @@ export default function StateDetailsPage ({location, data}) {
           {/* Transportation Section */}
           <div id="trnsprt-main" className="scrollable-sect">
             <h2 className="h3 font-weight-bold">
-              Getting Around
+              🚗 Getting Around
             </h2>
 
             <p className="h3 mt-5">
@@ -311,8 +315,8 @@ export default function StateDetailsPage ({location, data}) {
 
                 <p className="mt-5">
                   And we need to do this for all {carsCountStr} cars
-                  in {placeTitle} (That's around {carsPerYear} a year.
-                  Excluding the {evCountStr} EVs already in {placeTitle})
+                  in {placeTitle}. That's around {carsPerYear} a year,
+                  excluding the {evCountStr} EVs already in {placeTitle}.
                 </p>
               </div>
             </div>
@@ -355,7 +359,7 @@ export default function StateDetailsPage ({location, data}) {
           { powerPrcnt > 0 &&
           <div id="power-main" className="scrollable-sect mt-5">
             <h2 className="h3 font-weight-bold">
-                Power Generation
+                🔌 Power Generation
             </h2>
 
             <p className="h3 mt-5">
@@ -414,7 +418,7 @@ export default function StateDetailsPage ({location, data}) {
 
             <p className="h3 mt-5">
                 So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br/>
-                (That's ? a year)
+                That's ? a year.
             </p>
 
             <p className="h4 mt-5 text-muted">
@@ -457,7 +461,7 @@ export default function StateDetailsPage ({location, data}) {
           { powerPrcnt === '0' &&
           <div id="power-main" className="scrollable-sect mt-5 mb-7">
             <h2 className="h3 font-weight-bold">
-              Power Generation
+              🔌 Power Generation
             </h2>
             <div className="mt-6 mb-8 text-center">
               <p className="h3 font-weight-bold">
@@ -477,7 +481,7 @@ export default function StateDetailsPage ({location, data}) {
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
             <h2 className="h3 font-weight-bold">
-              Other Emissions
+              🏭 Other Emissions
             </h2>
 
             <p className="h3 mt-5">
