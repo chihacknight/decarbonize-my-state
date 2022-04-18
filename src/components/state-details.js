@@ -301,7 +301,8 @@ export default function StateDetailsPage ({location, data}) {
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  activeKey='transportation' />
+                  activeKey='transportation'
+                  greenKeys={[ 'buildings' ]} />
               </div>
 
               <div className="col h3">
@@ -372,7 +373,8 @@ export default function StateDetailsPage ({location, data}) {
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  activeKey='dirty_power' />
+                  activeKey='dirty_power'
+                  greenKeys={[ 'buildings', 'transportation' ]} />
               </div>
 
               <div className="col">
@@ -494,7 +496,8 @@ export default function StateDetailsPage ({location, data}) {
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  activeKey='dumps_farms_industrial_other' />
+                  activeKey='dumps_farms_industrial_other'
+                  greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
               </div>
 
               <div className="col">
