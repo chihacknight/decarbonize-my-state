@@ -151,10 +151,25 @@ footer {
 
 .action-panel {
     padding: 2rem;
-    margin:  3rem 0;
+    margin:  5rem 0;
     background-color: #f3f3f3;
 }
 
+
+/**
+ * Styling for the sticky graph container
+ */
+.sticky-cont {
+    position: sticky;
+    z-index: 100;
+    top: 30%;
+    align-self: start;
+    padding-left: 0;
+    margin-top: 7rem;
+    margin-bottom: 5rem;
+    margin-right: 5rem;
+    background-color: white;
+}
 
 /**
  * SingleBarChart styling
@@ -163,4 +178,40 @@ footer {
     font-size: 0.9rem;
     font-weight: bold;
     fill: #181818;
+}
+
+/** Animate graph color changes */
+.single-bar-chart .recharts-rectangle {
+    transition: fill 0.4s;
+}
+
+/**
+ * State Details Page - full desktop sticky graph layout
+ */
+@media (min-width: 1200px) {
+    /* On desktop, don't apply margin to row elements, since they don't
+       on the big screen layout anything */
+    .state-details-main .row { margin-top: 0 !important; }
+
+    /** Add transparent border to all sections so we can animate it in without
+     * shifting content */
+    .state-details-main .scrollable-sect {
+        padding: 2rem 0 2rem 2rem;
+        border-left: solid transparent 0.5rem;
+        transition: border-color 0.4s;
+    }
+
+    /*
+     * Style the active section.
+     *
+     * NOTE: The last section never gets the .is-current class for some reason, so use the
+     * sibling selector to make sure it is faded in after the previous one is
+     * scrolled-past
+     */
+    .state-details-main .scrollable-sect.is-current,
+    .state-details-main div#power-end.scrolled-past + div {
+        border-color: #ff5722;
+    }
+
+     { opacity: 1 !important; }
 }
