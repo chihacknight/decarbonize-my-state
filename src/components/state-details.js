@@ -23,6 +23,29 @@ const slugToTitle = (placeName) => {
   return words.join(' ')
 }
 
+
+/**
+ * Converts a very large number to a more readable string.
+ *
+ * 2_114_602 -> '2.1 million'
+ * 76_125 -> '76 thousand'
+ */
+function numberToHumanString (num) {
+  // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
+  // 76 thousand
+  if (num > 1_000 && num < 1_000_000) {
+    return `${Math.round(num / 1_000)},000`
+  }
+  // If in the millions return '${rounded_num_one_decimal} millions', e.g.
+  // 2_114_602 -> 2.1 million
+  else if (num > 1_000_000 && num < 1_000_000_000) {
+    return `${(num / 1_000_000).toFixed(1)} million`
+  }
+
+  // If in the hundreds or something else, return as is (e.g 534)
+  return num
+}
+
 const currentYear = new Date().getFullYear()
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
@@ -71,13 +94,13 @@ export default function StateDetailsPage ({location, data}) {
 
   // string formatting
   const carsCountStr = carsAll !== undefined 
-    ? carsAll.toLocaleString('en') 
+    ? numberToHumanString(carsAll)
     : '?'
   const carsPerYear = carsAll !== undefined 
-    ? Math.ceil(carsAll * cutPerYearPrcnt / 100).toLocaleString('en') 
+    ? numberToHumanString(Math.ceil(carsAll * cutPerYearPrcnt / 100))
     : '?'
   const evCountStr = evRegistration !== undefined 
-    ? evRegistration.toLocaleString('en') 
+    ? numberToHumanString(evRegistration)
     : '?'
 
   // #### BUILDINGS ####
@@ -87,10 +110,10 @@ export default function StateDetailsPage ({location, data}) {
 
   // string formatting
   const buildingsCountStr = buildings !== undefined
-    ? buildings.toLocaleString('en')
+    ? numberToHumanString(buildings)
     : '?'
   const buildingsPerYear = buildings !== undefined
-    ? Math.ceil(buildings * cutPerYearPrcnt / 100).toLocaleString('en')
+    ? numberToHumanString(Math.ceil(buildings * cutPerYearPrcnt / 100))
     : '?'
 
   // #### POWER PLANTS ####
@@ -246,12 +269,13 @@ export default function StateDetailsPage ({location, data}) {
             </div>
 
             <p className="h3 mt-5">
-              To stop this pollution, we need to electrify our furnaces, water boilers, and stoves.
+              To stop this pollution, we need to electrify our furnaces, water
+              boilers, and stoves.
             </p>
 
             <p className="h3 mt-5">
-              And we need to do this for all {buildingsCountStr}
-              buildings in {placeTitle}. That's around {buildingsPerYear} per year.
+              And we need to do this for all {buildingsCountStr} buildings
+              in {placeTitle}. That's around {buildingsPerYear} per year.
             </p>
           </div>
 
