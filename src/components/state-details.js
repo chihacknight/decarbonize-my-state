@@ -258,11 +258,12 @@ export default function StateDetailsPage ({location, data}) {
 
               <div className="col h3">
                 <p className="mt-5">
-                  Mostly from heating them.
+                  Mostly from different types of heating.
                 </p>
 
-                <p className="mt-5">
-                  ?% of the pollution of your typical home comes from heating your
+                <p className="mt-5 mb-0">
+                  {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
+                  80% of the pollution of your typical home comes from heating your
                   space, water, and food.
                 </p>
               </div>
