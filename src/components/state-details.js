@@ -49,6 +49,7 @@ const StateDetailsPage = ({location, data}) => {
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
     transportation: transportionEmissions
   } = latestEmissions
+
   
   // sum, then make nice percentages
   const sumOfEmissions = buildingsEmissions + dirtyPowerEmissions + farmsDumpsOtherEmissions + transportionEmissions
@@ -284,10 +285,16 @@ const StateDetailsPage = ({location, data}) => {
             </p>
           </div>
         }
+      
         { powerPrcnt > 0 && <HowToCleanPowerSection
           latestEmissions={latestEmissions}
           placeTitle={placeTitle}
-          powerPrcnt={powerPrcnt} /> }
+          powerPrcnt={powerPrcnt} 
+          coalPlants={coal_plants}
+          oilPlants={oil_plants}
+          gasPlants={gas_plants}
+          
+          /> }
 
         <hr className="mt-5"/>
       </div>
@@ -359,6 +366,9 @@ function HowToCleanPowerSection ({
   latestEmissions,
   placeTitle,
   powerPrcnt,
+  coalPlants,
+  oilPlants,
+  gasPlants
 }) {
   return (
     <div>
@@ -388,12 +398,23 @@ function HowToCleanPowerSection ({
       </div>
 
       <p className="h3 mt-5">
-        And we need to do this for all <strong className="font-weight-bold">? coal plants in {placeTitle}</strong>
+        And we need to do this for all <strong className="font-weight-bold">{coalPlants.length} coal plants in {placeTitle}</strong>
       </p>
+      {coalPlants.map(plant => {console.log(plant)
+      return <img src="../images/coal-plant.png" ></img>})}
+
 
       <p className="h3 mt-5">
-        ...and all <strong className="font-weight-bold">? gas plants</strong>.
+        ...and all <strong className="font-weight-bold">{gasPlants.length} gas plants</strong>.
       </p>
+      {gasPlants.map(plant => {console.log(plant)
+      return <img src="../images/gas-plant.png" ></img>})}
+
+      <p className="h3 mt-5">
+        ...and all <strong className="font-weight-bold">{oilPlants.length} oil plants</strong>.
+      </p>
+      {oilPlants.map(plant => {console.log(plant)
+      return <img src="../images/oil-plant.png" ></img>})}
 
       <p className="h3 mt-5">
         ...and help those workers find good jobs.
