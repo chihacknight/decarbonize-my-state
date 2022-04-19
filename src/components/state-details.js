@@ -401,20 +401,48 @@ function HowToCleanPowerSection ({
         And we need to do this for all <strong className="font-weight-bold">{coalPlants.length} coal plants in {placeTitle}</strong>
       </p>
       {coalPlants.map(plant => {console.log(plant)
-      return <img src="../images/coal-plant.png" ></img>})}
+      const capacity_mw=plant.capacity_mw
+      const county=plant.county
+      const plant_name=plant.plant_name
+      const utility_name=plant.utility_name
+
+      return <img src="https://user-images.githubusercontent.com/919583/163299062-c4f8c382-5ee0-4ee6-b9e8-e05103096826.png" 
+      title= {"Name: "+ plant_name +"\n"+
+      "County: " + county + "\n" +
+      "Megawatt Capacity: "+ capacity_mw +"\n"+
+      "Utility: "+ utility_name +"\n"}>
+      </img>})}
 
 
       <p className="h3 mt-5">
         ...and all <strong className="font-weight-bold">{gasPlants.length} gas plants</strong>.
       </p>
       {gasPlants.map(plant => {console.log(plant)
-      return <img src="../images/gas-plant.png" ></img>})}
+            const capacity_mw=plant.capacity_mw
+            const county=plant.county
+            const plant_name=plant.plant_name
+            const utility_name=plant.utility_name
+      return <img src="https://user-images.githubusercontent.com/919583/163299076-579d8c97-dc98-465a-b93a-392fab3f97f3.png" 
+      title= {"Name: "+ plant_name +"\n"+
+      "County: " + county + "\n" +
+      "Megawatt Capacity: "+ capacity_mw +"\n"+
+      "Utility: "+ utility_name +"\n"}>
+      </img>})}
 
       <p className="h3 mt-5">
         ...and all <strong className="font-weight-bold">{oilPlants.length} oil plants</strong>.
       </p>
       {oilPlants.map(plant => {console.log(plant)
-      return <img src="../images/oil-plant.png" ></img>})}
+                  const capacity_mw=plant.capacity_mw
+                  const county=plant.county
+                  const plant_name=plant.plant_name
+                  const utility_name=plant.utility_name
+      return <img src="https://user-images.githubusercontent.com/919583/163299086-a56d8250-8d81-44a3-bdb4-50e83c330f82.png" 
+      title= {"Name: "+ plant_name +"\n"+
+      "County: " + county + "\n" +
+      "Megawatt Capacity: "+ capacity_mw +"\n"+
+      "Utility: "+ utility_name +"\n"}>
+      </img>})}
 
       <p className="h3 mt-5">
         ...and help those workers find good jobs.
