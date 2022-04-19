@@ -159,31 +159,37 @@
   content: "g"; }
 
 .sf-new-hampshire:before,
+.sf-new_hampshire:before,
 .sf-nh:before,
 .sf-33:before {
   content: "d"; }
 
 .sf-new-jersey:before,
+.sf-new_jersey:before,
 .sf-nj:before,
 .sf-34:before {
   content: "e"; }
 
 .sf-new-mexico:before,
+.sf-new_mexico:before,
 .sf-nm:before,
 .sf-35:before {
   content: "f"; }
 
 .sf-new-york:before,
+.sf-new_york:before,
 .sf-ny:before,
 .sf-36:before {
   content: "h"; }
 
 .sf-north-carolina:before,
+.sf-north_carolina:before,
 .sf-nc:before,
 .sf-37:before {
   content: "a"; }
 
 .sf-north-dakota:before,
+.sf-north_dakota:before,
 .sf-nd:before,
 .sf-38:before {
   content: "b"; }
@@ -209,16 +215,19 @@
   content: "l"; }
 
 .sf-rhode-island:before,
+.sf-rhode_island:before,
 .sf-ri:before,
 .sf-44:before {
   content: "m"; }
 
 .sf-south-carolina:before,
+.sf-south_carolina:before,
 .sf-sc:before,
 .sf-45:before {
   content: "n"; }
 
 .sf-south-dakota:before,
+.sf-south_dakota:before,
 .sf-sd:before,
 .sf-46:before {
   content: "o"; }
@@ -254,6 +263,7 @@
   content: "u"; }
 
 .sf-west-virginia:before,
+.sf-west_virginia:before,
 .sf-wv:before,
 .sf-54:before {
   content: "w"; }
@@ -269,16 +279,7 @@
   content: "x"; }
 
 .sf-district-of-columbia:before,
+.sf-district_of_columbia:before,
 .sf-dc:before,
 .sf-11001:before {
   content: "y"; }
-
-.sf-puerto-rico:before,
-.sf-pr:before,
-.sf-72:before {
-  content: "3"; }
-
-.sf-guam:before,
-.sf-gu:before,
-.sf-66:before {
-  content: "4"; }
