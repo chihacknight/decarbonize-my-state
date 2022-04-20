@@ -60,7 +60,7 @@ const IndexPage = ({data}) => {
 
       <hr></hr>
 
-      <p className="h1 mt-5 mb-5 text-center">
+      <p className="h1 mt-6 mb-5 text-center main-phrase">
         To get to <strong>zero</strong> by
         2050, the US must <br className="d-none d-lg-block" />
         cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
@@ -95,7 +95,7 @@ const IndexPage = ({data}) => {
         </div>
       </div>
 
-      <p className="h1 text-center mt-8 font-weight-bold">
+      <p className="h1 text-center mt-8 font-weight-bold main-phrase">
         The levers of change are at the
         state level, <br className="d-none d-lg-block" />
         and each state is different.
@@ -105,7 +105,7 @@ const IndexPage = ({data}) => {
         Click on your state to see what it takes to decarbonize by 2050
       </p>
 
-      <div className="mb-7">
+      <div className="mb-md-5">
         <ChoroplethMap emissions={mapData} />
       </div>
     </Layout>
