@@ -285,7 +285,7 @@ export default function StateDetailsPage ({ location, data }) {
 
             {(weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                Except for the {Math.round(weightedEleBuildingsPct)}% of building emissions already electrified!
+                {Math.round(weightedEleBuildingsPct)}% of building systems in {placeTitle} are already electrified.
               </p>
             )}
             <AlreadyElectrifiedChart
@@ -354,8 +354,10 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <p className="mt-5">
                   And we need to do this for all {carsCountStr} cars
-                  in {placeTitle}. That's around {carsPerYear} a year,
-                  excluding the {evCountStr} EVs already in {placeTitle}.
+                  in {placeTitle}. That's around {carsPerYear} a year.
+                </p>
+                <p className="mt-5">
+                  {evCountStr} vehicles in {placeTitle} are already EVs.
                 </p>
                 <AlreadyElectrifiedChart
                   label={'Vehicles'} electrifiedPct={pctEv} fossilPct={pctNonEv}
