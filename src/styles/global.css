@@ -112,8 +112,8 @@ path:focus, .mapSelected {
 }
 
 #frames {
-  fill: none;
-  stroke: grey;
+    fill: none;
+    stroke: grey;
 }
 
 .sunrise-green {
@@ -124,11 +124,15 @@ path:focus, .mapSelected {
     border-bottom: 1px solid #aaaaaa;
 }
 
+
+/** Style header title */
 .nav-text {
     text-decoration: none;
     text-transform: capitalize;
     font-weight: bold;
     color: #000000;
+    /* Make sure we always have room for mobile menu */
+    max-width: calc(100% - 80px);
 }
 
 .table-bordered, .table-bordered td, .table-bordered th {
@@ -172,6 +176,24 @@ footer {
 }
 
 /**
+ * SimpleAreaChart styling
+ */
+.simplearea-cont {
+    height: auto !important;
+    aspect-ratio: 2/1;
+}
+
+.simplearea-cont tspan { font-weight: bold; }
+
+/* Mobile styling Make graph taller aspect ratio on mobile screens and shrink labels */
+@media (max-width: 575px) {
+    .simplearea-cont { aspect-ratio: 1.5/1; }
+
+    .simplearea-cont tspan { font-size:12px; }
+}
+
+
+/**
  * SingleBarChart styling
  */
 .single-bar-chart text {
@@ -184,6 +206,19 @@ footer {
 .single-bar-chart .recharts-rectangle {
     transition: fill 0.4s;
 }
+
+/**
+ * ChoroplethMap Styling
+ */
+
+/** Mobile - move leged below the map */
+@media (max-width: 991px) {
+    .map-row { flex-direction: column-reverse; }
+
+    .map-row .map-legend { max-width: 25rem; }
+}
+
+
 
 /**
  * State Details Page - full desktop sticky graph layout

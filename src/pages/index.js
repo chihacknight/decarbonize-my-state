@@ -65,7 +65,11 @@ const IndexPage = ({data}) => {
         2050, the US must <br className="d-none d-lg-block" />
         cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
-      Total US climate pollution
+
+      <h2 className="h4 font-weight-bold">Total US Emissions</h2>
+      <p className="h6">
+        Million metric tons of CO<sub>2</sub> equivalent (MMTCO2e) emissions
+      </p>
       <SimpleAreaChart emissions_data={emissionsOverTime}/>
 
       <p className='h2 text-center mt-7 mb-5'>

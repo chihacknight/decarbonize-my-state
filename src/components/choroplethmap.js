@@ -119,9 +119,9 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
       <div style={tooltipStyle}>
         <CustomHover emissions={emissions} activeRegion={activeRegion}/>
       </div>
-      <Row>
+      <Row className="map-row">
         {emissions && sidebar ?
-          <Col lg={3}>
+          <Col lg={3} className="map-legend">
             <div className="h6 mt-5 mb-3 font-weight-bold">
               Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions in 2018
             </div>
