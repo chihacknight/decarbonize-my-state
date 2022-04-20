@@ -31,7 +31,7 @@ const slugToTitle = (placeName) => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString(num) {
+function numberToHumanString (num) {
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
   // 76 thousand
   if (num > 1_000 && num < 1_000_000) {
@@ -52,7 +52,7 @@ const currentYear = new Date().getFullYear()
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
-export default function StateDetailsPage({ location, data }) {
+export default function StateDetailsPage ({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
@@ -131,7 +131,7 @@ export default function StateDetailsPage({ location, data }) {
   console.log("gas_plants", gas_plants)
   console.log("oil_plants", oil_plants)
 
-  function scrollTargetUpdated(scrollTarget) {
+  function scrollTargetUpdated (scrollTarget) {
     let activeKey = 'buildings'
     let greenKeys = []
 
