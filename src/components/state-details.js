@@ -92,8 +92,8 @@ export default function StateDetailsPage ({ location, data }) {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
   } = data.allVehiclesJson.edges[0].node
-  const pctEv = (evRegistration / carsAll * 100).toFixed(0)
-  const pctNonEv = (100 - pctEv).toFixed(0)
+  const pctEv = Math.round((evRegistration / carsAll * 100)*10)/10
+  const pctNonEv = Math.round((100 - pctEv)*10)/10
   // string formatting
   const carsCountStr = carsAll !== undefined
     ? numberToHumanString(carsAll)
@@ -104,7 +104,7 @@ export default function StateDetailsPage ({ location, data }) {
   const evCountStr = evRegistration !== undefined
     ? numberToHumanString(evRegistration)
     : '?'
-
+    
   // #### BUILDINGS ####
   const {
     buildings,
@@ -289,7 +289,7 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
             )}
             <AlreadyElectrifiedChart
-              label={'Buildings'} electrifiedPct={weightedEleBuildingsPct} fossilPct={weightedFossilBuildingsPct}
+              label={'Building Systems'} electrifiedPct={weightedEleBuildingsPct} fossilPct={weightedFossilBuildingsPct}
             />
           </div>
 
@@ -357,7 +357,7 @@ export default function StateDetailsPage ({ location, data }) {
                   in {placeTitle}. That's around {carsPerYear} a year.
                 </p>
                 <p className="mt-5">
-                  {evCountStr} vehicles in {placeTitle} are already EVs.
+                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}% of the total).
                 </p>
                 <AlreadyElectrifiedChart
                   label={'Vehicles'} electrifiedPct={pctEv} fossilPct={pctNonEv}
