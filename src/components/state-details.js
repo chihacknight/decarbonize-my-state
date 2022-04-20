@@ -6,6 +6,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 
+import OilPlantImg from "../images/oil-plant.png"
+import GasPlantImg from "../images/gas-plant.png"
+import CoalPlantImg from "../images/coal-plant.png"
+
 
 const slugToTitle = (placeName) => {
   const words = placeName.split('_')
@@ -27,7 +31,7 @@ const currentYear = new Date().getFullYear()
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
-const StateDetailsPage = ({location, data}) => {
+const StateDetailsPage = ({ location, data }) => {
   // place info and string
   const currentPlace = location.pathname.split("/")[1]
   // clean up title as needed
@@ -50,7 +54,7 @@ const StateDetailsPage = ({location, data}) => {
     transportation: transportionEmissions
   } = latestEmissions
 
-  
+
   // sum, then make nice percentages
   const sumOfEmissions = buildingsEmissions + dirtyPowerEmissions + farmsDumpsOtherEmissions + transportionEmissions
   const buildingsPrcnt = (buildingsEmissions / sumOfEmissions * 100).toFixed(0)
@@ -58,7 +62,7 @@ const StateDetailsPage = ({location, data}) => {
   const transportPrcnt = (transportionEmissions / sumOfEmissions * 100).toFixed(0)
   const otherPrcnt = (farmsDumpsOtherEmissions / sumOfEmissions * 100).toFixed(0)
 
-  
+
   // #### VEHICLES #### 
   const {
     Cars_All: carsAll,
@@ -66,14 +70,14 @@ const StateDetailsPage = ({location, data}) => {
   } = data.allVehiclesJson.edges[0].node
 
   // string formatting
-  const carsCountStr = carsAll !== undefined 
-    ? carsAll.toLocaleString('en') 
+  const carsCountStr = carsAll !== undefined
+    ? carsAll.toLocaleString('en')
     : '?'
-  const carsPerYear = carsAll !== undefined 
-    ? Math.ceil(carsAll * cutPerYearPrcnt / 100).toLocaleString('en') 
+  const carsPerYear = carsAll !== undefined
+    ? Math.ceil(carsAll * cutPerYearPrcnt / 100).toLocaleString('en')
     : '?'
-  const evCountStr = evRegistration !== undefined 
-    ? evRegistration.toLocaleString('en') 
+  const evCountStr = evRegistration !== undefined
+    ? evRegistration.toLocaleString('en')
     : '?'
 
   // #### BUILDINGS ####
@@ -108,8 +112,8 @@ const StateDetailsPage = ({location, data}) => {
 
       <div className='col-12'>
         <h1 className='display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold'>
-          <span className={ 'display-2 mr-4 sf-' + stateFaceClass } aria-hidden="true"></span>
-          { placeTitle }
+          <span className={'display-2 mr-4 sf-' + stateFaceClass} aria-hidden="true"></span>
+          {placeTitle}
         </h1>
       </div>
 
@@ -118,21 +122,21 @@ const StateDetailsPage = ({location, data}) => {
       {/* Intro Section */}
       <div className='col-12'>
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}<br/>
+          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}<br />
           must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
         </p>
 
         <h4>Metric tons of carbon dioxide equivalent (MTCO2e) emissions</h4>
-        <SimpleAreaChart emissions_data={emissionsByYear}/>
+        <SimpleAreaChart emissions_data={emissionsByYear} />
 
         <p className="h4 font-weight-bold">Emissions in {placeTitle}</p>
         <p className="h6 text-muted">
           Metric tons of carbon dioxide equivalent (MTCO2e) emissions
         </p>
-  
+
         <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
-        <hr className="mt-5"/>
+        <hr className="mt-5" />
       </div>
 
       {/* Buildings Section */}
@@ -145,7 +149,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <div className="row mt-5">
-          { /* Make SingleBarChart full width on mobile */ }
+          { /* Make SingleBarChart full width on mobile */}
           <div className="col-12-med">
             <SingleBarChart
               emissionsData={latestEmissions}
@@ -179,7 +183,7 @@ const StateDetailsPage = ({location, data}) => {
         <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
             emissionsData={latestEmissions}
-            greenKeys={ [ 'buildings' ] } />
+            greenKeys={['buildings']} />
         </div>
 
         {/* TODO: Make these link somewhere */}
@@ -189,15 +193,15 @@ const StateDetailsPage = ({location, data}) => {
           </li>
           <li>
             <a href="http://example.com">
-                Then push your local politicians to electrify the rest
+              Then push your local politicians to electrify the rest
             </a>
           </li>
         </ul>
       </div>
       <div className='col-12 col-lg-8'>
-          
 
-        <hr className="mt-5"/>
+
+        <hr className="mt-5" />
       </div>
 
       {/* Transportation Section */}
@@ -210,7 +214,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <div className="row mt-5">
-          { /* Make SingleBarChart full width on mobile */ }
+          { /* Make SingleBarChart full width on mobile */}
           <div className="col-12-med">
             <SingleBarChart
               emissionsData={latestEmissions}
@@ -227,8 +231,8 @@ const StateDetailsPage = ({location, data}) => {
             </p>
 
             <p className="mt-5">
-              And we need to do this for all {carsCountStr} cars 
-              in {placeTitle} (That's around {carsPerYear} a year. 
+              And we need to do this for all {carsCountStr} cars
+              in {placeTitle} (That's around {carsPerYear} a year.
               Excluding the {evCountStr} EVs already in {placeTitle})
             </p>
           </div>
@@ -241,7 +245,7 @@ const StateDetailsPage = ({location, data}) => {
         <div className="mt-5 d-flex justify-content-center">
           <SingleBarChart
             emissionsData={latestEmissions}
-            greenKeys={[ 'buildings', 'transportation' ]} />
+            greenKeys={['buildings', 'transportation']} />
         </div>
 
         <div className="action-panel">
@@ -262,7 +266,7 @@ const StateDetailsPage = ({location, data}) => {
           </ul>
         </div>
 
-        <hr className="mt-5"/>
+        <hr className="mt-5" />
       </div>
 
       {/* Power Section */}
@@ -285,18 +289,18 @@ const StateDetailsPage = ({location, data}) => {
             </p>
           </div>
         }
-      
-        { powerPrcnt > 0 && <HowToCleanPowerSection
+
+        {powerPrcnt > 0 && <HowToCleanPowerSection
           latestEmissions={latestEmissions}
           placeTitle={placeTitle}
-          powerPrcnt={powerPrcnt} 
+          powerPrcnt={powerPrcnt}
           coalPlants={coal_plants}
           oilPlants={oil_plants}
           gasPlants={gas_plants}
-          
-          /> }
 
-        <hr className="mt-5"/>
+        />}
+
+        <hr className="mt-5" />
       </div>
 
       {/* Other Section */}
@@ -309,7 +313,7 @@ const StateDetailsPage = ({location, data}) => {
         </p>
 
         <div className="row mt-5">
-          { /* Make SingleBarChart full width on mobile */ }
+          { /* Make SingleBarChart full width on mobile */}
           <div className="col-12-med">
             <SingleBarChart
               emissionsData={latestEmissions}
@@ -349,8 +353,8 @@ const StateDetailsPage = ({location, data}) => {
           </div>
 
           <p className="h4 mt-4">
-           We hope this gives you some ideas for what you can do to get your state
-           to zero emissions!
+            We hope this gives you some ideas for what you can do to get your state
+            to zero emissions!
           </p>
         </section>
       </div>
@@ -362,7 +366,7 @@ export default StateDetailsPage
 /**
  * The section for how to clean up a state's power grid
  */
-function HowToCleanPowerSection ({
+function HowToCleanPowerSection({
   latestEmissions,
   placeTitle,
   powerPrcnt,
@@ -378,7 +382,7 @@ function HowToCleanPowerSection ({
       </p>
 
       <div className="row mt-5">
-        { /* Make SingleBarChart full width on mobile */ }
+        { /* Make SingleBarChart full width on mobile */}
         <div className="col-12-med">
           <SingleBarChart
             emissionsData={latestEmissions}
@@ -400,49 +404,43 @@ function HowToCleanPowerSection ({
       <p className="h3 mt-5">
         And we need to do this for all <strong className="font-weight-bold">{coalPlants.length} coal plants in {placeTitle}</strong>
       </p>
-      {coalPlants.map(plant => {console.log(plant)
-      const capacity_mw=plant.capacity_mw
-      const county=plant.county
-      const plant_name=plant.plant_name
-      const utility_name=plant.utility_name
+      {coalPlants.map(plant => {
 
-      return <img src="https://user-images.githubusercontent.com/919583/163299062-c4f8c382-5ee0-4ee6-b9e8-e05103096826.png" 
-      title= {"Name: "+ plant_name +"\n"+
-      "County: " + county + "\n" +
-      "Megawatt Capacity: "+ capacity_mw +"\n"+
-      "Utility: "+ utility_name +"\n"}>
-      </img>})}
+        return <img src={CoalPlantImg}
+          title={"Name: " + plant.plant_name + "\n" +
+            "County: " + plant.county + "\n" +
+            "Megawatt Capacity: " + plant.capacity_mw + "\n" +
+            "Utility: " + plant.utility_name + "\n"}>
+        </img>
+      })}
 
 
       <p className="h3 mt-5">
         ...and all <strong className="font-weight-bold">{gasPlants.length} gas plants</strong>.
       </p>
-      {gasPlants.map(plant => {console.log(plant)
-            const capacity_mw=plant.capacity_mw
-            const county=plant.county
-            const plant_name=plant.plant_name
-            const utility_name=plant.utility_name
-      return <img src="https://user-images.githubusercontent.com/919583/163299076-579d8c97-dc98-465a-b93a-392fab3f97f3.png" 
-      title= {"Name: "+ plant_name +"\n"+
-      "County: " + county + "\n" +
-      "Megawatt Capacity: "+ capacity_mw +"\n"+
-      "Utility: "+ utility_name +"\n"}>
-      </img>})}
-
+      {
+        gasPlants.map((plant, index) => {
+          if (index === 20) { return <span className="h4"> ...and {gasPlants.length - 20} more!</span> }
+          if (index > 19) { return null }
+          return <img src={GasPlantImg}
+            title={"Name: " + plant.plant_name + "\n" +
+              "County: " + plant.county + "\n" +
+              "Megawatt Capacity: " + plant.capacity_mw + "\n" +
+              "Utility: " + plant.utility_name + "\n"}>
+          </img>
+        })
+      }
       <p className="h3 mt-5">
         ...and all <strong className="font-weight-bold">{oilPlants.length} oil plants</strong>.
       </p>
-      {oilPlants.map(plant => {console.log(plant)
-                  const capacity_mw=plant.capacity_mw
-                  const county=plant.county
-                  const plant_name=plant.plant_name
-                  const utility_name=plant.utility_name
-      return <img src="https://user-images.githubusercontent.com/919583/163299086-a56d8250-8d81-44a3-bdb4-50e83c330f82.png" 
-      title= {"Name: "+ plant_name +"\n"+
-      "County: " + county + "\n" +
-      "Megawatt Capacity: "+ capacity_mw +"\n"+
-      "Utility: "+ utility_name +"\n"}>
-      </img>})}
+      {oilPlants.map(plant => {
+        return <img src={OilPlantImg}
+          title={"Name: " + plant.plant_name + "\n" +
+            "County: " + plant.county + "\n" +
+            "Megawatt Capacity: " + plant.capacity_mw + "\n" +
+            "Utility: " + plant.utility_name + "\n"}>
+        </img>
+      })}
 
       <p className="h3 mt-5">
         ...and help those workers find good jobs.
@@ -466,7 +464,7 @@ function HowToCleanPowerSection ({
       </p>
 
       <p className="h3 mt-5">
-        So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br/>
+        So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br />
         (That's ? a year)
       </p>
 
@@ -481,7 +479,7 @@ function HowToCleanPowerSection ({
       <div className="mt-5 d-flex justify-content-center">
         <SingleBarChart
           emissionsData={latestEmissions}
-          greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
+          greenKeys={['buildings', 'transportation', 'dirty_power']} />
       </div>
 
       <div className="action-panel">
