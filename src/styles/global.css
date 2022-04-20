@@ -159,6 +159,8 @@ footer {
     background-color: #f3f3f3;
 }
 
+.electrication-cont .h1 { font-size: 1.5rem; }
+.electrication-cont .h3 { font-size: 1rem; }
 
 /**
  * Styling for the sticky graph container
@@ -207,6 +209,12 @@ footer {
     transition: fill 0.4s;
 }
 
+@media (max-width: 991px) {
+    .single-bar-chart tspan {
+        font-size: 0.8rem;
+    }
+}
+
 /**
  * ChoroplethMap Styling
  */
@@ -217,8 +225,6 @@ footer {
 
     .map-row .map-legend { max-width: 25rem; }
 }
-
-
 
 /**
  * State Details Page - full desktop sticky graph layout

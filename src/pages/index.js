@@ -76,10 +76,17 @@ const IndexPage = ({data}) => {
         To do that (and solve the climate crisis) there's one main thing
       </p>
 
-      <div className="d-flex justify-content-center mt-7">
-        <SingleBarChart emissionsData={barChartData} homeView={true} />
+      <div className="electrication-cont d-flex justify-content-center mt-7">
+        {/* Desktop only graph */}
+        <div className="d-none d-md-block">
+          <SingleBarChart emissionsData={barChartData} homeView={true} />
+        </div>
+        {/* Mobile only graph */}
+        <div className="d-md-none">
+          <SingleBarChart emissionsData={barChartData} homeView={true} mobileView={true} />
+        </div>
 
-        <div className="ml-5">
+        <div className="ml-3 ml-md-5">
           <p className="h1 font-weight-boldest mt-6 mb-7">
             Clean <br/> Electrification!
           </p>
@@ -88,13 +95,13 @@ const IndexPage = ({data}) => {
         </div>
       </div>
 
-      <p className="h1 text-center mt-7 font-weight-bold">
+      <p className="h1 text-center mt-8 font-weight-bold">
         The levers of change are at the
         state level, <br className="d-none d-lg-block" />
         and each state is different.
       </p>
 
-      <p className="text-center mt-2 mb-7">
+      <p className="text-center mt-5 mb-5">
         Click on your state to see what it takes to decarbonize by 2050
       </p>
 
