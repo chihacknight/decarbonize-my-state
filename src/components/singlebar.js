@@ -63,7 +63,7 @@ export default function SingleBarChart ({ emissionsData, homeView, mobileView, a
   const BarsConfig = {
     other: {
       key: 'dumps_farms_industrial_other',
-      text: '🏭 Farms, Industrial & Other:',
+      text: '🏭 Farms, Industry & Other:',
       fill: '#ad8669',
       // This category cannot be electrified so make the greenFill red to be
       // clearly bad
@@ -93,13 +93,13 @@ export default function SingleBarChart ({ emissionsData, homeView, mobileView, a
   let LabelPosition = 'right'
   let GraphMargin = {
     top: 10,
-    right: 200,
+    right: 125,
     left: 0,
     bottom: 0
   }
 
   BarWidth = 150
-  GraphWidth = 400
+  GraphWidth = 300
   GraphHeight = 350
 
   // Apply custom styling with interior labels for homepage chart
