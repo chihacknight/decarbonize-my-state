@@ -433,7 +433,7 @@ function HowToCleanPowerSection ({
       <p className="h3 mt-5">
         ...and all <strong className="font-weight-bold">{oilPlants.length} oil plants</strong>.
       </p>
-      {oilPlants.map((plant,index) => {
+      {oilPlants.map((plant, index) => {
         if (index === 20) { return <span className="h4"> ...and {oilPlants.length - 20} more!</span> }
         if (index > 19) { return null }
         return <img src={OilPlantImg}
