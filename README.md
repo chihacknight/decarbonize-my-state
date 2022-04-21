@@ -1,4 +1,4 @@
-# State by State Decarbonization 
+# Decarbonize My State
 
 Chi Hack Night data visualization project to measure the state and progress of decarbonization for all States in the USA.
 
@@ -17,8 +17,8 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
 1. Grab the repo:
 
     ```shell
-    git clone git@github.com:chihacknight/state-by-state-decarbonization.git
-    cd state-by-state-decarbonization
+    git clone git@github.com:chihacknight/decarbonize-my-state.git
+    cd decarbonize-my-state
     ```
 
 2. Start developing
@@ -124,4 +124,4 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 ### 💫 Deploy
 
-DataMade deploys static sites using Netlify. This project's staging URL is [state-decarbonize.netlify.app](https://state-decarbonize.netlify.app/).
+DataMade deploys static sites using Netlify. This project's staging URL is [decarbonizemystate.com](https://decarbonizemystate.com/).
