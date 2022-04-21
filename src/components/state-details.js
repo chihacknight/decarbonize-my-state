@@ -285,7 +285,7 @@ export default function StateDetailsPage ({ location, data }) {
 
             {(weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                {Math.round(weightedEleBuildingsPct)}% of building systems in {placeTitle} are already electrified.
+                {Math.round(weightedEleBuildingsPct)}% of building systems energy use in {placeTitle} are already electrified.
               </p>
             )}
             <AlreadyElectrifiedChart
