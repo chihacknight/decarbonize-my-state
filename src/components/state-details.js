@@ -367,7 +367,7 @@ export default StateDetailsPage
 /**
  * The section for how to clean up a state's power grid
  */
-function HowToCleanPowerSection ({
+function HowToCleanPowerSection({
   latestEmissions,
   placeTitle,
   powerPrcnt,
@@ -403,20 +403,20 @@ function HowToCleanPowerSection ({
       </div>
 
       <p className="h3 mt-5">
-        And we need to do this for {coalPlants.length>1 &&"all"} <strong className="font-weight-bold">{coalPlants.length} coal plant{coalPlants.length>1 &&"s"} in {placeTitle}</strong>
+        And we need to do this for {coalPlants.length > 1 && "all"} <strong className="font-weight-bold">{coalPlants.length} coal plant{coalPlants.length > 1 && "s"} in {placeTitle}</strong>
       </p>
-    <DisplayPlants plants={coalPlants} plantImg={CoalPlantImg}></DisplayPlants>
+      <DisplayPlants plants={coalPlants} plantImg={CoalPlantImg}></DisplayPlants>
 
 
       <p className="h3 mt-5">
-        ...and {gasPlants.length>1 &&"all"} <strong className="font-weight-bold">{gasPlants.length} gas plant{gasPlants.length>1 &&"s"}</strong>.
+        ...and {gasPlants.length > 1 && "all"} <strong className="font-weight-bold">{gasPlants.length} gas plant{gasPlants.length > 1 && "s"}</strong>.
       </p>
-       <DisplayPlants plants={gasPlants} plantImg={GasPlantImg}></DisplayPlants>
+      <DisplayPlants plants={gasPlants} plantImg={GasPlantImg}></DisplayPlants>
 
       <p className="h3 mt-5">
-        ...and {oilPlants.length>1 &&"all"} <strong className="font-weight-bold">{oilPlants.length} oil plant{oilPlants.length>1 &&"s"}</strong>.
+        ...and {oilPlants.length > 1 && "all"} <strong className="font-weight-bold">{oilPlants.length} oil plant{oilPlants.length > 1 && "s"}</strong>.
       </p>
-       <DisplayPlants plants={oilPlants} plantImg={OilPlantImg}></DisplayPlants>
+      <DisplayPlants plants={oilPlants} plantImg={OilPlantImg}></DisplayPlants>
 
       <p className="h3 mt-5">
         ...and help those workers find good jobs.
