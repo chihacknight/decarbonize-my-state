@@ -367,7 +367,7 @@ export default StateDetailsPage
 /**
  * The section for how to clean up a state's power grid
  */
-function HowToCleanPowerSection({
+function HowToCleanPowerSection ({
   latestEmissions,
   placeTitle,
   powerPrcnt,

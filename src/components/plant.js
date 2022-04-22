@@ -1,7 +1,7 @@
 import React from "react"
 
 
-export default function DisplayPlants({ plants, plantImg }) {
+export default function DisplayPlants ({ plants, plantImg }) {
   return plants.map((plant, index) => {
     if (index === 20 && plants.length > 25) { return <span className="h4"> ...and {plants.length - 20} more!</span> }
     if (index > 19 && plants.length > 25) { return null }
