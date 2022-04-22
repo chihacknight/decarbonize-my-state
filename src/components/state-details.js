@@ -5,6 +5,7 @@ import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
+import DisplayPlants from "./plant"
 
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
@@ -402,47 +403,20 @@ function HowToCleanPowerSection ({
       </div>
 
       <p className="h3 mt-5">
-        And we need to do this for all <strong className="font-weight-bold">{coalPlants.length} coal plants in {placeTitle}</strong>
+        And we need to do this for {coalPlants.length>1 &&"all"} <strong className="font-weight-bold">{coalPlants.length} coal plant{coalPlants.length>1 &&"s"} in {placeTitle}</strong>
       </p>
-      {coalPlants.map(plant => {
-
-        return <img src={CoalPlantImg}
-          title={"Name: " + plant.plant_name + "\n" +
-            "County: " + plant.county + "\n" +
-            "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-            "Utility: " + plant.utility_name + "\n"}>
-        </img>
-      })}
+    <DisplayPlants plants={coalPlants} plantImg={CoalPlantImg}></DisplayPlants>
 
 
       <p className="h3 mt-5">
-        ...and all <strong className="font-weight-bold">{gasPlants.length} gas plants</strong>.
+        ...and {gasPlants.length>1 &&"all"} <strong className="font-weight-bold">{gasPlants.length} gas plant{gasPlants.length>1 &&"s"}</strong>.
       </p>
-      {
-        gasPlants.map((plant, index) => {
-          if (index === 20) { return <span className="h4"> ...and {gasPlants.length - 20} more!</span> }
-          if (index > 19) { return null }
-          return <img src={GasPlantImg}
-            title={"Name: " + plant.plant_name + "\n" +
-              "County: " + plant.county + "\n" +
-              "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-              "Utility: " + plant.utility_name + "\n"}>
-          </img>
-        })
-      }
+       <DisplayPlants plants={gasPlants} plantImg={GasPlantImg}></DisplayPlants>
+
       <p className="h3 mt-5">
-        ...and all <strong className="font-weight-bold">{oilPlants.length} oil plants</strong>.
+        ...and {oilPlants.length>1 &&"all"} <strong className="font-weight-bold">{oilPlants.length} oil plant{oilPlants.length>1 &&"s"}</strong>.
       </p>
-      {oilPlants.map((plant, index) => {
-        if (index === 20) { return <span className="h4"> ...and {oilPlants.length - 20} more!</span> }
-        if (index > 19) { return null }
-        return <img src={OilPlantImg}
-          title={"Name: " + plant.plant_name + "\n" +
-            "County: " + plant.county + "\n" +
-            "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-            "Utility: " + plant.utility_name + "\n"}>
-        </img>
-      })}
+       <DisplayPlants plants={oilPlants} plantImg={OilPlantImg}></DisplayPlants>
 
       <p className="h3 mt-5">
         ...and help those workers find good jobs.
