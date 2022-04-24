@@ -6,6 +6,7 @@ import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
+import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 
 
 const slugToTitle = (placeName) => {
@@ -51,7 +52,7 @@ const currentYear = new Date().getFullYear()
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
-export default function StateDetailsPage ({location, data}) {
+export default function StateDetailsPage ({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
@@ -78,7 +79,7 @@ export default function StateDetailsPage ({location, data}) {
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
     transportation: transportionEmissions
   } = latestEmissions
-  
+
   // sum, then make nice percentages
   const sumOfEmissions = buildingsEmissions + dirtyPowerEmissions + farmsDumpsOtherEmissions + transportionEmissions
   const buildingsPrcnt = (buildingsEmissions / sumOfEmissions * 100).toFixed(0)
@@ -91,23 +92,26 @@ export default function StateDetailsPage ({location, data}) {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
   } = data.allVehiclesJson.edges[0].node
-
+  const pctEv = Math.round((evRegistration / carsAll * 100)*10)/10
+  const pctNonEv = Math.round((100 - pctEv)*10)/10
   // string formatting
-  const carsCountStr = carsAll !== undefined 
+  const carsCountStr = carsAll !== undefined
     ? numberToHumanString(carsAll)
     : '?'
-  const carsPerYear = carsAll !== undefined 
+  const carsPerYear = carsAll !== undefined
     ? numberToHumanString(Math.ceil(carsAll * cutPerYearPrcnt / 100))
     : '?'
-  const evCountStr = evRegistration !== undefined 
+  const evCountStr = evRegistration !== undefined
     ? numberToHumanString(evRegistration)
     : '?'
-
+    
   // #### BUILDINGS ####
   const {
-    buildings
+    buildings,
+    weightedFossilBuildingsPct,
+    weightedEleBuildingsPct
   } = data.allBuildingsJson.edges[0].node
-
+  
   // string formatting
   const buildingsCountStr = buildings !== undefined
     ? numberToHumanString(buildings)
@@ -150,11 +154,11 @@ export default function StateDetailsPage ({location, data}) {
     }
     else if (targetId === 'bld-end') {
       activeKey = ''
-      greenKeys = [ 'buildings' ]
+      greenKeys = ['buildings']
     }
     else if (targetId === 'trnsprt-main') {
       activeKey = 'transportation'
-      greenKeys = [ 'buildings' ]
+      greenKeys = ['buildings']
     }
     else if (targetId === 'trnsprt-end') {
       activeKey = ''
@@ -184,15 +188,15 @@ export default function StateDetailsPage ({location, data}) {
 
       <div className="col-12">
         <h1 className="display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold">
-          <span className={ 'display-2 mr-4 sf-' + stateFaceClass } aria-hidden="true"></span>
-          { placeTitle }
+          <span className={'display-2 mr-4 sf-' + stateFaceClass} aria-hidden="true"></span>
+          {placeTitle}
         </h1>
       </div>
 
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}<br/>
+          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}<br />
           must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
         </p>
 
@@ -200,11 +204,11 @@ export default function StateDetailsPage ({location, data}) {
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
-        <SimpleAreaChart emissions_data={emissionsByYear}/>
+        <SimpleAreaChart emissions_data={emissionsByYear} />
 
         <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
 
-        <hr className="mt-7 mb-7"/>
+        <hr className="mt-7 mb-7" />
       </div>
 
       <div className="row state-details-main">
@@ -231,11 +235,11 @@ export default function StateDetailsPage ({location, data}) {
         <Scrollspy
           offset={-300}
           scrolledPastClassName={'scrolled-past'}
-          items={ [
+          items={[
             'bld-main', 'bld-end',
             'trnsprt-main', 'trnsprt-end',
             'power-main', 'power-end',
-            'other-main'] }
+            'other-main']}
           currentClassName="is-current"
           onUpdate={scrollTargetUpdated}
           className="col-12 col-xl-7">
@@ -249,7 +253,7 @@ export default function StateDetailsPage ({location, data}) {
             </p>
 
             <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */ }
+              { /* Make SingleBarChart full width on mobile */}
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
@@ -278,6 +282,15 @@ export default function StateDetailsPage ({location, data}) {
               And we need to do this for all {buildingsCountStr} buildings
               in {placeTitle}. That's around {buildingsPerYear} per year.
             </p>
+
+            {(weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0) && (
+              <p className="h3 mt-5">
+                {Math.round(weightedEleBuildingsPct)}% of building systems' energy use in {placeTitle} are already electrified.
+              </p>
+            )}
+            <AlreadyElectrifiedChart
+              label={'Building Systems'} electrifiedPct={weightedEleBuildingsPct} fossilPct={weightedFossilBuildingsPct}
+            />
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-7">
@@ -288,7 +301,7 @@ export default function StateDetailsPage ({location, data}) {
             <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
-                greenKeys={ [ 'buildings' ] } />
+                greenKeys={['buildings']} />
             </div>
 
             <div className="action-panel">
@@ -301,13 +314,13 @@ export default function StateDetailsPage ({location, data}) {
                 </li>
                 <li>
                   <a href="http://example.com">
-                      Then push your local politicians to electrify the rest
+                    Then push your local politicians to electrify the rest
                   </a>
                 </li>
               </ul>
             </div>
 
-            <hr className="mt-7"/>
+            <hr className="mt-7" />
           </div>
 
           {/* Transportation Section */}
@@ -322,12 +335,12 @@ export default function StateDetailsPage ({location, data}) {
             </p>
 
             <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */ }
+              { /* Make SingleBarChart full width on mobile */}
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey='transportation'
-                  greenKeys={[ 'buildings' ]} />
+                  greenKeys={['buildings']} />
               </div>
 
               <div className="col h3">
@@ -341,9 +354,14 @@ export default function StateDetailsPage ({location, data}) {
 
                 <p className="mt-5">
                   And we need to do this for all {carsCountStr} cars
-                  in {placeTitle}. That's around {carsPerYear} a year,
-                  excluding the {evCountStr} EVs already in {placeTitle}.
+                  in {placeTitle}. That's around {carsPerYear} a year.
                 </p>
+                <p className="mt-5">
+                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}% of the total).
+                </p>
+                <AlreadyElectrifiedChart
+                  label={'Vehicles'} electrifiedPct={pctEv} fossilPct={pctNonEv}
+                />
               </div>
             </div>
           </div>
@@ -356,7 +374,7 @@ export default function StateDetailsPage ({location, data}) {
             <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
-                greenKeys={[ 'buildings', 'transportation' ]} />
+                greenKeys={['buildings', 'transportation']} />
             </div>
 
             <div className="action-panel">
@@ -377,133 +395,133 @@ export default function StateDetailsPage ({location, data}) {
               </ul>
             </div>
 
-            <hr className="mt-7"/>
+            <hr className="mt-7" />
           </div>
 
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
-          { powerPrcnt > 0 &&
-          <div id="power-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">
+          {powerPrcnt > 0 &&
+            <div id="power-main" className="scrollable-sect mt-5">
+              <h2 className="h3 font-weight-bold">
                 🔌 Power Generation
-            </h2>
+              </h2>
 
-            <p className="h3 mt-5">
-              <strong className="font-weight-bold">{powerPrcnt}%</strong> of
+              <p className="h3 mt-5">
+                <strong className="font-weight-bold">{powerPrcnt}%</strong> of
                 emissions in {placeTitle} comes from making power.
-            </p>
+              </p>
 
-            <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */ }
-              <div className="col-12 col-md-6 d-block d-xl-none">
-                <SingleBarChart
-                  emissionsData={latestEmissions}
-                  activeKey='dirty_power'
-                  greenKeys={[ 'buildings', 'transportation' ]} />
-              </div>
+              <div className="row mt-5">
+                { /* Make SingleBarChart full width on mobile */}
+                <div className="col-12 col-md-6 d-block d-xl-none">
+                  <SingleBarChart
+                    emissionsData={latestEmissions}
+                    activeKey='dirty_power'
+                    greenKeys={['buildings', 'transportation']} />
+                </div>
 
-              <div className="col">
-                <p className="h3 mt-5">
+                <div className="col">
+                  <p className="h3 mt-5">
                     Specifically from coal and gas plants.
-                </p>
+                  </p>
 
-                <p className="h3 mt-5">
+                  <p className="h3 mt-5">
                     To cut this pollution, we need to replace dirty power plants with
                     clean ones. (mostly wind and solar)
-                </p>
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 And we need to do this for all <strong className="font-weight-bold">? coal plants in {placeTitle}</strong>
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 ...and all <strong className="font-weight-bold">? gas plants</strong>.
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 ...and help those workers find good jobs.
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 But wait! Remember how we electrified all cars and buildings?
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 Our machines don't pollute now, because they run on electricity!
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 But that means we need to make more power for those new electric
                 machines - <strong className="font-weight-bold">twice</strong> as much power as we make now!
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
+              <p className="h3 mt-5">
                 And <strong className="font-weight-bold">all of it needs to be clean power!</strong>
-            </p>
+              </p>
 
-            <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br/>
+              <p className="h3 mt-5">
+                So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br />
                 That's ? a year.
-            </p>
+              </p>
 
-            <p className="h4 mt-5 text-muted">
+              <p className="h4 mt-5 text-muted">
                 [insert animated map here]
-            </p>
-          </div> }
-          { /* Show standard outro section if power emissions are zero */ }
-          { powerPrcnt > 0 &&
-          <div id="power-end" className="scrollable-sect mt-8 mb-7">
-            <p className="h3 font-weight-bold text-center">
-              That will solve another {powerPrcnt}% of the problem.
-            </p>
-
-            <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
-              <SingleBarChart
-                emissionsData={latestEmissions}
-                greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
-            </div>
-
-            <div className="action-panel">
-              <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-              {/* TODO: Make these link somewhere */}
-              <ul className="mt-3 pl-4 mb-0">
-                <li>
-                  <a href="http://example.com">Install solar panels and a battery in your building</a>
-                </li>
-                <li>
-                  <a href="http://example.com">
-                    Support the construction of grid-scale wind and solar
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <hr className="mt-7"/>
-          </div>}
-
-          { /* Show special section if power emissions are zero */ }
-          { powerPrcnt === '0' &&
-          <div id="power-main" className="scrollable-sect mt-5 mb-7">
-            <h2 className="h3 font-weight-bold">
-              🔌 Power Generation
-            </h2>
-            <div className="mt-6 mb-8 text-center">
-              <p className="h3 font-weight-bold">
-                {placeTitle} has absolutely no emissions from making power,
-                it's doing great! 😎
+              </p>
+            </div>}
+          { /* Show standard outro section if power emissions are zero */}
+          {powerPrcnt > 0 &&
+            <div id="power-end" className="scrollable-sect mt-8 mb-7">
+              <p className="h3 font-weight-bold text-center">
+                That will solve another {powerPrcnt}% of the problem.
               </p>
 
-              <p className="h5 mt-3">
-                Check out another state to see how they can cut their power
-                emissions to zero.
-              </p>
+              <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+                <SingleBarChart
+                  emissionsData={latestEmissions}
+                  greenKeys={['buildings', 'transportation', 'dirty_power']} />
+              </div>
 
-              <hr className="mt-7"/>
-            </div>
-          </div> }
+              <div className="action-panel">
+                <h3 className="h4 font-weight-bold">What should I do?</h3>
+
+                {/* TODO: Make these link somewhere */}
+                <ul className="mt-3 pl-4 mb-0">
+                  <li>
+                    <a href="http://example.com">Install solar panels and a battery in your building</a>
+                  </li>
+                  <li>
+                    <a href="http://example.com">
+                      Support the construction of grid-scale wind and solar
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <hr className="mt-7" />
+            </div>}
+
+          { /* Show special section if power emissions are zero */}
+          {powerPrcnt === '0' &&
+            <div id="power-main" className="scrollable-sect mt-5 mb-7">
+              <h2 className="h3 font-weight-bold">
+                🔌 Power Generation
+              </h2>
+              <div className="mt-6 mb-8 text-center">
+                <p className="h3 font-weight-bold">
+                  {placeTitle} has absolutely no emissions from making power,
+                  it's doing great! 😎
+                </p>
+
+                <p className="h5 mt-3">
+                  Check out another state to see how they can cut their power
+                  emissions to zero.
+                </p>
+
+                <hr className="mt-7" />
+              </div>
+            </div>}
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
@@ -517,12 +535,12 @@ export default function StateDetailsPage ({location, data}) {
             </p>
 
             <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */ }
+              { /* Make SingleBarChart full width on mobile */}
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey='dumps_farms_industrial_other'
-                  greenKeys={[ 'buildings', 'transportation', 'dirty_power' ]} />
+                  greenKeys={['buildings', 'transportation', 'dirty_power']} />
               </div>
 
               <div className="col">
@@ -561,8 +579,8 @@ export default function StateDetailsPage ({location, data}) {
         </div>
 
         <p className="h4 mt-4">
-         We hope this gives you some ideas for what you <br className="d-none d-lg-block"/>
-         can do to get your state to zero emissions!
+          We hope this gives you some ideas for what you <br className="d-none d-lg-block" />
+          can do to get your state to zero emissions!
         </p>
       </section>
     </Layout>
@@ -575,6 +593,8 @@ query StateQuery($state: String) {
     edges {
       node {
         buildings
+        weightedFossilBuildingsPct
+        weightedEleBuildingsPct
       }
     }
   }
