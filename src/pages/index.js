@@ -39,8 +39,6 @@ const IndexPage = ({data}) => {
 
   const stateSlugs = Object.keys(mapData)
 
-  console.log('stateSlugs', stateSlugs)
-
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
 
