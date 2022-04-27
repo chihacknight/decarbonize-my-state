@@ -123,15 +123,15 @@ const IndexPage = ({data}) => {
   )
 }
 
-function StatesList({ stateSlugs }) {
+function StatesList ({ stateSlugs }) {
   // Sort slugs A-Z
-  stateSlugs.sort();
+  stateSlugs.sort()
 
-  function slugToTitle(slug) {
+  function slugToTitle (slug) {
     return slug
       .replaceAll('_', ' ')
       // .replace(/_/g, ' ')
-      .replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+      .replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
   }
 
   return (
@@ -145,7 +145,7 @@ function StatesList({ stateSlugs }) {
         )
       }
     </ul>
-    )
+  )
 }
 
 export default IndexPage
