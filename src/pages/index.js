@@ -37,6 +37,10 @@ const IndexPage = ({data}) => {
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
 
+  const stateSlugs = Object.keys(mapData)
+
+  console.log('stateSlugs', stateSlugs)
+
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
 
@@ -108,8 +112,40 @@ const IndexPage = ({data}) => {
       <div className="mb-md-5">
         <ChoroplethMap emissions={mapData} />
       </div>
+
+      {/* Show list of states on mobile */}
+      <div className="d-lg-none">
+        <h2 className="h4 font-weight-bold mt-5 mb-3">Browse by State</h2>
+
+        <StatesList stateSlugs={stateSlugs}/>
+      </div>
     </Layout>
   )
+}
+
+function StatesList({ stateSlugs }) {
+  // Sort slugs A-Z
+  stateSlugs.sort();
+
+  function slugToTitle(slug) {
+    return slug
+      .replaceAll('_', ' ')
+      // .replace(/_/g, ' ')
+      .replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  }
+
+  return (
+    <ul className="state-links">
+      {
+        stateSlugs.map(slug =>
+          <li>
+            <a href={`/${slug}`}
+              className="btn btn-light">{slugToTitle(slug)}</a>
+          </li>
+        )
+      }
+    </ul>
+    )
 }
 
 export default IndexPage

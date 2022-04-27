@@ -151,6 +151,18 @@ footer { text-align: center; }
     background-color: #f3f3f3;
 }
 
+.state-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    gap: 15px;
+}
+
+/* Darken buttons a touch for state links */
+.state-links .btn-light { background-color: #eff0f1; }
+
 /**
  * Styling for the sticky graph container
  */
