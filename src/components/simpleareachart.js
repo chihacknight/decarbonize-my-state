@@ -35,7 +35,7 @@ export default function SimpleAreaChart ({emissions_data}) {
   var data = annualhistoricalEmissions.concat(projection)
  
   return (
-    <ResponsiveContainer width="100%" height={500}>
+    <ResponsiveContainer className="simplearea-cont">
       <AreaChart
         width={800}
         height={400}
@@ -61,6 +61,7 @@ export default function SimpleAreaChart ({emissions_data}) {
           stroke="#b65c00"
           fill="#e8ceb3"
           name="Emissions"
+          isAnimationActive={false}
         />
         <Area
           type="monotone"
@@ -69,6 +70,7 @@ export default function SimpleAreaChart ({emissions_data}) {
           stroke="#36a654"
           fill="#c1e5cb"
           name="Projection"
+          isAnimationActive={false}
         />
         <ReferenceLine x="2018" stroke="none" label={{value:"Emissions", angle:90, fill:"#b65c00"}} />
         <ReferenceLine x="2024" stroke="none" label={{value:"Projections", angle:90, fill:"#36a654"}} />

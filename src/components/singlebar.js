@@ -6,7 +6,7 @@ const getPct = (value, total) => { return Math.round((value/total)*100) }
 
 /** Create the label text with the percentage */
 const getLabel = (entry, total, field, label) => {
-  return `${label}: ${getPct(entry[field], total)}%`
+  return `${label} ${getPct(entry[field], total)}%`
 }
 
 /**
@@ -15,6 +15,7 @@ const getLabel = (entry, total, field, label) => {
 let BarWidth
 let GraphWidth
 let GraphHeight
+let LineWidth = 50
 
 /**
  * A vertically stacked bar chart intended to show the groups of different
@@ -41,7 +42,7 @@ let GraphHeight
  * @param {Array<string>} greenKeys Optional array of keys to show in green,
  * indicating they have been electrified.
  */
-export default function SingleBarChart ({ emissionsData, homeView, activeKey, greenKeys }) {
+export default function SingleBarChart ({ emissionsData, homeView, mobileView, activeKey, greenKeys }) {
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
     .filter(([key,_val]) => key !== 'year')
@@ -62,7 +63,7 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
   const BarsConfig = {
     other: {
       key: 'dumps_farms_industrial_other',
-      text: '🏭 Farms, Industrial & Other',
+      text: '🏭 Farms, Industry & Other:',
       fill: '#ad8669',
       // This category cannot be electrified so make the greenFill red to be
       // clearly bad
@@ -70,35 +71,35 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
     },
     transport: {
       key: 'transportation',
-      text: '🚗 Transportation',
+      text: '🚗 Transportation:',
       fill: '#c2c2c2',
       greenFill: '#6ebf70',
     },
     buildings: {
       key: 'buildings',
-      text: '🏠 Buildings',
+      text: '🏠 Buildings:',
       fill: '#dcdcdc',
       greenFill: '#a3d7a4',
     },
     power: {
       key: 'dirty_power',
-      text: '🔌 Dirty Power',
+      text: '🔌 Dirty Power:',
       fill: '#a6a6a6',
       greenFill: '#4caf50',
     }
   }
 
-  const LabelOffset = 12
+  let LabelOffset = 12
   let LabelPosition = 'right'
   let GraphMargin = {
     top: 10,
-    right: 200,
+    right: 125,
     left: 0,
     bottom: 0
   }
 
   BarWidth = 150
-  GraphWidth = 400
+  GraphWidth = 300
   GraphHeight = 350
 
   // Apply custom styling with interior labels for homepage chart
@@ -112,14 +113,28 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
       left: 0,
       bottom: 0
     }
-  }
 
+    // On mobile homeView use short text and smaller graph
+    if (mobileView) {
+      BarsConfig.power.text = 'Power'
+      BarsConfig.buildings.text = 'Buildings'
+      BarsConfig.transport.text = 'Transport'
+      BarsConfig.other.text = 'Other'
+      BarWidth = 30
+      GraphWidth = 150
+      GraphHeight = 300
+      LabelOffset = 8
+      LineWidth = 15
+      LabelPosition = 'left'
+      GraphMargin.left = 110
+    }
+  }
   // If on state details, shorten text labels
-  if (!homeView) {
-    BarsConfig.power.text = '🔌 Power'
-    BarsConfig.buildings.text = '🏠 Buildings'
-    BarsConfig.transport.text = '🚗 Transport'
-    BarsConfig.other.text = '🏭 Other'
+  else {
+    BarsConfig.power.text = '🔌 Power:'
+    BarsConfig.buildings.text = '🏠 Buildings:'
+    BarsConfig.transport.text = '🚗 Transport:'
+    BarsConfig.other.text = '🏭 Other:'
   }
 
   // If greenKeys are specified, switch those bars' fill to their greenFill color
@@ -215,7 +230,9 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
         <ReferenceArea shape={
           <ElectrificationLines
             electrificationPrcnt={electrificationPrcnt}
-            homeView={homeView} />
+            graphMargin={GraphMargin}
+            homeView={homeView}
+            lineWidth={LineWidth} />
         }/>
       </BarChart>
     </div>
@@ -232,31 +249,30 @@ export default function SingleBarChart ({ emissionsData, homeView, activeKey, gr
  * 3. A vertical line connecting the right endpoints of #1 and #2
  * 4. A horizontal line going right from the center point of #3
  */
-function ElectrificationLines ({ electrificationPrcnt, homeView }) {
+function ElectrificationLines ({ electrificationPrcnt, homeView, lineWidth, graphMargin }) {
   if (!homeView) {
     return null
   }
 
-  const LineWidth = 50
-
   const StrokeWidth = 4
+  const LeftX = BarWidth + graphMargin.left * 0.75
   const TopY = StrokeWidth
   const BotY = GraphHeight * (electrificationPrcnt / 100)
 
   const lines = [
-    { x1: BarWidth, x2: BarWidth + LineWidth, y1: TopY, y2: TopY },
-    { x1: BarWidth, x2: BarWidth + LineWidth, y1: BotY, y2: BotY },
+    { x1: LeftX, x2: LeftX + LineWidth, y1: TopY, y2: TopY },
+    { x1: LeftX, x2: LeftX + LineWidth, y1: BotY, y2: BotY },
     // The vertical line
     {
-      x1: BarWidth + LineWidth - StrokeWidth/2,
-      x2: BarWidth + LineWidth - StrokeWidth/2,
+      x1: LeftX + LineWidth - StrokeWidth/2,
+      x2: LeftX + LineWidth - StrokeWidth/2,
       y1: TopY,
       y2: BotY
     },
     // The right mid line
     {
-      x1: BarWidth + LineWidth,
-      x2: BarWidth + LineWidth * 2,
+      x1: LeftX + LineWidth - StrokeWidth,
+      x2: LeftX + LineWidth - StrokeWidth + LineWidth,
       y1: BotY / 2,
       y2: BotY / 2,
     },

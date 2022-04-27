@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `What does it take to decarbonize your state?`,
+    title: 'What does it take to decarbonize your state?',
     description: ``,
     author: `Chi Hack Night`,
     url: `https://state-decarbonize.netlify.app`,

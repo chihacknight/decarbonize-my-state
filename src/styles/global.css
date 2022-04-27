@@ -1,5 +1,6 @@
 /* Import stateface for state icons */
 @import 'stateface/stateface.css';
+@import 'index.css';
 
 /** Import Lato Google font with specific weights */
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap');
@@ -33,19 +34,12 @@ body {
  */
 .font-weight-boldest { font-weight: 900; }
 
-.main-header {
-    margin-top: 10rem;
-    margin-bottom: 10rem;
-}
-
 .page-item.active .page-link {
     background-color: var(--brand-color);
     border-color: var(--brand-color);
 }
 
-.float-right {
-    text-align: right;
-}
+.float-right { text-align: right; }
 
 .recharts-cartesian-axis-tick {
     font-size: 0.8rem;
@@ -112,8 +106,8 @@ path:focus, .mapSelected {
 }
 
 #frames {
-  fill: none;
-  stroke: grey;
+    fill: none;
+    stroke: grey;
 }
 
 .sunrise-green {
@@ -124,11 +118,15 @@ path:focus, .mapSelected {
     border-bottom: 1px solid #aaaaaa;
 }
 
+
+/** Style header title */
 .nav-text {
     text-decoration: none;
     text-transform: capitalize;
     font-weight: bold;
     color: #000000;
+    /* Make sure we always have room for mobile menu */
+    max-width: calc(100% - 80px);
 }
 
 .table-bordered, .table-bordered td, .table-bordered th {
@@ -139,9 +137,7 @@ path:focus, .mapSelected {
     border-top: 1px solid #dee2e6;
 }
 
-footer {
-    text-align: center;
-}
+footer { text-align: center; }
 
 .custom-tooltip {
     background-color: white;
@@ -155,6 +151,17 @@ footer {
     background-color: #f3f3f3;
 }
 
+.state-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    gap: 15px;
+}
+
+/* Darken buttons a touch for state links */
+.state-links .btn-light { background-color: #eff0f1; }
 
 /**
  * Styling for the sticky graph container
@@ -172,6 +179,23 @@ footer {
 }
 
 /**
+ * SimpleAreaChart styling
+ */
+.simplearea-cont {
+    height: auto !important;
+    aspect-ratio: 2/1;
+}
+
+.simplearea-cont tspan { font-weight: bold; }
+
+/* Mobile styling Make graph taller aspect ratio on mobile screens and shrink labels */
+@media (max-width: 575px) {
+    .simplearea-cont { aspect-ratio: 1.5/1; }
+
+    .simplearea-cont tspan { font-size:12px; }
+}
+
+/**
  * SingleBarChart styling
  */
 .single-bar-chart text {
@@ -183,6 +207,10 @@ footer {
 /** Animate graph color changes */
 .single-bar-chart .recharts-rectangle {
     transition: fill 0.4s;
+}
+
+@media (max-width: 991px) {
+    .single-bar-chart tspan { font-size: 0.8rem; }
 }
 
 /**

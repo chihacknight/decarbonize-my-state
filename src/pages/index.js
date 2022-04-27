@@ -37,6 +37,8 @@ const IndexPage = ({data}) => {
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
 
+  const stateSlugs = Object.keys(mapData)
+
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
 
@@ -60,22 +62,33 @@ const IndexPage = ({data}) => {
 
       <hr></hr>
 
-      <p className="h1 mt-5 mb-5 text-center">
+      <p className="h1 mt-6 mb-5 text-center main-phrase">
         To get to <strong>zero</strong> by
         2050, the US must <br className="d-none d-lg-block" />
         cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
       </p>
-      Total US climate pollution
+
+      <h2 className="h4 font-weight-bold">Total US Emissions</h2>
+      <p className="h6">
+        Million metric tons of CO<sub>2</sub> equivalent (MMTCO2e) emissions
+      </p>
       <SimpleAreaChart emissions_data={emissionsOverTime}/>
 
       <p className='h2 text-center mt-7 mb-5'>
         To do that (and solve the climate crisis) there's one main thing
       </p>
 
-      <div className="d-flex justify-content-center mt-7">
-        <SingleBarChart emissionsData={barChartData} homeView={true} />
+      <div className="electrication-cont d-flex justify-content-center mt-7">
+        {/* Desktop only graph */}
+        <div className="d-none d-md-block">
+          <SingleBarChart emissionsData={barChartData} homeView={true} />
+        </div>
+        {/* Mobile only graph */}
+        <div className="d-md-none">
+          <SingleBarChart emissionsData={barChartData} homeView={true} mobileView={true} />
+        </div>
 
-        <div className="ml-5">
+        <div className="ml-3 ml-md-5">
           <p className="h1 font-weight-boldest mt-6 mb-7">
             Clean <br/> Electrification!
           </p>
@@ -84,20 +97,52 @@ const IndexPage = ({data}) => {
         </div>
       </div>
 
-      <p className="h1 text-center mt-7 font-weight-bold">
+      <p className="h1 text-center mt-8 font-weight-bold main-phrase">
         The levers of change are at the
         state level, <br className="d-none d-lg-block" />
         and each state is different.
       </p>
 
-      <p className="text-center mt-2 mb-7">
+      <p className="text-center mt-5 mb-5">
         Click on your state to see what it takes to decarbonize by 2050
       </p>
 
-      <div className="mb-7">
+      <div className="mb-md-5">
         <ChoroplethMap emissions={mapData} />
       </div>
+
+      {/* Show list of states on mobile */}
+      <div className="d-lg-none">
+        <h2 className="h4 font-weight-bold mt-5 mb-3">Browse by State</h2>
+
+        <StatesList stateSlugs={stateSlugs}/>
+      </div>
     </Layout>
+  )
+}
+
+function StatesList ({ stateSlugs }) {
+  // Sort slugs A-Z
+  stateSlugs.sort()
+
+  function slugToTitle (slug) {
+    return slug
+      .replaceAll('_', ' ')
+      // .replace(/_/g, ' ')
+      .replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+  }
+
+  return (
+    <ul className="state-links">
+      {
+        stateSlugs.map(slug =>
+          <li>
+            <a href={`/${slug}`}
+              className="btn btn-light">{slugToTitle(slug)}</a>
+          </li>
+        )
+      }
+    </ul>
   )
 }
 
