@@ -1,0 +1,19 @@
+import React, { Component } from "react"
+
+const DisplayPlants = ({ plants, image }) => {
+    return (
+        plants.map((plant, index) => {
+            if (index === 20 && plants.length > 25) { return "<span className='h4'> ...and", plants.length - 20, " More!</span> " }
+            if (index > 19 && plants.length > 25) { return null }
+            var html = "<img src=" +
+                { image } +
+                "title='Name:  " + plant.plant_name + "\n" +
+                "County: " + plant.county + "\n" +
+                "Megawatt Capacity: " + plant.capacity_mw + "\n" +
+                "Utility: " + plant.utility_name + "'" + "> </img>"
+            return html
+        })
+    )
+}
+
+export default DisplayPlants
