@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
-import DisplayPlants from "./displayplants"
+import DisplayPlants from "./displayplants.js"
 
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
@@ -443,50 +443,20 @@ export default function StateDetailsPage ({ location, data }) {
                   {coal_plants.length} coal plant{(coal_plants.length !== 1) && "s"} </strong>
               </p>
 
-              {/* <DisplayPlants plants={coal_plants} image={CoalPlantImg}></DisplayPlants> */}
-              {coal_plants.map((plant, index) => {
-                if (index === 20 && coal_plants.length > 25) { return <span className="h4"> ...and {coal_plants.length - 20} more!</span> }
-                if (index > 19 && coal_plants.length > 25) { return null }
-                return <img src={CoalPlantImg}
-                  title={"Name: " + plant.plant_name + "\n" +
-                    "County: " + plant.county + "\n" +
-                    "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-                    "Utility: " + plant.utility_name + "\n"}>
-                </img>
-              })}
-
+              <DisplayPlants plants={coal_plants} plantImage={CoalPlantImg}></DisplayPlants>
+             
               <p className="h3 mt-5">
                 {/* ...and {gas_plants.length > 2 && "all"}{gas_plants.length === 2 && "both"}  */}
                 <strong className="font-weight-bold">{gas_plants.length} gas plant{(gas_plants.length !== 1) && "s"}</strong>
               </p>
-              {/* <DisplayPlants plants={gas_plants} image={GasPlantImg}></DisplayPlants> */}
-              {
-                gas_plants.map((plant, index) => {
-                  if (index === 20 && gas_plants.length > 25) { return <span className="h4"> ...and {gas_plants.length - 20} more!</span> }
-                  if (index > 19 && gas_plants.length > 25) { return null }
-                  return <img src={GasPlantImg}
-                    title={"Name: " + plant.plant_name + "\n" +
-                      "County: " + plant.county + "\n" +
-                      "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-                      "Utility: " + plant.utility_name + "\n"}>
-                  </img>
-                })
-              }
+              <DisplayPlants plants={gas_plants} plantImage={GasPlantImg}></DisplayPlants>
+             
               <p className="h3 mt-5">
                 {/* ...and {oil_plants.length > 2 && "all"}{oil_plants.length === 2 && "both"}  */}
                 <strong className="font-weight-bold">{oil_plants.length} oil plant{(oil_plants.length !== 1) && "s"}</strong>
               </p>
-              {/* <DisplayPlants plants={oil_plants} image={OilPlantImg}></DisplayPlants> */}
-              {oil_plants.map((plant, index) => {
-                if (index === 20 && oil_plants.length > 25) { return <span className="h4"> ...and {oil_plants.length - 20} more!</span> }
-                if (index > 19 && oil_plants.length > 25) { return null }
-                return <img src={OilPlantImg}
-                  title={"Name: " + plant.plant_name + "\n" +
-                    "County: " + plant.county + "\n" +
-                    "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-                    "Utility: " + plant.utility_name + "\n"}>
-                </img>
-              })}
+              <DisplayPlants plants={oil_plants} plantImage={OilPlantImg}></DisplayPlants>
+            
 
               <p className="h3 mt-5">
                 ...and help those workers find good jobs.
