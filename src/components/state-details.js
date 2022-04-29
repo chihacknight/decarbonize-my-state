@@ -125,16 +125,12 @@ export default function StateDetailsPage ({ location, data }) {
     ? numberToHumanString(Math.ceil(buildings * cutPerYearPrcnt / 100))
     : '?'
 
+
   // #### POWER PLANTS ####
   const power_plants = data.allPowerPlantsJson.edges[0].node.power_plants
   const coal_plants = power_plants.filter(plant => plant.fossil_fuel_category === "COAL")
   const gas_plants = power_plants.filter(plant => plant.fossil_fuel_category === "GAS")
   const oil_plants = power_plants.filter(plant => plant.fossil_fuel_category === "OIL")
-
-  // logging the data for debug
-  console.log("coal_plants", coal_plants)
-  console.log("gas_plants", gas_plants)
-  console.log("oil_plants", oil_plants)
 
   function scrollTargetUpdated (scrollTarget) {
     let activeKey = 'buildings'
