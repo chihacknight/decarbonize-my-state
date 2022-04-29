@@ -2,18 +2,28 @@ import React from "react"
 
 const DisplayPlants = ({ plants, plantImage }) => {
   return (
-    plants.map((plant, index) => {
-      if ((index === 20) && plants.length > 25) { return <span className="h4"> ...and {plants.length - 20} more!</span> }
-      if ((index > 19) && plants.length > 25) { return null }
-      return <img src={plantImage}
-        title={"Name: " + plant.plant_name + "\n" +
-          "County: " + plant.county + "\n" +
-          "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-          "Utility: " + plant.utility_name + "\n"}
-        alt="a power plant which needs to be replaced"
-      >
-      </img>
-    })
+    <div className="row">
+      { plants.map((plant, index) => {
+        if ((index === 10) && plants.length > 15) { return <span className="h4"> ...and {plants.length - 10} more</span> }
+        if ((index > 9) && plants.length > 15) { return null }
+
+        const title = "Name: " + plant.plant_name + "\n" +
+                      "County: " + plant.county + "\n" +
+                      "Megawatt Capacity: " + plant.capacity_mw + "\n" +
+                      "Utility: " + plant.utility_name + "\n"
+        return (
+          <div className="col-lg-3 col-6">
+            <img 
+              src={plantImage}
+              className="img-fluid mx-auto d-block"
+              title={title}
+              alt={title}
+            />
+            <p class='text-center'>{plant.plant_name}</p>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 

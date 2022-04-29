@@ -443,19 +443,19 @@ export default function StateDetailsPage ({ location, data }) {
                   {coal_plants.length} coal plant{(coal_plants.length !== 1) && "s"} </strong>
               </p>
 
-              <DisplayPlants plants={coal_plants} plantImage={CoalPlantImg}></DisplayPlants>
+              <DisplayPlants plants={coal_plants} plantImage={CoalPlantImg} />
              
               <p className="h3 mt-5">
                 {/* ...and {gas_plants.length > 2 && "all"}{gas_plants.length === 2 && "both"}  */}
                 <strong className="font-weight-bold">{gas_plants.length} gas plant{(gas_plants.length !== 1) && "s"}</strong>
               </p>
-              <DisplayPlants plants={gas_plants} plantImage={GasPlantImg}></DisplayPlants>
+              <DisplayPlants plants={gas_plants} plantImage={GasPlantImg} />
              
               <p className="h3 mt-5">
                 {/* ...and {oil_plants.length > 2 && "all"}{oil_plants.length === 2 && "both"}  */}
                 <strong className="font-weight-bold">{oil_plants.length} oil plant{(oil_plants.length !== 1) && "s"}</strong>
               </p>
-              <DisplayPlants plants={oil_plants} plantImage={OilPlantImg}></DisplayPlants>
+              <DisplayPlants plants={oil_plants} plantImage={OilPlantImg} />
             
 
               <p className="h3 mt-5">
