@@ -7,9 +7,11 @@ const DisplayPlants = ({ plants, plantImage }) => {
       if ((index > 19) && plants.length > 25) { return null }
       return <img src={plantImage}
         title={"Name: " + plant.plant_name + "\n" +
-                    "County: " + plant.county + "\n" +
-                    "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-                    "Utility: " + plant.utility_name + "\n"}>
+          "County: " + plant.county + "\n" +
+          "Megawatt Capacity: " + plant.capacity_mw + "\n" +
+          "Utility: " + plant.utility_name + "\n"}
+        alt="a power plant which needs to be replaced"
+      >
       </img>
     })
   )
