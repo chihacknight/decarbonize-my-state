@@ -11,7 +11,7 @@ import {
   Label
 } from "recharts"
 
-export default function SimpleAreaChart ({emissions_data}) {
+export default function SimpleAreaChart ({ emissions_data }) {
 
   const annualhistoricalEmissions = emissions_data.map((item) => {
     var data = { year: item.year, hist: 0 }
@@ -29,11 +29,15 @@ export default function SimpleAreaChart ({emissions_data}) {
 
   for (let step = 0; step < (yearsLeft + 1); step++) {
     if (step === 0) { projection.push({ year: currYear, hist: reduceFrom, projected: reduceFrom }) }
-    else { projection.push({ year: step + currYear, projected: Math.round(reduceFrom - reduceFrom * step / yearsLeft)}) }
+    else {
+      var rounded = (Math.round((reduceFrom - reduceFrom * step / yearsLeft) * 100)) / 100
+      if (rounded < 0) { rounded = 0 }
+      projection.push({ year: step + currYear, projected: rounded })
+    }
   }
 
   var data = annualhistoricalEmissions.concat(projection)
- 
+
   return (
     <ResponsiveContainer className="simplearea-cont">
       <AreaChart
@@ -50,7 +54,7 @@ export default function SimpleAreaChart ({emissions_data}) {
         {/* <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" /> */}
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="year" >
-          <Label value="Year" offset={-15} position="insideBottom"/>
+          <Label value="Year" offset={-15} position="insideBottom" />
         </XAxis>
         <YAxis />
         <Tooltip />
@@ -72,8 +76,8 @@ export default function SimpleAreaChart ({emissions_data}) {
           name="Projection"
           isAnimationActive={false}
         />
-        <ReferenceLine x="2018" stroke="none" label={{value:"Emissions", angle:90, fill:"#b65c00"}} />
-        <ReferenceLine x="2024" stroke="none" label={{value:"Projections", angle:90, fill:"#36a654"}} />
+        <ReferenceLine x="2018" stroke="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
+        <ReferenceLine x="2024" stroke="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
       </AreaChart>
     </ResponsiveContainer>
   )
