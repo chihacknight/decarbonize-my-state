@@ -2,6 +2,10 @@ import React from "react"
 import hash from 'object-hash'
 
 const DisplayPlants = ({ plants, plantImage }) => {
+  function formatNum(number) {
+    return Math.round(number).toLocaleString();
+  }
+
   return (
     <div className="row">
       { plants.map((plant, index) => {
@@ -26,19 +30,24 @@ const DisplayPlants = ({ plants, plantImage }) => {
           }
         }
 
-        const title = "Name: " + plant.plant_name + "\n" +
-                      "County: " + plant.county + "\n" +
-                      "Megawatt Capacity: " + plant.capacity_mw + "\n" +
-                      "Utility: " + plant.utility_name + "\n"
+        const title =
+          `Name: ${plant.plant_name}\n` +
+          `County: ${plant.county}\n` +
+          `Megawatt Capacity: ${formatNum(plant.capacity_mw)}\n` +
+          `Utility: ${plant.utility_name}\n`
+
         return (
-          <div className="col-lg-3 col-6" key={hash(plant)}>
+          <div className="col-lg-3 col-6 pl-0 pr-0" key={hash(plant)}>
             <img 
               src={plantImage}
               className="img-fluid mx-auto d-block"
               title={title}
               alt={title}
             />
-            <p className='text-center'>{plant.plant_name}</p>
+            <p className='text-center'>
+              {plant.plant_name} <br/>
+              <span className="small">{ formatNum(plant.capacity_mw) } MW</span>
+            </p>
           </div>
         )
       })}

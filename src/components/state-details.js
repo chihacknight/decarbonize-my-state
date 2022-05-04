@@ -127,10 +127,13 @@ export default function StateDetailsPage ({ location, data }) {
 
 
   // #### POWER PLANTS ####
-  const power_plants = data.allPowerPlantsJson.edges[0].node.power_plants
-  const coal_plants = power_plants.filter(plant => plant.fossil_fuel_category === "COAL")
-  const gas_plants = power_plants.filter(plant => plant.fossil_fuel_category === "GAS")
-  const oil_plants = power_plants.filter(plant => plant.fossil_fuel_category === "OIL")
+  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
+
+  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw);
+
+  const coalPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "COAL")
+  const gasPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "GAS")
+  const oilPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "OIL")
 
   function scrollTargetUpdated (scrollTarget) {
     let activeKey = 'buildings'
@@ -435,23 +438,23 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
               </div>
               <p className="h3 mt-5">
-                {coal_plants.length > 2 && "all"}{coal_plants.length === 2 && "both"} <strong className="font-weight-bold">
-                  {coal_plants.length} coal plant{(coal_plants.length !== 1) && "s"} </strong>
+                {coalPlants.length > 2 && "all"}{coalPlants.length === 2 && "both"} <strong className="font-weight-bold">
+                  {coalPlants.length} coal plant{(coalPlants.length !== 1) && "s"} </strong>
               </p>
 
-              <DisplayPlants plants={coal_plants} plantImage={CoalPlantImg} />
-             
+              <DisplayPlants plants={coalPlants} plantImage={CoalPlantImg} />
+
               <p className="h3 mt-5">
-                {/* ...and {gas_plants.length > 2 && "all"}{gas_plants.length === 2 && "both"}  */}
-                <strong className="font-weight-bold">{gas_plants.length} gas plant{(gas_plants.length !== 1) && "s"}</strong>
+                {/* ...and {gasPlants.length > 2 && "all"}{gasPlants.length === 2 && "both"}  */}
+                <strong className="font-weight-bold">{gasPlants.length} gas plant{(gasPlants.length !== 1) && "s"}</strong>
               </p>
-              <DisplayPlants plants={gas_plants} plantImage={GasPlantImg} />
-             
+              <DisplayPlants plants={gasPlants} plantImage={GasPlantImg} />
+
               <p className="h3 mt-5">
-                {/* ...and {oil_plants.length > 2 && "all"}{oil_plants.length === 2 && "both"}  */}
-                <strong className="font-weight-bold">{oil_plants.length} oil plant{(oil_plants.length !== 1) && "s"}</strong>
+                {/* ...and {oilPlants.length > 2 && "all"}{oilPlants.length === 2 && "both"}  */}
+                <strong className="font-weight-bold">{oilPlants.length} oil plant{(oilPlants.length !== 1) && "s"}</strong>
               </p>
-              <DisplayPlants plants={oil_plants} plantImage={OilPlantImg} />
+              <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
             
 
               <p className="h3 mt-5">
