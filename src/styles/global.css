@@ -225,6 +225,10 @@ footer { text-align: center; }
  * State Details Page - full desktop sticky graph layout
  */
 @media (min-width: 1200px) {
+    .sticky-header h1 {
+        font-size: 3.5rem !important;
+    }
+
     /* On desktop, don't apply margin to row elements, since they don't
        on the big screen layout anything */
     .state-details-main .row { margin-top: 0 !important; }
