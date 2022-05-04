@@ -7,7 +7,7 @@ const DisplayPlants = ({ plants, plantImage }) => {
   }
 
   return (
-    <div className="row">
+    <div className="row mt-4 pl-2 pr-2">
       { plants.map((plant, index) => {
         // The number of power plants we have to be over to start cutting off -
         // this is a bit away from our MaxIcons so we never say ...and 1 more
@@ -38,13 +38,13 @@ const DisplayPlants = ({ plants, plantImage }) => {
 
         return (
           <div className="col-lg-3 col-4 pl-0 pr-0" key={hash(plant)}>
-            <img 
+            <img
               src={plantImage}
               className="img-fluid mx-auto d-block pl-3 pr-3"
               title={title}
               alt={title}
             />
-            <p className='font-weight-bold text-center pl-0'>
+            <p className="font-weight-bold text-center">
               {plant.plant_name} <br/>
               <span className="small">{ formatNum(plant.capacity_mw) } MW</span>
             </p>
