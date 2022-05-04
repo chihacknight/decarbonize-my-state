@@ -5,8 +5,26 @@ const DisplayPlants = ({ plants, plantImage }) => {
   return (
     <div className="row">
       { plants.map((plant, index) => {
-        if ((index === 10) && plants.length > 15) { return <span key={hash(plant)} className="h4"> ...and {plants.length - 10} more</span> }
-        if ((index > 9) && plants.length > 15) { return null }
+        // The number of power plants we have to be over to start cutting off -
+        // this is a bit away from our MaxIcons so we never say ...and 1 more
+        const TruncateThreshold = 15;
+
+        // The maximum number of icons if we have a TON of power plants
+        // (like 80)
+        const MaxIcons = 10;
+
+        if (plants.length > TruncateThreshold) {
+          if (index === MaxIcons) {
+            return (
+              <div key={hash(plant)}
+                className="h4 text-center text-lg-left col-6 col-lg-5 pl-4 pt-5">
+                ...and {plants.length - MaxIcons} more
+              </div>);
+          }
+          else if (index > MaxIcons) {
+            return null
+          }
+        }
 
         const title = "Name: " + plant.plant_name + "\n" +
                       "County: " + plant.county + "\n" +
