@@ -47,7 +47,7 @@ body {
 
 .state { /* must go before choropleth classes */
   fill: #aaa;
-  stroke: white;
+  stroke: #fff;
   outline: none;
   cursor: pointer;
 }
@@ -114,8 +114,13 @@ path:focus, .mapSelected {
     color: #19975c;
 }
 
+/** Style the header */
 .sunrise-nav {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
     border-bottom: 1px solid #aaaaaa;
+    z-index: 100;
 }
 
 
@@ -140,7 +145,7 @@ path:focus, .mapSelected {
 footer { text-align: center; }
 
 .custom-tooltip {
-    background-color: white;
+    background-color: #fff;
     padding: 5px;
     box-shadow: 0 1px 2px #bdbdbd;
 }
@@ -175,7 +180,7 @@ footer { text-align: center; }
     margin-top: 7rem;
     margin-bottom: 5rem;
     margin-right: 5rem;
-    background-color: white;
+    background-color: #fff;
 }
 
 /**
@@ -215,10 +220,14 @@ footer { text-align: center; }
 
 .sticky-header {
     position: sticky;
-    top: 0;
-    background-color: white;
+    top: 55px; /* align with site header */
+    background-color: #fff;
     z-index: 1;
     border-bottom: solid 1px gainsboro;
+    /* Ick, I know. Blame Bootstrap for negative margins */
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 1rem;
 }
 
 /**
