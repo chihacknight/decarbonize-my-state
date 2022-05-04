@@ -109,22 +109,29 @@ def json_data_builder(dataframe, outer_tag="default", is_array=True, array_key="
     # outer tag output object
     return json_object
 
-# using this object to align our us state names with their abbreviation
-# code copied from https://gist.github.com/rogerallen/1583593
-# to invert it, simply run `dict(map(reversed, us_state_to_abbrev.items()))`
-
-def get_and_clean_csv(path_to_csv, state_col="state", cols_to_keep=None):
+# Fetch a CSV and clean it up, keeping the cols_to_keep and converting the
+# number_cols to numbers
+def get_and_clean_csv(path_to_csv, state_col="state", cols_to_keep=None, number_cols=None):
     df = pd.read_csv(path_to_csv)
 
     # replace abbreviated states with full names
     df[state_col] = df[state_col].replace(dict(map(reversed, us_state_to_abbrev.items())))
     df[state_col] = df[state_col].str.lower().str.replace(' ', '_')
+
+    if number_cols is not None:
+        for number_col in number_cols:
+            # Strip out commas and then convert to int so the FE can do rounding and
+            # what not
+            df[number_col] = df[number_col].str.replace(',', '').astype(float)
+
     if cols_to_keep is None:
         return df
     else:
         return df[cols_to_keep]
 
-
+# using this object to align our us state names with their abbreviation
+# code copied from https://gist.github.com/rogerallen/1583593
+# to invert it, simply run `dict(map(reversed, us_state_to_abbrev.items()))`
 us_state_to_abbrev = {
     "Alabama": "AL",
     "Alaska": "AK",
