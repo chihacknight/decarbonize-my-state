@@ -189,13 +189,15 @@ export default function StateDetailsPage ({ location, data }) {
     <Layout>
       <SEO />
 
-      <a className="btn btn-outline-secondary mb-5" href="/">Back to map</a>
-
-      <div className="col-12">
-        <h1 className="display-4 d-flex align-items-center mr-4 mb-3 font-weight-bold">
+      <div className="sticky-header col-12 d-flex align-items-center">
+        <h1 className="display-4 d-flex align-items-center mr-4 font-weight-bold">
           <span className={'display-2 mr-4 sf-' + stateFaceClass} aria-hidden="true"></span>
           {placeTitle}
         </h1>
+
+        <a className="btn btn-outline-secondary ml-3" href="/">
+          Back <span className="d-none d-md-inline">to map</span>
+        </a>
       </div>
 
       {/* Intro Section */}
