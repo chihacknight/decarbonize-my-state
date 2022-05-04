@@ -129,7 +129,7 @@ export default function StateDetailsPage ({ location, data }) {
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
 
-  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw);
+  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
 
   const coalPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "COAL")
   const gasPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "GAS")

@@ -2,8 +2,8 @@ import React from "react"
 import hash from 'object-hash'
 
 const DisplayPlants = ({ plants, plantImage }) => {
-  function formatNum(number) {
-    return Math.round(number).toLocaleString();
+  function formatNum (number) {
+    return Math.round(number).toLocaleString()
   }
 
   return (
@@ -11,11 +11,11 @@ const DisplayPlants = ({ plants, plantImage }) => {
       { plants.map((plant, index) => {
         // The number of power plants we have to be over to start cutting off -
         // this is a bit away from our MaxIcons so we never say ...and 1 more
-        const TruncateThreshold = 15;
+        const TruncateThreshold = 15
 
         // The maximum number of icons if we have a TON of power plants
         // (like 80)
-        const MaxIcons = 10;
+        const MaxIcons = 10
 
         if (plants.length > TruncateThreshold) {
           if (index === MaxIcons) {
@@ -23,7 +23,7 @@ const DisplayPlants = ({ plants, plantImage }) => {
               <div key={hash(plant)}
                 className="h4 text-center text-lg-left col-6 col-lg-5 pl-4 pt-5">
                 ...and {plants.length - MaxIcons} more
-              </div>);
+              </div>)
           }
           else if (index > MaxIcons) {
             return null
