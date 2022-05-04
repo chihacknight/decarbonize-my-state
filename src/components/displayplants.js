@@ -37,14 +37,14 @@ const DisplayPlants = ({ plants, plantImage }) => {
           `Utility: ${plant.utility_name}\n`
 
         return (
-          <div className="col-lg-3 col-6 pl-0 pr-0" key={hash(plant)}>
+          <div className="col-lg-3 col-4 pl-0 pr-0" key={hash(plant)}>
             <img 
               src={plantImage}
-              className="img-fluid mx-auto d-block"
+              className="img-fluid mx-auto d-block pl-3 pr-3"
               title={title}
               alt={title}
             />
-            <p className='text-center'>
+            <p className='font-weight-bold text-center pl-0'>
               {plant.plant_name} <br/>
               <span className="small">{ formatNum(plant.capacity_mw) } MW</span>
             </p>
