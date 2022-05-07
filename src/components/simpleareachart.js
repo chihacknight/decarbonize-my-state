@@ -15,9 +15,9 @@ export default function SimpleAreaChart ({ emissions_data }) {
 
   const annualhistoricalEmissions = emissions_data.map((item) => {
     var data = { year: item.year, hist: 0 }
-    data.hist = Math.round(Object.entries(item)
+    data.hist = Math.round(100*Object.entries(item)
       .filter(([key, _val]) => key !== 'year')
-      .reduce((acc, [_key, val]) => acc + val, 0))
+      .reduce((acc, [_key, val]) => acc + val, 0))/100
     return data
   })
 
