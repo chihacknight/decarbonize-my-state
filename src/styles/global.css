@@ -173,7 +173,7 @@ footer { text-align: center; }
  */
 .sticky-cont {
     position: sticky;
-    z-index: 100;
+    z-index: 5;
     top: 30%;
     align-self: start;
     padding-left: 0;
@@ -222,21 +222,19 @@ footer { text-align: center; }
     position: sticky;
     top: 55px; /* align with site header */
     background-color: #fff;
-    z-index: 1;
+    z-index: 10;
     border-bottom: solid 1px gainsboro;
     /* Ick, I know. Blame Bootstrap for negative margins */
     margin-left: -15px;
     margin-right: -15px;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 }
 
 /**
  * State Details Page - full desktop sticky graph layout
  */
 @media (min-width: 1200px) {
-    .sticky-header h1 {
-        font-size: 3.5rem !important;
-    }
+    .sticky-header h1 .title { font-size: 2rem !important; }
 
     /* On desktop, don't apply margin to row elements, since they don't
        on the big screen layout anything */
