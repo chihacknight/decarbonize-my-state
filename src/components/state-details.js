@@ -125,6 +125,25 @@ export default function StateDetailsPage ({ location, data }) {
     ? numberToHumanString(Math.ceil(buildings * cutPerYearPrcnt / 100))
     : '?'
 
+  // #### SOLAR PANELS & WIND TURBINES ####
+  const solarPanelsBuild = data.targetGenerationJson.edges[0].node.solarPanelsBuild
+  const windTurbinesBuild = data.targetGenerationJson.edges[0].node.windTurbinesBuild
+  const solarPanelsBuildPerYear = Math.round(solarPanelsBuild/30)
+  const windTurbinesBuildPerYear = Math.round(windTurbinesBuild/30)
+
+
+  const solarPanelsCountStr = solarPanelsBuild !== undefined
+  ? numberToHumanString(solarPanelsBuild)
+  : '?'
+  const windTurbinesCountStr = windTurbinesBuild !== undefined
+  ? numberToHumanString(windTurbinesBuild)
+  : '?'
+  const solarPanelsBuildPerYearStr = solarPanelsBuildPerYear !== undefined
+  ? numberToHumanString(solarPanelsBuildPerYear)
+  : '?'
+  const windTurbinesBuildPerYearStr = windTurbinesBuildPerYear !== undefined
+  ? numberToHumanString(windTurbinesBuildPerYear)
+  : '?'
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -479,8 +498,8 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br />
-                That's ? a year.
+                So to cut the climate pollution from our power, cars, and buildings we need to BUILD <strong className="font-weight-bold">{windTurbinesCountStr}</strong> wind and <strong className="font-weight-bold">{solarPanelsCountStr}</strong> solar farms. <br />
+                That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr}</strong> turbines AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr}</strong> solar panels a year.
               </p>
 
               <p className="h4 mt-5 text-muted">
@@ -646,6 +665,14 @@ query StateQuery($state: String) {
           capacity_mw
           utility_name
         }
+      }
+    }
+  }
+  targetGenerationJson(filter: {state: {eq: $state}}) {
+    edges {
+      node {
+        target_solar_panels
+        target_wind_turbines
       }
     }
   }
