@@ -9,10 +9,14 @@ import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 
+// image resources
+import GasAppliances from "../images/gas-appliances.png"
+import ElectricAppliances from "../images/electric-appliances.png"
+import CarTransition from "../images/car-transition.png"
+import CoalTransition from "../images/coal-plant-transition.png"
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
 import CoalPlantImg from "../images/coal-plant.png"
-
 
 const slugToTitle = (placeName) => {
   const words = placeName.split('_')
@@ -91,6 +95,8 @@ export default function StateDetailsPage ({ location, data }) {
   const powerPrcnt = (dirtyPowerEmissions / sumOfEmissions * 100).toFixed(0)
   const transportPrcnt = (transportionEmissions / sumOfEmissions * 100).toFixed(0)
   const otherPrcnt = (farmsDumpsOtherEmissions / sumOfEmissions * 100).toFixed(0)
+
+  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / (2050 - currentYear))).toFixed(1)
 
   // #### VEHICLES #### 
   const {
@@ -202,8 +208,7 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}<br />
-          must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.</strong>
+          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle} must cut climate pollution by <strong className="font-weight-bold">{rawEmissionsCutPerYear} million metric tons of C02 equivalent a year.</strong>
         </p>
 
         <h2 className="h4 font-weight-bold">Emissions in {placeTitle}</h2>
@@ -274,7 +279,12 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5 mb-0">
+                  <img className="img-fluid" src={GasAppliances} alt="Gas furnace, gas water heater, gas stove" />
+                </p>
+
+                <p className="mt-5 mb-0">
                   {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
+
                   80% of the pollution of your typical home comes from heating your
                   space, water, and food.
                 </p>
@@ -282,8 +292,13 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="h3 mt-5">
-              To stop this pollution, we need to electrify our furnaces, water
-              boilers, and stoves.
+              To stop this pollution, we need to replace our furnaces with <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">
+              electric heat pumps</a>, electrify our water heaters, and cook with <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">
+              induction and electricity</a> instead of gas.
+            </p>
+
+            <p className="mt-5 mb-0">
+              <img className="img-fluid" src={ElectricAppliances} alt="Electric heat pump, electric water heater, induction stove" />
             </p>
 
             <p className="h3 mt-5">
@@ -357,7 +372,11 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5">
-                  To cut this pollution, replace your car with an EV.
+                  To cut this pollution, if you have a car, your next one needs to be an electric vehicle (EV).
+                </p>
+
+                <p className="mt-5 mb-0">
+                  <img className="img-fluid" src={CarTransition} alt="Gas emitting car being converted to electric car" />
                 </p>
 
                 <p className="mt-5">
@@ -430,33 +449,55 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <div className="col">
                   <p className="h3 mt-5">
-                    Specifically from coal and gas plants.
+                    Specifically from coal, gas, and oil plants.
                   </p>
 
                   <p className="h3 mt-5">
                     To cut this pollution, we need to replace dirty power plants with
-                    clean ones(mostly wind and solar). And in {placeTitle} we need to do this for:
+                    clean ones (mostly wind and solar).
+                  </p>
+
+                  <p className="mt-5 mb-0">
+                    <img className="img-fluid" src={CoalTransition} title="We need to replace dirty power plants with
+                    clean ones (mostly wind and solar)" alt="We need to replace dirty power plants with
+                    clean ones (mostly wind and solar)" />
+                  </p>
+
+                  <p className="h3 mt-5">
+                    And in {placeTitle} we need to do this for:
                   </p>
                 </div>
               </div>
-              <p className="h3 mt-5">
-                {coalPlants.length > 2 && "all"}{coalPlants.length === 2 && "both"} <strong className="font-weight-bold">
-                  {coalPlants.length} coal plant{(coalPlants.length !== 1) && "s"} </strong>
-              </p>
 
-              <DisplayPlants plants={coalPlants} plantImage={CoalPlantImg} />
+              {coalPlants.length > 0 &&
+                <>
+                  <p className="h3 mt-5">
+                    {coalPlants.length > 2 && "all"}{coalPlants.length === 2 && "both"} <strong className="font-weight-bold">
+                      {coalPlants.length} coal plant{(coalPlants.length !== 1) && "s"} </strong>
+                  </p>
+                  <DisplayPlants plants={coalPlants} plantImage={CoalPlantImg} />
+                </>
+              }
 
-              <p className="h3 mt-5">
-                {/* ...and {gasPlants.length > 2 && "all"}{gasPlants.length === 2 && "both"}  */}
-                <strong className="font-weight-bold">{gasPlants.length} gas plant{(gasPlants.length !== 1) && "s"}</strong>
-              </p>
-              <DisplayPlants plants={gasPlants} plantImage={GasPlantImg} />
+              {gasPlants.length > 0 &&
+                <>
+                  <p className="h3 mt-5">
+                    {/* ...and {gasPlants.length > 2 && "all"}{gasPlants.length === 2 && "both"}  */}
+                    <strong className="font-weight-bold">{gasPlants.length} gas plant{(gasPlants.length !== 1) && "s"}</strong>
+                  </p>
+                  <DisplayPlants plants={gasPlants} plantImage={GasPlantImg} />
+                </>
+              }
 
-              <p className="h3 mt-5">
-                {/* ...and {oilPlants.length > 2 && "all"}{oilPlants.length === 2 && "both"}  */}
-                <strong className="font-weight-bold">{oilPlants.length} oil plant{(oilPlants.length !== 1) && "s"}</strong>
-              </p>
-              <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
+              {oilPlants.length > 0 &&
+                <>
+                  <p className="h3 mt-5">
+                    {/* ...and {oilPlants.length > 2 && "all"}{oilPlants.length === 2 && "both"}  */}
+                    <strong className="font-weight-bold">{oilPlants.length} oil plant{(oilPlants.length !== 1) && "s"}</strong>
+                  </p>
+                  <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
+                </>
+              }
             
 
               <p className="h3 mt-5">

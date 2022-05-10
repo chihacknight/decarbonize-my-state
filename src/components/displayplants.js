@@ -46,7 +46,10 @@ const DisplayPlants = ({ plants, plantImage }) => {
             />
             <p className="font-weight-bold text-center">
               {plant.plant_name} <br/>
-              <span className="small">{ formatNum(plant.capacity_mw) } MW</span>
+              <span className="small">
+                {plant.county} County<br/>
+                { formatNum(plant.capacity_mw) } MW
+              </span>
             </p>
           </div>
         )
