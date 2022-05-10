@@ -206,8 +206,7 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle}
-          must cut climate pollution by <strong className="font-weight-bold">{rawEmissionsCutPerYear} million metric tons of C02 equivalent a year.</strong>
+          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle} must cut climate pollution by <strong className="font-weight-bold">{rawEmissionsCutPerYear} million metric tons of C02 equivalent a year.</strong>
         </p>
 
         <h2 className="h4 font-weight-bold">Emissions in {placeTitle}</h2>
@@ -291,15 +290,9 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="h3 mt-5">
-              To stop this pollution, we need to replace our furnaces with 
-              <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">
-                electric heat pumps
-              </a>, 
-              electrify our water heaters, and cook with 
-              <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">
-                induction and electricity
-              </a>
-               instead of gas.
+              To stop this pollution, we need to replace our furnaces with <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">
+              electric heat pumps</a>, electrify our water heaters, and cook with <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">
+              induction and electricity</a> instead of gas.
             </p>
 
             <p className="mt-5 mb-0">
