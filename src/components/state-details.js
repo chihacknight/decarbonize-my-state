@@ -278,7 +278,7 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5 mb-0">
-                  <img className="img-fluid" src={GasAppliances} title="Gas furnace, gas water heater, gas stove" alt="Gas furnace, gas water heater, gas stove" />
+                  <img className="img-fluid" src={GasAppliances} alt="Gas furnace, gas water heater, gas stove" />
                 </p>
 
                 <p className="mt-5 mb-0">
@@ -291,11 +291,19 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="h3 mt-5">
-              To stop this pollution, we need to replace our furnaces with <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">electric heat pumps</a>, electrify our water heaters, and cook with <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">induction and electricity</a> instead of gas.
+              To stop this pollution, we need to replace our furnaces with 
+              <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">
+                electric heat pumps
+              </a>, 
+              electrify our water heaters, and cook with 
+              <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">
+                induction and electricity
+              </a>
+               instead of gas.
             </p>
 
             <p className="mt-5 mb-0">
-              <img className="img-fluid" src={ElectricAppliances} title="Electric heat pump, electric water heater, induction stove" alt="Electric heat pump, electric water heater, induction stove" />
+              <img className="img-fluid" src={ElectricAppliances} alt="Electric heat pump, electric water heater, induction stove" />
             </p>
 
             <p className="h3 mt-5">
@@ -373,7 +381,7 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5 mb-0">
-                  <img className="img-fluid" src={CarTransition} title="Your next car needs to be an electric vehicle (EV)" alt="Your next car needs to be an electric vehicle (EV)" />
+                  <img className="img-fluid" src={CarTransition} alt="Gas emitting car being converted to electric car" />
                 </p>
 
                 <p className="mt-5">
