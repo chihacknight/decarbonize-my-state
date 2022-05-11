@@ -24,13 +24,13 @@ const CustomHover = ({ emissions, activeRegion }) => {
   }
 }
 
-function getActiveRegionFromElem(elem) {
+function getActiveRegionFromElem (elem) {
   const newActiveRegion = {
     id: elem.getAttribute("id"),
     name: elem.getAttribute("name")
   }
 
-  return newActiveRegion;
+  return newActiveRegion
 }
 
 const mouseOver = (event, setActiveRegion, setTooltipStyle) => {
@@ -55,34 +55,34 @@ const mouseOut = (event, setActiveRegion, setTooltipStyle) => {
   setTooltipStyle(newTooltipStyle)
 }
 
-function showTooltip(targetElem, setTooltipStyle) {
-  const targetRect = targetElem.getBoundingClientRect();
+function showTooltip (targetElem, setTooltipStyle) {
+  const targetRect = targetElem.getBoundingClientRect()
 
   // These two values are absolute, so they will move the tooltip the same
   // number of pixels for tiny states (like DC) and large ones (like Texas)
-  let tooltipYOffsetPx = 0;
-  let tooltipXOffsetPx = -2;
+  let tooltipYOffsetPx = 0
+  let tooltipXOffsetPx = -2
 
   // We subtract these from the coords to align by top center by default
-  const tooltipHeight = 62;
-  const tooltipWidth = 150;
+  const tooltipHeight = 62
+  const tooltipWidth = 150
 
-  const stateWidth = targetRect.width;
-  const stateHeight = targetRect.height;
+  const stateWidth = targetRect.width
+  const stateHeight = targetRect.height
 
-  const partialStateHeight = stateHeight * 0.3;
+  const partialStateHeight = stateHeight * 0.3
 
   // Move Florida's tooltip to the right relative to its width since it's center
   // is in the gulf
   if (targetElem.id === 'florida') {
-    tooltipXOffsetPx += stateWidth * 0.25;
+    tooltipXOffsetPx += stateWidth * 0.25
   }
 
-  const centerX = targetRect.x + (stateWidth / 2) - (tooltipWidth / 2);
-  const topY = targetRect.y - tooltipHeight;
+  const centerX = targetRect.x + (stateWidth / 2) - (tooltipWidth / 2)
+  const topY = targetRect.y - tooltipHeight
 
-  const x = centerX  - (stateWidth * 0.1) + tooltipXOffsetPx;
-  const y = topY  + partialStateHeight + tooltipYOffsetPx;
+  const x = centerX  - (stateWidth * 0.1) + tooltipXOffsetPx
+  const y = topY  + partialStateHeight + tooltipYOffsetPx
 
   const newTooltipStyle = {
     opacity: 1,
@@ -100,7 +100,7 @@ const focus = (event, setActiveRegion, setTooltipStyle) => {
   showTooltip(targetElem, setTooltipStyle)
 
   setActiveRegion(getActiveRegionFromElem(event.target))
-};
+}
 
 const handleClick = (event, activeRegion) => {
   navigate(`/${activeRegion.id}`)
