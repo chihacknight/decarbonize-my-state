@@ -30,7 +30,7 @@ def group_df_by_emissions(emissions_data):
     for bucket in buckets:
         emissions_data['%_'+bucket] = round(emissions_data[bucket] / emissions_data[buckets].sum(axis=1), 2) * 100
         # round the main value by it's nearest 1st decimal point
-        emissions_data[bucket] = emissions_data[bucket].apply(lambda value: round(value,1))
+        emissions_data[bucket] = emissions_data[bucket].apply(lambda value: round(value,2))
     
     # rename state & year so they are lower case
     emissions_data.rename(columns={'State':'state', 'Year':'year'}, inplace=True)
