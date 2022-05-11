@@ -24,47 +24,83 @@ const CustomHover = ({ emissions, activeRegion }) => {
   }
 }
 
-const mouseOver = (event, setActiveRegion) => {
-  const current = event.target
-  if(current.id !== "frames") {
-    current.setAttribute("style", "stroke:#421B49;stroke-width:2;")
-  }
+function getActiveRegionFromElem(elem) {
   const newActiveRegion = {
-    id: current.getAttribute("id"),
-    name: current.getAttribute("name")
+    id: elem.getAttribute("id"),
+    name: elem.getAttribute("name")
   }
 
-  setActiveRegion(newActiveRegion)
+  return newActiveRegion;
+}
+
+const mouseOver = (event, setActiveRegion, setTooltipStyle) => {
+  const targetElem = event.target
+
+  if(targetElem.id !== "frames") {
+    // TODO: Add a class - no CSS mutation in JS!
+    targetElem.setAttribute("style", "stroke:#421B49;stroke-width:2;")
+  }
+
+  setActiveRegion(getActiveRegionFromElem(event.target))
+  showTooltip(targetElem, setTooltipStyle)
 }
 
 const mouseOut = (event, setActiveRegion, setTooltipStyle) => {
-  const current = event.target
-  current.setAttribute("style", "")
-  const newActiveRegion = {
-    id: current.getAttribute("id"),
-    name: current.getAttribute("name")
-  }
-  const newTooltipStyle = {display: "none"}
-  setActiveRegion(newActiveRegion)
+  const targetElem = event.target
+  targetElem.setAttribute("style", "")
+
+  const newTooltipStyle = { opacity: 0 }
+
+  setActiveRegion(getActiveRegionFromElem(targetElem))
   setTooltipStyle(newTooltipStyle)
 }
 
-const mouseMove = (event, setActiveRegion, setTooltipStyle) => {
-  const newTooltipStyle = {
-    display: "block",
-    position: "fixed",
-    top: event.clientY + 10,
-    left: event.clientX + 10,
-    backgroundColor: "white",
-    border: "1px solid #333",
-    padding: "5px",
-    color: "black",
-    minHeight: "40px",
-    minWidth: "100px",
-    zIndex: 5
+function showTooltip(targetElem, setTooltipStyle) {
+  const targetRect = targetElem.getBoundingClientRect();
+
+  // These two values are absolute, so they will move the tooltip the same
+  // number of pixels for tiny states (like DC) and large ones (like Texas)
+  let tooltipYOffsetPx = 0;
+  let tooltipXOffsetPx = -2;
+
+  // We subtract these from the coords to align by top center by default
+  const tooltipHeight = 62;
+  const tooltipWidth = 150;
+
+  const stateWidth = targetRect.width;
+  const stateHeight = targetRect.height;
+
+  const partialStateHeight = stateHeight * 0.3;
+
+  // Move Florida's tooltip to the right relative to its width since it's center
+  // is in the gulf
+  if (targetElem.id === 'florida') {
+    tooltipXOffsetPx += stateWidth * 0.25;
   }
+
+  const centerX = targetRect.x + (stateWidth / 2) - (tooltipWidth / 2);
+  const topY = targetRect.y - tooltipHeight;
+
+  const x = centerX  - (stateWidth * 0.1) + tooltipXOffsetPx;
+  const y = topY  + partialStateHeight + tooltipYOffsetPx;
+
+  const newTooltipStyle = {
+    opacity: 1,
+    top: y,
+    left: x,
+  }
+
   setTooltipStyle(newTooltipStyle)
 }
+
+const focus = (event, setActiveRegion, setTooltipStyle) => {
+  const targetElem = event.target
+
+
+  showTooltip(targetElem, setTooltipStyle)
+
+  setActiveRegion(getActiveRegionFromElem(event.target))
+};
 
 const handleClick = (event, activeRegion) => {
   navigate(`/${activeRegion.id}`)
@@ -77,8 +113,8 @@ const getBuckets = (emissions, numBuckets) => {
 
 const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
   const [activeRegion, setActiveRegion] = useState({id: undefined, name: undefined})
-  const [tooltipStyle, setTooltipStyle] = useState({display: "none"})
-  const [buckets, setBuckets] = useState([])
+  const [tooltipStyle, setTooltipStyle] = useState({ opacity: 0 })
+  const [buckets, setBuckets] = useState([ ])
 
   useEffect(() => {
     if (emissions) {
@@ -116,8 +152,18 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
 
   return (
     <>
-      <div style={tooltipStyle}>
-        <CustomHover emissions={emissions} activeRegion={activeRegion}/>
+      {/* A skip link for keyboard users to not have to tab through every state to get past the map */}
+      <a className="btn btn-outline-dark sr-only sr-only-focusable"
+        href="#after-map">
+        Skip map
+      </a>
+
+      {/* The tooltip event */}
+      <div style={tooltipStyle} className="map-tooltip tooltip bs-tooltip-top" role="tooltip">
+        <div className="arrow"></div>
+        <div className="tooltip-inner">
+          <CustomHover emissions={emissions} activeRegion={activeRegion}/>
+        </div>
       </div>
       <Row className="map-row">
         {emissions && sidebar ?
@@ -153,13 +199,17 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
           <SVGMap
             map={USMap}
             locationClassName={getClass}
-            onLocationMouseOver={(e) => {mouseOver(e, setActiveRegion)}}
+            locationRole="link"
+            onLocationFocus={(e) => {focus(e, setActiveRegion, setTooltipStyle)}}
+            onLocationMouseOver={(e) => {mouseOver(e, setActiveRegion, setTooltipStyle)}}
             onLocationMouseOut={(e) => {mouseOut(e, setActiveRegion, setTooltipStyle)}}
-            onLocationMouseMove={(e) => {mouseMove(e, setActiveRegion, setTooltipStyle)}}
             onLocationClick={(e) => {handleClick(e, activeRegion)}}
           />
         </Col>
       </Row>
+
+      {/* A target for the skip link */}
+      <div id="after-map"></div>
     </>
   )
 }

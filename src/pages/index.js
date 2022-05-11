@@ -136,7 +136,7 @@ function StatesList ({ stateSlugs }) {
     <ul className="state-links">
       {
         stateSlugs.map(slug =>
-          <li>
+          <li key={slug}>
             <a href={`/${slug}`}
               className="btn btn-light">{slugToTitle(slug)}</a>
           </li>
