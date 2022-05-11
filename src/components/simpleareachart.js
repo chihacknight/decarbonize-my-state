@@ -7,8 +7,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine,
-  Label
+  Label,
+  ReferenceDot
 } from "recharts"
 
 export default function SimpleAreaChart ({ emissions_data }) {
@@ -37,7 +37,8 @@ export default function SimpleAreaChart ({ emissions_data }) {
   }
 
   var data = annualhistoricalEmissions.concat(projection)
-
+  const dataMidPoint = data.find(item => item.year === currYear).hist / 2
+  
   return (
     <ResponsiveContainer className="simplearea-cont">
       <AreaChart
@@ -76,8 +77,8 @@ export default function SimpleAreaChart ({ emissions_data }) {
           name="Projection"
           isAnimationActive={false}
         />
-        <ReferenceLine x="2018" stroke="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
-        <ReferenceLine x="2024" stroke="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
+        <ReferenceDot y={dataMidPoint} x={currYear-4} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
+        <ReferenceDot y={dataMidPoint} x={currYear+1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
       </AreaChart>
     </ResponsiveContainer>
   )
