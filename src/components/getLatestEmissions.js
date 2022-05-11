@@ -11,8 +11,10 @@ export function getLatestEmissions (data) {
   let mutableDataObj = {}
 
   for (var key of Object.keys(data)) {
-    var year_data = data[key].emissionsByYear.filter(v => v.year === latestYear)[0]
-    mutableDataObj[key] = Math.round(year_data.dirty_power + year_data.buildings + year_data.transportation + year_data.dumps_farms_industrial_other)
+    if (key !== 'united_states') {
+      var year_data = data[key].emissionsByYear.filter(v => v.year === latestYear)[0]
+      mutableDataObj[key] = Math.round(year_data.dirty_power + year_data.buildings + year_data.transportation + year_data.dumps_farms_industrial_other)
+    }
   }
   return mutableDataObj
 }
