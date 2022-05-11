@@ -1,37 +1,37 @@
-import React, { useState } from "react";
-import { graphql } from "gatsby";
-import Scrollspy from "react-scrollspy";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import SingleBarChart from "../components/singlebar";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import SimpleAreaChart from "../components/simpleareachart";
-import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart";
-import DisplayPlants from "./displayplants.js";
+import React, { useState } from "react"
+import { graphql } from "gatsby"
+import Scrollspy from "react-scrollspy"
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
+import SingleBarChart from "../components/singlebar"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import SimpleAreaChart from "../components/simpleareachart"
+import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
+import DisplayPlants from "./displayplants.js"
 
 // image resources
-import GasAppliances from "../images/gas-appliances.png";
-import ElectricAppliances from "../images/electric-appliances.png";
-import CarTransition from "../images/car-transition.png";
-import CoalTransition from "../images/coal-plant-transition.png";
-import OilPlantImg from "../images/oil-plant.png";
-import GasPlantImg from "../images/gas-plant.png";
-import CoalPlantImg from "../images/coal-plant.png";
+import GasAppliances from "../images/gas-appliances.png"
+import ElectricAppliances from "../images/electric-appliances.png"
+import CarTransition from "../images/car-transition.png"
+import CoalTransition from "../images/coal-plant-transition.png"
+import OilPlantImg from "../images/oil-plant.png"
+import GasPlantImg from "../images/gas-plant.png"
+import CoalPlantImg from "../images/coal-plant.png"
 
 const slugToTitle = (placeName) => {
-  const words = placeName.split("_");
+  const words = placeName.split("_")
 
   for (let i = 0; i < words.length; i++) {
-    const word = words[i];
+    const word = words[i]
     if (word === "of") {
-      words[i] = word;
+      words[i] = word
     } else {
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
     }
   }
 
-  return words.join(" ");
-};
+  return words.join(" ")
+}
 
 /**
  * Converts a very large number to a more readable string.
@@ -39,41 +39,41 @@ const slugToTitle = (placeName) => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString(num) {
+function numberToHumanString (num) {
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
   // 76 thousand
   if (num > 1_000 && num < 1_000_000) {
-    return `${Math.round(num / 1_000)},000`;
+    return `${Math.round(num / 1_000)},000`
   }
   // If in the millions return '${rounded_num_one_decimal} millions', e.g.
   // 2_114_602 -> 2.1 million
   else if (num > 1_000_000 && num < 1_000_000_000) {
-    return `${(num / 1_000_000).toFixed(1)} million`;
+    return `${(num / 1_000_000).toFixed(1)} million`
   }
 
   // If in the hundreds or something else, return as is (e.g 534)
-  return num;
+  return num
 }
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear()
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1);
+const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
-export default function StateDetailsPage({ location, data }) {
+export default function StateDetailsPage ({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
   const [scrollGraphSettings, setScrollGraphSettings] = useState({
     active: "buildings",
     green: [],
-  });
+  })
 
   // place info and string
-  const currentPlace = location.pathname.split("/")[1];
+  const currentPlace = location.pathname.split("/")[1]
   // clean up title as needed
-  const placeTitle = slugToTitle(currentPlace);
-  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-");
+  const placeTitle = slugToTitle(currentPlace)
+  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-")
 
   // Each json loads in as an allSomethingJson and is filtered for
   // data relevant to this state, which is great!
@@ -81,131 +81,131 @@ export default function StateDetailsPage({ location, data }) {
   // so we can just take the first index
 
   // #### EMISSIONS ####
-  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear;
-  const latestEmissions = emissionsByYear[emissionsByYear.length - 1];
+  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear
+  const latestEmissions = emissionsByYear[emissionsByYear.length - 1]
   // desstructure out the different emissions categories for simplicity below
   const {
     buildings: buildingsEmissions,
     dirty_power: dirtyPowerEmissions,
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
     transportation: transportionEmissions,
-  } = latestEmissions;
+  } = latestEmissions
 
   // sum, then make nice percentages
   const sumOfEmissions =
     buildingsEmissions +
     dirtyPowerEmissions +
     farmsDumpsOtherEmissions +
-    transportionEmissions;
+    transportionEmissions
   const buildingsPrcnt = ((buildingsEmissions / sumOfEmissions) * 100).toFixed(
     0
-  );
-  const powerPrcnt = ((dirtyPowerEmissions / sumOfEmissions) * 100).toFixed(0);
+  )
+  const powerPrcnt = ((dirtyPowerEmissions / sumOfEmissions) * 100).toFixed(0)
   const transportPrcnt = (
     (transportionEmissions / sumOfEmissions) *
     100
-  ).toFixed(0);
+  ).toFixed(0)
   const otherPrcnt = (
     (farmsDumpsOtherEmissions / sumOfEmissions) *
     100
-  ).toFixed(0);
+  ).toFixed(0)
 
   const rawEmissionsCutPerYear = (
     sumOfEmissions *
     (1 / (2050 - currentYear))
-  ).toFixed(1);
+  ).toFixed(1)
 
   // #### VEHICLES ####
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
-  } = data.allVehiclesJson.edges[0].node;
-  const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10;
-  const pctNonEv = Math.round((100 - pctEv) * 10) / 10;
+  } = data.allVehiclesJson.edges[0].node
+  const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
+  const pctNonEv = Math.round((100 - pctEv) * 10) / 10
   // string formatting
   const carsCountStr =
-    carsAll !== undefined ? numberToHumanString(carsAll) : "?";
+    carsAll !== undefined ? numberToHumanString(carsAll) : "?"
   const carsPerYear =
     carsAll !== undefined
       ? numberToHumanString(Math.ceil((carsAll * cutPerYearPrcnt) / 100))
-      : "?";
+      : "?"
   const evCountStr =
-    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?";
+    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
 
   // #### BUILDINGS ####
   const {
     buildings,
     weightedFossilBuildingsPct,
     weightedEleBuildingsPct,
-  } = data.allBuildingsJson.edges[0].node;
+  } = data.allBuildingsJson.edges[0].node
 
   // string formatting
   const buildingsCountStr =
-    buildings !== undefined ? numberToHumanString(buildings) : "?";
+    buildings !== undefined ? numberToHumanString(buildings) : "?"
   const buildingsPerYear =
     buildings !== undefined
       ? numberToHumanString(Math.ceil((buildings * cutPerYearPrcnt) / 100))
-      : "?";
+      : "?"
 
   // #### POWER PLANTS ####
-  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants;
+  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
 
-  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw);
+  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
 
   const coalPlants = powerPlants.filter(
     (plant) => plant.fossil_fuel_category === "COAL"
-  );
+  )
   const gasPlants = powerPlants.filter(
     (plant) => plant.fossil_fuel_category === "GAS"
-  );
+  )
   const oilPlants = powerPlants.filter(
     (plant) => plant.fossil_fuel_category === "OIL"
-  );
+  )
 
-  function scrollTargetUpdated(scrollTarget) {
-    let activeKey = "buildings";
-    let greenKeys = [];
+  function scrollTargetUpdated (scrollTarget) {
+    let activeKey = "buildings"
+    let greenKeys = []
 
     // Make sure we don't try using the scrollTarget if it's null
     if (!scrollTarget) {
-      return;
+      return
     }
 
-    const targetId = scrollTarget.id;
+    const targetId = scrollTarget.id
 
     if (!targetId) {
-      console.error("Scroll target had no ID! Element was:", scrollTarget);
-      setScrollGraphSettings({ active: activeKey, green: greenKeys });
-      return;
+      console.error("Scroll target had no ID! Element was:", scrollTarget)
+      setScrollGraphSettings({ active: activeKey, green: greenKeys })
+      return
     }
 
     if (targetId === "bld-main") {
-      activeKey = "buildings";
-      greenKeys = [];
+      activeKey = "buildings"
+      greenKeys = []
     } else if (targetId === "bld-end") {
-      activeKey = "";
-      greenKeys = ["buildings"];
+      activeKey = ""
+      greenKeys = ["buildings"]
     } else if (targetId === "trnsprt-main") {
-      activeKey = "transportation";
-      greenKeys = ["buildings"];
+      activeKey = "transportation"
+      greenKeys = ["buildings"]
     } else if (targetId === "trnsprt-end") {
-      activeKey = "";
-      greenKeys = ["buildings", "transportation"];
+      activeKey = ""
+      greenKeys = ["buildings", "transportation"]
     } else if (targetId === "power-main") {
-      activeKey = "dirty_power";
-      greenKeys = ["buildings", "transportation"];
+      activeKey = "dirty_power"
+      greenKeys = ["buildings", "transportation"]
     } else if (targetId === "power-end") {
-      activeKey = "";
-      greenKeys = ["buildings", "transportation", "dirty_power"];
+      activeKey = ""
+      greenKeys = ["buildings", "transportation", "dirty_power"]
     } else if (targetId === "other-main") {
-      activeKey = "dumps_farms_industrial_other";
-      greenKeys = ["buildings", "transportation", "dirty_power"];
+      activeKey = "dumps_farms_industrial_other"
+      greenKeys = ["buildings", "transportation", "dirty_power"]
     }
 
-    setScrollGraphSettings({ active: activeKey, green: greenKeys });
+    setScrollGraphSettings({ active: activeKey, green: greenKeys })
   }
   // Description will retain formatting, so this needs to be single line
-  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`;
+  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`
 
   return (
     <Layout>
@@ -729,7 +729,7 @@ export default function StateDetailsPage({ location, data }) {
         </p>
       </section>
     </Layout>
-  );
+  )
 }
 
 export const query = graphql`
@@ -778,4 +778,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`
