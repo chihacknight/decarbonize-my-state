@@ -1,38 +1,37 @@
-import React, { useState } from "react"
-import { graphql } from "gatsby"
-import Scrollspy from "react-scrollspy"
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
-import SingleBarChart from "../components/singlebar"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import SimpleAreaChart from "../components/simpleareachart"
-import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
-import DisplayPlants from "./displayplants.js"
+import React, { useState } from "react";
+import { graphql } from "gatsby";
+import Scrollspy from "react-scrollspy";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import SingleBarChart from "../components/singlebar";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import SimpleAreaChart from "../components/simpleareachart";
+import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart";
+import DisplayPlants from "./displayplants.js";
 
 // image resources
-import GasAppliances from "../images/gas-appliances.png"
-import ElectricAppliances from "../images/electric-appliances.png"
-import CarTransition from "../images/car-transition.png"
-import CoalTransition from "../images/coal-plant-transition.png"
-import OilPlantImg from "../images/oil-plant.png"
-import GasPlantImg from "../images/gas-plant.png"
-import CoalPlantImg from "../images/coal-plant.png"
+import GasAppliances from "../images/gas-appliances.png";
+import ElectricAppliances from "../images/electric-appliances.png";
+import CarTransition from "../images/car-transition.png";
+import CoalTransition from "../images/coal-plant-transition.png";
+import OilPlantImg from "../images/oil-plant.png";
+import GasPlantImg from "../images/gas-plant.png";
+import CoalPlantImg from "../images/coal-plant.png";
 
 const slugToTitle = (placeName) => {
-  const words = placeName.split('_')
+  const words = placeName.split("_");
 
   for (let i = 0; i < words.length; i++) {
-    const word = words[i]
+    const word = words[i];
     if (word === "of") {
-      words[i] = word
+      words[i] = word;
     } else {
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
     }
   }
 
-  return words.join(' ')
-}
-
+  return words.join(" ");
+};
 
 /**
  * Converts a very large number to a more readable string.
@@ -40,163 +39,187 @@ const slugToTitle = (placeName) => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString (num) {
+function numberToHumanString(num) {
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
   // 76 thousand
   if (num > 1_000 && num < 1_000_000) {
-    return `${Math.round(num / 1_000)},000`
+    return `${Math.round(num / 1_000)},000`;
   }
   // If in the millions return '${rounded_num_one_decimal} millions', e.g.
   // 2_114_602 -> 2.1 million
   else if (num > 1_000_000 && num < 1_000_000_000) {
-    return `${(num / 1_000_000).toFixed(1)} million`
+    return `${(num / 1_000_000).toFixed(1)} million`;
   }
 
   // If in the hundreds or something else, return as is (e.g 534)
-  return num
+  return num;
 }
 
-const currentYear = new Date().getFullYear()
+const currentYear = new Date().getFullYear();
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
+const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1);
 
-export default function StateDetailsPage ({ location, data }) {
+export default function StateDetailsPage({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
-  const [scrollGraphSettings, setScrollGraphSettings] = useState({ active: 'buildings', green: [] })
+  const [scrollGraphSettings, setScrollGraphSettings] = useState({
+    active: "buildings",
+    green: [],
+  });
 
   // place info and string
-  const currentPlace = location.pathname.split("/")[1]
+  const currentPlace = location.pathname.split("/")[1];
   // clean up title as needed
-  const placeTitle = slugToTitle(currentPlace)
-  const stateFaceClass = currentPlace.toLowerCase().replaceAll(' ', '-')
+  const placeTitle = slugToTitle(currentPlace);
+  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-");
 
-  // Each json loads in as an allSomethingJson and is filtered for 
+  // Each json loads in as an allSomethingJson and is filtered for
   // data relevant to this state, which is great!
-  // the first edge node will have the relevant data, 
+  // the first edge node will have the relevant data,
   // so we can just take the first index
 
-  // #### EMISSIONS #### 
-  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear
-  const latestEmissions = emissionsByYear[emissionsByYear.length - 1]
+  // #### EMISSIONS ####
+  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear;
+  const latestEmissions = emissionsByYear[emissionsByYear.length - 1];
   // desstructure out the different emissions categories for simplicity below
   const {
     buildings: buildingsEmissions,
     dirty_power: dirtyPowerEmissions,
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
-    transportation: transportionEmissions
-  } = latestEmissions
+    transportation: transportionEmissions,
+  } = latestEmissions;
 
   // sum, then make nice percentages
-  const sumOfEmissions = buildingsEmissions + dirtyPowerEmissions + farmsDumpsOtherEmissions + transportionEmissions
-  const buildingsPrcnt = (buildingsEmissions / sumOfEmissions * 100).toFixed(0)
-  const powerPrcnt = (dirtyPowerEmissions / sumOfEmissions * 100).toFixed(0)
-  const transportPrcnt = (transportionEmissions / sumOfEmissions * 100).toFixed(0)
-  const otherPrcnt = (farmsDumpsOtherEmissions / sumOfEmissions * 100).toFixed(0)
+  const sumOfEmissions =
+    buildingsEmissions +
+    dirtyPowerEmissions +
+    farmsDumpsOtherEmissions +
+    transportionEmissions;
+  const buildingsPrcnt = ((buildingsEmissions / sumOfEmissions) * 100).toFixed(
+    0
+  );
+  const powerPrcnt = ((dirtyPowerEmissions / sumOfEmissions) * 100).toFixed(0);
+  const transportPrcnt = (
+    (transportionEmissions / sumOfEmissions) *
+    100
+  ).toFixed(0);
+  const otherPrcnt = (
+    (farmsDumpsOtherEmissions / sumOfEmissions) *
+    100
+  ).toFixed(0);
 
-  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / (2050 - currentYear))).toFixed(1)
+  const rawEmissionsCutPerYear = (
+    sumOfEmissions *
+    (1 / (2050 - currentYear))
+  ).toFixed(1);
 
-  // #### VEHICLES #### 
+  // #### VEHICLES ####
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
-  } = data.allVehiclesJson.edges[0].node
-  const pctEv = Math.round((evRegistration / carsAll * 100) * 10) / 10
-  const pctNonEv = Math.round((100 - pctEv) * 10) / 10
+  } = data.allVehiclesJson.edges[0].node;
+  const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10;
+  const pctNonEv = Math.round((100 - pctEv) * 10) / 10;
   // string formatting
-  const carsCountStr = carsAll !== undefined
-    ? numberToHumanString(carsAll)
-    : '?'
-  const carsPerYear = carsAll !== undefined
-    ? numberToHumanString(Math.ceil(carsAll * cutPerYearPrcnt / 100))
-    : '?'
-  const evCountStr = evRegistration !== undefined
-    ? numberToHumanString(evRegistration)
-    : '?'
+  const carsCountStr =
+    carsAll !== undefined ? numberToHumanString(carsAll) : "?";
+  const carsPerYear =
+    carsAll !== undefined
+      ? numberToHumanString(Math.ceil((carsAll * cutPerYearPrcnt) / 100))
+      : "?";
+  const evCountStr =
+    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?";
 
   // #### BUILDINGS ####
   const {
     buildings,
     weightedFossilBuildingsPct,
-    weightedEleBuildingsPct
-  } = data.allBuildingsJson.edges[0].node
+    weightedEleBuildingsPct,
+  } = data.allBuildingsJson.edges[0].node;
 
   // string formatting
-  const buildingsCountStr = buildings !== undefined
-    ? numberToHumanString(buildings)
-    : '?'
-  const buildingsPerYear = buildings !== undefined
-    ? numberToHumanString(Math.ceil(buildings * cutPerYearPrcnt / 100))
-    : '?'
-
+  const buildingsCountStr =
+    buildings !== undefined ? numberToHumanString(buildings) : "?";
+  const buildingsPerYear =
+    buildings !== undefined
+      ? numberToHumanString(Math.ceil((buildings * cutPerYearPrcnt) / 100))
+      : "?";
 
   // #### POWER PLANTS ####
-  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
+  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants;
 
-  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
+  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw);
 
-  const coalPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "COAL")
-  const gasPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "GAS")
-  const oilPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "OIL")
+  const coalPlants = powerPlants.filter(
+    (plant) => plant.fossil_fuel_category === "COAL"
+  );
+  const gasPlants = powerPlants.filter(
+    (plant) => plant.fossil_fuel_category === "GAS"
+  );
+  const oilPlants = powerPlants.filter(
+    (plant) => plant.fossil_fuel_category === "OIL"
+  );
 
-  function scrollTargetUpdated (scrollTarget) {
-    let activeKey = 'buildings'
-    let greenKeys = []
+  function scrollTargetUpdated(scrollTarget) {
+    let activeKey = "buildings";
+    let greenKeys = [];
 
     // Make sure we don't try using the scrollTarget if it's null
     if (!scrollTarget) {
-      return
+      return;
     }
 
-    const targetId = scrollTarget.id
+    const targetId = scrollTarget.id;
 
     if (!targetId) {
-      console.error('Scroll target had no ID! Element was:', scrollTarget)
-      setScrollGraphSettings({ active: activeKey, green: greenKeys })
-      return
+      console.error("Scroll target had no ID! Element was:", scrollTarget);
+      setScrollGraphSettings({ active: activeKey, green: greenKeys });
+      return;
     }
 
-    if (targetId === 'bld-main') {
-      activeKey = 'buildings'
-      greenKeys = []
-    }
-    else if (targetId === 'bld-end') {
-      activeKey = ''
-      greenKeys = ['buildings']
-    }
-    else if (targetId === 'trnsprt-main') {
-      activeKey = 'transportation'
-      greenKeys = ['buildings']
-    }
-    else if (targetId === 'trnsprt-end') {
-      activeKey = ''
-      greenKeys = ['buildings', 'transportation']
-    }
-    else if (targetId === 'power-main') {
-      activeKey = 'dirty_power'
-      greenKeys = ['buildings', 'transportation']
-    }
-    else if (targetId === 'power-end') {
-      activeKey = ''
-      greenKeys = ['buildings', 'transportation', 'dirty_power']
-    }
-    else if (targetId === 'other-main') {
-      activeKey = 'dumps_farms_industrial_other'
-      greenKeys = ['buildings', 'transportation', 'dirty_power']
+    if (targetId === "bld-main") {
+      activeKey = "buildings";
+      greenKeys = [];
+    } else if (targetId === "bld-end") {
+      activeKey = "";
+      greenKeys = ["buildings"];
+    } else if (targetId === "trnsprt-main") {
+      activeKey = "transportation";
+      greenKeys = ["buildings"];
+    } else if (targetId === "trnsprt-end") {
+      activeKey = "";
+      greenKeys = ["buildings", "transportation"];
+    } else if (targetId === "power-main") {
+      activeKey = "dirty_power";
+      greenKeys = ["buildings", "transportation"];
+    } else if (targetId === "power-end") {
+      activeKey = "";
+      greenKeys = ["buildings", "transportation", "dirty_power"];
+    } else if (targetId === "other-main") {
+      activeKey = "dumps_farms_industrial_other";
+      greenKeys = ["buildings", "transportation", "dirty_power"];
     }
 
-    setScrollGraphSettings({ active: activeKey, green: greenKeys })
+    setScrollGraphSettings({ active: activeKey, green: greenKeys });
   }
+  // Description will retain formatting, so this needs to be single line
+  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`;
 
   return (
     <Layout>
-      <SEO />
+      <SEO
+        title={`What does it take to decarbonize ${placeTitle}?`}
+        description={descriptionText}
+      />
 
       <div className="sticky-header d-flex align-items-center">
         <h1 className="d-flex align-items-center mr-4 mb-0">
-          <span className={'display-3 mr-4 sf-' + stateFaceClass} aria-hidden="true"></span>
+          <span
+            className={"display-3 mr-4 sf-" + stateFaceClass}
+            aria-hidden="true"
+          ></span>
           <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
         </h1>
 
@@ -208,7 +231,12 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050, {placeTitle} must cut climate pollution by <strong className="font-weight-bold">{rawEmissionsCutPerYear} million metric tons of C02 equivalent a year.</strong>
+          To get to <strong className="font-weight-bold">zero</strong> by 2050,{" "}
+          {placeTitle} must cut climate pollution by{" "}
+          <strong className="font-weight-bold">
+            {rawEmissionsCutPerYear} million metric tons of C02 equivalent a
+            year.
+          </strong>
         </p>
 
         <h2 className="h4 font-weight-bold">Emissions in {placeTitle}</h2>
@@ -217,16 +245,18 @@ export default function StateDetailsPage ({ location, data }) {
         </p>
         <SimpleAreaChart emissions_data={emissionsByYear} />
 
-        <p className="h1 font-weight-bold text-center mt-5">We can do it. Here's how.</p>
+        <p className="h1 font-weight-bold text-center mt-5">
+          We can do it. Here's how.
+        </p>
 
         <hr className="mt-7 mb-7" />
       </div>
 
       <div className="row state-details-main">
-        { /**
-           * Our main chart for desktop ONLY (others are hidden) this chart
-           * should update as you scroll
-           */ }
+        {/**
+         * Our main chart for desktop ONLY (others are hidden) this chart
+         * should update as you scroll
+         */}
         <div className="col-4 sticky-cont d-none d-xl-block">
           <div className="graph-title font-weight-bold mb-3">
             CO<sub>2</sub> Equivalent Emissions in {placeTitle} by Source
@@ -236,26 +266,30 @@ export default function StateDetailsPage ({ location, data }) {
             isSticky={true}
             emissionsData={latestEmissions}
             activeKey={scrollGraphSettings.active}
-            greenKeys={scrollGraphSettings.green} />
+            greenKeys={scrollGraphSettings.green}
+          />
         </div>
 
         {/*
-          * Right column on desktop, full width on mobile. This is a scroll spy
-          * container to update the left graph
-          */}
+         * Right column on desktop, full width on mobile. This is a scroll spy
+         * container to update the left graph
+         */}
         <Scrollspy
           offset={-300}
-          scrolledPastClassName={'scrolled-past'}
+          scrolledPastClassName={"scrolled-past"}
           items={[
-            'bld-main', 'bld-end',
-            'trnsprt-main', 'trnsprt-end',
-            'power-main', 'power-end',
-            'other-main']}
+            "bld-main",
+            "bld-end",
+            "trnsprt-main",
+            "trnsprt-end",
+            "power-main",
+            "power-end",
+            "other-main",
+          ]}
           currentClassName="is-current"
           onUpdate={scrollTargetUpdated}
-
-
-          className="col-12 col-xl-7">
+          className="col-12 col-xl-7"
+        >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
             <h2 className="h3 font-weight-bold">🏠 Buildings</h2>
@@ -266,53 +300,77 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */}
+              {/* Make SingleBarChart full width on mobile */}
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  activeKey={'buildings'} />
+                  activeKey={"buildings"}
+                />
               </div>
 
               <div className="col h3">
-                <p className="mt-5">
-                  Mostly from different types of heating.
-                </p>
+                <p className="mt-5">Mostly from different types of heating.</p>
 
                 <p className="mt-5 mb-0">
-                  <img className="img-fluid" src={GasAppliances} alt="Gas furnace, gas water heater, gas stove" />
+                  <img
+                    className="img-fluid"
+                    src={GasAppliances}
+                    alt="Gas furnace, gas water heater, gas stove"
+                  />
                 </p>
 
                 <p className="mt-5 mb-0">
                   {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
-
-                  80% of the pollution of your typical home comes from heating your
-                  space, water, and food.
+                  80% of the pollution of your typical home comes from heating
+                  your space, water, and food.
                 </p>
               </div>
             </div>
 
             <p className="h3 mt-5">
-              To stop this pollution, we need to replace our furnaces with <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">
-              electric heat pumps</a>, electrify our water heaters, and cook with <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">
-              induction and electricity</a> instead of gas.
+              To stop this pollution, we need to replace our furnaces with{" "}
+              <a
+                href="https://en.wikipedia.org/wiki/Heat_pump"
+                target="_blank"
+                rel="noreferrer"
+              >
+                electric heat pumps
+              </a>
+              , electrify our water heaters, and cook with{" "}
+              <a
+                href="https://en.wikipedia.org/wiki/Induction_cooking"
+                target="_blank"
+                rel="noreferrer"
+              >
+                induction and electricity
+              </a>{" "}
+              instead of gas.
             </p>
 
             <p className="mt-5 mb-0">
-              <img className="img-fluid" src={ElectricAppliances} alt="Electric heat pump, electric water heater, induction stove" />
+              <img
+                className="img-fluid"
+                src={ElectricAppliances}
+                alt="Electric heat pump, electric water heater, induction stove"
+              />
             </p>
 
             <p className="h3 mt-5">
-              And we need to do this for all {buildingsCountStr} buildings
-              in {placeTitle}. That's around {buildingsPerYear} per year.
+              And we need to do this for all {buildingsCountStr} buildings in{" "}
+              {placeTitle}. That's around {buildingsPerYear} per year.
             </p>
 
-            {(weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0) && (
+            {(weightedEleBuildingsPct !== 0 ||
+              weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                {Math.round(weightedEleBuildingsPct)}% of building systems' energy use in {placeTitle} are already electrified.
+                {Math.round(weightedEleBuildingsPct)}% of building systems'
+                energy use in {placeTitle} are already electrified.
               </p>
             )}
             <AlreadyElectrifiedChart
-              label={'Building Systems'} electrifiedPct={weightedEleBuildingsPct} fossilPct={weightedFossilBuildingsPct}
+              label={"Building Systems"}
+              electrifiedPct={weightedEleBuildingsPct}
+              fossilPct={weightedFossilBuildingsPct}
             />
           </div>
 
@@ -324,7 +382,8 @@ export default function StateDetailsPage ({ location, data }) {
             <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
-                greenKeys={['buildings']} />
+                greenKeys={["buildings"]}
+              />
             </div>
 
             <div className="action-panel">
@@ -333,7 +392,9 @@ export default function StateDetailsPage ({ location, data }) {
               {/* TODO: Make these link somewhere */}
               <ul className="mt-3 pl-4 mb-0">
                 <li>
-                  <a href="http://example.com">First, electrify your building(s)</a>
+                  <a href="http://example.com">
+                    First, electrify your building(s)
+                  </a>
                 </li>
                 <li>
                   <a href="http://example.com">
@@ -348,9 +409,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Transportation Section */}
           <div id="trnsprt-main" className="scrollable-sect">
-            <h2 className="h3 font-weight-bold">
-              🚗 Getting Around
-            </h2>
+            <h2 className="h3 font-weight-bold">🚗 Getting Around</h2>
 
             <p className="h3 mt-5">
               <strong className="font-weight-bold">{transportPrcnt}%</strong> of
@@ -358,36 +417,43 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */}
+              {/* Make SingleBarChart full width on mobile */}
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  activeKey='transportation'
-                  greenKeys={['buildings']} />
+                  activeKey="transportation"
+                  greenKeys={["buildings"]}
+                />
               </div>
 
               <div className="col h3">
-                <p className="mt-5">
-                  Mostly from our cars.
-                </p>
+                <p className="mt-5">Mostly from our cars.</p>
 
                 <p className="mt-5">
-                  To cut this pollution, if you have a car, your next one needs to be an electric vehicle (EV).
+                  To cut this pollution, if you have a car, your next one needs
+                  to be an electric vehicle (EV).
                 </p>
 
                 <p className="mt-5 mb-0">
-                  <img className="img-fluid" src={CarTransition} alt="Gas emitting car being converted to electric car" />
+                  <img
+                    className="img-fluid"
+                    src={CarTransition}
+                    alt="Gas emitting car being converted to electric car"
+                  />
                 </p>
 
                 <p className="mt-5">
-                  And we need to do this for all {carsCountStr} cars
-                  in {placeTitle}. That's around {carsPerYear} a year.
+                  And we need to do this for all {carsCountStr} cars in{" "}
+                  {placeTitle}. That's around {carsPerYear} a year.
                 </p>
                 <p className="mt-5">
-                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}% of the total).
+                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}
+                  % of the total).
                 </p>
                 <AlreadyElectrifiedChart
-                  label={'Vehicles'} electrifiedPct={pctEv} fossilPct={pctNonEv}
+                  label={"Vehicles"}
+                  electrifiedPct={pctEv}
+                  fossilPct={pctNonEv}
                 />
               </div>
             </div>
@@ -401,7 +467,8 @@ export default function StateDetailsPage ({ location, data }) {
             <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
-                greenKeys={['buildings', 'transportation']} />
+                greenKeys={["buildings", "transportation"]}
+              />
             </div>
 
             <div className="action-panel">
@@ -410,9 +477,7 @@ export default function StateDetailsPage ({ location, data }) {
               {/* TODO: Make these link somewhere */}
               <ul className="mt-3 pl-4 mb-0">
                 <li>
-                  <a href="http://example.com">
-                    If you have a car, buy an EV
-                  </a>
+                  <a href="http://example.com">If you have a car, buy an EV</a>
                 </li>
                 <li>
                   <a href="http://example.com">
@@ -427,11 +492,9 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
-          {powerPrcnt > 0 &&
+          {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h2 className="h3 font-weight-bold">
-                🔌 Power Generation
-              </h2>
+              <h2 className="h3 font-weight-bold">🔌 Power Generation</h2>
 
               <p className="h3 mt-5">
                 <strong className="font-weight-bold">{powerPrcnt}%</strong> of
@@ -439,12 +502,13 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <div className="row mt-5">
-                { /* Make SingleBarChart full width on mobile */}
+                {/* Make SingleBarChart full width on mobile */}
                 <div className="col-12 col-md-6 d-block d-xl-none">
                   <SingleBarChart
                     emissionsData={latestEmissions}
-                    activeKey='dirty_power'
-                    greenKeys={['buildings', 'transportation']} />
+                    activeKey="dirty_power"
+                    greenKeys={["buildings", "transportation"]}
+                  />
                 </div>
 
                 <div className="col">
@@ -453,14 +517,19 @@ export default function StateDetailsPage ({ location, data }) {
                   </p>
 
                   <p className="h3 mt-5">
-                    To cut this pollution, we need to replace dirty power plants with
-                    clean ones (mostly wind and solar).
+                    To cut this pollution, we need to replace dirty power plants
+                    with clean ones (mostly wind and solar).
                   </p>
 
                   <p className="mt-5 mb-0">
-                    <img className="img-fluid" src={CoalTransition} title="We need to replace dirty power plants with
-                    clean ones (mostly wind and solar)" alt="We need to replace dirty power plants with
-                    clean ones (mostly wind and solar)" />
+                    <img
+                      className="img-fluid"
+                      src={CoalTransition}
+                      title="We need to replace dirty power plants with
+                    clean ones (mostly wind and solar)"
+                      alt="We need to replace dirty power plants with
+                    clean ones (mostly wind and solar)"
+                    />
                   </p>
 
                   <p className="h3 mt-5">
@@ -469,36 +538,48 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
               </div>
 
-              {coalPlants.length > 0 &&
+              {coalPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    {coalPlants.length > 2 && "all"}{coalPlants.length === 2 && "both"} <strong className="font-weight-bold">
-                      {coalPlants.length} coal plant{(coalPlants.length !== 1) && "s"} </strong>
+                    {coalPlants.length > 2 && "all"}
+                    {coalPlants.length === 2 && "both"}{" "}
+                    <strong className="font-weight-bold">
+                      {coalPlants.length} coal plant
+                      {coalPlants.length !== 1 && "s"}{" "}
+                    </strong>
                   </p>
-                  <DisplayPlants plants={coalPlants} plantImage={CoalPlantImg} />
+                  <DisplayPlants
+                    plants={coalPlants}
+                    plantImage={CoalPlantImg}
+                  />
                 </>
-              }
+              )}
 
-              {gasPlants.length > 0 &&
+              {gasPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
                     {/* ...and {gasPlants.length > 2 && "all"}{gasPlants.length === 2 && "both"}  */}
-                    <strong className="font-weight-bold">{gasPlants.length} gas plant{(gasPlants.length !== 1) && "s"}</strong>
+                    <strong className="font-weight-bold">
+                      {gasPlants.length} gas plant
+                      {gasPlants.length !== 1 && "s"}
+                    </strong>
                   </p>
                   <DisplayPlants plants={gasPlants} plantImage={GasPlantImg} />
                 </>
-              }
+              )}
 
-              {oilPlants.length > 0 &&
+              {oilPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
                     {/* ...and {oilPlants.length > 2 && "all"}{oilPlants.length === 2 && "both"}  */}
-                    <strong className="font-weight-bold">{oilPlants.length} oil plant{(oilPlants.length !== 1) && "s"}</strong>
+                    <strong className="font-weight-bold">
+                      {oilPlants.length} oil plant
+                      {oilPlants.length !== 1 && "s"}
+                    </strong>
                   </p>
                   <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
                 </>
-              }
-            
+              )}
 
               <p className="h3 mt-5">
                 ...and help those workers find good jobs.
@@ -514,24 +595,28 @@ export default function StateDetailsPage ({ location, data }) {
 
               <p className="h3 mt-5">
                 But that means we need to make more power for those new electric
-                machines - <strong className="font-weight-bold">twice</strong> as much power as we make now!
+                machines - <strong className="font-weight-bold">twice</strong>{" "}
+                as much power as we make now!
               </p>
 
               <p className="h3 mt-5">
-                And <strong className="font-weight-bold">all of it needs to be clean power!</strong>
+                And{" "}
+                <strong className="font-weight-bold">
+                  all of it needs to be clean power!
+                </strong>
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings we need to BUILD ? wind and solar farms. <br />
+                So to cut the climate pollution from our power, cars, and
+                buildings we need to BUILD ? wind and solar farms. <br />
                 That's ? a year.
               </p>
 
-              <p className="h4 mt-5 text-muted">
-                [insert animated map here]
-              </p>
-            </div>}
-          { /* Show standard outro section if power emissions are zero */}
-          {powerPrcnt > 0 &&
+              <p className="h4 mt-5 text-muted">[insert animated map here]</p>
+            </div>
+          )}
+          {/* Show standard outro section if power emissions are zero */}
+          {powerPrcnt > 0 && (
             <div id="power-end" className="scrollable-sect mt-8 mb-7">
               <p className="h3 font-weight-bold text-center">
                 That will solve another {powerPrcnt}% of the problem.
@@ -540,7 +625,8 @@ export default function StateDetailsPage ({ location, data }) {
               <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  greenKeys={['buildings', 'transportation', 'dirty_power']} />
+                  greenKeys={["buildings", "transportation", "dirty_power"]}
+                />
               </div>
 
               <div className="action-panel">
@@ -549,7 +635,9 @@ export default function StateDetailsPage ({ location, data }) {
                 {/* TODO: Make these link somewhere */}
                 <ul className="mt-3 pl-4 mb-0">
                   <li>
-                    <a href="http://example.com">Install solar panels and a battery in your building</a>
+                    <a href="http://example.com">
+                      Install solar panels and a battery in your building
+                    </a>
                   </li>
                   <li>
                     <a href="http://example.com">
@@ -560,14 +648,13 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <hr className="mt-7" />
-            </div>}
+            </div>
+          )}
 
-          { /* Show special section if power emissions are zero */}
-          {powerPrcnt === '0' &&
+          {/* Show special section if power emissions are zero */}
+          {powerPrcnt === "0" && (
             <div id="power-main" className="scrollable-sect mt-5 mb-7">
-              <h2 className="h3 font-weight-bold">
-                🔌 Power Generation
-              </h2>
+              <h2 className="h3 font-weight-bold">🔌 Power Generation</h2>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
                   {placeTitle} has absolutely no emissions from making power,
@@ -581,26 +668,27 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <hr className="mt-7" />
               </div>
-            </div>}
+            </div>
+          )}
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">
-              🏭 Other Emissions
-            </h2>
+            <h2 className="h3 font-weight-bold">🏭 Other Emissions</h2>
 
             <p className="h3 mt-5">
-              The last <strong className="font-weight-bold">{otherPrcnt}%</strong> of
+              The last{" "}
+              <strong className="font-weight-bold">{otherPrcnt}%</strong> of
               emissions in {placeTitle} comes other sources
             </p>
 
             <div className="row mt-5">
-              { /* Make SingleBarChart full width on mobile */}
+              {/* Make SingleBarChart full width on mobile */}
               <div className="col-12 col-md-6 d-block d-xl-none">
                 <SingleBarChart
                   emissionsData={latestEmissions}
-                  activeKey='dumps_farms_industrial_other'
-                  greenKeys={['buildings', 'transportation', 'dirty_power']} />
+                  activeKey="dumps_farms_industrial_other"
+                  greenKeys={["buildings", "transportation", "dirty_power"]}
+                />
               </div>
 
               <div className="col">
@@ -609,20 +697,18 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-3">
-                  There's no one solution to solve these problems, but there are a
-                  lot of great ideas!
+                  There's no one solution to solve these problems, but there are
+                  a lot of great ideas!
                 </p>
 
-                <p>
-                  These include:
-                </p>
+                <p>These include:</p>
 
                 <ul>
                   <li>Regenerative agriculture to sequester carbon in soil</li>
                   <li>Composting to reduce landfill methane emissions</li>
                   <li>
-                    New techniques for manufacturing
-                    CO<sub>2</sub> emitting materials, like concrete
+                    New techniques for manufacturing CO<sub>2</sub> emitting
+                    materials, like concrete
                   </li>
                 </ul>
               </div>
@@ -634,64 +720,62 @@ export default function StateDetailsPage ({ location, data }) {
       <hr className="mt-7" />
 
       <section className="text-center mb-8">
-        <div className="h1 mt-7 font-weight-bold">
-          And that's it! 🎉
-        </div>
+        <div className="h1 mt-7 font-weight-bold">And that's it! 🎉</div>
 
         <p className="h4 mt-4">
-          We hope this gives you some ideas for what you <br className="d-none d-lg-block" />
+          We hope this gives you some ideas for what you{" "}
+          <br className="d-none d-lg-block" />
           can do to get your state to zero emissions!
         </p>
       </section>
     </Layout>
-  )
+  );
 }
 
 export const query = graphql`
-query StateQuery($state: String) {
-  allBuildingsJson(filter: {state: {eq: $state}}) {
-    edges {
-      node {
-        buildings
-        weightedFossilBuildingsPct
-        weightedEleBuildingsPct
-      }
-    }
-  }
-  allEmissionsJson(filter: {state: {eq: $state}}) {
-    edges {
-      node {
-        emissionsByYear {
-          dirty_power
+  query StateQuery($state: String) {
+    allBuildingsJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
           buildings
-          dumps_farms_industrial_other
-          transportation
-          year
+          weightedFossilBuildingsPct
+          weightedEleBuildingsPct
+        }
+      }
+    }
+    allEmissionsJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
+          emissionsByYear {
+            dirty_power
+            buildings
+            dumps_farms_industrial_other
+            transportation
+            year
+          }
+        }
+      }
+    }
+    allVehiclesJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
+          Cars_All
+          EV_Registration
+        }
+      }
+    }
+    allPowerPlantsJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
+          power_plants {
+            plant_name
+            fossil_fuel_category
+            county
+            capacity_mw
+            utility_name
+          }
         }
       }
     }
   }
-  allVehiclesJson(filter: {state: {eq: $state}}) {
-    edges {
-      node {
-        Cars_All
-        EV_Registration
-      }
-    }
-  }
-  allPowerPlantsJson(filter: {state: {eq: $state}}) {
-    edges {
-      node {
-        power_plants {
-          plant_name
-          fossil_fuel_category
-          county
-          capacity_mw
-          utility_name
-        }
-      }
-    }
-  }
-}
-
-`
+`;

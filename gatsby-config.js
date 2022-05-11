@@ -3,8 +3,9 @@ module.exports = {
     title: 'What does it take to decarbonize your state?',
     description: ``,
     author: `Chi Hack Night`,
-    url: `https://state-decarbonize.netlify.app`,
-    image: `/socialcard.png`
+    url: `https://decarbonizemystate.com/`,
+    image: `/socialcard.png`,
+    siteName: "Decarbonize My State"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
