@@ -141,6 +141,9 @@ export default function StateDetailsPage ({ location, data }) {
   const gasPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "GAS")
   const oilPlants = powerPlants.filter(plant => plant.fossil_fuel_category === "OIL")
 
+  const nonFossilPlantsPct = (powerPlants.length - coalPlants.length - gasPlants.length - oilPlants.length) / powerPlants.length * 100
+  const fossilPlantsPct = (coalPlants.length + gasPlants.length + oilPlants.length) / powerPlants.length * 100
+  
   function scrollTargetUpdated (scrollTarget) {
     let activeKey = 'buildings'
     let greenKeys = []
@@ -312,7 +315,7 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
             )}
             <AlreadyElectrifiedChart
-              label={'Building Systems'} electrifiedPct={weightedEleBuildingsPct} fossilPct={weightedFossilBuildingsPct}
+              label={'Building Systems Electrified'} electrifiedPct={weightedEleBuildingsPct} fossilPct={weightedFossilBuildingsPct}
             />
           </div>
 
@@ -387,7 +390,7 @@ export default function StateDetailsPage ({ location, data }) {
                   {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}% of the total).
                 </p>
                 <AlreadyElectrifiedChart
-                  label={'Vehicles'} electrifiedPct={pctEv} fossilPct={pctNonEv}
+                  label={'Vehicles Electrified'} electrifiedPct={pctEv} fossilPct={pctNonEv}
                 />
               </div>
             </div>
@@ -526,6 +529,9 @@ export default function StateDetailsPage ({ location, data }) {
                 That's ? a year.
               </p>
 
+              <AlreadyElectrifiedChart
+                  label={'Clean Power Plants'} electrifiedPct={nonFossilPlantsPct} fossilPct={fossilPlantsPct}
+                />
               <p className="h4 mt-5 text-muted">
                 [insert animated map here]
               </p>
