@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import USMap from "../images/svg/usaStatesNoTerritories.js"
 import jenks from "./jenks"
 
-const CustomHover = ({ emissions, activeRegion }) => {
+function CustomHover({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {
     return (
       <>
@@ -33,7 +33,7 @@ function getActiveRegionFromElem (elem) {
   return newActiveRegion
 }
 
-const mouseOver = (event, setActiveRegion, setTooltipStyle) => {
+function mouseOver(event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
 
   if(targetElem.id !== "frames") {
@@ -45,14 +45,12 @@ const mouseOver = (event, setActiveRegion, setTooltipStyle) => {
   showTooltip(targetElem, setTooltipStyle)
 }
 
-const mouseOut = (event, setActiveRegion, setTooltipStyle) => {
+function mouseOut(event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
   targetElem.setAttribute("style", "")
 
-  const newTooltipStyle = { opacity: 0 }
-
   setActiveRegion(getActiveRegionFromElem(targetElem))
-  setTooltipStyle(newTooltipStyle)
+  hideTooltip(setTooltipStyle)
 }
 
 function showTooltip (targetElem, setTooltipStyle) {
@@ -93,20 +91,27 @@ function showTooltip (targetElem, setTooltipStyle) {
   setTooltipStyle(newTooltipStyle)
 }
 
-const focus = (event, setActiveRegion, setTooltipStyle) => {
-  const targetElem = event.target
+function hideTooltip(setTooltipStyle) {
+  setTooltipStyle({ opacity: 0 })
+}
 
+function focus(event, setActiveRegion, setTooltipStyle) {
+  const targetElem = event.target
 
   showTooltip(targetElem, setTooltipStyle)
 
   setActiveRegion(getActiveRegionFromElem(event.target))
 }
 
-const handleClick = (event, activeRegion) => {
+function blur(event, setTooltipStyle) {
+  hideTooltip(setTooltipStyle)
+}
+
+function handleClick(event, activeRegion) {
   navigate(`/${activeRegion.id}`)
 }
 
-const getBuckets = (emissions, numBuckets) => {
+function getBuckets(emissions, numBuckets) {
   const buckets = jenks(Object.values(emissions), numBuckets)
   return buckets
 }
@@ -203,6 +208,7 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
             onLocationFocus={(e) => {focus(e, setActiveRegion, setTooltipStyle)}}
             onLocationMouseOver={(e) => {mouseOver(e, setActiveRegion, setTooltipStyle)}}
             onLocationMouseOut={(e) => {mouseOut(e, setActiveRegion, setTooltipStyle)}}
+            onLocationBlur={(e) => {blur(e, setTooltipStyle)}}
             onLocationClick={(e) => {handleClick(e, activeRegion)}}
           />
         </Col>
