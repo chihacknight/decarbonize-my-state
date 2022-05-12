@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import USMap from "../images/svg/usaStatesNoTerritories.js"
 import jenks from "./jenks"
 
-function CustomHover({ emissions, activeRegion }) {
+function CustomHover ({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {
     return (
       <>
@@ -33,7 +33,7 @@ function getActiveRegionFromElem (elem) {
   return newActiveRegion
 }
 
-function mouseOver(event, setActiveRegion, setTooltipStyle) {
+function mouseOver (event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
 
   if(targetElem.id !== "frames") {
@@ -45,7 +45,7 @@ function mouseOver(event, setActiveRegion, setTooltipStyle) {
   showTooltip(targetElem, setTooltipStyle)
 }
 
-function mouseOut(event, setActiveRegion, setTooltipStyle) {
+function mouseOut (event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
   targetElem.setAttribute("style", "")
 
@@ -91,11 +91,11 @@ function showTooltip (targetElem, setTooltipStyle) {
   setTooltipStyle(newTooltipStyle)
 }
 
-function hideTooltip(setTooltipStyle) {
+function hideTooltip (setTooltipStyle) {
   setTooltipStyle({ opacity: 0 })
 }
 
-function focus(event, setActiveRegion, setTooltipStyle) {
+function focus (event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
 
   showTooltip(targetElem, setTooltipStyle)
@@ -103,15 +103,15 @@ function focus(event, setActiveRegion, setTooltipStyle) {
   setActiveRegion(getActiveRegionFromElem(event.target))
 }
 
-function blur(event, setTooltipStyle) {
+function blur (event, setTooltipStyle) {
   hideTooltip(setTooltipStyle)
 }
 
-function handleClick(event, activeRegion) {
+function handleClick (event, activeRegion) {
   navigate(`/${activeRegion.id}`)
 }
 
-function getBuckets(emissions, numBuckets) {
+function getBuckets (emissions, numBuckets) {
   const buckets = jenks(Object.values(emissions), numBuckets)
   return buckets
 }
