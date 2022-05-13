@@ -194,9 +194,9 @@ export default function StateDetailsPage ({ location, data }) {
     <Layout>
       <SEO />
 
-      <div className="sticky-header d-flex align-items-center">
+      <div className="sticky-header d-flex align-items-center ">
         <h1 className="d-flex align-items-center mr-4 mb-0">
-          <span className={'display-3 mr-4 sf-' + stateFaceClass} aria-hidden="true"></span>
+          <span className={'display-5 mr-4 sf-' + stateFaceClass} aria-hidden="true"></span>
           <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
         </h1>
 
