@@ -262,3 +262,16 @@ footer { text-align: center; }
 
      { opacity: 1 !important; }
 }
+
+/* Increase contrast for navbar and action-panel links. */
+#___gatsby .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, .7);
+}
+
+#gatsby-focus-wrapper > footer a {
+    color: #004da1;
+}
+
+.action-panel a {
+    color: #004da1;
+}
