@@ -13,6 +13,10 @@ body, * {
     font-family: 'Lato', sans-serif;
 }
 
+body *:focus {
+    outline: dashed 0.25rem #993404;
+}
+
 body {
     background-color: #FFFFFB;
     font-family: "Source Serif Pro",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -77,10 +81,29 @@ body {
     background: #aaa;
 }
 
-/* Style focused <path> elements or selected state */
+.map-tooltip {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    /* Disable mouse events to prevent hovering tooltip hiding it */
+    pointer-events: none;
+}
+
+.map-tooltip .arrow { left:  48%; }
+
+.map-tooltip .tooltip-inner { width: 150px; }
+
+
+/**
+ * Style focused <path> elements with border and darkening
+ */
 path:focus, .mapSelected {
     stroke: #421B49;
-    stroke-width: 4;
+    stroke-width: 3;
+    outline: none;
+    filter:  brightness(0.75);
 }
 
 .legendKey {
