@@ -584,7 +584,7 @@ export default function StateDetailsPage ({ location, data }) {
                     <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
                       See a map of dirty power plants in the US
                     </a>
-                    </h5>
+                  </h5>
                   <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
                     <img
                       className="img-fluid"
