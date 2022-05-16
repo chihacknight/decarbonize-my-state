@@ -17,6 +17,7 @@ import CoalTransition from "../images/coal-plant-transition.png"
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
 import CoalPlantImg from "../images/coal-plant.png"
+import PowerPlantMap from "../images/dirty-power-plants.jpg"
 
 const slugToTitle = (placeName) => {
   const words = placeName.split("_")
@@ -517,7 +518,7 @@ export default function StateDetailsPage ({ location, data }) {
                   </p>
 
                   <p className="h3 mt-5">
-                    To cut this pollution, we need to replace dirty power plants
+                    To cut this pollution, we need to replace all dirty power plants
                     with clean ones (mostly wind and solar).
                   </p>
 
@@ -533,7 +534,7 @@ export default function StateDetailsPage ({ location, data }) {
                   </p>
 
                   <p className="h3 mt-5">
-                    And in {placeTitle} we need to do this for:
+                    In {placeTitle} we need to close and replace:
                   </p>
                 </div>
               </div>
@@ -541,8 +542,6 @@ export default function StateDetailsPage ({ location, data }) {
               {coalPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    {coalPlants.length > 2 && "all"}
-                    {coalPlants.length === 2 && "both"}{" "}
                     <strong className="font-weight-bold">
                       {coalPlants.length} coal plant
                       {coalPlants.length !== 1 && "s"}{" "}
@@ -558,7 +557,6 @@ export default function StateDetailsPage ({ location, data }) {
               {gasPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    {/* ...and {gasPlants.length > 2 && "all"}{gasPlants.length === 2 && "both"}  */}
                     <strong className="font-weight-bold">
                       {gasPlants.length} gas plant
                       {gasPlants.length !== 1 && "s"}
@@ -571,7 +569,6 @@ export default function StateDetailsPage ({ location, data }) {
               {oilPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    {/* ...and {oilPlants.length > 2 && "all"}{oilPlants.length === 2 && "both"}  */}
                     <strong className="font-weight-bold">
                       {oilPlants.length} oil plant
                       {oilPlants.length !== 1 && "s"}
@@ -580,6 +577,23 @@ export default function StateDetailsPage ({ location, data }) {
                   <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
                 </>
               )}
+
+              <div className="card">
+                <div className="card-body">
+                  <h5 class="card-title">
+                    <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
+                      See a map of dirty power plants in the US
+                    </a>
+                    </h5>
+                  <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
+                    <img
+                      className="img-fluid"
+                      src={PowerPlantMap}
+                      alt="Map showing coal, gas and oil power plants in the United States"
+                    />
+                  </a>
+                </div>
+              </div>
 
               <p className="h3 mt-5">
                 ...and help those workers find good jobs.
