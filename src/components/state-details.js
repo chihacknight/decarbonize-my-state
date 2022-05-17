@@ -126,24 +126,39 @@ export default function StateDetailsPage ({ location, data }) {
     : '?'
 
   // #### SOLAR PANELS & WIND TURBINES ####
-  const solarPanelsBuild = data.allTargetGenerationJson.edges[0].node.solarPanelsBuild
-  const windTurbinesBuild = data.allTargetGenerationJson.edges[0].node.windTurbinesBuild
-  const solarPanelsBuildPerYear = Math.round(solarPanelsBuild/30)
-  const windTurbinesBuildPerYear = Math.round(windTurbinesBuild/30)
+  const targetBuilds = data.allTargetGenerationJson.edges[0].node.targetBuilds[0]
 
+  // deconstruct object for simplicity
+  const {
+    total_gen_by_solar: targetGenBySolar,
+    total_gen_by_wind: targetGenByWind,
+    current_solar: currentSolar,
+    current_wind: currentWind
+  } = targetBuilds
+  
+  // since we are referencing capacity, let's stay consistent and make sure
+  // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
+  const everyDayPerYear = 24 * 365
+  const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000
+  const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
+  const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
+  const currentWindMW = (currentWind / everyDayPerYear) * 1000
 
-  const solarPanelsCountStr = solarPanelsBuild !== undefined
-  ? numberToHumanString(solarPanelsBuild)
-  : '?'
-  const windTurbinesCountStr = windTurbinesBuild !== undefined
-  ? numberToHumanString(windTurbinesBuild)
-  : '?'
-  const solarPanelsBuildPerYearStr = solarPanelsBuildPerYear !== undefined
-  ? numberToHumanString(solarPanelsBuildPerYear)
-  : '?'
-  const windTurbinesBuildPerYearStr = windTurbinesBuildPerYear !== undefined
-  ? numberToHumanString(windTurbinesBuildPerYear)
-  : '?'
+  const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
+  const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
+
+  const solarPanelsCountStr = targetGenBySolarMW !== undefined
+    ? numberToHumanString(targetGenBySolarMW)
+    : '?'
+  const windTurbinesCountStr = targetGenByWindMW !== undefined
+    ? numberToHumanString(targetGenByWindMW)
+    : '?'
+  const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
+    ? numberToHumanString(solarPanelsBuildPerYear)
+    : '?'
+  const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
+    ? numberToHumanString(windTurbinesBuildPerYear)
+    : '?'
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -498,8 +513,8 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings we need to BUILD <strong className="font-weight-bold">{windTurbinesCountStr}</strong> wind turbines and <strong className="font-weight-bold">{solarPanelsCountStr}</strong> solar panels. <br />
-                That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr}</strong> turbines AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr}</strong> solar panels a year.
+                So to cut the climate pollution from our power, cars, and buildings we need to INSTALL <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar. <br />
+                That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} MWs</strong> of wind capacity AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} MWs</strong> of solar capacity a year.
               </p>
 
               <p className="h4 mt-5 text-muted">
@@ -672,8 +687,10 @@ query StateQuery($state: String) {
     edges {
       node {
         targetBuilds {
-          target_solar_panels
-          target_wind_turbines
+          total_gen_by_solar
+          total_gen_by_wind
+          current_wind
+          current_solar
         }
       }
     }
