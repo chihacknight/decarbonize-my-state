@@ -126,8 +126,8 @@ export default function StateDetailsPage ({ location, data }) {
     : '?'
 
   // #### SOLAR PANELS & WIND TURBINES ####
-  const solarPanelsBuild = data.targetGenerationJson.edges[0].node.solarPanelsBuild
-  const windTurbinesBuild = data.targetGenerationJson.edges[0].node.windTurbinesBuild
+  const solarPanelsBuild = data.allTargetGenerationJson.edges[0].node.solarPanelsBuild
+  const windTurbinesBuild = data.allTargetGenerationJson.edges[0].node.windTurbinesBuild
   const solarPanelsBuildPerYear = Math.round(solarPanelsBuild/30)
   const windTurbinesBuildPerYear = Math.round(windTurbinesBuild/30)
 
@@ -498,7 +498,7 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings we need to BUILD <strong className="font-weight-bold">{windTurbinesCountStr}</strong> wind and <strong className="font-weight-bold">{solarPanelsCountStr}</strong> solar farms. <br />
+                So to cut the climate pollution from our power, cars, and buildings we need to BUILD <strong className="font-weight-bold">{windTurbinesCountStr}</strong> wind turbines and <strong className="font-weight-bold">{solarPanelsCountStr}</strong> solar panels. <br />
                 That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr}</strong> turbines AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr}</strong> solar panels a year.
               </p>
 
@@ -668,11 +668,13 @@ query StateQuery($state: String) {
       }
     }
   }
-  targetGenerationJson(filter: {state: {eq: $state}}) {
+  allTargetGenerationJson(filter: {state: {eq: $state}}) {
     edges {
       node {
-        target_solar_panels
-        target_wind_turbines
+        targetBuilds {
+          target_solar_panels
+          target_wind_turbines
+        }
       }
     }
   }
