@@ -8,6 +8,7 @@ import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
+import WindSolarBuilds from "./WindSolarBuildsChart.js"
 
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
@@ -133,7 +134,9 @@ export default function StateDetailsPage ({ location, data }) {
     total_gen_by_solar: targetGenBySolar,
     total_gen_by_wind: targetGenByWind,
     current_solar: currentSolar,
-    current_wind: currentWind
+    current_wind: currentWind,
+    perc_solar_target: percSolarTarget,
+    perc_wind_target: percWindTarget
   } = targetBuilds
   
   // since we are referencing capacity, let's stay consistent and make sure
@@ -147,6 +150,11 @@ export default function StateDetailsPage ({ location, data }) {
   const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
   const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
 
+  // getting %s for chart
+  const percSolarRemaining = 100 - percSolarTarget
+  const percWindRemaining = 100 - percWindTarget
+
+  // converting values to strings
   const solarPanelsCountStr = targetGenBySolarMW !== undefined
     ? numberToHumanString(targetGenBySolarMW)
     : '?'
@@ -513,12 +521,21 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings we need to INSTALL <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar. <br />
+                So to cut the climate pollution from our power, cars, and buildings we need to INSTALL <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar.
+              </p>
+              
+              <p className="h3 mt-5">
                 That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} MWs</strong> of wind capacity AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} MWs</strong> of solar capacity a year.
               </p>
 
               <p className="h4 mt-5 text-muted">
-                [insert animated map here]
+              <WindSolarBuilds
+                label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
+              </p>
+
+              <p className="h4 mt-5 text-muted">
+              <WindSolarBuilds
+                label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
               </p>
             </div>}
           { /* Show standard outro section if power emissions are zero */}
@@ -691,6 +708,8 @@ query StateQuery($state: String) {
           total_gen_by_wind
           current_wind
           current_solar
+          perc_solar_target
+          perc_wind_target
         }
       }
     }
