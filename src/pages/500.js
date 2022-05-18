@@ -1,5 +1,4 @@
 import React from "react"
-import { Helmet } from "react-helmet"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CoalPlant from "../images/coal-plant.png"
