@@ -10,7 +10,7 @@ const AboutPage = ({data, location}) => {
       <SEO title="About :: What does it take to decarbonize your state?" />
       <div className="container">
         <div className="border-bottom">
-          <h1 className="py-2" id="overview">Overview</h1>
+          <h1 id="main" className="py-2">Overview</h1>
           <p>About this app</p>
         </div>
       </div>

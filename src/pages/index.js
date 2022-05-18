@@ -51,7 +51,7 @@ const IndexPage = ({data}) => {
       <SEO title="What does it take to decarbonize your state?" />
 
       <div className="main-header">
-        <h1 className='display-4 text-center font-weight-bold'>
+        <h1 id="main" className='display-4 text-center font-weight-bold'>
           What does it take to <br className="d-none d-lg-block"/>
           decarbonize your state?
         </h1>

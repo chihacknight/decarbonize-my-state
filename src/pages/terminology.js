@@ -8,7 +8,7 @@ const Terminology = () => {
     <Layout>
       <SEO title="Terminology" />
       <div className="container">
-        <h1 className="py-2">Terminology</h1>
+        <h1 id="main" className="py-2">Terminology</h1>
       </div>
     </Layout>
   )
