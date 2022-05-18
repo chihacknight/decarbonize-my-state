@@ -107,8 +107,18 @@ function blur (event, setTooltipStyle) {
   hideTooltip(setTooltipStyle)
 }
 
+/**
+ * Handles clicking or pressing enter after tabbing into a state, navigating
+ * to that state
+ */
 function handleClick (event, activeRegion) {
   navigate(`/${activeRegion.id}`)
+}
+
+function handleKeydown (event, activeRegion) {
+  if (event.key === 'Enter') {
+    handleClick(null, activeRegion)
+  }
 }
 
 function getBuckets (emissions, numBuckets) {
@@ -210,6 +220,7 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
             onLocationMouseOut={(e) => {mouseOut(e, setActiveRegion, setTooltipStyle)}}
             onLocationBlur={(e) => {blur(e, setTooltipStyle)}}
             onLocationClick={(e) => {handleClick(e, activeRegion)}}
+            onLocationKeyDown={(e) => {handleKeydown(e, activeRegion)}}
           />
         </Col>
       </Row>
