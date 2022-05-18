@@ -386,7 +386,7 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
             )}
             <AlreadyElectrifiedChart
-              label={"Building Systems"}
+              label={"Building Systems Electrified"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
@@ -469,7 +469,7 @@ export default function StateDetailsPage ({ location, data }) {
                   % of the total).
                 </p>
                 <AlreadyElectrifiedChart
-                  label={"Vehicles"}
+                  label={"Vehicles Electrified"}
                   electrifiedPct={pctEv}
                   fossilPct={pctNonEv}
                 />
@@ -631,7 +631,7 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
               
               <AlreadyElectrifiedChart
-                  label={"Power Plants"}
+                  label={"Non-Fossil Fuel Power Plants"}
                   electrifiedPct={pctCleanerPower}
                   fossilPct={pctFossilPower}
                 />
