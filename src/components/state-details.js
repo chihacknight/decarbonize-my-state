@@ -162,6 +162,24 @@ export default function StateDetailsPage ({ location, data }) {
     (plant) => plant.fossil_fuel_category === "OIL"
   )
 
+  const {
+    fossilPower,
+    cleanerPower
+  } = powerPlants.reduce((accumulator, entry) => {
+    if (['COAL','GAS','OIL'].includes(entry.fossil_fuel_category)) {
+      accumulator.fossilPower += entry.capacity_mw
+    } else {
+      accumulator.cleanerPower += entry.capacity_mw
+    }
+    return accumulator
+  },{
+    fossilPower: 0,
+    cleanerPower: 0
+  })
+
+  const pctFossilPower = Math.round((fossilPower / (fossilPower + cleanerPower)) * 100 * 10) / 10
+  const pctCleanerPower = Math.round((cleanerPower / (fossilPower + cleanerPower)) * 100 * 10) / 10
+
   function scrollTargetUpdated (scrollTarget) {
     let activeKey = "buildings"
     let greenKeys = []
@@ -611,6 +629,12 @@ export default function StateDetailsPage ({ location, data }) {
                 buildings we need to BUILD ? wind and solar farms. <br />
                 That's ? a year.
               </p>
+              
+              <AlreadyElectrifiedChart
+                  label={"Power Plants"}
+                  electrifiedPct={pctCleanerPower}
+                  fossilPct={pctFossilPower}
+                />
 
               <p className="h4 mt-5 text-muted">[insert animated map here]</p>
             </div>
