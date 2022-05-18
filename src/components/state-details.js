@@ -636,7 +636,7 @@ export default function StateDetailsPage ({ location, data }) {
                   fossilPct={pctFossilPower}
                 />
 
-              <p className="h4 mt-5 text-muted">[insert animated map here]</p>
+              {/* <p className="h4 mt-5 text-muted">[insert animated map here]</p> */}
             </div>
           )}
           {/* Show standard outro section if power emissions are zero */}
