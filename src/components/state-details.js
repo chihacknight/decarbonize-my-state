@@ -631,7 +631,8 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
               
               <AlreadyElectrifiedChart
-                  label={"Non-Fossil Fuel Power Plants"}
+                  label={"Non-Fossil Fuel Electricity Generation"}
+                  endLabel={"Oil, Gas, and Coal Plants"}
                   electrifiedPct={pctCleanerPower}
                   fossilPct={pctFossilPower}
                 />
