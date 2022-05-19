@@ -300,3 +300,32 @@ footer a {
 
      { opacity: 1 !important; }
 }
+
+/**
+ * Both 404 and 500 error page styling
+ */
+.error-page {
+    display: flex;
+    align-self: center;
+}
+
+.error-page img {
+    margin: auto;
+}
+
+.error-page div {
+    text-align: center;
+    max-width:max-content;
+    flex: 1;
+}
+
+.error-page div p {
+    font-size: medium;
+    font-weight: 700;
+}
+
+.error-page div h1 {
+    font-size: 50px;
+    font-weight: bolder;
+    line-height: 90px;
+}
