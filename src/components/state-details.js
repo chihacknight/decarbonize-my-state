@@ -580,16 +580,12 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="card">
                 <div className="card-body">
-                  <h5 class="card-title">
-                    <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
-                      See a map of dirty power plants in the US
-                    </a>
-                  </h5>
                   <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
+                    <p className="h5" style={{display: 'block'}}>See a map of dirty power plants in the US</p>
                     <img
                       className="img-fluid"
                       src={PowerPlantMap}
-                      alt="Map showing coal, gas and oil power plants in the United States"
+                      alt=""
                     />
                   </a>
                 </div>
