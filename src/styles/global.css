@@ -168,6 +168,10 @@ path:focus, .mapSelected {
     top: 0;
 }
 
+#responsive-navbar-nav > div > a {
+    color: rgba(0, 0, 0, .7);
+}
+
 .table-bordered, .table-bordered td, .table-bordered th {
     border: none;
 }
@@ -176,7 +180,13 @@ path:focus, .mapSelected {
     border-top: 1px solid #dee2e6;
 }
 
-footer { text-align: center; }
+footer { 
+    text-align: center; 
+}
+
+footer a { 
+    color: #004da1;
+}
 
 .custom-tooltip {
     background-color: #fff;
@@ -188,6 +198,10 @@ footer { text-align: center; }
     padding: 2rem;
     margin:  5rem 0;
     background-color: #f3f3f3;
+}
+
+.action-panel a {
+    color: #004da1;
 }
 
 .state-links {
@@ -295,4 +309,33 @@ footer { text-align: center; }
     }
 
      { opacity: 1 !important; }
+}
+
+/**
+ * Both 404 and 500 error page styling
+ */
+.error-page {
+    display: flex;
+    align-self: center;
+}
+
+.error-page img {
+    margin: auto;
+}
+
+.error-page div {
+    text-align: center;
+    max-width:max-content;
+    flex: 1;
+}
+
+.error-page div p {
+    font-size: medium;
+    font-weight: 700;
+}
+
+.error-page div h1 {
+    font-size: 50px;
+    font-weight: bolder;
+    line-height: 90px;
 }
