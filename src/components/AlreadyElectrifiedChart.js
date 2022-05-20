@@ -10,7 +10,6 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => { //ot
         height="50px"
         style={{marginTop:'0.5em'}}
         xmlns="http://www.w3.org/2000/svg"
-        aria-labelledby={`${label}-title ${label}-description`}
         role="img"
       >
         <title id={`${label}-title`}>Percent of {label} electrified</title>

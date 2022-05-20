@@ -216,7 +216,7 @@ export default function StateDetailsPage ({ location, data }) {
       />
 
       <div className="sticky-header d-flex align-items-center">
-        <h1 className="d-flex align-items-center mr-4 mb-0">
+        <h1 id="main" className="d-flex align-items-center mr-4 mb-0">
           <span
             className={"display-3 mr-4 sf-" + stateFaceClass}
             aria-hidden="true"

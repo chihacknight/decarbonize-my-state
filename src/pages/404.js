@@ -10,7 +10,7 @@ const NotFoundPage = () => (
     <div className="error-page">
       <img src={OilPlantImg} alt="Oil power plant"/>
       <div>
-        <h1 className="error-page-h">404: Page not found</h1>
+        <h1 className="error-page-h" id="main">404: Page not found</h1>
         <p className="error-page-p">Sorry, we can't find that page. Try going back to the <Link to="/" >home page</Link>.</p>
       </div>
       <img src={OilPlantImg} alt="Oil power plant"/>

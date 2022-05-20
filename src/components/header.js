@@ -12,6 +12,9 @@ const Header = ({ siteTitle }) => (
       marginBottom: `1.45rem`
     }}
   >
+    <a className="sr-only sr-only-focusable skip-link btn btn-light" href="#main">
+      Skip to main content
+    </a>
     <Link className="nav-text text-body" to="/">{siteTitle}</Link>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">

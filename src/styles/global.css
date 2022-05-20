@@ -11,9 +11,15 @@
 
 body, * {
     font-family: 'Lato', sans-serif;
+    /* Make sure anchors (like the skip to main) account for sticky header */
+    scroll-margin-top: 5rem;
 }
 
 body *:focus {
+    outline: dashed 0.25rem #993404;
+}
+
+.btn:focus {
     outline: dashed 0.25rem #993404;
 }
 
@@ -146,7 +152,6 @@ path:focus, .mapSelected {
     z-index: 100;
 }
 
-
 /** Style header title */
 .nav-text {
     text-decoration: none;
@@ -157,10 +162,15 @@ path:focus, .mapSelected {
     max-width: calc(100% - 80px);
 }
 
+.skip-link:focus {
+    position: absolute;
+    padding: 0.5rem 1rem;
+    top: 0;
+}
+
 #responsive-navbar-nav > div > a {
     color: rgba(0, 0, 0, .7);
 }
-
 
 .table-bordered, .table-bordered td, .table-bordered th {
     border: none;
