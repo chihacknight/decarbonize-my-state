@@ -190,7 +190,7 @@ export default function StateDetailsPage ({ location, data }) {
     ? numberToHumanString(windTurbinesBuildPerYear)
     : '?'
 
-      // #### POWER PLANTS ####
+  // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
 
   powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
@@ -661,13 +661,13 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h4 mt-5 text-muted">
-              <WindSolarBuilds
-                label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
+                <WindSolarBuilds
+                  label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
               </p>
 
               <p className="h4 mt-5 text-muted">
-              <WindSolarBuilds
-                label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
+                <WindSolarBuilds
+                  label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
               </p>
             </div>
           )}
