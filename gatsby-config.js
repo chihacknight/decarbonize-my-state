@@ -4,7 +4,7 @@ module.exports = {
     description: ``,
     author: `Chi Hack Night`,
     url: `https://decarbonizemystate.com/`,
-    image: `/socialcard.png`,
+    image: `socialcard.png`,
     siteName: "Decarbonize My State"
   },
   plugins: [
