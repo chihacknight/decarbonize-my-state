@@ -8,6 +8,7 @@ import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
+import WindSolarBuilds from "./WindSolarBuilds.js"
 
 // image resources
 import GasAppliances from "../images/gas-appliances.png"
@@ -147,6 +148,48 @@ export default function StateDetailsPage ({ location, data }) {
     buildings !== undefined
       ? numberToHumanString(Math.ceil((buildings * cutPerYearPrcnt) / 100))
       : "?"
+
+  // #### SOLAR PANELS & WIND TURBINES ####
+  const targetBuilds = data.allTargetGenerationJson.edges[0].node
+
+  // deconstruct object for simplicity
+  const {
+    total_gen_by_solar: targetGenBySolar,
+    total_gen_by_wind: targetGenByWind,
+    current_solar: currentSolar,
+    current_wind: currentWind,
+    perc_solar_target: percSolarTarget,
+    perc_wind_target: percWindTarget
+  } = targetBuilds
+  
+  // since we are referencing capacity, let's stay consistent and make sure
+  // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
+  const everyDayPerYear = 24 * 365
+  const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000
+  const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
+  const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
+  const currentWindMW = (currentWind / everyDayPerYear) * 1000
+
+  const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
+  const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
+
+  // getting %s for chart
+  const percSolarRemaining = 100 - percSolarTarget
+  const percWindRemaining = 100 - percWindTarget
+
+  // converting values to strings
+  const solarPanelsCountStr = targetGenBySolarMW !== undefined
+    ? numberToHumanString(targetGenBySolarMW)
+    : '?'
+  const windTurbinesCountStr = targetGenByWindMW !== undefined
+    ? numberToHumanString(targetGenByWindMW)
+    : '?'
+  const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
+    ? numberToHumanString(solarPanelsBuildPerYear)
+    : '?'
+  const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
+    ? numberToHumanString(windTurbinesBuildPerYear)
+    : '?'
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -617,12 +660,25 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and
-                buildings we need to BUILD ? wind and solar farms. <br />
-                That's ? a year.
+                So to cut the climate pollution from our power, cars, and buildings 
+                we need to INSTALL <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind 
+                and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar.
+              </p>
+              
+              <p className="h3 mt-5">
+                That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} MWs</strong> of wind capacity 
+                AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} MWs</strong> of solar capacity a year.
               </p>
 
-              <p className="h4 mt-5 text-muted">[insert animated map here]</p>
+              <p className="h4 mt-5 text-muted">
+                <WindSolarBuilds
+                  label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
+              </p>
+
+              <p className="h4 mt-5 text-muted">
+                <WindSolarBuilds
+                  label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
+              </p>
             </div>
           )}
           {/* Show standard outro section if power emissions are zero */}
@@ -784,6 +840,18 @@ export const query = graphql`
             capacity_mw
             utility_name
           }
+        }
+      }
+    }
+    allTargetGenerationJson(filter: {state: {eq: $state}}) {
+      edges {
+        node {
+            total_gen_by_solar
+            total_gen_by_wind
+            current_wind
+            current_solar
+            perc_solar_target
+            perc_wind_target
         }
       }
     }
