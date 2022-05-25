@@ -13,22 +13,20 @@ const Header = ({ siteTitle }) => (
         marginBottom: `1.45rem`
       }}
     >
-      <div className="container">
-        <a className="sr-only sr-only-focusable skip-link btn btn-light" href="#main">
-          Skip to main content
-        </a>
-        <Link className="nav-text text-body" to="/">{siteTitle}</Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
-            <Link className="nav-link" to="/">Home</Link>
-            {/* Commented out for now since these pages are empty
-              <Link className="nav-link" to="/about">About</Link>
-              <Link className="nav-link" to="/terminology">Terminology</Link>
-            */}
-          </Nav>
-        </Navbar.Collapse>
-      </div>
+      <a className="sr-only sr-only-focusable skip-link btn btn-light" href="#main">
+        Skip to main content
+      </a>
+      <Link className="nav-text text-body" to="/">{siteTitle}</Link>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="ml-auto">
+          <Link className="nav-link" to="/">Home</Link>
+          {/* Commented out for now since these pages are empty
+            <Link className="nav-link" to="/about">About</Link>
+            <Link className="nav-link" to="/terminology">Terminology</Link>
+          */}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
     <div className="container">
       <div class=" alert alert-info ml-4 mr-4" role="alert">
