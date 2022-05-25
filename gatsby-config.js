@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'What does it take to decarbonize your state?',
+    title: 'Decarbonize My State',
     description: ``,
     author: `Chi Hack Night`,
     url: `https://decarbonizemystate.com/`,
