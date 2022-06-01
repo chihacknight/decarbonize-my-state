@@ -71,3 +71,4 @@ yarn-error.log
 *.pyc
 
 .yarn
+package-lock.json

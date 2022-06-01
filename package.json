@@ -10,6 +10,7 @@
     "eslint-config-react-app": "^5.2.1",
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
+    "gatsby-plugin-google-gtag": "^4.14.0",
     "gatsby-plugin-manifest": "^2.2.48",
     "gatsby-plugin-netlify-cache": "^1.2.0",
     "gatsby-plugin-offline": "^3.0.41",
