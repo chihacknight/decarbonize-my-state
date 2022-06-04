@@ -190,7 +190,7 @@ export default function StateDetailsPage ({ location, data }) {
     ? numberToHumanString(windTurbinesBuildPerYear)
     : '?'
 
-      // #### POWER PLANTS ####
+  // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
 
   powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
