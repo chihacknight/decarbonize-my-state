@@ -174,8 +174,8 @@ export default function StateDetailsPage ({ location, data }) {
   const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
 
   // getting %s for chart
-  const percSolarRemaining = 100 - percSolarTarget
-  const percWindRemaining = 100 - percWindTarget
+  const totalRemaining = 100 - (percSolarTarget + percWindTarget)
+  const percToTarget = percSolarTarget + percWindTarget
 
   // converting values to strings
   const solarPanelsCountStr = targetGenBySolarMW !== undefined
@@ -671,14 +671,10 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h4 mt-5 text-muted">
-                <WindSolarBuilds
-                  label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
+              <WindSolarBuilds
+                label={'targetGeneration'} percentCurrent={percToTarget} percentRemaining={totalRemaining}/>
               </p>
 
-              <p className="h4 mt-5 text-muted">
-                <WindSolarBuilds
-                  label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
-              </p>
             </div>
           )}
           {/* Show standard outro section if power emissions are zero */}
