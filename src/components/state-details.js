@@ -671,8 +671,8 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h4 mt-5 text-muted">
-                <WindSolarBuilds
-                  label={'targetGeneration'} percentCurrent={percToTarget} percentRemaining={totalRemaining}/>
+              <WindSolarBuilds
+                label={'targetGeneration'} percentCurrent={percToTarget} percentRemaining={totalRemaining}/>
               </p>
 
             </div>
