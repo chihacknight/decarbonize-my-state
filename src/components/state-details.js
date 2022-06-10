@@ -53,14 +53,19 @@ function numberToHumanString (num) {
     return `${(num / 1_000_000).toFixed(1)} million`
   }
 
-  // If in the hundreds or something else, return as is (e.g 534)
-  return num
+  // If in the hundreds or something else, return as is but rounded to whole
+  // number (e.g 534.12 -> 534)
+  return Math.round(num)
 }
 
 const currentYear = new Date().getFullYear()
+
+// The years we have till our zero goal of 20
+const yearsToTarget = 2050 - currentYear;
+
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
+const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
 
 export default function StateDetailsPage ({ location, data }) {
   /**
@@ -113,8 +118,7 @@ export default function StateDetailsPage ({ location, data }) {
   ).toFixed(0)
 
   const rawEmissionsCutPerYear = (
-    sumOfEmissions *
-    (1 / (2050 - currentYear))
+    sumOfEmissions * (1 / yearsToTarget)
   ).toFixed(1)
 
   // #### VEHICLES ####
@@ -170,12 +174,23 @@ export default function StateDetailsPage ({ location, data }) {
   const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
   const currentWindMW = (currentWind / everyDayPerYear) * 1000
 
-  const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
-  const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
+  // Clamp to zero since if we never want to say negative solar needs to be
+  // built
+  const solarPanelsBuildPerYear = Math.max(0, Math.round(
+    (targetGenBySolarMW - currentSolarMW)/ yearsToTarget ))
+  const windTurbinesBuildPerYear = Math.max(0, Math.round(
+    (targetGenByWindMW - currentWindMW)/ yearsToTarget ))
 
-  // getting %s for chart
-  const totalRemaining = 100 - (percSolarTarget + percWindTarget)
-  const percToTarget = percSolarTarget + percWindTarget
+  console.log({
+    percSolarTarget,
+    percWindTarget,
+  })
+
+  // getting percentages for chart
+  // Note that we divide in half since 100% solar and 100% wind is 100% of total
+  // not 200%
+  const percToCleanTarget = percSolarTarget + percWindTarget / 2;
+  const totalRemaining = 100 - percToCleanTarget;
 
   // converting values to strings
   const solarPanelsCountStr = targetGenBySolarMW !== undefined
@@ -184,6 +199,14 @@ export default function StateDetailsPage ({ location, data }) {
   const windTurbinesCountStr = targetGenByWindMW !== undefined
     ? numberToHumanString(targetGenByWindMW)
     : '?'
+
+  const currentSolarMWStr = currentSolarMW !== undefined
+    ? numberToHumanString(currentSolarMW)
+    : '?'
+  const currentWindMWStr = currentWindMW !== undefined
+    ? numberToHumanString(currentWindMW)
+    : '?'
+
   const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
     ? numberToHumanString(solarPanelsBuildPerYear)
     : '?'
@@ -666,13 +689,17 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
               
               <p className="h3 mt-5">
-                That's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} MWs</strong> of wind capacity 
-                AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} MWs</strong> of solar capacity a year.
+                Since {placeTitle} already has {currentSolarMWStr} megawatts of solar power
+                generation and {currentWindMWStr} megawatts of wind power generation,
+                that's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} Megawatts </strong>
+                of wind capacity
+                AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} Megawatts </strong>
+                of solar capacity a year we need to build.
               </p>
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={'targetGeneration'} percentCurrent={percToTarget} percentRemaining={totalRemaining}/>
+                  label={'targetGeneration'} percentCurrent={percToCleanTarget} percentRemaining={totalRemaining}/>
               </p>
 
             </div>

@@ -21,8 +21,8 @@ const WindSolarBuilds = ({ label, percentCurrent, percentRemaining }) => { //oth
         
         <rect x={0} y={'70%'} width={`${percentCurrent}%`} height="30%" fill={percentToColor} />
         <rect x={`${percentCurrent}%`} y={'70%'} width={`${percentRemaining}%`} height="30%" fill={percentRemainingColor} />
-        <text x={0} y={'40%'} fontSize="0.9rem" fontWeight="bold" alignmentBaseline='text-top'> MWs Installed</text>
-        <text x={'100%'} y={'40%'} fontSize="0.9rem"  fontWeight="bold" textAnchor="end" alignmentBaseline='text-top'>Left to Install</text>
+        <text x={0} y={'40%'} fontSize="0.9rem" fontWeight="bold" alignmentBaseline='text-top'>Solar & Wind MWs Installed</text>
+        <text x={'100%'} y={'40%'} fontSize="0.9rem"  fontWeight="bold" textAnchor="end" alignmentBaseline='text-top'>Remaining to Install</text>
       </svg>
     )
   } else {
