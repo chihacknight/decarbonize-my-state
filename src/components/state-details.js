@@ -61,7 +61,7 @@ function numberToHumanString (num) {
 const currentYear = new Date().getFullYear()
 
 // The years we have till our zero goal of 20
-const yearsToTarget = 2050 - currentYear;
+const yearsToTarget = 2050 - currentYear
 
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
@@ -177,9 +177,9 @@ export default function StateDetailsPage ({ location, data }) {
   // Clamp to zero since if we never want to say negative solar needs to be
   // built
   const solarPanelsBuildPerYear = Math.max(0, Math.round(
-    (targetGenBySolarMW - currentSolarMW)/ yearsToTarget ))
+    (targetGenBySolarMW - currentSolarMW)/ yearsToTarget))
   const windTurbinesBuildPerYear = Math.max(0, Math.round(
-    (targetGenByWindMW - currentWindMW)/ yearsToTarget ))
+    (targetGenByWindMW - currentWindMW)/ yearsToTarget))
 
   console.log({
     percSolarTarget,
@@ -189,8 +189,8 @@ export default function StateDetailsPage ({ location, data }) {
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
   // not 200%
-  const percToCleanTarget = percSolarTarget + percWindTarget / 2;
-  const totalRemaining = 100 - percToCleanTarget;
+  const percToCleanTarget = percSolarTarget + percWindTarget / 2
+  const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
   const solarPanelsCountStr = targetGenBySolarMW !== undefined
