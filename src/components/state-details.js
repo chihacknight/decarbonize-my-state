@@ -181,11 +181,6 @@ export default function StateDetailsPage ({ location, data }) {
   const windTurbinesBuildPerYear = Math.max(0, Math.round(
     (targetGenByWindMW - currentWindMW)/ yearsToTarget))
 
-  console.log({
-    percSolarTarget,
-    percWindTarget,
-  })
-
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
   // not 200%
