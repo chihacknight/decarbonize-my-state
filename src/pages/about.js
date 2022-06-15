@@ -9,16 +9,16 @@ const AboutPage = ({data, location}) => {
     <Layout>
       <SEO title="About :: Decarbonize My State" />
       <div className="container">
-        <div className="about">
+        <div>
           <h1 id="main border-bottom" className="py-4">About Decarbonize My State</h1>
-          <p>We have 28 years to reduce worldwide emissions to zero to avoid the worst impacts of climate change. But how do we get there and what can I do to help?</p>
-          <p><strong>Decarbonize My State </strong>is a website built to answer that question and galvanize US residents to take direct and personal action to fight climate change. Inspired by a recent talk by Juan-Pablo Velez titled<a href="https://chihacknight.org/events/2022/01/11/juan-pablo-velez.html"> “What does it actually take to decarbonize a state?</a>” and the book<a href="https://www.rewiringamerica.org/electrify-the-book"> “Electrify, by Saul Griffith from Rewiring America</a>”, we've gathered data on climate pollution and its sources for each state to make convincing arguments for society-wide electrification and investment in renewable energy like wind and solar.</p>
+          <p>We have { 2050 - new Date().getFullYear() } years to reduce worldwide emissions to zero to avoid the worst impacts of climate change. But how do we get there and what can I do to help?</p>
+          <p><strong>Decarbonize My State </strong>is a website built to answer that question and galvanize US residents to take direct and personal action to fight climate change. Inspired by a recent talk by Juan-Pablo Velez titled<a href="https://chihacknight.org/events/2022/01/11/juan-pablo-velez.html"> “What does it actually take to decarbonize a state?</a>” and the book<a href="https://www.rewiringamerica.org/electrify-the-book"> “Electrify”, by Saul Griffith from Rewiring America</a>, we've gathered data on climate pollution and its sources for each state to make convincing arguments for society-wide electrification and investment in renewable energy like wind and solar.</p>
           <p>Our goals for this website are to help people working on this project and our immediate peers and neighbors to:</p>
           <ul>
             <li>Understand what has to happen to decarbonize each US state, and what policies need to be passed to drive those actions</li>
-            <li>Understand the highest impact ways individuals can help by</li>
-            <li>Electrifying their own fossil fuel infrastructure</li>
-            <li>Joining political campaigns to pass those policies</li> 
+            <li>Learn the highest impact ways individuals can help</li>
+            <li>Electrify their own fossil fuel infrastructure</li>
+            <li>Join political campaigns to pass those policies</li> 
             <li>Dispel common misconceptions and strawman arguments against electrification</li>
           </ul>
           <h2 className="pt-3">Team and credits</h2>
@@ -29,7 +29,7 @@ const AboutPage = ({data, location}) => {
           <h2 className="pt-3">Data and sources</h2>
           <p>All of the data used on this website are from publicly available and trusted government and nonprofit sources. Below is a description of the primary datasets and their publishers. For more details on how we discovered and worked with this data, take a look at our <a href="https://github.com/chihacknight/decarbonize-my-state/issues?q=label%3Adata">GitHub issue tracker for data</a> and our <a href="https://github.com/chihacknight/decarbonize-my-state/tree/main/data">data folder</a> of this open source project.</p>
           
-          <h3 className="pt-2"><strong>US Emissions by State</strong></h3>
+          <h3 className="pt-2">US Emissions by State</h3>
           <p>
             <strong><a href="https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions">Climate Watch - U.S. States Greenhouse Gas Emissions</a></strong>
             <br />World Resources Institute
