@@ -13,16 +13,16 @@ const WindSolarBuilds = ({ label, percentCurrent, percentRemaining }) => { //oth
         aria-labelledby={`${label}-title ${label}-description`}
         role="img"
       >
-        <title id={`${label}-title`}>Percent of {label} electrified</title>
+        <title id={`${label}-title`}>Percent to Needed Electrification</title>
         <desc id={`${label}-description`}>
-          A chart showing the share of {label} that has already been installed and rest to be installed.
+          A chart showing the share of Solar and Wind capacity that has already been installed and rest to be installed.
           We are {percentCurrent}% of the way to what we need to be carbon neutral by 2050.
         </desc>
         
         <rect x={0} y={'70%'} width={`${percentCurrent}%`} height="30%" fill={percentToColor} />
         <rect x={`${percentCurrent}%`} y={'70%'} width={`${percentRemaining}%`} height="30%" fill={percentRemainingColor} />
-        <text x={0} y={'40%'} fontSize="0.9rem" fontWeight="bold" alignmentBaseline='text-top'>{label} Installed Capacity</text>
-        <text x={'100%'} y={'40%'} fontSize="0.9rem"  fontWeight="bold" textAnchor="end" alignmentBaseline='text-top'>Not yet</text>
+        <text x={0} y={'40%'} fontSize="0.9rem" fontWeight="bold" alignmentBaseline='text-top'>Solar & Wind MWs Installed</text>
+        <text x={'100%'} y={'40%'} fontSize="0.9rem"  fontWeight="bold" textAnchor="end" alignmentBaseline='text-top'>Remaining to Install</text>
       </svg>
     )
   } else {
