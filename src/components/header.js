@@ -21,8 +21,8 @@ const Header = ({ siteTitle }) => (
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
           <Link className="nav-link" to="/">Home</Link>
+          <Link className="nav-link" to="/about">About</Link>
           {/* Commented out for now since these pages are empty
-            <Link className="nav-link" to="/about">About</Link>
             <Link className="nav-link" to="/terminology">Terminology</Link>
           */}
         </Nav>
