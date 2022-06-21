@@ -49,7 +49,7 @@ const IndexPage = ({data}) => {
   return (
     <Layout>
       <SEO title="What does it take to decarbonize your state?" 
-        description={`To get to zero by 2050, the US must cut climate pollution by ${cutPerYearPrcnt}% a year.`}
+        description="You can help decarbonize your state, and it's a lot simpler than you think! Learn how with Decarbonize My State."
       />
       <div className="main-header">
         <h1 id="main" className='display-4 text-center font-weight-bold'>

@@ -257,7 +257,6 @@ export default function StateDetailsPage ({ location, data }) {
         title={`What does it take to decarbonize ${placeTitle}?`}
         description={descriptionText}
       />
-      <meta name="description" content="State Meta Tag Test"></meta>
 
       <div className="sticky-header d-flex align-items-center">
         <h1 id="main" className="d-flex align-items-center mr-4 mb-0">
