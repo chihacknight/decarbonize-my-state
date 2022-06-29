@@ -5,7 +5,7 @@
  */
 
 
-.main-header { margin: 10rem 0; }
+.main-header { margin: 3rem 0 5rem 0; }
 
 /** Tablet & mobile - move legend below the map */
 @media (max-width: 991px) {

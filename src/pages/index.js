@@ -52,59 +52,19 @@ const IndexPage = ({data}) => {
 
       <div className="main-header">
         <h1 id="main" className='display-4 text-center font-weight-bold'>
-          What does it take to <br className="d-none d-lg-block"/>
-          decarbonize your state?
+          What does take...</h1>
+        <h1 className='display-4 text-center font-weight-bold'>
+          to decarb your state?
         </h1>
-        <p className="h3 text-center mt-4">
-          The answer is less complicated than you think.
+        <p className="h3 text-center mt-2">
+          The answer is simpler than you think.
         </p>
       </div>
 
       <hr></hr>
 
-      <p className="h1 mt-6 mb-5 text-center main-phrase">
-        To get to <strong>zero</strong> by
-        2050, the US must <br className="d-none d-lg-block" />
-        cut climate pollution by <strong>{cutPerYearPrcnt}% a year.</strong>
-      </p>
-
-      <h2 className="h4 font-weight-bold">Total US Emissions</h2>
-      <p className="h6">
-        Million metric tons of CO<sub>2</sub> equivalent (MMTCO2e) emissions
-      </p>
-      <SimpleAreaChart emissions_data={emissionsOverTime}/>
-
-      <p className='h2 text-center mt-7 mb-5'>
-        To do that (and solve the climate crisis) there's one main thing
-      </p>
-
-      <div className="electrication-cont d-flex justify-content-center mt-7">
-        {/* Desktop only graph */}
-        <div className="d-none d-md-block">
-          <SingleBarChart emissionsData={barChartData} homeView={true} />
-        </div>
-        {/* Mobile only graph */}
-        <div className="d-md-none">
-          <SingleBarChart emissionsData={barChartData} homeView={true} mobileView={true} />
-        </div>
-
-        <div className="ml-3 ml-md-5">
-          <p className="h1 font-weight-boldest mt-6 mb-7">
-            Clean <br/> Electrification!
-          </p>
-
-          <p className="h3">...and then there's everything else</p>
-        </div>
-      </div>
-
-      <p className="h1 text-center mt-8 font-weight-bold main-phrase">
-        The levers of change are at the
-        state level, <br className="d-none d-lg-block" />
-        and each state is different.
-      </p>
-
-      <p className="text-center mt-5 mb-5">
-        Click on your state to see what it takes to decarbonize by 2050
+      <p className="text-center mt-5 mb-4">
+        Click to see how your state will end climate pollution by 2050
       </p>
 
       <div className="mb-md-5">
