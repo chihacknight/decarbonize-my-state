@@ -305,7 +305,8 @@ export default function StateDetailsPage ({ location, data }) {
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
-        <SimpleAreaChart emissions_data={emissionsByYear} />
+        <SimpleAreaChart emissionsData={emissionsByYear}
+          title={'Emissions in ' + placeTitle}/>
 
         <p className="h1 font-weight-bold text-center mt-5">
           We can do it. Here's how.

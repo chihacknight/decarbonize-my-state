@@ -12,42 +12,59 @@ import {
   ReferenceDot
 } from "recharts"
 
-import DataModal from './data-modal';
+import DataModal from './data-modal'
 
-export default function SimpleAreaChart ({ emissions_data }) {
+export default function SimpleAreaChart ({ emissionsData, title }) {
 
-  const annualhistoricalEmissions = emissions_data.map((item) => {
-    var data = { year: item.year, hist: 0 }
-    data.hist = Math.round(100*Object.entries(item)
-      .filter(([key, _val]) => key !== 'year')
-      .reduce((acc, [_key, val]) => acc + val, 0))/100
+  const YearDataKey = 'year';
+  const EmissionsDataKey = 'hist';
+  const ProjectionDataKey = 'projection';
+
+  const annualHistoricEmissions = emissionsData.map((item) => {
+    var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 }
+
+    data[EmissionsDataKey] = Math.round(100*Object.entries(item)
+      .filter(([key, _val]) => key !== YearDataKey)
+      .reduce((acc, [_key, val]) => acc + val, 0)) /100
+
     return data
   })
 
   const currYear = new Date().getFullYear()
   const yearsLeft = 2050 - currYear
-  const reduceFrom = annualhistoricalEmissions[annualhistoricalEmissions.length - 1].hist
+  const reduceFrom
+    = annualHistoricEmissions[annualHistoricEmissions.length - 1][EmissionsDataKey]
   var projection = []
 
-
   for (let step = 0; step < (yearsLeft + 1); step++) {
-    if (step === 0) { projection.push({ year: currYear, hist: reduceFrom, projected: reduceFrom }) }
+    if (step === 0) {
+      projection.push({
+        [YearDataKey]: currYear,
+        [EmissionsDataKey]: reduceFrom,
+        [ProjectionDataKey]: reduceFrom
+      })
+    }
     else {
       var rounded = (Math.round((reduceFrom - reduceFrom * step / yearsLeft) * 100)) / 100
       if (rounded < 0) { rounded = 0 }
-      projection.push({ year: step + currYear, projected: rounded })
+      projection.push({ [YearDataKey]: step + currYear, [ProjectionDataKey]: rounded })
     }
   }
 
-  var data = annualhistoricalEmissions.concat(projection)
-  const dataMidPoint = data.find(item => item.year === currYear).hist / 2
+  var data = annualHistoricEmissions.concat(projection)
+  const dataMidPoint = data.find(item => item.year === currYear)[EmissionsDataKey] / 2
 
-  console.log('data', data);
+  // Data headers for the modal
+  const dataHeaders = [
+    { title: 'Year', key: YearDataKey },
+    { title: 'Gigatonnes CO2 Emitted', key: EmissionsDataKey },
+    { title: 'Goal CO2 Emissions', key: ProjectionDataKey }
+  ];
 
-  const [showDataModal, setShowDataModal] = useState(false);
+  const [showDataModal, setShowDataModal] = useState(false)
 
-  const handleCloseModal = () => setShowDataModal(false);
-  const handleShowModal = () => setShowDataModal(true);
+  const handleCloseModal = () => setShowDataModal(false)
+  const handleShowModal = () => setShowDataModal(true)
   
   return (
     <>
@@ -65,14 +82,14 @@ export default function SimpleAreaChart ({ emissions_data }) {
         >
           {/* <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" /> */}
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" >
+          <XAxis dataKey={YearDataKey} >
             <Label value="Year" offset={-15} position="insideBottom" />
           </XAxis>
           <YAxis />
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="hist"
+            dataKey={EmissionsDataKey}
             stackId="1"
             stroke="#b65c00"
             fill="#e8ceb3"
@@ -81,7 +98,7 @@ export default function SimpleAreaChart ({ emissions_data }) {
           />
           <Area
             type="monotone"
-            dataKey="projected"
+            dataKey={ProjectionDataKey}
             stackId="2"
             stroke="#36a654"
             fill="#c1e5cb"
@@ -97,7 +114,11 @@ export default function SimpleAreaChart ({ emissions_data }) {
         View Data Table
       </Button>
 
-      <DataModal show={showDataModal} chartData={data}
+      <DataModal
+        chartData={data}
+        headers={dataHeaders}
+        show={showDataModal}
+        title={title}
         handleClose={handleCloseModal}></DataModal>
     </>
   )

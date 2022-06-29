@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "react-bootstrap"
+import { Button, Table, Modal } from "react-bootstrap"
 
 /**
  * A modal that we use to show a two-dimensional array of data. Used so that
@@ -7,21 +7,54 @@ import { Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "
  *
  * Props:
  *
- * @param {Array<Array<number|string>>} chartData
+ * @param {Array<{ [key: string]: number|string}>} chartData
  *   The data to render
+ * @param {Array<{ key: string; title: string }>} headers
+ *   The headers to show for the data (e.g. ['Year', 'Emissions'])
  * @param {boolean} show
  *   Whether we shoud be showing the modal
+ * @param {string} title
+ *   The modal title/the title of the data set
  * @param {function} handleClose
  *   A callback function to close the modal
  */
-export default function DataModal({ chartData, show, handleClose }) {
+export default function DataModal ({
+  chartData,
+  headers,
+  show,
+  title = 'Emissions',
+  // Output function
+  handleClose,
+}) {
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} scrollable={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        {/* Make modal body tabbable so keyboard users can scroll it */}
+        <Modal.Body className="data-modal-body" tabindex="0"
+          aria-label="Data Table Section">
+          <Table striped bordered>
+            <thead>
+              <tr>
+                {headers.map((header, index) => (
+                  <td key={index}>{header.title}</td>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {chartData.map((row, index) => (
+                <tr key={index}>
+                  {headers.map((header, index) => (
+                    // Show — if no data
+                    <td key={index}>{row[header.key] || '—'}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -29,6 +62,6 @@ export default function DataModal({ chartData, show, handleClose }) {
         </Modal.Footer>
       </Modal>
     </>
-  );
+  )
 }
 
