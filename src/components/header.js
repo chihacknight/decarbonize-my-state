@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => (
     </Navbar>
     <div className="container">
       <div className="alert alert-info ml-4 mr-4" role="alert">
-        <strong>Decarbonize My State is in an open beta! </strong>
+        <strong>Decarb My State is in an open beta! </strong>
         Some content or links may be missing.
       </div>
     </div>

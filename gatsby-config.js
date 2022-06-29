@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: 'Decarbonize My State',
+    title: 'Decarb My State',
     description: ``,
     author: `Chi Hack Night`,
-    url: `https://decarbonizemystate.com/`,
+    url: `https://decarbmystate.com/`,
     image: `socialcard.png`,
-    siteName: "Decarbonize My State"
+    siteName: "Decarb My State"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
