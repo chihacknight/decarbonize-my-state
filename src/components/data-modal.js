@@ -28,12 +28,12 @@ export default function DataModal ({
 }) {
   return (
     <>
-      <Modal show={show} onHide={handleClose} scrollable={true}>
+      <Modal show={show} onHide={handleClose} scrollable centered>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         {/* Make modal body tabbable so keyboard users can scroll it */}
-        <Modal.Body className="data-modal-body" tabindex="0"
+        <Modal.Body className="data-modal-body" tabIndex="0"
           aria-label="Data Table Section">
           <Table striped bordered>
             <thead>

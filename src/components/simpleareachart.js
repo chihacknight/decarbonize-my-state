@@ -16,9 +16,9 @@ import DataModal from './data-modal'
 
 export default function SimpleAreaChart ({ emissionsData, title }) {
 
-  const YearDataKey = 'year';
-  const EmissionsDataKey = 'hist';
-  const ProjectionDataKey = 'projection';
+  const YearDataKey = 'year'
+  const EmissionsDataKey = 'hist'
+  const ProjectionDataKey = 'projection'
 
   const annualHistoricEmissions = emissionsData.map((item) => {
     var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 }
@@ -59,7 +59,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
     { title: 'Year', key: YearDataKey },
     { title: 'Gigatonnes CO2 Emitted', key: EmissionsDataKey },
     { title: 'Goal CO2 Emissions', key: ProjectionDataKey }
-  ];
+  ]
 
   const [showDataModal, setShowDataModal] = useState(false)
 
