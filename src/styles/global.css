@@ -339,3 +339,5 @@ footer a {
     font-weight: bolder;
     line-height: 90px;
 }
+
+.data-modal-body { max-height: 40vh; }
