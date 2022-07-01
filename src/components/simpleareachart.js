@@ -109,10 +109,12 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
           <ReferenceDot y={dataMidPoint} x={currYear+1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
         </AreaChart>
       </ResponsiveContainer>
-
-      <Button variant="secondary" onClick={handleShowModal}>
-        View Data Table
-      </Button>
+      
+      <div className="text-center">
+        <Button variant="secondary" onClick={handleShowModal}>
+          View Data Table
+        </Button>
+      </div>
 
       <DataModal
         chartData={data}
