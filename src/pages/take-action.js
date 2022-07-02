@@ -9,8 +9,8 @@ const TakeActionPage = ({data, location}) => {
     <Layout>
       <SEO title="Take Action! :: Decarbonize My State" />
       <div className="container">
-       <h1>Ready to do your part?</h1>
-       <p>The best way to decarbonize your state is to electrify it. There are two big ways you can do your part.</p>
+        <h1>Ready to do your part?</h1>
+        <p>The best way to decarbonize your state is to electrify it. There are two big ways you can do your part.</p>
         <h2>Get Personal: Electrify your machines!</h2>
         <p>
           For most Americans, more than half your carbon footprint comes from how you heat and power your home, and from the car you drive. 
@@ -40,17 +40,17 @@ const TakeActionPage = ({data, location}) => {
             <a href="https://www.climateslate.com/candidates?filter-by-Priority=Top%20Priority">Donate Now.</a> 
           </li>
           <li>
-          <div class="font-weight-bold">
+            <div class="font-weight-bold">
           Pressure Electeds to Pass Climate Policy:
-          </div>
+            </div>
            It’s not enough to elect better candidates - we also have to pressure existing electeds to pass key climate policy now. Campaigns to do this already exist in your state – the highest impact thing you can do is join them. Sign up below and we will share what we know about climate campaigns in your state.
           </li>
         </ul>
         <h2>Learn about climate campaigns in your state!</h2>
-        <div class="form-container">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdiwiT6OZO0jsnLu22r6ClBZLh8fvfGIiYu_5coOvjYXqogtw/viewform?embedded=true" width="640" height="720" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        <div class="form-container embed-responsive embed-responsive-16by9">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdiwiT6OZO0jsnLu22r6ClBZLh8fvfGIiYu_5coOvjYXqogtw/viewform?embedded=true" class="embed-responsive-item " width="640" height="1720" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </div>
-        </div>
+      </div>
     </Layout>
   )
 }
