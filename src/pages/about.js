@@ -88,14 +88,14 @@ const AboutPage = ({data, location}) => {
           <h2 className="pt-3">Data and sources</h2>
           <p>All of the data used on this website are from publicly available and trusted government and nonprofit sources. Below is a description of the primary datasets and their publishers. For more details on how we discovered and worked with this data, take a look at our <a href="https://github.com/chihacknight/decarbonize-my-state/issues?q=label%3Adata">GitHub issue tracker for data</a> and our <a href="https://github.com/chihacknight/decarbonize-my-state/tree/main/data">data folder</a> of this open source project.</p>
           
-          <h4 className="pt-2">US Emissions by State</h4>
+          <h3 className="pt-2 h4">US Emissions by State</h3>
           <p>
             <strong><a href="https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions">Climate Watch - U.S. States Greenhouse Gas Emissions</a></strong>
             <br />World Resources Institute
             <br />March 23, 2021
           </p>
           
-          <h4 className="pt-2">US Building footprints and electrification</h4>
+          <h3 className="pt-2 h4">US Building footprints and electrification</h3>
           <p>
             <strong><a href="https://github.com/microsoft/USBuildingFootprints">US Building Footprints</a></strong>
             <br />Microsoft Maps
@@ -108,21 +108,21 @@ const AboutPage = ({data, location}) => {
             <br />Dec 2021
           </p>
 
-          <h4 className="pt-2">Vehicles by State</h4>
+          <h3 className="pt-2 h4">Vehicles by State</h3>
           <p>
             <strong><a href="https://www.fhwa.dot.gov/policyinformation/statistics/2017/mv1.cfm">State Motor-Vehicle Registrations</a></strong>
             <br />US Department of Transportation
             <br />Feb 2021
           </p>
 
-          <h4 className="pt-2">Power plants by State</h4>
+          <h3 className="pt-2 h4">Power plants by State</h3>
           <p>
             <strong><a href="https://www.epa.gov/airmarkets/power-plants-and-neighboring-communities#mapping">Environmental Justice Screening and Mapping Tool (EJScreen)</a></strong>
             <br />US Environmental Protection Agency (EPA)
             <br />Jan 27, 2021
           </p>
 
-          <h4 className="pt-2">State renewable generation targets</h4>
+          <h3 className="pt-2 h4">State renewable generation targets</h3>
           <p>
             <strong><a href="https://www.eia.gov/opendata/v1/qb.php?category=1">Electric generation by source 2001-2021</a></strong>
             <br />US Energy Information Administration (EIA)
