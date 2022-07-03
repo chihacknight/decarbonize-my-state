@@ -50,7 +50,7 @@ const AboutPage = ({data, location}) => {
           </ol>
           <p>Decarbonization is also <strong>inevitable</strong>. Wind, solar, and batteries are getting so cheap, they’re starting to outcompete fossil fuels. And they’re only going to get cheaper.</p>
 
-          <p>The problem: decarbonization is going to <strong>take too long</strong>. We need to speed it way up, using climate policy. And with climate action blocked in Congress, the path forward is through the states.</p>
+          <p>The problem: decarbonization is going to <strong>take too long</strong> to avoid the worst effects of climate change. We need to speed it way up, using climate policy. And with climate action blocked in Congress, the path forward is through the states.</p>
 
           <h2 className="pt-3">Why focus on states?</h2>
           <p>Three reasons:</p>
@@ -59,11 +59,11 @@ const AboutPage = ({data, location}) => {
             <li><strong>Opportunity</strong>: state and local governments are responsible for 50-75% of the climate action we need—regardless of what Congress does—according to <a href="https://www.climatecabinetaction.org/">Climate Cabinet</a>. And they can have a surprisingly huge impact: taken together, CO, IL, WA, CA, and NY make up the world’s 4th largest economy. They’ve all passed groundbreaking climate laws recently. And with the right policy, they could single-handedly make solar panels, wind turbines, heat pumps, and electric cars much cheaper, worldwide.</li>
             <li><strong>Accessibility</strong>: it’s much easier for regular people to make a difference at the state level. You can lobby your legislators personally. You can run for local office, or get someone elected. You can join one of the issue campaigns that are winning climate policy across the country—typically, they have only have a few dozen volunteers, so your involvement can actually help pass a bill.</li>
           </ol>
-          <p>Ready to do something? <a href="do-something">Get started here</a>.</p>
+          <p>Ready to do something in your state? <a href="do-something">Get started here</a>.</p>
 
           <h2 className="pt-3">Who built this?</h2>
           <p>This is an all-volunteer project made with love by folks from <a href="https://chihacknight.org/">ChiHackNight</a> and <a href="https://climate.win/">Win Climate</a>.</p>
-          <p>The team includes: <a href="https://derekeder.com">Derek Eder</a>,<a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>, <a href="https://viktorkoves.com/">Viktor Köves</a>, <a href="https://chihacknight.org/board-of-directors/sean-watland.html">Sean Watland</a>, <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>, <a href="https://dylanhalpern.com/">Dylan Halpern</a>, <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,<a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>, <a href="https://www.linkedin.com/in/sjegoodman/">Samantha Goodman</a>, <a href="https://www.linkedin.com/in/shelbybarron/">Shelby Barron</a>, and <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>.</p>
+          <p>The team includes: <a href="https://derekeder.com">Derek Eder</a>,<a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>, <a href="https://viktorkoves.com/">Viktor Köves</a>, <a href="https://chihacknight.org/board-of-directors/sean-watland.html">Sean Watland</a>, <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>, <a href="https://dylanhalpern.com/">Dylan Halpern</a>, <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,<a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>, <a href="https://www.linkedin.com/in/sjegoodman/">Samantha Goodman</a>, <a href="https://www.linkedin.com/in/shelbybarron/">Shelby Barron</a>, <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>, Surag Nuthulapaty and Robert Herrera.</p>
           <p>The initial code for this project was forked from <a href="https://greenjobsdata.com/">Who benefits from climate ambition?</a> by Data for Progress, Sunrise Movement and DataMade.</p>
 
           <h2 className="pt-3">Where did you get your ideas?</h2>
@@ -142,7 +142,7 @@ const AboutPage = ({data, location}) => {
           
           <h2 className="pt-3">Contact us</h2>
           <p>Found a bug?<a href="https://github.com/chihacknight/decarbonize-my-state/issues"> Report it on our issue tracker!</a></p>
-          <p>Have a suggestion or question? Contact us at <a href="mailto:info@decarbonizemystate.com">info@decarbonizemystate.com</a></p>
+          <p>Have a suggestion or question? Contact us at <a href="mailto:info@decarbmystate.com">info@decarbmystate.com</a></p>
         </div>
       </div>
     </Layout>
