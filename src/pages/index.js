@@ -37,8 +37,9 @@ const IndexPage = ({data}) => {
   
   return (
     <Layout>
-      <SEO title="What does it take to decarbonize your state?" />
-
+      <SEO title="What does it take to decarbonize your state?" 
+        description="You can help decarbonize your state, and it's a lot simpler than you think! Learn how with Decarbonize My State."
+      />
       <div className="main-header">
         <h1 id="main" className='display-4 text-center font-weight-bold'>
           What does take...</h1>
