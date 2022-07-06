@@ -344,3 +344,5 @@ footer a {
     display: table;
     height: 810px;
 }
+
+.data-modal-body { max-height: 40vh; }

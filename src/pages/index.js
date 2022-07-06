@@ -73,7 +73,8 @@ const IndexPage = ({data}) => {
       <p className="h6">
         Million metric tons of CO<sub>2</sub> equivalent (MMTCO2e) emissions
       </p>
-      <SimpleAreaChart emissions_data={emissionsOverTime}/>
+      <SimpleAreaChart emissionsData={emissionsOverTime}
+        title="Total US Emissions"/>
 
       <p className='h2 text-center mt-7 mb-5'>
         To do that (and solve the climate crisis) there's one main thing
