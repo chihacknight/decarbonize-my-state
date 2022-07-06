@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SingleBarChart from "../components/singlebar"
-import getLatestUsData from "../components/getLatestEmissions"
+import { getLatestUsData } from "../components/getLatestEmissions"
 
 const getCleanData = (data) => {
   let mutableDataObj = {}
@@ -25,11 +25,12 @@ const getCleanData = (data) => {
   return mutableDataObj
 }
 
-const AboutPage = ({data, location}) => {
+const AboutPage = ({data}) => {
 
-  //const cleanData = getCleanData(data)
+  const cleanData = getCleanData(data)
   // Prep data for the SingleBarChart breaking down emissions by category
-  //const barChartData = getLatestUsData(cleanData)[0]
+  console.log(cleanData)
+  const barChartData = getLatestUsData(cleanData)[0]
 
 
   return (
@@ -48,6 +49,27 @@ const AboutPage = ({data, location}) => {
             <li>We <strong>electrify</strong> the fossil fuel machines we use to heat our homes, cook our food, and get around.</li>
             <li>We <strong>clean</strong> all our electricity, mostly by building wind and solar. (And we need to <strong>double</strong> the electricity we produce today, to power our new electric machines.)</li>
           </ol>
+
+          <div className="electrication-cont d-flex justify-content-center my-3">
+            {/* Desktop only graph */}
+            <div className="d-none d-md-block">
+              <SingleBarChart emissionsData={barChartData} homeView={true} />
+            </div>
+            {/* Mobile only graph */}
+            <div className="d-md-none">
+              <SingleBarChart emissionsData={barChartData} homeView={true} mobileView={true} />
+            </div>
+
+            <div className="ml-3 ml-md-5">
+              <p className="h1 font-weight-boldest mt-6 mb-7">
+                Clean <br/> Electrification!
+              </p>
+
+              <p className="h3">...and then there's everything else</p>
+            </div>
+          </div>
+
+
           <p>Decarbonization is also <strong>inevitable</strong>. Wind, solar, and batteries are getting so cheap, they’re starting to outcompete fossil fuels. And they’re only going to get cheaper.</p>
 
           <p>The problem: decarbonization is going to <strong>take too long</strong> to avoid the worst effects of climate change. We need to speed it way up, using climate policy. And with climate action blocked in Congress, the path forward is through the states.</p>
@@ -150,3 +172,30 @@ const AboutPage = ({data, location}) => {
 }
 
 export default AboutPage
+
+export const query = graphql`
+  query AboutQuery {
+    allBuildingsJson {
+      edges {
+        node {
+          buildings
+          state
+        }
+      }
+    }
+    allEmissionsJson {
+      edges {
+        node {
+          state
+          emissionsByYear {
+            buildings
+            dumps_farms_industrial_other
+            dirty_power
+            transportation
+            year
+          }
+        }
+      }
+    }
+  }
+`

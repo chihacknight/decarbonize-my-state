@@ -2,10 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import SingleBarChart from "../components/singlebar"
 import ChoroplethMap from "../components/choroplethmap"
-import {getLatestEmissions, getLatestUsData} from "../components/getLatestEmissions"
-import SimpleAreaChart from "../components/simpleareachart"
+import {getLatestEmissions} from "../components/getLatestEmissions"
 
 const getCleanData = (data) => {
   let mutableDataObj = {}
@@ -28,11 +26,6 @@ const getCleanData = (data) => {
 
 const IndexPage = ({data}) => {
   const cleanData = getCleanData(data)
-  // Prep data for emissions over time chart
-  const emissionsOverTime = cleanData["united_states"].emissionsByYear
-
-  // Prep data for the SingleBarChart breaking down emissions by category
-  const barChartData = getLatestUsData(cleanData)[0]
 
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
@@ -41,10 +34,6 @@ const IndexPage = ({data}) => {
 
   // TODO: Extract currentYear and cutPerYearPrcnt to common place
   const currentYear = new Date().getFullYear()
-
-  // We want to get to 0 by 2050 and we use our current emissions as a start,
-  // so the % to cut by is 100 divided by the number of years we have
-  const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
   
   return (
     <Layout>
