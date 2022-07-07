@@ -344,4 +344,9 @@ footer a {
     line-height: 90px;
 }
 
+.form-container { 
+    display: table;
+    height: 810px;
+}
+
 .data-modal-body { max-height: 40vh; }
