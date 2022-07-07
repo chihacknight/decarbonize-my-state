@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ChoroplethMap from "../components/choroplethmap"
@@ -70,14 +70,14 @@ const IndexPage = ({data}) => {
 
       <hr className="mt-7" />
 
-      <section className="text-center mb-8">
+      <section className="text-center mb-8 mt-7">
         <br className="d-none d-lg-block" />
-        <div className="h1 font-weight-bold">Ready to do your part now?</div>
+        <h2 className="h1 font-weight-bold">Ready to do your part now?</h2>
 
         <p className="h4 mt-4">
           Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
           <br className="d-none d-lg-block" />
-          <a class='btn btn-lg btn-outline-secondary my-4' href='/take-action'>Take Action</a>
+          <Link className='btn btn-lg btn-success mt-5' to='/take-action'>Take Action</Link>
         </p>
       </section>
     </Layout>

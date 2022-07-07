@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
 import SingleBarChart from "../components/singlebar"
@@ -750,17 +750,17 @@ export default function StateDetailsPage ({ location, data }) {
         </Scrollspy>
       </div>
 
-      <hr className="mt-7" />
+      <hr className="mt-5" />
 
       <section className="text-center mb-8">
-        <div className="h1 mt-7">✅</div>
+        <div className="h1 mt-5">✅</div>
         <br className="d-none d-lg-block" />
         <div className="h1 font-weight-bold">Ready to do your part?</div>
 
         <p className="h4 mt-4">
           Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
           <br className="d-none d-lg-block" />
-          <a class='btn btn-lg btn-outline-secondary my-4' href='/take-action'>Take Action</a>
+          <Link className='btn btn-lg btn-success mt-5' to='/take-action'>Take Action</Link>
         </p>
       </section>
     </Layout>
