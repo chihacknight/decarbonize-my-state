@@ -47,7 +47,7 @@ const IndexPage = ({data}) => {
           to decarb your state?
         </h1>
         <p className="h3 text-center mt-2">
-          The answer is simpler than you think.
+          The answer to climate change is simpler than you think
         </p>
       </div>
 
@@ -67,6 +67,19 @@ const IndexPage = ({data}) => {
 
         <StatesList stateSlugs={stateSlugs}/>
       </div>
+
+      <hr className="mt-7" />
+
+      <section className="text-center mb-8">
+        <br className="d-none d-lg-block" />
+        <div className="h1 font-weight-bold">Ready to do your part now?</div>
+
+        <p className="h4 mt-4">
+          Learn how to <strong>electrify your own machines</strong> and how to <strong>pass local policy</strong> to electrify the rest
+          <br className="d-none d-lg-block" />
+          <a class='btn btn-lg btn-outline-secondary my-4' href='/take-action'>Take Action</a>
+        </p>
+      </section>
     </Layout>
   )
 }

@@ -449,24 +449,6 @@ export default function StateDetailsPage ({ location, data }) {
               />
             </div>
 
-            <div className="action-panel">
-              <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-              {/* TODO: Make these link somewhere */}
-              <ul className="mt-3 pl-4 mb-0">
-                <li>
-                  <a href="http://example.com">
-                    First, electrify your building(s)
-                  </a>
-                </li>
-                <li>
-                  <a href="http://example.com">
-                    Then push your local politicians to electrify the rest
-                  </a>
-                </li>
-              </ul>
-            </div>
-
             <hr className="mt-7" />
           </div>
 
@@ -532,22 +514,6 @@ export default function StateDetailsPage ({ location, data }) {
                 emissionsData={latestEmissions}
                 greenKeys={["buildings", "transportation"]}
               />
-            </div>
-
-            <div className="action-panel">
-              <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-              {/* TODO: Make these link somewhere */}
-              <ul className="mt-3 pl-4 mb-0">
-                <li>
-                  <a href="http://example.com">If you have a car, buy an EV</a>
-                </li>
-                <li>
-                  <a href="http://example.com">
-                    Then push your local politicians to electrify the rest
-                  </a>
-                </li>
-              </ul>
             </div>
 
             <hr className="mt-7" />
@@ -714,24 +680,6 @@ export default function StateDetailsPage ({ location, data }) {
                 />
               </div>
 
-              <div className="action-panel">
-                <h3 className="h4 font-weight-bold">What should I do?</h3>
-
-                {/* TODO: Make these link somewhere */}
-                <ul className="mt-3 pl-4 mb-0">
-                  <li>
-                    <a href="http://example.com">
-                      Install solar panels and a battery in your building
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http://example.com">
-                      Support the construction of grid-scale wind and solar
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
               <hr className="mt-7" />
             </div>
           )}
@@ -805,12 +753,14 @@ export default function StateDetailsPage ({ location, data }) {
       <hr className="mt-7" />
 
       <section className="text-center mb-8">
-        <div className="h1 mt-7 font-weight-bold">And that's it! 🎉</div>
+        <div className="h1 mt-7">✅</div>
+        <br className="d-none d-lg-block" />
+        <div className="h1 font-weight-bold">Ready to do your part?</div>
 
         <p className="h4 mt-4">
-          We hope this gives you some ideas for what you{" "}
+          Learn how to <strong>electrify your own machines</strong> and how to <strong>pass local policy</strong> to electrify the rest
           <br className="d-none d-lg-block" />
-          can do to get your state to zero emissions!
+          <a class='btn btn-lg btn-outline-secondary my-4' href='/take-action'>Take Action</a>
         </p>
       </section>
     </Layout>
