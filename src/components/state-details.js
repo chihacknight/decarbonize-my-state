@@ -758,7 +758,7 @@ export default function StateDetailsPage ({ location, data }) {
         <div className="h1 font-weight-bold">Ready to do your part?</div>
 
         <p className="h4 mt-4">
-          Learn how to <strong>electrify your own machines</strong> and how to <strong>pass local policy</strong> to electrify the rest
+          Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
           <br className="d-none d-lg-block" />
           <a class='btn btn-lg btn-outline-secondary my-4' href='/take-action'>Take Action</a>
         </p>
