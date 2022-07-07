@@ -183,8 +183,11 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
       <Row className="map-row">
         {emissions && sidebar ?
           <Col lg={3} className="map-legend">
-            <div className="h6 mt-5 mb-3 font-weight-bold">
-              Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions in 2018
+            <div className="h6 mt-4 font-weight-bold">
+              Climate pollution in 2018
+            </div>
+            <div className="legendKey">
+              <span className="keyText">in millions of metric tons of CO2e</span>
             </div>
             {buckets.map((bucket, i) => {
               const colorClass = `keyColor choropleth${i}`
@@ -208,6 +211,7 @@ const ChoroplethMap = ({emissions, sidebar = true, selected_location = {}}) => {
               <span className="keyColor choroplethNull"></span>
               <span className="keyText">Data not available</span>
             </div>
+
           </Col>: null
         }
         <Col lg={{span: (sidebar ? 9 : 12)}}>

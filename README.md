@@ -1,4 +1,4 @@
-# Decarbonize My State
+# Decarb My State
 
 Chi Hack Night data visualization project to measure the state and progress of decarbonization for all States in the USA.
 
