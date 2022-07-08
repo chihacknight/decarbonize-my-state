@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ChoroplethMap from "../components/choroplethmap"
@@ -47,7 +47,7 @@ const IndexPage = ({data}) => {
           to decarb your state?
         </h1>
         <p className="h3 text-center mt-2">
-          The answer is simpler than you think.
+          The answer to climate change is simpler than you think
         </p>
       </div>
 
@@ -67,6 +67,19 @@ const IndexPage = ({data}) => {
 
         <StatesList stateSlugs={stateSlugs}/>
       </div>
+
+      <hr className="mt-7" />
+
+      <section className="text-center mb-8 mt-7">
+        <br className="d-none d-lg-block" />
+        <h2 className="h1 font-weight-bold">Ready to do your part now?</h2>
+
+        <p className="h4 mt-4">
+          Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
+          <br className="d-none d-lg-block" />
+          <Link className='btn btn-lg btn-success mt-5' to='/take-action'>Take Action</Link>
+        </p>
+      </section>
     </Layout>
   )
 }

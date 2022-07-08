@@ -198,16 +198,6 @@ footer a {
     box-shadow: 0 1px 2px #bdbdbd;
 }
 
-.action-panel {
-    padding: 2rem;
-    margin:  5rem 0;
-    background-color: #f3f3f3;
-}
-
-.action-panel a {
-    color: #004da1;
-}
-
 .state-links {
     display: flex;
     flex-direction: row;

@@ -22,18 +22,10 @@ const Header = ({ siteTitle }) => (
         <Nav className="ml-auto">
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/about">About</Link>
-          {/* Commented out for now since these pages are empty
-            <Link className="nav-link" to="/terminology">Terminology</Link>
-          */}
+          <Link className="nav-link" to="/take-action">Take Action</Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <div className="container">
-      <div className="alert alert-info ml-4 mr-4" role="alert">
-        <strong>Decarb My State is in an open beta! </strong>
-        Some content or links may be missing.
-      </div>
-    </div>
   </>
 )
 
