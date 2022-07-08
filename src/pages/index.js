@@ -76,9 +76,8 @@ const IndexPage = ({data}) => {
 
         <p className="h4 mt-4">
           Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
-          <br className="d-none d-lg-block" />
-          <Link className='btn btn-lg btn-success mt-5' to='/take-action'>Take Action</Link>
         </p>
+        <Link className='btn btn-lg btn-success mt-4' to='/take-action'>Take Action</Link>
       </section>
     </Layout>
   )
