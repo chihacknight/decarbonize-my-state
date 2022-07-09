@@ -59,20 +59,16 @@ const TakeActionPage = () => {
             <p>
               By all means, electrify your machines. To electrify the rest, support the candidates and issue campaigns already fighting to decarbonize your state. 
             </p>
-            <ul>
-              <li>
-                <div class="font-weight-bold">Elect Climate Candidates:</div>
-                You can take meaningful action right now by donating to <strong>Climate Cabinet</strong>, a political action group that helps climate champions run for local office and pass critical legislation, 
-                { " " }<a href="https://www.climateslate.com/candidates?filter-by-Priority=Top%20Priority">Donate Now.</a> 
-              </li>
-              <li>
-                <div class="font-weight-bold">
-              Pressure Electeds to Pass Climate Policy:
-                </div>
-              It’s not enough to elect better candidates - we also have to pressure existing electeds to pass key climate policy now. Campaigns to do this already exist in your state – the highest impact thing you can do is join them. Sign up below and we will share what we know about climate campaigns in your state.
-              </li>
-            </ul>
-            <h2>Learn about climate campaigns in your state!</h2>
+
+            <h3>Elect Climate Candidates</h3>
+            <p>You can take meaningful action right now by donating to <strong>Climate Cabinet</strong>, a political action group that helps climate champions run for local office and pass critical legislation.</p>
+            <p><a className="btn btn-success" href="https://www.climateslate.com/candidates?filter-by-Priority=Top%20Priority">Donate to the Climate Slate by Climate Cabinet</a> </p>
+
+            <h3>Pressure Electeds to Pass Climate Policy</h3>
+            <p>It’s not enough to elect better candidates - we also have to pressure existing electeds to pass key climate policy now. Campaigns to do this already exist in your state – the highest impact thing you can do is join them.</p>
+              
+            <p>Sign up below and we will share what we know about climate campaigns in your state.</p>
+
             <div class="form-container embed-responsive embed-responsive-16by9">
               <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdiwiT6OZO0jsnLu22r6ClBZLh8fvfGIiYu_5coOvjYXqogtw/viewform?embedded=true" class="embed-responsive-item " width="640" height="1720" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             </div>
