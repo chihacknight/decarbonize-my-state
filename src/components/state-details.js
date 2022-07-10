@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
 import SingleBarChart from "../components/singlebar"
@@ -11,14 +11,24 @@ import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
 
 // image resources
-import GasAppliances from "../images/gas-appliances.png"
-import ElectricAppliances from "../images/electric-appliances.png"
-import CarTransition from "../images/car-transition.png"
 import CoalTransition from "../images/coal-plant-transition.png"
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
 import CoalPlantImg from "../images/coal-plant.png"
 import PowerPlantMap from "../images/dirty-power-plants.jpg"
+import DirtyBuilding from "../images/dirty-building.png"
+import HeatPumpAndStove from "../images/electric-heat-pump-stove.png"
+import GasBoilerAndStove from "../images/gas-boiler-stove.png"
+import GasCar from "../images/gas_car.png"
+import ElectricCar from "../images/electric_car.png"
+import GasBoxTruck from "../images/gas_boxtruck.png"
+import ElectricBoxTruck from "../images/electric_boxtruck.png"
+import GasTruck from "../images/gas_truck.png"
+import ElectricTruck from "../images/electric_truck.png"
+import GasToyota from "../images/gas_toyota.png"
+import ElectricToyota from "../images/electric_toyota.png"
+import SolarPanel from "../images/solar_panel.png"
+import PowerPlant from "../images/power_plant.png"
 
 const slugToTitle = (placeName) => {
   const words = placeName.split("_")
@@ -53,19 +63,14 @@ function numberToHumanString (num) {
     return `${(num / 1_000_000).toFixed(1)} million`
   }
 
-  // If in the hundreds or something else, return as is but rounded to whole
-  // number (e.g 534.12 -> 534)
-  return Math.round(num)
+  // If in the hundreds or something else, return as is (e.g 534)
+  return num
 }
 
 const currentYear = new Date().getFullYear()
-
-// The years we have till our zero goal of 20
-const yearsToTarget = 2050 - currentYear
-
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
+const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
 
 export default function StateDetailsPage ({ location, data }) {
   /**
@@ -118,7 +123,8 @@ export default function StateDetailsPage ({ location, data }) {
   ).toFixed(0)
 
   const rawEmissionsCutPerYear = (
-    sumOfEmissions * (1 / yearsToTarget)
+    sumOfEmissions *
+    (1 / (2050 - currentYear))
   ).toFixed(1)
 
   // #### VEHICLES ####
@@ -174,18 +180,12 @@ export default function StateDetailsPage ({ location, data }) {
   const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
   const currentWindMW = (currentWind / everyDayPerYear) * 1000
 
-  // Clamp to zero since if we never want to say negative solar needs to be
-  // built
-  const solarPanelsBuildPerYear = Math.max(0, Math.round(
-    (targetGenBySolarMW - currentSolarMW)/ yearsToTarget))
-  const windTurbinesBuildPerYear = Math.max(0, Math.round(
-    (targetGenByWindMW - currentWindMW)/ yearsToTarget))
+  const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
+  const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
 
-  // getting percentages for chart
-  // Note that we divide in half since 100% solar and 100% wind is 100% of total
-  // not 200%
-  const percToCleanTarget = percSolarTarget + percWindTarget / 2
-  const totalRemaining = 100 - percToCleanTarget
+  // getting %s for chart
+  const percSolarRemaining = 100 - percSolarTarget
+  const percWindRemaining = 100 - percWindTarget
 
   // converting values to strings
   const solarPanelsCountStr = targetGenBySolarMW !== undefined
@@ -194,14 +194,6 @@ export default function StateDetailsPage ({ location, data }) {
   const windTurbinesCountStr = targetGenByWindMW !== undefined
     ? numberToHumanString(targetGenByWindMW)
     : '?'
-
-  const currentSolarMWStr = currentSolarMW !== undefined
-    ? numberToHumanString(currentSolarMW)
-    : '?'
-  const currentWindMWStr = currentWindMW !== undefined
-    ? numberToHumanString(currentWindMW)
-    : '?'
-
   const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
     ? numberToHumanString(solarPanelsBuildPerYear)
     : '?'
@@ -267,7 +259,7 @@ export default function StateDetailsPage ({ location, data }) {
     setScrollGraphSettings({ active: activeKey, green: greenKeys })
   }
   // Description will retain formatting, so this needs to be single line
-  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`
+  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${cutPerYearPrcnt}% a year. Electrification can help us get there.`
 
   return (
     <Layout>
@@ -292,24 +284,19 @@ export default function StateDetailsPage ({ location, data }) {
 
       {/* Intro Section */}
       <div className="col-12">
-        <p className="h1 font-weight-light mt-6 mb-6">
+        <p className="h1 font-weight-light mt-6 mb-5">
           To get to <strong className="font-weight-bold">zero</strong> by 2050,{" "}
-          {placeTitle} must cut climate pollution by{" "}
-          <strong className="font-weight-bold">
-            {rawEmissionsCutPerYear} million metric tons of C02 equivalent a
-            year.
+          {placeTitle} must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.
           </strong>
         </p>
 
-        <h2 className="h4 font-weight-bold">Emissions in {placeTitle}</h2>
-        <p className="h6">
-          Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
-        </p>
-        <SimpleAreaChart emissionsData={emissionsByYear}
+        {/*
+          <SimpleAreaChart emissionsData={emissionsByYear}
           title={'Emissions in ' + placeTitle}/>
+        */}
 
         <p className="h1 font-weight-bold text-center mt-5">
-          We can do it. Here's how.
+          This is how we're going to do it.
         </p>
 
         <hr className="mt-7 mb-7" />
@@ -322,7 +309,7 @@ export default function StateDetailsPage ({ location, data }) {
          */}
         <div className="col-4 sticky-cont d-none d-xl-block">
           <div className="graph-title font-weight-bold mb-3">
-            CO<sub>2</sub> Equivalent Emissions in {placeTitle} by Source
+            {placeTitle}'s climate pollution, by source
           </div>
 
           <SingleBarChart
@@ -355,115 +342,132 @@ export default function StateDetailsPage ({ location, data }) {
         >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">🏠 Buildings</h2>
+            <h1 className="h1 font-weight-bold mb-6">🏠 Buildings</h1>
 
-            <p className="h3 mt-5">
-              <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of
-              emissions in {placeTitle} comes from buildings.
-            </p>
+              {/* Make SingleBarChart full width on mobile */}
 
             <div className="row mt-5">
-              {/* Make SingleBarChart full width on mobile */}
-              <div className="col-12 col-md-6 d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none mb-6">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey={"buildings"}
                 />
               </div>
-
               <div className="col h3">
-                <p className="mt-5">Mostly from different types of heating.</p>
 
-                <p className="mt-5 mb-0">
+                <p className="h2 mt-2 mb-0">
+                  <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of {placeTitle}'s climate pollution comes from buildings.
+                </p>
+
+                <p className="mt-0 mb-8">
                   <img
                     className="img-fluid"
-                    src={GasAppliances}
-                    alt="Gas furnace, gas water heater, gas stove"
+                    src={DirtyBuilding}
+                    alt="Building polluting by burning natural gas"
                   />
                 </p>
 
-                <p className="mt-5 mb-0">
-                  {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
-                  80% of the pollution of your typical home comes from heating
-                  your space, water, and food.
-                </p>
               </div>
             </div>
 
-            <p className="h3 mt-5">
-              To stop this pollution, we need to replace our furnaces with{" "}
-              <a
-                href="https://en.wikipedia.org/wiki/Heat_pump"
-                target="_blank"
-                rel="noreferrer"
-              >
-                electric heat pumps
-              </a>
-              , electrify our water heaters, and cook with{" "}
-              <a
-                href="https://en.wikipedia.org/wiki/Induction_cooking"
-                target="_blank"
-                rel="noreferrer"
-              >
-                induction and electricity
-              </a>{" "}
-              instead of gas.
+            <p className="h2 mt-6 mb-0">
+              {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
+              We burn <strong>🦖 fossil fuels</strong> to <strong>🔥 heat</strong> our air, water, and food.
+            </p>
+
+            <p className="mt-5 mb-8">
+              <img
+                className="img-fluid"
+                src={GasBoilerAndStove}
+                alt="Gas boiler, gas stove"
+              />
+            </p>
+
+            <p className="h2 mt-6">
+            To <strong>cut</strong> this pollution...
+            </p>
+
+            <p className="h2 mt-4 mb-6 float-right">
+            Let's <strong>⚡electrify</strong> our <strong>🔥 heat</strong>!
             </p>
 
             <p className="mt-5 mb-0">
               <img
                 className="img-fluid"
-                src={ElectricAppliances}
-                alt="Electric heat pump, electric water heater, induction stove"
+                src={HeatPumpAndStove}
+                alt="Electric heat pump, induction stove"
               />
             </p>
 
-            <p className="h3 mt-5">
-              And we need to do this for all {buildingsCountStr} buildings in{" "}
-              {placeTitle}. That's around {buildingsPerYear} per year.
+            <p className="h2 mt-6">
+              We'll replace...
+            </p>
+            <p className="h3 mt-4 mb-4">
+              <ul>
+                <li>
+                  Boilers and furnaces with {" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Heat_pump"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    heat pumps
+                  </a>
+                </li>
+                <li>
+                  Gas stoves with {" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Induction_cooking"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                   induction ranges
+                  </a>
+                  </li>
+              </ul>
+            </p>
+
+            <p className="h2 mt-0 mb-4 float-right">
+              ...in all of {placeTitle}'s <strong>{buildingsCountStr} buildings</strong>.
             </p>
 
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
-              <p className="h3 mt-5">
-                {Math.round(weightedEleBuildingsPct)}% of building systems'
-                energy use in {placeTitle} are already electrified.
+              <p className="h3 mt-8">
+                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings are already fossil fuel free!
               </p>
             )}
             <AlreadyElectrifiedChart
-              label={"Building Systems"}
+              label={"Buildings"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
           </div>
 
-          <div id="bld-end" className="scrollable-sect mt-8 mb-7">
-            <p className="h3 font-weight-bold text-center">
-              That will solve {buildingsPrcnt}% of the problem.
+          <div id="bld-end" className="scrollable-sect mt-8 mb-4">
+            <p className="h1 font-weight-bold text-center mt-6 mb-6">
+              That cuts {buildingsPrcnt}% of the pollution.
             </p>
 
-            <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+            <div className="mt-4 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
                 greenKeys={["buildings"]}
               />
             </div>
 
-            <hr className="mt-7" />
           </div>
 
-          {/* Transportation Section */}
-          <div id="trnsprt-main" className="scrollable-sect">
-            <h2 className="h3 font-weight-bold">🚗 Getting Around</h2>
+          <hr className="mb-8" />
 
-            <p className="h3 mt-5">
-              <strong className="font-weight-bold">{transportPrcnt}%</strong> of
-              emissions in {placeTitle} comes from cars, trucks, and planes.
-            </p>
+          {/* Transportation Section */}
+          <div id="trnsprt-main" className="scrollable-sect mt-5">
+            <h1 className="h1 font-weight-bold mb-6">🚗 Transport</h1>
+
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
-              <div className="col-12 col-md-6 d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none mb-6">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey="transportation"
@@ -472,67 +476,125 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <div className="col h3">
-                <p className="mt-5">Mostly from our cars.</p>
-
-                <p className="mt-5">
-                  To cut this pollution, if you have a car, your next one needs
-                  to be an electric vehicle (EV).
+                <p className="h2 mt-2">
+                  <strong className="font-weight-bold">{transportPrcnt}%</strong> of {placeTitle}'s 
+                  pollution comes from 🚗 cars, 🚚 trucks, 🚈 trains, and ✈️ planes.</p>
+                <p className="h2 mt-6 mb-6 float-right">
+                  But <strong>mostly</strong> from 🚗.
                 </p>
-
-                <p className="mt-5 mb-0">
-                  <img
-                    className="img-fluid"
-                    src={CarTransition}
-                    alt="Gas emitting car being converted to electric car"
-                  />
-                </p>
-
-                <p className="mt-5">
-                  And we need to do this for all {carsCountStr} cars in{" "}
-                  {placeTitle}. That's around {carsPerYear} a year.
-                </p>
-                <p className="mt-5">
-                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}
-                  % of the total).
-                </p>
-                <AlreadyElectrifiedChart
-                  label={"Vehicles"}
-                  electrifiedPct={pctEv}
-                  fossilPct={pctNonEv}
-                />
               </div>
             </div>
-          </div>
 
-          <div id="trnsprt-end" className="scrollable-sect mt-8 mb-7">
-            <p className="h3 font-weight-bold text-center">
-              That will solve another {transportPrcnt}% of the problem.
+            <p className="mt-0 mb-8">
+              <img
+                className="img-fluid"
+                src={GasCar}
+                alt="Gasoline car"
+              />
             </p>
 
-            <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+            <p className="h2 mt-6">
+            To cut this pollution... 
+            </p>
+
+            <p className="h2 mt-4 mb-6 float-right">
+              Your next car must be <strong>⚡electric</strong>.
+            </p>
+
+            <p className="mt-5 mb-6">
+              <img
+                className="img-fluid"
+                src={ElectricCar}
+                alt="Electric car"
+              />
+            </p>
+
+            <p className="h2 mt-8">
+              Then, we'll electrify all <strong>{carsCountStr} cars and trucks</strong> in{" "}
+              {placeTitle}!
+            </p>
+
+            <div className="col-5">
+              <p className="mt-0 mb-0">
+                <img
+                  className="img-fluid"
+                  src={GasBoxTruck}
+                  alt="Gasoline box truck"
+                />
+              </p>
+              <p className="mt-0 mb-0">
+                <img
+                  className="img-fluid"
+                  src={ElectricBoxTruck}
+                  alt="Electrix box truck"
+                />
+              </p>
+              <p className="mt-0 mb-0">
+                <img
+                  className="img-fluid"
+                  src={GasTruck}
+                  alt="Gasoline box truck"
+                />
+              </p>
+              <p className="mt-0 mb-0">
+                <img
+                  className="img-fluid"
+                  src={ElectricTruck}
+                  alt="Electrix box truck"
+                />
+              </p>
+              <p className="mt-0 mb-0">
+                <img
+                  className="img-fluid"
+                  src={GasToyota}
+                  alt="Gasoline box truck"
+                />
+              </p>
+              <p className="mt-0 mb-0">
+                <img
+                  className="img-fluid"
+                  src={ElectricToyota}
+                  alt="Electrix box truck"
+                />
+              </p>
+            </div>
+
+
+              <p className="h2 mt-6">
+                {pctEv}% of cars and trucks are already electric!
+              </p>
+              <AlreadyElectrifiedChart
+                label={"Vehicles"}
+                electrifiedPct={pctEv}
+                fossilPct={pctNonEv}
+              />
+          </div>
+
+          <div id="trnsprt-end" className="scrollable-sect mt-8 mb-4">
+            <p className="h1 font-weight-bold text-center mt-6 mb-6">
+              That cuts {transportPrcnt}% of the pollution.
+            </p>
+
+            <div className="mt-4 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
                 greenKeys={["buildings", "transportation"]}
               />
             </div>
-
-            <hr className="mt-7" />
           </div>
+
+          <hr className="mt-8" />
 
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h2 className="h3 font-weight-bold">🔌 Power Generation</h2>
+              <h1 className="h1 font-weight-bold mb-6">🔌 Power</h1>
 
-              <p className="h3 mt-5">
-                <strong className="font-weight-bold">{powerPrcnt}%</strong> of
-                emissions in {placeTitle} comes from making power.
-              </p>
 
               <div className="row mt-5">
                 {/* Make SingleBarChart full width on mobile */}
-                <div className="col-12 col-md-6 d-block d-xl-none">
+                <div className="col-12 col-md-6 d-block d-xl-none mb-6">
                   <SingleBarChart
                     emissionsData={latestEmissions}
                     activeKey="dirty_power"
@@ -541,31 +603,56 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
 
                 <div className="col">
-                  <p className="h3 mt-5">
-                    Specifically from coal, gas, and oil plants.
-                  </p>
+                <p className="h2 mt-2">
+                  <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s 
+                  pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
+                  make power.
+                </p>
+                <p className="mt-4 mb-6">
+                  <img
+                    className="img-fluid"
+                    src={PowerPlant}
+                    alt="Power plant"
+                  />
+                </p>
 
-                  <p className="h3 mt-5">
-                    To cut this pollution, we need to replace all dirty power plants
-                    with clean ones (mostly wind and solar).
-                  </p>
-
-                  <p className="mt-5 mb-0">
-                    <img
-                      className="img-fluid"
-                      src={CoalTransition}
-                      title="We need to replace dirty power plants with
-                    clean ones (mostly wind and solar)"
-                      alt="We need to replace dirty power plants with
-                    clean ones (mostly wind and solar)"
-                    />
-                  </p>
-
-                  <p className="h3 mt-5">
-                    In {placeTitle} we need to close and replace:
-                  </p>
                 </div>
               </div>
+
+              <p className="h2 mt-6">
+              To cut this pollution... 
+              </p>
+
+              <p className="h2 mt-4 mb-6 float-right">
+                Put <strong>⚡solar panels</strong> on your roof!
+              </p>
+
+              <p className="mt-5 mb-6">
+                <img
+                  className="img-fluid"
+                  src={SolarPanel}
+                  alt="Solar panel"
+                />
+              </p>
+
+              <p className="h2 mt-8">
+                Then, we'll replace <strong>🦖 all fossil fuel power plants</strong> with solar and wind farms.
+              </p>
+
+              <p className="mt-5 mb-0">
+                <img
+                  className="img-fluid"
+                  src={CoalTransition}
+                  title="We need to replace dirty power plants with
+                clean ones (mostly wind and solar)"
+                  alt="We need to replace dirty power plants with
+                clean ones (mostly wind and solar)"
+                />
+              </p>
+
+              <p className="h3 mt-5 mb-8">
+                ...and find good jobs for those workers.
+              </p>
 
               {coalPlants.length > 0 && (
                 <>
@@ -606,71 +693,44 @@ export default function StateDetailsPage ({ location, data }) {
                 </>
               )}
 
-              <div className="card">
-                <div className="card-body">
-                  <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
-                    <p className="h5" style={{display: 'block'}}>See a map of dirty power plants in the US</p>
-                    <img
-                      className="img-fluid"
-                      src={PowerPlantMap}
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
 
-              <p className="h3 mt-5">
-                ...and help those workers find good jobs.
+
+              <p className="h2 mt-8">
+                But wait! 
+              </p>
+              
+              <p className="h2 mt-6">
+                It's not enough to replace our power plants with wind and solar farms.
               </p>
 
-              <p className="h3 mt-5">
-                But wait! Remember how we electrified all cars and buildings?
+              <p className="h2 mt-6">
+                To power our electric cars and buildings, we need <strong>2x</strong> the electricity we have today!
               </p>
 
-              <p className="h3 mt-5">
-                Our machines don't pollute now, because they run on electricity!
-              </p>
-
-              <p className="h3 mt-5">
-                But that means we need to make more power for those new electric
-                machines - <strong className="font-weight-bold">twice</strong>{" "}
-                as much power as we make now!
-              </p>
-
-              <p className="h3 mt-5">
-                And{" "}
-                <strong className="font-weight-bold">
-                  all of it needs to be clean power!
-                </strong>
-              </p>
-
-              <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings 
-                we need to INSTALL <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind 
+              <p className="h2 mt-8">
+                In all, we'll need to build <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind 
                 and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar.
               </p>
               
-              <p className="h3 mt-5">
-                Since {placeTitle} already has {currentSolarMWStr} megawatts of solar power
-                generation and {currentWindMWStr} megawatts of wind power generation,
-                that's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} Megawatts </strong>
-                of wind capacity
-                AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} Megawatts </strong>
-                of solar capacity a year we need to build.
+              <p className="h4 mt-5 text-muted">
+                <WindSolarBuilds
+                  label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
               </p>
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={'targetGeneration'} percentCurrent={percToCleanTarget} percentRemaining={totalRemaining}/>
+                  label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
               </p>
-
             </div>
           )}
           {/* Show standard outro section if power emissions are zero */}
           {powerPrcnt > 0 && (
-            <div id="power-end" className="scrollable-sect mt-8 mb-7">
-              <p className="h3 font-weight-bold text-center">
-                That will solve another {powerPrcnt}% of the problem.
+            <div id="power-end" className="scrollable-sect mt-8 mb-4">
+              <p className="h1 font-weight-bold text-center mt-6 mb-6">
+                That cuts {powerPrcnt}% of the pollution.
+              </p>
+              <p className="h1 font-weight-bold text-center mt-6 mb-6">
+                And gives us the ⚡ to eliminate pollution from 🏠 and 🚗!
               </p>
 
               <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
@@ -679,19 +739,18 @@ export default function StateDetailsPage ({ location, data }) {
                   greenKeys={["buildings", "transportation", "dirty_power"]}
                 />
               </div>
-
-              <hr className="mt-7" />
+            
+            <hr className="mt-7" />
             </div>
           )}
 
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
-            <div id="power-main" className="scrollable-sect mt-5 mb-7">
-              <h2 className="h3 font-weight-bold">🔌 Power Generation</h2>
+            <div id="power-main" className="scrollable-sect mt-5">
+              <h1 className="h1 font-weight-bold">🔌 Power</h1>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
-                  {placeTitle} has absolutely no emissions from making power,
-                  it's doing great! 😎
+                  {placeTitle} produces all of it's power without making any climate pollution! 😎
                 </p>
 
                 <p className="h5 mt-3">
@@ -706,13 +765,8 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">🏭 Other Emissions</h2>
+            <h1 className="h1 font-weight-bold mt-6 mb-6">🏭 Other Pollution Sources</h1>
 
-            <p className="h3 mt-5">
-              The last{" "}
-              <strong className="font-weight-bold">{otherPrcnt}%</strong> of
-              emissions in {placeTitle} comes other sources
-            </p>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -725,24 +779,27 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <div className="col">
-                <p className="h3 mt-5">
-                  This includes industry, landfills, and farming.
+                
+                <p className="h2 mt-5">
+                  The last{" "}
+                  <strong className="font-weight-bold">{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
+                  comes from other sources...
+                </p>
+                <p className="h2 mt-5">
+                  This includes farming, landfills, industry, and leaks from gas pipelines.
                 </p>
 
-                <p className="mt-3">
-                  There's no one solution to solve these problems, but there are
-                  a lot of great ideas!
+                <p className="mt-5">
+                  There's <strong>no one solution</strong> to solve these problems, but there are
+                  lots of great ideas:
                 </p>
-
-                <p>These include:</p>
 
                 <ul>
-                  <li>Regenerative agriculture to sequester carbon in soil</li>
-                  <li>Composting to reduce landfill methane emissions</li>
-                  <li>
-                    New techniques for manufacturing CO<sub>2</sub> emitting
-                    materials, like concrete
-                  </li>
+                  <li>🌾 No-till farming to keep CO2 in the soil</li>
+                  <li>🗑️ Capturing methane leaks from landfills</li>
+                  <li>🧱 Capturing CO2 to make emissions-free concrete</li>
+                  <li>🔩 Burning green hydrogen to make emissions-free steel</li>
+                  <li>💨 Plugging methane leaks from gas pipelines</li>
                 </ul>
               </div>
             </div>
@@ -750,17 +807,16 @@ export default function StateDetailsPage ({ location, data }) {
         </Scrollspy>
       </div>
 
-      <hr className="mt-5" />
+      <hr className="mt-7" />
 
       <section className="text-center mb-8">
-        <div className="h1 mt-5">✅</div>
-        <br className="d-none d-lg-block" />
-        <div className="h1 font-weight-bold">Ready to do your part?</div>
+        <div className="h1 mt-7 font-weight-bold">And that's it! 🎉</div>
 
         <p className="h4 mt-4">
-          Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
+          We hope this gives you some ideas for what you{" "}
+          <br className="d-none d-lg-block" />
+          can do to get your state to zero emissions!
         </p>
-        <Link className='btn btn-lg btn-success mt-4' to='/take-action'>Take Action</Link>
       </section>
     </Layout>
   )
