@@ -8,8 +8,10 @@ import { getLatestUsData } from "../components/getLatestEmissions"
 
 const getCleanData = (data) => {
   let mutableDataObj = {}
+
   for (let i=0; i<data.allEmissionsJson.edges.length;i++) {
     const stateName = data.allEmissionsJson.edges[i].node.state
+
     mutableDataObj[stateName] = {
       emissionsByYear: data.allEmissionsJson.edges[i].node.emissionsByYear,
     }
@@ -26,19 +28,15 @@ const getCleanData = (data) => {
 }
 
 const AboutPage = ({data}) => {
-
   const cleanData = getCleanData(data)
-  // Prep data for the SingleBarChart breaking down emissions by category
-  console.log(cleanData)
   const barChartData = getLatestUsData(cleanData)[0]
-
 
   return (
     <Layout>
       <SEO title="About :: Decarbonize My State" />
       <div className="container">
         <div>
-          <h1 id="main border-bottom" className="py-4">About Decarb My State</h1>
+          <h1 id="main">About Decarb My State</h1>
           <p>Tired of waiting for Congress to act on the climate crisis? Then, <strong>decarbonize your state</strong>.</p>
           <p>Decarb My State allows Americans to picture exactly <strong>where</strong> their state’s carbon pollution comes from, and <strong>how</strong> to eliminate it.</p>
 
@@ -110,49 +108,72 @@ const AboutPage = ({data}) => {
           <h2 className="pt-3">Data and sources</h2>
           <p>All of the data used on this website are from publicly available and trusted government and nonprofit sources. Below is a description of the primary datasets and their publishers. For more details on how we discovered and worked with this data, take a look at our <a href="https://github.com/chihacknight/decarbonize-my-state/issues?q=label%3Adata">GitHub issue tracker for data</a> and our <a href="https://github.com/chihacknight/decarbonize-my-state/tree/main/data">data folder</a> of this open source project.</p>
           
-          <h3 className="pt-2 h4">US Emissions by State</h3>
+          <h3 className="pt-2 h4">U.S. Emissions By State</h3>
           <p>
-            <strong><a href="https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions">Climate Watch - U.S. States Greenhouse Gas Emissions</a></strong>
+            <a className="font-weight-bold"
+              href="https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions">
+              Climate Watch - U.S. States Greenhouse Gas Emissions
+            </a>
             <br />World Resources Institute
             <br />March 23, 2021
           </p>
           
-          <h3 className="pt-2 h4">US Building footprints and electrification</h3>
+          <h3 className="pt-2 h4">U.S. Building Footprints And Electrification</h3>
           <p>
-            <strong><a href="https://github.com/microsoft/USBuildingFootprints">US Building Footprints</a></strong>
+            <a className="font-weight-bold"
+              href="https://github.com/microsoft/USBuildingFootprints">
+              U.S. Building Footprints
+            </a>
             <br />Microsoft Maps
             <br />Mar 27, 2021
           </p>
 
           <p>
-            <strong><a href="https://www.nrel.gov/docs/fy22osti/81186.pdf">U.S. Building Stock Characterization Study</a></strong>
+            <a className="font-weight-bold"
+              href="https://www.nrel.gov/docs/fy22osti/81186.pdf">
+              U.S. Building Stock Characterization Study
+            </a>
             <br />The National Renewable Energy Laboratory (NREL)
             <br />Dec 2021
           </p>
 
-          <h3 className="pt-2 h4">Vehicles by State</h3>
+          <h3 className="pt-2 h4">Vehicles By State</h3>
           <p>
-            <strong><a href="https://www.fhwa.dot.gov/policyinformation/statistics/2017/mv1.cfm">State Motor-Vehicle Registrations</a></strong>
-            <br />US Department of Transportation
+            <a className="font-weight-bold"
+              href="https://www.fhwa.dot.gov/policyinformation/statistics/2017/mv1.cfm">
+              State Motor-Vehicle Registrations
+            </a>
+            <br />U.S. Department of Transportation
             <br />Feb 2021
           </p>
 
-          <h3 className="pt-2 h4">Power plants by State</h3>
+          <h3 className="pt-2 h4">Power Plants By State</h3>
           <p>
-            <strong><a href="https://www.epa.gov/airmarkets/power-plants-and-neighboring-communities#mapping">Environmental Justice Screening and Mapping Tool (EJScreen)</a></strong>
-            <br />US Environmental Protection Agency (EPA)
+            <a className="font-weight-bold"
+              href="https://www.epa.gov/airmarkets/power-plants-and-neighboring-communities#mapping">
+              Environmental Justice Screening and Mapping Tool (EJScreen)
+            </a>
+            <br />U.S. Environmental Protection Agency (EPA)
             <br />Jan 27, 2021
           </p>
 
-          <h3 className="pt-2 h4">State renewable generation targets</h3>
+          <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
           <p>
-            <strong><a href="https://www.eia.gov/opendata/v1/qb.php?category=1">Electric generation by source 2001-2021</a></strong>
-            <br />US Energy Information Administration (EIA)
+            <a className="font-weight-bold"
+              href="https://www.eia.gov/opendata/v1/qb.php?category=1">
+              Electric generation by source 2001-2021
+            </a>
+            <br />U.S. Energy Information Administration (EIA)
             <br />Updated Apr 2022
           </p>
 
           <h2 className="pt-3">Code</h2>
-          <p>All the code for this site is open source and available on <a href="https://github.com/chihacknight/decarbonize-my-state/">GitHub</a> under the MIT license.</p>
+          <p>
+            All the code for this site is open source and available on
+            <a href="https://github.com/chihacknight/decarbonize-my-state/">GitHub</a>
+            under the MIT license.
+          </p>
+
           <p>Technologies used:</p>
           <ul>
             <li><a href="https://www.docker.com/">Docker</a></li>
@@ -163,8 +184,16 @@ const AboutPage = ({data}) => {
           <p>This website is hosted on <a href="https://www.netlify.com/">Netlify</a>.</p>
           
           <h2 className="pt-3">Contact us</h2>
-          <p>Found a bug?<a href="https://github.com/chihacknight/decarbonize-my-state/issues"> Report it on our issue tracker!</a></p>
-          <p>Have a suggestion or question? Contact us at <a href="mailto:info@decarbmystate.com">info@decarbmystate.com</a></p>
+          <p>
+            Found a bug?
+            <a href="https://github.com/chihacknight/decarbonize-my-state/issues">
+              Report it on our issue tracker!
+            </a>
+          </p>
+          <p>
+            Have a suggestion or question? Contact us at
+            <a href="mailto:info@decarbmystate.com">info@decarbmystate.com</a>
+          </p>
         </div>
       </div>
     </Layout>

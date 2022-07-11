@@ -41,10 +41,9 @@ const IndexPage = ({data}) => {
         description="You can help decarbonize your state, and it's a lot simpler than you think! Learn how with Decarbonize My State."
       />
       <div className="main-header">
-        <h1 id="main" className='display-4 text-center font-weight-bold'>
-          What does take...</h1>
-        <h1 className='display-4 text-center font-weight-bold'>
-          to decarb your state?
+        <h1 id="main" className="display-4 text-center font-weight-bold">
+          What does take...<br/>
+          to decarbonize your state?
         </h1>
         <p className="h3 text-center mt-2">
           The answer to climate change is simpler than you think
@@ -63,7 +62,7 @@ const IndexPage = ({data}) => {
 
       {/* Show list of states on mobile */}
       <div className="d-lg-none">
-        <h2 className="h4 font-weight-bold mt-5 mb-3">Browse by State</h2>
+        <h2 className="h4 mt-5 mb-3">Browse by State</h2>
 
         <StatesList stateSlugs={stateSlugs}/>
       </div>
@@ -77,7 +76,7 @@ const IndexPage = ({data}) => {
         <p className="h4 mt-4">
           Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
         </p>
-        <Link className='btn btn-lg btn-success mt-4' to='/take-action'>Take Action</Link>
+        <Link className="btn btn-lg btn-success mt-4" to="/take-action">Take Action</Link>
       </section>
     </Layout>
   )

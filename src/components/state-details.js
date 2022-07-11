@@ -277,7 +277,7 @@ export default function StateDetailsPage ({ location, data }) {
       />
 
       <div className="sticky-header d-flex align-items-center">
-        <h1 id="main" className="d-flex align-items-center mr-4 mb-0">
+        <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
           <span
             className={"display-3 mr-4 sf-" + stateFaceClass}
             aria-hidden="true"
@@ -293,15 +293,15 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050,{" "}
+          To get to <strong>zero</strong> by 2050,{" "}
           {placeTitle} must cut climate pollution by{" "}
-          <strong className="font-weight-bold">
+          <strong>
             {rawEmissionsCutPerYear} million metric tons of C02 equivalent a
             year.
           </strong>
         </p>
 
-        <h2 className="h4 font-weight-bold">Emissions in {placeTitle}</h2>
+        <h2 className="h4">Emissions in {placeTitle}</h2>
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
@@ -355,10 +355,10 @@ export default function StateDetailsPage ({ location, data }) {
         >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">🏠 Buildings</h2>
+            <h2 className="h3">🏠 Buildings</h2>
 
             <p className="h3 mt-5">
-              <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of
+              <strong>{buildingsPrcnt}%</strong> of
               emissions in {placeTitle} comes from buildings.
             </p>
 
@@ -454,10 +454,10 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Transportation Section */}
           <div id="trnsprt-main" className="scrollable-sect">
-            <h2 className="h3 font-weight-bold">🚗 Getting Around</h2>
+            <h2 className="h3">🚗 Getting Around</h2>
 
             <p className="h3 mt-5">
-              <strong className="font-weight-bold">{transportPrcnt}%</strong> of
+              <strong>{transportPrcnt}%</strong> of
               emissions in {placeTitle} comes from cars, trucks, and planes.
             </p>
 
@@ -523,10 +523,10 @@ export default function StateDetailsPage ({ location, data }) {
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h2 className="h3 font-weight-bold">🔌 Power Generation</h2>
+              <h2 className="h3">🔌 Power Generation</h2>
 
               <p className="h3 mt-5">
-                <strong className="font-weight-bold">{powerPrcnt}%</strong> of
+                <strong>{powerPrcnt}%</strong> of
                 emissions in {placeTitle} comes from making power.
               </p>
 
@@ -570,7 +570,7 @@ export default function StateDetailsPage ({ location, data }) {
               {coalPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    <strong className="font-weight-bold">
+                    <strong>
                       {coalPlants.length} coal plant
                       {coalPlants.length !== 1 && "s"}{" "}
                     </strong>
@@ -585,7 +585,7 @@ export default function StateDetailsPage ({ location, data }) {
               {gasPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    <strong className="font-weight-bold">
+                    <strong>
                       {gasPlants.length} gas plant
                       {gasPlants.length !== 1 && "s"}
                     </strong>
@@ -597,7 +597,7 @@ export default function StateDetailsPage ({ location, data }) {
               {oilPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    <strong className="font-weight-bold">
+                    <strong>
                       {oilPlants.length} oil plant
                       {oilPlants.length !== 1 && "s"}
                     </strong>
@@ -633,29 +633,29 @@ export default function StateDetailsPage ({ location, data }) {
 
               <p className="h3 mt-5">
                 But that means we need to make more power for those new electric
-                machines - <strong className="font-weight-bold">twice</strong>{" "}
+                machines - <strong>twice</strong>{" "}
                 as much power as we make now!
               </p>
 
               <p className="h3 mt-5">
                 And{" "}
-                <strong className="font-weight-bold">
+                <strong>
                   all of it needs to be clean power!
                 </strong>
               </p>
 
               <p className="h3 mt-5">
                 So to cut the climate pollution from our power, cars, and buildings 
-                we need to INSTALL <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind 
-                and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar.
+                we need to INSTALL <strong>{windTurbinesCountStr} MWs</strong> of wind
+                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
               
               <p className="h3 mt-5">
                 Since {placeTitle} already has {currentSolarMWStr} megawatts of solar power
                 generation and {currentWindMWStr} megawatts of wind power generation,
-                that's <strong className="font-weight-bold">{windTurbinesBuildPerYearStr} Megawatts </strong>
+                that's <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
                 of wind capacity
-                AND <strong className="font-weight-bold">{solarPanelsBuildPerYearStr} Megawatts </strong>
+                AND <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
                 of solar capacity a year we need to build.
               </p>
 
@@ -687,7 +687,7 @@ export default function StateDetailsPage ({ location, data }) {
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
             <div id="power-main" className="scrollable-sect mt-5 mb-7">
-              <h2 className="h3 font-weight-bold">🔌 Power Generation</h2>
+              <h2 className="h3">🔌 Power Generation</h2>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
                   {placeTitle} has absolutely no emissions from making power,
@@ -706,11 +706,11 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h2 className="h3 font-weight-bold">🏭 Other Emissions</h2>
+            <h2 className="h3">🏭 Other Emissions</h2>
 
             <p className="h3 mt-5">
               The last{" "}
-              <strong className="font-weight-bold">{otherPrcnt}%</strong> of
+              <strong>{otherPrcnt}%</strong> of
               emissions in {placeTitle} comes other sources
             </p>
 
