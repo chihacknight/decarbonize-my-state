@@ -49,7 +49,7 @@ module.exports = {
           head: false,
           // Setting this parameter is also optional
           respectDNT: true,
-          origin: "https://decarbonizemystate.com",
+          origin: "https://decarbmystate.com",
         },
       },
     },
