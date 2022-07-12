@@ -29,11 +29,7 @@ const IndexPage = ({data}) => {
 
   // Prep data for choropleth map
   const mapData = getLatestEmissions(cleanData)
-
   const stateSlugs = Object.keys(mapData)
-
-  // TODO: Extract currentYear and cutPerYearPrcnt to common place
-  const currentYear = new Date().getFullYear()
   
   return (
     <Layout>

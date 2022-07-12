@@ -84,7 +84,10 @@ const AboutPage = ({data}) => {
           <h2 className="pt-3">Who built this?</h2>
           <p>This is an all-volunteer project made with love by folks from <a href="https://chihacknight.org/">ChiHackNight</a> and <a href="https://climate.win/">Win Climate</a>.</p>
           <p>The team includes: <a href="https://derekeder.com">Derek Eder</a>,<a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>, <a href="https://viktorkoves.com/">Viktor Köves</a>, <a href="https://chihacknight.org/board-of-directors/sean-watland.html">Sean Watland</a>, <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>, <a href="https://dylanhalpern.com/">Dylan Halpern</a>, <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,<a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>, <a href="https://www.linkedin.com/in/sjegoodman/">Samantha Goodman</a>, <a href="https://www.linkedin.com/in/shelbybarron/">Shelby Barron</a>, <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>, Surag Nuthulapaty and Robert Herrera.</p>
+          
           <p>The initial code for this project was forked from <a href="https://greenjobsdata.com/">Who benefits from climate ambition?</a> by Data for Progress, Sunrise Movement and DataMade.</p>
+
+          <p>Images of appliances and cars come from <a href="https://electrifynow.net/">Electrify Now</a>. Images of power plants are from <a href="http://en.wikipedia.org/wiki/SimCity_2000">Sim City 2000</a> by Maxis and Electronic Arts.</p>
 
           <h2 className="pt-3">Where did you get your ideas?</h2>
           <p>Our visual storytelling approach was inspired by a recent talk by Juan-Pablo Velez titled<a href="https://chihacknight.org/events/2022/01/11/juan-pablo-velez.html"> “What does it actually take to decarbonize a state?</a>”</p>

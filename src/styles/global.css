@@ -40,6 +40,7 @@ h1 {
     margin-bottom: 2rem;
 }
 h2 { margin-top: 1.75rem; }
+h3 { margin-top: 1.55rem; }
 
 /* Make <strong> actually use bold (by default it's a medium weight) */
 strong { font-weight: bold; }
