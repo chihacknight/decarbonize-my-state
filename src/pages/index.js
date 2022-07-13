@@ -38,7 +38,7 @@ const IndexPage = ({data}) => {
       />
       <div className="main-header">
         <h1 id="main" className="display-4 text-center font-weight-bold">
-          What does take...<br/>
+          What does it take...<br/>
           to decarbonize your state?
         </h1>
         <p className="h3 text-center mt-2">
