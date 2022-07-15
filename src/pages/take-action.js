@@ -21,13 +21,13 @@ const TakeActionPage = () => {
           <div className="col-lg-9">
             <h2>Get Personal: Electrify your machines!</h2>
             <p>
-              For most Americans, more than half your carbon footprint comes from how you heat and power your home, and from the car you drive.
+              For most Americans, more than half your carbon footprint comes from how you heat and power your home and from the car you drive.
               More than cutting out meat or single use plastics, the most impactful thing you can do – by far – is to eliminate your personal burning of fossil fuels:
             </p>
             <ol>
-              <li>Replace your heating system with a heat pump, your gas stove with an induction stove, and your water heater with an electric one</li>
+              <li>Replace your heating system with an <a href="https://en.wikipedia.org/wiki/Heat_pump" target="_blank" rel="noreferrer">electric heat pump</a>, your gas stove with an <a href="https://en.wikipedia.org/wiki/Induction_cooking" target="_blank" rel="noreferrer">induction stove</a>, and your water heater with an electric one</li>
               <li>If you drive, your next car must be electric</li>
-              <li>Produce you own power with solar panels</li>
+              <li>Produce your own power with solar panels</li>
             </ol>
             <p>
               40% of US climate pollution comes from decisions made around the kitchen table. We can’t solve climate change if you don’t electrify your home – and nobody can do it but you.
@@ -58,7 +58,7 @@ const TakeActionPage = () => {
               Discouraged by the inaction at the federal level? We can still win: 50-75% of the policies we need to get to zero are actually state and local. And we’re starting to win them!
             </p>
             <p>
-              By all means, electrify your machines. To electrify the rest, support the candidates and issue campaigns already fighting to decarbonize your state.
+              By all means, electrify your own machines. To electrify the rest, support the candidates and issue campaigns already fighting to decarbonize your state.
             </p>
           </div>
         </div>
