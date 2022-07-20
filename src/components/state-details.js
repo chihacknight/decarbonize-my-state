@@ -183,9 +183,11 @@ export default function StateDetailsPage ({ location, data }) {
   const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
   const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
 
-  // getting %s for chart
-  const percSolarRemaining = 100 - percSolarTarget
-  const percWindRemaining = 100 - percWindTarget
+  // getting percentages for chart
+  // Note that we divide in half since 100% solar and 100% wind is 100% of total
+  // not 200%
+  const percToCleanTarget = percSolarTarget + percWindTarget / 2
+  const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
   const solarPanelsCountStr = targetGenBySolarMW !== undefined
@@ -269,7 +271,7 @@ export default function StateDetailsPage ({ location, data }) {
       />
 
       <div className="sticky-header d-flex align-items-center">
-        <h1 id="main" className="d-flex align-items-center mr-4 mb-0">
+        <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
           <span
             className={"display-3 mr-4 sf-" + stateFaceClass}
             aria-hidden="true"
@@ -290,10 +292,12 @@ export default function StateDetailsPage ({ location, data }) {
           </strong>
         </p>
 
-        {/*
-          <SimpleAreaChart emissionsData={emissionsByYear}
+        <h2 className="h4">Emissions in {placeTitle}</h2>
+        <p className="h6">
+          Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
+        </p>
+        <SimpleAreaChart emissionsData={emissionsByYear}
           title={'Emissions in ' + placeTitle}/>
-        */}
 
         <p className="h1 font-weight-bold text-center mt-5">
           This is how we're going to do it.
@@ -342,9 +346,7 @@ export default function StateDetailsPage ({ location, data }) {
         >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h1 className="h1 font-weight-bold mb-6">🏠 Buildings</h1>
-
-              {/* Make SingleBarChart full width on mobile */}
+            <h2 className="h1 mb-6">🏠 Buildings</h2>
 
             <div className="row mt-5">
               <div className="col-12 col-md-6 d-block d-xl-none mb-6">
@@ -462,8 +464,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Transportation Section */}
           <div id="trnsprt-main" className="scrollable-sect mt-5">
-            <h1 className="h1 font-weight-bold mb-6">🚗 Transport</h1>
-
+            <h2 className="h1 mb-6">🚗 Transport</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -477,7 +478,7 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="col h3">
                 <p className="h2 mt-2">
-                  <strong className="font-weight-bold">{transportPrcnt}%</strong> of {placeTitle}'s 
+                  <strong className="font-weight-bold">{transportPrcnt}%</strong> of {placeTitle}'s
                   pollution comes from 🚗 cars, 🚚 trucks, 🚈 trains, and ✈️ planes.</p>
                 <p className="h2 mt-6 mb-6 float-right">
                   But <strong>mostly</strong> from 🚗.
@@ -494,7 +495,7 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <p className="h2 mt-6">
-            To cut this pollution... 
+            To cut this pollution...
             </p>
 
             <p className="h2 mt-4 mb-6 float-right">
@@ -589,8 +590,7 @@ export default function StateDetailsPage ({ location, data }) {
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h1 className="h1 font-weight-bold mb-6">🔌 Power</h1>
-
+              <h2 className="h1 mb-6">🔌 Power</h2>
 
               <div className="row mt-5">
                 {/* Make SingleBarChart full width on mobile */}
@@ -604,7 +604,7 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <div className="col">
                 <p className="h2 mt-2">
-                  <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s 
+                  <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s
                   pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
                   make power.
                 </p>
@@ -620,7 +620,7 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <p className="h2 mt-6">
-              To cut this pollution... 
+              To cut this pollution...
               </p>
 
               <p className="h2 mt-4 mb-6 float-right">
@@ -657,7 +657,7 @@ export default function StateDetailsPage ({ location, data }) {
               {coalPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    <strong className="font-weight-bold">
+                    <strong>
                       {coalPlants.length} coal plant
                       {coalPlants.length !== 1 && "s"}{" "}
                     </strong>
@@ -672,7 +672,7 @@ export default function StateDetailsPage ({ location, data }) {
               {gasPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    <strong className="font-weight-bold">
+                    <strong>
                       {gasPlants.length} gas plant
                       {gasPlants.length !== 1 && "s"}
                     </strong>
@@ -684,7 +684,7 @@ export default function StateDetailsPage ({ location, data }) {
               {oilPlants.length > 0 && (
                 <>
                   <p className="h3 mt-5">
-                    <strong className="font-weight-bold">
+                    <strong>
                       {oilPlants.length} oil plant
                       {oilPlants.length !== 1 && "s"}
                     </strong>
@@ -696,9 +696,9 @@ export default function StateDetailsPage ({ location, data }) {
 
 
               <p className="h2 mt-8">
-                But wait! 
+                But wait!
               </p>
-              
+
               <p className="h2 mt-6">
                 It's not enough to replace our power plants with wind and solar farms.
               </p>
@@ -708,18 +708,14 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h2 mt-8">
-                In all, we'll need to build <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind 
+                In all, we'll need to build <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind
                 and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar.
               </p>
-              
-              <p className="h4 mt-5 text-muted">
-                <WindSolarBuilds
-                  label={'Solar'} percentCurrent={percSolarTarget} percentRemaining={percSolarRemaining}/>
-              </p>
+
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={'Wind'} percentCurrent={percWindTarget} percentRemaining={percWindRemaining}/>
+                  label={'targetGeneration'} percentCurrent={percToCleanTarget} percentRemaining={totalRemaining}/>
               </p>
             </div>
           )}
@@ -739,15 +735,15 @@ export default function StateDetailsPage ({ location, data }) {
                   greenKeys={["buildings", "transportation", "dirty_power"]}
                 />
               </div>
-            
+
             <hr className="mt-7" />
             </div>
           )}
 
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
-            <div id="power-main" className="scrollable-sect mt-5">
-              <h1 className="h1 font-weight-bold">🔌 Power</h1>
+            <div id="power-main" className="scrollable-sect mt-5 mb-7">
+              <h2 className="h1">🔌 Power</h2>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
                   {placeTitle} produces all of it's power without making any climate pollution! 😎
@@ -765,8 +761,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h1 className="h1 font-weight-bold mt-6 mb-6">🏭 Other Pollution Sources</h1>
-
+            <h2 className="h1 mt-6 mb-6">🏭 Other Emissions</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -779,7 +774,7 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <div className="col">
-                
+
                 <p className="h2 mt-5">
                   The last{" "}
                   <strong className="font-weight-bold">{otherPrcnt}%</strong> of {placeTitle}'s climate pollution

@@ -29,9 +29,21 @@ body {
     color: #33342e;
 }
 
-a {
-    color: #8E2D13;
+a { color: #8E2D13; }
+
+/* Bold all heading elements by default */
+h1, h2, h3, h4, h5, h6 { font-weight: bold !important; }
+
+/* Add some spacing to <h2> elements by default for text pages */
+h1 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
+h2 { margin-top: 1.75rem; }
+h3 { margin-top: 1.55rem; }
+
+/* Make <strong> actually use bold (by default it's a medium weight) */
+strong { font-weight: bold; }
 
 /**
  * Extra large spacing options
