@@ -71,7 +71,7 @@ const TakeActionPage = () => {
             </p>
             <p>
               <a className="btn btn-success"
-                href="https://www.climateslate.com/candidates?filter-by-Priority=Top%20Priority">
+                href="https://secure.actblue.com/donate/climateslate?refcode=decarbmystate">
                 Donate to the Climate Slate by Climate Cabinet
               </a>
             </p>
