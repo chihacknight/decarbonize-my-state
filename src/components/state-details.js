@@ -159,8 +159,8 @@ export default function StateDetailsPage ({ location, data }) {
   buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
   const buildingsPerYear =
   buildingsToElectrify !== undefined
-      ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
-      : "?"
+    ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
+    : "?"
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
