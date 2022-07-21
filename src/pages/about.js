@@ -172,9 +172,8 @@ const AboutPage = ({data}) => {
 
           <h2 className="pt-3">Code</h2>
           <p>
-            All the code for this site is open source and available on
-            <a href="https://github.com/chihacknight/decarbonize-my-state/">GitHub</a>
-            under the MIT license.
+            All the code for this site is open source and available on{" "}
+            <a href="https://github.com/chihacknight/decarbonize-my-state/">GitHub</a> under the MIT license.
           </p>
 
           <p>Technologies used:</p>
@@ -188,13 +187,13 @@ const AboutPage = ({data}) => {
           
           <h2 className="pt-3">Contact us</h2>
           <p>
-            Found a bug?
+            Found a bug?{" "}
             <a href="https://github.com/chihacknight/decarbonize-my-state/issues">
               Report it on our issue tracker!
             </a>
           </p>
           <p>
-            Have a suggestion or question? Contact us at
+            Have a suggestion or question? Contact us at{" "}
             <a href="mailto:info@decarbmystate.com">info@decarbmystate.com</a>
           </p>
         </div>
