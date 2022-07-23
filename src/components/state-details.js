@@ -131,7 +131,7 @@ export default function StateDetailsPage ({ location, data }) {
   const pctNonEv = Math.round((100 - pctEv) * 10) / 10
 
   // calculate cars remaining to electrify
-  const carsToElectrify = carsAll * (pctNonEv/100)
+  const carsToElectrify = carsAll - evRegistration
   
   // string formatting
   const carsCountStr =
