@@ -135,6 +135,8 @@ export default function StateDetailsPage ({ location, data }) {
   
   // string formatting
   const carsCountStr =
+    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
+  const carsLeftStr =
     carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
   const carsPerYear =
     carsToElectrify !== undefined
@@ -156,6 +158,8 @@ export default function StateDetailsPage ({ location, data }) {
 
   // string formatting
   const buildingsCountStr =
+  buildings !== undefined ? numberToHumanString(buildings) : "?"
+  const buildingsLeftStr =
   buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
   const buildingsPerYear =
   buildingsToElectrify !== undefined
@@ -430,20 +434,21 @@ export default function StateDetailsPage ({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                {Math.round(weightedEleBuildingsPct)}% of building systems'
-                energy use in {placeTitle} are already electrified.
+                There are {buildingsCountStr} buildings in {placeTitle} and {Math.round(weightedEleBuildingsPct)}% of building systems'
+                are already electrified. 
               </p>
             )}
+
+            <p className="h3 mt-5">
+              We need to electrify the remaining {buildingsLeftStr} buildings in{" "}
+              {placeTitle}. That's around {buildingsPerYear} per year.
+            </p>
             <AlreadyElectrifiedChart
               label={"Building Systems"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
 
-            <p className="h3 mt-5">
-              We need to electrify the remaining {buildingsCountStr} buildings in{" "}
-              {placeTitle}. That's around {buildingsPerYear} per year.
-            </p>
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-7">
@@ -497,19 +502,17 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5">
-                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}
-                  % of the total).
+                  There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "} 
+                  are already electric ({pctEv}% of the total). 
+                </p>
+                <p className="mt-5">
+                  We need to electrify the remaining {carsLeftStr} vehicles. That's around {carsPerYear} a year.
                 </p>
                 <AlreadyElectrifiedChart
                   label={"Vehicles"}
                   electrifiedPct={pctEv}
                   fossilPct={pctNonEv}
                 />
-
-                <p className="mt-5">
-                  We need to electrify the remaining {carsCountStr} cars in{" "}
-                  {placeTitle}. That's around {carsPerYear} a year.
-                </p>
               </div>
             </div>
           </div>
