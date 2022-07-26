@@ -493,8 +493,8 @@ export default function StateDetailsPage ({ location, data }) {
                   to be an electric vehicle (EV).
                 </p>
                 <p className="mt-5">
-                  Or go car free with public transit, an ebike or other zero
-                  emission mobility options.
+                  Or go car free with public transit, an ebike, or another zero
+                  emission mobility option.
                 </p>
 
                 <p className="mt-5 mb-0">
