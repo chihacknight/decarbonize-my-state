@@ -492,6 +492,10 @@ export default function StateDetailsPage ({ location, data }) {
                   To cut this pollution, if you have a car, your next one needs
                   to be an electric vehicle (EV).
                 </p>
+                <p className="mt-5">
+                  Or try going car-free with public transit, bikes/e-bikes, or
+                  walking if it works for you.
+                </p>
 
                 <p className="mt-5 mb-0">
                   <img
