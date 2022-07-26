@@ -133,7 +133,7 @@ const AboutPage = ({data}) => {
 
           <p>
             <a className="font-weight-bold"
-              href="https://www.nrel.gov/docs/fy22osti/81186.pdf">
+              href="https://www.nrel.gov/docs/fy22osti/83063.pdf">
               U.S. Building Stock Characterization Study
             </a>
             <br />The National Renewable Energy Laboratory (NREL)
