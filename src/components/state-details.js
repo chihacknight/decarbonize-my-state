@@ -126,14 +126,21 @@ export default function StateDetailsPage ({ location, data }) {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
   } = data.allVehiclesJson.edges[0].node
+  
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
   const pctNonEv = Math.round((100 - pctEv) * 10) / 10
+
+  // calculate cars remaining to electrify
+  const carsToElectrify = carsAll - evRegistration
+  
   // string formatting
   const carsCountStr =
-    carsAll !== undefined ? numberToHumanString(carsAll) : "?"
+    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
+  const carsLeftStr =
+    carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
   const carsPerYear =
-    carsAll !== undefined
-      ? numberToHumanString(Math.ceil((carsAll * cutPerYearPrcnt) / 100))
+    carsToElectrify !== undefined
+      ? numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
       : "?"
   const evCountStr =
     evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
@@ -145,13 +152,19 @@ export default function StateDetailsPage ({ location, data }) {
     weightedEleBuildingsPct,
   } = data.allBuildingsJson.edges[0].node
 
+  // calculate buildings remaining to electrify
+  const buildingsToElectrify = (weightedEleBuildingsPct !== 0 ||
+    weightedFossilBuildingsPct !== 0) ? buildings * (weightedFossilBuildingsPct/100) : buildings
+
   // string formatting
   const buildingsCountStr =
-    buildings !== undefined ? numberToHumanString(buildings) : "?"
+  buildings !== undefined ? numberToHumanString(buildings) : "?"
+  const buildingsLeftStr =
+  buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
   const buildingsPerYear =
-    buildings !== undefined
-      ? numberToHumanString(Math.ceil((buildings * cutPerYearPrcnt) / 100))
-      : "?"
+  buildingsToElectrify !== undefined
+    ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
+    : "?"
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -418,23 +431,24 @@ export default function StateDetailsPage ({ location, data }) {
               />
             </p>
 
-            <p className="h3 mt-5">
-              And we need to do this for all {buildingsCountStr} buildings in{" "}
-              {placeTitle}. That's around {buildingsPerYear} per year.
-            </p>
-
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                {Math.round(weightedEleBuildingsPct)}% of building systems'
-                energy use in {placeTitle} are already electrified.
+                There are {buildingsCountStr} buildings in {placeTitle} and {Math.round(weightedEleBuildingsPct)}% of building systems
+                are already electrified. 
               </p>
             )}
+
+            <p className="h3 mt-5">
+              We need to electrify the remaining {buildingsLeftStr} buildings in{" "}
+              {placeTitle}. That's around {buildingsPerYear} per year.
+            </p>
             <AlreadyElectrifiedChart
               label={"Building Systems"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
+
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-7">
@@ -488,12 +502,11 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5">
-                  And we need to do this for all {carsCountStr} cars in{" "}
-                  {placeTitle}. That's around {carsPerYear} a year.
+                  There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "} 
+                  are already electric ({pctEv}% of the total). 
                 </p>
                 <p className="mt-5">
-                  {evCountStr} vehicles in {placeTitle} are already EVs ({pctEv}
-                  % of the total).
+                  We need to electrify the remaining {carsLeftStr} vehicles. That's around {carsPerYear} a year.
                 </p>
                 <AlreadyElectrifiedChart
                   label={"Vehicles"}
