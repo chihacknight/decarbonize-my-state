@@ -28,10 +28,11 @@ export default function SimpleAreaChart ({ emissions_data }) {
   var projection = []
   var missing = []
 
-  for (let step = 0; step < (currYear-lastYear); step++) {
-    if (step === 0) { missing.push({ year: lastYear, hist: reduceFrom, missingData: reduceFrom }) }
-    else { missing.push({year:step+lastYear,missingData:reduceFrom})}
-
+  for (let step = 0; step < (currYear-lastYear-1); step++) {
+    if (step === 0) { missing.push({ year: lastYear+1, hist: reduceFrom, missingData: reduceFrom }) }
+    else { 
+      missing.push({year:1+step+lastYear,missingData:reduceFrom})
+    }
   }
 
 
@@ -46,9 +47,8 @@ export default function SimpleAreaChart ({ emissions_data }) {
   }
 
   var data = annualhistoricalEmissions.concat(missing).concat(projection)
-  console.log(data)
-  const dataMidPoint = data.find(item => item.year === currYear).projected / 2
-  console.log(dataMidPoint)
+  const dataMidPoint = reduceFrom/2
+  // const dataMidPoint = data.find(item => item.year === currYear).projected / 2
   
     return (
     <ResponsiveContainer className="simplearea-cont">
@@ -83,8 +83,8 @@ export default function SimpleAreaChart ({ emissions_data }) {
           type="monotone"
           dataKey="missingData"
           stackId="3"
-          stroke="#c65c00"
-          fill="#c8ceb3"
+          stroke="#505050"
+          fill="#ababab"
           name="Assumed"
           isAnimationActive={false}
         />
@@ -97,8 +97,9 @@ export default function SimpleAreaChart ({ emissions_data }) {
           name="Projection"
           isAnimationActive={false}
         />
-        <ReferenceDot y={dataMidPoint} x={lastYear-10} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
-        <ReferenceDot y={dataMidPoint} x={currYear+10} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
+        <ReferenceDot y={dataMidPoint} x={lastYear} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
+        <ReferenceDot y={dataMidPoint} x={1+(currYear+lastYear)/2} stroke="none" fill="none" label={{ value: "Missing Data", angle: 90, fill: "#505050" }} />
+        <ReferenceDot y={dataMidPoint} x={currYear+1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
       </AreaChart>
     </ResponsiveContainer>
   )
