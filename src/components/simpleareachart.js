@@ -50,7 +50,7 @@ export default function SimpleAreaChart ({ emissions_data }) {
   const dataMidPoint = reduceFrom/2
   // const dataMidPoint = data.find(item => item.year === currYear).projected / 2
   
-    return (
+  return (
     <ResponsiveContainer className="simplearea-cont">
       <AreaChart
         width={800}
@@ -98,7 +98,7 @@ export default function SimpleAreaChart ({ emissions_data }) {
           isAnimationActive={false}
         />
         <ReferenceDot y={dataMidPoint} x={lastYear} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
-          <ReferenceDot y={dataMidPoint} x={1 + (currYear + lastYear) / 2} stroke="none" fill="none" label={{ value: "Missing Data", angle: 90, fill: "#505050" }} />
+        <ReferenceDot y={dataMidPoint} x={1 + (currYear + lastYear) / 2} stroke="none" fill="none" label={{ value: "Missing Data", angle: 90, fill: "#505050" }} />
         <ReferenceDot y={dataMidPoint} x={currYear+1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
       </AreaChart>
     </ResponsiveContainer>
