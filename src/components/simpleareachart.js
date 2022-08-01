@@ -19,27 +19,28 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
   const YearDataKey = 'year'
   const EmissionsDataKey = 'hist'
   const ProjectionDataKey = 'projection'
+  const MissingDataKey = 'missingData'
 
   const annualHistoricEmissions = emissionsData.map((item) => {
     var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 }
 
-    data[EmissionsDataKey] = Math.round(100*Object.entries(item)
+    data[EmissionsDataKey] = Math.round(100 * Object.entries(item)
       .filter(([key, _val]) => key !== YearDataKey)
-      .reduce((acc, [_key, val]) => acc + val, 0)) /100
+      .reduce((acc, [_key, val]) => acc + val, 0)) / 100
 
     return data
   })
   const currYear = new Date().getFullYear()
   const yearsLeft = 2050 - currYear
-  const reduceFrom= annualHistoricEmissions[annualHistoricEmissions.length - 1][EmissionsDataKey]
+  const reduceFrom = annualHistoricEmissions[annualHistoricEmissions.length - 1][EmissionsDataKey]
   const lastYear = annualHistoricEmissions.slice(-1)[0].year
   var projection = []
   var missing = []
 
-  for (let step = 0; step < (currYear-lastYear-1); step++) {
-    if (step === 0) { missing.push({ year: lastYear+1, hist: reduceFrom, missingData: reduceFrom }) }
-    else { 
-      missing.push({year:1+step+lastYear,missingData:reduceFrom})
+  for (let step = 0; step < (currYear - lastYear - 1); step++) {
+    if (step === 0) { missing.push({ year: lastYear + 1, hist: reduceFrom, missingData: reduceFrom }) }
+    else {
+      missing.push({ year: 1 + step + lastYear, missingData: reduceFrom })
     }
   }
 
@@ -47,8 +48,8 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
     if (step === 0) {
       projection.push({
         [YearDataKey]: currYear,
-        [missingData]:reduceFrom,
-        [EmissionsDataKey]: reduceFrom,
+        [MissingDataKey]: reduceFrom,
+
         [ProjectionDataKey]: reduceFrom
       })
     }
@@ -60,7 +61,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
   }
 
   var data = annualHistoricEmissions.concat(missing).concat(projection)
-  const dataMidPoint = reduceFrom/2
+  const dataMidPoint = reduceFrom / 2
 
   // Data headers for the modal
   const dataHeaders = [
@@ -73,7 +74,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
 
   const handleCloseModal = () => setShowDataModal(false)
   const handleShowModal = () => setShowDataModal(true)
-  
+
   return (
     <>
       <ResponsiveContainer className="simplearea-cont">
@@ -105,14 +106,14 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
             isAnimationActive={false}
           />
           <Area
-          type="monotone"
-          dataKey="missingData"
-          stackId="3"
-          stroke="#505050"
-          fill="#ababab"
-          name="Assumed"
-          isAnimationActive={false}
-        />
+            type="monotone"
+            dataKey="missingData"
+            stackId="3"
+            stroke="#505050"
+            fill="#ababab"
+            name="Assumed"
+            isAnimationActive={false}
+          />
           <Area
             type="monotone"
             dataKey={ProjectionDataKey}
@@ -122,12 +123,12 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
             name="Projection"
             isAnimationActive={false}
           />
-          <ReferenceDot y={dataMidPoint} x={currYear-4} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
+          <ReferenceDot y={dataMidPoint} x={currYear - 4} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
           <ReferenceDot y={dataMidPoint} x={1 + (currYear + lastYear) / 2} stroke="none" fill="none" label={{ value: "Missing Data", angle: 90, fill: "#505050" }} />
-          <ReferenceDot y={dataMidPoint} x={currYear+1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
+          <ReferenceDot y={dataMidPoint} x={currYear + 1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
         </AreaChart>
       </ResponsiveContainer>
-      
+
       <div className="text-center">
         <Button variant="secondary" onClick={handleShowModal}>
           View Data Table
