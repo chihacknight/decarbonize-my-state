@@ -37,6 +37,14 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
   var projection = []
   var missing = []
 
+  //Since there is a lag in the available data and the current year, years without emissions data yet
+  //need to be included in the graph so a "gap" does not occur.  This fills in the missing years
+  //with an assumptive emissions data which will be used to create an area on the graph where no
+  //data has been generated yet.  
+
+  //A loop is used to create data for the missing years.  Since this is a different area on the graph
+  //a new key, missingData is used.  This data is pushed into a array which will ultimately be
+  //concatinated into the data array.
   for (let step = 0; step < (currYear - lastYear - 1); step++) {
     if (step === 0) { missing.push({ year: lastYear + 1, hist: reduceFrom, missingData: reduceFrom }) }
     else {
