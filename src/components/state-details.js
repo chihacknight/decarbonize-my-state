@@ -132,14 +132,21 @@ export default function StateDetailsPage ({ location, data }) {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
   } = data.allVehiclesJson.edges[0].node
+
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
   const pctNonEv = Math.round((100 - pctEv) * 10) / 10
+
+  // calculate cars remaining to electrify
+  const carsToElectrify = carsAll - evRegistration
+
   // string formatting
   const carsCountStr =
-    carsAll !== undefined ? numberToHumanString(carsAll) : "?"
+    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
+  const carsLeftStr =
+    carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
   const carsPerYear =
-    carsAll !== undefined
-      ? numberToHumanString(Math.ceil((carsAll * cutPerYearPrcnt) / 100))
+    carsToElectrify !== undefined
+      ? numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
       : "?"
   const evCountStr =
     evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
@@ -151,13 +158,19 @@ export default function StateDetailsPage ({ location, data }) {
     weightedEleBuildingsPct,
   } = data.allBuildingsJson.edges[0].node
 
+  // calculate buildings remaining to electrify
+  const buildingsToElectrify = (weightedEleBuildingsPct !== 0 ||
+    weightedFossilBuildingsPct !== 0) ? buildings * (weightedFossilBuildingsPct/100) : buildings
+
   // string formatting
   const buildingsCountStr =
-    buildings !== undefined ? numberToHumanString(buildings) : "?"
+  buildings !== undefined ? numberToHumanString(buildings) : "?"
+  const buildingsLeftStr =
+  buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
   const buildingsPerYear =
-    buildings !== undefined
-      ? numberToHumanString(Math.ceil((buildings * cutPerYearPrcnt) / 100))
-      : "?"
+  buildingsToElectrify !== undefined
+    ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
+    : "?"
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -425,7 +438,7 @@ export default function StateDetailsPage ({ location, data }) {
                   >
                    induction ranges
                   </a>
-                  </li>
+                </li>
               </ul>
             </p>
 
@@ -436,14 +449,20 @@ export default function StateDetailsPage ({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-8">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings are already fossil fuel free!
+                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings in {placeTitle} are already fossil fuel free!
               </p>
             )}
+
+            <p className="h3 mt-5">
+              We need to electrify the remaining {buildingsLeftStr} buildings in{" "}
+              {placeTitle}. That's around {buildingsPerYear} per year.
+            </p>
             <AlreadyElectrifiedChart
               label={"Buildings"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
+
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-4">
@@ -495,7 +514,7 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <p className="h2 mt-6">
-            To cut this pollution...
+              To cut this pollution...
             </p>
 
             <p className="h2 mt-4 mb-6 float-right">
@@ -513,6 +532,11 @@ export default function StateDetailsPage ({ location, data }) {
             <p className="h2 mt-8">
               Then, we'll electrify all <strong>{carsCountStr} cars and trucks</strong> in{" "}
               {placeTitle}!
+            </p>
+
+            <p className="mt-5">
+              (Or try going car-free with public transit, bikes/e-bikes, or
+              walking if it works for you.)
             </p>
 
             <div className="col-5">
@@ -559,16 +583,18 @@ export default function StateDetailsPage ({ location, data }) {
                 />
               </p>
             </div>
-
-
-              <p className="h2 mt-6">
-                {pctEv}% of cars and trucks are already electric!
-              </p>
-              <AlreadyElectrifiedChart
-                label={"Vehicles"}
-                electrifiedPct={pctEv}
-                fossilPct={pctNonEv}
-              />
+            <p className="mt-5">
+                There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "}
+                are already electric ({pctEv}% of the total).
+            </p>
+            <p className="mt-5">
+                We need to electrify the remaining {carsLeftStr} vehicles. That's around {carsPerYear} a year.
+            </p>
+            <AlreadyElectrifiedChart
+              label={"Vehicles"}
+              electrifiedPct={pctEv}
+              fossilPct={pctNonEv}
+            />
           </div>
 
           <div id="trnsprt-end" className="scrollable-sect mt-8 mb-4">
@@ -603,18 +629,18 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
 
                 <div className="col">
-                <p className="h2 mt-2">
-                  <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s
+                  <p className="h2 mt-2">
+                    <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s
                   pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
                   make power.
-                </p>
-                <p className="mt-4 mb-6">
-                  <img
-                    className="img-fluid"
-                    src={PowerPlant}
-                    alt="Power plant"
-                  />
-                </p>
+                  </p>
+                  <p className="mt-4 mb-6">
+                    <img
+                      className="img-fluid"
+                      src={PowerPlant}
+                      alt="Power plant"
+                    />
+                  </p>
 
                 </div>
               </div>
@@ -736,7 +762,7 @@ export default function StateDetailsPage ({ location, data }) {
                 />
               </div>
 
-            <hr className="mt-7" />
+              <hr className="mt-7" />
             </div>
           )}
 
