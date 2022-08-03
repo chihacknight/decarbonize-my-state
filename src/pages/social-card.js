@@ -21,16 +21,19 @@ const slugToTitle = (placeName) => {
 }
 
 const SocialCardPage = ({data}) => {
+
+  //get the state data
   let params = new URLSearchParams(document.location.search)
   let currentState = params.get("state")
   let emissionsData = data.allEmissionsJson.edges
     .find(entry => entry.node.state === currentState)
-  {console.log(data)}
 
+  //used for ranking the states
   var eachStateRecentEmissions = []
   var counter = 0
   var emitterSuffix = 'th'
 
+  //go through each of the staes
   for (const stateData of data.allEmissionsJson.edges)
   {
     var tempState = stateData.node.state
@@ -41,6 +44,7 @@ const SocialCardPage = ({data}) => {
       continue
     }
         
+    //sum all the emission categories to get total emissions for the recent year
     var mostRecentEmissions = stateData.node.emissionsByYear[stateData.node.emissionsByYear.length-1]
     for (const [k,v] of Object.entries(mostRecentEmissions))
     {
@@ -48,20 +52,25 @@ const SocialCardPage = ({data}) => {
     }
 
         
+    //store in array of array containing state name, total emissions, and initial position
     eachStateRecentEmissions[counter] = [tempState, stateTotalEmissions, counter]
     counter += 1
   }
     
+  //sort array by emisisons
   eachStateRecentEmissions.sort((a,b) => b[1]-a[1])
 
+  //change the position of each state to reflect their new position in sorted array
   for(var i=0;i<eachStateRecentEmissions.length;i++)
   {
     eachStateRecentEmissions[i][2] = i
   }
 
+  //find the daa correspoinding to the current page
   let statePosInArr = eachStateRecentEmissions
     .find(entry => entry[0]===currentState)
 
+  //alter what the suffix of the number is
   var finalDigitOfStatePos = statePosInArr[2]%10
   if(finalDigitOfStatePos+1 == 1)
   {
@@ -87,7 +96,7 @@ const SocialCardPage = ({data}) => {
       <div className="d-flex justify-content-between mr-2"
         style={{height: '418px', width:'800px'}}
       >
- 
+        {/*state name, image and emitter rank */}
         <div className="d-flex align-items-center col-6">
           <span
             className={"text-left display-3 sf-" + stateFaceClass}
@@ -108,7 +117,7 @@ const SocialCardPage = ({data}) => {
         </div>
 
         <div className="col-6 d-block d-xl-none ml-2 justify-content-end">
-
+          {/* state emissions */}
           <p
             className="text-right pt-2"
             style={{fontSize:'15px'}}
