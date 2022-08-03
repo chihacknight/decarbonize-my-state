@@ -99,7 +99,6 @@ const SocialCardPage = ({data}) => {
           <div>
             <h3 id="main" className= "d-flex align-items-center mr-4 mt-0 mb-0" >
               <span className="title font-weight-bold h4 mb-0"
-                // style={{fontSize:(28/placeTitle.length)+'rem'}}
                 style={{fontSize:3.5+'rem'}}
               >{placeTitle}</span>
             </h3>
