@@ -139,6 +139,8 @@ export default function SingleBarChart ({ emissionsData, homeView, mobileView, a
     // On social card, make bar chart shorter
     if (socialCardView) {
       GraphHeight = 270
+      GraphWidth = 270
+      
     }
   }
 

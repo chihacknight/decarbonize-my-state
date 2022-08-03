@@ -35,14 +35,17 @@ const SocialCardPage = ({data}) => {
   let nodeData = emissionsData.node.emissionsByYear
 
   return(
-    <div className='social-card d-flex flex-column justify-content-between align-items-center'>
+    <div className='social-card d-flex flex-column'>
       <SEO title="Social Card" />
-      <div className="d-flex justify-content-around">
+      <div className="d-flex justify-content-between mr-2">
  
-        <div className="d-flex align-items-center col-6">
+        <div className="d-flex align-items-center col-6"
+            // style={{border: 'solid 1px red'}}
+        >
           <span
-            className={"display-3 pl-3 mr-4 sf-" + stateFaceClass}
+            className={"text-left display-3 sf-" + stateFaceClass}
             aria-hidden="true"
+            style={{fontSize: '300px'}}
           ></span>
           <h3 id="main" className= "d-flex align-items-center mr-4 mt-0 mb-0" >
             <span className="title font-weight-bold h4 mb-0"
@@ -50,15 +53,23 @@ const SocialCardPage = ({data}) => {
             >{placeTitle}</span>
           </h3>
         </div>
-        <div className="col-6 d-block d-xl-none m-2 p-2">
+
+        <div className="col-6 d-block d-xl-none ml-2 justify-content-end"
+            // style={{border: 'solid 1px blue'}}
+
+        >
             <p
-            className="text-right"
+            className="text-right pt-2"
             style={{fontSize:'15px'}}
             >CO2 Equivalent Emissions in {placeTitle} by Source</p>
-          <SingleBarChart
-            emissionsData={nodeData[emissionsData.node.emissionsByYear.length-1]}
-            socialCardView={true}
-          />
+            <div className="justify-content-end ml-5 pl-5"
+            >
+
+                <SingleBarChart
+                    emissionsData={nodeData[emissionsData.node.emissionsByYear.length-1]}
+                    socialCardView={true}
+            />
+          </div>
         </div>
       </div>
       <h2 className="p-2 m-0 text-left" 
