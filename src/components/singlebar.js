@@ -42,7 +42,7 @@ let LineWidth = 50
  * @param {Array<string>} greenKeys Optional array of keys to show in green,
  * indicating they have been electrified.
  */
-export default function SingleBarChart ({ emissionsData, homeView, mobileView, activeKey, greenKeys }) {
+export default function SingleBarChart ({ emissionsData, homeView, mobileView, activeKey, greenKeys, socialCardView }) {
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
     .filter(([key,_val]) => key !== 'year')
@@ -135,6 +135,11 @@ export default function SingleBarChart ({ emissionsData, homeView, mobileView, a
     BarsConfig.buildings.text = '🏠 Buildings:'
     BarsConfig.transport.text = '🚗 Transport:'
     BarsConfig.other.text = '🏭 Other:'
+
+    // On social card, make bar chart shorter
+    if (socialCardView) {
+      GraphHeight = 270
+    }
   }
 
   // If greenKeys are specified, switch those bars' fill to their greenFill color

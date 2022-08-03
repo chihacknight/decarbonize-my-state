@@ -1,6 +1,7 @@
 /* Import stateface for state icons */
 @import 'stateface/stateface.css';
 @import 'index.css';
+@import 'social-card.css';
 
 /** Import Lato Google font with specific weights */
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap');

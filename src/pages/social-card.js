@@ -24,7 +24,7 @@ const SocialCardPage = ({data}) => {
   let params = new URLSearchParams(document.location.search)
   let currentState = params.get("state")
   let emissionsData = data.allEmissionsJson.edges
-  .find(entry => entry.node.state === currentState)
+    .find(entry => entry.node.state === currentState)
   {console.log(emissionsData)}
 
   // place info and string
@@ -34,23 +34,37 @@ const SocialCardPage = ({data}) => {
 
   let nodeData = emissionsData.node.emissionsByYear
 
-  return(<div>
-    <SEO title="Social Card" />
-
-    <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
-      <span
-        className={"display-3 mr-4 sf-" + stateFaceClass}
-        aria-hidden="true"
-      ></span>
-      <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
-    </h1>
-
-
-    <SingleBarChart
-        emissionsData={nodeData[emissionsData.node.emissionsByYear.length-1]}
-    />
-
-  </div>
+  return(
+    <div className='social-card d-flex flex-column justify-content-between align-items-center'>
+      <SEO title="Social Card" />
+      <div className="d-flex justify-content-around">
+ 
+        <div className="d-flex align-items-center col-6">
+          <span
+            className={"display-3 pl-3 mr-4 sf-" + stateFaceClass}
+            aria-hidden="true"
+          ></span>
+          <h3 id="main" className= "d-flex align-items-center mr-4 mt-0 mb-0" >
+            <span className="title font-weight-bold h4 mb-0"
+              style={{fontSize:'3.5rem'}}
+            >{placeTitle}</span>
+          </h3>
+        </div>
+        <div className="col-6 d-block d-xl-none m-2 p-2">
+            <p
+            className="text-right"
+            style={{fontSize:'15px'}}
+            >CO2 Equivalent Emissions in {placeTitle} by Source</p>
+          <SingleBarChart
+            emissionsData={nodeData[emissionsData.node.emissionsByYear.length-1]}
+            socialCardView={true}
+          />
+        </div>
+      </div>
+      <h2 className="p-2 m-0 text-left" 
+        style={{width:'800px'}}        
+      >Decarb My State</h2>
+    </div>
   )
 }
 
