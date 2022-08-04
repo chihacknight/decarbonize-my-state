@@ -2,7 +2,6 @@ import React from "react"
 import SEO from "../components/seo"
 import SingleBarChart from "../components/singlebar"
 import { graphql } from "gatsby"
-import { node } from "prop-types"
 
 //TODO: move to shared file with state details
 const slugToTitle = (placeName) => {
@@ -39,14 +38,14 @@ const SocialCardPage = ({data}) => {
     var tempState = stateData.node.state
     var stateTotalEmissions = 0
 
-    if (tempState == 'united_states')
+    if (tempState === 'united_states')
     {
       continue
     }
         
     //sum all the emission categories to get total emissions for the recent year
     var mostRecentEmissions = stateData.node.emissionsByYear[stateData.node.emissionsByYear.length-1]
-    for (const [k,v] of Object.entries(mostRecentEmissions))
+    for (const v of Object.values(mostRecentEmissions))
     {
       stateTotalEmissions += v
     }
@@ -72,15 +71,15 @@ const SocialCardPage = ({data}) => {
 
   //alter what the suffix of the number is
   var finalDigitOfStatePos = statePosInArr[2]%10
-  if(finalDigitOfStatePos+1 == 1)
+  if(finalDigitOfStatePos+1 === 1)
   {
     emitterSuffix = 'st'
   }
-  else if (finalDigitOfStatePos+1==2)
+  else if (finalDigitOfStatePos+1===2)
   {
     emitterSuffix = 'nd'
   }
-  else if (finalDigitOfStatePos+1==3)
+  else if (finalDigitOfStatePos+1===3)
   {
     emitterSuffix = 'rd'
   }
