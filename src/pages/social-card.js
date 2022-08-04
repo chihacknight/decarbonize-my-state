@@ -27,11 +27,11 @@ const SocialCardPage = ({location, data}) => {
     .find(entry => entry.node.state === currentState)
 
 
-    if(emissionsData == null)
-    {
-        emissionsData = data.allEmissionsJson.edges
-            .find(entry => entry.node.state === 'illinois')
-    }
+  if(emissionsData == null)
+  {
+    emissionsData = data.allEmissionsJson.edges
+      .find(entry => entry.node.state === 'illinois')
+  }
 
   //used for ranking the states
   var eachStateRecentEmissions = []
@@ -75,13 +75,13 @@ const SocialCardPage = ({location, data}) => {
   let statePosInArr = eachStateRecentEmissions
     .find(entry => entry[0]===currentState)
 
-    //to be used for specifically checks with /social-card/ which dont have a ?state={}
-    if(statePosInArr == null)
-    {
-        statePosInArr = eachStateRecentEmissions
-            .find(entry => entry[0]==='illinois')
-        currentState = 'illinois'
-    }
+  //to be used for specifically checks with /social-card/ which dont have a ?state={}
+  if(statePosInArr == null)
+  {
+    statePosInArr = eachStateRecentEmissions
+      .find(entry => entry[0]==='illinois')
+    currentState = 'illinois'
+  }
 
   //alter what the suffix of the number is
   var finalDigitOfStatePos = statePosInArr[2]%10
