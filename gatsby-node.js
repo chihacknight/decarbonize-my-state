@@ -5,6 +5,8 @@ const fs = require('fs')
  
 exports.createPages = async ({ graphql, actions, reporter }) => {
  const { createPage } = actions
+
+ var namesForSocialCardImage = []
  
  const placeNames = [
    "alabama",
@@ -82,15 +84,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
      await page.setDefaultNavigationTimeout(0);
 
      setTimeout(async function() {
-      await page.goto("http://localhost:8000/social-card?state=illinois", {waitUntil: "load"});
+      await page.goto("http://localhost:8000/social-card?state="+name, {waitUntil: "load"});
 
       console.log('go to link')
         // capture screenshot and store it into screenshots directory.
-       await page.screenshot({ path: 'screenshots/illinois.jpeg' });
+       await page.screenshot({ path: 'screenshots/'+name+'.jpeg' });
        console.log('took screenshot')
        await browser.close();
 
-     }, 5000)
+     }, 3000)
 
      
    } catch (err) {
@@ -102,14 +104,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
  
  placeNames.forEach(name => {
    const path = name
- 
-   // const Screenshot = async () => {
-   //   const browser = await puppeteer.launch();
-   //   const page = await browser.newPage();
-   //   await page.goto('localhost:8000/social-card?state='+name);
-   //   await viewElement.screenshot({path: name+'.png'});
-   //   await browser.close();
-   // }
    createPage({
      path,
      component: StateDetailsTemplate,
@@ -117,9 +111,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
        state: name
      }
    })
+
+   namesForSocialCardImage.push(name)
  })
 
-  captureScreenshot('illinois');
+ for (const name of namesForSocialCardImage)
+ {
+   await captureScreenshot(name);
+ }
 }
  
 
