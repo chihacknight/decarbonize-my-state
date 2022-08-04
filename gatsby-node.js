@@ -77,20 +77,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
      console.log('new page')
       // set viewport width and height
      await page.setViewport({ width: 800, height: 418 });
-     console.log('se viewport')
-
+     console.log('set viewport')
      //no timeout time
      await page.setDefaultNavigationTimeout(0);
 
-    await page.goto("http://localhost:8000/social-card?state=illinois");
-    console.log('go to link')
-      // capture screenshot and store it into screenshots directory.
-     await page.screenshot({ path: 'screenshots/illinois.jpeg' });
-     console.log('took screenshot')
+     setTimeout(async function() {
+      await page.goto("http://localhost:8000/social-card?state=illinois", {waitUntil: "load"});
+
+      console.log('go to link')
+        // capture screenshot and store it into screenshots directory.
+       await page.screenshot({ path: 'screenshots/illinois.jpeg' });
+       console.log('took screenshot')
+       await browser.close();
+
+     }, 5000)
+
+     
    } catch (err) {
      console.log(`❌ Error: ${err.message}`);
    } finally {
-     await browser.close();
      console.log(`\n🎉 GitHub profile screenshots captured.`);
    }
  }
@@ -105,11 +110,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
    //   await viewElement.screenshot({path: name+'.png'});
    //   await browser.close();
    // }
-   if (name === 'illinois')
-   {
-     captureScreenshot(name);
-   }
- 
    createPage({
      path,
      component: StateDetailsTemplate,
@@ -118,6 +118,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
      }
    })
  })
+
+  captureScreenshot('illinois');
 }
  
 
