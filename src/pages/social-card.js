@@ -19,13 +19,13 @@ const slugToTitle = (placeName) => {
   return words.join(" ")
 }
 
-const SocialCardPage = ({data}) => {
-
+const SocialCardPage = ({location, data}) => {
   //get the state data
-  let params = new URLSearchParams(document.location.search)
+  let params = new URLSearchParams(location.search)
   let currentState = params.get("state")
   let emissionsData = data.allEmissionsJson.edges
     .find(entry => entry.node.state === currentState)
+
 
   //used for ranking the states
   var eachStateRecentEmissions = []
