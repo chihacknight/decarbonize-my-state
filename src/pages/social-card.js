@@ -27,6 +27,12 @@ const SocialCardPage = ({location, data}) => {
     .find(entry => entry.node.state === currentState)
 
 
+    if(emissionsData == null)
+    {
+        emissionsData = data.allEmissionsJson.edges
+            .find(entry => entry.node.state === 'illinois')
+    }
+
   //used for ranking the states
   var eachStateRecentEmissions = []
   var counter = 0
@@ -68,6 +74,14 @@ const SocialCardPage = ({location, data}) => {
   //find the daa correspoinding to the current page
   let statePosInArr = eachStateRecentEmissions
     .find(entry => entry[0]===currentState)
+
+    //to be used for specifically checks with /social-card/ which dont have a ?state={}
+    if(statePosInArr == null)
+    {
+        statePosInArr = eachStateRecentEmissions
+            .find(entry => entry[0]==='illinois')
+        currentState = 'illinois'
+    }
 
   //alter what the suffix of the number is
   var finalDigitOfStatePos = statePosInArr[2]%10
