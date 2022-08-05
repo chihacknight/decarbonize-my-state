@@ -31,6 +31,7 @@ const SocialCardPage = ({location, data}) => {
   {
     emissionsData = data.allEmissionsJson.edges
       .find(entry => entry.node.state === 'illinois')
+      currentState = 'illinois'
   }
 
   //used for ranking the states
@@ -80,7 +81,6 @@ const SocialCardPage = ({location, data}) => {
   {
     statePosInArr = eachStateRecentEmissions
       .find(entry => entry[0]==='illinois')
-    currentState = 'illinois'
   }
 
   //alter what the suffix of the number is
@@ -103,6 +103,13 @@ const SocialCardPage = ({location, data}) => {
 
   let nodeData = emissionsData.node.emissionsByYear
 
+  var stateNameSize = 3.5
+  if(currentState === 'tennessee' || currentState === 'pennsylvania'
+   || currentState === 'washington' || currentState === 'oklahoma')
+  {
+        stateNameSize = 2.5
+  }
+
   return(
     <div className='social-card d-flex flex-column'>
       <SEO title="Social Card" />
@@ -121,7 +128,7 @@ const SocialCardPage = ({location, data}) => {
           <div>
             <h3 id="main" className= "d-flex align-items-center mr-4 mt-0 mb-0" >
               <span className="title font-weight-bold h4 mb-0"
-                style={{fontSize:3.5+'rem'}}
+                style={{fontSize:stateNameSize+'rem'}}
               >{placeTitle}</span>
             </h3>
 
@@ -135,7 +142,7 @@ const SocialCardPage = ({location, data}) => {
             className="text-right pt-2"
             style={{fontSize:'15px'}}
           >CO2 Equivalent Emissions in {placeTitle} by Source</p>
-          <div className="justify-content-end ml-5 pl-5"            >
+          <div className="justify-content-end ml-5 pl-4"            >
 
             <SingleBarChart
               emissionsData={nodeData[emissionsData.node.emissionsByYear.length-1]}

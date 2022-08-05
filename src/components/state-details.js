@@ -289,6 +289,8 @@ export default function StateDetailsPage ({ location, data }) {
         description={descriptionText}
       />
 
+      <meta name="image" content={"/screenshots/"+placeTitle+".jpeg"}/>
+
       <div className="sticky-header d-flex align-items-center">
         <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
           <span

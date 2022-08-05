@@ -3,10 +3,11 @@ const path = require("path")
 const puppeteer = require('puppeteer')
 const fs = require('fs')
  
-exports.createPages = async ({ graphql, actions, reporter }) => {
+exports.createPages = async ({ graphql, actions, reporter, location }) => {
  const { createPage } = actions
 
  var namesForSocialCardImage = []
+ var waitingForReady = true
  
  const placeNames = [
    "alabama",
@@ -65,6 +66,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
  const StateDetailsTemplate = path.resolve(`src/components/state-details.js`)
  
  async function captureScreenshot(name) {
+  waitingForReady = false;
    // if screenshots directory is not exist then create one
    if (!fs.existsSync("screenshots")) {
      fs.mkdirSync("screenshots");
@@ -73,32 +75,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     try {
      // launch headless Chromium browser
      browser = await puppeteer.launch({headless: false});
-     console.log('launched puppteer')
       // create new page object
      const page = await browser.newPage();
-     console.log('new page')
       // set viewport width and height
      await page.setViewport({ width: 800, height: 418 });
-     console.log('set viewport')
      //no timeout time
      await page.setDefaultNavigationTimeout(0);
 
-     setTimeout(async function() {
-      await page.goto("http://localhost:8000/social-card?state="+name, {waitUntil: "load"});
+      await page.goto("http://localhost:8000/social-card?state="+name, {waitUntil: "networkidle2"});
 
       console.log('go to link')
         // capture screenshot and store it into screenshots directory.
        await page.screenshot({ path: 'screenshots/'+name+'.jpeg' });
        console.log('took screenshot')
        await browser.close();
-
-     }, 3000)
+      waitingForReady = true;
 
      
    } catch (err) {
      console.log(`❌ Error: ${err.message}`);
-   } finally {
-     console.log(`\n🎉 GitHub profile screenshots captured.`);
    }
  }
  
@@ -115,10 +110,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
    namesForSocialCardImage.push(name)
  })
 
- for (const name of namesForSocialCardImage)
- {
-   await captureScreenshot(name);
- }
+ setTimeout(async function() {
+  for (const name of namesForSocialCardImage)
+  {
+    while(!waitingForReady){}
+    await captureScreenshot(name);
+  }
+ }, 3000)
 }
  
 
