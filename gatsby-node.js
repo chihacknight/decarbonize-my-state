@@ -2,6 +2,7 @@
 const path = require("path")
 const puppeteer = require('puppeteer')
 const fs = require('fs')
+const { siteMetadata } = require("./gatsby-config")
  
 exports.createPages = async ({ graphql, actions, reporter, location }) => {
  const { createPage } = actions
@@ -82,12 +83,10 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
      //no timeout time
      await page.setDefaultNavigationTimeout(0);
 
-      await page.goto("http://localhost:8000/social-card?state="+name, {waitUntil: "networkidle2"});
+      await page.goto(siteMetadata.url+"social-card?state="+name, {waitUntil: "networkidle2"});
 
-      console.log('go to link')
         // capture screenshot and store it into screenshots directory.
        await page.screenshot({ path: 'screenshots/'+name+'.jpeg' });
-       console.log('took screenshot')
        await browser.close();
       waitingForReady = true;
 
