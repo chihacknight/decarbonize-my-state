@@ -10,25 +10,42 @@ import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
 
-// image resources
+/**
+ * Images - suffix with Img for clarity from actual code
+ */
+
 import CoalTransition from "../images/coal-plant-transition.png"
+
+// Sim city power plant icons
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
 import CoalPlantImg from "../images/coal-plant.png"
 import PowerPlantMap from "../images/dirty-power-plants.jpg"
-import DirtyBuilding from "../images/dirty-building.png"
-import HeatPumpAndStove from "../images/electric-heat-pump-stove.png"
-import GasBoilerAndStove from "../images/gas-boiler-stove.png"
-import GasCar from "../images/gas_car.png"
-import ElectricCar from "../images/electric_car.png"
-import GasBoxTruck from "../images/gas_boxtruck.png"
-import ElectricBoxTruck from "../images/electric_boxtruck.png"
-import GasTruck from "../images/gas_truck.png"
-import ElectricTruck from "../images/electric_truck.png"
-import GasToyota from "../images/gas_toyota.png"
-import ElectricToyota from "../images/electric_toyota.png"
-import SolarPanel from "../images/solar_panel.png"
-import PowerPlant from "../images/power_plant.png"
+
+// New images
+// import ChimneyImg from '../images/chimney.svg'
+// import DirtyCarImg from '../images/gas-car.svg'
+// import DirtyHouseImg from '../images/gas-house.svg'
+import DirtyPowerPlantImg from '../images/dirty-power-plant.png'
+// import ElectricCarImg from '../images/electric-car.svg'
+// import ElectricHeaterImg from '../images/electric-heat-pump.svg'
+// import ElectricStoveImg from '../images/induction-stove.svg'
+// import ElectricWaterHeaterImg from '../images/electric-water-heater.svg'
+// import GasHeaterImg from '../images/gas-furnace.svg'
+// import GasStoveImg from '../images/gas-stove.svg'
+// import GasWaterHeaterImg from '../images/gas-water-heater.svg'
+// import HouseWithSolarImg from '../images/house-with-solar.svg'
+
+// Spritesheets
+import AppliancesSpritesheet from '../images/appliances-sheet.png'
+import BuildingsSpritesheet from '../images/buildings-sheet.png'
+import CarsSpritesheet from '../images/cars-sheet.png'
+
+// import CleanApartmentsImg from '../images/clean-apartments.svg'
+// import CleanCornerBuildingsImg from '../images/clean-corner-buildings.svg'
+// import DirtyApartmentsImg from '../images/dirty-apartments.svg'
+// import DirtyCornerBuildingsImg from '../images/dirty-corner-buildings.svg'
+
 
 const slugToTitle = (placeName) => {
   const words = placeName.split("_")
@@ -52,6 +69,11 @@ const slugToTitle = (placeName) => {
  * 76_125 -> '76 thousand'
  */
 function numberToHumanString (num) {
+  // Return clear error string if the number is null or undefined
+  if (num === undefined || num === null) {
+    return '?'
+  }
+
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
   // 76 thousand
   if (num > 1_000 && num < 1_000_000) {
@@ -140,16 +162,10 @@ export default function StateDetailsPage ({ location, data }) {
   const carsToElectrify = carsAll - evRegistration
 
   // string formatting
-  const carsCountStr =
-    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
-  const carsLeftStr =
-    carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
-  const carsPerYear =
-    carsToElectrify !== undefined
-      ? numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
-      : "?"
-  const evCountStr =
-    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
+  const carsCountStr = numberToHumanString(carsAll)
+  const carsToElectrifyStr = numberToHumanString(carsToElectrify)
+  const carsPerYear = numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
+  const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
   const {
@@ -163,14 +179,10 @@ export default function StateDetailsPage ({ location, data }) {
     weightedFossilBuildingsPct !== 0) ? buildings * (weightedFossilBuildingsPct/100) : buildings
 
   // string formatting
-  const buildingsCountStr =
-  buildings !== undefined ? numberToHumanString(buildings) : "?"
-  const buildingsLeftStr =
-  buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
+  const buildingsCountStr = numberToHumanString(buildings)
+  const buildingsLeftToElectrifyStr = numberToHumanString(buildingsToElectrify)
   const buildingsPerYear =
-  buildingsToElectrify !== undefined
-    ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
-    : "?"
+    numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -254,10 +266,10 @@ export default function StateDetailsPage ({ location, data }) {
     } else if (targetId === "bld-end") {
       activeKey = ""
       greenKeys = ["buildings"]
-    } else if (targetId === "trnsprt-main") {
+    } else if (targetId === "transport-main") {
       activeKey = "transportation"
       greenKeys = ["buildings"]
-    } else if (targetId === "trnsprt-end") {
+    } else if (targetId === "transport-end") {
       activeKey = ""
       greenKeys = ["buildings", "transportation"]
     } else if (targetId === "power-main") {
@@ -347,8 +359,8 @@ export default function StateDetailsPage ({ location, data }) {
           items={[
             "bld-main",
             "bld-end",
-            "trnsprt-main",
-            "trnsprt-end",
+            "transport-main",
+            "transport-end",
             "power-main",
             "power-end",
             "other-main",
@@ -359,7 +371,7 @@ export default function StateDetailsPage ({ location, data }) {
         >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h2 className="h1 mb-6">🏠 Buildings</h2>
+            <h2 className="h1 mb-6">Buildings</h2>
 
             <div className="row mt-5">
               <div className="col-12 col-md-6 d-block d-xl-none mb-6">
@@ -376,9 +388,9 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <p className="mt-0 mb-8">
                   <img
-                    className="img-fluid"
-                    src={DirtyBuilding}
-                    alt="Building polluting by burning natural gas"
+                    className="img-fluid col-6"
+                    src={BuildingsSpritesheet}
+                    alt="Single family house"
                   />
                 </p>
 
@@ -387,32 +399,32 @@ export default function StateDetailsPage ({ location, data }) {
 
             <p className="h2 mt-6 mb-0">
               {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
-              We burn <strong>🦖 fossil fuels</strong> to <strong>🔥 heat</strong> our air, water, and food.
+              We burn <strong>fossil fuels</strong> to <strong>heat</strong> our air, water, and food.
             </p>
 
-            <p className="mt-5 mb-8">
+            <div className="mt-5 text-center">
               <img
-                className="img-fluid"
-                src={GasBoilerAndStove}
-                alt="Gas boiler, gas stove"
+                className="img-fluid col-6"
+                src={AppliancesSpritesheet}
+                alt="Single family house"
               />
-            </p>
+            </div>
 
             <p className="h2 mt-6">
             To <strong>cut</strong> this pollution...
             </p>
 
-            <p className="h2 mt-4 mb-6 float-right">
-            Let's <strong>⚡electrify</strong> our <strong>🔥 heat</strong>!
+            <p className="h2 mt-4 mb-6 text-right">
+              Let's <strong>electrify</strong> our <strong>heat</strong>!
             </p>
 
-            <p className="mt-5 mb-0">
+            <div className="mt-5 text-center">
               <img
-                className="img-fluid"
-                src={HeatPumpAndStove}
-                alt="Electric heat pump, induction stove"
+                className="img-fluid col-6"
+                src={AppliancesSpritesheet}
+                alt="Single family house"
               />
-            </p>
+            </div>
 
             <p className="h2 mt-6">
               We'll replace...
@@ -454,8 +466,9 @@ export default function StateDetailsPage ({ location, data }) {
             )}
 
             <p className="h3 mt-5">
-              We need to electrify the remaining {buildingsLeftStr} buildings in{" "}
-              {placeTitle}. That's around {buildingsPerYear} per year.
+              That means we only need to electrify the remaining{" "}
+              {buildingsLeftToElectrifyStr} buildings in {placeTitle}.{" "}
+              That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
               label={"Buildings"}
@@ -477,13 +490,12 @@ export default function StateDetailsPage ({ location, data }) {
               />
             </div>
 
+            <hr className="mb-8" />
           </div>
 
-          <hr className="mb-8" />
-
           {/* Transportation Section */}
-          <div id="trnsprt-main" className="scrollable-sect mt-5">
-            <h2 className="h1 mb-6">🚗 Transport</h2>
+          <div id="transport-main" className="scrollable-sect mt-5">
+            <h2 className="h1 mb-6">Transport</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -498,9 +510,9 @@ export default function StateDetailsPage ({ location, data }) {
               <div className="col h3">
                 <p className="h2 mt-2">
                   <strong className="font-weight-bold">{transportPrcnt}%</strong> of {placeTitle}'s
-                  pollution comes from 🚗 cars, 🚚 trucks, 🚈 trains, and ✈️ planes.</p>
+                  pollution comes from cars, trucks, trains, and planes.</p>
                 <p className="h2 mt-6 mb-6 float-right">
-                  But <strong>mostly</strong> from 🚗.
+                  But <strong>mostly</strong> from cars.
                 </p>
               </div>
             </div>
@@ -508,7 +520,7 @@ export default function StateDetailsPage ({ location, data }) {
             <p className="mt-0 mb-8">
               <img
                 className="img-fluid"
-                src={GasCar}
+                src={CarsSpritesheet}
                 alt="Gasoline car"
               />
             </p>
@@ -518,13 +530,13 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <p className="h2 mt-4 mb-6 float-right">
-              Your next car must be <strong>⚡electric</strong>.
+              Your next car must be <strong>electric</strong>.
             </p>
 
             <p className="mt-5 mb-6">
               <img
                 className="img-fluid"
-                src={ElectricCar}
+                src={CarsSpritesheet}
                 alt="Electric car"
               />
             </p>
@@ -535,60 +547,16 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <p className="mt-5">
-              (Or try going car-free with public transit, bikes/e-bikes, or
-              walking if it works for you.)
+              (Or have folks try going car-free with public transit,
+                bikes/e-bikes, or walking if it works for you.)
             </p>
 
-            <div className="col-5">
-              <p className="mt-0 mb-0">
-                <img
-                  className="img-fluid"
-                  src={GasBoxTruck}
-                  alt="Gasoline box truck"
-                />
-              </p>
-              <p className="mt-0 mb-0">
-                <img
-                  className="img-fluid"
-                  src={ElectricBoxTruck}
-                  alt="Electrix box truck"
-                />
-              </p>
-              <p className="mt-0 mb-0">
-                <img
-                  className="img-fluid"
-                  src={GasTruck}
-                  alt="Gasoline box truck"
-                />
-              </p>
-              <p className="mt-0 mb-0">
-                <img
-                  className="img-fluid"
-                  src={ElectricTruck}
-                  alt="Electrix box truck"
-                />
-              </p>
-              <p className="mt-0 mb-0">
-                <img
-                  className="img-fluid"
-                  src={GasToyota}
-                  alt="Gasoline box truck"
-                />
-              </p>
-              <p className="mt-0 mb-0">
-                <img
-                  className="img-fluid"
-                  src={ElectricToyota}
-                  alt="Electrix box truck"
-                />
-              </p>
-            </div>
             <p className="mt-5">
                 There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "}
                 are already electric ({pctEv}% of the total).
             </p>
             <p className="mt-5">
-                We need to electrify the remaining {carsLeftStr} vehicles. That's around {carsPerYear} a year.
+                We need to electrify the remaining {carsToElectrifyStr} vehicles. That's around {carsPerYear} a year.
             </p>
             <AlreadyElectrifiedChart
               label={"Vehicles"}
@@ -597,7 +565,7 @@ export default function StateDetailsPage ({ location, data }) {
             />
           </div>
 
-          <div id="trnsprt-end" className="scrollable-sect mt-8 mb-4">
+          <div id="transport-end" className="scrollable-sect mt-8 mb-4">
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               That cuts {transportPrcnt}% of the pollution.
             </p>
@@ -608,15 +576,15 @@ export default function StateDetailsPage ({ location, data }) {
                 greenKeys={["buildings", "transportation"]}
               />
             </div>
-          </div>
 
-          <hr className="mt-8" />
+            <hr className="mt-8" />
+          </div>
 
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h2 className="h1 mb-6">🔌 Power</h2>
+              <h2 className="h1 mb-6">Power</h2>
 
               <div className="row mt-5">
                 {/* Make SingleBarChart full width on mobile */}
@@ -631,15 +599,17 @@ export default function StateDetailsPage ({ location, data }) {
                 <div className="col">
                   <p className="h2 mt-2">
                     <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s
-                  pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
-                  make power.
+                    pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
+                    make power.
                   </p>
                   <p className="mt-4 mb-6">
-                    <img
-                      className="img-fluid"
-                      src={PowerPlant}
-                      alt="Power plant"
-                    />
+                    <div className="h3 mt-5 font-weight-bold">
+                      <img
+                        className="img-fluid"
+                        src={DirtyPowerPlantImg}
+                        alt="Dirty power plant"
+                      />
+                    </div>
                   </p>
 
                 </div>
@@ -650,19 +620,19 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h2 mt-4 mb-6 float-right">
-                Put <strong>⚡solar panels</strong> on your roof!
+                Put <strong>solar panels</strong> on your roof!
               </p>
 
               <p className="mt-5 mb-6">
                 <img
                   className="img-fluid"
-                  src={SolarPanel}
-                  alt="Solar panel"
+                  src={BuildingsSpritesheet}
+                  alt="Single family home with solar panels"
                 />
               </p>
 
               <p className="h2 mt-8">
-                Then, we'll replace <strong>🦖 all fossil fuel power plants</strong> with solar and wind farms.
+                Then, we'll replace <strong>all fossil fuel power plants</strong> with solar and wind farms.
               </p>
 
               <p className="mt-5 mb-0">
@@ -745,14 +715,15 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
             </div>
           )}
-          {/* Show standard outro section if power emissions are zero */}
+          {/* Show standard outro section if power emissions are non-zero */}
           {powerPrcnt > 0 && (
             <div id="power-end" className="scrollable-sect mt-8 mb-4">
               <p className="h1 font-weight-bold text-center mt-6 mb-6">
                 That cuts {powerPrcnt}% of the pollution.
               </p>
-              <p className="h1 font-weight-bold text-center mt-6 mb-6">
-                And gives us the ⚡ to eliminate pollution from 🏠 and 🚗!
+              <p className="h2 text-center mt-6 mb-6">
+                And gives us zero-emissions power we need to eliminate pollution
+                from buildings and cars!
               </p>
 
               <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
@@ -769,7 +740,7 @@ export default function StateDetailsPage ({ location, data }) {
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
             <div id="power-main" className="scrollable-sect mt-5 mb-7">
-              <h2 className="h1">🔌 Power</h2>
+              <h2 className="h1">Power</h2>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
                   {placeTitle} produces all of it's power without making any climate pollution! 😎
@@ -787,7 +758,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h2 className="h1 mt-6 mb-6">🏭 Other Emissions</h2>
+            <h2 className="h1 mt-6 mb-6">Other Emissions</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
