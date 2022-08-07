@@ -312,8 +312,12 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-5">
-          To get to <strong className="font-weight-bold">zero</strong> by 2050,{" "}
-          {placeTitle} must cut climate pollution by <strong className="font-weight-bold">{cutPerYearPrcnt}% a year.
+          To get to <strong>zero</strong> by 2050,{" "}
+          {placeTitle} must cut climate pollution by{" "}
+          <br className="d-none d-lg-block" />
+          <strong>
+            {rawEmissionsCutPerYear} million metric tons of CO<sub>2</sub>{" "}
+            equivalent a year.
           </strong>
         </p>
 
@@ -507,7 +511,7 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="col h3">
                 <p className="h2 mt-2">
-                  <strong className="font-weight-bold">{transportPrcnt}%</strong> of {placeTitle}'s
+                  <strong>{transportPrcnt}%</strong> of {placeTitle}'s
                   pollution comes from cars, trucks, trains, and planes.</p>
                 <p className="h2 mt-6 mb-6 text-right">
                   But <strong>mostly</strong> from cars.
@@ -592,7 +596,7 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <div className="col">
                   <p className="h2 mt-2">
-                    <strong className="font-weight-bold">{powerPrcnt}%</strong> of {placeTitle}'s
+                    <strong>{powerPrcnt}%</strong> of {placeTitle}'s
                     pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
                     make power.
                   </p>
@@ -694,8 +698,8 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="h2 mt-8">
-                In all, we'll need to build <strong className="font-weight-bold">{windTurbinesCountStr} MWs</strong> of wind
-                and <strong className="font-weight-bold">{solarPanelsCountStr} MWs</strong> of solar.
+                In all, we'll need to build <strong>{windTurbinesCountStr} MWs</strong> of wind
+                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
 
 
@@ -764,7 +768,7 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <p className="h2 mt-5">
                   The last{" "}
-                  <strong className="font-weight-bold">{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
+                  <strong>{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
                   comes from other sources...
                 </p>
                 <p className="h2 mt-5">
@@ -777,9 +781,9 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <ul>
-                  <li>🌾 No-till farming to keep CO2 in the soil</li>
+                  <li>🌾 No-till farming to keep CO<sub>2</sub> in the soil</li>
                   <li>🗑️ Capturing methane leaks from landfills</li>
-                  <li>🧱 Capturing CO2 to make emissions-free concrete</li>
+                  <li>🧱 Capturing CO<sub>2</sub> to make emissions-free concrete</li>
                   <li>🔩 Burning green hydrogen to make emissions-free steel</li>
                   <li>💨 Plugging methane leaks from gas pipelines</li>
                 </ul>
