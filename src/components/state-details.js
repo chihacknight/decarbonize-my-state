@@ -399,7 +399,7 @@ export default function StateDetailsPage ({ location, data }) {
               We burn <strong>fossil fuels</strong> to <strong>heat</strong> our air, water, and food.
             </p>
 
-            <div className="d-flex align-items-end justify-content-between mt-5">
+            <div className="d-flex align-items-end justify-content-between flex-wrap mt-5 mb-5">
               <div className="appliance-sheet -stove"></div>
               <div className="appliance-sheet -boiler"></div>
               <div className="appliance-sheet -heater"></div>
@@ -441,7 +441,7 @@ export default function StateDetailsPage ({ location, data }) {
               </ul>
             </p>
 
-            <div className="d-flex align-items-end justify-content-between mt-5 mb-5">
+            <div className="d-flex align-items-end justify-content-between flex-wrap  mt-5 mb-5">
               <div className="appliance-sheet -stove -clean"></div>
               <div className="appliance-sheet -boiler -clean"></div>
               <div className="appliance-sheet -heater -clean"></div>
@@ -522,16 +522,16 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="h2 mt-6">
-              To cut this pollution...
+              To cut this pollution,
             </p>
 
-            <p className="h2 mt-4 mb-6 text-right">
-              Your next car must be <strong>electric</strong>.
+            <p className="h2 mt-4 mb-5 text-right">
+              your next car must be <strong>electric</strong>.
             </p>
 
-            <p className="col-12 h5">
-              Or try going car-free with public transit, bikes/e-bikes, or
-              walking if it works for you.
+            <p className="col-12 h4">
+              Or consider going car-free with public transit, bikes/e-bikes, car
+              share, or other alternatives!
             </p>
 
             <p className="h2 mt-8">
