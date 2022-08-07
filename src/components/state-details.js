@@ -383,17 +383,14 @@ export default function StateDetailsPage ({ location, data }) {
               <div className="col h3">
 
                 <p className="h2 mt-2 mb-0">
-                  <strong className="font-weight-bold">{buildingsPrcnt}%</strong> of {placeTitle}'s climate pollution comes from buildings.
+                  <strong>{buildingsPrcnt}%</strong>{" "}
+                  of {placeTitle}'s climate pollution comes from buildings.
                 </p>
 
-                <p className="mt-0 mb-8">
-                  <img
-                    className="img-fluid col-6"
-                    src={BuildingsSpritesheet}
-                    alt="Single family house"
-                  />
-                </p>
-
+                <div className="d-flex align-items-end justify-content-around mt-5">
+                  <div className="col-6 building-sheet -house"></div>
+                  <div className="col-6 building-sheet -apartments"></div>
+                </div>
               </div>
             </div>
 
@@ -402,12 +399,10 @@ export default function StateDetailsPage ({ location, data }) {
               We burn <strong>fossil fuels</strong> to <strong>heat</strong> our air, water, and food.
             </p>
 
-            <div className="mt-5 text-center">
-              <img
-                className="img-fluid col-6"
-                src={AppliancesSpritesheet}
-                alt="Single family house"
-              />
+            <div className="d-flex align-items-end justify-content-between mt-5">
+              <div className="appliance-sheet -stove"></div>
+              <div className="appliance-sheet -boiler"></div>
+              <div className="appliance-sheet -heater"></div>
             </div>
 
             <p className="h2 mt-6">
@@ -417,14 +412,6 @@ export default function StateDetailsPage ({ location, data }) {
             <p className="h2 mt-4 mb-6 text-right">
               Let's <strong>electrify</strong> our <strong>heat</strong>!
             </p>
-
-            <div className="mt-5 text-center">
-              <img
-                className="img-fluid col-6"
-                src={AppliancesSpritesheet}
-                alt="Single family house"
-              />
-            </div>
 
             <p className="h2 mt-6">
               We'll replace...
@@ -454,9 +441,20 @@ export default function StateDetailsPage ({ location, data }) {
               </ul>
             </p>
 
-            <p className="h2 mt-0 mb-4 float-right">
+            <div className="d-flex align-items-end justify-content-between mt-5 mb-5">
+              <div className="appliance-sheet -stove -clean"></div>
+              <div className="appliance-sheet -boiler -clean"></div>
+              <div className="appliance-sheet -heater -clean"></div>
+            </div>
+
+            <p className="h2 mt-0 mb-4 text-right">
               ...in all of {placeTitle}'s <strong>{buildingsCountStr} buildings</strong>.
             </p>
+
+            <div className="d-flex align-items-end justify-content-around mt-6">
+              <div className="col-6 building-sheet -house -clean"></div>
+              <div className="col-6 building-sheet -apartments -clean"></div>
+            </div>
 
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
@@ -511,34 +509,29 @@ export default function StateDetailsPage ({ location, data }) {
                 <p className="h2 mt-2">
                   <strong className="font-weight-bold">{transportPrcnt}%</strong> of {placeTitle}'s
                   pollution comes from cars, trucks, trains, and planes.</p>
-                <p className="h2 mt-6 mb-6 float-right">
+                <p className="h2 mt-6 mb-6 text-right">
                   But <strong>mostly</strong> from cars.
                 </p>
               </div>
             </div>
 
-            <p className="mt-0 mb-8">
-              <img
-                className="img-fluid"
-                src={CarsSpritesheet}
-                alt="Gasoline car"
-              />
-            </p>
+            <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
+              <div className="col-5 car-sheet -car"></div>
+              <div className="col-6 car-sheet -truck"></div>
+              <div className="col-8 car-sheet -semi mt-5"></div>
+            </div>
 
             <p className="h2 mt-6">
               To cut this pollution...
             </p>
 
-            <p className="h2 mt-4 mb-6 float-right">
+            <p className="h2 mt-4 mb-6 text-right">
               Your next car must be <strong>electric</strong>.
             </p>
 
-            <p className="mt-5 mb-6">
-              <img
-                className="img-fluid"
-                src={CarsSpritesheet}
-                alt="Electric car"
-              />
+            <p className="col-12 h5">
+              Or try going car-free with public transit, bikes/e-bikes, or
+              walking if it works for you.
             </p>
 
             <p className="h2 mt-8">
@@ -546,10 +539,11 @@ export default function StateDetailsPage ({ location, data }) {
               {placeTitle}!
             </p>
 
-            <p className="mt-5">
-              (Or have folks try going car-free with public transit,
-                bikes/e-bikes, or walking if it works for you.)
-            </p>
+            <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
+              <div className="col-5 car-sheet -car -clean"></div>
+              <div className="col-6 car-sheet -truck -clean"></div>
+              <div className="col-8 car-sheet -semi -clean mt-5"></div>
+            </div>
 
             <p className="mt-5">
                 There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "}
@@ -602,16 +596,14 @@ export default function StateDetailsPage ({ location, data }) {
                     pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
                     make power.
                   </p>
-                  <p className="mt-4 mb-6">
-                    <div className="h3 mt-5 font-weight-bold">
-                      <img
-                        className="img-fluid"
-                        src={DirtyPowerPlantImg}
-                        alt="Dirty power plant"
-                      />
-                    </div>
-                  </p>
 
+                  <div className="mt-5 text-center">
+                    <img
+                      className="img-fluid col-6"
+                      src={DirtyPowerPlantImg}
+                      alt="Dirty power plant"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -619,17 +611,13 @@ export default function StateDetailsPage ({ location, data }) {
               To cut this pollution...
               </p>
 
-              <p className="h2 mt-4 mb-6 float-right">
+              <p className="h2 mt-4 mb-6 text-right">
                 Put <strong>solar panels</strong> on your roof!
               </p>
 
-              <p className="mt-5 mb-6">
-                <img
-                  className="img-fluid"
-                  src={BuildingsSpritesheet}
-                  alt="Single family home with solar panels"
-                />
-              </p>
+              <div className="d-flex justify-content-center">
+                <div className="building-sheet -house -clean col-8"></div>
+              </div>
 
               <p className="h2 mt-8">
                 Then, we'll replace <strong>all fossil fuel power plants</strong> with solar and wind farms.
@@ -649,6 +637,8 @@ export default function StateDetailsPage ({ location, data }) {
               <p className="h3 mt-5 mb-8">
                 ...and find good jobs for those workers.
               </p>
+
+              <h3 className="h5">Current Fossil Fuel Power Plants in {placeTitle}</h3>
 
               {coalPlants.length > 0 && (
                 <>

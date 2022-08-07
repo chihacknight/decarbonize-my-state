@@ -352,3 +352,108 @@ footer a {
 }
 
 .data-modal-body { max-height: 40vh; }
+
+/**
+ * Spritesheet styling
+ */
+.appliance-sheet, .building-sheet, .car-sheet {
+    aspect-ratio:  1;
+    background-repeat: no-repeat;
+    /* For testing */
+    /*border: dashed 2px grey;*/
+}
+
+/** 3X2 sheet */
+.appliance-sheet {
+    background-image: url("../images/appliances-sheet.png");
+    background-size: auto 200%;
+    height: 20rem;
+}
+
+.appliance-sheet.-boiler {
+    aspect-ratio: 1/3;
+    background-position: -1.5% 103%;
+}
+
+.appliance-sheet.-boiler.-clean {
+    background-position: -1.5% -2%;
+}
+
+.appliance-sheet.-stove {
+    background-position: 43.5% 102%;
+    aspect-ratio: 1/2;
+}
+
+.appliance-sheet.-stove.-clean {
+    background-position: 43.5% -2%;
+}
+
+.appliance-sheet.-heater {
+    background-position: 100% 102%;
+    aspect-ratio: 1/1.5;
+}
+
+.appliance-sheet.-heater.-clean {
+    background-position: 102% 18%;
+}
+
+/** 3X2 sheet */
+.building-sheet {
+    background-image: url("../images/buildings-sheet.png");
+    background-size: auto 200%;
+}
+
+.building-sheet.-house {
+    aspect-ratio: 2;
+    background-size: 300%;
+    background-position: -7% 102%;
+}
+
+.building-sheet.-house.-clean {
+    background-position: -7% 20%;
+}
+
+.building-sheet.-apartments {
+    aspect-ratio: 1/0.8;
+    background-position: 102% 104%;
+}
+
+.building-sheet.-apartments.-clean {
+    background-position: 102% -8%;
+}
+
+
+/** 2X4 sheet */
+.car-sheet {
+    background-image: url("../images/cars-sheet.png");
+    background-size:  auto 400%;
+}
+
+.car-sheet.-car {
+    background-size: 300% auto;
+    aspect-ratio: 1/0.5;
+    background-position: -4% -4%;
+}
+
+.car-sheet.-car.-clean {
+    background-position: 92% -7%;
+}
+
+.car-sheet.-truck {
+    background-position: 0% 28%;
+    aspect-ratio: 1/0.48;
+}
+
+.car-sheet.-truck.-clean {
+    background-position: 100% 28%;
+}
+
+.car-sheet.-semi {
+    aspect-ratio: 1/0.35;
+    background-position: 0% 58%;
+    background-size: auto 500%;
+}
+
+.car-sheet.-semi.-clean {
+    background-position: 100% 58%;
+}

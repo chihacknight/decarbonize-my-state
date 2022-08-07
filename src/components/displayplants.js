@@ -21,7 +21,7 @@ const DisplayPlants = ({ plants, plantImage }) => {
           if (index === MaxIcons) {
             return (
               <div key={hash(plant)}
-                className="h4 text-center text-lg-left col-6 col-lg-5 pl-4 pt-2">
+                className="h4 text-center text-muted text-lg-left col-6 col-lg-5 pl-4 pt-2">
                 ...and {plants.length - MaxIcons} more
               </div>)
           }
