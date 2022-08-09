@@ -107,12 +107,15 @@ const SocialCardPage = ({ location, data }) => {
     currentState === "oklahoma" ||
     currentState === "connecticut" ||
     currentState === "maryland" ||
-    currentState === "north_carolina"
+    currentState === "north_carolina" ||
+    currentState === "colorado" ||
+    currentState === "kentucky" ||
+    currentState === "nebraska"
   ) {
     stateNameSize = 2.5;
   }
   if (currentState === "massachusetts") {
-    stateNameSize = 1.7;
+    stateNameSize = 1.6;
   }
 
   return (
