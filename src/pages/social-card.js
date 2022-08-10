@@ -72,7 +72,7 @@ const SocialCardPage = ({ location, data }) => {
     eachStateRecentEmissions[i][2] = i
   }
 
-  //find the daa correspoinding to the current page
+  //find the data correspoinding to the current page
   let statePosInArr = eachStateRecentEmissions.find(
     (entry) => entry[0] === currentState
   )
