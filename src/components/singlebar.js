@@ -151,7 +151,7 @@ export default function SingleBarChart ({
     // On social card, make bar chart shorter
     if (socialCardView) {
       GraphHeight = 270
-      GraphWidth = 300
+      GraphWidth = 325
     }
   }
 

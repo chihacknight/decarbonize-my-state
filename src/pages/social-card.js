@@ -112,7 +112,7 @@ const SocialCardPage = ({ location, data }) => {
     currentState === "kentucky" ||
     currentState === "nebraska"
   ) {
-    stateNameSize = 2.5
+    stateNameSize = 2.3
   }
   if (currentState === "massachusetts") {
     stateNameSize = 1.6

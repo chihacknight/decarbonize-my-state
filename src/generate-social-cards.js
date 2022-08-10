@@ -3,80 +3,29 @@
  * This script is only meant to be run locally
  */
 
-import { launch } from "puppeteer"
-import { existsSync, mkdirSync } from "fs"
+const puppeteer = require('puppeteer')
+const fs = require('fs')
+const {placeNames} = require('./constants/state-names')
 
 var waitingForReady = true
-
-const placeNames = [
-  "alabama",
-  "alaska",
-  "arizona",
-  "arkansas",
-  "california",
-  "colorado",
-  "connecticut",
-  "delaware",
-  "district_of_columbia",
-  "florida",
-  "georgia",
-  "hawaii",
-  "idaho",
-  "illinois",
-  "indiana",
-  "iowa",
-  "kansas",
-  "kentucky",
-  "louisiana",
-  "maine",
-  "maryland",
-  "massachusetts",
-  "michigan",
-  "minnesota",
-  "mississippi",
-  "missouri",
-  "montana",
-  "nebraska",
-  "nevada",
-  "new_hampshire",
-  "new_jersey",
-  "new_mexico",
-  "new_york",
-  "north_carolina",
-  "north_dakota",
-  "ohio",
-  "oklahoma",
-  "oregon",
-  "pennsylvania",
-  "rhode_island",
-  "south_carolina",
-  "south_dakota",
-  "tennessee",
-  "texas",
-  "utah",
-  "vermont",
-  "virginia",
-  "washington",
-  "west_virginia",
-  "wisconsin",
-  "wyoming",
-]
+const SocialPageDelayMS = 3000
+const WaitDelayMS = 1000
 
 /*
  * For each state, use puppeteer to capture a screnshot
- * @param name {strign} the name of the state to have the social-card taken a picture of
+ * @param name {string} the name of the state to have the social-card taken a picture of
  */
 async function captureScreenshot (name) {
   let browser = null
   waitingForReady = false
   let outputDir = "static/social-cards"
   // if screenshots directory is not exist then create one
-  if (!existsSync(outputDir)) {
-    mkdirSync(outputDir)
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir)
   }
   try {
     // launch headless Chromium browser
-    browser = await launch({ headless: false })
+    browser = await puppeteer.launch({ headless: false })
     // create new page object
     const page = await browser.newPage()
     // set viewport width and height
@@ -103,8 +52,8 @@ async function captureScreenshot (name) {
 setTimeout(async function () {
   for (const name of placeNames) {
     while (!waitingForReady) {
-      setTimeout(function () {}, 1000)
+      setTimeout(function () {}, WaitDelayMS)
     }
     await captureScreenshot(name)
   }
-}, 3000)
+}, SocialPageDelayMS)
