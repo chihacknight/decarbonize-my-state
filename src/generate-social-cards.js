@@ -60,9 +60,10 @@ const placeNames = [
 async function captureScreenshot(name) {
   let browser = null;
   waitingForReady = false;
+  let outputDir = "static/social-cards";
   // if screenshots directory is not exist then create one
-  if (!fs.existsSync("screenshots")) {
-    fs.mkdirSync("screenshots");
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
   }
   try {
     // launch headless Chromium browser
@@ -78,7 +79,7 @@ async function captureScreenshot(name) {
     });
 
     // capture screenshot and store it into screenshots directory.
-    await page.screenshot({ path: "screenshots/" + name + ".jpeg" });
+    await page.screenshot({ path: outputDir + "/" + name + ".jpg" });
     await browser.close();
     waitingForReady = true;
   } catch (err) {
