@@ -1,7 +1,7 @@
-const puppeteer = require("puppeteer");
-const fs = require("fs");
+const puppeteer = require("puppeteer")
+const fs = require("fs")
 
-var waitingForReady = true;
+var waitingForReady = true
 
 const placeNames = [
   "alabama",
@@ -55,43 +55,43 @@ const placeNames = [
   "west_virginia",
   "wisconsin",
   "wyoming",
-];
+]
 
-async function captureScreenshot(name) {
-  let browser = null;
-  waitingForReady = false;
-  let outputDir = "static/social-cards";
+async function captureScreenshot (name) {
+  let browser = null
+  waitingForReady = false
+  let outputDir = "static/social-cards"
   // if screenshots directory is not exist then create one
   if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir);
+    fs.mkdirSync(outputDir)
   }
   try {
     // launch headless Chromium browser
-    browser = await puppeteer.launch({ headless: false });
+    browser = await puppeteer.launch({ headless: false })
     // create new page object
-    const page = await browser.newPage();
+    const page = await browser.newPage()
     // set viewport width and height
-    await page.setViewport({ width: 800, height: 418 });
+    await page.setViewport({ width: 800, height: 418 })
     //no timeout time
-    page.setDefaultNavigationTimeout(0);
+    page.setDefaultNavigationTimeout(0)
     await page.goto("http://localhost:8000/social-card?state=" + name, {
       waitUntil: "networkidle2",
-    });
+    })
 
     // capture screenshot and store it into screenshots directory.
-    await page.screenshot({ path: outputDir + "/" + name + ".jpg" });
-    await browser.close();
-    waitingForReady = true;
+    await page.screenshot({ path: outputDir + "/" + name + ".jpg" })
+    await browser.close()
+    waitingForReady = true
   } catch (err) {
-    console.log(`❌ Error: ${err.message}`);
+    console.log(`❌ Error: ${err.message}`)
   }
 }
 
-setTimeout(async function() {
+setTimeout(async function () {
   for (const name of placeNames) {
     while (!waitingForReady) {
-      setTimeout(async function() {}, 1000);
+      setTimeout(async function () {}, 1000)
     }
-    await captureScreenshot(name);
+    await captureScreenshot(name)
   }
-}, 3000);
+}, 3000)
