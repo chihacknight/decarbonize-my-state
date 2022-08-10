@@ -117,22 +117,22 @@ export default function StateDetailsPage ({ location, data }) {
     100
   ).toFixed(0)
 
-  const rawEmissionsCutPerYear = (
-    sumOfEmissions * (1 / yearsToTarget)
-  ).toFixed(1)
+  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / yearsToTarget)).toFixed(
+    1
+  )
 
   // #### VEHICLES ####
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
   } = data.allVehiclesJson.edges[0].node
-  
+
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
   const pctNonEv = Math.round((100 - pctEv) * 10) / 10
 
   // calculate cars remaining to electrify
   const carsToElectrify = carsAll - evRegistration
-  
+
   // string formatting
   const carsCountStr =
     carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
@@ -140,7 +140,9 @@ export default function StateDetailsPage ({ location, data }) {
     carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
   const carsPerYear =
     carsToElectrify !== undefined
-      ? numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
+      ? numberToHumanString(
+        Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100)
+      )
       : "?"
   const evCountStr =
     evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
@@ -153,18 +155,24 @@ export default function StateDetailsPage ({ location, data }) {
   } = data.allBuildingsJson.edges[0].node
 
   // calculate buildings remaining to electrify
-  const buildingsToElectrify = (weightedEleBuildingsPct !== 0 ||
-    weightedFossilBuildingsPct !== 0) ? buildings * (weightedFossilBuildingsPct/100) : buildings
+  const buildingsToElectrify =
+    weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0
+      ? buildings * (weightedFossilBuildingsPct / 100)
+      : buildings
 
   // string formatting
   const buildingsCountStr =
-  buildings !== undefined ? numberToHumanString(buildings) : "?"
+    buildings !== undefined ? numberToHumanString(buildings) : "?"
   const buildingsLeftStr =
-  buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
+    buildingsToElectrify !== undefined
+      ? numberToHumanString(buildingsToElectrify)
+      : "?"
   const buildingsPerYear =
-  buildingsToElectrify !== undefined
-    ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
-    : "?"
+    buildingsToElectrify !== undefined
+      ? numberToHumanString(
+        Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
+      )
+      : "?"
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -176,9 +184,9 @@ export default function StateDetailsPage ({ location, data }) {
     current_solar: currentSolar,
     current_wind: currentWind,
     perc_solar_target: percSolarTarget,
-    perc_wind_target: percWindTarget
+    perc_wind_target: percWindTarget,
   } = targetBuilds
-  
+
   // since we are referencing capacity, let's stay consistent and make sure
   // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
   const everyDayPerYear = 24 * 365
@@ -189,10 +197,14 @@ export default function StateDetailsPage ({ location, data }) {
 
   // Clamp to zero since if we never want to say negative solar needs to be
   // built
-  const solarPanelsBuildPerYear = Math.max(0, Math.round(
-    (targetGenBySolarMW - currentSolarMW)/ yearsToTarget))
-  const windTurbinesBuildPerYear = Math.max(0, Math.round(
-    (targetGenByWindMW - currentWindMW)/ yearsToTarget))
+  const solarPanelsBuildPerYear = Math.max(
+    0,
+    Math.round((targetGenBySolarMW - currentSolarMW) / yearsToTarget)
+  )
+  const windTurbinesBuildPerYear = Math.max(
+    0,
+    Math.round((targetGenByWindMW - currentWindMW) / yearsToTarget)
+  )
 
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
@@ -201,26 +213,28 @@ export default function StateDetailsPage ({ location, data }) {
   const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
-  const solarPanelsCountStr = targetGenBySolarMW !== undefined
-    ? numberToHumanString(targetGenBySolarMW)
-    : '?'
-  const windTurbinesCountStr = targetGenByWindMW !== undefined
-    ? numberToHumanString(targetGenByWindMW)
-    : '?'
+  const solarPanelsCountStr =
+    targetGenBySolarMW !== undefined
+      ? numberToHumanString(targetGenBySolarMW)
+      : "?"
+  const windTurbinesCountStr =
+    targetGenByWindMW !== undefined
+      ? numberToHumanString(targetGenByWindMW)
+      : "?"
 
-  const currentSolarMWStr = currentSolarMW !== undefined
-    ? numberToHumanString(currentSolarMW)
-    : '?'
-  const currentWindMWStr = currentWindMW !== undefined
-    ? numberToHumanString(currentWindMW)
-    : '?'
+  const currentSolarMWStr =
+    currentSolarMW !== undefined ? numberToHumanString(currentSolarMW) : "?"
+  const currentWindMWStr =
+    currentWindMW !== undefined ? numberToHumanString(currentWindMW) : "?"
 
-  const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
-    ? numberToHumanString(solarPanelsBuildPerYear)
-    : '?'
-  const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
-    ? numberToHumanString(windTurbinesBuildPerYear)
-    : '?'
+  const solarPanelsBuildPerYearStr =
+    targetGenBySolarMW !== undefined
+      ? numberToHumanString(solarPanelsBuildPerYear)
+      : "?"
+  const windTurbinesBuildPerYearStr =
+    targetGenByWindMW !== undefined
+      ? numberToHumanString(windTurbinesBuildPerYear)
+      : "?"
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -287,6 +301,7 @@ export default function StateDetailsPage ({ location, data }) {
       <SEO
         title={`What does it take to decarbonize ${placeTitle}?`}
         description={descriptionText}
+        image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
 
       <div className="sticky-header d-flex align-items-center">
@@ -306,8 +321,8 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong>zero</strong> by 2050,{" "}
-          {placeTitle} must cut climate pollution by{" "}
+          To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
+          pollution by{" "}
           <strong>
             {rawEmissionsCutPerYear} million metric tons of C02 equivalent a
             year.
@@ -318,8 +333,10 @@ export default function StateDetailsPage ({ location, data }) {
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
-        <SimpleAreaChart emissionsData={emissionsByYear}
-          title={'Emissions in ' + placeTitle}/>
+        <SimpleAreaChart
+          emissionsData={emissionsByYear}
+          title={"Emissions in " + placeTitle}
+        />
 
         <p className="h1 font-weight-bold text-center mt-5">
           We can do it. Here's how.
@@ -371,8 +388,8 @@ export default function StateDetailsPage ({ location, data }) {
             <h2 className="h3">🏠 Buildings</h2>
 
             <p className="h3 mt-5">
-              <strong>{buildingsPrcnt}%</strong> of
-              emissions in {placeTitle} comes from buildings.
+              <strong>{buildingsPrcnt}%</strong> of emissions in {placeTitle}{" "}
+              comes from buildings.
             </p>
 
             <div className="row mt-5">
@@ -434,8 +451,9 @@ export default function StateDetailsPage ({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                There are {buildingsCountStr} buildings in {placeTitle} and {Math.round(weightedEleBuildingsPct)}% of building systems
-                are already electrified. 
+                There are {buildingsCountStr} buildings in {placeTitle} and{" "}
+                {Math.round(weightedEleBuildingsPct)}% of building systems are
+                already electrified.
               </p>
             )}
 
@@ -448,7 +466,6 @@ export default function StateDetailsPage ({ location, data }) {
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
-
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-7">
@@ -471,8 +488,8 @@ export default function StateDetailsPage ({ location, data }) {
             <h2 className="h3">🚗 Getting Around</h2>
 
             <p className="h3 mt-5">
-              <strong>{transportPrcnt}%</strong> of
-              emissions in {placeTitle} comes from cars, trucks, and planes.
+              <strong>{transportPrcnt}%</strong> of emissions in {placeTitle}{" "}
+              comes from cars, trucks, and planes.
             </p>
 
             <div className="row mt-5">
@@ -506,11 +523,12 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5">
-                  There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "} 
-                  are already electric ({pctEv}% of the total). 
+                  There are {carsCountStr} vehicles in {placeTitle} and{" "}
+                  {evCountStr} are already electric ({pctEv}% of the total).
                 </p>
                 <p className="mt-5">
-                  We need to electrify the remaining {carsLeftStr} vehicles. That's around {carsPerYear} a year.
+                  We need to electrify the remaining {carsLeftStr} vehicles.
+                  That's around {carsPerYear} a year.
                 </p>
                 <AlreadyElectrifiedChart
                   label={"Vehicles"}
@@ -543,8 +561,8 @@ export default function StateDetailsPage ({ location, data }) {
               <h2 className="h3">🔌 Power Generation</h2>
 
               <p className="h3 mt-5">
-                <strong>{powerPrcnt}%</strong> of
-                emissions in {placeTitle} comes from making power.
+                <strong>{powerPrcnt}%</strong> of emissions in {placeTitle}{" "}
+                comes from making power.
               </p>
 
               <div className="row mt-5">
@@ -563,8 +581,8 @@ export default function StateDetailsPage ({ location, data }) {
                   </p>
 
                   <p className="h3 mt-5">
-                    To cut this pollution, we need to replace all dirty power plants
-                    with clean ones (mostly wind and solar).
+                    To cut this pollution, we need to replace all dirty power
+                    plants with clean ones (mostly wind and solar).
                   </p>
 
                   <p className="mt-5 mb-0">
@@ -625,13 +643,15 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="card">
                 <div className="card-body">
-                  <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
-                    <p className="h5" style={{display: 'block'}}>See a map of dirty power plants in the US</p>
-                    <img
-                      className="img-fluid"
-                      src={PowerPlantMap}
-                      alt=""
-                    />
+                  <a
+                    href="https://bit.ly/dirty-power-plants-usa"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <p className="h5" style={{ display: "block" }}>
+                      See a map of dirty power plants in the US
+                    </p>
+                    <img className="img-fluid" src={PowerPlantMap} alt="" />
                   </a>
                 </div>
               </div>
@@ -650,37 +670,37 @@ export default function StateDetailsPage ({ location, data }) {
 
               <p className="h3 mt-5">
                 But that means we need to make more power for those new electric
-                machines - <strong>twice</strong>{" "}
-                as much power as we make now!
+                machines - <strong>twice</strong> as much power as we make now!
               </p>
 
               <p className="h3 mt-5">
-                And{" "}
-                <strong>
-                  all of it needs to be clean power!
-                </strong>
+                And <strong>all of it needs to be clean power!</strong>
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings 
-                we need to INSTALL <strong>{windTurbinesCountStr} MWs</strong> of wind
-                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
+                So to cut the climate pollution from our power, cars, and
+                buildings we need to INSTALL{" "}
+                <strong>{windTurbinesCountStr} MWs</strong> of wind and{" "}
+                <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
-              
+
               <p className="h3 mt-5">
-                Since {placeTitle} already has {currentSolarMWStr} megawatts of solar power
-                generation and {currentWindMWStr} megawatts of wind power generation,
-                that's <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
-                of wind capacity
-                AND <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
+                Since {placeTitle} already has {currentSolarMWStr} megawatts of
+                solar power generation and {currentWindMWStr} megawatts of wind
+                power generation, that's{" "}
+                <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
+                of wind capacity AND{" "}
+                <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
                 of solar capacity a year we need to build.
               </p>
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={'targetGeneration'} percentCurrent={percToCleanTarget} percentRemaining={totalRemaining}/>
+                  label={"targetGeneration"}
+                  percentCurrent={percToCleanTarget}
+                  percentRemaining={totalRemaining}
+                />
               </p>
-
             </div>
           )}
           {/* Show standard outro section if power emissions are zero */}
@@ -726,9 +746,8 @@ export default function StateDetailsPage ({ location, data }) {
             <h2 className="h3">🏭 Other Emissions</h2>
 
             <p className="h3 mt-5">
-              The last{" "}
-              <strong>{otherPrcnt}%</strong> of
-              emissions in {placeTitle} comes other sources
+              The last <strong>{otherPrcnt}%</strong> of emissions in{" "}
+              {placeTitle} comes other sources
             </p>
 
             <div className="row mt-5">
@@ -775,9 +794,12 @@ export default function StateDetailsPage ({ location, data }) {
         <div className="h1 font-weight-bold">Ready to do your part?</div>
 
         <p className="h4 mt-4">
-          Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
+          Learn how to <strong>electrify your own machines</strong> and{" "}
+          <strong>pass local policy</strong> to electrify the rest
         </p>
-        <Link className='btn btn-lg btn-success mt-4' to='/take-action'>Take Action</Link>
+        <Link className="btn btn-lg btn-success mt-4" to="/take-action">
+          Take Action
+        </Link>
       </section>
     </Layout>
   )
@@ -828,15 +850,15 @@ export const query = graphql`
         }
       }
     }
-    allTargetGenerationJson(filter: {state: {eq: $state}}) {
+    allTargetGenerationJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-            total_gen_by_solar
-            total_gen_by_wind
-            current_wind
-            current_solar
-            perc_solar_target
-            perc_wind_target
+          total_gen_by_solar
+          total_gen_by_wind
+          current_wind
+          current_solar
+          perc_solar_target
+          perc_wind_target
         }
       }
     }

@@ -70,6 +70,14 @@ cd data
 docker-compose up --build
 ```
 
+### Social Cards
+We wanted the social cards to include what number emitter the state is and what their emissions breakdown is. To do this, we created a social card page and used puppeteer to take screenshots to output get the dynamic social cards. The new screenshots can be found in `/static/social-cards`
+
+**To generate them:**
+
+First make sure `yarn develop` is running
+Then run `yarn generate-social`
+
 ### 🤖 What's inside?
 _Taken from `gatsby-starter-default`_
 
