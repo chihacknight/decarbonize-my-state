@@ -1,39 +1,39 @@
-import React, { useState } from "react"
-import { graphql, Link } from "gatsby"
-import Scrollspy from "react-scrollspy"
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
-import SingleBarChart from "../components/singlebar"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import SimpleAreaChart from "../components/simpleareachart"
-import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
-import DisplayPlants from "./displayplants.js"
-import WindSolarBuilds from "./WindSolarBuilds.js"
+import React, { useState } from "react";
+import { graphql, Link } from "gatsby";
+import Scrollspy from "react-scrollspy";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import SingleBarChart from "../components/singlebar";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import SimpleAreaChart from "../components/simpleareachart";
+import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart";
+import DisplayPlants from "./displayplants.js";
+import WindSolarBuilds from "./WindSolarBuilds.js";
 
 // image resources
-import GasAppliances from "../images/gas-appliances.png"
-import ElectricAppliances from "../images/electric-appliances.png"
-import CarTransition from "../images/car-transition.png"
-import CoalTransition from "../images/coal-plant-transition.png"
-import OilPlantImg from "../images/oil-plant.png"
-import GasPlantImg from "../images/gas-plant.png"
-import CoalPlantImg from "../images/coal-plant.png"
-import PowerPlantMap from "../images/dirty-power-plants.jpg"
+import GasAppliances from "../images/gas-appliances.png";
+import ElectricAppliances from "../images/electric-appliances.png";
+import CarTransition from "../images/car-transition.png";
+import CoalTransition from "../images/coal-plant-transition.png";
+import OilPlantImg from "../images/oil-plant.png";
+import GasPlantImg from "../images/gas-plant.png";
+import CoalPlantImg from "../images/coal-plant.png";
+import PowerPlantMap from "../images/dirty-power-plants.jpg";
 
 const slugToTitle = (placeName) => {
-  const words = placeName.split("_")
+  const words = placeName.split("_");
 
   for (let i = 0; i < words.length; i++) {
-    const word = words[i]
+    const word = words[i];
     if (word === "of") {
-      words[i] = word
+      words[i] = word;
     } else {
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
     }
   }
 
-  return words.join(" ")
-}
+  return words.join(" ");
+};
 
 /**
  * Converts a very large number to a more readable string.
@@ -41,46 +41,46 @@ const slugToTitle = (placeName) => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString (num) {
+function numberToHumanString(num) {
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
   // 76 thousand
   if (num > 1_000 && num < 1_000_000) {
-    return `${Math.round(num / 1_000)},000`
+    return `${Math.round(num / 1_000)},000`;
   }
   // If in the millions return '${rounded_num_one_decimal} millions', e.g.
   // 2_114_602 -> 2.1 million
   else if (num > 1_000_000 && num < 1_000_000_000) {
-    return `${(num / 1_000_000).toFixed(1)} million`
+    return `${(num / 1_000_000).toFixed(1)} million`;
   }
 
   // If in the hundreds or something else, return as is but rounded to whole
   // number (e.g 534.12 -> 534)
-  return Math.round(num)
+  return Math.round(num);
 }
 
-const currentYear = new Date().getFullYear()
+const currentYear = new Date().getFullYear();
 
 // The years we have till our zero goal of 20
-const yearsToTarget = 2050 - currentYear
+const yearsToTarget = 2050 - currentYear;
 
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
+const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1);
 
-export default function StateDetailsPage ({ location, data }) {
+export default function StateDetailsPage({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
   const [scrollGraphSettings, setScrollGraphSettings] = useState({
     active: "buildings",
     green: [],
-  })
+  });
 
   // place info and string
-  const currentPlace = location.pathname.split("/")[1]
+  const currentPlace = location.pathname.split("/")[1];
   // clean up title as needed
-  const placeTitle = slugToTitle(currentPlace)
-  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-")
+  const placeTitle = slugToTitle(currentPlace);
+  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-");
 
   // Each json loads in as an allSomethingJson and is filtered for
   // data relevant to this state, which is great!
@@ -88,86 +88,94 @@ export default function StateDetailsPage ({ location, data }) {
   // so we can just take the first index
 
   // #### EMISSIONS ####
-  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear
-  const latestEmissions = emissionsByYear[emissionsByYear.length - 1]
+  const emissionsByYear = data.allEmissionsJson.edges[0].node.emissionsByYear;
+  const latestEmissions = emissionsByYear[emissionsByYear.length - 1];
   // desstructure out the different emissions categories for simplicity below
   const {
     buildings: buildingsEmissions,
     dirty_power: dirtyPowerEmissions,
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
     transportation: transportionEmissions,
-  } = latestEmissions
+  } = latestEmissions;
 
   // sum, then make nice percentages
   const sumOfEmissions =
     buildingsEmissions +
     dirtyPowerEmissions +
     farmsDumpsOtherEmissions +
-    transportionEmissions
+    transportionEmissions;
   const buildingsPrcnt = ((buildingsEmissions / sumOfEmissions) * 100).toFixed(
     0
-  )
-  const powerPrcnt = ((dirtyPowerEmissions / sumOfEmissions) * 100).toFixed(0)
+  );
+  const powerPrcnt = ((dirtyPowerEmissions / sumOfEmissions) * 100).toFixed(0);
   const transportPrcnt = (
     (transportionEmissions / sumOfEmissions) *
     100
-  ).toFixed(0)
+  ).toFixed(0);
   const otherPrcnt = (
     (farmsDumpsOtherEmissions / sumOfEmissions) *
     100
-  ).toFixed(0)
+  ).toFixed(0);
 
-  const rawEmissionsCutPerYear = (
-    sumOfEmissions * (1 / yearsToTarget)
-  ).toFixed(1)
+  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / yearsToTarget)).toFixed(
+    1
+  );
 
   // #### VEHICLES ####
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
-  } = data.allVehiclesJson.edges[0].node
-  
-  const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
-  const pctNonEv = Math.round((100 - pctEv) * 10) / 10
+  } = data.allVehiclesJson.edges[0].node;
+
+  const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10;
+  const pctNonEv = Math.round((100 - pctEv) * 10) / 10;
 
   // calculate cars remaining to electrify
-  const carsToElectrify = carsAll - evRegistration
-  
+  const carsToElectrify = carsAll - evRegistration;
+
   // string formatting
   const carsCountStr =
-    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
+    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?";
   const carsLeftStr =
-    carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
+    carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?";
   const carsPerYear =
     carsToElectrify !== undefined
-      ? numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
-      : "?"
+      ? numberToHumanString(
+          Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100)
+        )
+      : "?";
   const evCountStr =
-    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
+    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?";
 
   // #### BUILDINGS ####
   const {
     buildings,
     weightedFossilBuildingsPct,
     weightedEleBuildingsPct,
-  } = data.allBuildingsJson.edges[0].node
+  } = data.allBuildingsJson.edges[0].node;
 
   // calculate buildings remaining to electrify
-  const buildingsToElectrify = (weightedEleBuildingsPct !== 0 ||
-    weightedFossilBuildingsPct !== 0) ? buildings * (weightedFossilBuildingsPct/100) : buildings
+  const buildingsToElectrify =
+    weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0
+      ? buildings * (weightedFossilBuildingsPct / 100)
+      : buildings;
 
   // string formatting
   const buildingsCountStr =
-  buildings !== undefined ? numberToHumanString(buildings) : "?"
+    buildings !== undefined ? numberToHumanString(buildings) : "?";
   const buildingsLeftStr =
-  buildingsToElectrify !== undefined ? numberToHumanString(buildingsToElectrify) : "?"
+    buildingsToElectrify !== undefined
+      ? numberToHumanString(buildingsToElectrify)
+      : "?";
   const buildingsPerYear =
-  buildingsToElectrify !== undefined
-    ? numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
-    : "?"
+    buildingsToElectrify !== undefined
+      ? numberToHumanString(
+          Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
+        )
+      : "?";
 
   // #### SOLAR PANELS & WIND TURBINES ####
-  const targetBuilds = data.allTargetGenerationJson.edges[0].node
+  const targetBuilds = data.allTargetGenerationJson.edges[0].node;
 
   // deconstruct object for simplicity
   const {
@@ -176,117 +184,124 @@ export default function StateDetailsPage ({ location, data }) {
     current_solar: currentSolar,
     current_wind: currentWind,
     perc_solar_target: percSolarTarget,
-    perc_wind_target: percWindTarget
-  } = targetBuilds
-  
+    perc_wind_target: percWindTarget,
+  } = targetBuilds;
+
   // since we are referencing capacity, let's stay consistent and make sure
   // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
-  const everyDayPerYear = 24 * 365
-  const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000
-  const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
-  const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
-  const currentWindMW = (currentWind / everyDayPerYear) * 1000
+  const everyDayPerYear = 24 * 365;
+  const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000;
+  const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000;
+  const currentSolarMW = (currentSolar / everyDayPerYear) * 1000;
+  const currentWindMW = (currentWind / everyDayPerYear) * 1000;
 
   // Clamp to zero since if we never want to say negative solar needs to be
   // built
-  const solarPanelsBuildPerYear = Math.max(0, Math.round(
-    (targetGenBySolarMW - currentSolarMW)/ yearsToTarget))
-  const windTurbinesBuildPerYear = Math.max(0, Math.round(
-    (targetGenByWindMW - currentWindMW)/ yearsToTarget))
+  const solarPanelsBuildPerYear = Math.max(
+    0,
+    Math.round((targetGenBySolarMW - currentSolarMW) / yearsToTarget)
+  );
+  const windTurbinesBuildPerYear = Math.max(
+    0,
+    Math.round((targetGenByWindMW - currentWindMW) / yearsToTarget)
+  );
 
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
   // not 200%
-  const percToCleanTarget = percSolarTarget + percWindTarget / 2
-  const totalRemaining = 100 - percToCleanTarget
+  const percToCleanTarget = percSolarTarget + percWindTarget / 2;
+  const totalRemaining = 100 - percToCleanTarget;
 
   // converting values to strings
-  const solarPanelsCountStr = targetGenBySolarMW !== undefined
-    ? numberToHumanString(targetGenBySolarMW)
-    : '?'
-  const windTurbinesCountStr = targetGenByWindMW !== undefined
-    ? numberToHumanString(targetGenByWindMW)
-    : '?'
+  const solarPanelsCountStr =
+    targetGenBySolarMW !== undefined
+      ? numberToHumanString(targetGenBySolarMW)
+      : "?";
+  const windTurbinesCountStr =
+    targetGenByWindMW !== undefined
+      ? numberToHumanString(targetGenByWindMW)
+      : "?";
 
-  const currentSolarMWStr = currentSolarMW !== undefined
-    ? numberToHumanString(currentSolarMW)
-    : '?'
-  const currentWindMWStr = currentWindMW !== undefined
-    ? numberToHumanString(currentWindMW)
-    : '?'
+  const currentSolarMWStr =
+    currentSolarMW !== undefined ? numberToHumanString(currentSolarMW) : "?";
+  const currentWindMWStr =
+    currentWindMW !== undefined ? numberToHumanString(currentWindMW) : "?";
 
-  const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
-    ? numberToHumanString(solarPanelsBuildPerYear)
-    : '?'
-  const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
-    ? numberToHumanString(windTurbinesBuildPerYear)
-    : '?'
+  const solarPanelsBuildPerYearStr =
+    targetGenBySolarMW !== undefined
+      ? numberToHumanString(solarPanelsBuildPerYear)
+      : "?";
+  const windTurbinesBuildPerYearStr =
+    targetGenByWindMW !== undefined
+      ? numberToHumanString(windTurbinesBuildPerYear)
+      : "?";
 
   // #### POWER PLANTS ####
-  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
+  const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants;
 
-  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
+  powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw);
 
   const coalPlants = powerPlants.filter(
     (plant) => plant.fossil_fuel_category === "COAL"
-  )
+  );
   const gasPlants = powerPlants.filter(
     (plant) => plant.fossil_fuel_category === "GAS"
-  )
+  );
   const oilPlants = powerPlants.filter(
     (plant) => plant.fossil_fuel_category === "OIL"
-  )
+  );
 
-  function scrollTargetUpdated (scrollTarget) {
-    let activeKey = "buildings"
-    let greenKeys = []
+  function scrollTargetUpdated(scrollTarget) {
+    let activeKey = "buildings";
+    let greenKeys = [];
 
     // Make sure we don't try using the scrollTarget if it's null
     if (!scrollTarget) {
-      return
+      return;
     }
 
-    const targetId = scrollTarget.id
+    const targetId = scrollTarget.id;
 
     if (!targetId) {
-      console.error("Scroll target had no ID! Element was:", scrollTarget)
-      setScrollGraphSettings({ active: activeKey, green: greenKeys })
-      return
+      console.error("Scroll target had no ID! Element was:", scrollTarget);
+      setScrollGraphSettings({ active: activeKey, green: greenKeys });
+      return;
     }
 
     if (targetId === "bld-main") {
-      activeKey = "buildings"
-      greenKeys = []
+      activeKey = "buildings";
+      greenKeys = [];
     } else if (targetId === "bld-end") {
-      activeKey = ""
-      greenKeys = ["buildings"]
+      activeKey = "";
+      greenKeys = ["buildings"];
     } else if (targetId === "trnsprt-main") {
-      activeKey = "transportation"
-      greenKeys = ["buildings"]
+      activeKey = "transportation";
+      greenKeys = ["buildings"];
     } else if (targetId === "trnsprt-end") {
-      activeKey = ""
-      greenKeys = ["buildings", "transportation"]
+      activeKey = "";
+      greenKeys = ["buildings", "transportation"];
     } else if (targetId === "power-main") {
-      activeKey = "dirty_power"
-      greenKeys = ["buildings", "transportation"]
+      activeKey = "dirty_power";
+      greenKeys = ["buildings", "transportation"];
     } else if (targetId === "power-end") {
-      activeKey = ""
-      greenKeys = ["buildings", "transportation", "dirty_power"]
+      activeKey = "";
+      greenKeys = ["buildings", "transportation", "dirty_power"];
     } else if (targetId === "other-main") {
-      activeKey = "dumps_farms_industrial_other"
-      greenKeys = ["buildings", "transportation", "dirty_power"]
+      activeKey = "dumps_farms_industrial_other";
+      greenKeys = ["buildings", "transportation", "dirty_power"];
     }
 
-    setScrollGraphSettings({ active: activeKey, green: greenKeys })
+    setScrollGraphSettings({ active: activeKey, green: greenKeys });
   }
   // Description will retain formatting, so this needs to be single line
-  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`
+  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`;
 
   return (
     <Layout>
       <SEO
         title={`What does it take to decarbonize ${placeTitle}?`}
         description={descriptionText}
+        image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
 
       <div className="sticky-header d-flex align-items-center">
@@ -306,8 +321,8 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-6">
-          To get to <strong>zero</strong> by 2050,{" "}
-          {placeTitle} must cut climate pollution by{" "}
+          To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
+          pollution by{" "}
           <strong>
             {rawEmissionsCutPerYear} million metric tons of C02 equivalent a
             year.
@@ -318,8 +333,10 @@ export default function StateDetailsPage ({ location, data }) {
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
-        <SimpleAreaChart emissionsData={emissionsByYear}
-          title={'Emissions in ' + placeTitle}/>
+        <SimpleAreaChart
+          emissionsData={emissionsByYear}
+          title={"Emissions in " + placeTitle}
+        />
 
         <p className="h1 font-weight-bold text-center mt-5">
           We can do it. Here's how.
@@ -371,8 +388,8 @@ export default function StateDetailsPage ({ location, data }) {
             <h2 className="h3">🏠 Buildings</h2>
 
             <p className="h3 mt-5">
-              <strong>{buildingsPrcnt}%</strong> of
-              emissions in {placeTitle} comes from buildings.
+              <strong>{buildingsPrcnt}%</strong> of emissions in {placeTitle}{" "}
+              comes from buildings.
             </p>
 
             <div className="row mt-5">
@@ -434,8 +451,9 @@ export default function StateDetailsPage ({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-5">
-                There are {buildingsCountStr} buildings in {placeTitle} and {Math.round(weightedEleBuildingsPct)}% of building systems
-                are already electrified. 
+                There are {buildingsCountStr} buildings in {placeTitle} and{" "}
+                {Math.round(weightedEleBuildingsPct)}% of building systems are
+                already electrified.
               </p>
             )}
 
@@ -448,7 +466,6 @@ export default function StateDetailsPage ({ location, data }) {
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
-
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-7">
@@ -471,8 +488,8 @@ export default function StateDetailsPage ({ location, data }) {
             <h2 className="h3">🚗 Getting Around</h2>
 
             <p className="h3 mt-5">
-              <strong>{transportPrcnt}%</strong> of
-              emissions in {placeTitle} comes from cars, trucks, and planes.
+              <strong>{transportPrcnt}%</strong> of emissions in {placeTitle}{" "}
+              comes from cars, trucks, and planes.
             </p>
 
             <div className="row mt-5">
@@ -506,11 +523,12 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5">
-                  There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "} 
-                  are already electric ({pctEv}% of the total). 
+                  There are {carsCountStr} vehicles in {placeTitle} and{" "}
+                  {evCountStr} are already electric ({pctEv}% of the total).
                 </p>
                 <p className="mt-5">
-                  We need to electrify the remaining {carsLeftStr} vehicles. That's around {carsPerYear} a year.
+                  We need to electrify the remaining {carsLeftStr} vehicles.
+                  That's around {carsPerYear} a year.
                 </p>
                 <AlreadyElectrifiedChart
                   label={"Vehicles"}
@@ -543,8 +561,8 @@ export default function StateDetailsPage ({ location, data }) {
               <h2 className="h3">🔌 Power Generation</h2>
 
               <p className="h3 mt-5">
-                <strong>{powerPrcnt}%</strong> of
-                emissions in {placeTitle} comes from making power.
+                <strong>{powerPrcnt}%</strong> of emissions in {placeTitle}{" "}
+                comes from making power.
               </p>
 
               <div className="row mt-5">
@@ -563,8 +581,8 @@ export default function StateDetailsPage ({ location, data }) {
                   </p>
 
                   <p className="h3 mt-5">
-                    To cut this pollution, we need to replace all dirty power plants
-                    with clean ones (mostly wind and solar).
+                    To cut this pollution, we need to replace all dirty power
+                    plants with clean ones (mostly wind and solar).
                   </p>
 
                   <p className="mt-5 mb-0">
@@ -625,13 +643,15 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="card">
                 <div className="card-body">
-                  <a href="https://bit.ly/dirty-power-plants-usa" target="_blank" rel="noreferrer">
-                    <p className="h5" style={{display: 'block'}}>See a map of dirty power plants in the US</p>
-                    <img
-                      className="img-fluid"
-                      src={PowerPlantMap}
-                      alt=""
-                    />
+                  <a
+                    href="https://bit.ly/dirty-power-plants-usa"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <p className="h5" style={{ display: "block" }}>
+                      See a map of dirty power plants in the US
+                    </p>
+                    <img className="img-fluid" src={PowerPlantMap} alt="" />
                   </a>
                 </div>
               </div>
@@ -650,37 +670,37 @@ export default function StateDetailsPage ({ location, data }) {
 
               <p className="h3 mt-5">
                 But that means we need to make more power for those new electric
-                machines - <strong>twice</strong>{" "}
-                as much power as we make now!
+                machines - <strong>twice</strong> as much power as we make now!
               </p>
 
               <p className="h3 mt-5">
-                And{" "}
-                <strong>
-                  all of it needs to be clean power!
-                </strong>
+                And <strong>all of it needs to be clean power!</strong>
               </p>
 
               <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and buildings 
-                we need to INSTALL <strong>{windTurbinesCountStr} MWs</strong> of wind
-                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
+                So to cut the climate pollution from our power, cars, and
+                buildings we need to INSTALL{" "}
+                <strong>{windTurbinesCountStr} MWs</strong> of wind and{" "}
+                <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
-              
+
               <p className="h3 mt-5">
-                Since {placeTitle} already has {currentSolarMWStr} megawatts of solar power
-                generation and {currentWindMWStr} megawatts of wind power generation,
-                that's <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
-                of wind capacity
-                AND <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
+                Since {placeTitle} already has {currentSolarMWStr} megawatts of
+                solar power generation and {currentWindMWStr} megawatts of wind
+                power generation, that's{" "}
+                <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
+                of wind capacity AND{" "}
+                <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
                 of solar capacity a year we need to build.
               </p>
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={'targetGeneration'} percentCurrent={percToCleanTarget} percentRemaining={totalRemaining}/>
+                  label={"targetGeneration"}
+                  percentCurrent={percToCleanTarget}
+                  percentRemaining={totalRemaining}
+                />
               </p>
-
             </div>
           )}
           {/* Show standard outro section if power emissions are zero */}
@@ -726,9 +746,8 @@ export default function StateDetailsPage ({ location, data }) {
             <h2 className="h3">🏭 Other Emissions</h2>
 
             <p className="h3 mt-5">
-              The last{" "}
-              <strong>{otherPrcnt}%</strong> of
-              emissions in {placeTitle} comes other sources
+              The last <strong>{otherPrcnt}%</strong> of emissions in{" "}
+              {placeTitle} comes other sources
             </p>
 
             <div className="row mt-5">
@@ -775,12 +794,15 @@ export default function StateDetailsPage ({ location, data }) {
         <div className="h1 font-weight-bold">Ready to do your part?</div>
 
         <p className="h4 mt-4">
-          Learn how to <strong>electrify your own machines</strong> and <strong>pass local policy</strong> to electrify the rest
+          Learn how to <strong>electrify your own machines</strong> and{" "}
+          <strong>pass local policy</strong> to electrify the rest
         </p>
-        <Link className='btn btn-lg btn-success mt-4' to='/take-action'>Take Action</Link>
+        <Link className="btn btn-lg btn-success mt-4" to="/take-action">
+          Take Action
+        </Link>
       </section>
     </Layout>
-  )
+  );
 }
 
 export const query = graphql`
@@ -828,17 +850,17 @@ export const query = graphql`
         }
       }
     }
-    allTargetGenerationJson(filter: {state: {eq: $state}}) {
+    allTargetGenerationJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-            total_gen_by_solar
-            total_gen_by_wind
-            current_wind
-            current_solar
-            perc_solar_target
-            perc_wind_target
+          total_gen_by_solar
+          total_gen_by_wind
+          current_wind
+          current_solar
+          perc_solar_target
+          perc_wind_target
         }
       }
     }
   }
-`
+`;

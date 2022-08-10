@@ -1,8 +1,9 @@
 // Based on Gatsby docs at https://www.gatsbyjs.com/docs/creating-and-modifying-pages/
-const path = require("path")
+const path = require("path");
+const { siteMetadata } = require("./gatsby-config");
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+exports.createPages = async ({ graphql, actions, reporter, location }) => {
+  const { createPage } = actions;
 
   const placeNames = [
     "alabama",
@@ -55,19 +56,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     "washington",
     "west_virginia",
     "wisconsin",
-    "wyoming"
-  ]
+    "wyoming",
+  ];
 
-  const StateDetailsTemplate = path.resolve(`src/components/state-details.js`)
-  placeNames.forEach(name => {
-    const path = name
+  const StateDetailsTemplate = path.resolve(`src/components/state-details.js`);
 
+  placeNames.forEach((name) => {
+    const path = name;
     createPage({
       path,
       component: StateDetailsTemplate,
       context: {
-        state: name
-      }
-    })
-  })
-}
+        state: name,
+      },
+    });
+  });
+
+};
