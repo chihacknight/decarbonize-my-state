@@ -85,8 +85,9 @@ function numberToHumanString (num) {
     return `${(num / 1_000_000).toFixed(1)} million`
   }
 
-  // If in the hundreds or something else, return as is (e.g 534)
-  return num
+  // If in the hundreds or something else, return rounded to an integer
+  // (e.g 534.451312 -> 534)
+  return Math.round(num)
 }
 
 const currentYear = new Date().getFullYear()
@@ -241,10 +242,8 @@ export default function StateDetailsPage ({ location, data }) {
     ? numberToHumanString(windTurbinesBuildPerYear)
     : '?'
 
-  const currentSolarMWStr =
-    currentSolarMW !== undefined ? numberToHumanString(currentSolarMW) : "?"
-  const currentWindMWStr =
-    currentWindMW !== undefined ? numberToHumanString(currentWindMW) : "?"
+  const currentSolarMWStr = numberToHumanString(currentSolarMW);
+  const currentWindMWStr = numberToHumanString(currentWindMW);
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -798,7 +797,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h2 className="h1 mt-6 mb-6">Other Emissions</h2>
+            <h2 className="h1 mb-6">Other Emissions</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -812,7 +811,7 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="col">
 
-                <p className="h2 mt-5">
+                <p className="h2">
                   The last{" "}
                   <strong>{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
                   comes from other sources...
@@ -822,8 +821,8 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <p className="mt-5">
-                  There's <strong>no one solution</strong> to solve these problems, but there are
-                  lots of great ideas:
+                  There's <strong>no <em>one</em> solution</strong> to{" "}
+                  solve these problems, but there are lots of great ideas:
                 </p>
 
                 <ul>
@@ -842,7 +841,8 @@ export default function StateDetailsPage ({ location, data }) {
       <hr className="mt-7" />
 
       <section className="text-center mb-8">
-        <div className="h1 mt-7 font-weight-bold">And that's it! 🎉</div>
+        <div class="h1 mt-7 mb-3">✅</div>
+        <h2 className="h1 font-weight-bold">Ready to do your part?</h2>
 
         <p className="h4 mt-4">
           Learn how to <strong>electrify your own machines</strong> and{" "}
