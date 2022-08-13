@@ -11,10 +11,10 @@ import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
 
 /**
- * Images - suffix with Img for clarity from actual code
+ * Images - suffix with Img for clarity from actual JS files/variables
  */
 
-import CoalTransition from "../images/coal-plant-transition.png"
+import CoalTransitionImg from "../images/coal-plant-transition.png"
 
 // Sim city power plant icons
 import OilPlantImg from "../images/oil-plant.png"
@@ -23,29 +23,7 @@ import CoalPlantImg from "../images/coal-plant.png"
 import PowerPlantMap from "../images/dirty-power-plants.jpg"
 
 // New images
-// import ChimneyImg from '../images/chimney.svg'
-// import DirtyCarImg from '../images/gas-car.svg'
-// import DirtyHouseImg from '../images/gas-house.svg'
 import DirtyPowerPlantImg from '../images/dirty-power-plant.png'
-// import ElectricCarImg from '../images/electric-car.svg'
-// import ElectricHeaterImg from '../images/electric-heat-pump.svg'
-// import ElectricStoveImg from '../images/induction-stove.svg'
-// import ElectricWaterHeaterImg from '../images/electric-water-heater.svg'
-// import GasHeaterImg from '../images/gas-furnace.svg'
-// import GasStoveImg from '../images/gas-stove.svg'
-// import GasWaterHeaterImg from '../images/gas-water-heater.svg'
-// import HouseWithSolarImg from '../images/house-with-solar.svg'
-
-// Spritesheets
-import AppliancesSpritesheet from '../images/appliances-sheet.png'
-import BuildingsSpritesheet from '../images/buildings-sheet.png'
-import CarsSpritesheet from '../images/cars-sheet.png'
-
-// import CleanApartmentsImg from '../images/clean-apartments.svg'
-// import CleanCornerBuildingsImg from '../images/clean-corner-buildings.svg'
-// import DirtyApartmentsImg from '../images/dirty-apartments.svg'
-// import DirtyCornerBuildingsImg from '../images/dirty-corner-buildings.svg'
-
 
 const slugToTitle = (placeName) => {
   const words = placeName.split("_")
@@ -242,8 +220,8 @@ export default function StateDetailsPage ({ location, data }) {
     ? numberToHumanString(windTurbinesBuildPerYear)
     : '?'
 
-  const currentSolarMWStr = numberToHumanString(currentSolarMW);
-  const currentWindMWStr = numberToHumanString(currentWindMW);
+  const currentSolarMWStr = numberToHumanString(currentSolarMW)
+  const currentWindMWStr = numberToHumanString(currentWindMW)
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -650,7 +628,7 @@ export default function StateDetailsPage ({ location, data }) {
               <p className="mt-5 mb-0">
                 <img
                   className="img-fluid"
-                  src={CoalTransition}
+                  src={CoalTransitionImg}
                   title="We need to replace dirty power plants with
                 clean ones (mostly wind and solar)"
                   alt="We need to replace dirty power plants with
@@ -826,11 +804,28 @@ export default function StateDetailsPage ({ location, data }) {
                 </p>
 
                 <ul>
-                  <li>🌾 No-till farming to keep CO<sub>2</sub> in the soil</li>
-                  <li>🗑️ Capturing methane leaks from landfills</li>
-                  <li>🧱 Capturing CO<sub>2</sub> to make emissions-free concrete</li>
-                  <li>🔩 Burning green hydrogen to make emissions-free steel</li>
-                  <li>💨 Plugging methane leaks from gas pipelines</li>
+                  {/* All emojis in this context are decorative, so they are
+                      marked with aria-hidden */}
+                  <li>
+                    <span aria-hidden="true">🌾</span>
+                    No-till farming to keep CO<sub>2</sub> in the soil
+                  </li>
+                  <li>
+                    <span aria-hidden="true">🗑️</span>
+                    Capturing methane leaks from landfills
+                  </li>
+                  <li>
+                    <span aria-hidden="true">🧱</span>
+                    Capturing CO<sub>2</sub> to make emissions-free concrete
+                  </li>
+                  <li>
+                    <span aria-hidden="true">🔩</span>
+                    Burning green hydrogen to make emissions-free steel
+                  </li>
+                  <li>
+                    <span aria-hidden="true">💨</span>
+                    Plugging methane leaks from gas pipelines
+                  </li>
                 </ul>
               </div>
             </div>
@@ -841,7 +836,8 @@ export default function StateDetailsPage ({ location, data }) {
       <hr className="mt-7" />
 
       <section className="text-center mb-8">
-        <div class="h1 mt-7 mb-3">✅</div>
+        {/* This emoji is purely decorative */}
+        <div class="h1 mt-7 mb-3"><span aria-hidden="true">✅</span></div>
         <h2 className="h1 font-weight-bold">Ready to do your part?</h2>
 
         <p className="h4 mt-4">
