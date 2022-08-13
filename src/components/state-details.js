@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
 import SingleBarChart from "../components/singlebar"
@@ -90,9 +90,13 @@ function numberToHumanString (num) {
 }
 
 const currentYear = new Date().getFullYear()
+
+// The years we have till our zero goal of 20
+const yearsToTarget = 2050 - currentYear
+
 // We want to get to 0 by 2050 and we use our current emissions as a start,
 // so the % to cut by is 100 divided by the number of years we have
-const cutPerYearPrcnt = (100 / (2050 - currentYear)).toFixed(1)
+const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
 
 export default function StateDetailsPage ({ location, data }) {
   /**
@@ -144,10 +148,9 @@ export default function StateDetailsPage ({ location, data }) {
     100
   ).toFixed(0)
 
-  const rawEmissionsCutPerYear = (
-    sumOfEmissions *
-    (1 / (2050 - currentYear))
-  ).toFixed(1)
+  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / yearsToTarget)).toFixed(
+    1
+  )
 
   // #### VEHICLES ####
   const {
@@ -175,8 +178,10 @@ export default function StateDetailsPage ({ location, data }) {
   } = data.allBuildingsJson.edges[0].node
 
   // calculate buildings remaining to electrify
-  const buildingsToElectrify = (weightedEleBuildingsPct !== 0 ||
-    weightedFossilBuildingsPct !== 0) ? buildings * (weightedFossilBuildingsPct/100) : buildings
+  const buildingsToElectrify =
+    weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0
+      ? buildings * (weightedFossilBuildingsPct / 100)
+      : buildings
 
   // string formatting
   const buildingsCountStr = numberToHumanString(buildings)
@@ -194,9 +199,9 @@ export default function StateDetailsPage ({ location, data }) {
     current_solar: currentSolar,
     current_wind: currentWind,
     perc_solar_target: percSolarTarget,
-    perc_wind_target: percWindTarget
+    perc_wind_target: percWindTarget,
   } = targetBuilds
-  
+
   // since we are referencing capacity, let's stay consistent and make sure
   // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
   const everyDayPerYear = 24 * 365
@@ -205,8 +210,16 @@ export default function StateDetailsPage ({ location, data }) {
   const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
   const currentWindMW = (currentWind / everyDayPerYear) * 1000
 
-  const solarPanelsBuildPerYear = Math.round((targetGenBySolarMW - currentSolarMW)/30)
-  const windTurbinesBuildPerYear = Math.round((targetGenByWindMW - currentWindMW)/30)
+  // Clamp to zero since if we never want to say negative solar needs to be
+  // built
+  const solarPanelsBuildPerYear = Math.max(
+    0,
+    Math.round((targetGenBySolarMW - currentSolarMW) / yearsToTarget)
+  )
+  const windTurbinesBuildPerYear = Math.max(
+    0,
+    Math.round((targetGenByWindMW - currentWindMW) / yearsToTarget)
+  )
 
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
@@ -227,6 +240,11 @@ export default function StateDetailsPage ({ location, data }) {
   const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
     ? numberToHumanString(windTurbinesBuildPerYear)
     : '?'
+
+  const currentSolarMWStr =
+    currentSolarMW !== undefined ? numberToHumanString(currentSolarMW) : "?"
+  const currentWindMWStr =
+    currentWindMW !== undefined ? numberToHumanString(currentWindMW) : "?"
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -293,6 +311,7 @@ export default function StateDetailsPage ({ location, data }) {
       <SEO
         title={`What does it take to decarbonize ${placeTitle}?`}
         description={descriptionText}
+        image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
 
       <div className="sticky-header d-flex align-items-center">
@@ -312,8 +331,8 @@ export default function StateDetailsPage ({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-5">
-          To get to <strong>zero</strong> by 2050,{" "}
-          {placeTitle} must cut climate pollution by{" "}
+          To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
+          pollution by{" "}
           <br className="d-none d-lg-block" />
           <strong>
             {rawEmissionsCutPerYear} million metric tons of CO<sub>2</sub>{" "}
@@ -325,8 +344,10 @@ export default function StateDetailsPage ({ location, data }) {
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
-        <SimpleAreaChart emissionsData={emissionsByYear}
-          title={'Emissions in ' + placeTitle}/>
+        <SimpleAreaChart
+          emissionsData={emissionsByYear}
+          title={"Emissions in " + placeTitle}
+        />
 
         <p className="h1 font-weight-bold text-center mt-5">
           This is how we're going to do it.
@@ -463,7 +484,8 @@ export default function StateDetailsPage ({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-8">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings in {placeTitle} are already fossil fuel free!
+                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings
+                in {placeTitle} are already fossil fuel free!
               </p>
             )}
 
@@ -477,7 +499,6 @@ export default function StateDetailsPage ({ location, data }) {
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
-
           </div>
 
           <div id="bld-end" className="scrollable-sect mt-8 mb-4">
@@ -683,7 +704,20 @@ export default function StateDetailsPage ({ location, data }) {
                 </>
               )}
 
-
+              <div className="card">
+                <div className="card-body">
+                  <a
+                    href="https://bit.ly/dirty-power-plants-usa"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <p className="h5" style={{ display: "block" }}>
+                      See a map of dirty power plants in the US
+                    </p>
+                    <img className="img-fluid" src={PowerPlantMap} alt="" />
+                  </a>
+                </div>
+              </div>
 
               <p className="h2 mt-8">
                 But wait!
@@ -702,10 +736,22 @@ export default function StateDetailsPage ({ location, data }) {
                 and <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
 
+              <p className="h3 mt-5">
+                Since {placeTitle} already has {currentSolarMWStr} megawatts of
+                solar power generation and {currentWindMWStr} megawatts of wind
+                power generation, that's{" "}
+                <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
+                of wind capacity AND{" "}
+                <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
+                of solar capacity a year we need to build.
+              </p>
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={'targetGeneration'} percentCurrent={percToCleanTarget} percentRemaining={totalRemaining}/>
+                  label={"targetGeneration"}
+                  percentCurrent={percToCleanTarget}
+                  percentRemaining={totalRemaining}
+                />
               </p>
             </div>
           )}
@@ -799,10 +845,12 @@ export default function StateDetailsPage ({ location, data }) {
         <div className="h1 mt-7 font-weight-bold">And that's it! 🎉</div>
 
         <p className="h4 mt-4">
-          We hope this gives you some ideas for what you{" "}
-          <br className="d-none d-lg-block" />
-          can do to get your state to zero emissions!
+          Learn how to <strong>electrify your own machines</strong> and{" "}
+          <strong>pass local policy</strong> to electrify the rest
         </p>
+        <Link className="btn btn-lg btn-success mt-4" to="/take-action">
+          Take Action
+        </Link>
       </section>
     </Layout>
   )
@@ -853,15 +901,15 @@ export const query = graphql`
         }
       }
     }
-    allTargetGenerationJson(filter: {state: {eq: $state}}) {
+    allTargetGenerationJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-            total_gen_by_solar
-            total_gen_by_wind
-            current_wind
-            current_solar
-            perc_solar_target
-            perc_wind_target
+          total_gen_by_solar
+          total_gen_by_wind
+          current_wind
+          current_solar
+          perc_solar_target
+          perc_wind_target
         }
       }
     }

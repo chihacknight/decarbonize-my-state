@@ -8,6 +8,7 @@
     "@sentry/gatsby": "^5.27.3",
     "bootstrap": "^4.4.1",
     "eslint-config-react-app": "^5.2.1",
+    "fs": "^0.0.1-security",
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
     "gatsby-plugin-google-gtag": "^4.14.0",
@@ -21,6 +22,7 @@
     "gatsby-transformer-sharp": "^2.3.19",
     "journalize": "^2.5.0",
     "prop-types": "^15.7.2",
+    "puppeteer": "^16.0.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0",
     "react-bootstrap-table-next": "^4.0.3",
@@ -50,7 +52,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "eslint src"
+    "test": "eslint src",
+    "generate-social": "node src/generate-social-cards.js"
   },
   "repository": {
     "type": "git",
