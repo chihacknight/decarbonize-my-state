@@ -704,7 +704,7 @@ export default function StateDetailsPage ({ location, data }) {
                 </>
               )}
 
-              <div className="card">
+              <div className="card mt-5">
                 <div className="card-body">
                   <a
                     href="https://bit.ly/dirty-power-plants-usa"
@@ -712,7 +712,7 @@ export default function StateDetailsPage ({ location, data }) {
                     rel="noreferrer"
                   >
                     <p className="h5" style={{ display: "block" }}>
-                      See a map of dirty power plants in the US
+                      Find the dirty plants near you
                     </p>
                     <img className="img-fluid" src={PowerPlantMap} alt="" />
                   </a>
