@@ -10,15 +10,20 @@ import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
 
-// image resources
-import GasAppliances from "../images/gas-appliances.png"
-import ElectricAppliances from "../images/electric-appliances.png"
-import CarTransition from "../images/car-transition.png"
-import CoalTransition from "../images/coal-plant-transition.png"
+/**
+ * Images - suffix with Img for clarity from actual JS files/variables
+ */
+
+import CoalTransitionImg from "../images/coal-plant-transition.png"
+
+// Sim city power plant icons
 import OilPlantImg from "../images/oil-plant.png"
 import GasPlantImg from "../images/gas-plant.png"
 import CoalPlantImg from "../images/coal-plant.png"
 import PowerPlantMap from "../images/dirty-power-plants.jpg"
+
+// New images
+import DirtyPowerPlantImg from '../images/dirty-power-plant.png'
 
 const slugToTitle = (placeName) => {
   const words = placeName.split("_")
@@ -42,6 +47,11 @@ const slugToTitle = (placeName) => {
  * 76_125 -> '76 thousand'
  */
 function numberToHumanString (num) {
+  // Return clear error string if the number is null or undefined
+  if (num === undefined || num === null) {
+    return '?'
+  }
+
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
   // 76 thousand
   if (num > 1_000 && num < 1_000_000) {
@@ -53,8 +63,8 @@ function numberToHumanString (num) {
     return `${(num / 1_000_000).toFixed(1)} million`
   }
 
-  // If in the hundreds or something else, return as is but rounded to whole
-  // number (e.g 534.12 -> 534)
+  // If in the hundreds or something else, return rounded to an integer
+  // (e.g 534.451312 -> 534)
   return Math.round(num)
 }
 
@@ -134,18 +144,10 @@ export default function StateDetailsPage ({ location, data }) {
   const carsToElectrify = carsAll - evRegistration
 
   // string formatting
-  const carsCountStr =
-    carsToElectrify !== undefined ? numberToHumanString(carsAll) : "?"
-  const carsLeftStr =
-    carsToElectrify !== undefined ? numberToHumanString(carsToElectrify) : "?"
-  const carsPerYear =
-    carsToElectrify !== undefined
-      ? numberToHumanString(
-        Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100)
-      )
-      : "?"
-  const evCountStr =
-    evRegistration !== undefined ? numberToHumanString(evRegistration) : "?"
+  const carsCountStr = numberToHumanString(carsAll)
+  const carsToElectrifyStr = numberToHumanString(carsToElectrify)
+  const carsPerYear = numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
+  const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
   const {
@@ -161,18 +163,10 @@ export default function StateDetailsPage ({ location, data }) {
       : buildings
 
   // string formatting
-  const buildingsCountStr =
-    buildings !== undefined ? numberToHumanString(buildings) : "?"
-  const buildingsLeftStr =
-    buildingsToElectrify !== undefined
-      ? numberToHumanString(buildingsToElectrify)
-      : "?"
+  const buildingsCountStr = numberToHumanString(buildings)
+  const buildingsLeftToElectrifyStr = numberToHumanString(buildingsToElectrify)
   const buildingsPerYear =
-    buildingsToElectrify !== undefined
-      ? numberToHumanString(
-        Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
-      )
-      : "?"
+    numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -213,28 +207,21 @@ export default function StateDetailsPage ({ location, data }) {
   const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
-  const solarPanelsCountStr =
-    targetGenBySolarMW !== undefined
-      ? numberToHumanString(targetGenBySolarMW)
-      : "?"
-  const windTurbinesCountStr =
-    targetGenByWindMW !== undefined
-      ? numberToHumanString(targetGenByWindMW)
-      : "?"
+  const solarPanelsCountStr = targetGenBySolarMW !== undefined
+    ? numberToHumanString(targetGenBySolarMW)
+    : '?'
+  const windTurbinesCountStr = targetGenByWindMW !== undefined
+    ? numberToHumanString(targetGenByWindMW)
+    : '?'
+  const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
+    ? numberToHumanString(solarPanelsBuildPerYear)
+    : '?'
+  const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
+    ? numberToHumanString(windTurbinesBuildPerYear)
+    : '?'
 
-  const currentSolarMWStr =
-    currentSolarMW !== undefined ? numberToHumanString(currentSolarMW) : "?"
-  const currentWindMWStr =
-    currentWindMW !== undefined ? numberToHumanString(currentWindMW) : "?"
-
-  const solarPanelsBuildPerYearStr =
-    targetGenBySolarMW !== undefined
-      ? numberToHumanString(solarPanelsBuildPerYear)
-      : "?"
-  const windTurbinesBuildPerYearStr =
-    targetGenByWindMW !== undefined
-      ? numberToHumanString(windTurbinesBuildPerYear)
-      : "?"
+  const currentSolarMWStr = numberToHumanString(currentSolarMW)
+  const currentWindMWStr = numberToHumanString(currentWindMW)
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -274,10 +261,10 @@ export default function StateDetailsPage ({ location, data }) {
     } else if (targetId === "bld-end") {
       activeKey = ""
       greenKeys = ["buildings"]
-    } else if (targetId === "trnsprt-main") {
+    } else if (targetId === "transport-main") {
       activeKey = "transportation"
       greenKeys = ["buildings"]
-    } else if (targetId === "trnsprt-end") {
+    } else if (targetId === "transport-end") {
       activeKey = ""
       greenKeys = ["buildings", "transportation"]
     } else if (targetId === "power-main") {
@@ -294,7 +281,7 @@ export default function StateDetailsPage ({ location, data }) {
     setScrollGraphSettings({ active: activeKey, green: greenKeys })
   }
   // Description will retain formatting, so this needs to be single line
-  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${rawEmissionsCutPerYear} million metric tons  of C02 equivalent a year. Electrification can help us get there.`
+  const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${cutPerYearPrcnt}% a year. Electrification can help us get there.`
 
   return (
     <Layout>
@@ -320,12 +307,13 @@ export default function StateDetailsPage ({ location, data }) {
 
       {/* Intro Section */}
       <div className="col-12">
-        <p className="h1 font-weight-light mt-6 mb-6">
+        <p className="h1 font-weight-light mt-6 mb-5">
           To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
           pollution by{" "}
+          <br className="d-none d-lg-block" />
           <strong>
-            {rawEmissionsCutPerYear} million metric tons of C02 equivalent a
-            year.
+            {rawEmissionsCutPerYear} million metric tons of CO<sub>2</sub>{" "}
+            equivalent a year.
           </strong>
         </p>
 
@@ -339,7 +327,7 @@ export default function StateDetailsPage ({ location, data }) {
         />
 
         <p className="h1 font-weight-bold text-center mt-5">
-          We can do it. Here's how.
+          This is how we're going to do it.
         </p>
 
         <hr className="mt-7 mb-7" />
@@ -352,7 +340,7 @@ export default function StateDetailsPage ({ location, data }) {
          */}
         <div className="col-4 sticky-cont d-none d-xl-block">
           <div className="graph-title font-weight-bold mb-3">
-            CO<sub>2</sub> Equivalent Emissions in {placeTitle} by Source
+            {placeTitle}'s climate pollution, by source
           </div>
 
           <SingleBarChart
@@ -373,8 +361,8 @@ export default function StateDetailsPage ({ location, data }) {
           items={[
             "bld-main",
             "bld-end",
-            "trnsprt-main",
-            "trnsprt-end",
+            "transport-main",
+            "transport-end",
             "power-main",
             "power-end",
             "other-main",
@@ -385,116 +373,133 @@ export default function StateDetailsPage ({ location, data }) {
         >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h2 className="h3">🏠 Buildings</h2>
-
-            <p className="h3 mt-5">
-              <strong>{buildingsPrcnt}%</strong> of emissions in {placeTitle}{" "}
-              comes from buildings.
-            </p>
+            <h2 className="h1 mb-6">Buildings</h2>
 
             <div className="row mt-5">
-              {/* Make SingleBarChart full width on mobile */}
-              <div className="col-12 col-md-6 d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none mb-6">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey={"buildings"}
                 />
               </div>
-
               <div className="col h3">
-                <p className="mt-5">Mostly from different types of heating.</p>
 
-                <p className="mt-5 mb-0">
-                  <img
-                    className="img-fluid"
-                    src={GasAppliances}
-                    alt="Gas furnace, gas water heater, gas stove"
-                  />
+                <p className="h2 mt-2 mb-0">
+                  <strong>{buildingsPrcnt}%</strong>{" "}
+                  of {placeTitle}'s climate pollution comes from buildings.
                 </p>
 
-                <p className="mt-5 mb-0">
-                  {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
-                  80% of the pollution of your typical home comes from heating
-                  your space, water, and food.
-                </p>
+                <div className="d-flex align-items-end justify-content-around mt-5">
+                  <div className="col-6 building-sheet -house"></div>
+                  <div className="col-6 building-sheet -apartments"></div>
+                </div>
               </div>
             </div>
 
-            <p className="h3 mt-5">
-              To stop this pollution, we need to replace our furnaces with{" "}
-              <a
-                href="https://en.wikipedia.org/wiki/Heat_pump"
-                target="_blank"
-                rel="noreferrer"
-              >
-                electric heat pumps
-              </a>
-              , electrify our water heaters, and cook with{" "}
-              <a
-                href="https://en.wikipedia.org/wiki/Induction_cooking"
-                target="_blank"
-                rel="noreferrer"
-              >
-                induction and electricity
-              </a>{" "}
-              instead of gas.
+            <p className="h2 mt-6 mb-0">
+              {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
+              We burn <strong>fossil fuels</strong> to <strong>heat</strong> our air, water, and food.
             </p>
 
-            <p className="mt-5 mb-0">
-              <img
-                className="img-fluid"
-                src={ElectricAppliances}
-                alt="Electric heat pump, electric water heater, induction stove"
-              />
+            <div className="d-flex align-items-end justify-content-between flex-wrap mt-5 mb-5">
+              <div className="appliance-sheet -stove"></div>
+              <div className="appliance-sheet -boiler"></div>
+              <div className="appliance-sheet -heater"></div>
+            </div>
+
+            <p className="h2 mt-6">
+            To <strong>cut</strong> this pollution...
             </p>
+
+            <p className="h2 mt-4 mb-6 text-right">
+              Let's <strong>electrify</strong> our <strong>heat</strong>!
+            </p>
+
+            <p className="h2 mt-6">
+              We'll replace...
+            </p>
+            <p className="h3 mt-4 mb-4">
+              <ul>
+                <li>
+                  Boilers and furnaces with {" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Heat_pump"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    heat pumps
+                  </a>
+                </li>
+                <li>
+                  Gas stoves with {" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Induction_cooking"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                   induction ranges
+                  </a>
+                </li>
+              </ul>
+            </p>
+
+            <div className="d-flex align-items-end justify-content-between flex-wrap  mt-5 mb-5">
+              <div className="appliance-sheet -stove -clean"></div>
+              <div className="appliance-sheet -boiler -clean"></div>
+              <div className="appliance-sheet -heater -clean"></div>
+            </div>
+
+            <p className="h2 mt-0 mb-4 text-right">
+              ...in all of {placeTitle}'s <strong>{buildingsCountStr} buildings</strong>.
+            </p>
+
+            <div className="d-flex align-items-end justify-content-around mt-6">
+              <div className="col-6 building-sheet -house -clean"></div>
+              <div className="col-6 building-sheet -apartments -clean"></div>
+            </div>
 
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
-              <p className="h3 mt-5">
-                There are {buildingsCountStr} buildings in {placeTitle} and{" "}
-                {Math.round(weightedEleBuildingsPct)}% of building systems are
-                already electrified.
+              <p className="h3 mt-8">
+                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings
+                in {placeTitle} are already fossil fuel free!
               </p>
             )}
 
             <p className="h3 mt-5">
-              We need to electrify the remaining {buildingsLeftStr} buildings in{" "}
-              {placeTitle}. That's around {buildingsPerYear} per year.
+              That means we only need to electrify the remaining{" "}
+              {buildingsLeftToElectrifyStr} buildings in {placeTitle}.{" "}
+              That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Building Systems"}
+              label={"Buildings"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
           </div>
 
-          <div id="bld-end" className="scrollable-sect mt-8 mb-7">
-            <p className="h3 font-weight-bold text-center">
-              That will solve {buildingsPrcnt}% of the problem.
+          <div id="bld-end" className="scrollable-sect mt-8 mb-4">
+            <p className="h1 font-weight-bold text-center mt-6 mb-6">
+              That cuts {buildingsPrcnt}% of the pollution.
             </p>
 
-            <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+            <div className="mt-4 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
                 greenKeys={["buildings"]}
               />
             </div>
 
-            <hr className="mt-7" />
+            <hr className="mb-8" />
           </div>
 
           {/* Transportation Section */}
-          <div id="trnsprt-main" className="scrollable-sect">
-            <h2 className="h3">🚗 Getting Around</h2>
-
-            <p className="h3 mt-5">
-              <strong>{transportPrcnt}%</strong> of emissions in {placeTitle}{" "}
-              comes from cars, trucks, and planes.
-            </p>
+          <div id="transport-main" className="scrollable-sect mt-5">
+            <h2 className="h1 mb-6">Transport</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
-              <div className="col-12 col-md-6 d-block d-xl-none">
+              <div className="col-12 col-md-6 d-block d-xl-none mb-6">
                 <SingleBarChart
                   emissionsData={latestEmissions}
                   activeKey="transportation"
@@ -503,71 +508,83 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <div className="col h3">
-                <p className="mt-5">Mostly from our cars.</p>
-
-                <p className="mt-5">
-                  To cut this pollution, if you have a car, your next one needs
-                  to be an electric vehicle (EV).
+                <p className="h2 mt-2">
+                  <strong>{transportPrcnt}%</strong> of {placeTitle}'s
+                  pollution comes from cars, trucks, trains, and planes.</p>
+                <p className="h2 mt-6 mb-6 text-right">
+                  But <strong>mostly</strong> from cars.
                 </p>
-                <p className="mt-5">
-                  Or try going car-free with public transit, bikes/e-bikes, or
-                  walking if it works for you.
-                </p>
-
-                <p className="mt-5 mb-0">
-                  <img
-                    className="img-fluid"
-                    src={CarTransition}
-                    alt="Gas emitting car being converted to electric car"
-                  />
-                </p>
-
-                <p className="mt-5">
-                  There are {carsCountStr} vehicles in {placeTitle} and{" "}
-                  {evCountStr} are already electric ({pctEv}% of the total).
-                </p>
-                <p className="mt-5">
-                  We need to electrify the remaining {carsLeftStr} vehicles.
-                  That's around {carsPerYear} a year.
-                </p>
-                <AlreadyElectrifiedChart
-                  label={"Vehicles"}
-                  electrifiedPct={pctEv}
-                  fossilPct={pctNonEv}
-                />
               </div>
             </div>
-          </div>
 
-          <div id="trnsprt-end" className="scrollable-sect mt-8 mb-7">
-            <p className="h3 font-weight-bold text-center">
-              That will solve another {transportPrcnt}% of the problem.
+            <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
+              <div className="col-5 car-sheet -car"></div>
+              <div className="col-6 car-sheet -truck"></div>
+              <div className="col-8 car-sheet -semi mt-5"></div>
+            </div>
+
+            <p className="h2 mt-6">
+              To cut this pollution,
             </p>
 
-            <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
+            <p className="h2 mt-4 mb-5 text-right">
+              your next car must be <strong>electric</strong>.
+            </p>
+
+            <p className="col-12 h4">
+              Or consider going car-free with public transit, bikes/e-bikes, car
+              share, or other alternatives!
+            </p>
+
+            <p className="h2 mt-8">
+              Then, we'll electrify all <strong>{carsCountStr} cars and trucks</strong> in{" "}
+              {placeTitle}!
+            </p>
+
+            <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
+              <div className="col-5 car-sheet -car -clean"></div>
+              <div className="col-6 car-sheet -truck -clean"></div>
+              <div className="col-8 car-sheet -semi -clean mt-5"></div>
+            </div>
+
+            <p className="mt-5">
+                There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "}
+                are already electric ({pctEv}% of the total).
+            </p>
+            <p className="mt-5">
+                We need to electrify the remaining {carsToElectrifyStr} vehicles. That's around {carsPerYear} a year.
+            </p>
+            <AlreadyElectrifiedChart
+              label={"Vehicles"}
+              electrifiedPct={pctEv}
+              fossilPct={pctNonEv}
+            />
+          </div>
+
+          <div id="transport-end" className="scrollable-sect mt-8 mb-4">
+            <p className="h1 font-weight-bold text-center mt-6 mb-6">
+              That cuts {transportPrcnt}% of the pollution.
+            </p>
+
+            <div className="mt-4 d-flex justify-content-center d-block d-xl-none">
               <SingleBarChart
                 emissionsData={latestEmissions}
                 greenKeys={["buildings", "transportation"]}
               />
             </div>
 
-            <hr className="mt-7" />
+            <hr className="mt-8" />
           </div>
 
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h2 className="h3">🔌 Power Generation</h2>
-
-              <p className="h3 mt-5">
-                <strong>{powerPrcnt}%</strong> of emissions in {placeTitle}{" "}
-                comes from making power.
-              </p>
+              <h2 className="h1 mb-6">Power</h2>
 
               <div className="row mt-5">
                 {/* Make SingleBarChart full width on mobile */}
-                <div className="col-12 col-md-6 d-block d-xl-none">
+                <div className="col-12 col-md-6 d-block d-xl-none mb-6">
                   <SingleBarChart
                     emissionsData={latestEmissions}
                     activeKey="dirty_power"
@@ -576,31 +593,54 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
 
                 <div className="col">
-                  <p className="h3 mt-5">
-                    Specifically from coal, gas, and oil plants.
+                  <p className="h2 mt-2">
+                    <strong>{powerPrcnt}%</strong> of {placeTitle}'s
+                    pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
+                    make power.
                   </p>
 
-                  <p className="h3 mt-5">
-                    To cut this pollution, we need to replace all dirty power
-                    plants with clean ones (mostly wind and solar).
-                  </p>
-
-                  <p className="mt-5 mb-0">
+                  <div className="mt-5 text-center">
                     <img
-                      className="img-fluid"
-                      src={CoalTransition}
-                      title="We need to replace dirty power plants with
-                    clean ones (mostly wind and solar)"
-                      alt="We need to replace dirty power plants with
-                    clean ones (mostly wind and solar)"
+                      className="img-fluid col-6"
+                      src={DirtyPowerPlantImg}
+                      alt="Dirty power plant"
                     />
-                  </p>
-
-                  <p className="h3 mt-5">
-                    In {placeTitle} we need to close and replace:
-                  </p>
+                  </div>
                 </div>
               </div>
+
+              <p className="h2 mt-6">
+              To cut this pollution...
+              </p>
+
+              <p className="h2 mt-4 mb-6 text-right">
+                Put <strong>solar panels</strong> on your roof!
+              </p>
+
+              <div className="d-flex justify-content-center">
+                <div className="building-sheet -house -clean col-8"></div>
+              </div>
+
+              <p className="h2 mt-8">
+                Then, we'll replace <strong>all fossil fuel power plants</strong> with solar and wind farms.
+              </p>
+
+              <p className="mt-5 mb-0">
+                <img
+                  className="img-fluid"
+                  src={CoalTransitionImg}
+                  title="We need to replace dirty power plants with
+                clean ones (mostly wind and solar)"
+                  alt="We need to replace dirty power plants with
+                clean ones (mostly wind and solar)"
+                />
+              </p>
+
+              <p className="h3 mt-5 mb-8">
+                ...and find good jobs for those workers.
+              </p>
+
+              <h3 className="h5">Current Fossil Fuel Power Plants in {placeTitle}</h3>
 
               {coalPlants.length > 0 && (
                 <>
@@ -641,7 +681,7 @@ export default function StateDetailsPage ({ location, data }) {
                 </>
               )}
 
-              <div className="card">
+              <div className="card mt-5">
                 <div className="card-body">
                   <a
                     href="https://bit.ly/dirty-power-plants-usa"
@@ -649,39 +689,28 @@ export default function StateDetailsPage ({ location, data }) {
                     rel="noreferrer"
                   >
                     <p className="h5" style={{ display: "block" }}>
-                      See a map of dirty power plants in the US
+                      Find the dirty plants near you
                     </p>
                     <img className="img-fluid" src={PowerPlantMap} alt="" />
                   </a>
                 </div>
               </div>
 
-              <p className="h3 mt-5">
-                ...and help those workers find good jobs.
+              <p className="h2 mt-8">
+                But wait!
               </p>
 
-              <p className="h3 mt-5">
-                But wait! Remember how we electrified all cars and buildings?
+              <p className="h2 mt-6">
+                It's not enough to replace our power plants with wind and solar farms.
               </p>
 
-              <p className="h3 mt-5">
-                Our machines don't pollute now, because they run on electricity!
+              <p className="h2 mt-6">
+                To power our electric cars and buildings, we need <strong>2x</strong> the electricity we have today!
               </p>
 
-              <p className="h3 mt-5">
-                But that means we need to make more power for those new electric
-                machines - <strong>twice</strong> as much power as we make now!
-              </p>
-
-              <p className="h3 mt-5">
-                And <strong>all of it needs to be clean power!</strong>
-              </p>
-
-              <p className="h3 mt-5">
-                So to cut the climate pollution from our power, cars, and
-                buildings we need to INSTALL{" "}
-                <strong>{windTurbinesCountStr} MWs</strong> of wind and{" "}
-                <strong>{solarPanelsCountStr} MWs</strong> of solar.
+              <p className="h2 mt-8">
+                In all, we'll need to build <strong>{windTurbinesCountStr} MWs</strong> of wind
+                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
 
               <p className="h3 mt-5">
@@ -703,11 +732,15 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
             </div>
           )}
-          {/* Show standard outro section if power emissions are zero */}
+          {/* Show standard outro section if power emissions are non-zero */}
           {powerPrcnt > 0 && (
-            <div id="power-end" className="scrollable-sect mt-8 mb-7">
-              <p className="h3 font-weight-bold text-center">
-                That will solve another {powerPrcnt}% of the problem.
+            <div id="power-end" className="scrollable-sect mt-8 mb-4">
+              <p className="h1 font-weight-bold text-center mt-6 mb-6">
+                That cuts {powerPrcnt}% of the pollution.
+              </p>
+              <p className="h2 text-center mt-6 mb-6">
+                And gives us zero-emissions power we need to eliminate pollution
+                from buildings and cars!
               </p>
 
               <div className="mt-5 d-flex justify-content-center d-block d-xl-none">
@@ -724,11 +757,10 @@ export default function StateDetailsPage ({ location, data }) {
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
             <div id="power-main" className="scrollable-sect mt-5 mb-7">
-              <h2 className="h3">🔌 Power Generation</h2>
+              <h2 className="h1">Power</h2>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
-                  {placeTitle} has absolutely no emissions from making power,
-                  it's doing great! 😎
+                  {placeTitle} produces all of it's power without making any climate pollution! 😎
                 </p>
 
                 <p className="h5 mt-3">
@@ -743,12 +775,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Other Section */}
           <div id="other-main" className="scrollable-sect mt-5">
-            <h2 className="h3">🏭 Other Emissions</h2>
-
-            <p className="h3 mt-5">
-              The last <strong>{otherPrcnt}%</strong> of emissions in{" "}
-              {placeTitle} comes other sources
-            </p>
+            <h2 className="h1 mb-6">Other Emissions</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -761,23 +788,43 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <div className="col">
-                <p className="h3 mt-5">
-                  This includes industry, landfills, and farming.
+
+                <p className="h2">
+                  The last{" "}
+                  <strong>{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
+                  comes from other sources...
+                </p>
+                <p className="h2 mt-5">
+                  This includes farming, landfills, industry, and leaks from gas pipelines.
                 </p>
 
-                <p className="mt-3">
-                  There's no one solution to solve these problems, but there are
-                  a lot of great ideas!
+                <p className="mt-5">
+                  There's <strong>no <em>one</em> solution</strong> to{" "}
+                  solve these problems, but there are lots of great ideas:
                 </p>
-
-                <p>These include:</p>
 
                 <ul>
-                  <li>Regenerative agriculture to sequester carbon in soil</li>
-                  <li>Composting to reduce landfill methane emissions</li>
+                  {/* All emojis in this context are decorative, so they are
+                      marked with aria-hidden */}
                   <li>
-                    New techniques for manufacturing CO<sub>2</sub> emitting
-                    materials, like concrete
+                    <span aria-hidden="true">🌾</span>
+                    No-till farming to keep CO<sub>2</sub> in the soil
+                  </li>
+                  <li>
+                    <span aria-hidden="true">🗑️</span>
+                    Capturing methane leaks from landfills
+                  </li>
+                  <li>
+                    <span aria-hidden="true">🧱</span>
+                    Capturing CO<sub>2</sub> to make emissions-free concrete
+                  </li>
+                  <li>
+                    <span aria-hidden="true">🔩</span>
+                    Burning green hydrogen to make emissions-free steel
+                  </li>
+                  <li>
+                    <span aria-hidden="true">💨</span>
+                    Plugging methane leaks from gas pipelines
                   </li>
                 </ul>
               </div>
@@ -786,12 +833,12 @@ export default function StateDetailsPage ({ location, data }) {
         </Scrollspy>
       </div>
 
-      <hr className="mt-5" />
+      <hr className="mt-7" />
 
       <section className="text-center mb-8">
-        <div className="h1 mt-5">✅</div>
-        <br className="d-none d-lg-block" />
-        <div className="h1 font-weight-bold">Ready to do your part?</div>
+        {/* This emoji is purely decorative */}
+        <div class="h1 mt-7 mb-3"><span aria-hidden="true">✅</span></div>
+        <h2 className="h1 font-weight-bold">Ready to do your part?</h2>
 
         <p className="h4 mt-4">
           Learn how to <strong>electrify your own machines</strong> and{" "}
