@@ -23,7 +23,7 @@ import CoalPlantImg from "../images/coal-plant.png"
 import PowerPlantMap from "../images/dirty-power-plants.jpg"
 
 // New images
-import DirtyPowerPlantImg from '../images/dirty-power-plant.png'
+import DirtyPowerPlantImg from "../images/dirty-power-plant.png"
 
 const slugToTitle = (placeName) => {
   const words = placeName.split("_")
@@ -49,7 +49,7 @@ const slugToTitle = (placeName) => {
 function numberToHumanString (num) {
   // Return clear error string if the number is null or undefined
   if (num === undefined || num === null) {
-    return '?'
+    return "?"
   }
 
   // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
@@ -146,7 +146,9 @@ export default function StateDetailsPage ({ location, data }) {
   // string formatting
   const carsCountStr = numberToHumanString(carsAll)
   const carsToElectrifyStr = numberToHumanString(carsToElectrify)
-  const carsPerYear = numberToHumanString(Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100))
+  const carsPerYear = numberToHumanString(
+    Math.ceil((carsToElectrify * cutPerYearPrcnt) / 100)
+  )
   const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
@@ -165,8 +167,9 @@ export default function StateDetailsPage ({ location, data }) {
   // string formatting
   const buildingsCountStr = numberToHumanString(buildings)
   const buildingsLeftToElectrifyStr = numberToHumanString(buildingsToElectrify)
-  const buildingsPerYear =
-    numberToHumanString(Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100))
+  const buildingsPerYear = numberToHumanString(
+    Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
+  )
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -207,18 +210,22 @@ export default function StateDetailsPage ({ location, data }) {
   const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
-  const solarPanelsCountStr = targetGenBySolarMW !== undefined
-    ? numberToHumanString(targetGenBySolarMW)
-    : '?'
-  const windTurbinesCountStr = targetGenByWindMW !== undefined
-    ? numberToHumanString(targetGenByWindMW)
-    : '?'
-  const solarPanelsBuildPerYearStr = targetGenBySolarMW !== undefined
-    ? numberToHumanString(solarPanelsBuildPerYear)
-    : '?'
-  const windTurbinesBuildPerYearStr = targetGenByWindMW !== undefined
-    ? numberToHumanString(windTurbinesBuildPerYear)
-    : '?'
+  const solarPanelsCountStr =
+    targetGenBySolarMW !== undefined
+      ? numberToHumanString(targetGenBySolarMW)
+      : "?"
+  const windTurbinesCountStr =
+    targetGenByWindMW !== undefined
+      ? numberToHumanString(targetGenByWindMW)
+      : "?"
+  const solarPanelsBuildPerYearStr =
+    targetGenBySolarMW !== undefined
+      ? numberToHumanString(solarPanelsBuildPerYear)
+      : "?"
+  const windTurbinesBuildPerYearStr =
+    targetGenByWindMW !== undefined
+      ? numberToHumanString(windTurbinesBuildPerYear)
+      : "?"
 
   const currentSolarMWStr = numberToHumanString(currentSolarMW)
   const currentWindMWStr = numberToHumanString(currentWindMW)
@@ -309,8 +316,7 @@ export default function StateDetailsPage ({ location, data }) {
       <div className="col-12">
         <p className="h1 font-weight-light mt-6 mb-5">
           To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
-          pollution by{" "}
-          <br className="d-none d-lg-block" />
+          pollution by <br className="d-none d-lg-block" />
           <strong>
             {rawEmissionsCutPerYear} million metric tons of CO<sub>2</sub>{" "}
             equivalent a year.
@@ -373,7 +379,7 @@ export default function StateDetailsPage ({ location, data }) {
         >
           {/* Buildings Section */}
           <div id="bld-main" className="scrollable-sect mt-5">
-            <h2 className="h1 mb-6">Buildings</h2>
+            <h2 className="h1 mb-6">Decarbonize Our Buildings</h2>
 
             <div className="row mt-5">
               <div className="col-12 col-md-6 d-block d-xl-none mb-6">
@@ -383,10 +389,9 @@ export default function StateDetailsPage ({ location, data }) {
                 />
               </div>
               <div className="col h3">
-
                 <p className="h2 mt-2 mb-0">
-                  <strong>{buildingsPrcnt}%</strong>{" "}
-                  of {placeTitle}'s climate pollution comes from buildings.
+                  <strong>{buildingsPrcnt}%</strong> of {placeTitle}'s climate
+                  pollution comes from buildings.
                 </p>
 
                 <div className="d-flex align-items-end justify-content-around mt-5">
@@ -398,7 +403,8 @@ export default function StateDetailsPage ({ location, data }) {
 
             <p className="h2 mt-6 mb-0">
               {/* Sourced from Rewiring America Electrify Everything in Your Home guide */}
-              We burn <strong>fossil fuels</strong> to <strong>heat</strong> our air, water, and food.
+              We burn <strong>fossil fuels</strong> to <strong>heat</strong> our
+              air, water, and food.
             </p>
 
             <div className="d-flex align-items-end justify-content-between flex-wrap mt-5 mb-5">
@@ -408,20 +414,18 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="h2 mt-6">
-            To <strong>cut</strong> this pollution...
+              To <strong>cut</strong> this pollution...
             </p>
 
             <p className="h2 mt-4 mb-6 text-right">
               Let's <strong>electrify</strong> our <strong>heat</strong>!
             </p>
 
-            <p className="h2 mt-6">
-              We'll replace...
-            </p>
+            <p className="h2 mt-6">We'll replace...</p>
             <p className="h3 mt-4 mb-4">
               <ul>
                 <li>
-                  Boilers and furnaces with {" "}
+                  Boilers and furnaces with{" "}
                   <a
                     href="https://en.wikipedia.org/wiki/Heat_pump"
                     target="_blank"
@@ -431,13 +435,13 @@ export default function StateDetailsPage ({ location, data }) {
                   </a>
                 </li>
                 <li>
-                  Gas stoves with {" "}
+                  Gas stoves with{" "}
                   <a
                     href="https://en.wikipedia.org/wiki/Induction_cooking"
                     target="_blank"
                     rel="noreferrer"
                   >
-                   induction ranges
+                    induction ranges
                   </a>
                 </li>
               </ul>
@@ -450,7 +454,8 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="h2 mt-0 mb-4 text-right">
-              ...in all of {placeTitle}'s <strong>{buildingsCountStr} buildings</strong>.
+              ...in all of {placeTitle}'s{" "}
+              <strong>{buildingsCountStr} buildings</strong>.
             </p>
 
             <div className="d-flex align-items-end justify-content-around mt-6">
@@ -461,15 +466,15 @@ export default function StateDetailsPage ({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="h3 mt-8">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings
-                in {placeTitle} are already fossil fuel free!
+                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings in{" "}
+                {placeTitle} are already fossil fuel free!
               </p>
             )}
 
             <p className="h3 mt-5">
               That means we only need to electrify the remaining{" "}
-              {buildingsLeftToElectrifyStr} buildings in {placeTitle}.{" "}
-              That's around {buildingsPerYear} per year.
+              {buildingsLeftToElectrifyStr} buildings in {placeTitle}. That's
+              around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
               label={"Buildings"}
@@ -495,7 +500,7 @@ export default function StateDetailsPage ({ location, data }) {
 
           {/* Transportation Section */}
           <div id="transport-main" className="scrollable-sect mt-5">
-            <h2 className="h1 mb-6">Transport</h2>
+            <h2 className="h1 mb-6">Decarbonize Our Transport</h2>
 
             <div className="row mt-5">
               {/* Make SingleBarChart full width on mobile */}
@@ -509,8 +514,9 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="col h3">
                 <p className="h2 mt-2">
-                  <strong>{transportPrcnt}%</strong> of {placeTitle}'s
-                  pollution comes from cars, trucks, trains, and planes.</p>
+                  <strong>{transportPrcnt}%</strong> of {placeTitle}'s pollution
+                  comes from cars, trucks, trains, and planes.
+                </p>
                 <p className="h2 mt-6 mb-6 text-right">
                   But <strong>mostly</strong> from cars.
                 </p>
@@ -523,9 +529,7 @@ export default function StateDetailsPage ({ location, data }) {
               <div className="col-8 car-sheet -semi mt-5"></div>
             </div>
 
-            <p className="h2 mt-6">
-              To cut this pollution,
-            </p>
+            <p className="h2 mt-6">To cut this pollution,</p>
 
             <p className="h2 mt-4 mb-5 text-right">
               your next car must be <strong>electric</strong>.
@@ -537,8 +541,8 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <p className="h2 mt-8">
-              Then, we'll electrify all <strong>{carsCountStr} cars and trucks</strong> in{" "}
-              {placeTitle}!
+              Then, we'll electrify all{" "}
+              <strong>{carsCountStr} cars and trucks</strong> in {placeTitle}!
             </p>
 
             <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
@@ -548,11 +552,12 @@ export default function StateDetailsPage ({ location, data }) {
             </div>
 
             <p className="mt-5">
-                There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "}
-                are already electric ({pctEv}% of the total).
+              There are {carsCountStr} vehicles in {placeTitle} and {evCountStr}{" "}
+              are already electric ({pctEv}% of the total).
             </p>
             <p className="mt-5">
-                We need to electrify the remaining {carsToElectrifyStr} vehicles. That's around {carsPerYear} a year.
+              We need to electrify the remaining {carsToElectrifyStr} vehicles.
+              That's around {carsPerYear} a year.
             </p>
             <AlreadyElectrifiedChart
               label={"Vehicles"}
@@ -580,7 +585,7 @@ export default function StateDetailsPage ({ location, data }) {
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
             <div id="power-main" className="scrollable-sect mt-5">
-              <h2 className="h1 mb-6">Power</h2>
+              <h2 className="h1 mb-6">Decarbonize Our Power</h2>
 
               <div className="row mt-5">
                 {/* Make SingleBarChart full width on mobile */}
@@ -594,9 +599,10 @@ export default function StateDetailsPage ({ location, data }) {
 
                 <div className="col">
                   <p className="h2 mt-2">
-                    <strong>{powerPrcnt}%</strong> of {placeTitle}'s
-                    pollution comes from burning <strong>coal</strong>, <strong>gas</strong>, and <strong>oil</strong> to
-                    make power.
+                    <strong>{powerPrcnt}%</strong> of {placeTitle}'s pollution
+                    comes from burning <strong>coal</strong>,{" "}
+                    <strong>gas</strong>, and <strong>oil</strong> to make
+                    power.
                   </p>
 
                   <div className="mt-5 text-center">
@@ -609,9 +615,7 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
               </div>
 
-              <p className="h2 mt-6">
-              To cut this pollution...
-              </p>
+              <p className="h2 mt-6">To cut this pollution...</p>
 
               <p className="h2 mt-4 mb-6 text-right">
                 Put <strong>solar panels</strong> on your roof!
@@ -622,7 +626,9 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <p className="h2 mt-8">
-                Then, we'll replace <strong>all fossil fuel power plants</strong> with solar and wind farms.
+                Then, we'll replace{" "}
+                <strong>all fossil fuel power plants</strong> with solar and
+                wind farms.
               </p>
 
               <p className="mt-5 mb-0">
@@ -640,7 +646,9 @@ export default function StateDetailsPage ({ location, data }) {
                 ...and find good jobs for those workers.
               </p>
 
-              <h3 className="h5">Current Fossil Fuel Power Plants in {placeTitle}</h3>
+              <h3 className="h5">
+                Current Fossil Fuel Power Plants in {placeTitle}
+              </h3>
 
               {coalPlants.length > 0 && (
                 <>
@@ -696,21 +704,22 @@ export default function StateDetailsPage ({ location, data }) {
                 </div>
               </div>
 
-              <p className="h2 mt-8">
-                But wait!
+              <p className="h2 mt-8">But wait!</p>
+
+              <p className="h2 mt-6">
+                It's not enough to replace our power plants with wind and solar
+                farms.
               </p>
 
               <p className="h2 mt-6">
-                It's not enough to replace our power plants with wind and solar farms.
-              </p>
-
-              <p className="h2 mt-6">
-                To power our electric cars and buildings, we need <strong>2x</strong> the electricity we have today!
+                To power our electric cars and buildings, we need{" "}
+                <strong>2x</strong> the electricity we have today!
               </p>
 
               <p className="h2 mt-8">
-                In all, we'll need to build <strong>{windTurbinesCountStr} MWs</strong> of wind
-                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
+                In all, we'll need to build{" "}
+                <strong>{windTurbinesCountStr} MWs</strong> of wind and{" "}
+                <strong>{solarPanelsCountStr} MWs</strong> of solar.
               </p>
 
               <p className="h3 mt-5">
@@ -760,7 +769,8 @@ export default function StateDetailsPage ({ location, data }) {
               <h2 className="h1">Power</h2>
               <div className="mt-6 mb-8 text-center">
                 <p className="h3 font-weight-bold">
-                  {placeTitle} produces all of it's power without making any climate pollution! 😎
+                  {placeTitle} produces all of it's power without making any
+                  climate pollution! 😎
                 </p>
 
                 <p className="h5 mt-3">
@@ -788,19 +798,21 @@ export default function StateDetailsPage ({ location, data }) {
               </div>
 
               <div className="col">
-
                 <p className="h2">
-                  The last{" "}
-                  <strong>{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
-                  comes from other sources...
+                  The last <strong>{otherPrcnt}%</strong> of {placeTitle}'s
+                  climate pollution comes from other sources...
                 </p>
                 <p className="h2 mt-5">
-                  This includes farming, landfills, industry, and leaks from gas pipelines.
+                  This includes farming, landfills, industry, and leaks from gas
+                  pipelines.
                 </p>
 
                 <p className="mt-5">
-                  There's <strong>no <em>one</em> solution</strong> to{" "}
-                  solve these problems, but there are lots of great ideas:
+                  There's{" "}
+                  <strong>
+                    no <em>one</em> solution
+                  </strong>{" "}
+                  to solve these problems, but there are lots of great ideas:
                 </p>
 
                 <ul>
@@ -837,7 +849,9 @@ export default function StateDetailsPage ({ location, data }) {
 
       <section className="text-center mb-8">
         {/* This emoji is purely decorative */}
-        <div class="h1 mt-7 mb-3"><span aria-hidden="true">✅</span></div>
+        <div class="h1 mt-7 mb-3">
+          <span aria-hidden="true">✅</span>
+        </div>
         <h2 className="h1 font-weight-bold">Ready to do your part?</h2>
 
         <p className="h4 mt-4">
