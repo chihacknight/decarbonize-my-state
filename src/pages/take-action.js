@@ -85,7 +85,7 @@ const TakeActionPage = () => {
                 new national rebates for electrification of household
                 appliances.
               </a>
-              <div>
+              <ul className="mt-2">
                 <li>Up to $8,000 for a heat pump for heating and cooling</li>
                 <li className="mt-1">
                   Up to $4,000 to upgrade your electrical panel (to prepare for
@@ -104,7 +104,7 @@ const TakeActionPage = () => {
                   Up to $840 for an electric stove, oven, or an electric heat
                   pump dryer
                 </li>
-              </div>
+              </ul>
             </div>
           </div>
 
