@@ -71,13 +71,20 @@ const TakeActionPage = () => {
             </p>
 
             <div>
-              <h3>But I'm Broke!</h3>
-              <p>
-                <strong>Never fear, tax rebates are here!</strong>
-                <br />
-                With the passing of the IRA, there are now new national rebates
-                for electrification of household appliences.
-              </p>
+              <h3 className="mb-2">
+                <strong>
+                  Congress just passed a new bill making all of these cheaper!
+                </strong>
+              </h3>
+              With the passing of the Inflation Reduction Act, there are now{" "}
+              <a
+                href="https://www.fastcompany.com/90780252/how-to-decarbonize-your-house-inflation-reduction-act-incentives?partner=rss&utm_campaign=rss+fastcompany&utm_content=rss&utm_medium=feed&utm_source=rss"
+                target="_blank"
+                rel="noreferrer"
+              >
+                new national rebates for electrification of household
+                appliances.
+              </a>
               <div>
                 <li>Up to $8,000 for a heat pump for heating and cooling</li>
                 <li className="mt-1">
@@ -93,7 +100,7 @@ const TakeActionPage = () => {
                   {" "}
                   Up to $1,600 for insulation, air sealing, and ventilation{" "}
                 </li>
-                <li className="mt-1">
+                <li className="mt-1 mb-1">
                   Up to $840 for an electric stove, oven, or an electric heat
                   pump dryer
                 </li>
