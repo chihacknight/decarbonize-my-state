@@ -44,6 +44,14 @@ const IndexPage = ({data}) => {
         <p className="h3 text-center mt-2">
           The answer to climate change is simpler than you think
         </p>
+
+        <div className="row">
+          <div className="building-sheet -house -clean col-3"></div>
+          <div className="car-sheet -truck -clean col-3"></div>
+          <div className="appliance-sheet -stove -clean"></div>
+          <div className="appliance-sheet -boiler -clean"></div>
+          <div className="appliance-sheet -heater -clean"></div>
+        </div>
       </div>
 
       <hr></hr>
