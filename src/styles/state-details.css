@@ -1,0 +1,54 @@
+/**
+ * State Details page styling
+ */
+
+.state-details-main .sticky-header {
+    position: sticky;
+    top: 55px; /* align with site header */
+    background-color: #fff;
+    z-index: 10;
+    border-bottom: solid 1px gainsboro;
+    /* Ick, I know. Blame Bootstrap for negative margins */
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0.5rem 1rem;
+}
+
+/**
+ * Set consistent paragraph styles to keep text size uniform unless a paragraph
+ * specifically should be bigger or smaller
+ */
+.state-details-main p:not(.h1, .h2, .h3, .h4, .h5, .h6) {
+    font-size: 1.75rem;
+}
+
+/**
+ * Desktop Styling - full desktop sticky graph layout
+ */
+@media (min-width: 1200px) {
+    .state-details-main .sticky-header h1 .title { font-size: 2rem !important; }
+
+    /* On desktop, don't apply margin to row elements, since they don't
+       on the big screen layout anything */
+    .state-details-main .row { margin-top: 0 !important; }
+
+    /** Add transparent border to all sections so we can animate it in without
+     * shifting content */
+    .state-details-main .scrollable-sect {
+        padding: 2rem 0 2rem 2rem;
+        border-left: solid transparent 0.5rem;
+        transition: border-color 0.4s;
+    }
+
+    /*
+     * Style the active section.
+     *
+     * NOTE: The last section never gets the .is-current class for some reason, so use the
+     * sibling selector to make sure it is faded in after the previous one is
+     * scrolled-past
+     */
+    .state-details-main .scrollable-sect.is-current,
+    .state-details-main div#power-end.scrolled-past + div {
+        border-color: #ff5722;
+    }
+}
