@@ -104,6 +104,9 @@ const TakeActionPage = () => {
                   Up to $840 for an electric stove, oven, or an electric heat
                   pump dryer
                 </li>
+                <li className="mt-1">
+                  Up to $7,500 for a new electric vehicle or $4,000 for a used electric vehicle
+                </li>
               </ul>
             </div>
           </div>
