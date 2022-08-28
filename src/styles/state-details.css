@@ -2,7 +2,7 @@
  * State Details page styling
  */
 
-.state-details-main .sticky-header {
+.sticky-header {
     position: sticky;
     top: 55px; /* align with site header */
     background-color: #fff;
@@ -26,7 +26,7 @@
  * Desktop Styling - full desktop sticky graph layout
  */
 @media (min-width: 1200px) {
-    .state-details-main .sticky-header h1 .title { font-size: 2rem !important; }
+    .sticky-header h1 .title { font-size: 2rem !important; }
 
     /* On desktop, don't apply margin to row elements, since they don't
        on the big screen layout anything */
