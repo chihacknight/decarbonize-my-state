@@ -709,8 +709,8 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <p className="mt-6">
-                In all, we'll need to build <strong>{windTurbinesCountStr} MWs</strong> of wind
-                and <strong>{solarPanelsCountStr} MWs</strong> of solar.
+                In all, we'll need to build <strong>{windTurbinesCountStr} Megawatts</strong> of wind
+                and <strong>{solarPanelsCountStr} Megawatts</strong> of solar.
               </p>
 
               <p className="mt-5">
@@ -789,7 +789,7 @@ export default function StateDetailsPage ({ location, data }) {
 
               <div className="col">
 
-                <p className="h2">
+                <p className="mt-5">
                   The last{" "}
                   <strong>{otherPrcnt}%</strong> of {placeTitle}'s climate pollution
                   comes from other sources...
@@ -807,23 +807,23 @@ export default function StateDetailsPage ({ location, data }) {
                   {/* All emojis in this context are decorative, so they are
                       marked with aria-hidden */}
                   <li>
-                    <span aria-hidden="true">🌾</span>
+                    <span className="mr-2" aria-hidden="true">🌾</span>
                     No-till farming to keep CO<sub>2</sub> in the soil
                   </li>
                   <li>
-                    <span aria-hidden="true">🗑️</span>
+                    <span className="mr-2" aria-hidden="true">🗑️</span>
                     Capturing methane leaks from landfills
                   </li>
                   <li>
-                    <span aria-hidden="true">🧱</span>
+                    <span className="mr-2" aria-hidden="true">🧱</span>
                     Capturing CO<sub>2</sub> to make emissions-free concrete
                   </li>
                   <li>
-                    <span aria-hidden="true">🔩</span>
+                    <span className="mr-2" aria-hidden="true">🔩</span>
                     Burning green hydrogen to make emissions-free steel
                   </li>
                   <li>
-                    <span aria-hidden="true">💨</span>
+                    <span className="mr-2" aria-hidden="true">💨</span>
                     Plugging methane leaks from gas pipelines
                   </li>
                 </ul>
