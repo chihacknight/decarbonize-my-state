@@ -1,5 +1,5 @@
-import React from "react"
-import { Button, Table, Modal } from "react-bootstrap"
+import React from "react";
+import { Button, Table, Modal } from "react-bootstrap";
 
 /**
  * A modal that we use to show a two-dimensional array of data. Used so that
@@ -18,13 +18,13 @@ import { Button, Table, Modal } from "react-bootstrap"
  * @param {function} handleClose
  *   A callback function to close the modal
  */
-export default function DataModal ({
+export default function DataModal({
   chartData,
   headers,
   show,
-  title = 'Emissions',
+  title = "Emissions",
   // Output function
-  handleClose,
+  handleClose
 }) {
   return (
     <>
@@ -33,8 +33,11 @@ export default function DataModal ({
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         {/* Make modal body tabbable so keyboard users can scroll it */}
-        <Modal.Body className="data-modal-body" tabIndex="0"
-          aria-label="Data Table Section">
+        <Modal.Body
+          className="data-modal-body"
+          tabIndex="0"
+          aria-label="Data Table Section"
+        >
           <Table striped bordered>
             <thead>
               <tr>
@@ -48,7 +51,7 @@ export default function DataModal ({
                 <tr key={index}>
                   {headers.map((header, index) => (
                     // Show — if no data
-                    <td key={index}>{row[header.key] || '—'}</td>
+                    <td key={index}>{row[header.key] || "—"}</td>
                   ))}
                 </tr>
               ))}
@@ -62,6 +65,5 @@ export default function DataModal ({
         </Modal.Footer>
       </Modal>
     </>
-  )
+  );
 }
-

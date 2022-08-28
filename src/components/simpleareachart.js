@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Button } from "react-bootstrap"
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import {
   AreaChart,
   Area,
@@ -10,62 +10,73 @@ import {
   ResponsiveContainer,
   Label,
   ReferenceDot
-} from "recharts"
+} from "recharts";
 
-import DataModal from './data-modal'
+import DataModal from "./data-modal";
 
-export default function SimpleAreaChart ({ emissionsData, title }) {
+export default function SimpleAreaChart({ emissionsData, title }) {
+  const YearDataKey = "year";
+  const EmissionsDataKey = "hist";
+  const ProjectionDataKey = "projection";
 
-  const YearDataKey = 'year'
-  const EmissionsDataKey = 'hist'
-  const ProjectionDataKey = 'projection'
+  const annualHistoricEmissions = emissionsData.map(item => {
+    var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 };
 
-  const annualHistoricEmissions = emissionsData.map((item) => {
-    var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 }
+    data[EmissionsDataKey] =
+      Math.round(
+        100 *
+          Object.entries(item)
+            .filter(([key, _val]) => key !== YearDataKey)
+            .reduce((acc, [_key, val]) => acc + val, 0)
+      ) / 100;
 
-    data[EmissionsDataKey] = Math.round(100*Object.entries(item)
-      .filter(([key, _val]) => key !== YearDataKey)
-      .reduce((acc, [_key, val]) => acc + val, 0)) /100
+    return data;
+  });
 
-    return data
-  })
+  const currYear = new Date().getFullYear();
+  const yearsLeft = 2050 - currYear;
+  const reduceFrom =
+    annualHistoricEmissions[annualHistoricEmissions.length - 1][
+      EmissionsDataKey
+    ];
+  var projection = [];
 
-  const currYear = new Date().getFullYear()
-  const yearsLeft = 2050 - currYear
-  const reduceFrom
-    = annualHistoricEmissions[annualHistoricEmissions.length - 1][EmissionsDataKey]
-  var projection = []
-
-  for (let step = 0; step < (yearsLeft + 1); step++) {
+  for (let step = 0; step < yearsLeft + 1; step++) {
     if (step === 0) {
       projection.push({
         [YearDataKey]: currYear,
         [EmissionsDataKey]: reduceFrom,
         [ProjectionDataKey]: reduceFrom
-      })
-    }
-    else {
-      var rounded = (Math.round((reduceFrom - reduceFrom * step / yearsLeft) * 100)) / 100
-      if (rounded < 0) { rounded = 0 }
-      projection.push({ [YearDataKey]: step + currYear, [ProjectionDataKey]: rounded })
+      });
+    } else {
+      var rounded =
+        Math.round((reduceFrom - (reduceFrom * step) / yearsLeft) * 100) / 100;
+      if (rounded < 0) {
+        rounded = 0;
+      }
+      projection.push({
+        [YearDataKey]: step + currYear,
+        [ProjectionDataKey]: rounded
+      });
     }
   }
 
-  var data = annualHistoricEmissions.concat(projection)
-  const dataMidPoint = data.find(item => item.year === currYear)[EmissionsDataKey] / 2
+  var data = annualHistoricEmissions.concat(projection);
+  const dataMidPoint =
+    data.find(item => item.year === currYear)[EmissionsDataKey] / 2;
 
   // Data headers for the modal
   const dataHeaders = [
-    { title: 'Year', key: YearDataKey },
-    { title: 'Gigatonnes CO2 Emitted', key: EmissionsDataKey },
-    { title: 'Goal CO2 Emissions', key: ProjectionDataKey }
-  ]
+    { title: "Year", key: YearDataKey },
+    { title: "Gigatonnes CO2 Emitted", key: EmissionsDataKey },
+    { title: "Goal CO2 Emissions", key: ProjectionDataKey }
+  ];
 
-  const [showDataModal, setShowDataModal] = useState(false)
+  const [showDataModal, setShowDataModal] = useState(false);
 
-  const handleCloseModal = () => setShowDataModal(false)
-  const handleShowModal = () => setShowDataModal(true)
-  
+  const handleCloseModal = () => setShowDataModal(false);
+  const handleShowModal = () => setShowDataModal(true);
+
   return (
     <>
       <ResponsiveContainer className="simplearea-cont">
@@ -82,11 +93,17 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
         >
           {/* <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" /> */}
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={YearDataKey} >
+          <XAxis dataKey={YearDataKey}>
             <Label value="Year" offset={-15} position="insideBottom" />
           </XAxis>
-          <YAxis >
-            <Label value="CO2e (million metric tons)" offset={10} angle={-90} position="insideLeft"    style={{ textAnchor: 'middle' }} />
+          <YAxis>
+            <Label
+              value="CO2e (million metric tons)"
+              offset={10}
+              angle={-90}
+              position="insideLeft"
+              style={{ textAnchor: "middle" }}
+            />
           </YAxis>
           <Tooltip />
           <Area
@@ -107,11 +124,23 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
             name="Projection"
             isAnimationActive={false}
           />
-          <ReferenceDot y={dataMidPoint} x={currYear-4} stroke="none" fill="none" label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
-          <ReferenceDot y={dataMidPoint} x={currYear+1} stroke="none" fill="none" label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
+          <ReferenceDot
+            y={dataMidPoint}
+            x={currYear - 4}
+            stroke="none"
+            fill="none"
+            label={{ value: "Emissions", angle: 90, fill: "#b65c00" }}
+          />
+          <ReferenceDot
+            y={dataMidPoint}
+            x={currYear + 1}
+            stroke="none"
+            fill="none"
+            label={{ value: "Projections", angle: 90, fill: "#36a654" }}
+          />
         </AreaChart>
       </ResponsiveContainer>
-      
+
       <div className="text-center">
         <Button variant="secondary" onClick={handleShowModal}>
           View Data Table
@@ -123,7 +152,8 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
         headers={dataHeaders}
         show={showDataModal}
         title={title}
-        handleClose={handleCloseModal}></DataModal>
+        handleClose={handleCloseModal}
+      ></DataModal>
     </>
-  )
+  );
 }

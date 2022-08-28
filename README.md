@@ -16,18 +16,18 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
 
 1. Grab the repo:
 
-    ```shell
-    git clone git@github.com:chihacknight/decarbonize-my-state.git
-    cd decarbonize-my-state
-    ```
+   ```shell
+   git clone git@github.com:chihacknight/decarbonize-my-state.git
+   cd decarbonize-my-state
+   ```
 
 2. Start developing
 
-    ```shell
-    docker-compose up --build
-    ```
+   ```shell
+   docker-compose up --build
+   ```
 
-    Your site should now be up and running at `http://localhost:8000`!
+   Your site should now be up and running at `http://localhost:8000`!
 
 ## Dependencies
 
@@ -61,9 +61,9 @@ docker-compose run --rm app run test --fix
 
 ## Data processing
 
-All data that appears on the frontend of this site should come directly from a file in `data/final`—for more on that line of thinking, see [this guide to data handling](https://github.com/datamade/how-to/blob/master/gatsby/recharts.md#on-data-transformation) in Gatsby. The data processing pipeline for this project lives in `data/` and follows DataMade's [data making guidelines](https://github.com/datamade/data-making-guidelines). As these files are relatively small, we keep both raw and final data under version control. 
+All data that appears on the frontend of this site should come directly from a file in `data/final`—for more on that line of thinking, see [this guide to data handling](https://github.com/datamade/how-to/blob/master/gatsby/recharts.md#on-data-transformation) in Gatsby. The data processing pipeline for this project lives in `data/` and follows DataMade's [data making guidelines](https://github.com/datamade/data-making-guidelines). As these files are relatively small, we keep both raw and final data under version control.
 
-To recreate the data, run: 
+To recreate the data, run:
 
 ```bash
 cd data
@@ -71,6 +71,7 @@ docker-compose up --build
 ```
 
 ### Social Cards
+
 We wanted the social cards to include what number emitter the state is and what their emissions breakdown is. To do this, we created a social card page and used puppeteer to take screenshots to output get the dynamic social cards. The new screenshots can be found in `/static/social-cards`
 
 **To generate them:**
@@ -79,6 +80,7 @@ First make sure `yarn develop` is running
 Then run `yarn generate-social`
 
 ### 🤖 What's inside?
+
 _Taken from `gatsby-starter-default`_
 
 A quick look at the top-level files and directories you'll see in a Gatsby project.
@@ -106,7 +108,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 4.  **`.eslintrc.js`**: This is a configuration file for [ESLint](https://eslint.org/), a Javascript linter.
 
-5. **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+5.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
 
 6.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
 
@@ -116,7 +118,7 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 9.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
 
-10.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+10. **`LICENSE`**: Gatsby is licensed under the MIT license.
 
 11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
 

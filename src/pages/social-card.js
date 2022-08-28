@@ -1,105 +1,105 @@
-import React from "react"
-import SEO from "../components/seo"
-import SingleBarChart from "../components/singlebar"
-import { graphql } from "gatsby"
+import React from "react";
+import SEO from "../components/seo";
+import SingleBarChart from "../components/singlebar";
+import { graphql } from "gatsby";
 
 //TODO: move to shared file with state details
-const slugToTitle = (placeName) => {
-  const words = placeName.split("_")
+const slugToTitle = placeName => {
+  const words = placeName.split("_");
 
   for (let i = 0; i < words.length; i++) {
-    const word = words[i]
+    const word = words[i];
     if (word === "of") {
-      words[i] = word
+      words[i] = word;
     } else {
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
     }
   }
 
-  return words.join(" ")
-}
+  return words.join(" ");
+};
 
 const SocialCardPage = ({ location, data }) => {
   //get the state data
-  let params = new URLSearchParams(location.search)
-  let currentState = params.get("state")
+  let params = new URLSearchParams(location.search);
+  let currentState = params.get("state");
   let emissionsData = data.allEmissionsJson.edges.find(
-    (entry) => entry.node.state === currentState
-  )
+    entry => entry.node.state === currentState
+  );
 
   if (emissionsData == null) {
     emissionsData = data.allEmissionsJson.edges.find(
-      (entry) => entry.node.state === "illinois"
-    )
-    currentState = "illinois"
+      entry => entry.node.state === "illinois"
+    );
+    currentState = "illinois";
   }
 
   //used for ranking the states
-  var eachStateRecentEmissions = []
-  var counter = 0
-  var emitterSuffix = "th"
+  var eachStateRecentEmissions = [];
+  var counter = 0;
+  var emitterSuffix = "th";
 
   //go through each of the staes
   for (const stateData of data.allEmissionsJson.edges) {
-    var tempState = stateData.node.state
-    var stateTotalEmissions = 0
+    var tempState = stateData.node.state;
+    var stateTotalEmissions = 0;
 
     if (tempState === "united_states") {
-      continue
+      continue;
     }
 
     //sum all the emission categories to get total emissions for the recent year
     var mostRecentEmissions =
-      stateData.node.emissionsByYear[stateData.node.emissionsByYear.length - 1]
+      stateData.node.emissionsByYear[stateData.node.emissionsByYear.length - 1];
     for (const v of Object.values(mostRecentEmissions)) {
-      stateTotalEmissions += v
+      stateTotalEmissions += v;
     }
 
     //store in array of array containing state name, total emissions, and initial position
     eachStateRecentEmissions[counter] = [
       tempState,
       stateTotalEmissions,
-      counter,
-    ]
-    counter += 1
+      counter
+    ];
+    counter += 1;
   }
 
   //sort array by emisisons
-  eachStateRecentEmissions.sort((a, b) => b[1] - a[1])
+  eachStateRecentEmissions.sort((a, b) => b[1] - a[1]);
 
   //change the position of each state to reflect their new position in sorted array
   for (var i = 0; i < eachStateRecentEmissions.length; i++) {
-    eachStateRecentEmissions[i][2] = i
+    eachStateRecentEmissions[i][2] = i;
   }
 
   //find the data correspoinding to the current page
   let statePosInArr = eachStateRecentEmissions.find(
-    (entry) => entry[0] === currentState
-  )
+    entry => entry[0] === currentState
+  );
 
   //to be used for specifically checks with /social-card/ which dont have a ?state={}
   if (statePosInArr == null) {
     statePosInArr = eachStateRecentEmissions.find(
-      (entry) => entry[0] === "illinois"
-    )
+      entry => entry[0] === "illinois"
+    );
   }
 
   //alter what the suffix of the number is
-  var finalDigitOfStatePos = statePosInArr[2] % 10
+  var finalDigitOfStatePos = statePosInArr[2] % 10;
   if (finalDigitOfStatePos + 1 === 1) {
-    emitterSuffix = "st"
+    emitterSuffix = "st";
   } else if (finalDigitOfStatePos + 1 === 2) {
-    emitterSuffix = "nd"
+    emitterSuffix = "nd";
   } else if (finalDigitOfStatePos + 1 === 3) {
-    emitterSuffix = "rd"
+    emitterSuffix = "rd";
   }
 
-  const placeTitle = slugToTitle(currentState)
-  const stateFaceClass = currentState.toLowerCase().replaceAll(" ", "-")
+  const placeTitle = slugToTitle(currentState);
+  const stateFaceClass = currentState.toLowerCase().replaceAll(" ", "-");
 
-  let nodeData = emissionsData.node.emissionsByYear
+  let nodeData = emissionsData.node.emissionsByYear;
 
-  var stateNameSize = 3.5
+  var stateNameSize = 3.5;
   if (
     currentState === "tennessee" ||
     currentState === "pennsylvania" ||
@@ -112,10 +112,10 @@ const SocialCardPage = ({ location, data }) => {
     currentState === "kentucky" ||
     currentState === "nebraska"
   ) {
-    stateNameSize = 2.3
+    stateNameSize = 2.3;
   }
   if (currentState === "massachusetts") {
-    stateNameSize = 1.6
+    stateNameSize = 1.6;
   }
 
   return (
@@ -138,7 +138,7 @@ const SocialCardPage = ({ location, data }) => {
               <span
                 className="title font-weight-bold h4 mb-0"
                 style={{
-                  fontSize: stateNameSize + "rem",
+                  fontSize: stateNameSize + "rem"
                 }}
               >
                 {placeTitle}
@@ -168,10 +168,10 @@ const SocialCardPage = ({ location, data }) => {
         Decarb My State
       </h2>
     </div>
-  )
-}
+  );
+};
 
-export default SocialCardPage
+export default SocialCardPage;
 
 export const query = graphql`
   query SocialQuery {
@@ -190,4 +190,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

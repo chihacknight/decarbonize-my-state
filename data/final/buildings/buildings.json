@@ -1,1 +1,314 @@
-[{"state": "new_york", "buildings": 4972497, "weightedFossilBuildingsPct": 80.64, "weightedEleBuildingsPct": 19.36}, {"state": "nebraska", "buildings": 1187234, "weightedFossilBuildingsPct": 65.16, "weightedEleBuildingsPct": 34.84}, {"state": "idaho", "buildings": 942132, "weightedFossilBuildingsPct": 61.88, "weightedEleBuildingsPct": 38.12}, {"state": "ohio", "buildings": 5544032, "weightedFossilBuildingsPct": 73.24, "weightedEleBuildingsPct": 26.76}, {"state": "virginia", "buildings": 3079351, "weightedFossilBuildingsPct": 44.77, "weightedEleBuildingsPct": 55.23}, {"state": "georgia", "buildings": 3981792, "weightedFossilBuildingsPct": 48.47, "weightedEleBuildingsPct": 51.53}, {"state": "florida", "buildings": 7263195, "weightedFossilBuildingsPct": 15.92, "weightedEleBuildingsPct": 84.08}, {"state": "minnesota", "buildings": 2914016, "weightedFossilBuildingsPct": 75.2, "weightedEleBuildingsPct": 24.8}, {"state": "mississippi", "buildings": 1507496, "weightedFossilBuildingsPct": 44.58, "weightedEleBuildingsPct": 55.42}, {"state": "oklahoma", "buildings": 2159894, "weightedFossilBuildingsPct": 60.54, "weightedEleBuildingsPct": 39.46}, {"state": "colorado", "buildings": 2185953, "weightedFossilBuildingsPct": 72.07, "weightedEleBuildingsPct": 27.93}, {"state": "illinois", "buildings": 5194010, "weightedFossilBuildingsPct": 80.04, "weightedEleBuildingsPct": 19.96}, {"state": "oregon", "buildings": 1873786, "weightedFossilBuildingsPct": 45.02, "weightedEleBuildingsPct": 54.98}, {"state": "pennsylvania", "buildings": 4965213, "weightedFossilBuildingsPct": 69.11, "weightedEleBuildingsPct": 30.89}, {"state": "maryland", "buildings": 1657199, "weightedFossilBuildingsPct": 55.01, "weightedEleBuildingsPct": 44.99}, {"state": "louisiana", "buildings": 2173567, "weightedFossilBuildingsPct": 40.85, "weightedEleBuildingsPct": 59.15}, {"state": "united_states", "buildings": 30099920, "weightedFossilBuildingsPct": 0.0, "weightedEleBuildingsPct": 0.0}, {"state": "arkansas", "buildings": 1571198, "weightedFossilBuildingsPct": 50.12, "weightedEleBuildingsPct": 49.88}, {"state": "montana", "buildings": 773199, "weightedFossilBuildingsPct": 68.87, "weightedEleBuildingsPct": 31.13}, {"state": "alaska", "buildings": 111042, "weightedFossilBuildingsPct": 0.0, "weightedEleBuildingsPct": 0.0}, {"state": "district_of_columbia", "buildings": 77851, "weightedFossilBuildingsPct": 63.58, "weightedEleBuildingsPct": 36.42}, {"state": "michigan", "buildings": 4982783, "weightedFossilBuildingsPct": 82.76, "weightedEleBuildingsPct": 17.24}, {"state": "iowa", "buildings": 2074904, "weightedFossilBuildingsPct": 71.73, "weightedEleBuildingsPct": 28.27}, {"state": "delaware", "buildings": 357534, "weightedFossilBuildingsPct": 58.27, "weightedEleBuildingsPct": 41.73}, {"state": "missouri", "buildings": 3190076, "weightedFossilBuildingsPct": 60.43, "weightedEleBuildingsPct": 39.57}, {"state": "wyoming", "buildings": 386518, "weightedFossilBuildingsPct": 70.09, "weightedEleBuildingsPct": 29.91}, {"state": "wisconsin", "buildings": 3173347, "weightedFossilBuildingsPct": 77.34, "weightedEleBuildingsPct": 22.66}, {"state": "new_hampshire", "buildings": 577936, "weightedFossilBuildingsPct": 77.59, "weightedEleBuildingsPct": 22.41}, {"state": "indiana", "buildings": 3379648, "weightedFossilBuildingsPct": 68.47, "weightedEleBuildingsPct": 31.53}, {"state": "hawaii", "buildings": 252908, "weightedFossilBuildingsPct": 0.0, "weightedEleBuildingsPct": 0.0}, {"state": "massachusetts", "buildings": 2114602, "weightedFossilBuildingsPct": 76.39, "weightedEleBuildingsPct": 23.61}, {"state": "alabama", "buildings": 2455168, "weightedFossilBuildingsPct": 39.42, "weightedEleBuildingsPct": 60.58}, {"state": "south_carolina", "buildings": 2299671, "weightedFossilBuildingsPct": 33.87, "weightedEleBuildingsPct": 66.13}, {"state": "new_mexico", "buildings": 1037096, "weightedFossilBuildingsPct": 76.68, "weightedEleBuildingsPct": 23.32}, {"state": "washington", "buildings": 3128258, "weightedFossilBuildingsPct": 40.27, "weightedEleBuildingsPct": 59.73}, {"state": "south_dakota", "buildings": 661311, "weightedFossilBuildingsPct": 63.24, "weightedEleBuildingsPct": 36.76}, {"state": "connecticut", "buildings": 1215624, "weightedFossilBuildingsPct": 72.55, "weightedEleBuildingsPct": 27.45}, {"state": "tennessee", "buildings": 3212306, "weightedFossilBuildingsPct": 42.38, "weightedEleBuildingsPct": 57.62}, {"state": "texas", "buildings": 10678921, "weightedFossilBuildingsPct": 43.34, "weightedEleBuildingsPct": 56.66}, {"state": "west_virginia", "buildings": 1055625, "weightedFossilBuildingsPct": 53.54, "weightedEleBuildingsPct": 46.46}, {"state": "maine", "buildings": 758999, "weightedFossilBuildingsPct": 76.86, "weightedEleBuildingsPct": 23.14}, {"state": "north_dakota", "buildings": 568213, "weightedFossilBuildingsPct": 57.49, "weightedEleBuildingsPct": 42.51}, {"state": "rhode_island", "buildings": 392581, "weightedFossilBuildingsPct": 79.21, "weightedEleBuildingsPct": 20.79}, {"state": "utah", "buildings": 1081586, "weightedFossilBuildingsPct": 79.42, "weightedEleBuildingsPct": 20.58}, {"state": "new_jersey", "buildings": 2550308, "weightedFossilBuildingsPct": 81.48, "weightedEleBuildingsPct": 18.52}, {"state": "kentucky", "buildings": 2447682, "weightedFossilBuildingsPct": 49.21, "weightedEleBuildingsPct": 50.79}, {"state": "california", "buildings": 11542912, "weightedFossilBuildingsPct": 71.57, "weightedEleBuildingsPct": 28.43}, {"state": "kansas", "buildings": 1614406, "weightedFossilBuildingsPct": 70.77, "weightedEleBuildingsPct": 29.23}, {"state": "nevada", "buildings": 1006278, "weightedFossilBuildingsPct": 65.37, "weightedEleBuildingsPct": 34.63}, {"state": "arizona", "buildings": 2738732, "weightedFossilBuildingsPct": 42.75, "weightedEleBuildingsPct": 57.25}, {"state": "north_carolina", "buildings": 4678064, "weightedFossilBuildingsPct": 40.06, "weightedEleBuildingsPct": 59.94}, {"state": "vermont", "buildings": 351266, "weightedFossilBuildingsPct": 80.02, "weightedEleBuildingsPct": 19.98}]
+[
+  {
+    "state": "new_york",
+    "buildings": 4972497,
+    "weightedFossilBuildingsPct": 80.64,
+    "weightedEleBuildingsPct": 19.36
+  },
+  {
+    "state": "nebraska",
+    "buildings": 1187234,
+    "weightedFossilBuildingsPct": 65.16,
+    "weightedEleBuildingsPct": 34.84
+  },
+  {
+    "state": "idaho",
+    "buildings": 942132,
+    "weightedFossilBuildingsPct": 61.88,
+    "weightedEleBuildingsPct": 38.12
+  },
+  {
+    "state": "ohio",
+    "buildings": 5544032,
+    "weightedFossilBuildingsPct": 73.24,
+    "weightedEleBuildingsPct": 26.76
+  },
+  {
+    "state": "virginia",
+    "buildings": 3079351,
+    "weightedFossilBuildingsPct": 44.77,
+    "weightedEleBuildingsPct": 55.23
+  },
+  {
+    "state": "georgia",
+    "buildings": 3981792,
+    "weightedFossilBuildingsPct": 48.47,
+    "weightedEleBuildingsPct": 51.53
+  },
+  {
+    "state": "florida",
+    "buildings": 7263195,
+    "weightedFossilBuildingsPct": 15.92,
+    "weightedEleBuildingsPct": 84.08
+  },
+  {
+    "state": "minnesota",
+    "buildings": 2914016,
+    "weightedFossilBuildingsPct": 75.2,
+    "weightedEleBuildingsPct": 24.8
+  },
+  {
+    "state": "mississippi",
+    "buildings": 1507496,
+    "weightedFossilBuildingsPct": 44.58,
+    "weightedEleBuildingsPct": 55.42
+  },
+  {
+    "state": "oklahoma",
+    "buildings": 2159894,
+    "weightedFossilBuildingsPct": 60.54,
+    "weightedEleBuildingsPct": 39.46
+  },
+  {
+    "state": "colorado",
+    "buildings": 2185953,
+    "weightedFossilBuildingsPct": 72.07,
+    "weightedEleBuildingsPct": 27.93
+  },
+  {
+    "state": "illinois",
+    "buildings": 5194010,
+    "weightedFossilBuildingsPct": 80.04,
+    "weightedEleBuildingsPct": 19.96
+  },
+  {
+    "state": "oregon",
+    "buildings": 1873786,
+    "weightedFossilBuildingsPct": 45.02,
+    "weightedEleBuildingsPct": 54.98
+  },
+  {
+    "state": "pennsylvania",
+    "buildings": 4965213,
+    "weightedFossilBuildingsPct": 69.11,
+    "weightedEleBuildingsPct": 30.89
+  },
+  {
+    "state": "maryland",
+    "buildings": 1657199,
+    "weightedFossilBuildingsPct": 55.01,
+    "weightedEleBuildingsPct": 44.99
+  },
+  {
+    "state": "louisiana",
+    "buildings": 2173567,
+    "weightedFossilBuildingsPct": 40.85,
+    "weightedEleBuildingsPct": 59.15
+  },
+  {
+    "state": "united_states",
+    "buildings": 30099920,
+    "weightedFossilBuildingsPct": 0.0,
+    "weightedEleBuildingsPct": 0.0
+  },
+  {
+    "state": "arkansas",
+    "buildings": 1571198,
+    "weightedFossilBuildingsPct": 50.12,
+    "weightedEleBuildingsPct": 49.88
+  },
+  {
+    "state": "montana",
+    "buildings": 773199,
+    "weightedFossilBuildingsPct": 68.87,
+    "weightedEleBuildingsPct": 31.13
+  },
+  {
+    "state": "alaska",
+    "buildings": 111042,
+    "weightedFossilBuildingsPct": 0.0,
+    "weightedEleBuildingsPct": 0.0
+  },
+  {
+    "state": "district_of_columbia",
+    "buildings": 77851,
+    "weightedFossilBuildingsPct": 63.58,
+    "weightedEleBuildingsPct": 36.42
+  },
+  {
+    "state": "michigan",
+    "buildings": 4982783,
+    "weightedFossilBuildingsPct": 82.76,
+    "weightedEleBuildingsPct": 17.24
+  },
+  {
+    "state": "iowa",
+    "buildings": 2074904,
+    "weightedFossilBuildingsPct": 71.73,
+    "weightedEleBuildingsPct": 28.27
+  },
+  {
+    "state": "delaware",
+    "buildings": 357534,
+    "weightedFossilBuildingsPct": 58.27,
+    "weightedEleBuildingsPct": 41.73
+  },
+  {
+    "state": "missouri",
+    "buildings": 3190076,
+    "weightedFossilBuildingsPct": 60.43,
+    "weightedEleBuildingsPct": 39.57
+  },
+  {
+    "state": "wyoming",
+    "buildings": 386518,
+    "weightedFossilBuildingsPct": 70.09,
+    "weightedEleBuildingsPct": 29.91
+  },
+  {
+    "state": "wisconsin",
+    "buildings": 3173347,
+    "weightedFossilBuildingsPct": 77.34,
+    "weightedEleBuildingsPct": 22.66
+  },
+  {
+    "state": "new_hampshire",
+    "buildings": 577936,
+    "weightedFossilBuildingsPct": 77.59,
+    "weightedEleBuildingsPct": 22.41
+  },
+  {
+    "state": "indiana",
+    "buildings": 3379648,
+    "weightedFossilBuildingsPct": 68.47,
+    "weightedEleBuildingsPct": 31.53
+  },
+  {
+    "state": "hawaii",
+    "buildings": 252908,
+    "weightedFossilBuildingsPct": 0.0,
+    "weightedEleBuildingsPct": 0.0
+  },
+  {
+    "state": "massachusetts",
+    "buildings": 2114602,
+    "weightedFossilBuildingsPct": 76.39,
+    "weightedEleBuildingsPct": 23.61
+  },
+  {
+    "state": "alabama",
+    "buildings": 2455168,
+    "weightedFossilBuildingsPct": 39.42,
+    "weightedEleBuildingsPct": 60.58
+  },
+  {
+    "state": "south_carolina",
+    "buildings": 2299671,
+    "weightedFossilBuildingsPct": 33.87,
+    "weightedEleBuildingsPct": 66.13
+  },
+  {
+    "state": "new_mexico",
+    "buildings": 1037096,
+    "weightedFossilBuildingsPct": 76.68,
+    "weightedEleBuildingsPct": 23.32
+  },
+  {
+    "state": "washington",
+    "buildings": 3128258,
+    "weightedFossilBuildingsPct": 40.27,
+    "weightedEleBuildingsPct": 59.73
+  },
+  {
+    "state": "south_dakota",
+    "buildings": 661311,
+    "weightedFossilBuildingsPct": 63.24,
+    "weightedEleBuildingsPct": 36.76
+  },
+  {
+    "state": "connecticut",
+    "buildings": 1215624,
+    "weightedFossilBuildingsPct": 72.55,
+    "weightedEleBuildingsPct": 27.45
+  },
+  {
+    "state": "tennessee",
+    "buildings": 3212306,
+    "weightedFossilBuildingsPct": 42.38,
+    "weightedEleBuildingsPct": 57.62
+  },
+  {
+    "state": "texas",
+    "buildings": 10678921,
+    "weightedFossilBuildingsPct": 43.34,
+    "weightedEleBuildingsPct": 56.66
+  },
+  {
+    "state": "west_virginia",
+    "buildings": 1055625,
+    "weightedFossilBuildingsPct": 53.54,
+    "weightedEleBuildingsPct": 46.46
+  },
+  {
+    "state": "maine",
+    "buildings": 758999,
+    "weightedFossilBuildingsPct": 76.86,
+    "weightedEleBuildingsPct": 23.14
+  },
+  {
+    "state": "north_dakota",
+    "buildings": 568213,
+    "weightedFossilBuildingsPct": 57.49,
+    "weightedEleBuildingsPct": 42.51
+  },
+  {
+    "state": "rhode_island",
+    "buildings": 392581,
+    "weightedFossilBuildingsPct": 79.21,
+    "weightedEleBuildingsPct": 20.79
+  },
+  {
+    "state": "utah",
+    "buildings": 1081586,
+    "weightedFossilBuildingsPct": 79.42,
+    "weightedEleBuildingsPct": 20.58
+  },
+  {
+    "state": "new_jersey",
+    "buildings": 2550308,
+    "weightedFossilBuildingsPct": 81.48,
+    "weightedEleBuildingsPct": 18.52
+  },
+  {
+    "state": "kentucky",
+    "buildings": 2447682,
+    "weightedFossilBuildingsPct": 49.21,
+    "weightedEleBuildingsPct": 50.79
+  },
+  {
+    "state": "california",
+    "buildings": 11542912,
+    "weightedFossilBuildingsPct": 71.57,
+    "weightedEleBuildingsPct": 28.43
+  },
+  {
+    "state": "kansas",
+    "buildings": 1614406,
+    "weightedFossilBuildingsPct": 70.77,
+    "weightedEleBuildingsPct": 29.23
+  },
+  {
+    "state": "nevada",
+    "buildings": 1006278,
+    "weightedFossilBuildingsPct": 65.37,
+    "weightedEleBuildingsPct": 34.63
+  },
+  {
+    "state": "arizona",
+    "buildings": 2738732,
+    "weightedFossilBuildingsPct": 42.75,
+    "weightedEleBuildingsPct": 57.25
+  },
+  {
+    "state": "north_carolina",
+    "buildings": 4678064,
+    "weightedFossilBuildingsPct": 40.06,
+    "weightedEleBuildingsPct": 59.94
+  },
+  {
+    "state": "vermont",
+    "buildings": 351266,
+    "weightedFossilBuildingsPct": 80.02,
+    "weightedEleBuildingsPct": 19.98
+  }
+]

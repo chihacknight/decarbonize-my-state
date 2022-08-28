@@ -56,20 +56,19 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
     "washington",
     "west_virginia",
     "wisconsin",
-    "wyoming",
+    "wyoming"
   ];
 
   const StateDetailsTemplate = path.resolve(`src/components/state-details.js`);
 
-  placeNames.forEach((name) => {
+  placeNames.forEach(name => {
     const path = name;
     createPage({
       path,
       component: StateDetailsTemplate,
       context: {
-        state: name,
-      },
+        state: name
+      }
     });
   });
-
 };
