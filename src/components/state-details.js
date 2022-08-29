@@ -418,7 +418,7 @@ export default function StateDetailsPage ({ location, data }) {
 
             <p className="mt-6">We'll replace...</p>
             <div className="mt-4 mb-4">
-              <ul>
+              <ul className="h4">
                 <li>
                   Boilers and furnaces with{" "}
                   <a
@@ -453,14 +453,14 @@ export default function StateDetailsPage ({ location, data }) {
               <strong>{buildingsCountStr} buildings</strong>.
             </p>
 
-            <div className="d-flex align-items-end justify-content-around mt-6">
+            <div className="d-flex align-items-end justify-content-around mt-5">
               <div className="col-6 building-sheet -house -clean"></div>
               <div className="col-6 building-sheet -apartments -clean"></div>
             </div>
 
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
-              <p className="mt-8">
+              <p className="mt-7">
                 In fact, {Math.round(weightedEleBuildingsPct)}% of buildings in{" "}
                 {placeTitle} are already fossil fuel free!
               </p>
@@ -478,7 +478,7 @@ export default function StateDetailsPage ({ location, data }) {
             />
           </div>
 
-          <div id="bld-end" className="scrollable-sect mt-8 mb-4">
+          <div id="bld-end" className="scrollable-sect change-text mt-8 mb-4">
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all buildings cuts {buildingsPrcnt}% of the
               pollution.
@@ -536,7 +536,7 @@ export default function StateDetailsPage ({ location, data }) {
               share, or other alternatives!
             </p>
 
-            <p className="mt-8">
+            <p className="mt-6">
               Then, we'll electrify all{" "}
               <strong>{carsCountStr} cars and trucks</strong> in {placeTitle}!
             </p>
@@ -562,7 +562,7 @@ export default function StateDetailsPage ({ location, data }) {
             />
           </div>
 
-          <div id="transport-end" className="scrollable-sect mt-8 mb-4">
+          <div id="transport-end" className="scrollable-sect change-text mt-8 mb-4">
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all transportation cuts {transportPrcnt}% of the
               pollution.
@@ -619,10 +619,10 @@ export default function StateDetailsPage ({ location, data }) {
               </p>
 
               <div className="d-flex justify-content-center">
-                <div className="building-sheet -house -clean col-8"></div>
+                <div className="building-sheet -house -clean col-10"></div>
               </div>
 
-              <p className="mt-8">
+              <p className="mt-6">
                 Then, we'll replace{" "}
                 <strong>all fossil fuel power plants</strong> with solar and
                 wind farms.
@@ -740,7 +740,7 @@ export default function StateDetailsPage ({ location, data }) {
           )}
           {/* Show standard outro section if power emissions are non-zero */}
           {powerPrcnt > 0 && (
-            <div id="power-end" className="scrollable-sect mt-8 mb-4">
+            <div id="power-end" className="scrollable-sect change-text mt-8 mb-4">
               <p className="h1 font-weight-bold text-center mt-6 mb-6">
                 Decarbonizing all dirty power cuts {powerPrcnt}% of the
                 pollution.
@@ -813,7 +813,7 @@ export default function StateDetailsPage ({ location, data }) {
                   to solve these problems, but there are lots of great ideas:
                 </p>
 
-                <ul>
+                <ul className="h5 mt-4">
                   {/* All emojis in this context are decorative, so they are
                       marked with aria-hidden */}
                   <li>

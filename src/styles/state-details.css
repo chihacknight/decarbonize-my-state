@@ -22,6 +22,17 @@
     font-size: 1.75rem;
 }
 
+/** Add padding between bulleted list items */
+.state-details-main li + li { margin-top: 1em; }
+
+/**
+ * Mobile/tablet styling - shrink some text
+ */
+@media (max-width: 1199px) {
+    /* Shrink .h1 text */
+    .h1 { font-size: 1.75rem; }
+}
+
 /**
  * Desktop Styling - full desktop sticky graph layout
  */
@@ -38,6 +49,21 @@
         padding: 2rem 0 2rem 2rem;
         border-left: solid transparent 0.5rem;
         transition: border-color 0.4s;
+    }
+
+
+    /**
+     * Have the "Decarbonising X cuts Y% of the pollution" faded out until you
+     * scroll into it, giving it a bit of a pop
+     */
+    .state-details-main .change-text p {
+        opacity: 0.2;
+        transition: opacity 0.5s;
+    }
+
+    .state-details-main .change-text.is-current p,
+    .state-details-main .change-text.scrolled-past p {
+        opacity: 1;
     }
 
     /*
