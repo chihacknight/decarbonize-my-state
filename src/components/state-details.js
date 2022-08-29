@@ -417,7 +417,7 @@ export default function StateDetailsPage ({ location, data }) {
             </p>
 
             <p className="mt-6">We'll replace...</p>
-            <p className="mt-4 mb-4">
+            <div className="mt-4 mb-4">
               <ul>
                 <li>
                   Boilers and furnaces with{" "}
@@ -440,7 +440,7 @@ export default function StateDetailsPage ({ location, data }) {
                   </a>
                 </li>
               </ul>
-            </p>
+            </div>
 
             <div className="d-flex align-items-end justify-content-between flex-wrap  mt-5 mb-5">
               <div className="appliance-sheet -stove -clean"></div>
@@ -857,7 +857,7 @@ export default function StateDetailsPage ({ location, data }) {
 
       <section className="text-center mb-8">
         {/* This emoji is purely decorative */}
-        <div class="h1 mt-7 mb-3">
+        <div className="h1 mt-7 mb-3">
           <span aria-hidden="true">✅</span>
         </div>
         <h2 className="h1 font-weight-bold">Ready to do your part?</h2>
