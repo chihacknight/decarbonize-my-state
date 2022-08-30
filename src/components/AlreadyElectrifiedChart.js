@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
-const electrifiedColor = "rgb(163, 215, 164)";
-const fossilColor = "rgb(255, 87, 34)";
+const electrifiedColor = "rgb(163, 215, 164)"
+const fossilColor = "rgb(255, 87, 34)"
 const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
   //otherPct
   if (electrifiedPct !== 0 || fossilPct !== 0) {
@@ -55,10 +55,10 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
           Not yet
         </text>
       </svg>
-    );
+    )
   } else {
-    return null;
+    return null
   }
-};
+}
 
-export default React.memo(AlreadyElectrifiedChart);
+export default React.memo(AlreadyElectrifiedChart)

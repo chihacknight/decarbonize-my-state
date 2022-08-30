@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   BarChart,
   Bar,
@@ -8,9 +8,9 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer
-} from "recharts";
+} from "recharts"
 
-const barColors = ["#984ea3", "#4daf4a", "#377eb8", "#e41a1c"];
+const barColors = ["#984ea3", "#4daf4a", "#377eb8", "#e41a1c"]
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -51,11 +51,11 @@ const CustomTooltip = ({ active, payload, label }) => {
           </tfoot>
         </table>
       </div>
-    );
+    )
   }
 
-  return null;
-};
+  return null
+}
 
 const TooltipItem = ({ payload, index }) => {
   return (
@@ -74,19 +74,19 @@ const TooltipItem = ({ payload, index }) => {
         </span>
       </td>
     </tr>
-  );
-};
+  )
+}
 
 function getTotal(payload) {
   return (
     payload[0].value + payload[1].value + payload[2].value + payload[3].value
-  );
+  )
 }
 
 function calcPercent(payload, index) {
   return ((100 * payload[index].value.toFixed(1)) / getTotal(payload)).toFixed(
     1
-  );
+  )
 }
 
 const StackedBarChart = ({ emissions_data }) => {
@@ -135,10 +135,10 @@ const StackedBarChart = ({ emissions_data }) => {
           />
         </BarChart>
       </ResponsiveContainer>
-    );
+    )
   } else {
-    return <span className="float-right">Data not available</span>;
+    return <span className="float-right">Data not available</span>
   }
-};
+}
 
-export default StackedBarChart;
+export default StackedBarChart

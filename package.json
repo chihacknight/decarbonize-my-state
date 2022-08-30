@@ -52,7 +52,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "eslint src",
+    "test": "prettier --config ./.prettierrc.js --write \"**/*.{js,jsx,json,md}\"",
     "generate-social": "node src/generate-social-cards.js"
   },
   "repository": {

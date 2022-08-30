@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react"
+import { Button } from "react-bootstrap"
 import {
   AreaChart,
   Area,
@@ -10,17 +10,17 @@ import {
   ResponsiveContainer,
   Label,
   ReferenceDot
-} from "recharts";
+} from "recharts"
 
-import DataModal from "./data-modal";
+import DataModal from "./data-modal"
 
 export default function SimpleAreaChart({ emissionsData, title }) {
-  const YearDataKey = "year";
-  const EmissionsDataKey = "hist";
-  const ProjectionDataKey = "projection";
+  const YearDataKey = "year"
+  const EmissionsDataKey = "hist"
+  const ProjectionDataKey = "projection"
 
   const annualHistoricEmissions = emissionsData.map(item => {
-    var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 };
+    var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 }
 
     data[EmissionsDataKey] =
       Math.round(
@@ -28,18 +28,18 @@ export default function SimpleAreaChart({ emissionsData, title }) {
           Object.entries(item)
             .filter(([key, _val]) => key !== YearDataKey)
             .reduce((acc, [_key, val]) => acc + val, 0)
-      ) / 100;
+      ) / 100
 
-    return data;
-  });
+    return data
+  })
 
-  const currYear = new Date().getFullYear();
-  const yearsLeft = 2050 - currYear;
+  const currYear = new Date().getFullYear()
+  const yearsLeft = 2050 - currYear
   const reduceFrom =
     annualHistoricEmissions[annualHistoricEmissions.length - 1][
       EmissionsDataKey
-    ];
-  var projection = [];
+    ]
+  var projection = []
 
   for (let step = 0; step < yearsLeft + 1; step++) {
     if (step === 0) {
@@ -47,35 +47,35 @@ export default function SimpleAreaChart({ emissionsData, title }) {
         [YearDataKey]: currYear,
         [EmissionsDataKey]: reduceFrom,
         [ProjectionDataKey]: reduceFrom
-      });
+      })
     } else {
       var rounded =
-        Math.round((reduceFrom - (reduceFrom * step) / yearsLeft) * 100) / 100;
+        Math.round((reduceFrom - (reduceFrom * step) / yearsLeft) * 100) / 100
       if (rounded < 0) {
-        rounded = 0;
+        rounded = 0
       }
       projection.push({
         [YearDataKey]: step + currYear,
         [ProjectionDataKey]: rounded
-      });
+      })
     }
   }
 
-  var data = annualHistoricEmissions.concat(projection);
+  var data = annualHistoricEmissions.concat(projection)
   const dataMidPoint =
-    data.find(item => item.year === currYear)[EmissionsDataKey] / 2;
+    data.find(item => item.year === currYear)[EmissionsDataKey] / 2
 
   // Data headers for the modal
   const dataHeaders = [
     { title: "Year", key: YearDataKey },
     { title: "Gigatonnes CO2 Emitted", key: EmissionsDataKey },
     { title: "Goal CO2 Emissions", key: ProjectionDataKey }
-  ];
+  ]
 
-  const [showDataModal, setShowDataModal] = useState(false);
+  const [showDataModal, setShowDataModal] = useState(false)
 
-  const handleCloseModal = () => setShowDataModal(false);
-  const handleShowModal = () => setShowDataModal(true);
+  const handleCloseModal = () => setShowDataModal(false)
+  const handleShowModal = () => setShowDataModal(true)
 
   return (
     <>
@@ -155,5 +155,5 @@ export default function SimpleAreaChart({ emissionsData, title }) {
         handleClose={handleCloseModal}
       ></DataModal>
     </>
-  );
+  )
 }

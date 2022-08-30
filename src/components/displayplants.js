@@ -1,9 +1,9 @@
-import React from "react";
-import hash from "object-hash";
+import React from "react"
+import hash from "object-hash"
 
 const DisplayPlants = ({ plants, plantImage }) => {
   function formatNum(number) {
-    return Math.round(number).toLocaleString();
+    return Math.round(number).toLocaleString()
   }
 
   return (
@@ -11,11 +11,11 @@ const DisplayPlants = ({ plants, plantImage }) => {
       {plants.map((plant, index) => {
         // The number of power plants we have to be over to start cutting off -
         // this is a bit away from our MaxIcons so we never say ...and 1 more
-        const TruncateThreshold = 14;
+        const TruncateThreshold = 14
 
         // The maximum number of icons if we have a TON of power plants
         // (like 80)
-        const MaxIcons = 4;
+        const MaxIcons = 4
 
         if (plants.length > TruncateThreshold) {
           if (index === MaxIcons) {
@@ -26,9 +26,9 @@ const DisplayPlants = ({ plants, plantImage }) => {
               >
                 ...and {plants.length - MaxIcons} more
               </div>
-            );
+            )
           } else if (index > MaxIcons) {
-            return null;
+            return null
           }
         }
 
@@ -36,7 +36,7 @@ const DisplayPlants = ({ plants, plantImage }) => {
           `Name: ${plant.plant_name}\n` +
           `County: ${plant.county}\n` +
           `Megawatt Capacity: ${formatNum(plant.capacity_mw)}\n` +
-          `Utility: ${plant.utility_name}\n`;
+          `Utility: ${plant.utility_name}\n`
 
         return (
           <div className="col-lg-3 col-4 pl-0 pr-0" key={hash(plant)}>
@@ -55,10 +55,10 @@ const DisplayPlants = ({ plants, plantImage }) => {
               </span>
             </p>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default DisplayPlants;
+export default DisplayPlants

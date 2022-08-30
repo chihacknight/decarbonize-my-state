@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "gatsby";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import OilPlantImg from "../images/oil-plant.png";
+import React from "react"
+import { Link } from "gatsby"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import OilPlantImg from "../images/oil-plant.png"
 
 const NotFoundPage = () => (
   <Layout>
@@ -21,6 +21,6 @@ const NotFoundPage = () => (
       <img src={OilPlantImg} alt="Oil power plant" />
     </div>
   </Layout>
-);
+)
 
-export default NotFoundPage;
+export default NotFoundPage

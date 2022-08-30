@@ -1,20 +1,20 @@
-import React from "react";
-import { graphql } from "gatsby";
+import React from "react"
+import { graphql } from "gatsby"
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import SingleBarChart from "../components/singlebar";
-import { getLatestUsData } from "../components/getLatestEmissions";
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import SingleBarChart from "../components/singlebar"
+import { getLatestUsData } from "../components/getLatestEmissions"
 
 const getCleanData = data => {
-  let mutableDataObj = {};
+  let mutableDataObj = {}
 
   for (let i = 0; i < data.allEmissionsJson.edges.length; i++) {
-    const stateName = data.allEmissionsJson.edges[i].node.state;
+    const stateName = data.allEmissionsJson.edges[i].node.state
 
     mutableDataObj[stateName] = {
       emissionsByYear: data.allEmissionsJson.edges[i].node.emissionsByYear
-    };
+    }
     // pattern for pulling other data, for future reference!
     // const buildingsData = data.allBuildingsJson.edges.find(row => row.node.state === stateName);
     // if (buildingsData) {
@@ -24,12 +24,12 @@ const getCleanData = data => {
     //   }
     // }
   }
-  return mutableDataObj;
-};
+  return mutableDataObj
+}
 
 const AboutPage = ({ data }) => {
-  const cleanData = getCleanData(data);
-  const barChartData = getLatestUsData(cleanData)[0];
+  const cleanData = getCleanData(data)
+  const barChartData = getLatestUsData(cleanData)[0]
 
   return (
     <Layout>
@@ -383,10 +383,10 @@ const AboutPage = ({ data }) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default AboutPage;
+export default AboutPage
 
 export const query = graphql`
   query AboutQuery {
@@ -413,4 +413,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`

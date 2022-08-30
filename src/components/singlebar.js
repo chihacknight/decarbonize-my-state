@@ -1,23 +1,23 @@
-import React from "react";
-import { BarChart, Bar, LabelList, ReferenceArea, YAxis } from "recharts";
+import React from "react"
+import { BarChart, Bar, LabelList, ReferenceArea, YAxis } from "recharts"
 
 /* Calculate a rounded percentage given a value and the total it's out of */
 const getPct = (value, total) => {
-  return Math.round((value / total) * 100);
-};
+  return Math.round((value / total) * 100)
+}
 
 /** Create the label text with the percentage */
 const getLabel = (entry, total, field, label) => {
-  return `${label} ${getPct(entry[field], total)}%`;
-};
+  return `${label} ${getPct(entry[field], total)}%`
+}
 
 /**
  * Create constants for bar and graph dimensions for calculating lines
  */
-let BarWidth;
-let GraphWidth;
-let GraphHeight;
-let LineWidth = 50;
+let BarWidth
+let GraphWidth
+let GraphHeight
+let LineWidth = 50
 
 /**
  * A vertically stacked bar chart intended to show the groups of different
@@ -55,7 +55,7 @@ export default function SingleBarChart({
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
     .filter(([key, _val]) => key !== "year")
-    .reduce((acc, [_key, val]) => acc + val, 0);
+    .reduce((acc, [_key, val]) => acc + val, 0)
 
   // To draw our lines we need to know the % of emissions that are handled by
   // clean electrification. We do this by finding the non-electrifiable percent
@@ -63,10 +63,10 @@ export default function SingleBarChart({
   const nonElectrificationPrcnt = getPct(
     emissionsData.dumps_farms_industrial_other,
     emissionsTotal
-  );
-  const electrificationPrcnt = 100 * (1 - nonElectrificationPrcnt / 100);
+  )
+  const electrificationPrcnt = 100 * (1 - nonElectrificationPrcnt / 100)
 
-  const activeFill = "#ff5722";
+  const activeFill = "#ff5722"
 
   /**
    * Configuration for the colors for each bar graph bar as well as their data
@@ -99,59 +99,59 @@ export default function SingleBarChart({
       fill: "#a6a6a6",
       greenFill: "#4caf50"
     }
-  };
+  }
 
-  let LabelOffset = 12;
-  let LabelPosition = "right";
+  let LabelOffset = 12
+  let LabelPosition = "right"
   let GraphMargin = {
     top: 10,
     right: 125,
     left: 0,
     bottom: 0
-  };
+  }
 
-  BarWidth = 150;
-  GraphWidth = 300;
-  GraphHeight = 350;
+  BarWidth = 150
+  GraphWidth = 300
+  GraphHeight = 350
 
   // Apply custom styling with interior labels for homepage chart
   if (homeView) {
-    LabelPosition = "insideTopLeft";
-    BarWidth = 275;
-    GraphWidth = 375;
+    LabelPosition = "insideTopLeft"
+    BarWidth = 275
+    GraphWidth = 375
     GraphMargin = {
       top: 0,
       right: 100,
       left: 0,
       bottom: 0
-    };
+    }
 
     // On mobile homeView use short text and smaller graph
     if (mobileView) {
-      BarsConfig.power.text = "Power";
-      BarsConfig.buildings.text = "Buildings";
-      BarsConfig.transport.text = "Transport";
-      BarsConfig.other.text = "Other";
-      BarWidth = 30;
-      GraphWidth = 150;
-      GraphHeight = 300;
-      LabelOffset = 8;
-      LineWidth = 15;
-      LabelPosition = "left";
-      GraphMargin.left = 110;
+      BarsConfig.power.text = "Power"
+      BarsConfig.buildings.text = "Buildings"
+      BarsConfig.transport.text = "Transport"
+      BarsConfig.other.text = "Other"
+      BarWidth = 30
+      GraphWidth = 150
+      GraphHeight = 300
+      LabelOffset = 8
+      LineWidth = 15
+      LabelPosition = "left"
+      GraphMargin.left = 110
     }
   }
   // If on state details, shorten text labels
   else {
-    BarsConfig.power.text = "🔌 Power:";
-    BarsConfig.buildings.text = "🏠 Buildings:";
-    BarsConfig.transport.text = "🚗 Transport:";
-    BarsConfig.other.text = "🏭 Other:";
+    BarsConfig.power.text = "🔌 Power:"
+    BarsConfig.buildings.text = "🏠 Buildings:"
+    BarsConfig.transport.text = "🚗 Transport:"
+    BarsConfig.other.text = "🏭 Other:"
 
     // On social card, make bar chart shorter
     if (socialCardView) {
-      GraphHeight = 270;
-      GraphWidth = 325;
+      GraphHeight = 270
+      GraphWidth = 325
     }
   }
 
@@ -159,21 +159,21 @@ export default function SingleBarChart({
   if (greenKeys) {
     Object.values(BarsConfig).forEach(config => {
       if (greenKeys.includes(config.key)) {
-        config.fill = config.greenFill;
+        config.fill = config.greenFill
       }
-    });
+    })
   }
 
   // If activeKey is specified, switch that bar's fill to its activeKey color
   if (activeKey) {
     const activeConfig = Object.values(BarsConfig).find(
       config => config.key === activeKey
-    );
+    )
 
     if (activeConfig) {
-      activeConfig.fill = activeFill;
+      activeConfig.fill = activeFill
     } else {
-      console.error("Bad activeKey!", activeKey);
+      console.error("Bad activeKey!", activeKey)
     }
   }
 
@@ -289,7 +289,7 @@ export default function SingleBarChart({
         />
       </BarChart>
     </div>
-  );
+  )
 }
 
 /**
@@ -309,13 +309,13 @@ function ElectrificationLines({
   graphMargin
 }) {
   if (!homeView) {
-    return null;
+    return null
   }
 
-  const StrokeWidth = 4;
-  const LeftX = BarWidth + graphMargin.left * 0.75;
-  const TopY = StrokeWidth;
-  const BotY = GraphHeight * (electrificationPrcnt / 100);
+  const StrokeWidth = 4
+  const LeftX = BarWidth + graphMargin.left * 0.75
+  const TopY = StrokeWidth
+  const BotY = GraphHeight * (electrificationPrcnt / 100)
 
   const lines = [
     { x1: LeftX, x2: LeftX + LineWidth, y1: TopY, y2: TopY },
@@ -334,9 +334,9 @@ function ElectrificationLines({
       y1: BotY / 2,
       y2: BotY / 2
     }
-  ];
+  ]
 
-  const lineColor = "#000";
+  const lineColor = "#000"
 
   return (
     <g>
@@ -352,5 +352,5 @@ function ElectrificationLines({
         />
       ))}
     </g>
-  );
+  )
 }

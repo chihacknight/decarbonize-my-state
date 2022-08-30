@@ -1,6 +1,6 @@
-import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "gatsby";
+import React from "react"
+import { Navbar, Nav } from "react-bootstrap"
+import { Link } from "gatsby"
 
 const Header = ({ siteTitle }) => (
   <>
@@ -37,6 +37,6 @@ const Header = ({ siteTitle }) => (
       </Navbar.Collapse>
     </Navbar>
   </>
-);
+)
 
-export default Header;
+export default Header

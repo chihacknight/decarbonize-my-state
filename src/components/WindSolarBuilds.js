@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
-const percentToColor = "rgb(163, 215, 164)";
-const percentRemainingColor = "rgb(255, 87, 34)";
+const percentToColor = "rgb(163, 215, 164)"
+const percentRemainingColor = "rgb(255, 87, 34)"
 const WindSolarBuilds = ({ label, percentCurrent, percentRemaining }) => {
   //otherPct
   if (percentCurrent !== 0 || percentRemaining !== 0) {
@@ -45,10 +45,10 @@ const WindSolarBuilds = ({ label, percentCurrent, percentRemaining }) => {
           MWs of {label} Built
         </text>
       </svg>
-    );
+    )
   } else {
-    return null;
+    return null
   }
-};
+}
 
-export default React.memo(WindSolarBuilds);
+export default React.memo(WindSolarBuilds)

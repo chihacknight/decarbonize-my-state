@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 // image resources
-import ElectrifyEverything from "../images/electrify-everything.jpg";
-import ClimateCabinet from "../images/climate-cabinet.png";
+import ElectrifyEverything from "../images/electrify-everything.jpg"
+import ClimateCabinet from "../images/climate-cabinet.png"
 
 const TakeActionPage = () => {
   return (
@@ -172,7 +172,7 @@ const TakeActionPage = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default TakeActionPage;
+export default TakeActionPage

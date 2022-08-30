@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Table, Modal } from "react-bootstrap";
+import React from "react"
+import { Button, Table, Modal } from "react-bootstrap"
 
 /**
  * A modal that we use to show a two-dimensional array of data. Used so that
@@ -65,5 +65,5 @@ export default function DataModal({
         </Modal.Footer>
       </Modal>
     </>
-  );
+  )
 }

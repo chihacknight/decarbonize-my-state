@@ -1,7 +1,7 @@
-import React from "react";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import CoalPlant from "../images/coal-plant.png";
+import React from "react"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import CoalPlant from "../images/coal-plant.png"
 
 const ServerError = () => (
   <Layout>
@@ -16,6 +16,6 @@ const ServerError = () => (
       <img src={CoalPlant} alt="Coal Power Plant" />
     </div>
   </Layout>
-);
+)
 
-export default ServerError;
+export default ServerError

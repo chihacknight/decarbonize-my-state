@@ -13,4 +13,4 @@ module.exports = {
     "space-before-function-paren": ["error", "always"],
     "space-before-blocks": ["error", "always"]
   }
-};
+}
