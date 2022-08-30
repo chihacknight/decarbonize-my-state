@@ -14,7 +14,7 @@ import {
 
 import DataModal from "./data-modal"
 
-export default function SimpleAreaChart({ emissionsData, title }) {
+export default function SimpleAreaChart ({ emissionsData, title }) {
   const YearDataKey = "year"
   const EmissionsDataKey = "hist"
   const ProjectionDataKey = "projection"

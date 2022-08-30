@@ -83,11 +83,11 @@ const IndexPage = ({ data }) => {
   )
 }
 
-function StatesList({ stateSlugs }) {
+function StatesList ({ stateSlugs }) {
   // Sort slugs A-Z
   stateSlugs.sort()
 
-  function slugToTitle(slug) {
+  function slugToTitle (slug) {
     return (
       slug
         .replaceAll("_", " ")

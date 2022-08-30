@@ -15,7 +15,7 @@ const WaitDelayMS = 1000
  * For each state, use puppeteer to capture a screnshot
  * @param name {string} the name of the state to have the social-card taken a picture of
  */
-async function captureScreenshot(name) {
+async function captureScreenshot (name) {
   let browser = null
   waitingForReady = false
   let outputDir = "static/social-cards"
@@ -49,10 +49,10 @@ async function captureScreenshot(name) {
 }
 
 //wait for the previous state to finish taking screenshot before making the next one
-setTimeout(async function() {
+setTimeout(async function () {
   for (const name of placeNames) {
     while (!waitingForReady) {
-      setTimeout(function() {}, WaitDelayMS)
+      setTimeout(function () {}, WaitDelayMS)
     }
     await captureScreenshot(name)
   }

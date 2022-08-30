@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import USMap from "../images/svg/usaStatesNoTerritories.js"
 import jenks from "./jenks"
 
-function CustomHover({ emissions, activeRegion }) {
+function CustomHover ({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {
     return (
       <>
@@ -26,7 +26,7 @@ function CustomHover({ emissions, activeRegion }) {
   }
 }
 
-function getActiveRegionFromElem(elem) {
+function getActiveRegionFromElem (elem) {
   const newActiveRegion = {
     id: elem.getAttribute("id"),
     name: elem.getAttribute("name")
@@ -35,7 +35,7 @@ function getActiveRegionFromElem(elem) {
   return newActiveRegion
 }
 
-function mouseOver(event, setActiveRegion, setTooltipStyle) {
+function mouseOver (event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
 
   if (targetElem.id !== "frames") {
@@ -47,7 +47,7 @@ function mouseOver(event, setActiveRegion, setTooltipStyle) {
   showTooltip(targetElem, setTooltipStyle)
 }
 
-function mouseOut(event, setActiveRegion, setTooltipStyle) {
+function mouseOut (event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
   targetElem.setAttribute("style", "")
 
@@ -55,7 +55,7 @@ function mouseOut(event, setActiveRegion, setTooltipStyle) {
   hideTooltip(setTooltipStyle)
 }
 
-function showTooltip(targetElem, setTooltipStyle) {
+function showTooltip (targetElem, setTooltipStyle) {
   const targetRect = targetElem.getBoundingClientRect()
 
   // These two values are absolute, so they will move the tooltip the same
@@ -93,11 +93,11 @@ function showTooltip(targetElem, setTooltipStyle) {
   setTooltipStyle(newTooltipStyle)
 }
 
-function hideTooltip(setTooltipStyle) {
+function hideTooltip (setTooltipStyle) {
   setTooltipStyle({ opacity: 0 })
 }
 
-function focus(event, setActiveRegion, setTooltipStyle) {
+function focus (event, setActiveRegion, setTooltipStyle) {
   const targetElem = event.target
 
   showTooltip(targetElem, setTooltipStyle)
@@ -105,7 +105,7 @@ function focus(event, setActiveRegion, setTooltipStyle) {
   setActiveRegion(getActiveRegionFromElem(event.target))
 }
 
-function blur(event, setTooltipStyle) {
+function blur (event, setTooltipStyle) {
   hideTooltip(setTooltipStyle)
 }
 
@@ -113,17 +113,17 @@ function blur(event, setTooltipStyle) {
  * Handles clicking or pressing enter after tabbing into a state, navigating
  * to that state
  */
-function handleClick(event, activeRegion) {
+function handleClick (event, activeRegion) {
   navigate(`/${activeRegion.id}`)
 }
 
-function handleKeydown(event, activeRegion) {
+function handleKeydown (event, activeRegion) {
   if (event.key === "Enter") {
     handleClick(null, activeRegion)
   }
 }
 
-function getBuckets(emissions, numBuckets) {
+function getBuckets (emissions, numBuckets) {
   const buckets = jenks(Object.values(emissions), numBuckets)
   return buckets
 }
@@ -212,8 +212,8 @@ const ChoroplethMap = ({
                 bucket === null
                   ? `0 - ${buckets[i + 1] - 1}`
                   : buckets[i + 2]
-                  ? `${bucket} - ${buckets[i + 1] - 1}`
-                  : `${bucket} - ${buckets[i + 1] - 1}`
+                    ? `${bucket} - ${buckets[i + 1] - 1}`
+                    : `${bucket} - ${buckets[i + 1] - 1}`
               return (
                 <div key={i}>
                   {buckets[i + 1] ? (

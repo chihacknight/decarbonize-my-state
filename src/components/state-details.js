@@ -46,7 +46,7 @@ const slugToTitle = placeName => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString(num) {
+function numberToHumanString (num) {
   // Return clear error string if the number is null or undefined
   if (num === undefined || num === null) {
     return "?"
@@ -77,7 +77,7 @@ const yearsToTarget = 2050 - currentYear
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
 
-export default function StateDetailsPage({ location, data }) {
+export default function StateDetailsPage ({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
@@ -245,7 +245,7 @@ export default function StateDetailsPage({ location, data }) {
     plant => plant.fossil_fuel_category === "OIL"
   )
 
-  function scrollTargetUpdated(scrollTarget) {
+  function scrollTargetUpdated (scrollTarget) {
     let activeKey = "buildings"
     let greenKeys = []
 
