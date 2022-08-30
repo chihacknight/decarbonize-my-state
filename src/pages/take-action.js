@@ -86,7 +86,13 @@ const TakeActionPage = () => {
                 appliances.
               </a>
               <ul className="mt-2">
-                <li>Up to $8,000 for a heat pump for heating and cooling</li>
+                <li>
+                  Up to $7,500 for a new electric vehicle or $4,000 for a used
+                  electric vehicle
+                </li>
+                <li className="mt-1">
+                  Up to $8,000 for a heat pump for heating and cooling
+                </li>
                 <li className="mt-1">
                   Up to $4,000 to upgrade your electrical panel (to prepare for
                   an all-electric home)
@@ -104,10 +110,14 @@ const TakeActionPage = () => {
                   Up to $840 for an electric stove, oven, or an electric heat
                   pump dryer
                 </li>
-                <li className="mt-1">
-                  Up to $7,500 for a new electric vehicle or $4,000 for a used electric vehicle
-                </li>
               </ul>
+              <a
+                href="https://www.rewiringamerica.org/app/ira-calculator"
+                target="_blank"
+                rel="noreferrer"
+              >
+                See how much money will you get with the Inflation Reduction Act
+              </a>
             </div>
           </div>
 
