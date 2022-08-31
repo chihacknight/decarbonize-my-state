@@ -56,7 +56,7 @@ docker-compose run --rm app run test
 If you want to reformat with the linter, you can run:
 
 ```
-docker-compose run --rm app run test --fix
+docker-compose run --rm app run format
 ```
 
 ## Data processing
