@@ -18,13 +18,13 @@ import { Button, Table, Modal } from "react-bootstrap"
  * @param {function} handleClose
  *   A callback function to close the modal
  */
-export default function DataModal ({
+export default function DataModal({
   chartData,
   headers,
   show,
   title = "Emissions",
   // Output function
-  handleClose
+  handleClose,
 }) {
   return (
     <>

@@ -44,13 +44,13 @@ let LineWidth = 50
  * @param {Array<string>} greenKeys Optional array of keys to show in green,
  * indicating they have been electrified.
  */
-export default function SingleBarChart ({
+export default function SingleBarChart({
   emissionsData,
   homeView,
   mobileView,
   activeKey,
   greenKeys,
-  socialCardView
+  socialCardView,
 }) {
   // sum all emissions fields except year
   const emissionsTotal = Object.entries(emissionsData)
@@ -79,26 +79,26 @@ export default function SingleBarChart ({
       fill: "#ad8669",
       // This category cannot be electrified so make the greenFill red to be
       // clearly bad
-      greenFill: "#ff0000"
+      greenFill: "#ff0000",
     },
     transport: {
       key: "transportation",
       text: "🚗 Transportation:",
       fill: "#c2c2c2",
-      greenFill: "#6ebf70"
+      greenFill: "#6ebf70",
     },
     buildings: {
       key: "buildings",
       text: "🏠 Buildings:",
       fill: "#dcdcdc",
-      greenFill: "#a3d7a4"
+      greenFill: "#a3d7a4",
     },
     power: {
       key: "dirty_power",
       text: "🔌 Dirty Power:",
       fill: "#a6a6a6",
-      greenFill: "#4caf50"
-    }
+      greenFill: "#4caf50",
+    },
   }
 
   let LabelOffset = 12
@@ -107,7 +107,7 @@ export default function SingleBarChart ({
     top: 10,
     right: 125,
     left: 0,
-    bottom: 0
+    bottom: 0,
   }
 
   BarWidth = 150
@@ -123,7 +123,7 @@ export default function SingleBarChart ({
       top: 0,
       right: 100,
       left: 0,
-      bottom: 0
+      bottom: 0,
     }
 
     // On mobile homeView use short text and smaller graph
@@ -189,93 +189,93 @@ export default function SingleBarChart ({
         {/* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */}
         <YAxis domain={["dataMin", "dataMax"]} hide={true} />
         {// Only show other bar if it's non-zero
-          emissionsData[BarsConfig.other.key] && (
-            <Bar
-              dataKey={BarsConfig.other.key}
-              fill={BarsConfig.other.fill}
-              isAnimationActive={false}
-              stackId="main"
-            >
-              <LabelList
-                valueAccessor={entry =>
-                  getLabel(
-                    entry,
-                    emissionsTotal,
-                    BarsConfig.other.key,
-                    BarsConfig.other.text
-                  )
-                }
-                position={LabelPosition}
-                offset={LabelOffset}
-              />
-            </Bar>
-          )}
+        emissionsData[BarsConfig.other.key] && (
+          <Bar
+            dataKey={BarsConfig.other.key}
+            fill={BarsConfig.other.fill}
+            isAnimationActive={false}
+            stackId="main"
+          >
+            <LabelList
+              valueAccessor={entry =>
+                getLabel(
+                  entry,
+                  emissionsTotal,
+                  BarsConfig.other.key,
+                  BarsConfig.other.text
+                )
+              }
+              position={LabelPosition}
+              offset={LabelOffset}
+            />
+          </Bar>
+        )}
         {// Only show power bar if it's non-zero
-          emissionsData[BarsConfig.power.key] && (
-            <Bar
-              dataKey={BarsConfig.power.key}
-              fill={BarsConfig.power.fill}
-              isAnimationActive={false}
-              stackId="main"
-            >
-              <LabelList
-                valueAccessor={entry =>
-                  getLabel(
-                    entry,
-                    emissionsTotal,
-                    BarsConfig.power.key,
-                    BarsConfig.power.text
-                  )
-                }
-                position={LabelPosition}
-                offset={LabelOffset}
-              />
-            </Bar>
-          )}
+        emissionsData[BarsConfig.power.key] && (
+          <Bar
+            dataKey={BarsConfig.power.key}
+            fill={BarsConfig.power.fill}
+            isAnimationActive={false}
+            stackId="main"
+          >
+            <LabelList
+              valueAccessor={entry =>
+                getLabel(
+                  entry,
+                  emissionsTotal,
+                  BarsConfig.power.key,
+                  BarsConfig.power.text
+                )
+              }
+              position={LabelPosition}
+              offset={LabelOffset}
+            />
+          </Bar>
+        )}
         {// Only show transport bar if it's non-zero
-          emissionsData[BarsConfig.transport.key] && (
-            <Bar
-              dataKey={BarsConfig.transport.key}
-              fill={BarsConfig.transport.fill}
-              isAnimationActive={false}
-              stackId="main"
-            >
-              <LabelList
-                valueAccessor={entry =>
-                  getLabel(
-                    entry,
-                    emissionsTotal,
-                    BarsConfig.transport.key,
-                    BarsConfig.transport.text
-                  )
-                }
-                position={LabelPosition}
-                offset={LabelOffset}
-              />
-            </Bar>
-          )}
+        emissionsData[BarsConfig.transport.key] && (
+          <Bar
+            dataKey={BarsConfig.transport.key}
+            fill={BarsConfig.transport.fill}
+            isAnimationActive={false}
+            stackId="main"
+          >
+            <LabelList
+              valueAccessor={entry =>
+                getLabel(
+                  entry,
+                  emissionsTotal,
+                  BarsConfig.transport.key,
+                  BarsConfig.transport.text
+                )
+              }
+              position={LabelPosition}
+              offset={LabelOffset}
+            />
+          </Bar>
+        )}
         {// Only show buildings bar if it's non-zero
-          emissionsData[BarsConfig.buildings.key] && (
-            <Bar
-              dataKey={BarsConfig.buildings.key}
-              fill={BarsConfig.buildings.fill}
-              isAnimationActive={false}
-              stackId="main"
-            >
-              <LabelList
-                valueAccessor={entry =>
-                  getLabel(
-                    entry,
-                    emissionsTotal,
-                    BarsConfig.buildings.key,
-                    BarsConfig.buildings.text
-                  )
-                }
-                position={LabelPosition}
-                offset={LabelOffset}
-              />
-            </Bar>
-          )}
+        emissionsData[BarsConfig.buildings.key] && (
+          <Bar
+            dataKey={BarsConfig.buildings.key}
+            fill={BarsConfig.buildings.fill}
+            isAnimationActive={false}
+            stackId="main"
+          >
+            <LabelList
+              valueAccessor={entry =>
+                getLabel(
+                  entry,
+                  emissionsTotal,
+                  BarsConfig.buildings.key,
+                  BarsConfig.buildings.text
+                )
+              }
+              position={LabelPosition}
+              offset={LabelOffset}
+            />
+          </Bar>
+        )}
 
         <ReferenceArea
           shape={
@@ -302,11 +302,11 @@ export default function SingleBarChart ({
  * 3. A vertical line connecting the right endpoints of #1 and #2
  * 4. A horizontal line going right from the center point of #3
  */
-function ElectrificationLines ({
+function ElectrificationLines({
   electrificationPrcnt,
   homeView,
   lineWidth,
-  graphMargin
+  graphMargin,
 }) {
   if (!homeView) {
     return null
@@ -325,15 +325,15 @@ function ElectrificationLines ({
       x1: LeftX + LineWidth - StrokeWidth / 2,
       x2: LeftX + LineWidth - StrokeWidth / 2,
       y1: TopY,
-      y2: BotY
+      y2: BotY,
     },
     // The right mid line
     {
       x1: LeftX + LineWidth - StrokeWidth,
       x2: LeftX + LineWidth - StrokeWidth + LineWidth,
       y1: BotY / 2,
-      y2: BotY / 2
-    }
+      y2: BotY / 2,
+    },
   ]
 
   const lineColor = "#000"

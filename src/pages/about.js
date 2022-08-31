@@ -13,7 +13,7 @@ const getCleanData = data => {
     const stateName = data.allEmissionsJson.edges[i].node.state
 
     mutableDataObj[stateName] = {
-      emissionsByYear: data.allEmissionsJson.edges[i].node.emissionsByYear
+      emissionsByYear: data.allEmissionsJson.edges[i].node.emissionsByYear,
     }
     // pattern for pulling other data, for future reference!
     // const buildingsData = data.allBuildingsJson.edges.find(row => row.node.state === stateName);

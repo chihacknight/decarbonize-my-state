@@ -50,6 +50,6 @@ module.exports = {
     "washington",
     "west_virginia",
     "wisconsin",
-    "wyoming"
-  ]
+    "wyoming",
+  ],
 }

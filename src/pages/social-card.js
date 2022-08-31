@@ -59,7 +59,7 @@ const SocialCardPage = ({ location, data }) => {
     eachStateRecentEmissions[counter] = [
       tempState,
       stateTotalEmissions,
-      counter
+      counter,
     ]
     counter += 1
   }
@@ -138,7 +138,7 @@ const SocialCardPage = ({ location, data }) => {
               <span
                 className="title font-weight-bold h4 mb-0"
                 style={{
-                  fontSize: stateNameSize + "rem"
+                  fontSize: stateNameSize + "rem",
                 }}
               >
                 {placeTitle}

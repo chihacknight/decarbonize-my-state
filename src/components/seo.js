@@ -14,14 +14,14 @@ const SEO = ({ title, description, image, article }) => {
     siteUrl,
     defaultImage,
     author,
-    siteName
+    siteName,
   } = site.siteMetadata
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
     image: `${siteUrl}${image || defaultImage}`,
-    url: `${siteUrl}${pathname}`
+    url: `${siteUrl}${pathname}`,
   }
 
   return (
@@ -60,14 +60,14 @@ SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
-  article: PropTypes.bool
+  article: PropTypes.bool,
 }
 
 SEO.defaultProps = {
   title: null,
   description: null,
   image: null,
-  article: false
+  article: false,
 }
 
 const query = graphql`

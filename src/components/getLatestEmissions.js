@@ -1,5 +1,5 @@
 // unpack the us emissions data for 2018 and total up all 4 categories by state
-export function getLatestUsData (data) {
+export function getLatestUsData(data) {
   const sortedYears = [...data[Object.keys(data)[0]].emissionsByYear].sort(
     (a, b) => b.year - a.year
   )
@@ -9,7 +9,7 @@ export function getLatestUsData (data) {
   )
 }
 
-export function getLatestEmissions (data) {
+export function getLatestEmissions(data) {
   const sortedYears = [...data[Object.keys(data)[0]].emissionsByYear].sort(
     (a, b) => b.year - a.year
   )

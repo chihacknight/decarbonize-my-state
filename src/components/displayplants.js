@@ -2,7 +2,7 @@ import React from "react"
 import hash from "object-hash"
 
 const DisplayPlants = ({ plants, plantImage }) => {
-  function formatNum (number) {
+  function formatNum(number) {
     return Math.round(number).toLocaleString()
   }
 

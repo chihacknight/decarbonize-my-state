@@ -9,12 +9,12 @@ import {
   Tooltip,
   ResponsiveContainer,
   Label,
-  ReferenceDot
+  ReferenceDot,
 } from "recharts"
 
 import DataModal from "./data-modal"
 
-export default function SimpleAreaChart ({ emissionsData, title }) {
+export default function SimpleAreaChart({ emissionsData, title }) {
   const YearDataKey = "year"
   const EmissionsDataKey = "hist"
   const ProjectionDataKey = "projection"
@@ -46,7 +46,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
       projection.push({
         [YearDataKey]: currYear,
         [EmissionsDataKey]: reduceFrom,
-        [ProjectionDataKey]: reduceFrom
+        [ProjectionDataKey]: reduceFrom,
       })
     } else {
       var rounded =
@@ -56,7 +56,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
       }
       projection.push({
         [YearDataKey]: step + currYear,
-        [ProjectionDataKey]: rounded
+        [ProjectionDataKey]: rounded,
       })
     }
   }
@@ -69,7 +69,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
   const dataHeaders = [
     { title: "Year", key: YearDataKey },
     { title: "Gigatonnes CO2 Emitted", key: EmissionsDataKey },
-    { title: "Goal CO2 Emissions", key: ProjectionDataKey }
+    { title: "Goal CO2 Emissions", key: ProjectionDataKey },
   ]
 
   const [showDataModal, setShowDataModal] = useState(false)
@@ -88,7 +88,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
             top: 30,
             right: 30,
             left: 0,
-            bottom: 30
+            bottom: 30,
           }}
         >
           {/* <Legend align="center" verticalAlign="top" iconType="square" iconSize="15" /> */}

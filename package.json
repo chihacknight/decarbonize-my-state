@@ -42,7 +42,8 @@
     "url-search-params-polyfill": "^8.1.0"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "eslint-config-prettier": "8.5.0"
   },
   "keywords": [
     "gatsby"
@@ -51,10 +52,10 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop -H 0.0.0.0 -p 8000",
-    "format": "prettier --config ./.prettierrc.js --write \"**/*.{js,jsx,json,md}",
+    "format": "eslint src --fix && prettier --config ./.prettierrc.js --write \"src/**/*.{js,jsx,json,md,css}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "eslint src",
+    "test": "eslint src && prettier --check \"src/**/*.{js,jsx,json,md,css}\"",
     "generate-social": "node src/generate-social-cards.js"
   },
   "repository": {

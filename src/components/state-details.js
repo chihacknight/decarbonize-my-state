@@ -46,7 +46,7 @@ const slugToTitle = placeName => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString (num) {
+function numberToHumanString(num) {
   // Return clear error string if the number is null or undefined
   if (num === undefined || num === null) {
     return "?"
@@ -77,13 +77,13 @@ const yearsToTarget = 2050 - currentYear
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
 
-export default function StateDetailsPage ({ location, data }) {
+export default function StateDetailsPage({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
   const [scrollGraphSettings, setScrollGraphSettings] = useState({
     active: "buildings",
-    green: []
+    green: [],
   })
 
   // place info and string
@@ -105,7 +105,7 @@ export default function StateDetailsPage ({ location, data }) {
     buildings: buildingsEmissions,
     dirty_power: dirtyPowerEmissions,
     dumps_farms_industrial_other: farmsDumpsOtherEmissions,
-    transportation: transportionEmissions
+    transportation: transportionEmissions,
   } = latestEmissions
 
   // sum, then make nice percentages
@@ -134,7 +134,7 @@ export default function StateDetailsPage ({ location, data }) {
   // #### VEHICLES ####
   const {
     Cars_All: carsAll,
-    EV_Registration: evRegistration
+    EV_Registration: evRegistration,
   } = data.allVehiclesJson.edges[0].node
 
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
@@ -155,7 +155,7 @@ export default function StateDetailsPage ({ location, data }) {
   const {
     buildings,
     weightedFossilBuildingsPct,
-    weightedEleBuildingsPct
+    weightedEleBuildingsPct,
   } = data.allBuildingsJson.edges[0].node
 
   // calculate buildings remaining to electrify
@@ -181,7 +181,7 @@ export default function StateDetailsPage ({ location, data }) {
     current_solar: currentSolar,
     current_wind: currentWind,
     perc_solar_target: percSolarTarget,
-    perc_wind_target: percWindTarget
+    perc_wind_target: percWindTarget,
   } = targetBuilds
 
   // since we are referencing capacity, let's stay consistent and make sure
@@ -245,7 +245,7 @@ export default function StateDetailsPage ({ location, data }) {
     plant => plant.fossil_fuel_category === "OIL"
   )
 
-  function scrollTargetUpdated (scrollTarget) {
+  function scrollTargetUpdated(scrollTarget) {
     let activeKey = "buildings"
     let greenKeys = []
 
@@ -371,7 +371,7 @@ export default function StateDetailsPage ({ location, data }) {
             "transport-end",
             "power-main",
             "power-end",
-            "other-main"
+            "other-main",
           ]}
           currentClassName="is-current"
           onUpdate={scrollTargetUpdated}
@@ -849,7 +849,7 @@ export default function StateDetailsPage ({ location, data }) {
 
       <section className="text-center mb-8">
         {/* This emoji is purely decorative */}
-        <div class="h1 mt-7 mb-3">
+        <div className="h1 mt-7 mb-3">
           <span aria-hidden="true">✅</span>
         </div>
         <h2 className="h1 font-weight-bold">Ready to do your part?</h2>

@@ -9,7 +9,7 @@ const Header = ({ siteTitle }) => (
       expand="lg"
       className="sunrise-nav"
       style={{
-        marginBottom: `1.45rem`
+        marginBottom: `1.45rem`,
       }}
     >
       <a

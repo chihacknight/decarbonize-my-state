@@ -5,10 +5,10 @@
 // Implementations: [1](http://danieljlewis.org/files/2010/06/Jenks.pdf) (python),
 // [2](https://github.com/vvoovv/djeo-jenks/blob/master/main.js) (buggy),
 // [3](https://github.com/simogeo/geostats/blob/master/lib/geostats.js#L407) (works)
-export default function jenks (data, n_classes) {
+export default function jenks(data, n_classes) {
   // Compute the matrices required for Jenks breaks. These matrices
   // can be used for any classing of data with `classes <= n_classes`
-  function getMatrices (data, n_classes) {
+  function getMatrices(data, n_classes) {
     // in the original implementation, these matrices are referred to
     // as `LC` and `OP`
     //
@@ -107,13 +107,13 @@ export default function jenks (data, n_classes) {
     // evaluage goodness of fit.
     return {
       lower_class_limits: lower_class_limits,
-      variance_combinations: variance_combinations
+      variance_combinations: variance_combinations,
     }
   }
 
   // the second part of the jenks recipe: take the calculated matrices
   // and derive an array of n breaks.
-  function breaks (data, lower_class_limits, n_classes) {
+  function breaks(data, lower_class_limits, n_classes) {
     var k = data.length - 1,
       kclass = [],
       countNum = n_classes
@@ -140,7 +140,7 @@ export default function jenks (data, n_classes) {
 
   // sort data in numerical order, since this is expected
   // by the matrices function
-  data = data.slice().sort(function (a, b) {
+  data = data.slice().sort(function(a, b) {
     return a - b
   })
 

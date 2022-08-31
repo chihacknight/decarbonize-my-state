@@ -1,13 +1,13 @@
 div.social-card {
-    width: 800px;
-    height: 418px;
+  width: 800px;
+  height: 418px;
 }
 
 .social-card h2 {
-    background-color: #ff5722;
-    color: white;
+  background-color: #ff5722;
+  color: white;
 }
 
 .social-card h3 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
