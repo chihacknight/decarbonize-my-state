@@ -138,7 +138,7 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
             label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
           <ReferenceDot y={dataMidPoint} x={1 + (currYear + lastYear) / 2}
             stroke="none" fill="none"
-            />
+          />
           <ReferenceDot y={dataMidPoint} x={currYear + 2}
             stroke="none" fill="none"
             label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
