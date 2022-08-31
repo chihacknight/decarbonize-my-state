@@ -51,21 +51,6 @@
         transition: border-color 0.4s;
     }
 
-
-    /**
-     * Have the "Decarbonising X cuts Y% of the pollution" faded out until you
-     * scroll into it, giving it a bit of a pop
-     */
-    .state-details-main .change-text p {
-        opacity: 0.2;
-        transition: opacity 0.5s;
-    }
-
-    .state-details-main .change-text.is-current p,
-    .state-details-main .change-text.scrolled-past p {
-        opacity: 1;
-    }
-
     /*
      * Style the active section.
      *
