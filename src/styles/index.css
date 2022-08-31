@@ -1,12 +1,61 @@
 /**
- * Homepage styles
  *
- * Warning: This styling is ultimately applied to the global scope!
+ * Homepage (index.js) Styling
+ *
+ * Warning: This styling is ultimately applied to the global scope! Use specific
+ * classes to make sure it only applies to the homepage.
+ *
  */
 
-.main-header {
-  margin: 3rem 0 5rem 0;
+.main-header { margin: 3rem 0 5rem 0; }
+
+/**
+ * The art row is a collage of some of our illustrations - we use the buildings
+ * as the main basis for the collage and then absolutely position our clean
+ * vehicles and appliances around them
+ */
+.art-row {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
 }
+
+.art-row * {
+    filter:  drop-shadow(-0.4rem 0.4rem 0rem var(--light-shadow-color));
+}
+
+.art-row .appliance-sheet, .art-row .car-sheet {
+    position: absolute;
+    bottom: 0;
+}
+
+/**
+ * The buildings set the art-row size, everything else should use percentages
+ * so they are responsive
+ */
+.art-row .building-sheet { width: 30rem; }
+
+.art-row .appliance-sheet { height: 95%; }
+.art-row .car-sheet { height: 75%; }
+
+.art-row .-car {
+    bottom: -10%;
+    left: 2%;
+}
+
+.art-row .-boiler {
+    right: 15%;
+    bottom: -5%;
+}
+
+.art-row .-stove {
+    right: 22%;
+}
+
+
 
 /** Tablet & mobile - move legend below the map */
 @media (max-width: 991px) {
@@ -18,6 +67,9 @@
   }
 }
 
+/**
+ * Mobile Styling
+ */
 @media (max-width: 575px) {
   .main-header {
     margin: 5rem 0;
@@ -34,10 +86,37 @@
     text-align: left !important;
   }
 
-  .electrication-cont .h1 {
-    font-size: 1.5rem;
-  }
-  .electrication-cont .h3 {
-    font-size: 1rem;
-  }
+    .art-row * {
+        filter:  drop-shadow(-0.15rem 0.15rem 0rem var(--light-shadow-color));
+    }
+
+    .art-row {
+        margin-top: 3rem;
+        margin-bottom: 0rem;
+    }
+
+    .art-row .-house {
+        width: 14rem;
+        margin-left: 8%;
+    }
+
+    .art-row .-car {
+        left: -4%;
+        bottom: -30%;
+    }
+
+    .art-row .-stove {
+        right: 8%;
+        bottom: -30%;
+    }
+
+    .art-row .-boiler {
+        right: -2%;
+        bottom: -30%;
+    }
+
+
+    /** TODO:  Move to about */
+    .electrication-cont .h1 { font-size: 1.5rem; }
+    .electrication-cont .h3 { font-size: 1rem; }
 }

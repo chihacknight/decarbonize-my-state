@@ -1,20 +1,23 @@
 /* Import stateface for state icons */
-@import "stateface/stateface.css";
-@import "index.css";
-@import "social-card.css";
+@import 'stateface/stateface.css';
+
+/* Import colors first for use in other files */
+@import 'colors.css';
+
+@import 'social-card.css';
+@import 'index.css';
+@import 'state-details.css';
+
+/* Import stateface for state icons */
+@import 'stateface/stateface.css';
 
 /** Import Lato Google font with specific weights */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap");
 
-:root {
-  --brand-color: #8f0d56;
-}
-
-body,
-* {
-  font-family: "Lato", sans-serif;
-  /* Make sure anchors (like the skip to main) account for sticky header */
-  scroll-margin-top: 5rem;
+body, * {
+    font-family: 'Lato', sans-serif;
+    /* Make sure anchors (like the skip to main) account for sticky header */
+    scroll-margin-top: 5rem;
 }
 
 body *:focus {
@@ -295,9 +298,12 @@ footer a {
 
 /* Mobile styling Make graph taller aspect ratio on mobile screens and shrink labels */
 @media (max-width: 575px) {
-  .simplearea-cont {
-    aspect-ratio: 1.5/1;
-  }
+    .simplearea-cont {
+        aspect-ratio: 1.5/1;
+        /** Crude but lets us go full width */
+        margin-left: -2rem;
+        width: 95vw !important;
+    }
 
   .simplearea-cont tspan {
     font-size: 12px;
@@ -321,57 +327,6 @@ footer a {
 @media (max-width: 991px) {
   .single-bar-chart tspan {
     font-size: 0.8rem;
-  }
-}
-
-.sticky-header {
-  position: sticky;
-  top: 55px; /* align with site header */
-  background-color: #fff;
-  z-index: 10;
-  border-bottom: solid 1px gainsboro;
-  /* Ick, I know. Blame Bootstrap for negative margins */
-  margin-left: -15px;
-  margin-right: -15px;
-  padding: 0.5rem 1rem;
-}
-
-/**
- * State Details Page - full desktop sticky graph layout
- */
-@media (min-width: 1200px) {
-  .sticky-header h1 .title {
-    font-size: 2rem !important;
-  }
-
-  /* On desktop, don't apply margin to row elements, since they don't
-       on the big screen layout anything */
-  .state-details-main .row {
-    margin-top: 0 !important;
-  }
-
-  /** Add transparent border to all sections so we can animate it in without
-     * shifting content */
-  .state-details-main .scrollable-sect {
-    padding: 2rem 0 2rem 2rem;
-    border-left: solid transparent 0.5rem;
-    transition: border-color 0.4s;
-  }
-
-  /*
-     * Style the active section.
-     *
-     * NOTE: The last section never gets the .is-current class for some reason, so use the
-     * sibling selector to make sure it is faded in after the previous one is
-     * scrolled-past
-     */
-  .state-details-main .scrollable-sect.is-current,
-  .state-details-main div#power-end.scrolled-past + div {
-    border-color: #ff5722;
-  }
-
-   {
-    opacity: 1 !important;
   }
 }
 
