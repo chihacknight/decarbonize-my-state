@@ -53,7 +53,7 @@ If you want to check the linter on its own you can run:
 docker-compose run --rm app run test
 ```
 
-To auto-fix, run this command with `--fix` like so:
+If you want to reformat with the linter, you can run:
 
 ```
 docker-compose run --rm app run test --fix
