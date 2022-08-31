@@ -318,6 +318,10 @@ export default function StateDetailsPage ({ location, data }) {
         <p className="h6">
           Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
         </p>
+        <p className="small">
+          <strong>Note:</strong> Grey area indicates missing data due to
+          processing delays.
+        </p>
         <SimpleAreaChart emissionsData={emissionsByYear}
           title={'Emissions in ' + placeTitle}/>
 
