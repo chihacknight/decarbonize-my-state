@@ -4,6 +4,7 @@
   "description": "A multipurpose containerized Gatsby starter app",
   "version": "0.1.0",
   "author": "DataMade",
+  "engines": {"node" : ">=16"},
   "dependencies": {
     "@sentry/gatsby": "^5.27.3",
     "bootstrap": "^4.4.1",
@@ -42,8 +43,7 @@
     "url-search-params-polyfill": "^8.1.0"
   },
   "devDependencies": {
-    "prettier": "^1.19.1",
-    "eslint-config-prettier": "8.5.0"
+    "prettier": "^1.19.1"
   },
   "keywords": [
     "gatsby"
