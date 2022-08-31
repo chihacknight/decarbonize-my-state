@@ -2,6 +2,6 @@
  * A file that declares colors as CSS variables for easy use
  */
 :root {
-    --brand-color: #8F0D56;
-    --light-shadow-color:  rgba(0, 0, 0, 0.25);
+  --brand-color: #8f0d56;
+  --light-shadow-color: rgba(0, 0, 0, 0.25);
 }

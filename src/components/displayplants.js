@@ -47,7 +47,7 @@ const DisplayPlants = ({ plants, plantImage }) => {
               alt={title}
             />
             <p className="font-weight-bold text-center h6">
-              {plant.plant_name} <br/>
+              {plant.plant_name} <br />
               <span className="small">
                 {plant.county} County
                 <br />

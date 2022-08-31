@@ -132,8 +132,10 @@ export default function StateDetailsPage({ location, data }) {
   )
 
   // #### VEHICLES ####
-  const { Cars_All: carsAll, EV_Registration: evRegistration } =
-    data.allVehiclesJson.edges[0].node
+  const {
+    Cars_All: carsAll,
+    EV_Registration: evRegistration,
+  } = data.allVehiclesJson.edges[0].node
 
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
   const pctNonEv = Math.round((100 - pctEv) * 10) / 10
@@ -150,8 +152,11 @@ export default function StateDetailsPage({ location, data }) {
   const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
-  const { buildings, weightedFossilBuildingsPct, weightedEleBuildingsPct } =
-    data.allBuildingsJson.edges[0].node
+  const {
+    buildings,
+    weightedFossilBuildingsPct,
+    weightedEleBuildingsPct,
+  } = data.allBuildingsJson.edges[0].node
 
   // calculate buildings remaining to electrify
   const buildingsToElectrify =
@@ -566,7 +571,10 @@ export default function StateDetailsPage({ location, data }) {
             />
           </div>
 
-          <div id="transport-end" className="scrollable-sect change-text mt-8 mb-4">
+          <div
+            id="transport-end"
+            className="scrollable-sect change-text mt-8 mb-4"
+          >
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all transportation cuts {transportPrcnt}% of the
               pollution.
@@ -744,7 +752,10 @@ export default function StateDetailsPage({ location, data }) {
           )}
           {/* Show standard outro section if power emissions are non-zero */}
           {powerPrcnt > 0 && (
-            <div id="power-end" className="scrollable-sect change-text mt-8 mb-4">
+            <div
+              id="power-end"
+              className="scrollable-sect change-text mt-8 mb-4"
+            >
               <p className="h1 font-weight-bold text-center mt-6 mb-6">
                 Decarbonizing all dirty power cuts {powerPrcnt}% of the
                 pollution.

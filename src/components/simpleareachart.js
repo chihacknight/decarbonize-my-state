@@ -18,24 +18,27 @@ export default function SimpleAreaChart({ emissionsData, title }) {
   const YearDataKey = "year"
   const EmissionsDataKey = "hist"
   const ProjectionDataKey = "projection"
+  const MissingDataKey = "missingData"
 
-  const YearDataKey = 'year'
-  const EmissionsDataKey = 'hist'
-  const ProjectionDataKey = 'projection'
-  const MissingDataKey = 'missingData'
-
-  const annualHistoricEmissions = emissionsData.map((item) => {
+  const annualHistoricEmissions = emissionsData.map(item => {
     var data = { [YearDataKey]: item.year, [EmissionsDataKey]: 0 }
 
-    data[EmissionsDataKey] = Math.round(100 * Object.entries(item)
-      .filter(([key, _val]) => key !== YearDataKey)
-      .reduce((acc, [_key, val]) => acc + val, 0)) / 100
+    data[EmissionsDataKey] =
+      Math.round(
+        100 *
+          Object.entries(item)
+            .filter(([key, _val]) => key !== YearDataKey)
+            .reduce((acc, [_key, val]) => acc + val, 0)
+      ) / 100
     return data
   })
   const currYear = new Date().getFullYear()
   const yearsLeft = 2050 - currYear
 
-  const reduceFrom = annualHistoricEmissions[annualHistoricEmissions.length - 1][EmissionsDataKey]
+  const reduceFrom =
+    annualHistoricEmissions[annualHistoricEmissions.length - 1][
+      EmissionsDataKey
+    ]
   const lastYear = annualHistoricEmissions.slice(-1)[0].year
   var projection = []
   var missing = []
@@ -43,14 +46,19 @@ export default function SimpleAreaChart({ emissionsData, title }) {
   //Since there is a lag in the available data and the current year, years without emissions data yet
   //need to be included in the graph so a "gap" does not occur.  This fills in the missing years
   //with an assumptive emissions data which will be used to create an area on the graph where no
-  //data has been generated yet.  
+  //data has been generated yet.
 
   //A loop is used to create data for the missing years.  Since this is a different area on the graph
   //a new key, missingData is used.  This data is pushed into a array which will ultimately be
   //concatinated into the data array.
-  for (let step = 0; step < (currYear - lastYear - 1); step++) {
-    if (step === 0) { missing.push({ year: lastYear + 1, hist: reduceFrom, missingData: reduceFrom }) }
-    else {
+  for (let step = 0; step < currYear - lastYear - 1; step++) {
+    if (step === 0) {
+      missing.push({
+        year: lastYear + 1,
+        hist: reduceFrom,
+        missingData: reduceFrom,
+      })
+    } else {
       missing.push({ year: 1 + step + lastYear, missingData: reduceFrom })
     }
   }
@@ -62,7 +70,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
 
         [MissingDataKey]: reduceFrom,
 
-        [ProjectionDataKey]: reduceFrom
+        [ProjectionDataKey]: reduceFrom,
       })
     }
   }
@@ -138,15 +146,26 @@ export default function SimpleAreaChart({ emissionsData, title }) {
             name="Projection"
             isAnimationActive={false}
           />
-          <ReferenceDot y={dataMidPoint} x={currYear - 5}
-            stroke="none" fill="none"
-            label={{ value: "Emissions", angle: 90, fill: "#b65c00" }} />
-          <ReferenceDot y={dataMidPoint} x={1 + (currYear + lastYear) / 2}
-            stroke="none" fill="none"
+          <ReferenceDot
+            y={dataMidPoint}
+            x={currYear - 5}
+            stroke="none"
+            fill="none"
+            label={{ value: "Emissions", angle: 90, fill: "#b65c00" }}
           />
-          <ReferenceDot y={dataMidPoint} x={currYear + 2}
-            stroke="none" fill="none"
-            label={{ value: "Projections", angle: 90, fill: "#36a654" }} />
+          <ReferenceDot
+            y={dataMidPoint}
+            x={1 + (currYear + lastYear) / 2}
+            stroke="none"
+            fill="none"
+          />
+          <ReferenceDot
+            y={dataMidPoint}
+            x={currYear + 2}
+            stroke="none"
+            fill="none"
+            label={{ value: "Projections", angle: 90, fill: "#36a654" }}
+          />
         </AreaChart>
       </ResponsiveContainer>
 
