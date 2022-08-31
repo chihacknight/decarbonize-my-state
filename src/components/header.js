@@ -22,6 +22,7 @@ const Header = ({ siteTitle }) => (
         <Nav className="ml-auto">
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/about">About</Link>
+          <Link className="nav-link" to="/faq">FAQ</Link>
           <Link className="nav-link" to="/take-action">Take Action</Link>
         </Nav>
       </Navbar.Collapse>
