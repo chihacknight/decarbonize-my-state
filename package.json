@@ -4,7 +4,7 @@
   "description": "A multipurpose containerized Gatsby starter app",
   "version": "0.1.0",
   "author": "DataMade",
-  "engines": {"node" : ">=15"},
+  "engines": {"node" : ">=12"},
   "dependencies": {
     "@sentry/gatsby": "^5.27.3",
     "bootstrap": "^4.4.1",
