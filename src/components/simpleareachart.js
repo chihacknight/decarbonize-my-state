@@ -30,11 +30,11 @@ export default function SimpleAreaChart({ emissionsData, title }) {
             .filter(([key, _val]) => key !== YearDataKey)
             .reduce((acc, [_key, val]) => acc + val, 0)
       ) / 100
+
     return data
   })
   const currYear = new Date().getFullYear()
   const yearsLeft = 2050 - currYear
-
   const reduceFrom =
     annualHistoricEmissions[annualHistoricEmissions.length - 1][
       EmissionsDataKey
@@ -67,10 +67,19 @@ export default function SimpleAreaChart({ emissionsData, title }) {
     if (step === 0) {
       projection.push({
         [YearDataKey]: currYear,
-
         [MissingDataKey]: reduceFrom,
 
         [ProjectionDataKey]: reduceFrom,
+      })
+    } else {
+      var rounded =
+        Math.round((reduceFrom - (reduceFrom * step) / yearsLeft) * 100) / 100
+      if (rounded < 0) {
+        rounded = 0
+      }
+      projection.push({
+        [YearDataKey]: step + currYear,
+        [ProjectionDataKey]: rounded,
       })
     }
   }
