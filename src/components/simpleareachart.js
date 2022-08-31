@@ -102,7 +102,9 @@ export default function SimpleAreaChart ({ emissionsData, title }) {
           <XAxis dataKey={YearDataKey} >
             <Label value="Year" offset={-15} position="insideBottom" />
           </XAxis>
-          <YAxis />
+          <YAxis >
+            <Label value="CO2e (million metric tons)" offset={10} angle={-90} position="insideLeft"    style={{ textAnchor: 'middle' }} />
+          </YAxis>
           <Tooltip />
           <Area
             type="monotone"
