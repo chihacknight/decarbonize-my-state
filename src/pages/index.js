@@ -44,12 +44,19 @@ const IndexPage = ({data}) => {
         <p className="h3 text-center mt-2">
           The answer to climate change is simpler than you think
         </p>
+
+        <div className="art-row">
+          <div className="building-sheet -house -clean"></div>
+          <div className="appliance-sheet -stove -clean"></div>
+          <div className="appliance-sheet -boiler -clean"></div>
+          <div className="car-sheet -car -clean"></div>
+        </div>
       </div>
 
       <hr></hr>
 
-      <p className="text-center mt-5 mb-4">
-        Click to see how your state will end climate pollution by 2050
+      <p className="h5 text-center mt-6 mb-5 font-weight-bold">
+        Click Your State to See How It Can End Climate Pollution by 2050
       </p>
 
       <div className="mb-md-5">
