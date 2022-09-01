@@ -14,7 +14,7 @@ const SEO = ({ title, description, image, article }) => {
     siteUrl,
     defaultImage,
     author,
-    siteName
+    siteName,
   } = site.siteMetadata
 
   const seo = {
@@ -26,13 +26,12 @@ const SEO = ({ title, description, image, article }) => {
 
   return (
     <Helmet title={seo.title} htmlAttributes={{ lang: "en" }}>
-      
       {seo.title && <meta property="og:title" content={seo.title} />}
       <meta property="og:type" content={article ? "article" : "website"} />
       <meta property="og:site_name" content={siteName} />
       {author && <meta name="author" content={author} />}
       {seo.url && <meta property="og:url" content={seo.url} />}
-      
+
       <meta name="description" content={seo.description} />
       {seo.description && (
         <meta property="og:description" content={seo.description} />

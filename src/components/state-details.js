@@ -25,7 +25,7 @@ import PowerPlantMap from "../images/dirty-power-plants.jpg"
 // New images
 import DirtyPowerPlantImg from "../images/dirty-power-plant.png"
 
-const slugToTitle = (placeName) => {
+const slugToTitle = placeName => {
   const words = placeName.split("_")
 
   for (let i = 0; i < words.length; i++) {
@@ -46,7 +46,7 @@ const slugToTitle = (placeName) => {
  * 2_114_602 -> '2.1 million'
  * 76_125 -> '76 thousand'
  */
-function numberToHumanString (num) {
+function numberToHumanString(num) {
   // Return clear error string if the number is null or undefined
   if (num === undefined || num === null) {
     return "?"
@@ -77,7 +77,7 @@ const yearsToTarget = 2050 - currentYear
 // so the % to cut by is 100 divided by the number of years we have
 const cutPerYearPrcnt = (100 / yearsToTarget).toFixed(1)
 
-export default function StateDetailsPage ({ location, data }) {
+export default function StateDetailsPage({ location, data }) {
   /**
    * Properties to pass to the main desktop graph, which updates as you scroll
    */
@@ -132,8 +132,10 @@ export default function StateDetailsPage ({ location, data }) {
   )
 
   // #### VEHICLES ####
-  const { Cars_All: carsAll, EV_Registration: evRegistration } =
-    data.allVehiclesJson.edges[0].node
+  const {
+    Cars_All: carsAll,
+    EV_Registration: evRegistration,
+  } = data.allVehiclesJson.edges[0].node
 
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
   const pctNonEv = Math.round((100 - pctEv) * 10) / 10
@@ -150,8 +152,11 @@ export default function StateDetailsPage ({ location, data }) {
   const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
-  const { buildings, weightedFossilBuildingsPct, weightedEleBuildingsPct } =
-    data.allBuildingsJson.edges[0].node
+  const {
+    buildings,
+    weightedFossilBuildingsPct,
+    weightedEleBuildingsPct,
+  } = data.allBuildingsJson.edges[0].node
 
   // calculate buildings remaining to electrify
   const buildingsToElectrify =
@@ -231,16 +236,16 @@ export default function StateDetailsPage ({ location, data }) {
   powerPlants.sort((a, b) => b.capacity_mw - a.capacity_mw)
 
   const coalPlants = powerPlants.filter(
-    (plant) => plant.fossil_fuel_category === "COAL"
+    plant => plant.fossil_fuel_category === "COAL"
   )
   const gasPlants = powerPlants.filter(
-    (plant) => plant.fossil_fuel_category === "GAS"
+    plant => plant.fossil_fuel_category === "GAS"
   )
   const oilPlants = powerPlants.filter(
-    (plant) => plant.fossil_fuel_category === "OIL"
+    plant => plant.fossil_fuel_category === "OIL"
   )
 
-  function scrollTargetUpdated (scrollTarget) {
+  function scrollTargetUpdated(scrollTarget) {
     let activeKey = "buildings"
     let greenKeys = []
 
@@ -566,7 +571,10 @@ export default function StateDetailsPage ({ location, data }) {
             />
           </div>
 
-          <div id="transport-end" className="scrollable-sect change-text mt-8 mb-4">
+          <div
+            id="transport-end"
+            className="scrollable-sect change-text mt-8 mb-4"
+          >
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all transportation cuts {transportPrcnt}% of the
               pollution.
@@ -744,7 +752,10 @@ export default function StateDetailsPage ({ location, data }) {
           )}
           {/* Show standard outro section if power emissions are non-zero */}
           {powerPrcnt > 0 && (
-            <div id="power-end" className="scrollable-sect change-text mt-8 mb-4">
+            <div
+              id="power-end"
+              className="scrollable-sect change-text mt-8 mb-4"
+            >
               <p className="h1 font-weight-bold text-center mt-6 mb-6">
                 Decarbonizing all dirty power cuts {powerPrcnt}% of the
                 pollution.

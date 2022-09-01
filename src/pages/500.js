@@ -8,12 +8,12 @@ const ServerError = () => (
     <SEO title="500: Server Error" />
 
     <div className="error-page">
-      <img src={CoalPlant} alt="Coal Power Plant"/>
+      <img src={CoalPlant} alt="Coal Power Plant" />
       <div>
         <h1>Server Error</h1>
         <p>Something went wrong. Please come again later.</p>
       </div>
-      <img src={CoalPlant} alt="Coal Power Plant"/>
+      <img src={CoalPlant} alt="Coal Power Plant" />
     </div>
   </Layout>
 )

@@ -5,12 +5,10 @@
 // Implementations: [1](http://danieljlewis.org/files/2010/06/Jenks.pdf) (python),
 // [2](https://github.com/vvoovv/djeo-jenks/blob/master/main.js) (buggy),
 // [3](https://github.com/simogeo/geostats/blob/master/lib/geostats.js#L407) (works)
-export default function jenks (data, n_classes) {
-
+export default function jenks(data, n_classes) {
   // Compute the matrices required for Jenks breaks. These matrices
   // can be used for any classing of data with `classes <= n_classes`
-  function getMatrices (data, n_classes) {
-
+  function getMatrices(data, n_classes) {
     // in the original implementation, these matrices are referred to
     // as `LC` and `OP`
     //
@@ -19,13 +17,15 @@ export default function jenks (data, n_classes) {
     var lower_class_limits = [],
       variance_combinations = [],
       // loop counters
-      i, j,
+      i,
+      j,
       // the variance, as computed at each step in the calculation
       variance = 0
 
     // Initialize and fill each matrix with zeroes
     for (i = 0; i < data.length + 1; i++) {
-      var tmp1 = [], tmp2 = []
+      var tmp1 = [],
+        tmp2 = []
       for (j = 0; j < n_classes + 1; j++) {
         tmp1.push(0)
         tmp2.push(0)
@@ -45,7 +45,6 @@ export default function jenks (data, n_classes) {
     }
 
     for (var l = 2; l < data.length + 1; l++) {
-
       // `SZ` originally. this is the sum of the values seen thus
       // far when calculating variance.
       var sum = 0,
@@ -61,7 +60,6 @@ export default function jenks (data, n_classes) {
       // instead of `x * x`, but this is slower in some browsers
       // introduces an unnecessary concept.
       for (var m = 1; m < l + 1; m++) {
-
         // `III` originally
         var lower_class_limit = l - m + 1,
           val = data[lower_class_limit - 1]
@@ -88,11 +86,13 @@ export default function jenks (data, n_classes) {
             // will increase its variance beyond the limit, break
             // the class at this point, setting the lower_class_limit
             // at this point.
-            if (variance_combinations[l][j] >=
-                (variance + variance_combinations[i4][j - 1])) {
+            if (
+              variance_combinations[l][j] >=
+              variance + variance_combinations[i4][j - 1]
+            ) {
               lower_class_limits[l][j] = lower_class_limit
-              variance_combinations[l][j] = variance +
-                  variance_combinations[i4][j - 1]
+              variance_combinations[l][j] =
+                variance + variance_combinations[i4][j - 1]
             }
           }
         }
@@ -107,14 +107,13 @@ export default function jenks (data, n_classes) {
     // evaluage goodness of fit.
     return {
       lower_class_limits: lower_class_limits,
-      variance_combinations: variance_combinations
+      variance_combinations: variance_combinations,
     }
   }
 
   // the second part of the jenks recipe: take the calculated matrices
   // and derive an array of n breaks.
-  function breaks (data, lower_class_limits, n_classes) {
-
+  function breaks(data, lower_class_limits, n_classes) {
     var k = data.length - 1,
       kclass = [],
       countNum = n_classes
@@ -135,11 +134,15 @@ export default function jenks (data, n_classes) {
     return kclass
   }
 
-  if (n_classes > data.length) {return null}
+  if (n_classes > data.length) {
+    return null
+  }
 
   // sort data in numerical order, since this is expected
   // by the matrices function
-  data = data.slice().sort(function (a, b) { return a - b })
+  data = data.slice().sort(function(a, b) {
+    return a - b
+  })
 
   // get our basic matrices
   var matrices = getMatrices(data, n_classes),
@@ -148,5 +151,4 @@ export default function jenks (data, n_classes) {
 
   // extract n_classes out of the computed matrices
   return breaks(data, lower_class_limits, n_classes)
-
 }

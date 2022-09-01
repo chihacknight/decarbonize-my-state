@@ -1,6 +1,5 @@
-module.exports =
-{
-  "placeNames": [
+module.exports = {
+  placeNames: [
     "alabama",
     "alaska",
     "arizona",
@@ -52,5 +51,5 @@ module.exports =
     "west_virginia",
     "wisconsin",
     "wyoming",
-  ]
+  ],
 }
