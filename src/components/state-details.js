@@ -230,6 +230,9 @@ export default function StateDetailsPage({ location, data }) {
   const currentSolarMWStr = numberToHumanString(currentSolarMW)
   const currentWindMWStr = numberToHumanString(currentWindMW)
 
+  // #### Number of Turbines and Football-fields of solar panels. ####
+  const turbinesNeededNumber = Math.ceil(targetGenByWindMW / 843 * 12)
+
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
 
@@ -289,7 +292,7 @@ export default function StateDetailsPage({ location, data }) {
   }
   // Description will retain formatting, so this needs to be single line
   const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${cutPerYearPrcnt}% a year. Electrification can help us get there.`
-
+  
   return (
     <Layout>
       <SEO
@@ -729,6 +732,11 @@ export default function StateDetailsPage({ location, data }) {
                 In all, we'll need to build{" "}
                 <strong>{windTurbinesCountStr} Megawatts</strong> of wind and{" "}
                 <strong>{solarPanelsCountStr} Megawatts</strong> of solar.
+              </p>
+
+              <p className="mt-6">
+                With the average wind turbine generating 843 Megawatts per month, that's{" "}
+                <strong>{turbinesNeededNumber}</strong> turbines.
               </p>
 
               <p className="mt-5">
