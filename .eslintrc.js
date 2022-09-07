@@ -1,16 +1,13 @@
 module.exports = {
   globals: {
-    __PATH_PREFIX__: true,
+    __PATH_PREFIX__: true
   },
   extends: `react-app`,
+  //we are using prettier, so eslint should not be doing any cosmetic changes
   rules: {
-    "indent": ["error", 2],
     "no-console": "off",
-    "strict": ["error", "global"],
-    "curly": "warn",
-    "semi": ["error", "never"],
-    "space-in-parens": ["error", "never"],
-    "space-before-function-paren": ["error", "always"],
-    "space-before-blocks": ["error", "always"]
+    strict: ["error", "global"],
+    curly: "warn",
+    semi: ["error", "never"],
   }
 }

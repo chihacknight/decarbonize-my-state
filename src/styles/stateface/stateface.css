@@ -2,284 +2,336 @@
  * Copied from http://propublica.github.io/stateface/
  */
 @font-face {
-    font-family: 'StateFaceRegular';
-    src: url('webfont/stateface-regular-webfont.eot');
-    src: url('webfont/stateface-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('webfont/stateface-regular-webfont.woff') format('woff'),
-         url('webfont/stateface-regular-webfont.ttf') format('truetype'),
-         url('webfont/stateface-regular-webfont.svg#StateFaceRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "StateFaceRegular";
+  src: url("webfont/stateface-regular-webfont.eot");
+  src: url("webfont/stateface-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("webfont/stateface-regular-webfont.woff") format("woff"),
+    url("webfont/stateface-regular-webfont.ttf") format("truetype"),
+    url("webfont/stateface-regular-webfont.svg#StateFaceRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Apply stateface font to any class containing "sf-" */
-[class*='sf-']:before {
-    font-family: StateFaceRegular;
-    margin-right: 5px;
+[class*="sf-"]:before {
+  font-family: StateFaceRegular;
+  margin-right: 5px;
 }
 
 .sf-alabama:before,
 .sf-al:before,
 .sf-01:before {
-  content: "B"; }
+  content: "B";
+}
 
 .sf-alaska:before,
 .sf-ak:before,
 .sf-02:before {
-  content: "A"; }
+  content: "A";
+}
 
 .sf-arizona:before,
 .sf-az:before,
 .sf-04:before {
-  content: "D"; }
+  content: "D";
+}
 
 .sf-arkansas:before,
 .sf-ar:before,
 .sf-05:before {
-  content: "C"; }
+  content: "C";
+}
 
 .sf-california:before,
 .sf-ca:before,
 .sf-06:before {
-  content: "E"; }
+  content: "E";
+}
 
 .sf-colorado:before,
 .sf-co:before,
 .sf-08:before {
-  content: "F"; }
+  content: "F";
+}
 
 .sf-connecticut:before,
 .sf-ct:before,
 .sf-09:before {
-  content: "G"; }
+  content: "G";
+}
 
 .sf-delaware:before,
 .sf-de:before,
 .sf-10:before {
-  content: "H"; }
+  content: "H";
+}
 
 .sf-florida:before,
 .sf-fl:before,
 .sf-12:before {
-  content: "I"; }
+  content: "I";
+}
 
 .sf-georgia:before,
 .sf-ga:before,
 .sf-13:before {
-  content: "J"; }
+  content: "J";
+}
 
 .sf-hawaii:before,
 .sf-hi:before,
 .sf-15:before {
-  content: "K"; }
+  content: "K";
+}
 
 .sf-idaho:before,
 .sf-id:before,
 .sf-16:before {
-  content: "M"; }
+  content: "M";
+}
 
 .sf-illinois:before,
 .sf-il:before,
 .sf-17:before {
-  content: "N"; }
+  content: "N";
+}
 
 .sf-indiana:before,
 .sf-in:before,
 .sf-18:before {
-  content: "O"; }
+  content: "O";
+}
 
 .sf-iowa:before,
 .sf-ia:before,
 .sf-19:before {
-  content: "L"; }
+  content: "L";
+}
 
 .sf-kansas:before,
 .sf-ks:before,
 .sf-20:before {
-  content: "P"; }
+  content: "P";
+}
 
 .sf-kentucky:before,
 .sf-ky:before,
 .sf-21:before {
-  content: "Q"; }
+  content: "Q";
+}
 
 .sf-louisiana:before,
 .sf-la:before,
 .sf-22:before {
-  content: "R"; }
+  content: "R";
+}
 
 .sf-maine:before,
 .sf-me:before,
 .sf-23:before {
-  content: "U"; }
+  content: "U";
+}
 
 .sf-maryland:before,
 .sf-md:before,
 .sf-24:before {
-  content: "T"; }
+  content: "T";
+}
 
 .sf-massachusetts:before,
 .sf-ma:before,
 .sf-25:before {
-  content: "S"; }
+  content: "S";
+}
 
 .sf-michigan:before,
 .sf-mi:before,
 .sf-26:before {
-  content: "V"; }
+  content: "V";
+}
 
 .sf-minnesota:before,
 .sf-mn:before,
 .sf-27:before {
-  content: "W"; }
+  content: "W";
+}
 
 .sf-mississippi:before,
 .sf-ms:before,
 .sf-28:before {
-  content: "Y"; }
+  content: "Y";
+}
 
 .sf-missouri:before,
 .sf-mo:before,
 .sf-29:before {
-  content: "X"; }
+  content: "X";
+}
 
 .sf-montana:before,
 .sf-mt:before,
 .sf-30:before {
-  content: "Z"; }
+  content: "Z";
+}
 
 .sf-nebraska:before,
 .sf-ne:before,
 .sf-31:before {
-  content: "c"; }
+  content: "c";
+}
 
 .sf-nevada:before,
 .sf-nv:before,
 .sf-32:before {
-  content: "g"; }
+  content: "g";
+}
 
 .sf-new-hampshire:before,
 .sf-new_hampshire:before,
 .sf-nh:before,
 .sf-33:before {
-  content: "d"; }
+  content: "d";
+}
 
 .sf-new-jersey:before,
 .sf-new_jersey:before,
 .sf-nj:before,
 .sf-34:before {
-  content: "e"; }
+  content: "e";
+}
 
 .sf-new-mexico:before,
 .sf-new_mexico:before,
 .sf-nm:before,
 .sf-35:before {
-  content: "f"; }
+  content: "f";
+}
 
 .sf-new-york:before,
 .sf-new_york:before,
 .sf-ny:before,
 .sf-36:before {
-  content: "h"; }
+  content: "h";
+}
 
 .sf-north-carolina:before,
 .sf-north_carolina:before,
 .sf-nc:before,
 .sf-37:before {
-  content: "a"; }
+  content: "a";
+}
 
 .sf-north-dakota:before,
 .sf-north_dakota:before,
 .sf-nd:before,
 .sf-38:before {
-  content: "b"; }
+  content: "b";
+}
 
 .sf-ohio:before,
 .sf-oh:before,
 .sf-39:before {
-  content: "i"; }
+  content: "i";
+}
 
 .sf-oklahoma:before,
 .sf-ok:before,
 .sf-40:before {
-  content: "j"; }
+  content: "j";
+}
 
 .sf-oregon:before,
 .sf-or:before,
 .sf-41:before {
-  content: "k"; }
+  content: "k";
+}
 
 .sf-pennsylvania:before,
 .sf-pa:before,
 .sf-42:before {
-  content: "l"; }
+  content: "l";
+}
 
 .sf-rhode-island:before,
 .sf-rhode_island:before,
 .sf-ri:before,
 .sf-44:before {
-  content: "m"; }
+  content: "m";
+}
 
 .sf-south-carolina:before,
 .sf-south_carolina:before,
 .sf-sc:before,
 .sf-45:before {
-  content: "n"; }
+  content: "n";
+}
 
 .sf-south-dakota:before,
 .sf-south_dakota:before,
 .sf-sd:before,
 .sf-46:before {
-  content: "o"; }
+  content: "o";
+}
 
 .sf-tennessee:before,
 .sf-tn:before,
 .sf-47:before {
-  content: "p"; }
+  content: "p";
+}
 
 .sf-texas:before,
 .sf-tx:before,
 .sf-48:before {
-  content: "q"; }
+  content: "q";
+}
 
 .sf-utah:before,
 .sf-ut:before,
 .sf-49:before {
-  content: "r"; }
+  content: "r";
+}
 
 .sf-vermont:before,
 .sf-vt:before,
 .sf-50:before {
-  content: "t"; }
+  content: "t";
+}
 
 .sf-virginia:before,
 .sf-va:before,
 .sf-51:before {
-  content: "s"; }
+  content: "s";
+}
 
 .sf-washington:before,
 .sf-wa:before,
 .sf-53:before {
-  content: "u"; }
+  content: "u";
+}
 
 .sf-west-virginia:before,
 .sf-west_virginia:before,
 .sf-wv:before,
 .sf-54:before {
-  content: "w"; }
+  content: "w";
+}
 
 .sf-wisconsin:before,
 .sf-wi:before,
 .sf-55:before {
-  content: "v"; }
+  content: "v";
+}
 
 .sf-wyoming:before,
 .sf-wy:before,
 .sf-56:before {
-  content: "x"; }
+  content: "x";
+}
 
 .sf-district-of-columbia:before,
 .sf-district_of_columbia:before,
 .sf-dc:before,
 .sf-11001:before {
-  content: "y"; }
+  content: "y";
+}

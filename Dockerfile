@@ -1,5 +1,7 @@
 FROM nikolaik/python-nodejs:latest
 
+RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+
 RUN mkdir /app
 WORKDIR /app
 COPY package.json ./

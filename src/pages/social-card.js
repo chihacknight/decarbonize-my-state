@@ -4,7 +4,7 @@ import SingleBarChart from "../components/singlebar"
 import { graphql } from "gatsby"
 
 //TODO: move to shared file with state details
-const slugToTitle = (placeName) => {
+const slugToTitle = placeName => {
   const words = placeName.split("_")
 
   for (let i = 0; i < words.length; i++) {
@@ -24,12 +24,12 @@ const SocialCardPage = ({ location, data }) => {
   let params = new URLSearchParams(location.search)
   let currentState = params.get("state")
   let emissionsData = data.allEmissionsJson.edges.find(
-    (entry) => entry.node.state === currentState
+    entry => entry.node.state === currentState
   )
 
   if (emissionsData == null) {
     emissionsData = data.allEmissionsJson.edges.find(
-      (entry) => entry.node.state === "illinois"
+      entry => entry.node.state === "illinois"
     )
     currentState = "illinois"
   }
@@ -74,13 +74,13 @@ const SocialCardPage = ({ location, data }) => {
 
   //find the data correspoinding to the current page
   let statePosInArr = eachStateRecentEmissions.find(
-    (entry) => entry[0] === currentState
+    entry => entry[0] === currentState
   )
 
   //to be used for specifically checks with /social-card/ which dont have a ?state={}
   if (statePosInArr == null) {
     statePosInArr = eachStateRecentEmissions.find(
-      (entry) => entry[0] === "illinois"
+      entry => entry[0] === "illinois"
     )
   }
 
