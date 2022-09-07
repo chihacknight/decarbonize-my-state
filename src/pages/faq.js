@@ -7,7 +7,7 @@ const FAQ = () => {
   return (
     <Layout>
       <SEO title="FAQ" />
-      <div className="container">
+      <div className="container faq">
         <h1 id="main" className="py-2">Frequently Asked Questions</h1>
 
         <p>
@@ -26,6 +26,11 @@ const FAQ = () => {
           <a href="https://carbonswitch.com/do-heat-pumps-work-in-cold-weather/">Read more at CarbonSwitch</a>
         </p>
 
+        {
+          /**
+           * Electric Vehicle Section
+           */
+        }
         <h2>Electric Vehicles (EVs)</h2>
 
         <h3>Are EVs <em>really</em> lower emission, even with a dirty grid?</h3>
@@ -36,8 +41,8 @@ const FAQ = () => {
           the short answer:
         </p>
 
-        <p className="h6 font-weight-bold">
-          Electric vehicles almost always have a smaller carbon footprint than gasoline cars, even when accounting for the electricity used for charging, and even if your grid is very carbon intensive, like coal.
+        <p>
+          <strong>Electric vehicles almost always have a smaller carbon footprint than gasoline cars</strong>, even when accounting for the electricity used for charging, and even if your grid is very carbon intensive, like coal.
         </p>
 
         <p>
@@ -60,6 +65,85 @@ const FAQ = () => {
           </a> can help you estimate the greenhouse gas emissions associated with charging and driving an EV or a plug-in hybrid electric vehicle (PHEV) where you live. You can select an EV or PHEV model and type in your zip code to see the CO2 emissions and how they stack up against those associated with a gasoline car.
         </p>
 
+        <h3>How long does it take to charge an EV?</h3>
+
+        <p>
+          This one is a bit complicated, but most new EVs support fast-charging
+          at public charging stations, which (at the highest speeds of 250kW)
+          can get most EVs to 80% in around a half hour.
+        </p>
+
+        <p>
+          Learn more from <a href="https://www.tomsguide.com/reference/ev-charging-explained-heres-all-the-different-charger-types">
+            Tom's Guide - EV Charging Explained
+          </a>
+        </p>
+
+        <h3>Why are EVs so expensive?</h3>
+
+        <p>
+          EVs require large battery packs, particularly if you are looking for a
+          very long range. However, it's worth keeping in mind that an electric
+          vehicles has lower fuel costs (electricity per mile is generally
+          cheaper than gasoline) and lower maintenance costs, since electric
+          vehicles are much more simpler mechanically speaking and have lower
+          brake wear due to regenerative braking.
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.consumersenergy.com/residential/programs-and-services/electric-vehicles/ev-cost-of-ownership">
+            Consumers Energy - EV Cost of Ownership
+          </a>
+        </p>
+
+        <h3>Do we have enough Lithium to make all these EVs?</h3>
+
+        <p>
+          This is also complex, but ultimately speaking there is enough Lithium
+          on the planet to meet our EV needs, but we're going to have to rapidly
+          ramp up Lithium exctraction to meet our needs.
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.nature.com/articles/d41586-021-02222-1">
+            Nature - Electric cars and batteries: how will the world produce enough?
+          </a>
+        </p>
+
+        <h3>
+          But are electric cars <em>really</em> the best climate transporation solution?
+        </h3>
+
+        <p>
+          In short, no, but they are a big part of the solution. Electric cars
+          and trucks require a lot of minerals and energy to manufacture,
+          consume a lot of energy per mile due to their weight. In dense urban
+          and suburban areas, we should work towards moving away from cars
+          towards trains, buses, biking, and walking, which are much more energy
+          resource efficient. However, as we mentioned before, an electric car
+          is basically always better emissions wise than a gas car.
+        </p>
+
+        <p>
+          As an example, an ebike (let's say Gazelle Ultimate T10) may have
+          a 500 Wh battery (0.5 kWh) that gives it a 25 mile range, or 50 miles
+          per kWh. Meanwhile the Tesla Model 3, one of the most efficient EVs
+          out right now, gets around 4.2 miles per kWh, making the
+          <strong>e-bike 12 times more energy efficient!</strong> This does not
+          even take into account the signifcantly reduced material cost and
+          manufacturing emissions of making a 50 pound e-bike compared to a
+          4,048 lb electric car with <em>at least</em> 100 times the battery
+          capacity (54 kWh).
+        </p>
+
+        <p>
+          Learn more at{" "}
+          <a href="https://ourworldindata.org/travel-carbon-footprint">
+            Our World in Data - Which form of transport has the lowest carbon footprint
+          </a>
+        </p>
       </div>
     </Layout>
   )
