@@ -22,19 +22,25 @@ const FAQ = () => {
         <h3>Do heat pumps work in colder climates?</h3>
 
         <p>
-          Google this question or ask a contractor and you might think the
-          answer is no. But make no mistake, heat pumps absolutely work in cold
-          climates. Not only that, but often they are the most energy efficient
-          and cost effective solution available. A few decades ago, most heat
-          pumps stopped working when the temperature dropped below 20 or 30
-          degrees fahrenheit. By contrast, today’s heat pumps can run more
-          efficiently than any other HVAC system all the way down to about -25
+          Heat pumps absolutely work in cold climates. Not only that, but often
+          they are the most energy efficient and cost effective solution available.
+          A few decades ago, most heat pumps stopped working when the temperature
+          dropped below 20 or 30 degrees fahrenheit. By contrast, today’s heat pumps
+          can run more efficiently than any other HVAC system all the way down to about -25
           fahrenheit. Just ask the millions of homeowners in Scandinavia. People
           in Norway, Finland and Sweden are installing heat pumps at a faster
           pace than anywhere else in Europe.
+        </p>
+        <p>
+          In colder climates, a potential hurdle to installing heat pumps is home insulation.
+          You may want to get a {" "}
+          <a href="https://www.energy.gov/energysaver/blower-door-tests">blower door test</a>
+          to determine how much heat you are leaking from your home.
+        </p>
+        <p>
           <a href="https://carbonswitch.com/do-heat-pumps-work-in-cold-weather/">
-            Read more at CarbonSwitch
-          </a>
+            Read more about heat pumps and cold weather at CarbonSwitch
+          </a>.
         </p>
 
         {/**
@@ -125,9 +131,9 @@ const FAQ = () => {
         <p>
           EVs require large battery packs, particularly if you are looking for a
           very long range. However, it's worth keeping in mind that an electric
-          vehicles has lower fuel costs (electricity per mile is generally
+          vehicle has lower fuel costs (electricity per mile is generally
           cheaper than gasoline) and lower maintenance costs, since electric
-          vehicles are much more simpler mechanically speaking and have lower
+          vehicles are much simpler mechanically speaking and have lower
           brake wear due to regenerative braking.
         </p>
 
