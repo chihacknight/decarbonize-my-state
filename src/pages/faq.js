@@ -34,12 +34,13 @@ const FAQ = () => {
         <p>
           In colder climates, a potential hurdle to installing heat pumps is home insulation.
           You may want to get a {" "}
-          <a href="https://www.energy.gov/energysaver/blower-door-tests">blower door test</a>
+          <a href="https://www.energy.gov/energysaver/blower-door-tests">blower door test</a>{" "}
           to determine how much heat you are leaking from your home.
         </p>
         <p>
+          Learn more{" "}
           <a href="https://carbonswitch.com/do-heat-pumps-work-in-cold-weather/">
-            Read more about heat pumps and cold weather at CarbonSwitch
+             about heat pumps and cold weather at CarbonSwitch
           </a>.
         </p>
 
@@ -123,7 +124,7 @@ const FAQ = () => {
           Learn more from{" "}
           <a href="https://www.tomsguide.com/reference/ev-charging-explained-heres-all-the-different-charger-types">
             Tom's Guide - EV Charging Explained
-          </a>
+          </a>.
         </p>
 
         <h3>Why are EVs so expensive?</h3>
@@ -141,7 +142,7 @@ const FAQ = () => {
           Learn more from{" "}
           <a href="https://www.consumersenergy.com/residential/programs-and-services/electric-vehicles/ev-cost-of-ownership">
             Consumers Energy - EV Cost of Ownership
-          </a>
+          </a>.
         </p>
 
         <h3>Do we have enough Lithium to make all these EVs?</h3>
@@ -157,7 +158,7 @@ const FAQ = () => {
           <a href="https://www.nature.com/articles/d41586-021-02222-1">
             Nature - Electric cars and batteries: how will the world produce
             enough?
-          </a>
+          </a>.
         </p>
 
         <h3>
@@ -192,7 +193,7 @@ const FAQ = () => {
           <a href="https://ourworldindata.org/travel-carbon-footprint">
             Our World in Data - Which form of transport has the lowest carbon
             footprint
-          </a>
+          </a>.
         </p>
       </div>
     </Layout>
