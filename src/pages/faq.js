@@ -23,25 +23,28 @@ const FAQ = () => {
 
         <p>
           Heat pumps absolutely work in cold climates. Not only that, but often
-          they are the most energy efficient and cost effective solution available.
-          A few decades ago, most heat pumps stopped working when the temperature
-          dropped below 20 or 30 degrees fahrenheit. By contrast, today’s heat pumps
-          can run more efficiently than any other HVAC system all the way down to about -25
-          fahrenheit. Just ask the millions of homeowners in Scandinavia. People
-          in Norway, Finland and Sweden are installing heat pumps at a faster
-          pace than anywhere else in Europe.
+          they are the most energy efficient and cost effective solution
+          available. A few decades ago, most heat pumps stopped working when the
+          temperature dropped below 20 or 30 degrees fahrenheit. By contrast,
+          today’s heat pumps can run more efficiently than any other HVAC system
+          all the way down to about -25 fahrenheit. Just ask the millions of
+          homeowners in Scandinavia. People in Norway, Finland and Sweden are
+          installing heat pumps at a faster pace than anywhere else in Europe.
         </p>
         <p>
-          In colder climates, a potential hurdle to installing heat pumps is home insulation.
-          You may want to get a {" "}
-          <a href="https://www.energy.gov/energysaver/blower-door-tests">blower door test</a>{" "}
+          In colder climates, a potential hurdle to installing heat pumps is
+          home insulation. You may want to get a{" "}
+          <a href="https://www.energy.gov/energysaver/blower-door-tests">
+            blower door test
+          </a>{" "}
           to determine how much heat you are leaking from your home.
         </p>
         <p>
           Learn more{" "}
           <a href="https://carbonswitch.com/do-heat-pumps-work-in-cold-weather/">
-             about heat pumps and cold weather at CarbonSwitch
-          </a>.
+            about heat pumps and cold weather at CarbonSwitch
+          </a>
+          .
         </p>
 
         {/**
@@ -124,7 +127,8 @@ const FAQ = () => {
           Learn more from{" "}
           <a href="https://www.tomsguide.com/reference/ev-charging-explained-heres-all-the-different-charger-types">
             Tom's Guide - EV Charging Explained
-          </a>.
+          </a>
+          .
         </p>
 
         <h3>Why are EVs so expensive?</h3>
@@ -134,15 +138,16 @@ const FAQ = () => {
           very long range. However, it's worth keeping in mind that an electric
           vehicle has lower fuel costs (electricity per mile is generally
           cheaper than gasoline) and lower maintenance costs, since electric
-          vehicles are much simpler mechanically speaking and have lower
-          brake wear due to regenerative braking.
+          vehicles are much simpler mechanically speaking and have lower brake
+          wear due to regenerative braking.
         </p>
 
         <p>
           Learn more from{" "}
           <a href="https://www.consumersenergy.com/residential/programs-and-services/electric-vehicles/ev-cost-of-ownership">
             Consumers Energy - EV Cost of Ownership
-          </a>.
+          </a>
+          .
         </p>
 
         <h3>Do we have enough Lithium to make all these EVs?</h3>
@@ -158,7 +163,8 @@ const FAQ = () => {
           <a href="https://www.nature.com/articles/d41586-021-02222-1">
             Nature - Electric cars and batteries: how will the world produce
             enough?
-          </a>.
+          </a>
+          .
         </p>
 
         <h3>
@@ -193,7 +199,8 @@ const FAQ = () => {
           <a href="https://ourworldindata.org/travel-carbon-footprint">
             Our World in Data - Which form of transport has the lowest carbon
             footprint
-          </a>.
+          </a>
+          .
         </p>
       </div>
     </Layout>
