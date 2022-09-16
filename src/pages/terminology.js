@@ -16,21 +16,21 @@ const Terminology = () => {
           <dt>Carbon</dt>{" "}
           <dd>
             {" "}
-            a nonmetallic chemical element with atomic number 6 that readily
+            A nonmetallic chemical element with atomic number 6 that readily
             forms compounds with many other elements and is a constituent of
             organic compounds in all known living tissues&nbsp;
           </dd>
           <dt>Carbon Dioxide</dt>
           <dd>
-            a molecule consisting of one carbon atom and two oxygen atoms.&nbsp;
+            A molecule consisting of one carbon atom and two oxygen atoms.&nbsp;
             A product of combustion, respiration and other natural
             processes.&nbsp; Also a greenhouse gas.
           </dd>
           <dt>Decarbonize</dt>{" "}
-          <dd>to move away from carbon producing appliances</dd>
+          <dd>To move away from carbon producing appliances.</dd>
           <dt>Electrification</dt>{" "}
           <dd>
-            the process of converting combustion engines, heating and cooking
+            The process of converting combustion engines, heating and cooking
             appliances from fossil fuels (mainly gasoline and natural gas) to
             electric.
           </dd>
@@ -49,12 +49,12 @@ const Terminology = () => {
           </dd>
           <dt>Greenhouse effect</dt>{" "}
           <dd>
-            the conversion of infrared light into heat.&nbsp; Most noticed in
+            The conversion of infrared light into heat.&nbsp; Most noticed in
             closed automobiles on a sunny day.
           </dd>
           <dt>Megawatt</dt>
           <dd>
-            a unit of energy. One megawatt can power 400-900 homes a year.
+            A unit of energy. One megawatt can power 400-900 homes a year.
           </dd>
           <dt>MTCO2e</dt>{" "}
           <dd>
