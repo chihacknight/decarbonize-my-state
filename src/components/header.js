@@ -30,6 +30,9 @@ const Header = ({ siteTitle }) => (
           <Link className="nav-link" to="/about">
             About
           </Link>
+          <Link className="nav-link" to="/terminology">
+            Terminology
+          </Link>
           <Link className="nav-link" to="/faq">
             FAQ
           </Link>
