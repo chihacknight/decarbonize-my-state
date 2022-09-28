@@ -474,3 +474,8 @@ footer a {
 .car-sheet.-semi.-clean {
   background-position: 100% 58%;
 }
+
+.terminology-page-style dt {
+  font-size: 1.3rem;
+  margin-top: 15px;
+}
