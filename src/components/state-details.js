@@ -191,8 +191,8 @@ export default function StateDetailsPage({ location, data }) {
   const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
   const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
   const currentWindMW = (currentWind / everyDayPerYear) * 1000
-  const solarToBuildMw = targetGenBySolarMW - currentSolarMW;
-  const windToBuildMw = targetGenByWindMW - currentWindMW;
+  const solarToBuildMw = targetGenBySolarMW - currentSolarMW
+  const windToBuildMw = targetGenByWindMW - currentWindMW
 
   // Clamp to zero since if we never want to say negative solar needs to be
   // built
@@ -483,10 +483,10 @@ export default function StateDetailsPage({ location, data }) {
             <p className="mt-5">
               That means we only need to{" "}
               <strong>
-              electrify the remaining {" "}
-              {buildingsLeftToElectrifyStr} dirty buildings in {placeTitle}
-              </strong>.{" "}
-              That's around {buildingsPerYear} per year.
+                electrify the remaining {buildingsLeftToElectrifyStr} dirty
+                buildings in {placeTitle}
+              </strong>
+              . That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
               label={"Buildings"}
@@ -734,18 +734,17 @@ export default function StateDetailsPage({ location, data }) {
 
               <p className="mt-6">
                 In all, we'll need to build{" "}
-                <strong>{windTurbinesCountStr} Megawatts</strong> of wind power and{" "}
-                <strong>{solarPanelsCountStr} Megawatts</strong> of solar power.
+                <strong>{windTurbinesCountStr} Megawatts</strong> of wind power
+                and <strong>{solarPanelsCountStr} Megawatts</strong> of solar
+                power.
               </p>
 
               <p className="mt-5">
                 Since {placeTitle} already has {currentWindMWStr} Megawatts of{" "}
                 wind and {currentSolarMWStr} Megawatts of solar, that's{" "}
-                {windToBuildMwStr} Megawatts of wind power we need to build{" "}
-                and {solarToBuildMwStr} Megawatts of solar power.{" "}
-
-
-                That's around <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
+                {windToBuildMwStr} Megawatts of wind power we need to build and{" "}
+                {solarToBuildMwStr} Megawatts of solar power. That's around{" "}
+                <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
                 of wind power and{" "}
                 <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
                 of solar power a year.
