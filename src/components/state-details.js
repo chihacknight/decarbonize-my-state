@@ -191,6 +191,8 @@ export default function StateDetailsPage({ location, data }) {
   const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
   const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
   const currentWindMW = (currentWind / everyDayPerYear) * 1000
+  const solarToBuildMw = targetGenBySolarMW - currentSolarMW
+  const windToBuildMw = targetGenByWindMW - currentWindMW
 
   // Clamp to zero since if we never want to say negative solar needs to be
   // built
@@ -222,6 +224,10 @@ export default function StateDetailsPage({ location, data }) {
     targetGenBySolarMW !== undefined
       ? numberToHumanString(solarPanelsBuildPerYear)
       : "?"
+
+  const solarToBuildMwStr = numberToHumanString(solarToBuildMw)
+  const windToBuildMwStr = numberToHumanString(solarToBuildMw)
+
   const windTurbinesBuildPerYearStr =
     targetGenByWindMW !== undefined
       ? numberToHumanString(windTurbinesBuildPerYear)
@@ -458,8 +464,7 @@ export default function StateDetailsPage({ location, data }) {
             </div>
 
             <p className="mt-0 mb-4 text-right">
-              ...in all of {placeTitle}'s{" "}
-              <strong>{buildingsCountStr} buildings</strong>.
+              ...in all of {placeTitle}'s {buildingsCountStr} buildings.
             </p>
 
             <div className="d-flex align-items-end justify-content-around mt-5">
@@ -476,9 +481,12 @@ export default function StateDetailsPage({ location, data }) {
             )}
 
             <p className="mt-5">
-              That means we only need to electrify the remaining{" "}
-              {buildingsLeftToElectrifyStr} buildings in {placeTitle}. That's
-              around {buildingsPerYear} per year.
+              That means we only need to{" "}
+              <strong>
+                electrify the remaining {buildingsLeftToElectrifyStr} dirty
+                buildings in {placeTitle}
+              </strong>
+              . That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
               label={"Buildings"}
@@ -540,14 +548,9 @@ export default function StateDetailsPage({ location, data }) {
               your next car must be <strong>electric</strong>.
             </p>
 
-            <p className="col-12 h4">
+            <p className="mt-5">
               Or consider going car-free with public transit, bikes/e-bikes, car
               share, or other alternatives!
-            </p>
-
-            <p className="mt-6">
-              Then, we'll electrify all{" "}
-              <strong>{carsCountStr} cars and trucks</strong> in {placeTitle}!
             </p>
 
             <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
@@ -561,9 +564,13 @@ export default function StateDetailsPage({ location, data }) {
               are already electric ({pctEv}% of the total).
             </p>
             <p className="mt-5">
-              We need to electrify the remaining {carsToElectrifyStr} vehicles.
+              <strong>
+                We need to electrify (or replace) the remaining{" "}
+                {carsToElectrifyStr} gas-powered vehicles.{" "}
+              </strong>
               That's around {carsPerYear} a year.
             </p>
+
             <AlreadyElectrifiedChart
               label={"Vehicles"}
               electrifiedPct={pctEv}
@@ -722,23 +729,25 @@ export default function StateDetailsPage({ location, data }) {
 
               <p className="mt-6">
                 To power our electric cars and buildings, we need{" "}
-                <strong>2x</strong> the electricity we have today!
+                <strong>two times</strong> the electricity we have today.
               </p>
 
               <p className="mt-6">
                 In all, we'll need to build{" "}
-                <strong>{windTurbinesCountStr} Megawatts</strong> of wind and{" "}
-                <strong>{solarPanelsCountStr} Megawatts</strong> of solar.
+                <strong>{windTurbinesCountStr} Megawatts</strong> of wind power
+                and <strong>{solarPanelsCountStr} Megawatts</strong> of solar
+                power.
               </p>
 
               <p className="mt-5">
-                Since {placeTitle} already has {currentSolarMWStr} megawatts of
-                solar power generation and {currentWindMWStr} megawatts of wind
-                power generation, that's{" "}
+                Since {placeTitle} already has {currentWindMWStr} Megawatts of{" "}
+                wind and {currentSolarMWStr} Megawatts of solar, that's{" "}
+                {windToBuildMwStr} Megawatts of wind power we need to build and{" "}
+                {solarToBuildMwStr} Megawatts of solar power. That's around{" "}
                 <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
-                of wind capacity AND{" "}
+                of wind power and{" "}
                 <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
-                of solar capacity a year we need to build.
+                of solar power a year.
               </p>
 
               <p className="h4 mt-5 text-muted">
