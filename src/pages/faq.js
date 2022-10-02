@@ -219,8 +219,9 @@ const FAQ = () => {
         <p>
           Learn more from{" "}
           <a href="https://www.energy.gov/energysaver/heat-pump-systems">
-           Energy.gov - Heat Pump Systems
-          </a>.
+            Energy.gov - Heat Pump Systems
+          </a>
+          .
         </p>
 
         <h3>But do heat pumps work in cold climates?</h3>
@@ -228,8 +229,8 @@ const FAQ = () => {
         <p>
           Absolutely - although heat pumps used to have issues in lower
           temperatures, modern heat pumps can work great even in the cold
-          climates of the Northeast and Midwest - they are even popular in
-          chily Norway!
+          climates of the Northeast and Midwest - they are even popular in chily
+          Norway!
         </p>
 
         <p>
@@ -249,14 +250,15 @@ const FAQ = () => {
         <p>
           Technically, yes, but they work on <em>ferro-magnetic</em> materials,
           meaning materials that a magnet can stick to. These include stainless
-          steel, cast iron, and enameled cast iron pans, but
-          induction <em>does not work</em> on copper, glass, or aluminum pans.
+          steel, cast iron, and enameled cast iron pans, but induction{" "}
+          <em>does not work</em> on copper, glass, or aluminum pans.
         </p>
 
         <p>
           Learn more from{" "}
           <a href="https://www.thespruceeats.com/what-is-the-best-cookware-for-induction-cooktops-908920">
-            The Spruce Eats - How to Tell If Your Cookware Is Induction Compatible
+            The Spruce Eats - How to Tell If Your Cookware Is Induction
+            Compatible
           </a>
         </p>
 
@@ -267,7 +269,6 @@ const FAQ = () => {
           certain types of pans and a lack of visibility to the heat output
           (since induction works via invisible magnetism) but it also has a huge
           list of benefits including:
-
           <ul>
             <li>Faster heating time (like water boiling quicker)</li>
             <li>Heat level changes apply rapidly</li>
@@ -276,7 +277,10 @@ const FAQ = () => {
           </ul>
         </p>
 
-        <h3>Is induction cooking the same as an electric stove with those glowing red coils?</h3>
+        <h3>
+          Is induction cooking the same as an electric stove with those glowing
+          red coils?
+        </h3>
 
         <p>
           Not at all! A stove with red coils that heat up your pan (either
@@ -292,11 +296,11 @@ const FAQ = () => {
         </p>
 
         <p>
-          However, if you have a working electric resistance cooktop and you
-          are satisfied with it - keep it! There's no climate benefit to
-          switching from an electric cooktop to an induction cooktop - the
-          benefit comes from switching a gas powered stove to an electric one
-          that can be powered by clean renewable energy.
+          However, if you have a working electric resistance cooktop and you are
+          satisfied with it - keep it! There's no climate benefit to switching
+          from an electric cooktop to an induction cooktop - the benefit comes
+          from switching a gas powered stove to an electric one that can be
+          powered by clean renewable energy.
         </p>
 
         <p>
