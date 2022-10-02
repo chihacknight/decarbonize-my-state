@@ -164,7 +164,6 @@ const FAQ = () => {
             Nature - Electric cars and batteries: how will the world produce
             enough?
           </a>
-          .
         </p>
 
         <h3>
@@ -186,7 +185,7 @@ const FAQ = () => {
           As an example, an ebike (let's say Gazelle Ultimate T10) may have a
           500 Wh battery (0.5 kWh) that gives it a 25 mile range, or 50 miles
           per kWh. Meanwhile the Tesla Model 3, one of the most efficient EVs
-          out right now, gets around 4.2 miles per kWh, making the
+          out right now, gets around 4.2 miles per kWh, making the{" "}
           <strong>e-bike 12 times more energy efficient!</strong> This does not
           even take into account the signifcantly reduced material cost and
           manufacturing emissions of making a 50 pound e-bike compared to a
