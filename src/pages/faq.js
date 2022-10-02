@@ -201,6 +201,74 @@ const FAQ = () => {
           </a>
           .
         </p>
+
+
+        {/**
+         * Induction Stoves Section
+         */}
+        <h2>Induction Stoves</h2>
+
+        <h3>Do induction stoves only work on certain pans?</h3>
+
+        <p>
+          Technically, yes, but they work on <em>ferro-magnetic</em> materials,
+          meaning materials that a magnet can stick to. These include stainless
+          steel, cast iron, and enameled cast iron pans, but
+          induction <em>does not work</em> on copper, glass, or aluminum pans.
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.thespruceeats.com/what-is-the-best-cookware-for-induction-cooktops-908920">
+            The Spruce Eats - How to Tell If Your Cookware Is Induction Compatible
+          </a>
+        </p>
+
+        <h3>Are induction stoves worse than gas?</h3>
+
+        <p>
+          There might be some downsides with induction, like not working with
+          certain types of pans and a lack of visibility to the heat output
+          (since induction works via invisible magnetism) but it also has a huge
+          list of benefits including:
+
+          <ul>
+            <li>Faster heating time (like water boiling quicker)</li>
+            <li>Heat level changes apply rapidly</li>
+            <li>Cook surface stays cool</li>
+            <li>Automatically shuts off when pan is removed</li>
+          </ul>
+        </p>
+
+        <h3>Is induction cooking the same as an electric stove with those glowing red coils?</h3>
+
+        <p>
+          Not at all! A stove with red coils that heat up your pan (either
+          directly or through a glass surface) are what is known as an electric
+          resistive cooktop or just electric cooktop. These are electrically
+          powered (and so don't burn fossil fuels) but they aren't as
+          responsive, fast, or efficient as induction cooktops. They work by
+          heating using electrical resistance to heat up a coil (just like your
+          toaster) which means a lot of heat is wasted transferring the energy
+          through the glass surface and the pot. Induction cooking works by
+          using electromagnetism to heat a pot or pan directly - which means
+          almost all of the heat makes it into your food.
+        </p>
+
+        <p>
+          However, if you have a working electric resistance cooktop and you
+          are satisfied with it - keep it! There's no climate benefit to
+          switching from an electric cooktop to an induction cooktop - the
+          benefit comes from switching a gas powered stove to an electric one
+          that can be powered by clean renewable energy.
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.forbes.com/home-improvement/kitchen/induction-vs-electric-cooktop/">
+            Forbes Home - Induction Vs Electric Cooktop: What’s The Difference?
+          </a>
+        </p>
       </div>
     </Layout>
   )
