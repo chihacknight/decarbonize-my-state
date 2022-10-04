@@ -17,7 +17,15 @@ const FAQ = () => {
           get into this one page.
         </p>
 
-        <h2>Heat Pumps</h2>
+        {/*
+         * Heat Pumps Section
+         */}
+
+        <div className="row ml-0">
+          <h2>Heat Pumps</h2>
+
+          <div className="appliance-sheet -heater -clean ml-4"></div>
+        </div>
 
         <h3>Do heat pumps work in colder climates?</h3>
 
@@ -47,10 +55,31 @@ const FAQ = () => {
           .
         </p>
 
+        <h3>Are heat pumps for heating, or for cooling?</h3>
+
+        <p>
+          Heat pumps are for both - they can heat and cool your home! There are
+          a variety of different types of heat pumps, but they all work like a
+          reversible air conditioner, moving heat from inside to outside
+          (cooling) or outside to inside (heating).
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.energy.gov/energysaver/heat-pump-systems">
+            Energy.gov - Heat Pump Systems
+          </a>
+          .
+        </p>
+
         {/**
          * Electric Vehicle Section
          */}
-        <h2>Electric Vehicles (EVs)</h2>
+        <div className="row ml-0">
+          <h2>Electric Vehicles (EVs)</h2>
+
+          <div className="car-sheet -truck -clean ml-4"></div>
+        </div>
 
         <h3>
           Are EVs <em>really</em> lower emission, even with a dirty grid?
@@ -164,7 +193,6 @@ const FAQ = () => {
             Nature - Electric cars and batteries: how will the world produce
             enough?
           </a>
-          .
         </p>
 
         <h3>
@@ -186,7 +214,7 @@ const FAQ = () => {
           As an example, an ebike (let's say Gazelle Ultimate T10) may have a
           500 Wh battery (0.5 kWh) that gives it a 25 mile range, or 50 miles
           per kWh. Meanwhile the Tesla Model 3, one of the most efficient EVs
-          out right now, gets around 4.2 miles per kWh, making the
+          out right now, gets around 4.2 miles per kWh, making the{" "}
           <strong>e-bike 12 times more energy efficient!</strong> This does not
           even take into account the signifcantly reduced material cost and
           manufacturing emissions of making a 50 pound e-bike compared to a
@@ -201,6 +229,80 @@ const FAQ = () => {
             footprint
           </a>
           .
+        </p>
+
+        {/**
+         * Induction Stoves Section
+         */}
+        <div className="row ml-0">
+          <h2>Induction Stoves</h2>
+
+          <div className="appliance-sheet -stove -clean ml-4"></div>
+        </div>
+
+        <h3>Do induction stoves only work on certain pans?</h3>
+
+        <p>
+          Technically, yes, but they work on <em>ferro-magnetic</em> materials,
+          meaning materials that a magnet can stick to. These include stainless
+          steel, cast iron, and enameled cast iron pans, but induction{" "}
+          <em>does not work</em> on copper, glass, or aluminum pans.
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.thespruceeats.com/what-is-the-best-cookware-for-induction-cooktops-908920">
+            The Spruce Eats - How to Tell If Your Cookware Is Induction
+            Compatible
+          </a>
+        </p>
+
+        <h3>Are induction stoves worse than gas?</h3>
+
+        <p>
+          There might be some downsides with induction, like not working with
+          certain types of pans and a lack of visibility to the heat output
+          (since induction works via invisible magnetism) but it also has a huge
+          list of benefits including:
+          <ul>
+            <li>Faster heating time (like water boiling quicker)</li>
+            <li>Heat level changes apply rapidly</li>
+            <li>Cook surface stays cool</li>
+            <li>Automatically shuts off when pan is removed</li>
+          </ul>
+        </p>
+
+        <h3>
+          Is induction cooking the same as an electric stove with those glowing
+          red coils?
+        </h3>
+
+        <p>
+          Not at all! A stove with red coils that heat up your pan (either
+          directly or through a glass surface) are what is known as an electric
+          resistive cooktop or just electric cooktop. These are electrically
+          powered (and so don't burn fossil fuels) but they aren't as
+          responsive, fast, or efficient as induction cooktops. They work by
+          heating using electrical resistance to heat up a coil (just like your
+          toaster) which means a lot of heat is wasted transferring the energy
+          through the glass surface and the pot. Induction cooking works by
+          using electromagnetism to heat a pot or pan directly - which means
+          almost all of the heat makes it into your food.
+        </p>
+
+        <p>
+          However, if you have a working electric resistance cooktop and you are
+          satisfied with it - keep it! There's no climate benefit to switching
+          from an electric cooktop to an induction cooktop - the benefit comes
+          from switching a gas powered stove to an electric one that can be
+          powered by clean renewable energy.
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.forbes.com/home-improvement/kitchen/induction-vs-electric-cooktop/">
+            Forbes Home - Induction Vs Electric Cooktop: What’s The Difference?
+          </a>
         </p>
       </div>
     </Layout>
