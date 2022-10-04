@@ -18,10 +18,10 @@ const FAQ = () => {
         </p>
 
         {/*
-          * Heat Pumps Section
+         * Heat Pumps Section
          */}
 
-         <div className="row ml-0">
+        <div className="row ml-0">
           <h2>Heat Pumps</h2>
 
           <div className="appliance-sheet -heater -clean ml-4"></div>
