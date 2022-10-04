@@ -1,0 +1,17 @@
+.faq .appliance-sheet.-heater.-clean {
+    height: 80px;
+    background-size: 280% auto;
+    aspect-ratio: 1/0.65;
+    background-position: 103% 36%;
+}
+
+.car-sheet.-truck.-clean {
+    height: 80px;
+}
+
+.faq .appliance-sheet.-stove.-clean {
+    height: 100px;
+    aspect-ratio: 1/1.4;
+    background-size: 350% auto;
+    background-position: 43% 17%;
+}

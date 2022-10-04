@@ -17,7 +17,15 @@ const FAQ = () => {
           get into this one page.
         </p>
 
-        <h2>Heat Pumps</h2>
+        {/*
+          * Heat Pumps Section
+         */}
+
+         <div className="row ml-0">
+          <h2>Heat Pumps</h2>
+
+          <div className="appliance-sheet -heater -clean ml-4"></div>
+        </div>
 
         <h3>Do heat pumps work in colder climates?</h3>
 
@@ -47,10 +55,31 @@ const FAQ = () => {
           .
         </p>
 
+        <h3>Are heat pumps for heating, or for cooling?</h3>
+
+        <p>
+          Heat pumps are for both - they can heat and cool your home! There are
+          a variety of different types of heat pumps, but they all work like a
+          reversible air conditioner, moving heat from inside to outside
+          (cooling) or outside to inside (heating).
+        </p>
+
+        <p>
+          Learn more from{" "}
+          <a href="https://www.energy.gov/energysaver/heat-pump-systems">
+            Energy.gov - Heat Pump Systems
+          </a>
+          .
+        </p>
+
         {/**
          * Electric Vehicle Section
          */}
-        <h2>Electric Vehicles (EVs)</h2>
+        <div className="row ml-0">
+          <h2>Electric Vehicles (EVs)</h2>
+
+          <div className="car-sheet -truck -clean ml-4"></div>
+        </div>
 
         <h3>
           Are EVs <em>really</em> lower emission, even with a dirty grid?
@@ -203,47 +232,13 @@ const FAQ = () => {
         </p>
 
         {/**
-         * Heat Pumps Section
-         */}
-        <h2>Heat Pumps</h2>
-
-        <h3>Are heat pumps for heating, or for cooling?</h3>
-
-        <p>
-          Heat pumps are for both - they can heat and cool your home! There are
-          a variety of different types of heat pumps, but they all work like a
-          reversible air conditioner, moving heat from inside to outside
-          (cooling) or outside to inside (heating).
-        </p>
-
-        <p>
-          Learn more from{" "}
-          <a href="https://www.energy.gov/energysaver/heat-pump-systems">
-            Energy.gov - Heat Pump Systems
-          </a>
-          .
-        </p>
-
-        <h3>But do heat pumps work in cold climates?</h3>
-
-        <p>
-          Absolutely - although heat pumps used to have issues in lower
-          temperatures, modern heat pumps can work great even in the cold
-          climates of the Northeast and Midwest - they are even popular in chily
-          Norway!
-        </p>
-
-        <p>
-          Learn more from{" "}
-          <a href="https://www.consumerreports.org/heat-pumps/can-heat-pumps-actually-work-in-cold-climates-a4929629430">
-            Consumer Reports - Can Heat Pumps Actually Work in Cold Climates?
-          </a>
-        </p>
-
-        {/**
          * Induction Stoves Section
          */}
-        <h2>Induction Stoves</h2>
+        <div className="row ml-0">
+          <h2>Induction Stoves</h2>
+
+          <div className="appliance-sheet -stove -clean ml-4"></div>
+        </div>
 
         <h3>Do induction stoves only work on certain pans?</h3>
 
