@@ -199,7 +199,7 @@ const ChoroplethMap = ({
         {emissions && sidebar ? (
           <Col lg={3} className="map-legend">
             <div className="h6 mt-4 font-weight-bold">
-              Climate pollution in 2018
+              Climate pollution
             </div>
             <div className="legendKey">
               <span className="keyText">
@@ -229,6 +229,7 @@ const ChoroplethMap = ({
               <span className="keyColor choroplethNull"></span>
               <span className="keyText">Data not available</span>
             </div>
+            <br /><span className="text-secondary keyText">Source: World Resource Institute, 2018</span>
           </Col>
         ) : null}
         <Col lg={{ span: sidebar ? 9 : 12 }}>

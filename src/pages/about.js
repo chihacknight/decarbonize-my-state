@@ -266,7 +266,7 @@ const AboutPage = ({ data }) => {
               className="font-weight-bold"
               href="https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions"
             >
-              Climate Watch - U.S. States Greenhouse Gas Emissions
+              Climate Watch - U.S. States Greenhouse Gas Emissions 1990 to 2018
             </a>
             <br />
             World Resources Institute
