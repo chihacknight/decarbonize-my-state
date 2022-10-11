@@ -336,7 +336,10 @@ export default function StateDetailsPage({ location, data }) {
         <p className="small">
           <strong>Note:</strong> Grey area indicates missing data due to
           processing delays.
-          <br /><span className="text-secondary">Source: World Resource Institute, 2018</span>
+          <br />
+          <span className="text-secondary">
+            Source: World Resource Institute, 2018
+          </span>
         </p>
         <SimpleAreaChart
           emissionsData={emissionsByYear}
@@ -366,7 +369,10 @@ export default function StateDetailsPage({ location, data }) {
             activeKey={scrollGraphSettings.active}
             greenKeys={scrollGraphSettings.green}
           />
-          <br /><span className="text-secondary keyText">Source: World Resource Institute, 2018</span>
+          <br />
+          <span className="text-secondary keyText">
+            Source: World Resource Institute, 2018
+          </span>
         </div>
 
         {/*
@@ -495,7 +501,10 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
-            <span className="mt-4 text-secondary keyText">Source: Microsoft Maps, Mar 2021; National Renewable Energy Laboratory (NREL), Dec 2021</span>
+            <span className="mt-4 text-secondary keyText">
+              Source: Microsoft Maps, Mar 2021; National Renewable Energy
+              Laboratory (NREL), Dec 2021
+            </span>
           </div>
 
           <div id="bld-end" className="scrollable-sect change-text mt-8 mb-4">
@@ -579,7 +588,9 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={pctEv}
               fossilPct={pctNonEv}
             />
-            <span className="mt-4 text-secondary keyText">Source: U.S. Department of Transportation (DOT), Feb 2021</span>
+            <span className="mt-4 text-secondary keyText">
+              Source: U.S. Department of Transportation (DOT), Feb 2021
+            </span>
           </div>
 
           <div
@@ -723,7 +734,9 @@ export default function StateDetailsPage({ location, data }) {
                   </a>
                 </div>
               </div>
-              <span className="mt-4 text-secondary keyText">Source: U.S. Environmental Protection Agency (EPA), Feb 2021</span>
+              <span className="mt-4 text-secondary keyText">
+                Source: U.S. Environmental Protection Agency (EPA), Feb 2021
+              </span>
 
               <p className="mt-8">But wait!</p>
 
@@ -762,7 +775,9 @@ export default function StateDetailsPage({ location, data }) {
                   percentRemaining={totalRemaining}
                 />
               </p>
-              <span className="mt-4 text-secondary keyText">Source: U.S. Energy Information Administration (EIA), Apr 2022</span>
+              <span className="mt-4 text-secondary keyText">
+                Source: U.S. Energy Information Administration (EIA), Apr 2022
+              </span>
             </div>
           )}
           {/* Show standard outro section if power emissions are non-zero */}
