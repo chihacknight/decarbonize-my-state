@@ -231,7 +231,9 @@ export default function StateDetailsPage({ location, data }) {
   const currentWindMWStr = numberToHumanString(currentWindMW)
 
   // #### Number of Turbines and Football-fields of solar panels. ####
-  const turbinesNeededNumber = Math.ceil(targetGenByWindMW / 843 * 12)
+  // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
+  const averageTurbinePowerGeneratedMonthKWH = 843;
+  const turbinesNeededNumber = Math.ceil(targetGenByWindMW / averageTurbinePowerGeneratedMonthKWH * 12)
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
