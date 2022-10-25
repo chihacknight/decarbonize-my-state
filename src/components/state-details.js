@@ -9,6 +9,7 @@ import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
+import { getShortCitation } from "../constants/source-citations.js"
 
 /**
  * Images - suffix with Img for clarity from actual JS files/variables
@@ -338,7 +339,7 @@ export default function StateDetailsPage({ location, data }) {
           processing delays.
           <br />
           <span className="text-secondary">
-            Source: World Resource Institute, 2018
+            Source: { getShortCitation("emissions") }
           </span>
         </p>
         <SimpleAreaChart
@@ -371,7 +372,7 @@ export default function StateDetailsPage({ location, data }) {
           />
           <br />
           <span className="text-secondary keyText">
-            Source: World Resource Institute, 2018
+            Source: { getShortCitation("emissions") }
           </span>
         </div>
 
@@ -502,8 +503,7 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={weightedFossilBuildingsPct}
             />
             <span className="mt-4 text-secondary keyText">
-              Source: Microsoft Maps, Mar 2021; National Renewable Energy
-              Laboratory (NREL), Dec 2021
+              Source: { getShortCitation("building-footprints") }; { getShortCitation("building-energy") }
             </span>
           </div>
 
@@ -589,7 +589,7 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={pctNonEv}
             />
             <span className="mt-4 text-secondary keyText">
-              Source: U.S. Department of Transportation (DOT), Feb 2021
+              Source: { getShortCitation("vehicles") }
             </span>
           </div>
 
@@ -735,7 +735,7 @@ export default function StateDetailsPage({ location, data }) {
                 </div>
               </div>
               <span className="mt-4 text-secondary keyText">
-                Source: U.S. Environmental Protection Agency (EPA), Feb 2021
+                Source: { getShortCitation("power-plants") }
               </span>
 
               <p className="mt-8">But wait!</p>
@@ -776,7 +776,7 @@ export default function StateDetailsPage({ location, data }) {
                 />
               </p>
               <span className="mt-4 text-secondary keyText">
-                Source: U.S. Energy Information Administration (EIA), Apr 2022
+                Source: { getShortCitation("power-generation") }
               </span>
             </div>
           )}
