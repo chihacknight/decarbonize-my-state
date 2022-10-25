@@ -230,7 +230,7 @@ const ChoroplethMap = ({
             </div>
             <br />
             <span className="text-secondary keyText">
-              Source: { getShortCitation("emissions") }
+              Source: {getShortCitation("emissions")}
             </span>
           </Col>
         ) : null}

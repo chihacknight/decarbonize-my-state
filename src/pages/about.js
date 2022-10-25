@@ -262,23 +262,18 @@ const AboutPage = ({ data }) => {
             of this open source project.
           </p>
           <h3 className="pt-2 h4">U.S. Emissions By State</h3>
-          { getLongCitation("emissions") }
-          
+          {getLongCitation("emissions")}
           <h3 className="pt-2 h4">
             U.S. Building Footprints And Electrification
           </h3>
-          { getLongCitation("building-footprints") }
-          { getLongCitation("building-energy") }
-          
+          {getLongCitation("building-footprints")}
+          {getLongCitation("building-energy")}
           <h3 className="pt-2 h4">Vehicles By State</h3>
-          { getLongCitation("vehicles") }
-
+          {getLongCitation("vehicles")}
           <h3 className="pt-2 h4">Power Plants By State</h3>
-          { getLongCitation("power-plants") }
-
+          {getLongCitation("power-plants")}
           <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
-          { getLongCitation("power-generation") }
-
+          {getLongCitation("power-generation")}
           <h2 className="pt-3">Code</h2>
           <p>
             All the code for this site is open source and available on{" "}

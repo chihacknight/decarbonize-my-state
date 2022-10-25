@@ -339,7 +339,7 @@ export default function StateDetailsPage({ location, data }) {
           processing delays.
           <br />
           <span className="text-secondary">
-            Source: { getShortCitation("emissions") }
+            Source: {getShortCitation("emissions")}
           </span>
         </p>
         <SimpleAreaChart
@@ -372,7 +372,7 @@ export default function StateDetailsPage({ location, data }) {
           />
           <br />
           <span className="text-secondary keyText">
-            Source: { getShortCitation("emissions") }
+            Source: {getShortCitation("emissions")}
           </span>
         </div>
 
@@ -503,7 +503,8 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={weightedFossilBuildingsPct}
             />
             <span className="mt-4 text-secondary keyText">
-              Source: { getShortCitation("building-footprints") }; { getShortCitation("building-energy") }
+              Source: {getShortCitation("building-footprints")};{" "}
+              {getShortCitation("building-energy")}
             </span>
           </div>
 
@@ -589,7 +590,7 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={pctNonEv}
             />
             <span className="mt-4 text-secondary keyText">
-              Source: { getShortCitation("vehicles") }
+              Source: {getShortCitation("vehicles")}
             </span>
           </div>
 
@@ -735,7 +736,7 @@ export default function StateDetailsPage({ location, data }) {
                 </div>
               </div>
               <span className="mt-4 text-secondary keyText">
-                Source: { getShortCitation("power-plants") }
+                Source: {getShortCitation("power-plants")}
               </span>
 
               <p className="mt-8">But wait!</p>
@@ -776,7 +777,7 @@ export default function StateDetailsPage({ location, data }) {
                 />
               </p>
               <span className="mt-4 text-secondary keyText">
-                Source: { getShortCitation("power-generation") }
+                Source: {getShortCitation("power-generation")}
               </span>
             </div>
           )}
