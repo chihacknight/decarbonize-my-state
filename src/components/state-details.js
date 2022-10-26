@@ -9,6 +9,7 @@ import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
+import { getShortCitation } from "../constants/source-citations.js"
 
 /**
  * Images - suffix with Img for clarity from actual JS files/variables
@@ -336,6 +337,10 @@ export default function StateDetailsPage({ location, data }) {
         <p className="small">
           <strong>Note:</strong> Grey area indicates missing data due to
           processing delays.
+          <br />
+          <span className="text-secondary">
+            Source: {getShortCitation("emissions")}
+          </span>
         </p>
         <SimpleAreaChart
           emissionsData={emissionsByYear}
@@ -365,6 +370,10 @@ export default function StateDetailsPage({ location, data }) {
             activeKey={scrollGraphSettings.active}
             greenKeys={scrollGraphSettings.green}
           />
+          <br />
+          <span className="text-secondary keyText">
+            Source: {getShortCitation("emissions")}
+          </span>
         </div>
 
         {/*
@@ -493,6 +502,10 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
+            <span className="mt-4 text-secondary keyText">
+              Source: {getShortCitation("building-footprints")};{" "}
+              {getShortCitation("building-energy")}
+            </span>
           </div>
 
           <div id="bld-end" className="scrollable-sect change-text mt-8 mb-4">
@@ -576,6 +589,9 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={pctEv}
               fossilPct={pctNonEv}
             />
+            <span className="mt-4 text-secondary keyText">
+              Source: {getShortCitation("vehicles")}
+            </span>
           </div>
 
           <div
@@ -719,6 +735,9 @@ export default function StateDetailsPage({ location, data }) {
                   </a>
                 </div>
               </div>
+              <span className="mt-4 text-secondary keyText">
+                Source: {getShortCitation("power-plants")}
+              </span>
 
               <p className="mt-8">But wait!</p>
 
@@ -757,6 +776,9 @@ export default function StateDetailsPage({ location, data }) {
                   percentRemaining={totalRemaining}
                 />
               </p>
+              <span className="mt-4 text-secondary keyText">
+                Source: {getShortCitation("power-generation")}
+              </span>
             </div>
           )}
           {/* Show standard outro section if power emissions are non-zero */}

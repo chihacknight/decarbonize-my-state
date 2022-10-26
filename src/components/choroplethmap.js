@@ -5,6 +5,7 @@ import { navigate } from "gatsby"
 
 import USMap from "../images/svg/usaStatesNoTerritories.js"
 import jenks from "./jenks"
+import { getShortCitation } from "../constants/source-citations.js"
 
 function CustomHover({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {
@@ -198,9 +199,7 @@ const ChoroplethMap = ({
       <Row className="map-row">
         {emissions && sidebar ? (
           <Col lg={3} className="map-legend">
-            <div className="h6 mt-4 font-weight-bold">
-              Climate pollution in 2018
-            </div>
+            <div className="h6 mt-4 font-weight-bold">Climate pollution</div>
             <div className="legendKey">
               <span className="keyText">
                 in millions of metric tons of CO2e
@@ -229,6 +228,10 @@ const ChoroplethMap = ({
               <span className="keyColor choroplethNull"></span>
               <span className="keyText">Data not available</span>
             </div>
+            <br />
+            <span className="text-secondary keyText">
+              Source: {getShortCitation("emissions")}
+            </span>
           </Col>
         ) : null}
         <Col lg={{ span: sidebar ? 9 : 12 }}>

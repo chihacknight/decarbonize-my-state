@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SingleBarChart from "../components/singlebar"
 import { getLatestUsData } from "../components/getLatestEmissions"
+import { getLongCitation } from "../constants/source-citations.js"
 
 const getCleanData = data => {
   let mutableDataObj = {}
@@ -261,84 +262,18 @@ const AboutPage = ({ data }) => {
             of this open source project.
           </p>
           <h3 className="pt-2 h4">U.S. Emissions By State</h3>
-          <p>
-            <a
-              className="font-weight-bold"
-              href="https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions"
-            >
-              Climate Watch - U.S. States Greenhouse Gas Emissions
-            </a>
-            <br />
-            World Resources Institute
-            <br />
-            March 23, 2021
-          </p>
+          {getLongCitation("emissions")}
           <h3 className="pt-2 h4">
             U.S. Building Footprints And Electrification
           </h3>
-          <p>
-            <a
-              className="font-weight-bold"
-              href="https://github.com/microsoft/USBuildingFootprints"
-            >
-              U.S. Building Footprints
-            </a>
-            <br />
-            Microsoft Maps
-            <br />
-            Mar 27, 2021
-          </p>
-          <p>
-            <a
-              className="font-weight-bold"
-              href="https://www.nrel.gov/docs/fy22osti/83063.pdf"
-            >
-              U.S. Building Stock Characterization Study
-            </a>
-            <br />
-            The National Renewable Energy Laboratory (NREL)
-            <br />
-            Dec 2021
-          </p>
+          {getLongCitation("building-footprints")}
+          {getLongCitation("building-energy")}
           <h3 className="pt-2 h4">Vehicles By State</h3>
-          <p>
-            <a
-              className="font-weight-bold"
-              href="https://www.fhwa.dot.gov/policyinformation/statistics/2017/mv1.cfm"
-            >
-              State Motor-Vehicle Registrations
-            </a>
-            <br />
-            U.S. Department of Transportation
-            <br />
-            Feb 2021
-          </p>
+          {getLongCitation("vehicles")}
           <h3 className="pt-2 h4">Power Plants By State</h3>
-          <p>
-            <a
-              className="font-weight-bold"
-              href="https://www.epa.gov/airmarkets/power-plants-and-neighboring-communities#mapping"
-            >
-              Environmental Justice Screening and Mapping Tool (EJScreen)
-            </a>
-            <br />
-            U.S. Environmental Protection Agency (EPA)
-            <br />
-            Jan 27, 2021
-          </p>
+          {getLongCitation("power-plants")}
           <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
-          <p>
-            <a
-              className="font-weight-bold"
-              href="https://www.eia.gov/opendata/v1/qb.php?category=1"
-            >
-              Electric generation by source 2001-2021
-            </a>
-            <br />
-            U.S. Energy Information Administration (EIA)
-            <br />
-            Updated Apr 2022
-          </p>
+          {getLongCitation("power-generation")}
           <h2 className="pt-3">Code</h2>
           <p>
             All the code for this site is open source and available on{" "}
