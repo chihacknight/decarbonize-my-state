@@ -233,8 +233,8 @@ export default function StateDetailsPage({ location, data }) {
   // #### Number of Turbines and Football-fields of solar panels. ####
   // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
   const averageTurbinePowerGenerated = 2.75
-  const turbinesNeededNumber = Math.ceil(
-    targetGenByWindMW / averageTurbinePowerGenerated
+  const turbinesNeededNumber = numberToHumanString(Math.ceil(
+    targetGenByWindMW / averageTurbinePowerGenerated)
   )
 
   // #### POWER PLANTS ####
