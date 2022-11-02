@@ -232,8 +232,10 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### Number of Turbines and Football-fields of solar panels. ####
   // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
-  const averageTurbinePowerGeneratedMonthKWH = 843;
-  const turbinesNeededNumber = Math.ceil(targetGenByWindMW / averageTurbinePowerGeneratedMonthKWH * 12)
+  const averageTurbinePowerGenerated = 2.75
+  const turbinesNeededNumber = Math.ceil(
+    targetGenByWindMW / averageTurbinePowerGenerated
+  )
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -294,7 +296,7 @@ export default function StateDetailsPage({ location, data }) {
   }
   // Description will retain formatting, so this needs to be single line
   const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${cutPerYearPrcnt}% a year. Electrification can help us get there.`
-  
+
   return (
     <Layout>
       <SEO
@@ -737,8 +739,8 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-6">
-                With the average wind turbine generating 843 Megawatts per month, that's{" "}
-                <strong>{turbinesNeededNumber}</strong> turbines.
+                With the average wind turbine generating 843 Megawatts per
+                month, that's <strong>{turbinesNeededNumber}</strong> turbines.
               </p>
 
               <p className="mt-5">
