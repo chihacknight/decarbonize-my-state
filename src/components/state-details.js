@@ -739,7 +739,7 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-6">
-                With the average wind turbine generating 2.75, that's{" "}
+                With the average wind turbine generating 2.75, that's about{" "}
                 <strong>{turbinesNeededNumber}</strong> turbines.
               </p>
 
