@@ -739,8 +739,8 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-6">
-                With the average wind turbine generating 843 Megawatts per
-                month, that's <strong>{turbinesNeededNumber}</strong> turbines.
+                With the average wind turbine generating 2.75, that's{" "}
+                <strong>{turbinesNeededNumber}</strong> turbines.
               </p>
 
               <p className="mt-5">
