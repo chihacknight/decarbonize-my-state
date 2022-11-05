@@ -232,9 +232,9 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### Number of Turbines and Football-fields of solar panels. ####
   // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
-  const averageTurbinePowerGenerated = 2.75
+  const averageWindTurbineCapacityMw = 2.75
   const turbinesNeededNumber = numberToHumanString(
-    Math.ceil(targetGenByWindMW / averageTurbinePowerGenerated)
+    Math.ceil(targetGenByWindMW / averageWindTurbineCapacityMw)
   )
 
   // #### POWER PLANTS ####
@@ -739,8 +739,8 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-6">
-                Since the average wind turbine produces 2.75 MW of capacity,{" "}
-                {placeTitle} would need to install about{" "}
+                Since the average wind turbine providees 2.75 MW of peak
+                capacity, {placeTitle} would need to install about{" "}
                 <strong>{turbinesNeededNumber}</strong> turbines.
               </p>
 
