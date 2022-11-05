@@ -739,7 +739,7 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-6">
-                Since the average wind turbine providees 2.75 MW of peak
+                Since the average wind turbine provides 2.75 MW of peak
                 capacity, {placeTitle} would need to install about{" "}
                 <strong>{turbinesNeededNumber}</strong> turbines.
               </p>
