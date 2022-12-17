@@ -152,7 +152,7 @@ const SocialCardPage = ({ location, data }) => {
         <div className="col-6 d-block d-xl-none ml-2 justify-content-end">
           {/* state emissions */}
           <p className="text-right pt-2" style={{ fontSize: "15px" }}>
-            CO2 Equivalent Emissions in {placeTitle} by Source
+            CO<sub>2</sub> Equivalent Emissions in {placeTitle} by Source
           </p>
           <div className="justify-content-end ml-4 pl-4">
             <SingleBarChart

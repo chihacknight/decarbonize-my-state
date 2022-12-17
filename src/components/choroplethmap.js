@@ -11,9 +11,9 @@ function CustomHover({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {
     return (
       <>
-        <strong>{activeRegion.name}</strong>
-        <br />
-        {emissions[activeRegion.id]} MMTCO2e
+        <strong className="h6">{activeRegion.name}</strong><br/>
+        {emissions[activeRegion.id]} MMTCO<sub>2</sub>e<br/>
+        <strong>View Details</strong>
       </>
     )
   } else {
@@ -202,7 +202,7 @@ const ChoroplethMap = ({
             <div className="h6 mt-4 font-weight-bold">Climate pollution</div>
             <div className="legendKey">
               <span className="keyText">
-                in millions of metric tons of CO2e
+                In millions of metric tons of CO<sub>2</sub> equivalent
               </span>
             </div>
             {buckets.map((bucket, i) => {
