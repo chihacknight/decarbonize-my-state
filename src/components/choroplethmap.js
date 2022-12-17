@@ -14,7 +14,9 @@ function CustomHover({ emissions, activeRegion }) {
         <strong className="h6">{activeRegion.name}</strong>
         <br />
         {emissions[activeRegion.id]} MMTCO<sub>2</sub>e<br />
-        <strong>View Details</strong>
+        <div className="font-weight-bold mb-1">
+          <u>View Details</u>
+        </div>
       </>
     )
   } else {

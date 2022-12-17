@@ -57,9 +57,9 @@ const IndexPage = ({ data }) => {
 
       <hr></hr>
 
-      <p className="h5 text-center mt-6 mb-5 font-weight-bold">
-        Click Your State to See How It Can End Climate Pollution by 2050
-      </p>
+      <h2 className="text-center mt-6 mb-5">
+        See Details On How Your State Can Decarbonize
+      </h2>
 
       <div className="mb-md-5">
         <ChoroplethMap emissions={mapData} />
