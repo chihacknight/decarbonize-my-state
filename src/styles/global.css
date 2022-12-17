@@ -37,8 +37,15 @@ body {
   color: #33342e;
 }
 
+/* Make links blue and underlined by default for clarity */
 a {
-  color: #8e2d13;
+  color: var(--link-blue);
+  text-decoration: underline;
+}
+
+/* Make link underline thicken on hover or focus */
+a:hover, a:focus {
+  text-decoration-thickness: 3px;
 }
 
 /* Bold all heading elements by default */
@@ -211,6 +218,8 @@ path:focus,
   border-bottom: 1px solid #aaaaaa;
   z-index: 100;
 }
+
+.nav-link { text-decoration: none; }
 
 /** Style header title */
 .nav-text {
