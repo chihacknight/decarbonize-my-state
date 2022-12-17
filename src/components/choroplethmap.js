@@ -11,8 +11,9 @@ function CustomHover({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {
     return (
       <>
-        <strong className="h6">{activeRegion.name}</strong><br/>
-        {emissions[activeRegion.id]} MMTCO<sub>2</sub>e<br/>
+        <strong className="h6">{activeRegion.name}</strong>
+        <br />
+        {emissions[activeRegion.id]} MMTCO<sub>2</sub>e<br />
         <strong>View Details</strong>
       </>
     )

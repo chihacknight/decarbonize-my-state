@@ -56,15 +56,17 @@ const Terminology = () => {
           <dd>
             A unit of energy. One megawatt can power 400-900 homes a year.
           </dd>
-          <dt>MTCO<sub>2</sub>e</dt>{" "}
+          <dt>
+            MTCO<sub>2</sub>e
+          </dt>{" "}
           <dd>
             {" "}
             Metric tons of carbon dioxide equivalent or MTCO<sub>2</sub>e is the
             unit of measurement in this tool. The unit "CO<sub>2</sub>e"
             represents an amount of a greenhouse gas whose atmospheric impact
-            has been standardized to that of one unit mass of carbon dioxide
-            (CO<sub>2</sub>), based on the global warming potential (GWP) of
-            the gas in question.
+            has been standardized to that of one unit mass of carbon dioxide (CO
+            <sub>2</sub>), based on the global warming potential (GWP) of the
+            gas in question.
           </dd>
           <dt>Renewable Energy</dt>
           <dd>
