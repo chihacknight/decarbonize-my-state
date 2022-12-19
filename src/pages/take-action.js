@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 // image resources
-import ElectrifyEverything from "../images/electrify-everything.jpg"
+import HomeElectrificationDiagram from "../images/electrification-appliances.webp"
 import ClimateCabinet from "../images/climate-cabinet.png"
 
 const TakeActionPage = () => {
@@ -12,45 +12,96 @@ const TakeActionPage = () => {
     <Layout>
       <SEO title="Take Action! :: Decarbonize My State" />
       <div className="container">
-        <h1 id="main">Ready to do your part?</h1>
+        <h1 id="main">Take Action!</h1>
+
+        <h2>Ready to do your part?</h2>
 
         <p>
-          The best way to decarbonize your state is to electrify it. There are
-          two big ways you can do your part.
+          The best way to decarbonize your state is to electrify it, and there
+          are two big ways you can do your part -{" "}
+          <a href="#electrify">personally electrifying your machines</a> and{" "}
+          <a href="#get-political">getting political</a>!
         </p>
 
         <div className="row">
-          <div className="col-lg-9">
-            <h2>Get Personal: Electrify your machines!</h2>
+          <h2 className="col-lg-12 mb-4" id="electrify">
+            Get Personal: Electrify your machines!
+          </h2>
+
+          <div className="col-lg-8">
+            <p>
+              <img
+                className="img-fluid img-thumbnail"
+                src={HomeElectrificationDiagram}
+                alt="Electrify Everything in Your Home by Rewiring America"
+                title="Electrify Everything in Your Home by Rewiring America"
+              />
+
+              <small>
+                <span class="font-weight-bold">Source:</span>{" "}
+                <a
+                  href="https://www.rewiringamerica.org/electrify-home-guide"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Electrify Home Guide, Rewiring America
+                </a>
+              </small>
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-8">
             <p>
               For most Americans, more than half your carbon footprint comes
               from how you heat and power your home and from the car you drive.
               More than cutting out meat or single use plastics, the most
               impactful thing you can do – by far – is to eliminate your
-              personal burning of fossil fuels:
+              personal burning of fossil fuels.
             </p>
-            <ol>
+
+            <ol className="font-weight-bold">
               <li>
-                Replace your heating system with an{" "}
-                <a
-                  href="https://en.wikipedia.org/wiki/Heat_pump"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  electric heat pump
-                </a>
-                , your gas stove with an{" "}
-                <a
-                  href="https://en.wikipedia.org/wiki/Induction_cooking"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  induction stove
-                </a>
-                , and your water heater with an electric one
+                Replace your gas appliances with electric, including:
+                <ul className="mb-3">
+                  <li>
+                    Replacing your gas heating system to an{" "}
+                    <a
+                      href="https://en.wikipedia.org/wiki/Heat_pump"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      electric heat pump
+                    </a>
+                  </li>
+                  <li>
+                    Replacing your gas stove with an{" "}
+                    <a
+                      href="https://en.wikipedia.org/wiki/Induction_cooking"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      induction stove
+                    </a>
+                  </li>
+                  <li>Replacing your gas water heater to an electric one</li>
+                </ul>
               </li>
-              <li>If you drive, your next car must be electric</li>
-              <li>Produce your own power with solar panels</li>
+
+              <li className="mb-3">
+                If you drive, <strong>your next car must be electric</strong>
+              </li>
+
+              <li>
+                Produce your own power with solar panels or enroll in{" "}
+                <a
+                  href="https://www.energy.gov/eere/solar/community-solar-basics"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  community solar
+                </a>
+              </li>
             </ol>
             <p>
               40% of US climate pollution comes from decisions made around the
@@ -59,32 +110,36 @@ const TakeActionPage = () => {
             </p>
 
             <p>
-              Check out Rewiring America's free guide{" "}
+              Check out Rewiring America's free guide,{" "}
               <a
                 href="https://www.rewiringamerica.org/electrify-home-guide"
                 target="_blank"
                 rel="noreferrer"
               >
                 Electrify Everything in Your Home
-              </a>{" "}
-              for steps on how to get started.
+              </a>
+              , for steps on how to get started.
             </p>
 
             <div>
               <h3 className="mb-2">
-                <strong>
-                  Congress just passed a new bill making all of these cheaper!
-                </strong>
+                Congress Passed The IRA Making All Of These Cheaper!
               </h3>
-              With the passing of the Inflation Reduction Act, there are now{" "}
-              <a
-                href="https://www.fastcompany.com/90780252/how-to-decarbonize-your-house-inflation-reduction-act-incentives?partner=rss&utm_campaign=rss+fastcompany&utm_content=rss&utm_medium=feed&utm_source=rss"
-                target="_blank"
-                rel="noreferrer"
-              >
-                new national rebates for electrification of household
-                appliances.
-              </a>
+
+              <p>
+                With the passing of the Inflation Reduction Act (IRA), there are
+                now{" "}
+                <a
+                  href="https://www.fastcompany.com/90780252/how-to-decarbonize-your-house-inflation-reduction-act-incentives?partner=rss&utm_campaign=rss+fastcompany&utm_content=rss&utm_medium=feed&utm_source=rss"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  new national rebates for electrification of household
+                  appliances
+                </a>
+                .
+              </p>
+
               <ul className="mt-2">
                 <li>
                   Up to $7,500 for a new electric vehicle or $4,000 for a used
@@ -111,42 +166,33 @@ const TakeActionPage = () => {
                   pump dryer
                 </li>
               </ul>
-              <a
-                href="https://www.rewiringamerica.org/app/ira-calculator"
-                target="_blank"
-                rel="noreferrer"
-              >
-                See how much money will you get with the Inflation Reduction Act
-              </a>
-            </div>
-          </div>
 
-          <div className="col-lg-3">
-            <p>
-              <a
-                href="https://www.rewiringamerica.org/electrify-home-guide"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  className="img-fluid img-thumbnail"
-                  src={ElectrifyEverything}
-                  alt="Electrify Everything in Your Home by Rewiring America"
-                  title="Electrify Everything in Your Home by Rewiring America"
-                />
-              </a>
-            </p>
+              <p>
+                See how much money will you get with the Inflation Reduction Act
+                with the{" "}
+                <a
+                  href="https://www.rewiringamerica.org/app/ira-calculator"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Rewiring America Inflation Reduction Act Savings Calculator
+                </a>
+                !
+              </p>
+            </div>
           </div>
         </div>
 
         <div className="row">
           <div className="col-lg-9">
-            <h2>Get Political: Electrify the rest!</h2>
+            <h2 id="get-political">Get Political: Electrify the rest!</h2>
+
             <p>
               Discouraged by the inaction at the federal level? We can still
               win: 50-75% of the policies we need to get to zero are actually
               state and local. And we’re starting to win them!
             </p>
+
             <p>
               By all means, electrify your own machines. To electrify the rest,
               support the candidates and issue campaigns already fighting to
@@ -155,24 +201,9 @@ const TakeActionPage = () => {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-lg-9">
-            <h3>Elect Climate Candidates</h3>
-            <p>
-              You can take meaningful action right now by donating to{" "}
-              <strong>Climate Cabinet</strong>, a political action group that
-              helps climate champions run for local office and pass critical
-              legislation.
-            </p>
-            <p>
-              <a
-                className="btn btn-success"
-                href="https://secure.actblue.com/donate/climateslate?refcode=decarbmystate"
-              >
-                Donate to the Climate Slate by Climate Cabinet
-              </a>
-            </p>
-          </div>
+        <h3>Elect Climate Candidates</h3>
+
+        <div className="row mt-4">
           <div className="col-lg-3">
             <p>
               <a
@@ -188,11 +219,46 @@ const TakeActionPage = () => {
               </a>
             </p>
           </div>
+
+          <div className="col-lg-6">
+            <p>
+              You can take meaningful action right now by donating to{" "}
+              <strong>Climate Cabinet</strong>, a political action group that
+              helps climate champions run for local office and pass critical
+              legislation. They score candidates based on their climate
+              credentials and provide information to candidates on their{" "}
+              <a
+                href="https://www.climatecabinetaction.org/climate-cabinet-scorecard"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Climate Cabinet Scorecard
+              </a>
+              .
+            </p>
+            <p>
+              Climate Cabinet also creates a curated "Climate Slate", of climate
+              friendly candidates in local races - and you can donate to support
+              all of them!
+            </p>
+
+            <p>
+              <a
+                className="btn btn-success"
+                href="https://secure.actblue.com/donate/climateslate?refcode=decarbmystate"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Donate to the Climate Slate by Climate Cabinet
+              </a>
+            </p>
+          </div>
         </div>
 
         <div className="row">
           <div className="col-lg-9">
             <h3>Pressure Electeds to Pass Climate Policy</h3>
+
             <p>
               It’s not enough to elect better candidates - we also have to
               pressure existing electeds to pass key climate policy now.

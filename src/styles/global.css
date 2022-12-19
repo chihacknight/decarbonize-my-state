@@ -23,11 +23,15 @@ body,
 }
 
 body *:focus {
-  outline: dashed 0.25rem #993404;
+  outline: dashed 0.25rem var(--outline-color);
+}
+
+.btn {
+  text-decoration: none;
 }
 
 .btn:focus {
-  outline: dashed 0.25rem #993404;
+  outline: dashed 0.25rem var(--outline-color);
 }
 
 body {
@@ -37,8 +41,16 @@ body {
   color: #33342e;
 }
 
+/* Make links blue and underlined by default for clarity */
 a {
-  color: #8e2d13;
+  color: var(--link-blue);
+  text-decoration: underline;
+}
+
+/* Make link underline thicken on hover or focus */
+a:hover,
+a:focus {
+  text-decoration-thickness: 0.125em;
 }
 
 /* Bold all heading elements by default */
@@ -49,6 +61,15 @@ h4,
 h5,
 h6 {
   font-weight: bold !important;
+}
+
+h1:target,
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  border-bottom: solid 0.25rem var(--outline-color);
 }
 
 /* Add some spacing to <h2> elements by default for text pages */
@@ -210,6 +231,10 @@ path:focus,
   background-color: #fff;
   border-bottom: 1px solid #aaaaaa;
   z-index: 100;
+}
+
+.nav-link {
+  text-decoration: none;
 }
 
 /** Style header title */
