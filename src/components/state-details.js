@@ -307,7 +307,7 @@ export default function StateDetailsPage({ location, data }) {
   return (
     <Layout>
       <SEO
-        title={`What does it take to decarbonize ${placeTitle}?`}
+        title={`${placeTitle} | Decarb My State`}
         description={descriptionText}
         image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
