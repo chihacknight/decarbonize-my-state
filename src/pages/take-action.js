@@ -128,16 +128,8 @@ const TakeActionPage = () => {
 
               <p>
                 With the passing of the Inflation Reduction Act (IRA), there are
-                now{" "}
-                <a
-                  href="https://www.fastcompany.com/90780252/how-to-decarbonize-your-house-inflation-reduction-act-incentives?partner=rss&utm_campaign=rss+fastcompany&utm_content=rss&utm_medium=feed&utm_source=rss"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  new national rebates for electrification of household
-                  appliances
-                </a>
-                .
+                now new national rebates for electrification of household
+                appliances.
               </p>
 
               <ul className="mt-2">
@@ -169,15 +161,19 @@ const TakeActionPage = () => {
 
               <p>
                 See how much money will you get with the Inflation Reduction Act
-                with the{" "}
+                with the Rewiring America Inflation Reduction Act
+                Calculator!
+              </p>
+
+              <p>
                 <a
+                  className="btn btn-success"
                   href="https://www.rewiringamerica.org/app/ira-calculator"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Rewiring America Inflation Reduction Act Savings Calculator
+                  Find Out How Much You Can Save With Rewiring America's Calculator
                 </a>
-                !
               </p>
             </div>
           </div>
@@ -206,17 +202,11 @@ const TakeActionPage = () => {
         <div className="row mt-4">
           <div className="col-lg-3">
             <p>
-              <a
-                href="https://www.climateslate.com/candidates?filter-by-Priority=Top%20Priority"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  className="img-fluid img-thumbnail"
-                  src={ClimateCabinet}
-                  alt="Climate Cabinet"
-                />
-              </a>
+              <img
+                className="img-fluid img-thumbnail"
+                src={ClimateCabinet}
+                alt="Climate Cabinet"
+              />
             </p>
           </div>
 
@@ -245,7 +235,7 @@ const TakeActionPage = () => {
             <p>
               <a
                 className="btn btn-success"
-                href="https://secure.actblue.com/donate/climateslate?refcode=decarbmystate"
+                href="https://www.climateslate.com/candidates?filter-by-Priority=Top%20Priority"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -256,35 +246,29 @@ const TakeActionPage = () => {
         </div>
 
         <div className="row">
-          <div className="col-lg-9">
+          <div className="col-lg-9 mb-6">
             <h3>Pressure Electeds to Pass Climate Policy</h3>
 
             <p>
               It’s not enough to elect better candidates - we also have to
               pressure existing electeds to pass key climate policy now.
               Campaigns to do this already exist in your state – the highest
-              impact thing you can do is join them.
+              impact thing you can do is join them!
             </p>
 
             <p>
-              Sign up below and we will share what we know about climate
-              campaigns in your state.
+              You can also contact your elected leaders to pressure them to take
+              action.
             </p>
 
-            <div className="form-container embed-responsive embed-responsive-16by9">
-              <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdiwiT6OZO0jsnLu22r6ClBZLh8fvfGIiYu_5coOvjYXqogtw/viewform?embedded=true"
-                title="DecarbMyState Sign Up Form"
-                className="embed-responsive-item"
-                width="640"
-                height="1720"
-                frameBorder="0"
-                marginHeight="0"
-                marginWidth="0"
-              >
-                Loading…
-              </iframe>
-            </div>
+            <a
+              className="btn btn-success"
+              href="https://whoaremyrepresentatives.org/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Find Your Representatives & Contact Them About Climate
+            </a>
           </div>
         </div>
       </div>
