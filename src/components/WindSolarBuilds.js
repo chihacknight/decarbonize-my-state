@@ -7,7 +7,12 @@ const percentRemainingColor = "rgb(255, 87, 34)"
  * label - The actual UI label to show for the MW of generation
  * labelSlug - The prefix to use to generate IDs for elements in this graph
  */
-const WindSolarBuilds = ({ label, labelSlug, percentCurrent, percentRemaining }) => {
+const WindSolarBuilds = ({
+  label,
+  labelSlug,
+  percentCurrent,
+  percentRemaining,
+}) => {
   //otherPct
   if (percentCurrent !== 0 || percentRemaining !== 0) {
     return (

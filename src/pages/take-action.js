@@ -128,9 +128,9 @@ const TakeActionPage = () => {
 
               <p>
                 With the passing of the Inflation Reduction Act (IRA), there are
-                now new tax credits available for the electrification of household
-                appliances, with up-front rebates for low and middle income households
-                coming soon!
+                now new tax credits available for the electrification of
+                household appliances, with up-front rebates for low and middle
+                income households coming soon!
               </p>
 
               <table className="savings-table table table-striped mt-2">
@@ -147,82 +147,55 @@ const TakeActionPage = () => {
 
                 <tbody>
                   <tr>
-                    <td>
-                      New or Used Electric Car
-                    </td>
-                    <td className="price-cell">
-                      $7,500 new / $4,00 used
-                    </td>
+                    <td>New or Used Electric Car</td>
+                    <td className="price-cell">$7,500 new / $4,00 used</td>
                   </tr>
                   <tr>
-                    <td>
-                      Electric Car Charger
-                    </td>
-                    <td className="price-cell">
-                      $1,000
-                    </td>
+                    <td>Electric Car Charger</td>
+                    <td className="price-cell">$1,000</td>
                   </tr>
                   <tr>
-                    <td>
-                      Heat Pump Air Conditioner/Heater
-                    </td>
-                    <td className="price-cell">
-                      $2,000
-                    </td>
+                    <td>Heat Pump Air Conditioner/Heater</td>
+                    <td className="price-cell">$2,000</td>
                   </tr>
                   <tr>
-                    <td>
-                      Rooftop Solar
-                    </td>
-                    <td className="price-cell">
-                      30%
-                    </td>
+                    <td>Rooftop Solar</td>
+                    <td className="price-cell">30%</td>
                   </tr>
                   <tr>
-                    <td>
-                      Battery Storage Installation
-                    </td>
-                    <td className="price-cell">
-                      30%
-                    </td>
+                    <td>Battery Storage Installation</td>
+                    <td className="price-cell">30%</td>
                   </tr>
                   <tr>
                     <td>
                       Electrical Panel Upgrade
                       <span className="text-dark">
-                        {" "}(to prepare for an all-electric home)
+                        {" "}
+                        (to prepare for an all-electric home)
                       </span>
                     </td>
-                    <td className="price-cell">
-                      $600
-                    </td>
+                    <td className="price-cell">$600</td>
                   </tr>
                   <tr>
                     <td>
                       Weatherization
                       <span className="text-dark">
-                        {" "}(insulation, air sealing, and ventilation)
+                        {" "}
+                        (insulation, air sealing, and ventilation)
                       </span>
                     </td>
-                    <td className="price-cell">
-                      $1,200
-                    </td>
+                    <td className="price-cell">$1,200</td>
                   </tr>
                   <tr>
-                    <td>
-                      Heat Pump Water Heater
-                    </td>
-                    <td className="price-cell">
-                      $2,000
-                    </td>
+                    <td>Heat Pump Water Heater</td>
+                    <td className="price-cell">$2,000</td>
                   </tr>
                 </tbody>
               </table>
 
               <p>
                 See how much money will you get with the Inflation Reduction Act
-                with the Rewiring America Inflation Reduction Act
-                Calculator!
+                with the Rewiring America Inflation Reduction Act Calculator!
               </p>
 
               <p>
