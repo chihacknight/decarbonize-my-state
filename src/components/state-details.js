@@ -784,7 +784,8 @@ export default function StateDetailsPage({ location, data }) {
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={"targetGeneration"}
+                  labelSlug={"target-gen"}
+                  label={"Wind & Solar"}
                   percentCurrent={percToCleanTarget}
                   percentRemaining={totalRemaining}
                 />

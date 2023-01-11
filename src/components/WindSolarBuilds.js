@@ -2,7 +2,12 @@ import React from "react"
 
 const percentToColor = "rgb(163, 215, 164)"
 const percentRemainingColor = "rgb(255, 87, 34)"
-const WindSolarBuilds = ({ label, percentCurrent, percentRemaining }) => {
+
+/**
+ * label - The actual UI label to show for the MW of generation
+ * labelSlug - The prefix to use to generate IDs for elements in this graph
+ */
+const WindSolarBuilds = ({ label, labelSlug, percentCurrent, percentRemaining }) => {
   //otherPct
   if (percentCurrent !== 0 || percentRemaining !== 0) {
     return (
@@ -11,11 +16,11 @@ const WindSolarBuilds = ({ label, percentCurrent, percentRemaining }) => {
         height="50px"
         style={{ marginTop: "0.5em" }}
         xmlns="http://www.w3.org/2000/svg"
-        aria-labelledby={`${label}-title ${label}-description`}
+        aria-labelledby={`${labelSlug}-title ${labelSlug}-description`}
         role="img"
       >
-        <title id={`${label}-title`}>Percent of needed {label} built</title>
-        <desc id={`${label}-description`}>
+        <title id={`${labelSlug}-title`}>Percent of needed {label} built</title>
+        <desc id={`${labelSlug}-description`}>
           A chart showing the share of Solar and Wind capacity that has already
           been installed and rest to be installed. We are {percentCurrent}% of
           the way to what we need to be carbon neutral by 2050.
