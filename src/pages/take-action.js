@@ -10,7 +10,7 @@ import ClimateCabinet from "../images/climate-cabinet.png"
 const TakeActionPage = () => {
   return (
     <Layout>
-      <SEO title="Take Action! :: Decarbonize My State" />
+      <SEO title="Take Action | Decarb My State" />
       <div className="container">
         <h1 id="main">Take Action!</h1>
 

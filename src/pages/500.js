@@ -5,7 +5,7 @@ import CoalPlant from "../images/coal-plant.png"
 
 const ServerError = () => (
   <Layout>
-    <SEO title="500: Server Error" />
+    <SEO title="500 Server Error | Decarb My State" />
 
     <div className="error-page">
       <img src={CoalPlant} alt="Coal Power Plant" />

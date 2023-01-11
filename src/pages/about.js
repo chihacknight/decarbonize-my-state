@@ -34,7 +34,7 @@ const AboutPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="About :: Decarbonize My State" />
+      <SEO title="About | Decarb My State" />
       <div className="container">
         <div>
           <h1 id="main">About Decarb My State</h1>

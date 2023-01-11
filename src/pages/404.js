@@ -6,7 +6,7 @@ import OilPlantImg from "../images/oil-plant.png"
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="404: Not found" />
+    <SEO title="404: Not Found | Decarb My State" />
     <div className="error-page">
       <img src={OilPlantImg} alt="Oil power plant" />
       <div>

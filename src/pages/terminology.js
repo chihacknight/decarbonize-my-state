@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 const Terminology = () => {
   return (
     <Layout>
-      <SEO title="Terminology" />
+      <SEO title="Terminology | Decarb My State" />
       <div className="container">
         <h1 id="main" className="mb-2">
           Terms to Know
