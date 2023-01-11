@@ -2,9 +2,8 @@
  *
  * Homepage (index.js) Styling
  *
- * Warning: This styling is ultimately applied to the global scope! Use specific
- * classes to make sure it only applies to the homepage.
- *
+ * ⚠️ Warning: This styling is ultimately applied to the global scope! Use specific
+ * classes to make sure it only applies to the right page.
  */
 
 .main-header {

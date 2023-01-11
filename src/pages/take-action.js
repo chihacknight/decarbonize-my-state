@@ -11,7 +11,7 @@ const TakeActionPage = () => {
   return (
     <Layout>
       <SEO title="Take Action | Decarb My State" />
-      <div className="container">
+      <div className="take-action container">
         <h1 id="main">Take Action!</h1>
 
         <h2>Ready to do your part?</h2>
@@ -128,36 +128,96 @@ const TakeActionPage = () => {
 
               <p>
                 With the passing of the Inflation Reduction Act (IRA), there are
-                now new national rebates for electrification of household
-                appliances.
+                now new tax credits available for the electrification of household
+                appliances, with up-front rebates for low and middle income households
+                coming soon!
               </p>
 
-              <ul className="mt-2">
-                <li>
-                  Up to $7,500 for a new electric vehicle or $4,000 for a used
-                  electric vehicle
-                </li>
-                <li className="mt-1">
-                  Up to $8,000 for a heat pump for heating and cooling
-                </li>
-                <li className="mt-1">
-                  Up to $4,000 to upgrade your electrical panel (to prepare for
-                  an all-electric home)
-                </li>
-                <li className="mt-1">Up to $2,500 for new wiring</li>
-                <li className="mt-1">
-                  {" "}
-                  Up to $1,750 for a heat pump water heater
-                </li>
-                <li className="mt-1">
-                  {" "}
-                  Up to $1,600 for insulation, air sealing, and ventilation{" "}
-                </li>
-                <li className="mt-1 mb-1">
-                  Up to $840 for an electric stove, oven, or an electric heat
-                  pump dryer
-                </li>
-              </ul>
+              <table className="savings-table table table-striped mt-2">
+                <caption>
+                  Potential Electrification Tax Credits (Rewiring America, 2022)
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Max. Tax Credit</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      New or Used Electric Car
+                    </td>
+                    <td className="price-cell">
+                      $7,500 new / $4,00 used
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Electric Car Charger
+                    </td>
+                    <td className="price-cell">
+                      $1,000
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Heat Pump Air Conditioner/Heater
+                    </td>
+                    <td className="price-cell">
+                      $2,000
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Rooftop Solar
+                    </td>
+                    <td className="price-cell">
+                      30%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Battery Storage Installation
+                    </td>
+                    <td className="price-cell">
+                      30%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Electrical Panel Upgrade
+                      <span className="text-dark">
+                        {" "}(to prepare for an all-electric home)
+                      </span>
+                    </td>
+                    <td className="price-cell">
+                      $600
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Weatherization
+                      <span className="text-dark">
+                        {" "}(insulation, air sealing, and ventilation)
+                      </span>
+                    </td>
+                    <td className="price-cell">
+                      $1,200
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Heat Pump Water Heater
+                    </td>
+                    <td className="price-cell">
+                      $2,000
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
               <p>
                 See how much money will you get with the Inflation Reduction Act
@@ -172,7 +232,7 @@ const TakeActionPage = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Find Out How Much You Can Save With Rewiring America's Calculator
+                  Find Out How Much You Can Save With Rewiring America
                 </a>
               </p>
             </div>
