@@ -38,7 +38,7 @@ const TakeActionPage = () => {
                 alt="Electrify Everything in Your Home by Rewiring America"
                 title="Electrify Everything in Your Home by Rewiring America"
               />
-              <br/>
+              <br />
 
               <small>
                 <span class="font-weight-bold">Source:</span>{" "}
@@ -56,11 +56,11 @@ const TakeActionPage = () => {
 
         <div>
           <p>
-            For most Americans, more than half your carbon footprint comes
-            from how you heat and power your home and from the car you drive.
-            More than cutting out meat or single use plastics, the most
-            impactful thing you can do – by far – is to eliminate your
-            personal burning of fossil fuels.
+            For most Americans, more than half your carbon footprint comes from
+            how you heat and power your home and from the car you drive. More
+            than cutting out meat or single use plastics, the most impactful
+            thing you can do – by far – is to eliminate your personal burning of
+            fossil fuels.
           </p>
 
           <ol className="font-weight-bold">
@@ -108,8 +108,8 @@ const TakeActionPage = () => {
           </ol>
           <p>
             40% of US climate pollution comes from decisions made around the
-            kitchen table. We can’t solve climate change if you don’t
-            electrify your home – and nobody can do it but you.
+            kitchen table. We can’t solve climate change if you don’t electrify
+            your home – and nobody can do it but you.
           </p>
 
           <p>
@@ -131,9 +131,9 @@ const TakeActionPage = () => {
 
             <p>
               With the passing of the Inflation Reduction Act (IRA), there are
-              now new tax credits available for the electrification of
-              household appliances, with up-front rebates for low and middle
-              income households coming soon!
+              now new tax credits available for the electrification of household
+              appliances, with up-front rebates for low and middle income
+              households coming soon!
             </p>
 
             <table className="savings-table table table-striped mt-2 col-lg-10">
@@ -215,12 +215,14 @@ const TakeActionPage = () => {
         </div>
 
         <div>
-          <h2 className="mt-6 mb-4" id="get-political">Get Political: Electrify the rest!</h2>
+          <h2 className="mt-6 mb-4" id="get-political">
+            Get Political: Electrify the rest!
+          </h2>
 
           <p>
-            Discouraged by the inaction at the federal level? We can still
-            win: 50-75% of the policies we need to get to zero are actually
-            state and local. And we’re starting to win them!
+            Discouraged by the inaction at the federal level? We can still win:
+            50-75% of the policies we need to get to zero are actually state and
+            local. And we’re starting to win them!
           </p>
 
           <p>
@@ -283,9 +285,9 @@ const TakeActionPage = () => {
 
           <p>
             It’s not enough to elect better candidates - we also have to
-            pressure existing electeds to pass key climate policy now.
-            Campaigns to do this already exist in your state – the highest
-            impact thing you can do is join them!
+            pressure existing electeds to pass key climate policy now. Campaigns
+            to do this already exist in your state – the highest impact thing
+            you can do is join them!
           </p>
 
           <p>
