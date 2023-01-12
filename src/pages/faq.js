@@ -7,7 +7,7 @@ const FAQ = () => {
   return (
     <Layout>
       <SEO title="FAQ | Decarb My State" />
-      <div className="container faq">
+      <div className="container faq col-lg-10">
         <h1 id="main" className="py-2">
           Frequently Asked Questions
         </h1>

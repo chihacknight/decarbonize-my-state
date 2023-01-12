@@ -35,7 +35,7 @@ const AboutPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="About | Decarb My State" />
-      <div className="container">
+      <div className="container col-lg-10">
         <div>
           <h1 id="main">About Decarb My State</h1>
           <p>

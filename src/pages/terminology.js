@@ -7,7 +7,8 @@ const Terminology = () => {
   return (
     <Layout>
       <SEO title="Terminology | Decarb My State" />
-      <div className="container">
+
+      <div className="container col-lg-10">
         <h1 id="main" className="mb-2">
           Terms to Know
         </h1>
