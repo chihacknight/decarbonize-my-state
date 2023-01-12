@@ -6,8 +6,8 @@ import SEO from "../components/seo"
 const FAQ = () => {
   return (
     <Layout>
-      <SEO title="FAQ" />
-      <div className="container faq">
+      <SEO title="FAQ | Decarb My State" />
+      <div className="container faq col-lg-10">
         <h1 id="main" className="py-2">
           Frequently Asked Questions
         </h1>

@@ -1,0 +1,32 @@
+/**
+ * Take Action page styling
+ *
+ * ⚠️ Warning: This styling is ultimately applied to the global scope! Use specific
+ * classes to make sure it only applies to the right page.
+ */
+
+.take-action .savings-table {
+  background: #f2f2f2;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.take-action .savings-table thead tr {
+  background: #397e3b;
+  color: #fff;
+}
+
+.take-action .savings-table thead tr th {
+  border-top: none;
+  border-bottom: solid 0.25rem #2b5e2b;
+  padding-bottom: 0.35rem;
+}
+
+.take-action .savings-table tbody tr:first-child td {
+  border-top: none;
+}
+
+.take-action .savings-table .price-cell {
+  font-weight: bold;
+  color: #343a40;
+}

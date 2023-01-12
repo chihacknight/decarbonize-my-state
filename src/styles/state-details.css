@@ -1,5 +1,8 @@
 /**
- * State Details page styling
+ * State Details page styling - imported globally, make sure to scope selectors!
+ *
+ * ⚠️ Warning: This styling is ultimately applied to the global scope! Use specific
+ * classes to make sure it only applies to the right page.
  */
 
 .sticky-header {

@@ -307,7 +307,7 @@ export default function StateDetailsPage({ location, data }) {
   return (
     <Layout>
       <SEO
-        title={`What does it take to decarbonize ${placeTitle}?`}
+        title={`${placeTitle} | Decarb My State`}
         description={descriptionText}
         image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
@@ -784,7 +784,8 @@ export default function StateDetailsPage({ location, data }) {
 
               <p className="h4 mt-5 text-muted">
                 <WindSolarBuilds
-                  label={"targetGeneration"}
+                  labelSlug={"target-gen"}
+                  label={"Wind & Solar"}
                   percentCurrent={percToCleanTarget}
                   percentRemaining={totalRemaining}
                 />

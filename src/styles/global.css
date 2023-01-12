@@ -8,6 +8,7 @@
 @import "index.css";
 @import "faq.css";
 @import "state-details.css";
+@import "take-action.css";
 
 /* Import stateface for state icons */
 @import "stateface/stateface.css";
