@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SingleBarChart from "../components/singlebar"
 import { getLatestUsData } from "../components/getLatestEmissions"
-import { getLongCitation } from "../constants/source-citations.js"
+import { getLongCitation } from "../constants/source-citations"
 
 const getCleanData = data => {
   let mutableDataObj = {}
