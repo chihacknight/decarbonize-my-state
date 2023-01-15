@@ -327,10 +327,8 @@ export default function StateDetailsPage({ location, data }) {
       {/* Intro Section */}
       <div className="col-12">
         <p className="h2 font-weight-light mt-6 mb-5">
-          To get to <strong>zero</strong> by 2050, {placeTitle} must cut emissions by{" "}
-          <strong>
-            {percentToCut}% a year
-          </strong>
+          To get to <strong>zero</strong> by 2050, {placeTitle} must cut
+          emissions by <strong>{percentToCut}% a year</strong>
         </p>
 
         <h2 className="h4">Emissions in {placeTitle}</h2>
@@ -487,8 +485,8 @@ export default function StateDetailsPage({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="mt-7">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of appliances in buildings in{" "}
-                {placeTitle} are already fossil fuel free!
+                In fact, {Math.round(weightedEleBuildingsPct)}% of appliances in
+                buildings in {placeTitle} are already fossil fuel free!
               </p>
             )}
 
