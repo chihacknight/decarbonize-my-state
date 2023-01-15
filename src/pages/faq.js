@@ -3,6 +3,8 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import LinkImg from "../images/icons/link.svg"
+
 const FAQ = () => {
   return (
     <Layout>
@@ -22,7 +24,12 @@ const FAQ = () => {
          */}
 
         <div className="row ml-0">
-          <h2>Heat Pumps</h2>
+          <h2 id="heat-pumps">
+            Heat Pumps
+            <a href="#heat-pumps" className="ml-3">
+              <img src={LinkImg} className="link-icon"/>
+            </a>
+          </h2>
 
           <div className="appliance-sheet -heater -clean ml-4"></div>
         </div>
@@ -76,7 +83,12 @@ const FAQ = () => {
          * Electric Vehicle Section
          */}
         <div className="row ml-0">
-          <h2>Electric Vehicles (EVs)</h2>
+          <h2 id="electric-vehicles">
+            Electric Vehicles (EVs)
+            <a href="#electric-vehicles" className="ml-3">
+              <img src={LinkImg} className="link-icon"/>
+            </a>
+          </h2>
 
           <div className="car-sheet -truck -clean ml-4"></div>
         </div>
@@ -235,7 +247,12 @@ const FAQ = () => {
          * Induction Stoves Section
          */}
         <div className="row ml-0">
-          <h2>Induction Stoves</h2>
+          <h2 id="induction-stoves">
+            Induction Stoves
+            <a href="#induction-stoves" className="ml-3">
+              <img src={LinkImg} className="link-icon"/>
+            </a>
+          </h2>
 
           <div className="appliance-sheet -stove -clean ml-4"></div>
         </div>

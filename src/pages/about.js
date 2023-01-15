@@ -47,6 +47,7 @@ const AboutPage = ({ data }) => {
             <strong>where</strong> their state’s carbon pollution comes from,
             and <strong>how</strong> to eliminate it.
           </p>
+
           <h2 className="pt-3">Ok then, how do we end climate pollution?</h2>
           <p>
             Decarbonization is <strong>simple</strong>—in every state, we can
@@ -134,6 +135,7 @@ const AboutPage = ({ data }) => {
             Ready to do something in your state?{" "}
             <a href="do-something">Get started here</a>.
           </p>
+
           <h2 className="pt-3">Who built this?</h2>
           <p>
             This is an all-volunteer project made with love by folks from{" "}
@@ -177,6 +179,7 @@ const AboutPage = ({ data }) => {
             </a>{" "}
             by Maxis and Electronic Arts.
           </p>
+
           <h2 className="pt-3">Where did you get your ideas?</h2>
           <p>
             Our visual storytelling approach was inspired by a recent talk by
@@ -198,6 +201,7 @@ const AboutPage = ({ data }) => {
             <a href="https://www.rewiringamerica.org/">Rewiring America</a>.
             It's amazing, read it.
           </p>
+
           <h2 className="pt-3">
             Why do you only focus on wind and solar power? Is that reliable?
           </h2>
@@ -229,6 +233,7 @@ const AboutPage = ({ data }) => {
             Ultra-high photovoltaic penetration: Where to deploy
           </a>{" "}
           by Perez et al.
+
           <h2 className="pt-3">Why don't you feature nuclear power?</h2>
           <p>
             We are not against nuclear. On the contrary, our actually analysis
@@ -246,6 +251,7 @@ const AboutPage = ({ data }) => {
             "all-renewables" approach is fact feasible (and affordable) using{" "}
             <strong>overbuilding</strong>.
           </p>
+
           <h2 className="pt-3">Data and sources</h2>
           <p>
             All of the data used on this website are from publicly available and
@@ -274,6 +280,7 @@ const AboutPage = ({ data }) => {
           {getLongCitation("power-plants")}
           <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
           {getLongCitation("power-generation")}
+
           <h2 className="pt-3">Code</h2>
           <p>
             All the code for this site is open source and available on{" "}
@@ -304,6 +311,7 @@ const AboutPage = ({ data }) => {
             This website is hosted on{" "}
             <a href="https://www.netlify.com/">Netlify</a>.
           </p>
+
           <h2 className="pt-3">Contact us</h2>
           <p>
             Found a bug?{" "}

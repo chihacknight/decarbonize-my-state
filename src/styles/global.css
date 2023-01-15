@@ -90,6 +90,11 @@ strong {
   font-weight: bold;
 }
 
+.link-icon {
+  width: 1rem;
+  aspect-ratio:  1;
+}
+
 /**
  * Extra large spacing options
  */
