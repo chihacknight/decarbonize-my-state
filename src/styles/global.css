@@ -316,7 +316,7 @@ footer a {
  * SimpleAreaChart styling
  */
 .simplearea-cont {
-  height: auto !important;
+  height: 300px !important;
   aspect-ratio: 2/1;
 }
 

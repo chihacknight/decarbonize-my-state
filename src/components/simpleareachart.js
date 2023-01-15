@@ -104,7 +104,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
       <ResponsiveContainer className="simplearea-cont">
         <AreaChart
           width={800}
-          height={400}
+          height={200}
           data={data}
           margin={{
             top: 30,

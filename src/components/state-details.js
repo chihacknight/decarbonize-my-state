@@ -128,9 +128,7 @@ export default function StateDetailsPage({ location, data }) {
     100
   ).toFixed(0)
 
-  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / yearsToTarget)).toFixed(
-    1
-  )
+  const percentToCut = ((1 / yearsToTarget) * 100).toFixed(1)
 
   // #### VEHICLES ####
   const {
@@ -328,12 +326,10 @@ export default function StateDetailsPage({ location, data }) {
 
       {/* Intro Section */}
       <div className="col-12">
-        <p className="h1 font-weight-light mt-6 mb-5">
-          To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
-          pollution by <br className="d-none d-lg-block" />
+        <p className="h2 font-weight-light mt-6 mb-5">
+          To get to <strong>zero</strong> by 2050, {placeTitle} must cut emissions by{" "}
           <strong>
-            {rawEmissionsCutPerYear} million metric tons of CO<sub>2</sub>{" "}
-            equivalent a year.
+            {percentToCut}% a year
           </strong>
         </p>
 
@@ -355,7 +351,7 @@ export default function StateDetailsPage({ location, data }) {
         />
 
         <p className="h1 font-weight-bold text-center mt-5">
-          This is how we're going to do it.
+          This is how we're going to do it
         </p>
 
         <hr className="mt-7 mb-7" />
@@ -491,7 +487,7 @@ export default function StateDetailsPage({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="mt-7">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings in{" "}
+                In fact, {Math.round(weightedEleBuildingsPct)}% of appliances in buildings in{" "}
                 {placeTitle} are already fossil fuel free!
               </p>
             )}

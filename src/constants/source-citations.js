@@ -2,14 +2,18 @@ import React from "react"
 
 export function getShortCitation(slug) {
   const citation = getCitation(slug)
-  return `${citation.source_short}, ${citation.date}`
+  return (
+    <a href={`/about#data-${slug}`} target="_blank">
+      {citation.source_short}, {citation.date}
+    </a>
+  )
 }
 
 export function getLongCitation(slug) {
   const citation = getCitation(slug)
 
   return (
-    <p>
+    <p id={`data-${slug}`}>
       <a className="font-weight-bold" href={citation.link}>
         {citation.title}
       </a>
