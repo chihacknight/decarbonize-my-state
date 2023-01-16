@@ -19,14 +19,18 @@ const FAQ = () => {
           get into this one page.
         </p>
 
-        <h2 id="general">
-          General
-          <a href="#general" className="ml-3">
-            <img src={LinkImg} className="link-icon"/>
-          </a>
-        </h2>
+        <div className="row align-items-center ml-0 mt-5">
+          <h2 id="general">
+            General
+            <a href="#general" className="ml-3">
+              <img src={LinkImg} alt="Link to 'General' heading" className="link-icon"/>
+            </a>
+          </h2>
 
-        <h2 className="pt-3">Why focus on states?</h2>
+          <div className="building-sheet -house -clean"></div>
+        </div>
+
+        <h3>Why focus on states?</h3>
 
         <p>Three reasons:</p>
 
@@ -66,9 +70,9 @@ const FAQ = () => {
           <a href="do-something">Get started here</a>.
         </p>
 
-        <h2 className="pt-3">
+        <h3>
           Why do you only focus on wind and solar power? Is that reliable?
-        </h2>
+        </h3>
         <p>
           The key problem of wind and solar is <b>intermittency</b>: the wind
           doesn't always blow, and the sun doesn't always shine. Batteries can
@@ -98,7 +102,7 @@ const FAQ = () => {
         </a>{" "}
         by Perez et al.
 
-        <h2 className="pt-3">Why don't you feature nuclear power?</h2>
+        <h3>Why don't you feature nuclear power?</h3>
 
         <p>
           We are not against nuclear. On the contrary, our actually analysis
@@ -122,11 +126,11 @@ const FAQ = () => {
          * Heat Pumps Section
          */}
 
-        <div className="row ml-0">
+        <div className="row align-items-center ml-0 mt-5">
           <h2 id="heat-pumps">
             Heat Pumps
             <a href="#heat-pumps" className="ml-3">
-              <img src={LinkImg} className="link-icon"/>
+              <img src={LinkImg} alt="Link to 'Heat Pumps' heading" className="link-icon"/>
             </a>
           </h2>
 
@@ -181,11 +185,11 @@ const FAQ = () => {
         {/**
          * Electric Vehicle Section
          */}
-        <div className="row ml-0">
+        <div className="row align-items-center ml-0 mt-5">
           <h2 id="electric-vehicles">
             Electric Vehicles (EVs)
             <a href="#electric-vehicles" className="ml-3">
-              <img src={LinkImg} className="link-icon"/>
+              <img src={LinkImg} alt="Link to 'Electric Vehicles' heading" className="link-icon"/>
             </a>
           </h2>
 
@@ -345,11 +349,11 @@ const FAQ = () => {
         {/**
          * Induction Stoves Section
          */}
-        <div className="row ml-0">
+        <div className="row align-items-center ml-0 mt-5">
           <h2 id="induction-stoves">
             Induction Stoves
             <a href="#induction-stoves" className="ml-3">
-              <img src={LinkImg} className="link-icon"/>
+              <img src={LinkImg} alt="Link to 'Induction Stoves' heading" className="link-icon"/>
             </a>
           </h2>
 
