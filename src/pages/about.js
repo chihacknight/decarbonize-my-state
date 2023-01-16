@@ -7,6 +7,10 @@ import SingleBarChart from "../components/singlebar"
 import { getLatestUsData } from "../components/getLatestEmissions"
 import { getLongCitation } from "../constants/source-citations.js"
 
+import ChloePhoto from "../images/team/chloe.jpg"
+import DerekPhoto from "../images/team/derek.jpg"
+import ViktorPhoto from "../images/team/viktor.jpg"
+
 const getCleanData = data => {
   let mutableDataObj = {}
 
@@ -105,13 +109,49 @@ const AboutPage = ({ data }) => {
           </p>
 
           <h2 className="pt-3">Our Team</h2>
+
           <p>
             This is an all-volunteer project made with love by folks from{" "}
             <a href="https://chihacknight.org/">ChiHackNight</a> and{" "}
             <a href="https://climate.win/">Win Climate</a>.
           </p>
+
           <p>
-            The team includes: <a href="https://derekeder.com">Derek Eder</a>,
+            Our team includes:
+          </p>
+
+          {/* Show team members with photos in columns */}
+          <div className="row justify-content-around mt-4 mb-3">
+            <div className="col-6 col-lg-3 text-center mb-3 m-l-0">
+              <img src={DerekPhoto} className="rounded img-fluid" />
+
+              <p className="text-center mt-3">
+                <a href="https://derekeder.com">Derek Eder</a> <br/>
+                Founder, DataMade
+              </p>
+            </div>
+
+            <div className="col-6 col-lg-3 text-center mb-3 m-l-0">
+              <img src={ViktorPhoto} className="rounded img-fluid" />
+
+              <p className="text-center mt-3">
+                <a href="https://viktorkoves.com/">Viktor Köves</a> <br/>
+                Senior Front-End Engineer, Packback
+              </p>
+            </div>
+
+            <div className="col-6 col-lg-3 text-center mb-3 m-l-0">
+              <img src={ChloePhoto} className="rounded img-fluid" />
+
+              <p className="text-center mt-3">
+                Chloe Xu <br/>
+                UX Strategist
+              </p>
+            </div>
+          </div>
+
+          <p>
+            As well as
             <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>
             , <a href="https://viktorkoves.com/">Viktor Köves</a>,{" "}
             <a href="https://chihacknight.org/board-of-directors/sean-watland.html">
@@ -131,6 +171,7 @@ const AboutPage = ({ data }) => {
             , <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>,
             Surag Nuthulapaty and Robert Herrera.
           </p>
+
           <p>
             The initial code for this project was forked from{" "}
             <a href="https://greenjobsdata.com/">
@@ -138,6 +179,7 @@ const AboutPage = ({ data }) => {
             </a>{" "}
             by Data for Progress, Sunrise Movement and DataMade.
           </p>
+
           <p>
             Images of appliances and cars come from{" "}
             <a href="https://electrifynow.net/">Electrify Now</a>. Images of
