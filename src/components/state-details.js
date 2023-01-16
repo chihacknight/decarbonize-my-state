@@ -907,7 +907,7 @@ export default function StateDetailsPage({ location, data }) {
                 </ul>
 
                 <p className="mt-5">
-                  That doesn't mean there's no solution, it just means that
+                  That doesn't mean there's no solution, it just means that{" "}
                   {getTerminologyHover("clean-electrification")} doesn't help
                   with these problems, and you could fill a whole book with
                   covering all of them. We need to encourage our politicians to
