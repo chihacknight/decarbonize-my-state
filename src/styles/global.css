@@ -93,6 +93,7 @@ strong {
 .link-icon {
   width: 1rem;
   aspect-ratio:  1;
+  margin-bottom: 0.5rem;
 }
 
 /**
