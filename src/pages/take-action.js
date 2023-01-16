@@ -19,8 +19,8 @@ const TakeActionPage = () => {
           <h2>Ready to do your part?</h2>
 
           <p>
-            The best way to {getTerminologyHover('decarbonize')} your state is to electrify it, and there
-            are two big ways you can do your part -{" "}
+            The best way to {getTerminologyHover("decarbonize")} your state is
+            to electrify it, and there are two big ways you can do your part -{" "}
             <a href="#electrify">personally electrifying your machines</a> and{" "}
             <a href="#get-political">getting political</a>!
           </p>

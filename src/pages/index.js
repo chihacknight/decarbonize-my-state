@@ -59,7 +59,7 @@ const IndexPage = ({ data }) => {
       <hr></hr>
 
       <h2 className="text-center mt-6 mb-5">
-        See details on how your state can {getTerminologyHover('decarbonize')}
+        See details on how your state can {getTerminologyHover("decarbonize")}
       </h2>
 
       <div className="mb-md-5">
