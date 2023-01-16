@@ -506,3 +506,8 @@ footer a {
   font-size: 1.3rem;
   margin-top: 15px;
 }
+
+.terminology {
+  text-decoration-line: underline;
+  text-decoration-style: dashed; 
+}

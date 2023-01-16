@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ChoroplethMap from "../components/choroplethmap"
 import { getLatestEmissions } from "../components/getLatestEmissions"
+import { getTerminologyHover } from "../constants/terminology-list"
 
 const getCleanData = data => {
   let mutableDataObj = {}
@@ -58,7 +59,7 @@ const IndexPage = ({ data }) => {
       <hr></hr>
 
       <h2 className="text-center mt-6 mb-5">
-        See Details On How Your State Can Decarbonize
+        See details on how your state can {getTerminologyHover('decarbonize')}
       </h2>
 
       <div className="mb-md-5">

@@ -5,7 +5,7 @@ import { navigate } from "gatsby"
 
 import USMap from "../images/svg/usaStatesNoTerritories.js"
 import jenks from "./jenks"
-import { getShortCitation } from "../constants/source-citations.js"
+import { getShortCitation } from "../constants/source-citations"
 
 function CustomHover({ emissions, activeRegion }) {
   if (emissions[activeRegion.id] != null) {

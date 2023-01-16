@@ -9,7 +9,8 @@ import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
-import { getShortCitation } from "../constants/source-citations.js"
+import { getShortCitation } from "../constants/source-citations"
+import { getTerminologyHover } from "../constants/terminology-list"
 
 /**
  * Images - suffix with Img for clarity from actual JS files/variables
@@ -333,7 +334,7 @@ export default function StateDetailsPage({ location, data }) {
 
         <h2 className="h4">Emissions in {placeTitle}</h2>
         <p className="h6">
-          Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
+          Million metric tons of {getTerminologyHover('carbon-dioxide')} equivalent ({getTerminologyHover('mtco2e')}) emissions
         </p>
         <p className="small">
           <strong>Note:</strong> Grey area indicates missing data due to
@@ -754,8 +755,8 @@ export default function StateDetailsPage({ location, data }) {
 
               <p className="mt-6">
                 In all, we'll need to build{" "}
-                <strong>{windTurbinesCountStr} Megawatts</strong> of wind power
-                and <strong>{solarPanelsCountStr} Megawatts</strong> of solar
+                <strong>{windTurbinesCountStr} {getTerminologyHover('megawatt')}</strong> of wind power
+                and <strong>{solarPanelsCountStr} MW</strong> of solar
                 power.
               </p>
 
@@ -766,13 +767,13 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-5">
-                Since {placeTitle} already has {currentWindMWStr} Megawatts of{" "}
-                wind and {currentSolarMWStr} Megawatts of solar, that's{" "}
-                {windToBuildMwStr} Megawatts of wind power we need to build and{" "}
-                {solarToBuildMwStr} Megawatts of solar power. That's around{" "}
-                <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
+                Since {placeTitle} already has {currentWindMWStr} MW of{" "}
+                wind and {currentSolarMWStr} MW of solar, that's{" "}
+                {windToBuildMwStr} MW of wind power we need to build and{" "}
+                {solarToBuildMwStr} MW of solar power. That's around{" "}
+                <strong>{windTurbinesBuildPerYearStr} MW </strong>
                 of wind power and{" "}
-                <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
+                <strong>{solarPanelsBuildPerYearStr} MW </strong>
                 of solar power a year.
               </p>
 
@@ -904,7 +905,7 @@ export default function StateDetailsPage({ location, data }) {
 
                 <p className="mt-5">
                   That doesn't mean there's no solution, it just means that
-                  clean electrification doesn't help with these problems, and
+                  clean {getTerminologyHover('clean-electrification')} doesn't help with these problems, and
                   you could fill a whole book with covering all of them. We need
                   to encourage our politicians to invest in researching new
                   solutions and implementing existing solutions to these

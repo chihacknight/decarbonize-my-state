@@ -11,13 +11,13 @@ const Terminology = () => {
 
       <div className="container col-lg-10">
         <h1 id="main" className="mb-2">
-          Terms to Know
+          Terminology
         </h1>
 
         <dl className="mt-0 terminology-page-style">
           {terminologyDefs.map(t => (
             <>
-              <dt id={t.slug}>{t.term} <a class='text-muted small' href={`#${t.slug}`}>#</a></dt>
+              <dt id={t.slug}>{t.term}</dt>
               <dd>{t.definition}</dd>
             </>
           ))}
