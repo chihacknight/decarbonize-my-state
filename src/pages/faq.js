@@ -19,6 +19,105 @@ const FAQ = () => {
           get into this one page.
         </p>
 
+        <h2 id="general">
+          General
+          <a href="#general" className="ml-3">
+            <img src={LinkImg} className="link-icon"/>
+          </a>
+        </h2>
+
+        <h2 className="pt-3">Why focus on states?</h2>
+
+        <p>Three reasons:</p>
+
+        <ol>
+          <li>
+            <strong>Clarity</strong>: at a global or even national scale, the
+            climate crisis can be incredibly overwhelming. At the state level,
+            solutions become much clearer.
+          </li>
+          <li>
+            <strong>Opportunity</strong>: state and local governments are
+            responsible for 50-75% of the climate action we need—regardless of
+            what Congress does—according to{" "}
+            <a href="https://www.climatecabinetaction.org/">
+              Climate Cabinet
+            </a>
+            . And they can have a surprisingly huge impact: taken together,
+            CO, IL, WA, CA, and NY make up the world’s 4th largest economy.
+            They’ve all passed groundbreaking climate laws recently. And with
+            the right policy, they could single-handedly make solar panels,
+            wind turbines, heat pumps, and electric cars much cheaper,
+            worldwide.
+          </li>
+          <li>
+            <strong>Accessibility</strong>: it’s much easier for regular
+            people to make a difference at the state level. You can lobby your
+            legislators personally. You can run for local office, or get
+            someone elected. You can join one of the issue campaigns that are
+            winning climate policy across the country—typically, they have
+            only have a few dozen volunteers, so your involvement can actually
+            help pass a bill.
+          </li>
+        </ol>
+
+        <p>
+          Ready to do something in your state?{" "}
+          <a href="do-something">Get started here</a>.
+        </p>
+
+        <h2 className="pt-3">
+          Why do you only focus on wind and solar power? Is that reliable?
+        </h2>
+        <p>
+          The key problem of wind and solar is <b>intermittency</b>: the wind
+          doesn't always blow, and the sun doesn't always shine. Batteries can
+          store solar power for use at night, or wind power for use on less
+          windy days. But they can't extra energy during the summer to use in
+          the winter, when there's less sun and wind.
+        </p>
+        <p>
+          To solve this <strong>seasonal intermittency</strong> problem, we
+          use <strong>renewable overbuilding</strong>: the trick is to build
+          enough wind and solar to reliably power your state during the
+          winter. During the summer, you end up with more power than you need.
+          But you can use it make green hydrogen, which can cleanly power
+          planes, factories, and other hard-to-electrify machines.
+        </p>
+        <p>
+          Our estimates of how much (overbuilt) wind and solar each state must
+          build to
+        </p>
+        <ol>
+          <li>produce reliable year-round power while</li>
+          <li>fully electrifying cars and buildings</li>
+        </ol>
+        ...are based on the paper{" "}
+        <a href="https://www.documentcloud.org/documents/21010255-perez-et-al-ultra-high-photovoltaic-penetration-where-to-deploy">
+          Ultra-high photovoltaic penetration: Where to deploy
+        </a>{" "}
+        by Perez et al.
+
+        <h2 className="pt-3">Why don't you feature nuclear power?</h2>
+
+        <p>
+          We are not against nuclear. On the contrary, our actually analysis
+          assumes that <em>all existing nuclear plants</em> stay open for the
+          foreseeable future.
+        </p>
+        <p>
+          Nuclear is <strong>safe</strong> and <strong>reliable</strong>.
+          Though expensive, building more nuclear plants would allow us to
+          build fewer wind and solar farms.
+        </p>
+        <p>
+          That said, this site <em>intentionally</em> depicts how much wind
+          and solar we need to decarbonize every state, and argues that this
+          "all-renewables" approach is fact feasible (and affordable) using{" "}
+          <strong>overbuilding</strong>.
+        </p>
+
+
         {/*
          * Heat Pumps Section
          */}
