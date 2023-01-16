@@ -13,27 +13,26 @@ const FAQ = () => {
         <h1 id="main" className="py-2">
           Frequently Asked Questions
         </h1>
-
         <p>
           Do you have questions? We've compiled some of the most common ones we
           get into this one page.
         </p>
-
         <div className="row align-items-center ml-0 mt-5">
           <h2 id="general">
             General
             <a href="#general" className="ml-3">
-              <img src={LinkImg} alt="Link to 'General' heading" className="link-icon"/>
+              <img
+                src={LinkImg}
+                alt="Link to 'General' heading"
+                className="link-icon"
+              />
             </a>
           </h2>
 
           <div className="building-sheet -house -clean"></div>
         </div>
-
         <h3>Why focus on states?</h3>
-
         <p>Three reasons:</p>
-
         <ol>
           <li>
             <strong>Clarity</strong>: at a global or even national scale, the
@@ -44,32 +43,27 @@ const FAQ = () => {
             <strong>Opportunity</strong>: state and local governments are
             responsible for 50-75% of the climate action we need—regardless of
             what Congress does—according to{" "}
-            <a href="https://www.climatecabinetaction.org/">
-              Climate Cabinet
-            </a>
-            . And they can have a surprisingly huge impact: taken together,
-            CO, IL, WA, CA, and NY make up the world’s 4th largest economy.
-            They’ve all passed groundbreaking climate laws recently. And with
-            the right policy, they could single-handedly make solar panels,
-            wind turbines, heat pumps, and electric cars much cheaper,
-            worldwide.
+            <a href="https://www.climatecabinetaction.org/">Climate Cabinet</a>.
+            And they can have a surprisingly huge impact: taken together, CO,
+            IL, WA, CA, and NY make up the world’s 4th largest economy. They’ve
+            all passed groundbreaking climate laws recently. And with the right
+            policy, they could single-handedly make solar panels, wind turbines,
+            heat pumps, and electric cars much cheaper, worldwide.
           </li>
           <li>
-            <strong>Accessibility</strong>: it’s much easier for regular
-            people to make a difference at the state level. You can lobby your
-            legislators personally. You can run for local office, or get
-            someone elected. You can join one of the issue campaigns that are
-            winning climate policy across the country—typically, they have
-            only have a few dozen volunteers, so your involvement can actually
-            help pass a bill.
+            <strong>Accessibility</strong>: it’s much easier for regular people
+            to make a difference at the state level. You can lobby your
+            legislators personally. You can run for local office, or get someone
+            elected. You can join one of the issue campaigns that are winning
+            climate policy across the country—typically, they have only have a
+            few dozen volunteers, so your involvement can actually help pass a
+            bill.
           </li>
         </ol>
-
         <p>
           Ready to do something in your state?{" "}
           <a href="do-something">Get started here</a>.
         </p>
-
         <h3>
           Why do you only focus on wind and solar power? Is that reliable?
         </h3>
@@ -81,12 +75,12 @@ const FAQ = () => {
           the winter, when there's less sun and wind.
         </p>
         <p>
-          To solve this <strong>seasonal intermittency</strong> problem, we
-          use <strong>renewable overbuilding</strong>: the trick is to build
-          enough wind and solar to reliably power your state during the
-          winter. During the summer, you end up with more power than you need.
-          But you can use it make green hydrogen, which can cleanly power
-          planes, factories, and other hard-to-electrify machines.
+          To solve this <strong>seasonal intermittency</strong> problem, we use{" "}
+          <strong>renewable overbuilding</strong>: the trick is to build enough
+          wind and solar to reliably power your state during the winter. During
+          the summer, you end up with more power than you need. But you can use
+          it make green hydrogen, which can cleanly power planes, factories, and
+          other hard-to-electrify machines.
         </p>
         <p>
           Our estimates of how much (overbuilt) wind and solar each state must
@@ -101,44 +95,41 @@ const FAQ = () => {
           Ultra-high photovoltaic penetration: Where to deploy
         </a>{" "}
         by Perez et al.
-
         <h3>Why don't you feature nuclear power?</h3>
-
         <p>
           We are not against nuclear. On the contrary, our actually analysis
           assumes that <em>all existing nuclear plants</em> stay open for the
           foreseeable future.
         </p>
         <p>
-          Nuclear is <strong>safe</strong> and <strong>reliable</strong>.
-          Though expensive, building more nuclear plants would allow us to
-          build fewer wind and solar farms.
+          Nuclear is <strong>safe</strong> and <strong>reliable</strong>. Though
+          expensive, building more nuclear plants would allow us to build fewer
+          wind and solar farms.
         </p>
         <p>
-          That said, this site <em>intentionally</em> depicts how much wind
-          and solar we need to decarbonize every state, and argues that this
+          That said, this site <em>intentionally</em> depicts how much wind and
+          solar we need to decarbonize every state, and argues that this
           "all-renewables" approach is fact feasible (and affordable) using{" "}
           <strong>overbuilding</strong>.
         </p>
-
-
         {/*
          * Heat Pumps Section
          */}
-
         <div className="row align-items-center ml-0 mt-5">
           <h2 id="heat-pumps">
             Heat Pumps
             <a href="#heat-pumps" className="ml-3">
-              <img src={LinkImg} alt="Link to 'Heat Pumps' heading" className="link-icon"/>
+              <img
+                src={LinkImg}
+                alt="Link to 'Heat Pumps' heading"
+                className="link-icon"
+              />
             </a>
           </h2>
 
           <div className="appliance-sheet -heater -clean ml-4"></div>
         </div>
-
         <h3>Do heat pumps work in colder climates?</h3>
-
         <p>
           Heat pumps absolutely work in cold climates. Not only that, but often
           they are the most energy efficient and cost effective solution
@@ -164,16 +155,13 @@ const FAQ = () => {
           </a>
           .
         </p>
-
         <h3>Are heat pumps for heating, or for cooling?</h3>
-
         <p>
           Heat pumps are for both - they can heat and cool your home! There are
           a variety of different types of heat pumps, but they all work like a
           reversible air conditioner, moving heat from inside to outside
           (cooling) or outside to inside (heating).
         </p>
-
         <p>
           Learn more from{" "}
           <a href="https://www.energy.gov/energysaver/heat-pump-systems">
@@ -181,7 +169,6 @@ const FAQ = () => {
           </a>
           .
         </p>
-
         {/**
          * Electric Vehicle Section
          */}
@@ -189,17 +176,19 @@ const FAQ = () => {
           <h2 id="electric-vehicles">
             Electric Vehicles (EVs)
             <a href="#electric-vehicles" className="ml-3">
-              <img src={LinkImg} alt="Link to 'Electric Vehicles' heading" className="link-icon"/>
+              <img
+                src={LinkImg}
+                alt="Link to 'Electric Vehicles' heading"
+                className="link-icon"
+              />
             </a>
           </h2>
 
           <div className="car-sheet -truck -clean ml-4"></div>
         </div>
-
         <h3>
           Are EVs <em>really</em> lower emission, even with a dirty grid?
         </h3>
-
         <p>
           Based off of information from
           <a href="https://www.epa.gov/greenvehicles/electric-vehicle-myths#Myth1">
@@ -208,7 +197,6 @@ const FAQ = () => {
           </a>
           , here's the short answer:
         </p>
-
         <p>
           <strong>
             Electric vehicles almost always have a smaller carbon footprint than
@@ -217,7 +205,6 @@ const FAQ = () => {
           , even when accounting for the electricity used for charging, and even
           if your grid is very carbon intensive, like coal.
         </p>
-
         <p>
           The longer answer: Electric vehicles (EVs) have no tailpipe emissions.
           Generating the electricity used to charge EVs, however, may create
@@ -231,7 +218,6 @@ const FAQ = () => {
           your own solar panels) the total GHGs associated with EVs could be
           even lower.
         </p>
-
         <p>
           If that sounds confusing, think about it this way: a gas car runs{" "}
           <em>completely</em> off of gasoline, and doesn't even burn it that
@@ -239,7 +225,6 @@ const FAQ = () => {
           and a large fossil fuel power plant can convert more of that chemical
           energy into usable electricity, rather than heat.
         </p>
-
         <p>
           You can also
           <a href="https://www.epa.gov/egrid/power-profiler">
@@ -247,7 +232,6 @@ const FAQ = () => {
             learn more about electricity production in your area.
           </a>
         </p>
-
         <p>
           <a href="https://www.fueleconomy.gov/feg/Find.do?action=bt2">
             EPA and DOE’s Beyond Tailpipe Emissions Calculator
@@ -258,15 +242,12 @@ const FAQ = () => {
           zip code to see the CO2 emissions and how they stack up against those
           associated with a gasoline car.
         </p>
-
         <h3>How long does it take to charge an EV?</h3>
-
         <p>
           This one is a bit complicated, but most new EVs support fast-charging
           at public charging stations, which (at the highest speeds of 250kW)
           can get most EVs to 80% in around a half hour.
         </p>
-
         <p>
           Learn more from{" "}
           <a href="https://www.tomsguide.com/reference/ev-charging-explained-heres-all-the-different-charger-types">
@@ -274,9 +255,7 @@ const FAQ = () => {
           </a>
           .
         </p>
-
         <h3>Why are EVs so expensive?</h3>
-
         <p>
           EVs require large battery packs, particularly if you are looking for a
           very long range. However, it's worth keeping in mind that an electric
@@ -285,7 +264,6 @@ const FAQ = () => {
           vehicles are much simpler mechanically speaking and have lower brake
           wear due to regenerative braking.
         </p>
-
         <p>
           Learn more from{" "}
           <a href="https://www.consumersenergy.com/residential/programs-and-services/electric-vehicles/ev-cost-of-ownership">
@@ -293,15 +271,12 @@ const FAQ = () => {
           </a>
           .
         </p>
-
         <h3>Do we have enough Lithium to make all these EVs?</h3>
-
         <p>
           This is also complex, but ultimately speaking there is enough Lithium
           on the planet to meet our EV needs, but we're going to have to rapidly
           ramp up Lithium exctraction to meet our needs.
         </p>
-
         <p>
           Learn more from{" "}
           <a href="https://www.nature.com/articles/d41586-021-02222-1">
@@ -309,12 +284,10 @@ const FAQ = () => {
             enough?
           </a>
         </p>
-
         <h3>
           But are electric cars <em>really</em> the best climate transporation
           solution?
         </h3>
-
         <p>
           In short, no, but they are a big part of the solution. Electric cars
           and trucks require a lot of minerals and energy to manufacture,
@@ -324,7 +297,6 @@ const FAQ = () => {
           resource efficient. However, as we mentioned before, an electric car
           is basically always better emissions wise than a gas car.
         </p>
-
         <p>
           As an example, an ebike (let's say Gazelle Ultimate T10) may have a
           500 Wh battery (0.5 kWh) that gives it a 25 mile range, or 50 miles
@@ -336,7 +308,6 @@ const FAQ = () => {
           4,048 lb electric car with <em>at least</em> 100 times the battery
           capacity (54 kWh).
         </p>
-
         <p>
           Learn more at{" "}
           <a href="https://ourworldindata.org/travel-carbon-footprint">
@@ -345,7 +316,6 @@ const FAQ = () => {
           </a>
           .
         </p>
-
         {/**
          * Induction Stoves Section
          */}
@@ -353,22 +323,23 @@ const FAQ = () => {
           <h2 id="induction-stoves">
             Induction Stoves
             <a href="#induction-stoves" className="ml-3">
-              <img src={LinkImg} alt="Link to 'Induction Stoves' heading" className="link-icon"/>
+              <img
+                src={LinkImg}
+                alt="Link to 'Induction Stoves' heading"
+                className="link-icon"
+              />
             </a>
           </h2>
 
           <div className="appliance-sheet -stove -clean ml-4"></div>
         </div>
-
         <h3>Do induction stoves only work on certain pans?</h3>
-
         <p>
           Technically, yes, but they work on <em>ferro-magnetic</em> materials,
           meaning materials that a magnet can stick to. These include stainless
           steel, cast iron, and enameled cast iron pans, but induction{" "}
           <em>does not work</em> on copper, glass, or aluminum pans.
         </p>
-
         <p>
           Learn more from{" "}
           <a href="https://www.thespruceeats.com/what-is-the-best-cookware-for-induction-cooktops-908920">
@@ -376,9 +347,7 @@ const FAQ = () => {
             Compatible
           </a>
         </p>
-
         <h3>Are induction stoves worse than gas?</h3>
-
         <p>
           There might be some downsides with induction, like not working with
           certain types of pans and a lack of visibility to the heat output
@@ -391,12 +360,10 @@ const FAQ = () => {
             <li>Automatically shuts off when pan is removed</li>
           </ul>
         </p>
-
         <h3>
           Is induction cooking the same as an electric stove with those glowing
           red coils?
         </h3>
-
         <p>
           Not at all! A stove with red coils that heat up your pan (either
           directly or through a glass surface) are what is known as an electric
@@ -409,7 +376,6 @@ const FAQ = () => {
           using electromagnetism to heat a pot or pan directly - which means
           almost all of the heat makes it into your food.
         </p>
-
         <p>
           However, if you have a working electric resistance cooktop and you are
           satisfied with it - keep it! There's no climate benefit to switching
@@ -417,7 +383,6 @@ const FAQ = () => {
           from switching a gas powered stove to an electric one that can be
           powered by clean renewable energy.
         </p>
-
         <p>
           Learn more from{" "}
           <a href="https://www.forbes.com/home-improvement/kitchen/induction-vs-electric-cooktop/">

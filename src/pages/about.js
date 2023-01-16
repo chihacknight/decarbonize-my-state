@@ -116,9 +116,7 @@ const AboutPage = ({ data }) => {
             <a href="https://climate.win/">Win Climate</a>.
           </p>
 
-          <p>
-            Our team includes:
-          </p>
+          <p>Our team includes:</p>
 
           {/* Show team members with photos in columns */}
           <div className="row justify-content-around mt-4 mb-3">
@@ -126,7 +124,7 @@ const AboutPage = ({ data }) => {
               <img src={DerekPhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
-                <a href="https://derekeder.com">Derek Eder</a> <br/>
+                <a href="https://derekeder.com">Derek Eder</a> <br />
                 Founder, DataMade
               </p>
             </div>
@@ -135,7 +133,7 @@ const AboutPage = ({ data }) => {
               <img src={ViktorPhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
-                <a href="https://viktorkoves.com/">Viktor Köves</a> <br/>
+                <a href="https://viktorkoves.com/">Viktor Köves</a> <br />
                 Senior Front-End Engineer, Packback
               </p>
             </div>
@@ -144,7 +142,7 @@ const AboutPage = ({ data }) => {
               <img src={ChloePhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
-                Chloe Xu <br/>
+                Chloe Xu <br />
                 UX Strategist
               </p>
             </div>
