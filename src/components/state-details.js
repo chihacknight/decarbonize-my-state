@@ -226,7 +226,7 @@ export default function StateDetailsPage({ location, data }) {
       : "?"
 
   const solarToBuildMwStr = numberToHumanString(solarToBuildMw)
-  const windToBuildMwStr = numberToHumanString(solarToBuildMw)
+  const windToBuildMwStr = numberToHumanString(windToBuildMw)
 
   const windTurbinesBuildPerYearStr =
     targetGenByWindMW !== undefined
@@ -908,8 +908,8 @@ export default function StateDetailsPage({ location, data }) {
 
                 <p className="mt-5">
                   That doesn't mean there's no solution, it just means that
-                  clean {getTerminologyHover("clean-electrification")} doesn't
-                  help with these problems, and you could fill a whole book with
+                  {getTerminologyHover("clean-electrification")} doesn't help
+                  with these problems, and you could fill a whole book with
                   covering all of them. We need to encourage our politicians to
                   invest in researching new solutions and implementing existing
                   solutions to these problems!

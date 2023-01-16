@@ -3,7 +3,7 @@ import React from "react"
 export function getShortCitation(slug) {
   const citation = getCitation(slug)
   return (
-    <a href={`/about#data-${slug}`} target="_blank">
+    <a href={`/about#data-${slug}`} target="_blank" rel="noreferrer">
       {citation.source_short}, {citation.date}
     </a>
   )

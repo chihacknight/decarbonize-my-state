@@ -1,13 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
-import Button from "react-bootstrap/Button"
 import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import Tooltip from "react-bootstrap/Tooltip"
 
 export function getTerminologyLink(slug) {
   const t = getTerminology(slug)
   return (
-    <a href={`/terminology#${slug}`} target="_blank">
+    <a href={`/terminology#${slug}`} target="_blank" rel="noreferrer">
       {t.term}
     </a>
   )
