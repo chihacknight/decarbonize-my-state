@@ -149,14 +149,15 @@ const AboutPage = ({ data }) => {
           </div>
 
           <p>
-            <a href="https://dylanhalpern.com/">Dylan Halpern</a>,{" "}
-            Surag Nuthulapaty, Robert Herrera,{" "}
+            <a href="https://dylanhalpern.com/">Dylan Halpern</a>, Surag
+            Nuthulapaty, Robert Herrera,{" "}
             <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>,{" "}
-            <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>, {" "}
+            <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>
+            ,{" "}
             <a href="https://chihacknight.org/board-of-directors/sean-watland.html">
               Sean Watland
-            </a>,{" "}
-            <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,
+            </a>
+            , <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,
             <a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>,{" "}
             <a href="https://www.linkedin.com/in/sjegoodman/">
               Samantha Goodman
@@ -165,7 +166,8 @@ const AboutPage = ({ data }) => {
             <a href="https://www.linkedin.com/in/shelbybarron/">
               Shelby Barron
             </a>
-            , and <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>.
+            , and{" "}
+            <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>.
           </p>
 
           <p>
