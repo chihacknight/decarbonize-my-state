@@ -120,7 +120,7 @@ const AboutPage = ({ data }) => {
 
           {/* Show team members with photos in columns */}
           <div className="row justify-content-around mt-4 mb-3">
-            <div className="col-6 col-lg-3 text-center mb-3 m-l-0">
+            <div className="col-6 col-md-3 text-center mb-3 m-l-0">
               <img src={DerekPhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
@@ -129,7 +129,7 @@ const AboutPage = ({ data }) => {
               </p>
             </div>
 
-            <div className="col-6 col-lg-3 text-center mb-3 m-l-0">
+            <div className="col-6 col-md-3 text-center mb-3 m-l-0">
               <img src={ViktorPhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
@@ -138,7 +138,7 @@ const AboutPage = ({ data }) => {
               </p>
             </div>
 
-            <div className="col-6 col-lg-3 text-center mb-3 m-l-0">
+            <div className="col-6 col-md-3 text-center mb-3 m-l-0">
               <img src={ChloePhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
@@ -149,14 +149,13 @@ const AboutPage = ({ data }) => {
           </div>
 
           <p>
-            As well as
-            <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>
-            , <a href="https://viktorkoves.com/">Viktor Köves</a>,{" "}
+            <a href="https://dylanhalpern.com/">Dylan Halpern</a>,{" "}
+            Surag Nuthulapaty, Robert Herrera,{" "}
+            <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>,{" "}
+            <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>, {" "}
             <a href="https://chihacknight.org/board-of-directors/sean-watland.html">
               Sean Watland
-            </a>
-            , <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>,{" "}
-            <a href="https://dylanhalpern.com/">Dylan Halpern</a>,{" "}
+            </a>,{" "}
             <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,
             <a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>,{" "}
             <a href="https://www.linkedin.com/in/sjegoodman/">
@@ -166,8 +165,7 @@ const AboutPage = ({ data }) => {
             <a href="https://www.linkedin.com/in/shelbybarron/">
               Shelby Barron
             </a>
-            , <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>,
-            Surag Nuthulapaty and Robert Herrera.
+            , and <a href="https://www.linkedin.com/in/jackmadans/">Jack Madans</a>.
           </p>
 
           <p>
