@@ -2,6 +2,8 @@ import React from "react"
 import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import Tooltip from "react-bootstrap/Tooltip"
 
+import InfoImg from "../images/icons/info.svg"
+
 export function getTerminologyLink(slug) {
   const t = getTerminology(slug)
   return (
@@ -24,13 +26,16 @@ export function getTerminologyHover(slug) {
   )
 
   return (
-    <OverlayTrigger
-      placement="top"
-      delay={{ show: 250, hide: 400 }}
-      overlay={renderTooltip}
-    >
-      <span class="terminology">{t.term}</span>
-    </OverlayTrigger>
+    <>
+      {t.term}
+      <OverlayTrigger
+        placement="top"
+        delay={{ show: 250, hide: 400 }}
+        overlay={renderTooltip}
+      >
+        <sup>[?]</sup>
+      </OverlayTrigger>
+    </>
   )
 }
 

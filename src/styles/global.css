@@ -507,7 +507,12 @@ footer a {
   margin-top: 15px;
 }
 
-.terminology {
-  text-decoration-line: underline;
-  text-decoration-style: dashed;
+.info-icon {
+  width: 1rem;
+  aspect-ratio: 1;
+  margin-bottom: 0.5rem;
+}
+
+.tooltip {
+  cursor: pointer;
 }
