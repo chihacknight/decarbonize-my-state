@@ -10,6 +10,8 @@ import { getLongCitation } from "../constants/source-citations.js"
 import ChloePhoto from "../images/team/chloe.jpg"
 import DerekPhoto from "../images/team/derek.jpg"
 import ViktorPhoto from "../images/team/viktor.jpg"
+import SuragPhoto from "../images/team/surag.jpg"
+import SeanPhoto from "../images/team/sean.jpg"
 
 const getCleanData = data => {
   let mutableDataObj = {}
@@ -119,8 +121,8 @@ const AboutPage = ({ data }) => {
           <p>Our team includes:</p>
 
           {/* Show team members with photos in columns */}
-          <div className="row justify-content-around mt-4 mb-3">
-            <div className="col-6 col-md-3 text-center mb-3 m-l-0">
+          <div className="row justify-content-center mt-4 mb-3 col-md-10">
+            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
               <img src={DerekPhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
@@ -129,7 +131,7 @@ const AboutPage = ({ data }) => {
               </p>
             </div>
 
-            <div className="col-6 col-md-3 text-center mb-3 m-l-0">
+            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
               <img src={ViktorPhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
@@ -138,7 +140,16 @@ const AboutPage = ({ data }) => {
               </p>
             </div>
 
-            <div className="col-6 col-md-3 text-center mb-3 m-l-0">
+            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+              <img src={SuragPhoto} className="rounded img-fluid" />
+
+              <p className="text-center mt-3">
+                Surag Nuthulapaty <br />
+                Developer
+              </p>
+            </div>
+
+            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
               <img src={ChloePhoto} className="rounded img-fluid" />
 
               <p className="text-center mt-3">
@@ -146,17 +157,23 @@ const AboutPage = ({ data }) => {
                 UX Strategist
               </p>
             </div>
+
+            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+              <img src={SeanPhoto} className="rounded img-fluid" />
+
+              <p className="text-center mt-3">
+                Sean Watland <br />
+                Senior Business Intelligence Analyst, dscout
+              </p>
+            </div>
           </div>
 
           <p>
-            <a href="https://dylanhalpern.com/">Dylan Halpern</a>, Surag
-            Nuthulapaty, Robert Herrera,{" "}
+            <a href="https://dylanhalpern.com/">Dylan Halpern</a>,
+            Robert Herrera,{" "}
             <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>,{" "}
             <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>
             ,{" "}
-            <a href="https://chihacknight.org/board-of-directors/sean-watland.html">
-              Sean Watland
-            </a>
             , <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,
             <a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>,{" "}
             <a href="https://www.linkedin.com/in/sjegoodman/">
