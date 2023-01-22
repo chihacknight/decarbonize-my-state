@@ -5,6 +5,44 @@
  * classes to make sure it only applies to the right page.
  */
 
+.state-graph-section {
+  margin: auto;
+}
+
+/**
+ * Emissions graph styling
+ */
+.state-graph-section .simplearea-cont {
+  height: 18.75rem !important;
+  width: 50rem !important;
+  max-width: 100%;
+  margin: auto;
+}
+
+.state-graph-section .simplearea-cont tspan {
+  font-weight: bold;
+}
+
+/* Mobile styling Make graph taller aspect ratio on mobile screens and shrink labels */
+@media (max-width: 575px) {
+  .state-graph-section .simplearea-cont {
+    aspect-ratio: 1.5/1;
+    /** Crude but lets us go full width */
+    margin-left: -1rem;
+    height: auto !important;
+    width: 95vw !important;
+    max-width: none;
+  }
+
+  .state-graph-section .simplearea-cont tspan {
+    font-size: 0.75rem;
+  }
+
+  .state-graph-section .table-btn-cont {
+    text-align: center;
+  }
+}
+
 .sticky-header {
   position: sticky;
   top: 55px; /* align with site header */

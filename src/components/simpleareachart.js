@@ -104,7 +104,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
       <ResponsiveContainer className="simplearea-cont">
         <AreaChart
           width={800}
-          height={400}
+          height={200}
           data={data}
           margin={{
             top: 30,
@@ -178,7 +178,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
         </AreaChart>
       </ResponsiveContainer>
 
-      <div className="text-center">
+      <div className="table-btn-cont mt-2">
         <Button variant="secondary" onClick={handleShowModal}>
           View Data Table
         </Button>

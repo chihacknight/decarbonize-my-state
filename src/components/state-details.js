@@ -9,7 +9,8 @@ import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
 import WindSolarBuilds from "./WindSolarBuilds.js"
-import { getShortCitation } from "../constants/source-citations.js"
+import { getShortCitation } from "../constants/source-citations"
+import { getTerminologyHover } from "../constants/terminology-list"
 
 /**
  * Images - suffix with Img for clarity from actual JS files/variables
@@ -128,9 +129,7 @@ export default function StateDetailsPage({ location, data }) {
     100
   ).toFixed(0)
 
-  const rawEmissionsCutPerYear = (sumOfEmissions * (1 / yearsToTarget)).toFixed(
-    1
-  )
+  const percentToCut = ((1 / yearsToTarget) * 100).toFixed(1)
 
   // #### VEHICLES ####
   const {
@@ -227,7 +226,7 @@ export default function StateDetailsPage({ location, data }) {
       : "?"
 
   const solarToBuildMwStr = numberToHumanString(solarToBuildMw)
-  const windToBuildMwStr = numberToHumanString(solarToBuildMw)
+  const windToBuildMwStr = numberToHumanString(windToBuildMw)
 
   const windTurbinesBuildPerYearStr =
     targetGenByWindMW !== undefined
@@ -328,18 +327,18 @@ export default function StateDetailsPage({ location, data }) {
 
       {/* Intro Section */}
       <div className="col-12">
-        <p className="h1 font-weight-light mt-6 mb-5">
-          To get to <strong>zero</strong> by 2050, {placeTitle} must cut climate
-          pollution by <br className="d-none d-lg-block" />
-          <strong>
-            {rawEmissionsCutPerYear} million metric tons of CO<sub>2</sub>{" "}
-            equivalent a year.
-          </strong>
+        <p className="h2 text-center font-weight-light mt-6 mb-5">
+          To get to <strong>zero</strong> by 2050, {placeTitle} must cut
+          emissions by <strong>{percentToCut}% a year</strong>
         </p>
+      </div>
 
+      {/* Make graph thinner */}
+      <div className="col-lg-9 state-graph-section">
         <h2 className="h4">Emissions in {placeTitle}</h2>
         <p className="h6">
-          Million metric tons of carbon dioxide equivalent (MMTCO2e) emissions
+          Million metric tons of {getTerminologyHover("carbon-dioxide")}{" "}
+          equivalent ({getTerminologyHover("mtco2e")}) emissions
         </p>
         <p className="small">
           <strong>Note:</strong> Grey area indicates missing data due to
@@ -353,9 +352,11 @@ export default function StateDetailsPage({ location, data }) {
           emissionsData={emissionsByYear}
           title={"Emissions in " + placeTitle}
         />
+      </div>
 
-        <p className="h1 font-weight-bold text-center mt-5">
-          This is how we're going to do it.
+      <div className="col-12">
+        <p className="h1 font-weight-bold text-center mt-7">
+          This is how we're going to do it
         </p>
 
         <hr className="mt-7 mb-7" />
@@ -467,7 +468,7 @@ export default function StateDetailsPage({ location, data }) {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    induction ranges
+                    electric induction ranges
                   </a>
                 </li>
               </ul>
@@ -491,8 +492,8 @@ export default function StateDetailsPage({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="mt-7">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of buildings in{" "}
-                {placeTitle} are already fossil fuel free!
+                In fact, {Math.round(weightedEleBuildingsPct)}% of appliances in
+                buildings in {placeTitle} are already fossil fuel free!
               </p>
             )}
 
@@ -760,9 +761,11 @@ export default function StateDetailsPage({ location, data }) {
 
               <p className="mt-6">
                 In all, we'll need to build{" "}
-                <strong>{windTurbinesCountStr} Megawatts</strong> of wind power
-                and <strong>{solarPanelsCountStr} Megawatts</strong> of solar
-                power.
+                <strong>
+                  {windTurbinesCountStr} {getTerminologyHover("megawatt")}
+                </strong>{" "}
+                of wind power and <strong>{solarPanelsCountStr} MW</strong> of
+                solar power.
               </p>
 
               <p className="mt-6">
@@ -772,13 +775,13 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-5">
-                Since {placeTitle} already has {currentWindMWStr} Megawatts of{" "}
-                wind and {currentSolarMWStr} Megawatts of solar, that's{" "}
-                {windToBuildMwStr} Megawatts of wind power we need to build and{" "}
-                {solarToBuildMwStr} Megawatts of solar power. That's around{" "}
-                <strong>{windTurbinesBuildPerYearStr} Megawatts </strong>
+                Since {placeTitle} already has {currentWindMWStr} MW of wind and{" "}
+                {currentSolarMWStr} MW of solar, that's {windToBuildMwStr} MW of
+                wind power we need to build and {solarToBuildMwStr} MW of solar
+                power. That's around{" "}
+                <strong>{windTurbinesBuildPerYearStr} MW </strong>
                 of wind power and{" "}
-                <strong>{solarPanelsBuildPerYearStr} Megawatts </strong>
+                <strong>{solarPanelsBuildPerYearStr} MW </strong>
                 of solar power a year.
               </p>
 
@@ -909,12 +912,12 @@ export default function StateDetailsPage({ location, data }) {
                 </ul>
 
                 <p className="mt-5">
-                  That doesn't mean there's no solution, it just means that
-                  clean electrification doesn't help with these problems, and
-                  you could fill a whole book with covering all of them. We need
-                  to encourage our politicians to invest in researching new
-                  solutions and implementing existing solutions to these
-                  problems!
+                  That doesn't mean there's no solution, it just means that{" "}
+                  {getTerminologyHover("clean-electrification")} doesn't help
+                  with these problems, and you could fill a whole book with
+                  covering all of them. We need to encourage our politicians to
+                  invest in researching new solutions and implementing existing
+                  solutions to these problems!
                 </p>
               </div>
             </div>

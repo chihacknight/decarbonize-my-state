@@ -5,7 +5,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SingleBarChart from "../components/singlebar"
 import { getLatestUsData } from "../components/getLatestEmissions"
-import { getLongCitation } from "../constants/source-citations.js"
+import { getLongCitation } from "../constants/source-citations"
+import { getTerminologyHover } from "../constants/terminology-list"
 
 import ChloePhoto from "../images/team/chloe.jpg"
 import DerekPhoto from "../images/team/derek.jpg"
@@ -47,7 +48,7 @@ const AboutPage = ({ data }) => {
 
           <p>
             Tired of waiting for Congress to act on the climate crisis? Then,{" "}
-            <strong>decarbonize your state</strong>.
+            <strong>{getTerminologyHover("decarbonize")} your state</strong>.
           </p>
           <p>
             Decarb My State allows Americans to picture exactly{" "}
@@ -59,7 +60,7 @@ const AboutPage = ({ data }) => {
           <p>
             Decarbonization is <strong>simple</strong>—in every state, we can
             eliminate most emissions using{" "}
-            <strong>clean electrification</strong>:
+            <strong>{getTerminologyHover("clean-electrification")}</strong>:
           </p>
 
           <ol>
@@ -223,8 +224,8 @@ const AboutPage = ({ data }) => {
             ”
           </p>
           <p>
-            The idea of using clean electrification as the lynchpin of
-            decarbonization is heavily inspired by the book
+            The idea of using {getTerminologyHover("clean-electrification")} as
+            the lynchpin of decarbonization is heavily inspired by the book
             <a href="https://www.rewiringamerica.org/electrify-the-book">
               {" "}
               “Electrify”

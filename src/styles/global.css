@@ -321,32 +321,6 @@ footer a {
 }
 
 /**
- * SimpleAreaChart styling
- */
-.simplearea-cont {
-  height: auto !important;
-  aspect-ratio: 2/1;
-}
-
-.simplearea-cont tspan {
-  font-weight: bold;
-}
-
-/* Mobile styling Make graph taller aspect ratio on mobile screens and shrink labels */
-@media (max-width: 575px) {
-  .simplearea-cont {
-    aspect-ratio: 1.5/1;
-    /** Crude but lets us go full width */
-    margin-left: -2rem;
-    width: 95vw !important;
-  }
-
-  .simplearea-cont tspan {
-    font-size: 12px;
-  }
-}
-
-/**
  * SingleBarChart styling
  */
 .single-bar-chart text {
