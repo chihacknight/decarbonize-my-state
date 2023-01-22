@@ -480,13 +480,3 @@ footer a {
   font-size: 1.3rem;
   margin-top: 15px;
 }
-
-.info-icon {
-  width: 1rem;
-  aspect-ratio: 1;
-  margin-bottom: 0.5rem;
-}
-
-.tooltip {
-  cursor: pointer;
-}

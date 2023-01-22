@@ -2,8 +2,6 @@ import React from "react"
 import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import Tooltip from "react-bootstrap/Tooltip"
 
-import InfoImg from "../images/icons/info.svg"
-
 export function getTerminologyLink(slug) {
   const t = getTerminology(slug)
   return (
@@ -26,7 +24,7 @@ export function getTerminologyHover(slug) {
   )
 
   return (
-    <>
+    <span class="nowrap">
       {t.term}
       <OverlayTrigger
         placement="top"
@@ -42,7 +40,7 @@ export function getTerminologyHover(slug) {
           [?]
         </sup>
       </OverlayTrigger>
-    </>
+    </span>
   )
 }
 
