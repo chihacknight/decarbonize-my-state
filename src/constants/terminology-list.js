@@ -24,8 +24,8 @@ export function getTerminologyHover(slug) {
   )
 
   return (
-    <span class="text-nowrap">
-      {t.term}
+    <span>
+      {t.term}&nbsp;
       <OverlayTrigger
         placement="top"
         delay={{ show: 250, hide: 400 }}
