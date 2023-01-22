@@ -1,0 +1,41 @@
+/**
+ * About Page Styles
+ *
+ * ⚠️ Warning: This styling is ultimately applied to the global scope! Use specific
+ * classes to make sure it only applies to the right page.
+ */
+.about .team-photos {
+  display: flex;
+  gap: 2rem 4rem;
+  padding: 0 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about .team-photos > div {
+  width: 25%;
+}
+
+.about .team-title {
+  font-size: 0.875rem;
+}
+
+/**
+ * Mobile Tablet Styling
+ */
+@media (max-width: 991px) {
+  .about .team-photos {
+    justify-content: space-between;
+    padding: 0;
+    gap: 2rem 0;
+  }
+
+  .about .team-photos > div {
+    width: 42.5%;
+    font-size: 0.875rem;
+  }
+
+  .about .team-title {
+    font-size: 0.75rem;
+  }
+}

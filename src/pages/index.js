@@ -57,8 +57,10 @@ const IndexPage = ({ data }) => {
 
       <hr></hr>
 
-      <h2 className="text-center mt-6 mb-5">
-        See Details On How Your State Can Decarbonize
+      <h2 className="text-center font-weight-normal mt-6 mb-5">
+        <strong>Choose Your State</strong>
+        <br />
+        To Learn How It Can Decarbonize
       </h2>
 
       <div className="mb-md-5">
