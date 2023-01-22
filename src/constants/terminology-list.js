@@ -24,7 +24,7 @@ export function getTerminologyHover(slug) {
   )
 
   return (
-    <span class="nowrap">
+    <span class="text-nowrap">
       {t.term}
       <OverlayTrigger
         placement="top"
