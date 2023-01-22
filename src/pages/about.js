@@ -41,7 +41,7 @@ const AboutPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="About | Decarb My State" />
-      <div className="container col-lg-10">
+      <div className="about container col-lg-10">
         <div>
           <h1 id="main">About Decarb My State</h1>
 
@@ -121,50 +121,60 @@ const AboutPage = ({ data }) => {
           <p>Our team includes:</p>
 
           {/* Show team members with photos in columns */}
-          <div className="row justify-content-center mt-4 mb-3 col-md-10">
-            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+          <div className="team-photos mt-4 mb-3">
+            <div className="text-center">
               <img src={DerekPhoto} className="rounded img-fluid" />
 
-              <p className="text-center mt-3">
-                <a href="https://derekeder.com">Derek Eder</a> <br />
-                Founder, DataMade
-              </p>
+              <div className="text-center mt-3">
+                <strong><a href="https://derekeder.com">Derek Eder</a></strong>
+                <div className="team-title">
+                  Founder, DataMade
+                </div>
+              </div>
             </div>
 
-            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+            <div className="text-center">
               <img src={ViktorPhoto} className="rounded img-fluid" />
 
-              <p className="text-center mt-3">
-                <a href="https://viktorkoves.com/">Viktor Köves</a> <br />
-                Senior Front-End Engineer, Packback
-              </p>
+              <div className="text-center mt-3">
+                <strong><a href="https://viktorkoves.com/">Viktor Köves</a></strong>
+                <div className="team-title">
+                  Senior Front-End Engineer, Packback
+                </div>
+              </div>
             </div>
 
-            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+            <div className="text-center">
               <img src={SuragPhoto} className="rounded img-fluid" />
 
-              <p className="text-center mt-3">
-                Surag Nuthulapaty <br />
-                Developer
-              </p>
+              <div className="text-center mt-3">
+                <strong>Surag Nuthulapaty</strong>
+                <div className="team-title">
+                  Developer
+                </div>
+              </div>
             </div>
 
-            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+            <div className="text-center">
               <img src={ChloePhoto} className="rounded img-fluid" />
 
-              <p className="text-center mt-3">
-                Chloe Xu <br />
-                UX Strategist
-              </p>
+              <div className="text-center mt-3">
+                <strong>Chloe Xu</strong>
+                <div className="team-title">
+                  UX Strategist
+                </div>
+              </div>
             </div>
 
-            <div className="col-6 col-md-4 text-center mb-3 m-l-0">
+            <div className="text-center">
               <img src={SeanPhoto} className="rounded img-fluid" />
 
-              <p className="text-center mt-3">
-                Sean Watland <br />
-                Senior Business Intelligence Analyst, dscout
-              </p>
+              <div className="text-center mt-3">
+                <strong>Sean Watland</strong>
+                <div className="team-title">
+                  Senior Business Intelligence Analyst, dscout
+                </div>
+              </div>
             </div>
           </div>
 
