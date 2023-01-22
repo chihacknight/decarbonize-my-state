@@ -126,10 +126,10 @@ const AboutPage = ({ data }) => {
               <img src={DerekPhoto} className="rounded img-fluid" />
 
               <div className="text-center mt-3">
-                <strong><a href="https://derekeder.com">Derek Eder</a></strong>
-                <div className="team-title">
-                  Founder, DataMade
-                </div>
+                <strong>
+                  <a href="https://derekeder.com">Derek Eder</a>
+                </strong>
+                <div className="team-title">Founder, DataMade</div>
               </div>
             </div>
 
@@ -137,7 +137,9 @@ const AboutPage = ({ data }) => {
               <img src={ViktorPhoto} className="rounded img-fluid" />
 
               <div className="text-center mt-3">
-                <strong><a href="https://viktorkoves.com/">Viktor Köves</a></strong>
+                <strong>
+                  <a href="https://viktorkoves.com/">Viktor Köves</a>
+                </strong>
                 <div className="team-title">
                   Senior Front-End Engineer, Packback
                 </div>
@@ -149,9 +151,7 @@ const AboutPage = ({ data }) => {
 
               <div className="text-center mt-3">
                 <strong>Surag Nuthulapaty</strong>
-                <div className="team-title">
-                  Developer
-                </div>
+                <div className="team-title">Developer</div>
               </div>
             </div>
 
@@ -160,9 +160,7 @@ const AboutPage = ({ data }) => {
 
               <div className="text-center mt-3">
                 <strong>Chloe Xu</strong>
-                <div className="team-title">
-                  UX Strategist
-                </div>
+                <div className="team-title">UX Strategist</div>
               </div>
             </div>
 
@@ -179,12 +177,11 @@ const AboutPage = ({ data }) => {
           </div>
 
           <p>
-            <a href="https://dylanhalpern.com/">Dylan Halpern</a>,
-            Robert Herrera,{" "}
+            <a href="https://dylanhalpern.com/">Dylan Halpern</a>, Robert
+            Herrera,{" "}
             <a href="https://www.linkedin.com/in/hkier/">Howard Kier</a>,{" "}
             <a href="https://www.linkedin.com/in/jpvelez/"> Juan-Pablo Velez</a>
-            ,{" "}
-            , <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,
+            , , <a href="https://www.elisarudolph.com/">Elisa Rudolph</a>,
             <a href="https://www.linkedin.com/in/joyce-ohiri/"> Joyce Ohiri</a>,{" "}
             <a href="https://www.linkedin.com/in/sjegoodman/">
               Samantha Goodman
