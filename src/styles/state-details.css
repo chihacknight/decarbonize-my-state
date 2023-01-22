@@ -55,6 +55,9 @@
   padding: 0.5rem 1rem;
 }
 
+/** Make sure focusing links works with both sticky headers */
+.state-details-main * { scroll-margin-top: 15rem; }
+
 /**
  * Set consistent paragraph styles to keep text size uniform unless a paragraph
  * specifically should be bigger or smaller
