@@ -34,7 +34,13 @@ export function getTerminologyHover(slug) {
         overlay={renderTooltip}
       >
         {/* For screen readers, provide term as this button's label */}
-        <sup tabindex="0" role="tooltip" aria-label={t.term + ' - ' + t.definition}>[?]</sup>
+        <sup
+          tabindex="0"
+          role="tooltip"
+          aria-label={t.term + " - " + t.definition}
+        >
+          [?]
+        </sup>
       </OverlayTrigger>
     </>
   )

@@ -327,11 +327,14 @@ export default function StateDetailsPage({ location, data }) {
 
       {/* Intro Section */}
       <div className="col-12">
-        <p className="h2 font-weight-light mt-6 mb-5">
+        <p className="h2 text-center font-weight-light mt-6 mb-5">
           To get to <strong>zero</strong> by 2050, {placeTitle} must cut
           emissions by <strong>{percentToCut}% a year</strong>
         </p>
+      </div>
 
+      {/* Make graph thinner */}
+      <div className="col-lg-9 state-graph-section">
         <h2 className="h4">Emissions in {placeTitle}</h2>
         <p className="h6">
           Million metric tons of {getTerminologyHover("carbon-dioxide")}{" "}
@@ -349,8 +352,10 @@ export default function StateDetailsPage({ location, data }) {
           emissionsData={emissionsByYear}
           title={"Emissions in " + placeTitle}
         />
+      </div>
 
-        <p className="h1 font-weight-bold text-center mt-5">
+      <div className="col-12">
+        <p className="h1 font-weight-bold text-center mt-7">
           This is how we're going to do it
         </p>
 
@@ -463,7 +468,7 @@ export default function StateDetailsPage({ location, data }) {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    induction ranges
+                    electric induction ranges
                   </a>
                 </li>
               </ul>

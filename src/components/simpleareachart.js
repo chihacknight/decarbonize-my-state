@@ -178,7 +178,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
         </AreaChart>
       </ResponsiveContainer>
 
-      <div className="text-center">
+      <div className="table-btn-cont mt-2">
         <Button variant="secondary" onClick={handleShowModal}>
           View Data Table
         </Button>
