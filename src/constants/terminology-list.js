@@ -33,7 +33,8 @@ export function getTerminologyHover(slug) {
         delay={{ show: 250, hide: 400 }}
         overlay={renderTooltip}
       >
-        <sup>[?]</sup>
+        {/* For screen readers, provide term as this button's label */}
+        <sup tabindex="0" role="tooltip" aria-label={t.term + ' - ' + t.definition}>[?]</sup>
       </OverlayTrigger>
     </>
   )
