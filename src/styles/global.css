@@ -4,9 +4,11 @@
 /* Import colors first for use in other files */
 @import "colors.css";
 
-@import "social-card.css";
-@import "index.css";
+/* Import page specific styles */
+@import "about.css";
 @import "faq.css";
+@import "index.css";
+@import "social-card.css";
 @import "state-details.css";
 @import "take-action.css";
 
@@ -88,6 +90,12 @@ h3 {
 /* Make <strong> actually use bold (by default it's a medium weight) */
 strong {
   font-weight: bold;
+}
+
+.link-icon {
+  width: 1rem;
+  aspect-ratio: 1;
+  margin-bottom: 0.5rem;
 }
 
 /**
