@@ -11,6 +11,9 @@ export function getTerminologyLink(slug) {
   )
 }
 
+/**
+ * Return a term phrase with a ? icon that shows a tooltip explaining the term
+ */
 export function getTerminologyHover(slug) {
   const t = getTerminology(slug)
   if (!t) {
@@ -71,6 +74,19 @@ export const terminologyDefs = [
     definition: `To move away from carbon producing appliances and machines.`,
   },
   {
+    slug: "heat-pumps",
+    term: "heat pumps",
+    definition:
+      "Heat pumps are electric appliances that can heat and cool a building using the refrigeration cycle, acting like reversible air conditioners.",
+  },
+  {
+    slug: "induction-stoves",
+    term: "electric induction stoves",
+    definition:
+      "Induction stoves are a type of electric stove that use magnets to create heat directly within pots or pans. These " +
+      "are distinct from radiant electric stoves (which glow red) because they heat up and cool down immediately and don't stay hot after use!",
+  },
+  {
     slug: "geothermal-energy",
     term: "geothermal energy",
     definition: `The natural heat emanating from the Earth’s core being conveyed by either magma or water to the Earth’s surface where it can be converted to electricity or used for heating.`,
@@ -88,7 +104,7 @@ export const terminologyDefs = [
   {
     slug: "megawatt",
     term: "megawatt (MW)",
-    definition: `A unit of energy. One megawatt can power 400-900 homes a year.`,
+    definition: `A unit of electric power. A one megawatt power generator can power around 400-900 homes a year.`,
   },
   {
     slug: "mtco2e",

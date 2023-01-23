@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -62,7 +63,7 @@ const FAQ = () => {
         </ol>
         <p>
           Ready to do something in your state?{" "}
-          <a href="do-something">Get started here</a>.
+          <Link to="/take-action">Get started here</Link>.
         </p>
         <h3>
           Why do you only focus on wind and solar power? Is that reliable?

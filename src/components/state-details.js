@@ -453,23 +453,11 @@ export default function StateDetailsPage({ location, data }) {
               <ul className="h4">
                 <li>
                   Boilers and furnaces with{" "}
-                  <a
-                    href="https://en.wikipedia.org/wiki/Heat_pump"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    heat pumps
-                  </a>
+                  <strong>{getTerminologyHover("heat-pumps")}</strong>
                 </li>
                 <li>
                   Gas stoves with{" "}
-                  <a
-                    href="https://en.wikipedia.org/wiki/Induction_cooking"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    electric induction ranges
-                  </a>
+                  <strong>{getTerminologyHover("induction-stoves")}</strong>
                 </li>
               </ul>
             </div>
