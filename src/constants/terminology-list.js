@@ -75,14 +75,16 @@ export const terminologyDefs = [
   },
   {
     slug: "heat-pumps",
-    term: 'heat pumps',
-    definition: 'Heat pumps are electric appliances that can heat and cool a building using the refrigeration cycle, acting like reversible air conditioners.',
+    term: "heat pumps",
+    definition:
+      "Heat pumps are electric appliances that can heat and cool a building using the refrigeration cycle, acting like reversible air conditioners.",
   },
   {
     slug: "induction-stoves",
-    term: 'electric induction stoves',
-    definition: 'Induction stoves are a type of electric stove that use magnets to create heat directly within pots or pans. These ' +
-      'are distinct from radiant electric stoves (which glow red) because they heat up and cool down immediately and don\'t stay hot after use!',
+    term: "electric induction stoves",
+    definition:
+      "Induction stoves are a type of electric stove that use magnets to create heat directly within pots or pans. These " +
+      "are distinct from radiant electric stoves (which glow red) because they heat up and cool down immediately and don't stay hot after use!",
   },
   {
     slug: "geothermal-energy",
