@@ -152,7 +152,7 @@ const TakeActionPage = () => {
               <tbody>
                 <tr>
                   <td>New or Used Electric Car</td>
-                  <td className="price-cell">$7,500 new / $4,00 used</td>
+                  <td className="price-cell">$7,500 new / $4,000 used</td>
                 </tr>
                 <tr>
                   <td>Electric Car Charger</td>
