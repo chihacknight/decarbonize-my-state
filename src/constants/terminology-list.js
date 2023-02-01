@@ -2,6 +2,8 @@ import React from "react"
 import OverlayTrigger from "react-bootstrap/OverlayTrigger"
 import Tooltip from "react-bootstrap/Tooltip"
 
+import QuestionIcon from "../images/icons/question-circle.svg"
+
 export function getTerminologyLink(slug) {
   const t = getTerminology(slug)
   return (
@@ -38,9 +40,10 @@ export function getTerminologyHover(slug) {
         <sup
           tabindex="0"
           role="tooltip"
+          class="terminology-icon"
           aria-label={t.term + " - " + t.definition}
         >
-          [?]
+          <img src={QuestionIcon} />
         </sup>
       </OverlayTrigger>
     </span>
