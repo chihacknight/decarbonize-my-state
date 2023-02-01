@@ -43,8 +43,7 @@ export function getTerminologyHover(slug) {
           class="terminology-icon"
           aria-label={t.term + " - " + t.definition}
         >
-          <img
-            src={QuestionIcon}/>
+          <img src={QuestionIcon} />
         </sup>
       </OverlayTrigger>
     </span>
