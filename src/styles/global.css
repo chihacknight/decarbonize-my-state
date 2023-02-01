@@ -56,6 +56,16 @@ a:focus {
   text-decoration-thickness: 0.125em;
 }
 
+a:hover .new-tab-icon {
+  filter: brightness(0.8);
+}
+
+.new-tab-icon {
+  width: 1em;
+  position: relative;
+  top: -0.3em;
+}
+
 /* Bold all heading elements by default */
 h1,
 h2,
