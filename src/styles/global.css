@@ -488,3 +488,12 @@ footer a {
   font-size: 1.3rem;
   margin-top: 15px;
 }
+
+.terminology-icon {
+  display: inline-block;
+}
+
+.terminology-icon img {
+  width: 1rem;
+  height: 1rem;
+}
