@@ -114,7 +114,20 @@ const TakeActionPage = () => {
             </li>
 
             <li>
-              Produce your own power with solar panels or{" "}
+              Produce your own power by{" "}
+              <a
+                href="https://www.energysage.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                installing your own solar panels&nbsp;
+                <img
+                  src={NewTabIcon}
+                  alt="(opens in a new tab)"
+                  className="new-tab-icon"
+                />
+              </a>{" "}
+              or{" "}
               <a
                 href="https://communitysolar.energysage.com/"
                 target="_blank"
@@ -240,7 +253,7 @@ const TakeActionPage = () => {
                 <img
                   src={NewTabWhiteIcon}
                   alt="(opens in a new tab)"
-                  className="new-tab-icon"
+                  className="new-tab-icon -white"
                 />
               </a>
             </p>
@@ -316,7 +329,7 @@ const TakeActionPage = () => {
                 <img
                   src={NewTabWhiteIcon}
                   alt="(opens in a new tab)"
-                  className="new-tab-icon"
+                  className="new-tab-icon -white"
                 />
               </a>
             </p>
@@ -348,7 +361,7 @@ const TakeActionPage = () => {
             <img
               src={NewTabWhiteIcon}
               alt="(opens in a new tab)"
-              className="new-tab-icon"
+              className="new-tab-icon -white"
             />
           </a>
         </div>

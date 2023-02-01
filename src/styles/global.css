@@ -56,7 +56,8 @@ a:focus {
   text-decoration-thickness: 0.125em;
 }
 
-a:hover .new-tab-icon {
+/* Darken new tab icons on hover if not white */
+a:hover .new-tab-icon:not(.-white) {
   filter: brightness(0.8);
 }
 
