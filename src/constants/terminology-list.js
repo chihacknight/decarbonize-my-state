@@ -19,7 +19,7 @@ export function getTerminologyLink(slug) {
 export function getTerminologyHover(slug) {
   const t = getTerminology(slug)
   if (!t) {
-    return <span class="terminology">{slug}</span>
+    return <span className="terminology">{slug}</span>
   }
 
   const renderTooltip = props => (
@@ -38,9 +38,9 @@ export function getTerminologyHover(slug) {
       >
         {/* For screen readers, provide term as this button's label */}
         <sup
-          tabindex="0"
+          tabIndex="0"
           role="tooltip"
-          class="terminology-icon"
+          className="terminology-icon"
           aria-label={t.term + " - " + t.definition}
         >
           <img src={QuestionIcon} />

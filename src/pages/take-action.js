@@ -2,13 +2,12 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import NewTabIcon from "../components/new-tab-icon"
 import { getTerminologyHover } from "../constants/terminology-list"
 
 // image resources
 import HomeElectrificationDiagram from "../images/electrification-appliances.webp"
 import ClimateCabinet from "../images/climate-cabinet.png"
-import NewTabIcon from "../images/icons/new-tab.svg"
-import NewTabWhiteIcon from "../images/icons/new-tab-white.svg"
 
 const TakeActionPage = () => {
   return (
@@ -44,18 +43,14 @@ const TakeActionPage = () => {
               <br />
 
               <small>
-                <span class="font-weight-bold">Source:</span>{" "}
+                <span className="font-weight-bold">Source:</span>{" "}
                 <a
                   href="https://www.rewiringamerica.org/electrify-home-guide"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Electrify Home Guide, Rewiring America&nbsp;
-                  <img
-                    src={NewTabIcon}
-                    alt="(opens in a new tab)"
-                    className="new-tab-icon"
-                  />
+                  Electrify Home Guide, Rewiring America
+                  <NewTabIcon/>
                 </a>
               </small>
             </p>
@@ -82,12 +77,7 @@ const TakeActionPage = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    electric heat pump&nbsp;
-                    <img
-                      src={NewTabIcon}
-                      alt="(opens in a new tab)"
-                      className="new-tab-icon"
-                    />
+                    electric heat pump<NewTabIcon/>
                   </a>
                 </li>
                 <li>
@@ -97,12 +87,7 @@ const TakeActionPage = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    induction stove&nbsp;
-                    <img
-                      src={NewTabIcon}
-                      alt="(opens in a new tab)"
-                      className="new-tab-icon"
-                    />
+                    induction stove<NewTabIcon/>
                   </a>
                 </li>
                 <li>Replacing your gas water heater with an electric one</li>
@@ -120,12 +105,7 @@ const TakeActionPage = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                installing your own solar panels&nbsp;
-                <img
-                  src={NewTabIcon}
-                  alt="(opens in a new tab)"
-                  className="new-tab-icon"
-                />
+                installing your own solar panels<NewTabIcon/>
               </a>{" "}
               or{" "}
               <a
@@ -133,12 +113,7 @@ const TakeActionPage = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                enrolling in community solar&nbsp;
-                <img
-                  src={NewTabIcon}
-                  alt="(opens in a new tab)"
-                  className="new-tab-icon"
-                />
+                enrolling in community solar<NewTabIcon/>
               </a>
             </li>
           </ol>
@@ -155,12 +130,7 @@ const TakeActionPage = () => {
               target="_blank"
               rel="noreferrer"
             >
-              Electrify Everything in Your Home&nbsp;
-              <img
-                src={NewTabIcon}
-                alt="(opens in a new tab)"
-                className="new-tab-icon"
-              />
+              Electrify Everything in Your Home<NewTabIcon/>
             </a>
             , for steps on how to get started.
           </p>
@@ -249,12 +219,8 @@ const TakeActionPage = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Find Out How Much You Can Save With Rewiring America&nbsp;
-                <img
-                  src={NewTabWhiteIcon}
-                  alt="(opens in a new tab)"
-                  className="new-tab-icon -white"
-                />
+                Find Out How Much You Can Save With Rewiring America
+                <NewTabIcon classes="-white"/>
               </a>
             </p>
           </div>
@@ -303,12 +269,7 @@ const TakeActionPage = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Climate Cabinet Scorecard&nbsp;
-                <img
-                  src={NewTabIcon}
-                  alt="(opens in a new tab)"
-                  className="new-tab-icon"
-                />
+                Climate Cabinet Scorecard
               </a>
               .
             </p>
@@ -325,12 +286,8 @@ const TakeActionPage = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Donate to the Climate Slate by Climate Cabinet&nbsp;
-                <img
-                  src={NewTabWhiteIcon}
-                  alt="(opens in a new tab)"
-                  className="new-tab-icon -white"
-                />
+                Donate to the Climate Slate by Climate Cabinet
+                <NewTabIcon classes="-white"/>
               </a>
             </p>
           </div>
@@ -357,12 +314,8 @@ const TakeActionPage = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Find Your Representatives & Contact Them About Climate&nbsp;
-            <img
-              src={NewTabWhiteIcon}
-              alt="(opens in a new tab)"
-              className="new-tab-icon -white"
-            />
+            Find Your Representatives & Contact Them About Climate
+            <NewTabIcon classes="-white"/>
           </a>
         </div>
       </div>
