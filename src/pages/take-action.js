@@ -66,13 +66,13 @@ const TakeActionPage = () => {
                 Replace your gas appliances with electric, including:
                 <ul className="mb-3">
                   <li className="mt-2">
-                    Replacing your gas heating system with an{" "}
-                    <strong>{getTerminologyHover("heat-pumps")}</strong>
+                    Replacing your gas heating system with a{" "}
+                    <strong>{getTerminologyHover("heat-pump")}</strong>
                   </li>
 
                   <li className="mt-2">
                     Replacing your gas stove with an{" "}
-                    <strong>{getTerminologyHover("induction-stoves")}</strong>
+                    <strong>{getTerminologyHover("induction-stove")}</strong>
                   </li>
 
                   <li className="mt-2">
@@ -252,7 +252,7 @@ const TakeActionPage = () => {
           </h2>
 
           <p>
-            When talking about personal actions, renters have a lot less direct
+            In terms of personal actions, renters have a lot less direct
             control of their polluting machines, but there's still some things
             you can do.
           </p>
@@ -286,7 +286,7 @@ const TakeActionPage = () => {
               Especially if your old gas stove or dryer isn't working well, you
               have an opportunity to talk to your landlord about getting
               electric ones! It might be helpful to mention that electric
-              appliances will improve your air quality, reduce your landlords
+              appliances will improve your air quality, reduce your landlord's
               gas bill, and make an apartment more attractive to future tenants.
             </li>
 
