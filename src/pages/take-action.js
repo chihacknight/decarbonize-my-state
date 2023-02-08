@@ -25,18 +25,26 @@ const TakeActionPage = () => {
           </p>
           <p>
             <strong>Are you a homeowner?</strong> You can{" "}
-            <a href="#homeowners">personally electrify your machines</a>
+            <a href="#homeowners" className="font-weight-bold">
+              personally electrify your machines
+            </a>
           </p>
 
           <p>
             <strong>Are you a renter?</strong> Check out our{" "}
-            <a href="#renters">suggestions for renters</a>
+            <a href="#renters" className="font-weight-bold">
+              suggestions for renters
+            </a>
           </p>
 
           <p>
-            And whether you're a homeowner or a renter, the biggest impact is{" "}
-            <a href="#get-political">getting political</a>! Policy can shape
-            whole industries.
+            <strong>
+              And whether you're a homeowner or a renter, the biggest impact is{" "}
+              <a href="#get-political">getting political</a>!
+            </strong>{" "}
+            Policy can impact purchasing decisions for companies, help electrify
+            government buildings, provide incentives and subsidies for
+            homeowners, and a whole lot more.
           </p>
         </div>
 
@@ -109,8 +117,8 @@ const TakeActionPage = () => {
                 >
                   enrolling in community solar
                   <NewTabIcon />
-                </a>
-                .
+                </a>{" "}
+                or switching to another renewable energy supplier.
               </li>
             </ol>
             <p>
@@ -275,10 +283,7 @@ const TakeActionPage = () => {
             </li>
 
             <li className="mt-3">
-              <strong>
-                Switch your electricity supply to renewable energy
-              </strong>{" "}
-              by{" "}
+              <strong>Switch your electricity supply to renewables</strong> by{" "}
               <a
                 href="https://communitysolar.energysage.com/"
                 target="_blank"
@@ -286,8 +291,8 @@ const TakeActionPage = () => {
               >
                 enrolling in community solar
                 <NewTabIcon />
-              </a>
-              .
+              </a>{" "}
+              or switching to another renewable energy supplier.
             </li>
 
             <li className="mt-3">
@@ -295,17 +300,19 @@ const TakeActionPage = () => {
               <a href="https://www.nytimes.com/wirecutter/reviews/best-portable-induction-cooktop/">
                 portable induction cooktop
                 <NewTabIcon />
-              </a>{" "}
-              for under $100.
+              </a>
+              , which plugs into a regular outlet and cooks great for under{" "}
+              $100!
             </li>
 
             <li className="mt-3">
               <strong>Talk to your landlord about electrifying</strong> -{" "}
               Especially if your old gas stove or dryer isn't working well, you
               have an opportunity to talk to your landlord about getting
-              electric ones! It might be helpful to mention that electric
-              appliances will improve your air quality, reduce your landlord's
-              gas bill, and make an apartment more attractive to future tenants.
+              electric replacements! It might be helpful to mention that
+              electric appliances will improve your air quality, reduce your
+              landlord's gas bill, and make an apartment more attractive to
+              future tenants.
             </li>
 
             <li className="mt-3">
