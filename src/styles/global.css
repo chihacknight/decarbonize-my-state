@@ -444,13 +444,13 @@ footer a {
 }
 
 .building-sheet.-house {
-  aspect-ratio: 2;
-  background-size: 300%;
-  background-position: -7% 102%;
+  aspect-ratio: 1.5;
+  background-size: 350%;
+  background-position: -3% 102%;
 }
 
 .building-sheet.-house.-clean {
-  background-position: -7% 20%;
+  background-position: -3% 20%;
 }
 
 .building-sheet.-apartments {

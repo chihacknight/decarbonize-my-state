@@ -38,11 +38,11 @@ const Layout = ({ children }) => {
       </main>
       <footer>
         <hr />
-          &#169; 2022 - A Project From{" "}
-          <a href="https://chihacknight.org" target="_blank" rel="noreferrer">
-            Chi Hack Night
-            <NewTabIcon/>
-          </a>
+        &#169; 2022 - A Project From{" "}
+        <a href="https://chihacknight.org" target="_blank" rel="noreferrer">
+          Chi Hack Night
+          <NewTabIcon />
+        </a>
       </footer>
     </>
   )

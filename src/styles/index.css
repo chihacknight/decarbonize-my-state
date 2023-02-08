@@ -39,19 +39,19 @@
  * so they are responsive
  */
 .art-row .building-sheet {
-  width: 30rem;
+  width: 26rem;
 }
 
 .art-row .appliance-sheet {
-  height: 95%;
+  height: 90%;
 }
 .art-row .car-sheet {
-  height: 75%;
+  height: 65%;
 }
 
 .art-row .-car {
-  bottom: -10%;
-  left: 2%;
+  bottom: -6%;
+  left: 5%;
 }
 
 .art-row .-boiler {
@@ -60,17 +60,14 @@
 }
 
 .art-row .-stove {
-  right: 22%;
+  right: 24%;
 }
 
 /** Tablet & mobile - move legend below the map */
 @media (max-width: 991px) {
-  .map-row {
-    flex-direction: column-reverse;
-  }
-  .map-row .map-legend {
-    max-width: 25rem;
-  }
+  .art-row .building-sheet { width: 15rem; }
+  .map-row { flex-direction: column-reverse; }
+  .map-row .map-legend { max-width: 25rem; }
 }
 
 /**
@@ -112,7 +109,7 @@
   }
 
   .art-row .-stove {
-    right: 8%;
+    right: 12%;
     bottom: -30%;
   }
 
