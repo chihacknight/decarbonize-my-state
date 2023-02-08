@@ -61,32 +61,35 @@ const TakeActionPage = () => {
               personal burning of fossil fuels.
             </p>
 
-            <ol className="font-weight-bold">
+            <ol>
               <li>
-                Replace your gas appliances with electric, including:
-                <ul className="mb-3">
+                <strong>Replace your gas appliances with electric</strong>,{" "}
+                including:
+
+                <ul>
                   <li className="mt-2">
                     Replacing your gas heating system with a{" "}
-                    <strong>{getTerminologyHover("heat-pump")}</strong>
+                    <strong>{getTerminologyHover("heat-pump")}</strong>.
                   </li>
 
                   <li className="mt-2">
                     Replacing your gas stove with an{" "}
-                    <strong>{getTerminologyHover("induction-stove")}</strong>
+                    <strong>{getTerminologyHover("induction-stove")}</strong>.
                   </li>
 
                   <li className="mt-2">
-                    Replacing your gas water heater with an electric one
+                    Replacing your gas water heater with an electric one.
                   </li>
                 </ul>
               </li>
 
-              <li className="mb-3">
-                If you drive, <strong>make your next car electric</strong>
+              <li className="mt-3">
+                If you drive, <strong>make your next car electric or switch to
+                an e-bike and public transit</strong>.
               </li>
 
-              <li>
-                Produce your own power by{" "}
+              <li className="mt-3">
+                <strong>Switch to renewable power</strong> by{" "}
                 <a
                   href="https://www.energysage.com/"
                   target="_blank"
@@ -103,7 +106,7 @@ const TakeActionPage = () => {
                 >
                   enrolling in community solar
                   <NewTabIcon />
-                </a>
+                </a>.
               </li>
             </ol>
             <p>
@@ -259,6 +262,11 @@ const TakeActionPage = () => {
 
           <ol>
             <li>
+              If you drive, <strong>make your next car electric or switch to
+              an e-bike or public transit</strong>.
+            </li>
+
+            <li className="mt-3">
               <strong>
                 Switch your electricity supply to renewable energy
               </strong>{" "}
@@ -270,7 +278,7 @@ const TakeActionPage = () => {
               >
                 enrolling in community solar
                 <NewTabIcon />
-              </a>
+              </a>.
             </li>
 
             <li className="mt-3">
@@ -278,7 +286,7 @@ const TakeActionPage = () => {
               <a href="https://www.nytimes.com/wirecutter/reviews/best-portable-induction-cooktop/">
                 portable induction cooktop<NewTabIcon />
               </a>{" "}
-              for under  $100
+              for under  $100.
             </li>
 
             <li className="mt-3">
