@@ -65,9 +65,15 @@
 
 /** Tablet & mobile - move legend below the map */
 @media (max-width: 991px) {
-  .art-row .building-sheet { width: 15rem; }
-  .map-row { flex-direction: column-reverse; }
-  .map-row .map-legend { max-width: 25rem; }
+  .art-row .building-sheet {
+    width: 15rem;
+  }
+  .map-row {
+    flex-direction: column-reverse;
+  }
+  .map-row .map-legend {
+    max-width: 25rem;
+  }
 }
 
 /**

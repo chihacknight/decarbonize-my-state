@@ -45,8 +45,10 @@ const TakeActionPage = () => {
           <h2 className="heading-row mt-6 mb-4" id="homeowners">
             <div className="building-sheet -house -clean"></div>
             <div>
-              Homeowners <br/>
-              <div className="sub-text">Get Personal & Electrify Your Machines</div>
+              Homeowners <br />
+              <div className="sub-text">
+                Get Personal & Electrify Your Machines
+              </div>
             </div>
           </h2>
 
@@ -242,8 +244,10 @@ const TakeActionPage = () => {
           <h2 className="heading-row mt-6 mb-4" id="renters">
             <div className="building-sheet -apartments -clean"></div>
             <div>
-              Renters <br/>
-              <div className="sub-text">Switch Your Power Supplier & Talk To Your Landlord</div>
+              Renters <br />
+              <div className="sub-text">
+                Switch Your Power Supplier & Talk To Your Landlord
+              </div>
             </div>
           </h2>
 
@@ -278,7 +282,7 @@ const TakeActionPage = () => {
             </li>
 
             <li className="mt-3">
-              <strong>Talk to your landlord about electrifying</strong> - {" "}
+              <strong>Talk to your landlord about electrifying</strong> -{" "}
               Especially if your old gas stove or dryer isn't working well, you
               have an opportunity to talk to your landlord about getting
               electric ones! It might be helpful to mention that electric
@@ -287,13 +291,13 @@ const TakeActionPage = () => {
             </li>
 
             <li className="mt-3">
-              <strong>Talk to homeowners you know about electrifying</strong> - {" "}
-              Whether it's family, friends, or coworkers, talk about electrification!
-              A lot of folks don't know about the benefits of electrification
-              (including air quality and saving money on their energy bills) or
-              haven't heard about technologies like{" "}
-              {getTerminologyHover("heat-pumps")}{" "}
-              or {getTerminologyHover("induction-stoves")}.
+              <strong>Talk to homeowners you know about electrifying</strong> -{" "}
+              Whether it's family, friends, or coworkers, talk about
+              electrification! A lot of folks don't know about the benefits of
+              electrification (including air quality and saving money on their
+              energy bills) or haven't heard about technologies like{" "}
+              {getTerminologyHover("heat-pumps")} or{" "}
+              {getTerminologyHover("induction-stoves")}.
             </li>
           </ol>
         </section>
@@ -305,7 +309,9 @@ const TakeActionPage = () => {
               <div className="appliance-sheet -stove -clean"></div>
               <div>
                 Everyone
-                <div className="sub-text">Get Political & Electrify The Rest!</div>
+                <div className="sub-text">
+                  Get Political & Electrify The Rest!
+                </div>
               </div>
             </h2>
 
