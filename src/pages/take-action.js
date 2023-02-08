@@ -276,7 +276,7 @@ const TakeActionPage = () => {
             <li>
               If you drive,{" "}
               <strong>
-                make your next car electric or switch to an e-bike or public
+                make your next car electric or switch to an e-bike and public
                 transit
               </strong>
               .
