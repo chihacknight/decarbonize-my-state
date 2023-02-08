@@ -70,7 +70,8 @@
     gap: 1rem;
   }
 
-  .take-action ol, .take-action ul {
+  .take-action ol,
+  .take-action ul {
     padding-left: 0.5rem;
   }
 }

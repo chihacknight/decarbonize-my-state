@@ -43,7 +43,7 @@ export function getTerminologyHover(slug) {
           className="terminology-icon"
           aria-label={t.term + " - " + t.definition}
         >
-          <img src={QuestionIcon} />
+          <img src={QuestionIcon} alt="" />
         </sup>
       </OverlayTrigger>
     </span>
@@ -51,19 +51,19 @@ export function getTerminologyHover(slug) {
 }
 
 export function getTerminology(slug) {
-  let requestedPlural = false;
+  let requestedPlural = false
 
-  if (slug.endsWith('s')) {
-    slug = slug.slice(0, -1);
-    requestedPlural = true;
+  if (slug.endsWith("s")) {
+    slug = slug.slice(0, -1)
+    requestedPlural = true
   }
 
   const termDef = terminologyDefs.find(c => c.slug === slug)
 
   // If requesting a plural (like 'heat-pumps') pluralize the term
   if (requestedPlural) {
-    return Object.assign({ }, termDef, {
-      term: `${termDef.term}s`
+    return Object.assign({}, termDef, {
+      term: `${termDef.term}s`,
     })
   }
 

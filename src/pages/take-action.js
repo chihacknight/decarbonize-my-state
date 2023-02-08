@@ -65,7 +65,6 @@ const TakeActionPage = () => {
               <li>
                 <strong>Replace your gas appliances with electric</strong>,{" "}
                 including:
-
                 <ul>
                   <li className="mt-2">
                     Replacing your gas heating system with a{" "}
@@ -84,8 +83,12 @@ const TakeActionPage = () => {
               </li>
 
               <li className="mt-3">
-                If you drive, <strong>make your next car electric or switch to
-                an e-bike and public transit</strong>.
+                If you drive,{" "}
+                <strong>
+                  make your next car electric or switch to an e-bike and public
+                  transit
+                </strong>
+                .
               </li>
 
               <li className="mt-3">
@@ -106,7 +109,8 @@ const TakeActionPage = () => {
                 >
                   enrolling in community solar
                   <NewTabIcon />
-                </a>.
+                </a>
+                .
               </li>
             </ol>
             <p>
@@ -255,15 +259,19 @@ const TakeActionPage = () => {
           </h2>
 
           <p>
-            In terms of personal actions, renters have a lot less direct
-            control of their polluting machines, but there's still some things
-            you can do.
+            In terms of personal actions, renters have a lot less direct control
+            of their polluting machines, but there's still some things you can
+            do.
           </p>
 
           <ol>
             <li>
-              If you drive, <strong>make your next car electric or switch to
-              an e-bike or public transit</strong>.
+              If you drive,{" "}
+              <strong>
+                make your next car electric or switch to an e-bike or public
+                transit
+              </strong>
+              .
             </li>
 
             <li className="mt-3">
@@ -278,15 +286,17 @@ const TakeActionPage = () => {
               >
                 enrolling in community solar
                 <NewTabIcon />
-              </a>.
+              </a>
+              .
             </li>
 
             <li className="mt-3">
               <strong>Stop cooking with gas</strong> by getting a{" "}
               <a href="https://www.nytimes.com/wirecutter/reviews/best-portable-induction-cooktop/">
-                portable induction cooktop<NewTabIcon />
+                portable induction cooktop
+                <NewTabIcon />
               </a>{" "}
-              for under  $100.
+              for under $100.
             </li>
 
             <li className="mt-3">

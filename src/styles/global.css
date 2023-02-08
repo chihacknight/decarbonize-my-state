@@ -109,6 +109,21 @@ strong {
   margin-bottom: 0.5rem;
 }
 
+/* Fix Bootstrap caption color WCAG contrast violation */
+caption {
+  color: #687076;
+}
+
+/* Fix Bootstrap button success WCAG contrast violation */
+.btn-success {
+  background-color: #198727;
+  border-color: transparent;
+}
+.btn-success:focus,
+.btn-success:hover {
+  background-color: #157021;
+}
+
 /**
  * Extra large spacing options
  */
