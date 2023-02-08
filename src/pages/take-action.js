@@ -276,9 +276,9 @@ const TakeActionPage = () => {
             <li className="mt-3">
               <strong>Stop cooking with gas</strong> by getting a{" "}
               <a href="https://www.nytimes.com/wirecutter/reviews/best-portable-induction-cooktop/">
-                portable induction cooktop <NewTabIcon />
-              </a>
-              , which costs only around $100
+                portable induction cooktop<NewTabIcon />
+              </a>{" "}
+              for under  $100
             </li>
 
             <li className="mt-3">
