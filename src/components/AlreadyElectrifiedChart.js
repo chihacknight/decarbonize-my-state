@@ -1,8 +1,12 @@
 import React from "react"
+import { yearsToTarget } from "../constants/climate-data"
 
-const electrifiedColor = "rgb(163, 215, 164)"
-const fossilColor = "rgb(255, 87, 34)"
+const electrifiedColor = "rgb(110, 191, 112)"
+const fossilColor = "rgb(254, 140, 75)"
+const oneYearColor = "rgb(255, 213, 128)"
+
 const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
+  const oneMoreYearPct = fossilPct / yearsToTarget
   //otherPct
   if (electrifiedPct !== 0 || fossilPct !== 0) {
     return (
@@ -29,12 +33,21 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
           fill={electrifiedColor}
         />
         <rect
-          x={`${electrifiedPct}%`}
+          x={`${electrifiedPct + oneMoreYearPct}%`}
           y={"70%"}
-          width={`${fossilPct}%`}
+          width={`${fossilPct - oneMoreYearPct}%`}
           height="30%"
           fill={fossilColor}
         />
+
+        <rect
+          x={`${electrifiedPct}%`}
+          y={"70%"}
+          width={`${oneMoreYearPct}%`}
+          height="30%"
+          fill={oneYearColor}
+        />
+
         <text
           x={0}
           y={"40%"}
