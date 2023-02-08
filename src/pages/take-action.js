@@ -372,6 +372,7 @@ const TakeActionPage = () => {
                   rel="noreferrer"
                 >
                   Climate Cabinet Scorecard
+                  <NewTabIcon />
                 </a>
                 .
               </p>
