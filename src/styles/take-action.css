@@ -8,13 +8,13 @@
 .take-action .heading-row {
   display: flex;
   align-items: center;
+  gap: 2rem;
 }
 
 .take-action .heading-row .appliance-sheet,
 .take-action .heading-row .building-sheet {
   width: 15rem;
-  margin-right: 2rem;
-  max-width: 40%;
+  max-width: 60%;
 }
 
 .take-action .heading-row .appliance-sheet.-stove.-clean {
@@ -23,6 +23,7 @@
   background-size: 400%;
   background-position: 43% 19%;
   width: 6rem;
+  max-width: 35%;
 }
 
 .take-action .heading-row .sub-text {
@@ -66,5 +67,10 @@
   .take-action .heading-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .take-action ol, .take-action ul {
+    padding-left: 0.5rem;
   }
 }
