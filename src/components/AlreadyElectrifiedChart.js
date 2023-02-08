@@ -12,7 +12,7 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
     return (
       <svg
         width={"100%"}
-        height="50px"
+        height="60px"
         style={{ marginTop: "0.5em" }}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
@@ -27,14 +27,14 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
 
         <rect
           x={0}
-          y={"70%"}
+          y={"35%"}
           width={`${electrifiedPct}%`}
           height="30%"
           fill={electrifiedColor}
         />
         <rect
           x={`${electrifiedPct + oneMoreYearPct}%`}
-          y={"70%"}
+          y={"35%"}
           width={`${fossilPct - oneMoreYearPct}%`}
           height="30%"
           fill={fossilColor}
@@ -42,7 +42,7 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
 
         <rect
           x={`${electrifiedPct}%`}
-          y={"70%"}
+          y={"35%"}
           width={`${oneMoreYearPct}%`}
           height="30%"
           fill={oneYearColor}
@@ -50,22 +50,27 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
 
         <text
           x={0}
-          y={"40%"}
+          y={"20%"}
           fontSize="0.9rem"
           fontWeight="bold"
           alignmentBaseline="text-top"
         >
           {label} Electrified
         </text>
+
         <text
           x={"100%"}
-          y={"40%"}
+          y={"20%"}
           fontSize="0.9rem"
           fontWeight="bold"
           textAnchor="end"
           alignmentBaseline="text-top"
         >
-          Not yet
+          Not Yet
+        </text>
+
+        <text x={"0%"} y={"95%"} fontSize="0.7rem" alignmentBaseline="text-top">
+          Middle Section Indicates Progress Needed This Year
         </text>
       </svg>
     )
