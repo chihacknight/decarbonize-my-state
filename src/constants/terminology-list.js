@@ -19,7 +19,7 @@ export function getTerminologyLink(slug) {
 export function getTerminologyHover(slug) {
   const t = getTerminology(slug)
   if (!t) {
-    return <span class="terminology">{slug}</span>
+    return <span className="terminology">{slug}</span>
   }
 
   const renderTooltip = props => (
@@ -38,12 +38,12 @@ export function getTerminologyHover(slug) {
       >
         {/* For screen readers, provide term as this button's label */}
         <sup
-          tabindex="0"
+          tabIndex="0"
           role="tooltip"
-          class="terminology-icon"
+          className="terminology-icon"
           aria-label={t.term + " - " + t.definition}
         >
-          <img src={QuestionIcon} />
+          <img src={QuestionIcon} alt="" />
         </sup>
       </OverlayTrigger>
     </span>
@@ -51,8 +51,23 @@ export function getTerminologyHover(slug) {
 }
 
 export function getTerminology(slug) {
-  const t = terminologyDefs.filter(c => c.slug === slug)
-  return t[0]
+  let requestedPlural = false
+
+  if (slug.endsWith("s")) {
+    slug = slug.slice(0, -1)
+    requestedPlural = true
+  }
+
+  const termDef = terminologyDefs.find(c => c.slug === slug)
+
+  // If requesting a plural (like 'heat-pumps') pluralize the term
+  if (requestedPlural) {
+    return Object.assign({}, termDef, {
+      term: `${termDef.term}s`,
+    })
+  }
+
+  return termDef
 }
 
 export const terminologyDefs = [
@@ -77,14 +92,14 @@ export const terminologyDefs = [
     definition: `To move away from carbon producing appliances and machines.`,
   },
   {
-    slug: "heat-pumps",
-    term: "heat pumps",
+    slug: "heat-pump",
+    term: "heat pump",
     definition:
       "Heat pumps are electric appliances that can heat and cool a building using the refrigeration cycle, acting like reversible air conditioners.",
   },
   {
-    slug: "induction-stoves",
-    term: "electric induction stoves",
+    slug: "induction-stove",
+    term: "electric induction stove",
     definition:
       "Induction stoves are a type of electric stove that use magnets to create heat directly within pots or pans. These " +
       "are distinct from radiant electric stoves (which glow red) because they heat up and cool down immediately and don't stay hot after use!",

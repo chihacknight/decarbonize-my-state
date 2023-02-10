@@ -121,10 +121,16 @@ const AboutPage = ({ data }) => {
 
           <p>Our team includes:</p>
 
-          {/* Show team members with photos in columns */}
+          {/*
+           * Show team members with photos in columns
+           *
+           * Accessibility note: All images are marked decorative since we list
+           * each team member's name right below, so saying "Photo of Name" is
+           * not very useful
+           */}
           <div className="team-photos mt-4 mb-3">
             <div className="text-center">
-              <img src={DerekPhoto} className="rounded img-fluid" />
+              <img src={DerekPhoto} alt="" className="rounded img-fluid" />
 
               <div className="text-center mt-3">
                 <strong>
@@ -135,7 +141,7 @@ const AboutPage = ({ data }) => {
             </div>
 
             <div className="text-center">
-              <img src={ViktorPhoto} className="rounded img-fluid" />
+              <img src={ViktorPhoto} alt="" className="rounded img-fluid" />
 
               <div className="text-center mt-3">
                 <strong>
@@ -148,7 +154,7 @@ const AboutPage = ({ data }) => {
             </div>
 
             <div className="text-center">
-              <img src={SuragPhoto} className="rounded img-fluid" />
+              <img src={SuragPhoto} alt="" className="rounded img-fluid" />
 
               <div className="text-center mt-3">
                 <strong>Surag Nuthulapaty</strong>
@@ -157,7 +163,7 @@ const AboutPage = ({ data }) => {
             </div>
 
             <div className="text-center">
-              <img src={ChloePhoto} className="rounded img-fluid" />
+              <img src={ChloePhoto} alt="" className="rounded img-fluid" />
 
               <div className="text-center mt-3">
                 <strong>Chloe Xu</strong>
@@ -166,7 +172,7 @@ const AboutPage = ({ data }) => {
             </div>
 
             <div className="text-center">
-              <img src={SeanPhoto} className="rounded img-fluid" />
+              <img src={SeanPhoto} alt="" className="rounded img-fluid" />
 
               <div className="text-center mt-3">
                 <strong>Sean Watland</strong>

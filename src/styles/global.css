@@ -56,6 +56,17 @@ a:focus {
   text-decoration-thickness: 0.125em;
 }
 
+/* Darken new tab icons on hover if not white */
+a:hover .new-tab-icon:not(.-white) {
+  filter: brightness(0.8);
+}
+
+.new-tab-icon {
+  width: 1em;
+  position: relative;
+  top: -0.3em;
+}
+
 /* Bold all heading elements by default */
 h1,
 h2,
@@ -96,6 +107,21 @@ strong {
   width: 1rem;
   aspect-ratio: 1;
   margin-bottom: 0.5rem;
+}
+
+/* Fix Bootstrap caption color WCAG contrast violation */
+caption {
+  color: #687076;
+}
+
+/* Fix Bootstrap button success WCAG contrast violation */
+.btn-success {
+  background-color: #198727;
+  border-color: transparent;
+}
+.btn-success:focus,
+.btn-success:hover {
+  background-color: #157021;
 }
 
 /**
@@ -279,6 +305,8 @@ path:focus,
 
 footer {
   text-align: center;
+  font-size: 0.75rem;
+  padding: 1rem 0;
 }
 
 footer a {
@@ -431,13 +459,13 @@ footer a {
 }
 
 .building-sheet.-house {
-  aspect-ratio: 2;
-  background-size: 300%;
-  background-position: -7% 102%;
+  aspect-ratio: 1.5;
+  background-size: 350%;
+  background-position: -3% 102%;
 }
 
 .building-sheet.-house.-clean {
-  background-position: -7% 20%;
+  background-position: -3% 20%;
 }
 
 .building-sheet.-apartments {

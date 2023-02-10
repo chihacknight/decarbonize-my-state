@@ -5,10 +5,38 @@
  * classes to make sure it only applies to the right page.
  */
 
+.take-action .heading-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.take-action .heading-row .appliance-sheet,
+.take-action .heading-row .building-sheet {
+  width: 15rem;
+  max-width: 60%;
+}
+
+.take-action .heading-row .appliance-sheet.-stove.-clean {
+  aspect-ratio: 1 / 1.5;
+  height: auto;
+  background-size: 400%;
+  background-position: 43% 19%;
+  width: 6rem;
+  max-width: 35%;
+}
+
+.take-action .heading-row .sub-text {
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+}
+
 .take-action .savings-table {
   background: #f2f2f2;
   border-radius: 0.5rem;
   overflow: hidden;
+  font-size: 0.875rem;
+  max-width: 40rem;
 }
 
 .take-action .savings-table thead tr {
@@ -26,7 +54,24 @@
   border-top: none;
 }
 
+.take-action .savings-table tbody td {
+  padding: 0.5rem 1rem;
+}
+
 .take-action .savings-table .price-cell {
   font-weight: bold;
   color: #343a40;
+}
+
+@media (max-width: 575px) {
+  .take-action .heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .take-action ol,
+  .take-action ul {
+    padding-left: 0.5rem;
+  }
 }
