@@ -56,12 +56,12 @@ const WindSolarBuilds = ({
           height="30%"
           fill={oneYearColor}
         />
-        <text x={0} y={"20%"} alignmentBaseline="text-top">
+        <text x={0} y={"25%"} alignmentBaseline="text-top">
           MWs of {label} Built: {percentCurrent.toFixed(1)}%
         </text>
         <text
           x={`${percentCurrent + 1}%`}
-          y={"95%"}
+          y={"100%"}
           alignmentBaseline="text-top"
         >
           Needed This Year: {oneMoreYearPct.toFixed(1)}%
