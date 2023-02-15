@@ -1,7 +1,9 @@
 import React from "react"
+import { yearsToTarget } from "../constants/climate-data"
 
 const percentToColor = "rgb(163, 215, 164)"
 const percentRemainingColor = "rgb(255, 87, 34)"
+const oneYearColor = "rgb(255, 213, 128)"
 
 /**
  * label - The actual UI label to show for the MW of generation
@@ -13,6 +15,7 @@ const WindSolarBuilds = ({
   percentCurrent,
   percentRemaining,
 }) => {
+  const oneMoreYearPct = percentRemaining / yearsToTarget
   //otherPct
   if (percentCurrent !== 0 || percentRemaining !== 0) {
     return (
@@ -23,6 +26,7 @@ const WindSolarBuilds = ({
         xmlns="http://www.w3.org/2000/svg"
         aria-labelledby={`${labelSlug}-title ${labelSlug}-description`}
         role="img"
+        className="already-electrified-chart"
       >
         <title id={`${labelSlug}-title`}>Percent of needed {label} built</title>
         <desc id={`${labelSlug}-description`}>
@@ -33,26 +37,34 @@ const WindSolarBuilds = ({
 
         <rect
           x={0}
-          y={"70%"}
+          y={"35%"}
           width={`${percentCurrent}%`}
           height="30%"
           fill={percentToColor}
         />
         <rect
-          x={`${percentCurrent}%`}
-          y={"70%"}
-          width={`${percentRemaining}%`}
+          x={`${percentCurrent + oneMoreYearPct}%`}
+          y={"35%"}
+          width={`${percentRemaining - oneMoreYearPct}%`}
           height="30%"
           fill={percentRemainingColor}
         />
+        <rect
+          x={`${percentCurrent}%`}
+          y={"35%"}
+          width={`${oneMoreYearPct}%`}
+          height="30%"
+          fill={oneYearColor}
+        />
+        <text x={0} y={"20%"} alignmentBaseline="text-top">
+          MWs of {label} Built: {percentCurrent.toFixed(1)}%
+        </text>
         <text
-          x={0}
-          y={"40%"}
-          fontSize="0.9rem"
-          fontWeight="bold"
+          x={`${percentCurrent + 1}%`}
+          y={"95%"}
           alignmentBaseline="text-top"
         >
-          MWs of {label} Built
+          Needed This Year: {oneMoreYearPct.toFixed(1)}%
         </text>
       </svg>
     )

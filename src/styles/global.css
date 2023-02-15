@@ -497,3 +497,14 @@ footer a {
   width: 1rem;
   height: 1rem;
 }
+
+/** already electrified chart mobile **/
+@media (max-width: 575px) {
+  .already-electrified-chart text {
+    font-size: 0.8rem;
+  }
+}
+
+.already-electrified-chart text {
+  font-size: 0.9rem;
+}

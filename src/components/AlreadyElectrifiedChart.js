@@ -16,6 +16,7 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
         style={{ marginTop: "0.5em" }}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
+        className="already-electrified-chart"
       >
         <title id={`${label}-title`}>Percent of {label} electrified</title>
         <desc id={`${label}-description`}>
@@ -48,21 +49,17 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
           fill={oneYearColor}
         />
 
-        <text
-          x={0}
-          y={"20%"}
-          fontSize="0.9rem"
-          fontWeight="bold"
+        <text 
+          x={0} 
+          y={"20%"} 
           alignmentBaseline="text-top"
         >
           {label} Electrified: {electrifiedPct.toFixed(1)}%
         </text>
 
         <text
-          x={`${electrifiedPct}%`}
+          x={`${electrifiedPct + 1}%`}
           y={"95%"}
-          fontSize="0.9rem"
-          fontWeight="bold"
           alignmentBaseline="text-top"
         >
           Needed This Year: {oneMoreYearPct.toFixed(1)}%
@@ -71,17 +68,11 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
         <text
           x={"100%"}
           y={"20%"}
-          fontSize="0.9rem"
-          fontWeight="bold"
           textAnchor="end"
           alignmentBaseline="text-top"
         >
-          Not Electrified: {(fossilPct - oneMoreYearPct).toFixed(1)}%
+          Not Yet: {(fossilPct - oneMoreYearPct).toFixed(1)}%
         </text>
-
-        {/* <text x={"0%"} y={"95%"} fontSize="0.7rem" alignmentBaseline="text-top">
-          Middle Section Indicates Progress Needed This Year
-        </text> */}
       </svg>
     )
   } else {
