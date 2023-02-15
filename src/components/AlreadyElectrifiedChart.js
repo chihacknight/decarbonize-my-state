@@ -49,11 +49,7 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
           fill={oneYearColor}
         />
 
-        <text 
-          x={0} 
-          y={"20%"} 
-          alignmentBaseline="text-top"
-        >
+        <text x={0} y={"20%"} alignmentBaseline="text-top">
           {label} Electrified: {electrifiedPct.toFixed(1)}%
         </text>
 
