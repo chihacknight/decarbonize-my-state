@@ -480,7 +480,7 @@ export default function StateDetailsPage({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="mt-7">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of appliances in
+                In fact, {weightedEleBuildingsPct.toFixed(1)}% of appliances in
                 buildings in {placeTitle} are already fossil fuel free!
               </p>
             )}
@@ -494,7 +494,7 @@ export default function StateDetailsPage({ location, data }) {
               . That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Buildings"}
+              label={"Appliances"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />

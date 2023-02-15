@@ -55,7 +55,17 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
           fontWeight="bold"
           alignmentBaseline="text-top"
         >
-          {label} Electrified
+          {label} Electrified: {electrifiedPct.toFixed(1)}%
+        </text>
+
+        <text
+          x={`${electrifiedPct}%`}
+          y={"95%"}
+          fontSize="0.9rem"
+          fontWeight="bold"
+          alignmentBaseline="text-top"
+        >
+          Needed This Year: {oneMoreYearPct.toFixed(1)}%
         </text>
 
         <text
@@ -66,12 +76,12 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
           textAnchor="end"
           alignmentBaseline="text-top"
         >
-          Not Yet
+          Not Electrified: {(fossilPct - oneMoreYearPct).toFixed(1)}%
         </text>
 
-        <text x={"0%"} y={"95%"} fontSize="0.7rem" alignmentBaseline="text-top">
+        {/* <text x={"0%"} y={"95%"} fontSize="0.7rem" alignmentBaseline="text-top">
           Middle Section Indicates Progress Needed This Year
-        </text>
+        </text> */}
       </svg>
     )
   } else {
