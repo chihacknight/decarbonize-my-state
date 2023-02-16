@@ -8,7 +8,6 @@ import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
-import WindSolarBuilds from "./WindSolarBuilds.js"
 import { getShortCitation } from "../constants/source-citations"
 import { getTerminologyHover } from "../constants/terminology-list"
 
