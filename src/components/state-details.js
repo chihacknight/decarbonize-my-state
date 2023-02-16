@@ -494,7 +494,7 @@ export default function StateDetailsPage({ location, data }) {
               . That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Appliances"}
+              label={"Appliances Electrified"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
@@ -581,7 +581,7 @@ export default function StateDetailsPage({ location, data }) {
             </p>
 
             <AlreadyElectrifiedChart
-              label={"Vehicles"}
+              label={"Vehicles Electrified"}
               electrifiedPct={pctEv}
               fossilPct={pctNonEv}
             />
@@ -774,11 +774,10 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="h4 mt-5 text-muted">
-                <WindSolarBuilds
-                  labelSlug={"target-gen"}
-                  label={"Wind & Solar"}
-                  percentCurrent={percToCleanTarget}
-                  percentRemaining={totalRemaining}
+                <AlreadyElectrifiedChart
+                  label={"MWs of Wind and Solar Built"}
+                  electrifiedPct={percToCleanTarget}
+                  fossilPct={totalRemaining}
                 />
               </p>
               <span className="mt-4 text-secondary keyText">

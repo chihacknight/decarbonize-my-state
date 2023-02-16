@@ -50,7 +50,7 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
         />
 
         <text x={0} y={"20%"} alignmentBaseline="text-top">
-          {label} Electrified: {electrifiedPct.toFixed(1)}%
+          {label}: {electrifiedPct.toFixed(1)}%
         </text>
 
         <text
