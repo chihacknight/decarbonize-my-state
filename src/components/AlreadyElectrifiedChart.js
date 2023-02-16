@@ -1,17 +1,22 @@
 import React from "react"
+import { yearsToTarget } from "../constants/climate-data"
 
-const electrifiedColor = "rgb(163, 215, 164)"
-const fossilColor = "rgb(255, 87, 34)"
+const electrifiedColor = "rgb(110, 191, 112)"
+const fossilColor = "rgb(254, 140, 75)"
+const oneYearColor = "rgb(255, 213, 128)"
+
 const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
+  const oneMoreYearPct = fossilPct / yearsToTarget
   //otherPct
   if (electrifiedPct !== 0 || fossilPct !== 0) {
     return (
       <svg
         width={"100%"}
-        height="50px"
+        height="60px"
         style={{ marginTop: "0.5em" }}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
+        className="already-electrified-chart"
       >
         <title id={`${label}-title`}>Percent of {label} electrified</title>
         <desc id={`${label}-description`}>
@@ -23,36 +28,46 @@ const AlreadyElectrifiedChart = ({ label, electrifiedPct, fossilPct }) => {
 
         <rect
           x={0}
-          y={"70%"}
+          y={"35%"}
           width={`${electrifiedPct}%`}
           height="30%"
           fill={electrifiedColor}
         />
         <rect
-          x={`${electrifiedPct}%`}
-          y={"70%"}
-          width={`${fossilPct}%`}
+          x={`${electrifiedPct + oneMoreYearPct}%`}
+          y={"35%"}
+          width={`${fossilPct - oneMoreYearPct}%`}
           height="30%"
           fill={fossilColor}
         />
+
+        <rect
+          x={`${electrifiedPct}%`}
+          y={"35%"}
+          width={`${oneMoreYearPct}%`}
+          height="30%"
+          fill={oneYearColor}
+        />
+
+        <text x={0} y={"20%"} alignmentBaseline="text-top">
+          {label}: {electrifiedPct.toFixed(1)}%
+        </text>
+
         <text
-          x={0}
-          y={"40%"}
-          fontSize="0.9rem"
-          fontWeight="bold"
+          x={`${electrifiedPct + 1}%`}
+          y={"95%"}
           alignmentBaseline="text-top"
         >
-          {label} Electrified
+          Needed This Year: {oneMoreYearPct.toFixed(1)}%
         </text>
+
         <text
           x={"100%"}
-          y={"40%"}
-          fontSize="0.9rem"
-          fontWeight="bold"
+          y={"20%"}
           textAnchor="end"
           alignmentBaseline="text-top"
         >
-          Not yet
+          Not Yet: {(fossilPct - oneMoreYearPct).toFixed(1)}%
         </text>
       </svg>
     )

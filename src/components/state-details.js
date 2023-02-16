@@ -8,7 +8,6 @@ import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
 import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
 import DisplayPlants from "./displayplants.js"
-import WindSolarBuilds from "./WindSolarBuilds.js"
 import { getShortCitation } from "../constants/source-citations"
 import { getTerminologyHover } from "../constants/terminology-list"
 
@@ -480,7 +479,7 @@ export default function StateDetailsPage({ location, data }) {
             {(weightedEleBuildingsPct !== 0 ||
               weightedFossilBuildingsPct !== 0) && (
               <p className="mt-7">
-                In fact, {Math.round(weightedEleBuildingsPct)}% of appliances in
+                In fact, {weightedEleBuildingsPct.toFixed(1)}% of appliances in
                 buildings in {placeTitle} are already fossil fuel free!
               </p>
             )}
@@ -494,7 +493,7 @@ export default function StateDetailsPage({ location, data }) {
               . That's around {buildingsPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Buildings"}
+              label={"Appliances Electrified"}
               electrifiedPct={weightedEleBuildingsPct}
               fossilPct={weightedFossilBuildingsPct}
             />
@@ -581,7 +580,7 @@ export default function StateDetailsPage({ location, data }) {
             </p>
 
             <AlreadyElectrifiedChart
-              label={"Vehicles"}
+              label={"Vehicles Electrified"}
               electrifiedPct={pctEv}
               fossilPct={pctNonEv}
             />
@@ -774,11 +773,10 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="h4 mt-5 text-muted">
-                <WindSolarBuilds
-                  labelSlug={"target-gen"}
-                  label={"Wind & Solar"}
-                  percentCurrent={percToCleanTarget}
-                  percentRemaining={totalRemaining}
+                <AlreadyElectrifiedChart
+                  label={"MWs of Wind and Solar Built"}
+                  electrifiedPct={percToCleanTarget}
+                  fossilPct={totalRemaining}
                 />
               </p>
               <span className="mt-4 text-secondary keyText">
