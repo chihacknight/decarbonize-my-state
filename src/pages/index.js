@@ -52,7 +52,7 @@ const IndexPage = ({ data }) => {
           <div className="building-sheet -house -clean"></div>
           <div className="appliance-sheet -stove -clean"></div>
           <div className="appliance-sheet -boiler -clean"></div>
-          <div className="car-sheet -car -clean"></div>
+          <div className="vehicles-sheet -car -clean"></div>
         </div>
       </div>
 

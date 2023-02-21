@@ -545,9 +545,9 @@ export default function StateDetailsPage({ location, data }) {
             </div>
 
             <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
-              <div className="col-5 car-sheet -car"></div>
-              <div className="col-6 car-sheet -truck"></div>
-              <div className="col-8 car-sheet -semi mt-5"></div>
+              <div className="col-5 vehicles-sheet -car"></div>
+              <div className="col-6 vehicles-sheet -truck"></div>
+              <div className="col-8 vehicles-sheet -semi mt-5"></div>
             </div>
 
             <p className="mt-6">To cut this pollution,</p>
@@ -562,9 +562,11 @@ export default function StateDetailsPage({ location, data }) {
             </p>
 
             <div className="d-flex align-items-end justify-content-around flex-wrap mt-5">
-              <div className="col-5 car-sheet -car -clean"></div>
-              <div className="col-6 car-sheet -truck -clean"></div>
-              <div className="col-8 car-sheet -semi -clean mt-5"></div>
+              <div className="col-5 vehicles-sheet -car -clean"></div>
+              <div className="col-6 vehicles-sheet -truck -clean"></div>
+              {/*<div className="col-8 vehicles-sheet -semi -clean mt-5"></div>*/}
+              <div className="col-6 vehicles-sheet -e-streetcar mt-5"></div>
+              <div className="col-3 vehicles-sheet -ebike mt-5"></div>
             </div>
 
             <p className="mt-5">

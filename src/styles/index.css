@@ -29,7 +29,7 @@
 }
 
 .art-row .appliance-sheet,
-.art-row .car-sheet {
+.art-row .vehicles-sheet {
   position: absolute;
   bottom: 0;
 }
@@ -45,7 +45,7 @@
 .art-row .appliance-sheet {
   height: 90%;
 }
-.art-row .car-sheet {
+.art-row .vehicles-sheet {
   height: 65%;
 }
 

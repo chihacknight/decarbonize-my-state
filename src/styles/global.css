@@ -411,11 +411,13 @@ footer a {
  */
 .appliance-sheet,
 .building-sheet,
-.car-sheet {
+.vehicles-sheet {
   aspect-ratio: 1;
   background-repeat: no-repeat;
+  padding: 0;
+
   /* For testing */
-  /*border: dashed 2px grey;*/
+  /*  outline: dashed 2px grey;*/
 }
 
 /** 3X2 sheet */
@@ -478,38 +480,47 @@ footer a {
 }
 
 /** 2X4 sheet */
-.car-sheet {
-  background-image: url("../images/cars-sheet.png");
-  background-size: auto 400%;
+.vehicles-sheet {
+  background-image: url("../images/vehicles-sheet.png");
+  background-size: 250% auto;
 }
 
-.car-sheet.-car {
-  background-size: 300% auto;
+.vehicles-sheet.-car {
+  aspect-ratio: 1/0.4;
+  background-position: 5% 11%;
+}
+
+.vehicles-sheet.-car.-clean {
+  background-position: 95% 10%;
+}
+
+.vehicles-sheet.-truck {
+  background-position: 6% 25%;
   aspect-ratio: 1/0.5;
-  background-position: -4% -4%;
 }
 
-.car-sheet.-car.-clean {
-  background-position: 92% -7%;
+.vehicles-sheet.-truck.-clean {
+  background-position: 95% 25%;
 }
 
-.car-sheet.-truck {
-  background-position: 0% 28%;
-  aspect-ratio: 1/0.48;
+.vehicles-sheet.-semi {
+  aspect-ratio: 1/0.28;
+  background-position: 6% 45.5%;
 }
 
-.car-sheet.-truck.-clean {
-  background-position: 100% 28%;
+.vehicles-sheet.-semi.-clean {
+  background-position: 93% 45%;
 }
 
-.car-sheet.-semi {
-  aspect-ratio: 1/0.35;
-  background-position: 0% 58%;
-  background-size: auto 500%;
+.vehicles-sheet.-ebike {
+  aspect-ratio: 1;
+  background-position: 70% 58.5%;
+  background-size: 490% auto;
 }
 
-.car-sheet.-semi.-clean {
-  background-position: 100% 58%;
+.vehicles-sheet.-e-streetcar {
+  background-position: 94.5% 75%;
+  aspect-ratio: 2;
 }
 
 .terminology-page-style dt {
