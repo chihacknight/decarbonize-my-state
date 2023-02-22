@@ -185,7 +185,7 @@ const FAQ = () => {
             </a>
           </h2>
 
-          <div className="car-sheet -truck -clean ml-4"></div>
+          <div className="vehicles-sheet -truck -clean ml-4"></div>
         </div>
         <h3>
           Are EVs <em>really</em> lower emission, even with a dirty grid?
