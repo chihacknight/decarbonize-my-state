@@ -170,6 +170,15 @@ export default function StateDetailsPage({ location, data }) {
     Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
   )
 
+  // #### POWER GENERATION ####
+  const generationByYear = data.allPowerGenerationJson.edges[0].node.generation
+  const latestGeneration = generationByYear.filter(
+    v => v.year === 2020
+  )
+  // for Viktor: this is the data you need to use for the power generation graph
+  console.log(latestGeneration)
+  
+  
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
 
@@ -975,6 +984,22 @@ export const query = graphql`
             county
             capacity_mw
             utility_name
+          }
+        }
+      }
+    }
+    allPowerGenerationJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
+          generation {
+            all_solar
+            coal
+            hydro_electric
+            natural_gas
+            nuclear
+            petro_liquids
+            wind
+            year
           }
         }
       }

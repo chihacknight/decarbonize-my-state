@@ -63,7 +63,7 @@ def group_df_by_generation(generation_data):
 
     cols_to_keep = ['state', 'year', 'coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
 
-    prepped_dictionary = json_data_builder(generation_data[cols_to_keep], 'generation')
+    prepped_dictionary = json_data_builder(generation_data[cols_to_keep], array_key='generation')
 
     return json.dumps(prepped_dictionary)
 
