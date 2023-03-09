@@ -996,6 +996,13 @@ export const query = graphql`
             nuclear
             petro_liquids
             wind
+            all_solar_percent
+            coal_percent
+            hydro_electric_percent
+            natural_gas_percent
+            nuclear_percent
+            petro_liquids_percent
+            wind_percent
             year
           }
         }
