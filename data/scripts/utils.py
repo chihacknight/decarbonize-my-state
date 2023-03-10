@@ -52,18 +52,19 @@ def group_df_by_generation(generation_data):
 
     # build each bucketed totals
     for calc in columns_list: 
-        generation_data[calc+'_%'] = round(generation_data[calc] / generation_data[columns_list].sum(axis=1), 2) * 100
+        generation_data[calc+'_percent'] = round(generation_data[calc] / generation_data[columns_list].sum(axis=1), 2) * 100
         # round the value to it's nearest first decimal
         generation_data[calc] = generation_data[calc].apply(lambda value: round(value,1))
+        generation_data[calc+'_percent'] = generation_data[calc+'_percent'].apply(lambda value: round(value,1))
 
     # replace the state_abbreviations with their full name to match the emissions data
     generation_data['state'] = generation_data['state'].replace(dict(map(reversed, us_state_to_abbrev.items())))
     generation_data['state'] = generation_data['state'].apply(lambda state: state.lower())
     generation_data['state'] = generation_data['state'].apply(lambda state: state.replace(" ", "_"))
 
-    cols_to_keep = ['state', 'year', 'coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind']
+    cols_to_keep = ['state', 'year', 'coal', 'natural_gas', 'petro_liquids', 'nuclear', 'hydro_electric', 'all_solar', 'wind', 'coal_percent', 'natural_gas_percent', 'petro_liquids_percent', 'nuclear_percent', 'hydro_electric_percent', 'all_solar_percent', 'wind_percent']
 
-    prepped_dictionary = json_data_builder(generation_data[cols_to_keep], 'generation')
+    prepped_dictionary = json_data_builder(generation_data[cols_to_keep], array_key='generation')
 
     return json.dumps(prepped_dictionary)
 
