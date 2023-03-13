@@ -110,7 +110,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              innerRadius={"60%"}
+              innerRadius={"58%"}
               outerRadius={"80%"}
               paddingAngle={2}
               dataKey="value"
