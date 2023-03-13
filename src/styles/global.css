@@ -199,6 +199,10 @@ caption {
   background: #aaa;
 }
 
+/**
+ * NOTE: Make sure to update StateEmissionsMap.showTooltip if this is changed,
+ * since the tooltip height and width are hard-coded there
+ */
 .map-tooltip {
   display: block;
   position: fixed;
@@ -211,10 +215,16 @@ caption {
 
 .map-tooltip .arrow {
   left: 48%;
+
+}
+
+.map-tooltip .arrow::before {
+  border-top-color: rgba(0,0,0,0.8);
 }
 
 .map-tooltip .tooltip-inner {
-  width: 150px;
+  width: 180px;
+  background-color: rgba(0,0,0,0.8);
 }
 
 /**

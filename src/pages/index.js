@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import ChoroplethMap from "../components/choroplethmap"
+import StateEmissionsMap from "../components/state-emissions-map"
 import { getLatestEmissions } from "../components/getLatestEmissions"
 import { getTerminologyHover } from "../constants/terminology-list"
 
@@ -65,7 +65,7 @@ const IndexPage = ({ data }) => {
       </h2>
 
       <div className="mb-md-5">
-        <ChoroplethMap emissions={mapData} />
+        <StateEmissionsMap emissions={mapData} />
       </div>
 
       {/* Show list of states on mobile */}

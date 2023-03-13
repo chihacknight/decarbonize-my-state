@@ -664,7 +664,7 @@ export default function StateDetailsPage({ location, data }) {
 
                   <div className="mt-5 text-center">
                     <img
-                      className="img-fluid col-6"
+                      className="img-fluid col-5"
                       src={DirtyPowerPlantImg}
                       alt="Dirty power plant"
                     />
@@ -678,7 +678,7 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <h3 className="h6 mt-5 mb-4">
-                {placeTitle} Power Generation Breakdown ({latestGeneration.year}
+                Power Generation in the State of {placeTitle} ({latestGeneration.year}
                 )
               </h3>
 
