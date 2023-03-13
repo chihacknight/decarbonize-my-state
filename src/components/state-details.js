@@ -173,12 +173,16 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### POWER GENERATION ####
   const generationByYear = data.allPowerGenerationJson.edges[0].node.generation
-  console.log('generationByYear', generationByYear);
+  console.log("generationByYear", generationByYear)
 
   // Sort by newest first and grab the first record to get the latest generation
-  const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0];
-  // for Viktor: this is the data you need to use for the power generation graph
-  console.log(latestGeneration)
+  const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0]
+
+  const carbonFreePercent =
+    latestGeneration.all_solar_percent +
+    latestGeneration.hydro_electric_percent +
+    latestGeneration.nuclear_percent +
+    latestGeneration.wind_percent
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -654,24 +658,33 @@ export default function StateDetailsPage({ location, data }) {
                 </div>
               </div>
 
-              <h3>Here's a Look at { placeTitle }'s Power Generation</h3>
+              <p className="mt-5">
+                That's because of how power is generated in {placeTitle}{" "}
+                <em>today</em>.
+              </p>
+
+              <h3 className="h6 mt-5 mb-4">
+                {placeTitle} Power Generation Breakdown ({latestGeneration.year}
+                )
+              </h3>
 
               <PowerSourcesChart
                 latestGeneration={latestGeneration}
-                placeTitle={placeTitle}></PowerSourcesChart>
+                placeTitle={placeTitle}
+              ></PowerSourcesChart>
 
-              <p className="mt-6">To cut this pollution...</p>
-
-              <p className="mt-4 mb-6 text-right">
-                Put <strong>solar panels</strong> on your roof!
-              </p>
-
-              <div className="d-flex justify-content-center">
-                <div className="building-sheet -house -clean col-10"></div>
-              </div>
+              <span className="text-secondary keyText">
+                Source: {getShortCitation("power-generation")}
+              </span>
 
               <p className="mt-6">
-                Then, we'll replace{" "}
+                But there's already{" "}
+                <strong>{carbonFreePercent}% carbon-free</strong> electricity
+                generation in {placeTitle}!
+              </p>
+
+              <p className="mt-6">
+                To clean up the remaining emissions we need to replace{" "}
                 <strong>all fossil fuel power plants</strong> with solar and
                 wind farms.
               </p>

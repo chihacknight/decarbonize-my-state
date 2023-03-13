@@ -41,7 +41,7 @@ body {
   background-color: #fffffb;
   font-family: "Source Serif Pro", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  color: #33342e;
+  color: var(--text-color-main);
 }
 
 /* Make links blue and underlined by default for clarity */

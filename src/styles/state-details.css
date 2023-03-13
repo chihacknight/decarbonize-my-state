@@ -74,12 +74,59 @@
 }
 
 /**
+ * Styling for the power sources chart - make sure to QA with various states
+ * since the labels are quite long and can end up on the left hand side of the
+ * graph
+ */
+.state-details-main .power-sources-chart {
+  width: 30rem;
+  max-width: 100%;
+  aspect-ratio: 2 / 1;
+}
+
+.state-details-main .power-sources-chart text {
+  font-size: 0.9rem;
+  fill: var(--text-color-main);
+}
+
+.state-details-main .power-sources-chart path {
+  stroke-width: 0.125rem;
+}
+
+.state-details-main .power-sources-chart path[name="Wind"] {
+  fill: #5d9732;
+}
+.state-details-main .power-sources-chart path[name="Solar"] {
+  fill: #ffc702;
+}
+.state-details-main .power-sources-chart path[name="Hydropower"] {
+  fill: #7944d6;
+}
+.state-details-main .power-sources-chart path[name="Natural Gas"] {
+  fill: #189bd7;
+}
+.state-details-main .power-sources-chart path[name="Coal"] {
+  fill: #333333;
+}
+.state-details-main .power-sources-chart path[name="Petroleum"] {
+  fill: #bd732a;
+}
+.state-details-main .power-sources-chart path[name="Nuclear"] {
+  fill: #a33340;
+}
+
+/**
  * Mobile/tablet styling - shrink some text
  */
 @media (max-width: 1199px) {
   /* Shrink .h1 text */
   .h1 {
     font-size: 1.75rem;
+  }
+
+  /* Cut power pie chart text size */
+  .state-details-main .power-sources-chart text {
+    font-size: 0.7rem;
   }
 }
 
