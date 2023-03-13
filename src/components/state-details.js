@@ -6,8 +6,9 @@ import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
-import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
-import DisplayPlants from "./displayplants.js"
+import AlreadyElectrifiedChart from "./already-electrified-chart"
+import PowerSourcesChart from "./power-sources-chart"
+import DisplayPlants from "./display-plants"
 import { getShortCitation } from "../constants/source-citations"
 import { getTerminologyHover } from "../constants/terminology-list"
 
@@ -172,7 +173,10 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### POWER GENERATION ####
   const generationByYear = data.allPowerGenerationJson.edges[0].node.generation
-  const latestGeneration = generationByYear.filter(v => v.year === 2020)
+  console.log('generationByYear', generationByYear);
+
+  // Sort by newest first and grab the first record to get the latest generation
+  const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0];
   // for Viktor: this is the data you need to use for the power generation graph
   console.log(latestGeneration)
 
@@ -649,6 +653,12 @@ export default function StateDetailsPage({ location, data }) {
                   </div>
                 </div>
               </div>
+
+              <h3>Here's a Look at { placeTitle }'s Power Generation</h3>
+
+              <PowerSourcesChart
+                latestGeneration={latestGeneration}
+                placeTitle={placeTitle}></PowerSourcesChart>
 
               <p className="mt-6">To cut this pollution...</p>
 
