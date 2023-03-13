@@ -678,8 +678,8 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <h3 className="h6 mt-5 mb-4">
-                Power Generation in the State of {placeTitle} ({latestGeneration.year}
-                )
+                Power Generation in the State of {placeTitle} (
+                {latestGeneration.year})
               </h3>
 
               <PowerSourcesChart

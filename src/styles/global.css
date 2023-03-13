@@ -215,16 +215,15 @@ caption {
 
 .map-tooltip .arrow {
   left: 48%;
-
 }
 
 .map-tooltip .arrow::before {
-  border-top-color: rgba(0,0,0,0.8);
+  border-top-color: rgba(0, 0, 0, 0.8);
 }
 
 .map-tooltip .tooltip-inner {
   width: 180px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /**

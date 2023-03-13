@@ -90,7 +90,7 @@
 }
 
 .state-details-main .power-sources-chart path {
-  stroke-width: 0.125rem;
+  stroke-width: 0; /* 0.125rem; */
 }
 
 .state-details-main .power-sources-chart path[name="Wind"] {

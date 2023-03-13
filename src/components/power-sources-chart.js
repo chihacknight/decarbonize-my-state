@@ -54,9 +54,11 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
   ]
 
   // Filter out totally unused power sectors to prevent breaking padding angle
-  chartData = chartData.filter(data => data.value > 0)
-
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
+  // and sort by largest power sector first, which helps keep small sectors on
+  // the right (e.g. in Nevada) where they won't collide
+  chartData = chartData
+    .filter(data => data.value > 0)
+    .sort((a, b) => a.value - b.value)
 
   const RADIAN = Math.PI / 180
 
@@ -69,15 +71,16 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     percent,
     index,
   }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 1.5
+    // How far out the label should be
+    const LabelRadiusMult = 1.6
+    const radius = innerRadius + (outerRadius - innerRadius) * LabelRadiusMult
     const x = cx + radius * Math.cos(-midAngle * RADIAN)
     const y = cy + radius * Math.sin(-midAngle * RADIAN)
     const roundedPercent = (percent * 100).toFixed(0)
 
     // Align text to end if left of the chart, center if in the middle, and
     // align start if to the right of the chart
-    const textAnchor =
-      Math.abs(x - cx) <= 10 ? "middle" : x > cx ? "start" : "end"
+    const textAnchor = x > cx ? "start" : "end"
 
     if (roundedPercent > 0) {
       return (
@@ -107,8 +110,9 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              innerRadius={"50%"}
+              innerRadius={"60%"}
               outerRadius={"80%"}
+              paddingAngle={2}
               dataKey="value"
             >
               {chartData.map((entry, index) => (

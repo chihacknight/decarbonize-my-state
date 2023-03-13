@@ -20,7 +20,7 @@ let GraphHeight
 let LineWidth = 50
 
 /** Don't render graph chunks that get rounded to 0% */
-const MinPercentToRender = 0.49;
+const MinPercentToRender = 0.49
 
 /**
  * A vertically stacked bar chart intended to show the groups of different

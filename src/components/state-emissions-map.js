@@ -80,14 +80,11 @@ function showTooltip(targetElem, setTooltipStyle) {
   // spots (like the ocean or another state)
   if (targetElem.id === "florida") {
     tooltipXOffsetPx += stateWidth * 0.25
-  }
-  else if (targetElem.id === 'louisiana' || targetElem.id === 'california') {
+  } else if (targetElem.id === "louisiana" || targetElem.id === "california") {
     tooltipXOffsetPx -= stateWidth * 0.15
-  }
-  else if (targetElem.id === "maryland") {
+  } else if (targetElem.id === "maryland") {
     tooltipYOffsetPx -= stateHeight * 0.25
-  }
-  else if (targetElem.id === 'michigan') {
+  } else if (targetElem.id === "michigan") {
     tooltipXOffsetPx += stateWidth * 0.3
     tooltipYOffsetPx += stateHeight * 0.3
   }
@@ -212,7 +209,9 @@ const StateEmissionsMap = ({
       <Row className="map-row">
         {emissions && sidebar ? (
           <Col lg={3} className="map-legend">
-            <div className="h6 mt-4 font-weight-bold">Annaul Climate Pollution</div>
+            <div className="h6 mt-4 font-weight-bold">
+              Annaul Climate Pollution
+            </div>
             <div className="legendKey">
               <span className="keyText">
                 In millions of metric tons of CO<sub>2</sub> equivalent
