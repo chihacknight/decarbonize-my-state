@@ -19,6 +19,9 @@ let GraphWidth
 let GraphHeight
 let LineWidth = 50
 
+/** Don't render graph chunks that get rounded to 0% */
+const MinPercentToRender = 0.49;
+
 /**
  * A vertically stacked bar chart intended to show the groups of different
  * emissions. Has the following input props:
@@ -188,8 +191,8 @@ export default function SingleBarChart({
       >
         {/* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */}
         <YAxis domain={["dataMin", "dataMax"]} hide={true} />
-        {// Only show other bar if it's non-zero
-        emissionsData[BarsConfig.other.key] && (
+        {// Only show other bar if it's greater than our min
+        emissionsData[BarsConfig.other.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.other.key}
             fill={BarsConfig.other.fill}
@@ -210,8 +213,8 @@ export default function SingleBarChart({
             />
           </Bar>
         )}
-        {// Only show power bar if it's non-zero
-        emissionsData[BarsConfig.power.key] && (
+        {// Only show power bar if it's greater than our min
+        emissionsData[BarsConfig.power.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.power.key}
             fill={BarsConfig.power.fill}
@@ -232,8 +235,8 @@ export default function SingleBarChart({
             />
           </Bar>
         )}
-        {// Only show transport bar if it's non-zero
-        emissionsData[BarsConfig.transport.key] && (
+        {// Only show transport bar if it's greater than our min
+        emissionsData[BarsConfig.transport.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.transport.key}
             fill={BarsConfig.transport.fill}
@@ -254,8 +257,8 @@ export default function SingleBarChart({
             />
           </Bar>
         )}
-        {// Only show buildings bar if it's non-zero
-        emissionsData[BarsConfig.buildings.key] && (
+        {// Only show buildings bar if it's greater than our min
+        emissionsData[BarsConfig.buildings.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.buildings.key}
             fill={BarsConfig.buildings.fill}
