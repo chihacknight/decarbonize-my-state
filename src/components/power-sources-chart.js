@@ -1,6 +1,8 @@
 import React from "react"
 import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 
+import { getShortCitation } from "../constants/source-citations"
+
 /**
  * A pie chart that shows the sources of power generation for a given state.
  *
@@ -95,25 +97,31 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
   }
 
   return (
-    <div className="power-sources-chart">
-      <ResponsiveContainer>
-        <PieChart width="400" height="400">
-          <Pie
-            data={chartData}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            innerRadius={"50%"}
-            outerRadius={"80%"}
-            dataKey="value"
-          >
-            {chartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+    <div>
+      <div className="power-sources-chart">
+        <ResponsiveContainer>
+          <PieChart width="400" height="400">
+            <Pie
+              data={chartData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              innerRadius={"50%"}
+              outerRadius={"80%"}
+              dataKey="value"
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+
+      <span className="text-secondary keyText">
+        Source: {getShortCitation("power-generation")}
+      </span>
     </div>
   )
 }

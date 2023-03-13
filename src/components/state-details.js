@@ -173,7 +173,6 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### POWER GENERATION ####
   const generationByYear = data.allPowerGenerationJson.edges[0].node.generation
-  console.log("generationByYear", generationByYear)
 
   // Sort by newest first and grab the first record to get the latest generation
   const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0]
@@ -271,6 +270,29 @@ export default function StateDetailsPage({ location, data }) {
     plant => plant.fossil_fuel_category === "OIL"
   )
 
+  /**
+   * The section IDs that are scrollable - it's important this reflects the
+   * actual sections or tracking gets real wacky
+   */
+  let scrollableSectionIds = [
+    "bld-main",
+    "bld-end",
+    "transport-main",
+    "transport-end",
+    "power-main",
+    "power-end",
+    "other-main",
+  ]
+
+  if (powerPrcnt === "0") {
+    scrollableSectionIds = scrollableSectionIds.filter(
+      sect => sect !== "power-end"
+    )
+  }
+
+  /**
+   * Restyles the side graph as we scroll through the page, given a new target
+   */
   function scrollTargetUpdated(scrollTarget) {
     let activeKey = "buildings"
     let greenKeys = []
@@ -404,15 +426,7 @@ export default function StateDetailsPage({ location, data }) {
         <Scrollspy
           offset={-300}
           scrolledPastClassName={"scrolled-past"}
-          items={[
-            "bld-main",
-            "bld-end",
-            "transport-main",
-            "transport-end",
-            "power-main",
-            "power-end",
-            "other-main",
-          ]}
+          items={scrollableSectionIds}
           currentClassName="is-current"
           onUpdate={scrollTargetUpdated}
           className="col-12 col-xl-7"
@@ -673,10 +687,6 @@ export default function StateDetailsPage({ location, data }) {
                 placeTitle={placeTitle}
               ></PowerSourcesChart>
 
-              <span className="text-secondary keyText">
-                Source: {getShortCitation("power-generation")}
-              </span>
-
               <p className="mt-6">
                 But there's already{" "}
                 <strong>{carbonFreePercent}% carbon-free</strong> electricity
@@ -684,9 +694,9 @@ export default function StateDetailsPage({ location, data }) {
               </p>
 
               <p className="mt-6">
-                To clean up the remaining emissions we need to replace{" "}
-                <strong>all fossil fuel power plants</strong> with solar and
-                wind farms.
+                To clean up the emissions from the polluting power plants we
+                need to replace <strong>all fossil fuel power plants</strong>{" "}
+                with solar and wind farms.
               </p>
 
               <p className="mt-5 mb-0">
@@ -845,7 +855,7 @@ export default function StateDetailsPage({ location, data }) {
           {powerPrcnt === "0" && (
             <div id="power-main" className="scrollable-sect mt-5 mb-7">
               <h2 className="h1">Power</h2>
-              <div className="mt-6 mb-8 text-center">
+              <div className="mt-6 mb-4 text-center">
                 <p className="font-weight-bold">
                   {placeTitle} produces all of it's power without making any
                   climate pollution! 😎
