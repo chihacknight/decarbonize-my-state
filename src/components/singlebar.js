@@ -154,7 +154,10 @@ export default function SingleBarChart({
 
       const scrollValue =
         targetOffsetTop + stateDetailsMainOffset + scrollOffset
-      document.documentElement.scrollTo({ top: scrollValue, behavior: 'smooth' })
+      document.documentElement.scrollTo({
+        top: scrollValue,
+        behavior: "smooth",
+      })
     } else {
       console.error(`Couldn't find element with ID "${targetAnchor}"`)
     }
@@ -237,7 +240,7 @@ export default function SingleBarChart({
   }
 
   return (
-    <div className={"single-bar-chart" + (homeView ? ' -home' : ' -state')}>
+    <div className={"single-bar-chart" + (homeView ? " -home" : " -state")}>
       <BarChart
         barSize={BarWidth}
         width={GraphWidth}

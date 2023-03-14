@@ -22,22 +22,33 @@ import { getShortCitation } from "../constants/source-citations"
  * }
  */
 const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
+  // Start at 12 o'clock and go clockwise, rather than starting at 3 o'clock
+  // and going counter clockwise like the default
+  const GraphStartAngle = 360 + 90
+  const GraphEndAngle = 0 + 90
+
+  // The padding between every power type
+  const OuterPaddingAngle = 2
+
+  /**
+   * The order here matters, we basically pick our favorites first
+   */
   let chartData = [
     {
       name: "Solar",
       value: latestGeneration.all_solar_percent,
     },
     {
-      name: "Hydropower",
-      value: latestGeneration.hydro_electric_percent,
+      name: "Wind",
+      value: latestGeneration.wind_percent,
     },
     {
       name: "Nuclear",
       value: latestGeneration.nuclear_percent,
     },
     {
-      name: "Wind",
-      value: latestGeneration.wind_percent,
+      name: "Hydropower",
+      value: latestGeneration.hydro_electric_percent,
     },
     {
       name: "Coal",
@@ -56,9 +67,16 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
   // Filter out totally unused power sectors to prevent breaking padding angle
   // and sort by largest power sector first, which helps keep small sectors on
   // the right (e.g. in Nevada) where they won't collide
-  chartData = chartData
-    .filter(data => data.value > 0)
-    .sort((a, b) => a.value - b.value)
+  chartData = chartData.filter(data => data.value > 0)
+  // .sort((a, b) => a.value - b.value)
+
+  // Count the number of clean power sectors for inner arc padding angle
+  const ShownCleanPowerCount = chartData.filter(
+    datum => datum.name !== "Coal" && datum.name !== "Natural Gas" && datum.name !== "Petroleum"
+  ).length
+  const ShownDirtyPowerCount = chartData.length - ShownCleanPowerCount
+
+  console.log({ ShownCleanPowerCount, ShownDirtyPowerCount })
 
   const totalCleanPercent =
     latestGeneration.all_solar_percent +
@@ -67,6 +85,27 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     latestGeneration.wind_percent
 
   const totalDirtyPercent = 100 - totalCleanPercent
+
+  // This is very messy, but to line up the inner arc (which combines power
+  // sectors) with the outer arc, we basically have to convert the padding angle
+  // of the outer arc into a % and then add it to the clean and dirty arcs
+  const OuterPaddingAnglePrcnt = 100 * (OuterPaddingAngle / 360);
+
+  const cleanSectorsPaddingPrcnt = (ShownCleanPowerCount - 1) * OuterPaddingAnglePrcnt
+  const dirtySectorsPaddingPrcnt = (ShownDirtyPowerCount - 1) * OuterPaddingAnglePrcnt
+
+  const chartDataInner = [
+    {
+      value: totalCleanPercent + cleanSectorsPaddingPrcnt,
+      name: "Carbon Free",
+    },
+    {
+      value: totalDirtyPercent + dirtySectorsPaddingPrcnt,
+      name: "Dirty",
+    },
+  ]
+
+  console.log('chartDataInner', chartDataInner);
 
   const RADIAN = Math.PI / 180
 
@@ -117,9 +156,11 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
+              startAngle={GraphStartAngle}
+              endAngle={GraphEndAngle}
               innerRadius={"58%"}
               outerRadius={"75%"}
-              paddingAngle={2}
+              paddingAngle={OuterPaddingAngle}
               dataKey="value"
             >
               {chartData.map((entry, index) => (
@@ -129,13 +170,15 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
 
             {/* Inner pie chart shows what power sources are green or dirty */}
             <Pie
-              data={chartData}
+              data={chartDataInner}
               cx="50%"
               cy="50%"
               labelLine={false}
+              startAngle={GraphStartAngle}
+              endAngle={GraphEndAngle}
               innerRadius={"52%"}
               outerRadius={"56%"}
-              paddingAngle={2}
+              paddingAngle={OuterPaddingAngle}
               dataKey="value"
             >
               {chartData.map((entry, index) => (
@@ -156,7 +199,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
 
             <text
               x={"50%"}
-              y={"58%"}
+              y={"59%"}
               width={100}
               textAnchor="middle"
               className="inner-label"

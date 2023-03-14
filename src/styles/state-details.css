@@ -86,6 +86,7 @@
 
 .state-details-main .power-sources-chart text {
   font-size: 0.875rem;
+  font-weight: bold;
   fill: var(--text-color-main);
 }
 
@@ -122,41 +123,28 @@
 .state-details-main
   .power-sources-chart
   .recharts-pie:nth-of-type(2)
-  path[name="Wind"],
-.state-details-main
-  .power-sources-chart
-  .recharts-pie:nth-of-type(2)
-  path[name="Solar"],
-.state-details-main
-  .power-sources-chart
-  .recharts-pie:nth-of-type(2)
-  path[name="Hydropower"],
-.state-details-main
-  .power-sources-chart
-  .recharts-pie:nth-of-type(2)
-  path[name="Nuclear"] {
+  path[name="Carbon Free"] {
   fill: #28ac28;
 }
 
+/* The dirty arc is hidden, but you can re-enable it for debugging */
 .state-details-main
   .power-sources-chart
   .recharts-pie:nth-of-type(2)
-  path[name="Natural Gas"],
-.state-details-main
-  .power-sources-chart
-  .recharts-pie:nth-of-type(2)
-  path[name="Coal"],
-.state-details-main
-  .power-sources-chart
-  .recharts-pie:nth-of-type(2)
-  path[name="Petroleum"] {
-  fill: #5f5f5f;
+  path[name="Dirty"] {
+  /*  fill: #5f5f5f;*/
+  fill: transparent;
+}
+
+.state-details-main .power-sources-chart .inner-label {
+  font-weight: normal;
 }
 
 .state-details-main .power-sources-chart .inner-label.-prcnt {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 
 /**
  * Mobile/tablet styling - shrink some text
