@@ -28,28 +28,28 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
       value: latestGeneration.all_solar_percent,
     },
     {
-      name: "Coal",
-      value: latestGeneration.coal_percent,
-    },
-    {
       name: "Hydropower",
       value: latestGeneration.hydro_electric_percent,
-    },
-    {
-      name: "Natural Gas",
-      value: latestGeneration.natural_gas_percent,
     },
     {
       name: "Nuclear",
       value: latestGeneration.nuclear_percent,
     },
     {
-      name: "Petroleum",
-      value: latestGeneration.petro_liquids_percent,
-    },
-    {
       name: "Wind",
       value: latestGeneration.wind_percent,
+    },
+    {
+      name: "Coal",
+      value: latestGeneration.coal_percent,
+    },
+    {
+      name: "Natural Gas",
+      value: latestGeneration.natural_gas_percent,
+    },
+    {
+      name: "Petroleum",
+      value: latestGeneration.petro_liquids_percent,
     },
   ]
 
@@ -60,6 +60,13 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     .filter(data => data.value > 0)
     .sort((a, b) => a.value - b.value)
 
+  const totalCleanPercent = latestGeneration.all_solar_percent +
+    latestGeneration.hydro_electric_percent +
+    latestGeneration.nuclear_percent +
+    latestGeneration.wind_percent
+
+  const totalDirtyPercent = 100 - totalCleanPercent
+
   const RADIAN = Math.PI / 180
 
   const renderCustomizedLabel = ({
@@ -68,7 +75,6 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     midAngle,
     innerRadius,
     outerRadius,
-    percent,
     index,
   }) => {
     // How far out the label should be
@@ -76,13 +82,13 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * LabelRadiusMult
     const x = cx + radius * Math.cos(-midAngle * RADIAN)
     const y = cy + radius * Math.sin(-midAngle * RADIAN)
-    const roundedPercent = (percent * 100).toFixed(0)
+    const slicePercent = chartData[index].value
 
     // Align text to end if left of the chart, center if in the middle, and
     // align start if to the right of the chart
     const textAnchor = x > cx ? "start" : "end"
 
-    if (roundedPercent > 0) {
+    if (slicePercent > 0) {
       return (
         <text
           x={x}
@@ -91,7 +97,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
           width={80}
           dominantBaseline="central"
         >
-          {`${chartData[index].name} (${roundedPercent}%)`}
+          {`${chartData[index].name} (${slicePercent}%)`}
         </text>
       )
     } else {
@@ -111,7 +117,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               labelLine={false}
               label={renderCustomizedLabel}
               innerRadius={"58%"}
-              outerRadius={"80%"}
+              outerRadius={"75%"}
               paddingAngle={2}
               dataKey="value"
             >
@@ -119,6 +125,37 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
                 <Cell key={`cell-${index}`} />
               ))}
             </Pie>
+
+            {/* Inner pie chart shows what power sources are green or dirty */}
+            <Pie
+              data={chartData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              innerRadius={"52%"}
+              outerRadius={"56%"}
+              paddingAngle={2}
+              dataKey="value"
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} />
+              ))}
+            </Pie>
+
+            <text x={'50%'} y={'48%'}
+              width={100}
+              dominantBaseline="central"
+              textAnchor="middle"
+              className="inner-label -prcnt">
+              { totalCleanPercent }%
+            </text>
+
+            <text x={'50%'} y={'58%'}
+              width={100}
+              textAnchor="middle"
+              className="inner-label">
+              Carbon-Free
+            </text>
           </PieChart>
         </ResponsiveContainer>
       </div>
