@@ -1,5 +1,6 @@
 import React from "react"
 import { BarChart, Bar, LabelList, ReferenceArea, YAxis } from "recharts"
+import { navigate } from "gatsby"
 
 /* Calculate a rounded percentage given a value and the total it's out of */
 const getPct = (value, total) => {
@@ -13,10 +14,10 @@ const getLabel = (entry, total, field, label) => {
 
 const Selectors = {
   stateDetailsMain: "state-details-main",
-  otherMain: "other-main",
-  transportMain: "transport-main",
-  buildingsMain: "bld-main",
-  powerMain: "power-main",
+  otherMain: "other",
+  transportMain: "transport",
+  buildingsMain: "buildings",
+  powerMain: "power",
 }
 
 /**
@@ -154,6 +155,9 @@ export default function SingleBarChart({
 
       const scrollValue =
         targetOffsetTop + stateDetailsMainOffset + scrollOffset
+
+      // Smooth scroll to anchor element, and update URL so users can share
+      history.pushState(null, null, `#${targetAnchor}`);
       document.documentElement.scrollTo({
         top: scrollValue,
         behavior: "smooth",

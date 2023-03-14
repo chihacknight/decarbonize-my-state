@@ -125,7 +125,15 @@ function blur(event, setTooltipStyle) {
  * to that state
  */
 function handleClick(event, activeRegion) {
-  navigate(`/${activeRegion.id}`)
+  const newUrl = `/${activeRegion.id}`
+
+  // If Ctrl is held, open a new tab, otherwise navigate this page
+  if (event.ctrlKey) {
+    window.open(newUrl)
+  }
+  else {
+    navigate(newUrl)
+  }
 }
 
 function handleKeydown(event, activeRegion) {

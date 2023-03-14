@@ -275,13 +275,13 @@ export default function StateDetailsPage({ location, data }) {
    * actual sections or tracking gets real wacky
    */
   let scrollableSectionIds = [
-    "bld-main",
-    "bld-end",
-    "transport-main",
+    "buildings",
+    "buildings-end",
+    "transport",
     "transport-end",
-    "power-main",
+    "power",
     "power-end",
-    "other-main",
+    "other",
   ]
 
   if (powerPrcnt === "0") {
@@ -310,25 +310,25 @@ export default function StateDetailsPage({ location, data }) {
       return
     }
 
-    if (targetId === "bld-main") {
+    if (targetId === "buildings") {
       activeKey = "buildings"
       greenKeys = []
-    } else if (targetId === "bld-end") {
+    } else if (targetId === "buildings-end") {
       activeKey = ""
       greenKeys = ["buildings"]
-    } else if (targetId === "transport-main") {
+    } else if (targetId === "transport") {
       activeKey = "transportation"
       greenKeys = ["buildings"]
     } else if (targetId === "transport-end") {
       activeKey = ""
       greenKeys = ["buildings", "transportation"]
-    } else if (targetId === "power-main") {
+    } else if (targetId === "power") {
       activeKey = "dirty_power"
       greenKeys = ["buildings", "transportation"]
     } else if (targetId === "power-end") {
       activeKey = ""
       greenKeys = ["buildings", "transportation", "dirty_power"]
-    } else if (targetId === "other-main") {
+    } else if (targetId === "other") {
       activeKey = "dumps_farms_industrial_other"
       greenKeys = ["buildings", "transportation", "dirty_power"]
     }
@@ -432,7 +432,7 @@ export default function StateDetailsPage({ location, data }) {
           className="col-12 col-xl-7"
         >
           {/* Buildings Section */}
-          <div id="bld-main" className="scrollable-sect mt-5">
+          <div id="buildings" className="scrollable-sect mt-5">
             <h2 className="h1 mb-6">Decarbonize Our Buildings</h2>
 
             <div className="row mt-5">
@@ -531,7 +531,7 @@ export default function StateDetailsPage({ location, data }) {
             </span>
           </div>
 
-          <div id="bld-end" className="scrollable-sect change-text mt-8 mb-4">
+          <div id="buildings-end" className="scrollable-sect change-text mt-8 mb-4">
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all buildings cuts {buildingsPrcnt}% of the
               pollution.
@@ -548,7 +548,7 @@ export default function StateDetailsPage({ location, data }) {
           </div>
 
           {/* Transportation Section */}
-          <div id="transport-main" className="scrollable-sect mt-5">
+          <div id="transport" className="scrollable-sect mt-5">
             <h2 className="h1 mb-6">Decarbonize Our Transport</h2>
 
             <div className="row mt-5">
@@ -641,7 +641,7 @@ export default function StateDetailsPage({ location, data }) {
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
-            <div id="power-main" className="scrollable-sect mt-5">
+            <div id="power" className="scrollable-sect mt-5">
               <h2 className="h1 mb-6">Decarbonize Our Power</h2>
 
               <div className="row mt-5">
@@ -853,7 +853,7 @@ export default function StateDetailsPage({ location, data }) {
 
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
-            <div id="power-main" className="scrollable-sect mt-5 mb-7">
+            <div id="power" className="scrollable-sect mt-5 mb-7">
               <h2 className="h1">Power</h2>
               <div className="mt-6 mb-4 text-center">
                 <p className="font-weight-bold">
@@ -872,7 +872,7 @@ export default function StateDetailsPage({ location, data }) {
           )}
 
           {/* Other Section */}
-          <div id="other-main" className="scrollable-sect mt-5">
+          <div id="other" className="scrollable-sect mt-5">
             <h2 className="h1 mb-6">Other Emissions</h2>
 
             <div className="row mt-5">
