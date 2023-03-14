@@ -397,7 +397,7 @@ export default function StateDetailsPage({ location, data }) {
         <hr className="mt-7 mb-7" />
       </div>
 
-      <div className="row state-details-main">
+      <div className="row state-details-main" id="state-details-main">
         {/**
          * Our main chart for desktop ONLY (others are hidden) this chart
          * should update as you scroll

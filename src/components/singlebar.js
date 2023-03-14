@@ -11,6 +11,14 @@ const getLabel = (entry, total, field, label) => {
   return `${label} ${getPct(entry[field], total)}%`
 }
 
+const Selectors = {
+  stateDetailsMain: "state-details-main",
+  otherMain: "other-main",
+  transportMain: "transport-main",
+  buildingsMain: "bld-main",
+  powerMain: "power-main",
+}
+
 /**
  * Create constants for bar and graph dimensions for calculating lines
  */
@@ -71,13 +79,21 @@ export default function SingleBarChart({
 
   const activeFill = "#ff5722"
 
+  /** The keys of the relevant data */
+  const DataKeys = {
+    other: "dumps_farms_industrial_other",
+    transport: "transportation",
+    buildings: "buildings",
+    power: "dirty_power",
+  }
+
   /**
    * Configuration for the colors for each bar graph bar as well as their data
    * key and label text
    */
   const BarsConfig = {
     other: {
-      key: "dumps_farms_industrial_other",
+      key: DataKeys.other,
       text: "🏭 Farms, Industry & Other:",
       fill: "#ad8669",
       // This category cannot be electrified so make the greenFill red to be
@@ -85,23 +101,63 @@ export default function SingleBarChart({
       greenFill: "#ff0000",
     },
     transport: {
-      key: "transportation",
+      key: DataKeys.transport,
       text: "🚗 Transportation:",
       fill: "#c2c2c2",
       greenFill: "#6ebf70",
     },
     buildings: {
-      key: "buildings",
+      key: DataKeys.buildings,
       text: "🏠 Buildings:",
       fill: "#dcdcdc",
       greenFill: "#a3d7a4",
     },
     power: {
-      key: "dirty_power",
+      key: DataKeys.power,
       text: "🔌 Dirty Power:",
       fill: "#a6a6a6",
       greenFill: "#4caf50",
     },
+  }
+
+  function handleClick(event) {
+    // Do nothing if not on state details
+    if (homeView) {
+      return
+    }
+
+    const clickedDataKey = event.tooltipPayload[0].name
+
+    // A fudge factor for scrolling to account for the top header
+    const scrollOffset = -100
+
+    let targetAnchor = ""
+
+    if (clickedDataKey === DataKeys.other) {
+      targetAnchor = Selectors.otherMain
+    } else if (clickedDataKey === DataKeys.transport) {
+      targetAnchor = Selectors.transportMain
+    } else if (clickedDataKey === DataKeys.buildings) {
+      targetAnchor = Selectors.buildingsMain
+    } else if (clickedDataKey === DataKeys.power) {
+      targetAnchor = Selectors.powerMain
+    }
+
+    const targetAnchorElem = document.getElementById(targetAnchor)
+
+    if (targetAnchorElem) {
+      const targetOffsetTop = document.getElementById(targetAnchor).offsetTop
+
+      const stateDetailsMainOffset = document.getElementById(
+        Selectors.stateDetailsMain
+      ).offsetTop
+
+      const scrollValue =
+        targetOffsetTop + stateDetailsMainOffset + scrollOffset
+      document.documentElement.scrollTo({ top: scrollValue, behavior: 'smooth' })
+    } else {
+      console.error(`Couldn't find element with ID "${targetAnchor}"`)
+    }
   }
 
   let LabelOffset = 12
@@ -181,7 +237,7 @@ export default function SingleBarChart({
   }
 
   return (
-    <div className="single-bar-chart">
+    <div className={"single-bar-chart" + (homeView ? ' -home' : ' -state')}>
       <BarChart
         barSize={BarWidth}
         width={GraphWidth}
@@ -198,6 +254,7 @@ export default function SingleBarChart({
             fill={BarsConfig.other.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
@@ -220,6 +277,7 @@ export default function SingleBarChart({
             fill={BarsConfig.power.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
@@ -242,6 +300,7 @@ export default function SingleBarChart({
             fill={BarsConfig.transport.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
@@ -264,6 +323,7 @@ export default function SingleBarChart({
             fill={BarsConfig.buildings.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>

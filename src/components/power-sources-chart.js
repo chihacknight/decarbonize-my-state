@@ -60,7 +60,8 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     .filter(data => data.value > 0)
     .sort((a, b) => a.value - b.value)
 
-  const totalCleanPercent = latestGeneration.all_solar_percent +
+  const totalCleanPercent =
+    latestGeneration.all_solar_percent +
     latestGeneration.hydro_electric_percent +
     latestGeneration.nuclear_percent +
     latestGeneration.wind_percent
@@ -142,18 +143,24 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               ))}
             </Pie>
 
-            <text x={'50%'} y={'48%'}
+            <text
+              x={"50%"}
+              y={"48%"}
               width={100}
               dominantBaseline="central"
               textAnchor="middle"
-              className="inner-label -prcnt">
-              { totalCleanPercent }%
+              className="inner-label -prcnt"
+            >
+              {totalCleanPercent}%
             </text>
 
-            <text x={'50%'} y={'58%'}
+            <text
+              x={"50%"}
+              y={"58%"}
               width={100}
               textAnchor="middle"
-              className="inner-label">
+              className="inner-label"
+            >
               Carbon-Free
             </text>
           </PieChart>
