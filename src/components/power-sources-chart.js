@@ -161,7 +161,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     // (e.g. Missouri with 1% Solar then 5% Wind)
     if (textAnchor === "middle" && nextSlicePercent < 10) {
       // Shift up if a top label, down if a bottom label
-      yOffset = y < outerRadius ? -16 : 10;
+      yOffset = y < outerRadius ? -16 : 10
     }
 
     if (slicePercent > 0) {

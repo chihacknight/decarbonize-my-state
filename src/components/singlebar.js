@@ -1,6 +1,5 @@
 import React from "react"
 import { BarChart, Bar, LabelList, ReferenceArea, YAxis } from "recharts"
-import { navigate } from "gatsby"
 
 /* Calculate a rounded percentage given a value and the total it's out of */
 const getPct = (value, total) => {
