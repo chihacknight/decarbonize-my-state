@@ -118,6 +118,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
    *
    * - Missouri (1% Solar, then 5% Wind)
    * - West Virginia (3% Wind then 3% Hydro)
+   * - Maryland (5% Hydropower bumps 9% Coal at bottom)
    * - California (a bucnh of renewables, labels stack bottom right)
    */
   function renderCustomizedLabel({
@@ -156,10 +157,11 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
     let xOffset = 0
     let yOffset = 0
 
-    // Shift top centered labels up if the next slice is also small
+    // Shift centered labels out if the next slice is also small
     // (e.g. Missouri with 1% Solar then 5% Wind)
-    if (textAnchor === "middle" && y < outerRadius && nextSlicePercent < 10) {
-      yOffset = -16
+    if (textAnchor === "middle" && nextSlicePercent < 10) {
+      // Shift up if a top label, down if a bottom label
+      yOffset = y < outerRadius ? -16 : 10;
     }
 
     if (slicePercent > 0) {
