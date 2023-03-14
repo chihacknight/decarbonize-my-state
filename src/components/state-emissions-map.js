@@ -130,8 +130,7 @@ function handleClick(event, activeRegion) {
   // If Ctrl is held, open a new tab, otherwise navigate this page
   if (event.ctrlKey) {
     window.open(newUrl)
-  }
-  else {
+  } else {
     navigate(newUrl)
   }
 }

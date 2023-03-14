@@ -531,7 +531,10 @@ export default function StateDetailsPage({ location, data }) {
             </span>
           </div>
 
-          <div id="buildings-end" className="scrollable-sect change-text mt-8 mb-4">
+          <div
+            id="buildings-end"
+            className="scrollable-sect change-text mt-8 mb-4"
+          >
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all buildings cuts {buildingsPrcnt}% of the
               pollution.
@@ -687,11 +690,13 @@ export default function StateDetailsPage({ location, data }) {
                 placeTitle={placeTitle}
               ></PowerSourcesChart>
 
-              <p className="mt-6">
-                But there's already{" "}
-                <strong>{carbonFreePercent}% carbon-free</strong> electricity
-                generation in {placeTitle}!
-              </p>
+              {carbonFreePercent > 0 && (
+                <p className="mt-6">
+                  But there's already{" "}
+                  <strong>{carbonFreePercent}% carbon-free</strong> electricity
+                  generation in {placeTitle}!
+                </p>
+              )}
 
               <p className="mt-6">
                 To clean up the emissions from the polluting power plants we

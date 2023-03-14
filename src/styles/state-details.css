@@ -79,7 +79,7 @@
  * graph
  */
 .state-details-main .power-sources-chart {
-  width: 30rem;
+  width: 35rem;
   max-width: 100%;
   aspect-ratio: 2 / 1;
 }
@@ -94,7 +94,10 @@
   stroke-width: 0;
 }
 
-/** Set colors for each power section */
+/**
+ * Set colors for each power section. Some of these are based on the IEA, but
+ * we tune fossil fuel colors to be darker
+ */
 .state-details-main .power-sources-chart path[name="Wind"] {
   fill: #5d9732;
 }
@@ -102,10 +105,11 @@
   fill: #ffc702;
 }
 .state-details-main .power-sources-chart path[name="Hydropower"] {
-  fill: #7944d6;
+  fill: #1983d7;
 }
 .state-details-main .power-sources-chart path[name="Natural Gas"] {
-  fill: #189bd7;
+  /* fill: #189bd7; IEA Blue*/
+  fill: #90684b;
 }
 .state-details-main .power-sources-chart path[name="Coal"] {
   fill: #333333;
@@ -114,7 +118,9 @@
   fill: #bd732a;
 }
 .state-details-main .power-sources-chart path[name="Nuclear"] {
-  fill: #a33340;
+  /* IEA red */
+  /* fill: #a33340;*/
+  fill: #df554a;
 }
 
 /**
@@ -145,7 +151,6 @@
   font-weight: bold;
 }
 
-
 /**
  * Mobile/tablet styling - shrink some text
  */
@@ -164,6 +169,18 @@
   .state-details-main .power-sources-chart {
     max-width: 100vw;
     margin: 1rem -1rem;
+  }
+}
+
+/** Small mobile styling */
+@media (max-width: 400px) {
+  /** Shrink power % text */
+  .state-details-main .power-sources-chart .inner-label {
+    font-size: 0.625rem;
+  }
+
+  .state-details-main .power-sources-chart .inner-label.-prcnt {
+    font-size: 1rem;
   }
 }
 

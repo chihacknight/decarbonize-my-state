@@ -157,7 +157,7 @@ export default function SingleBarChart({
         targetOffsetTop + stateDetailsMainOffset + scrollOffset
 
       // Smooth scroll to anchor element, and update URL so users can share
-      history.pushState(null, null, `#${targetAnchor}`);
+      window.history.pushState(null, null, `#${targetAnchor}`)
       document.documentElement.scrollTo({
         top: scrollValue,
         behavior: "smooth",
