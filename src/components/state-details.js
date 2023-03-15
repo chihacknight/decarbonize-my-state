@@ -862,24 +862,25 @@ export default function StateDetailsPage({ location, data }) {
               <h2 className="h1">Power</h2>
               <div className="mt-6 mb-4 text-center">
                 {/* DC generates no power, and so has 0% carbon free % */}
-                { carbonFreePercent === 0 && (
+                {carbonFreePercent === 0 && (
                   <p className="font-weight-bold">
-                    {placeTitle} doesn't produce any power that creates climate pollution! 😎
-                  </p>)
-                }
+                    {placeTitle} doesn't produce any power that creates climate
+                    pollution! 😎
+                  </p>
+                )}
 
-                { carbonFreePercent > 0 && (
+                {carbonFreePercent > 0 && (
                   <>
                     <p className="font-weight-bold">
-                      {placeTitle} already produces {carbonFreePercent || 100}% of
-                      it's power without making any climate pollution! 😎
+                      {placeTitle} already produces {carbonFreePercent || 100}%
+                      of it's power without making any climate pollution! 😎
                     </p>
                     <p className="h6 mb-5">
                       This means power accounts for &lt; 1% of their total
                       emissions.
                     </p>
-                  </>)
-                }
+                  </>
+                )}
 
                 <p className="h6 mt-3">
                   Check out another state to see how they can cut their power
