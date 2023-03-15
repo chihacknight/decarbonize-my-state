@@ -6,8 +6,9 @@ import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
-import AlreadyElectrifiedChart from "./AlreadyElectrifiedChart"
-import DisplayPlants from "./displayplants.js"
+import AlreadyElectrifiedChart from "./already-electrified-chart"
+import PowerSourcesChart from "./power-sources-chart"
+import DisplayPlants from "./display-plants"
 import { getShortCitation } from "../constants/source-citations"
 import { getTerminologyHover } from "../constants/terminology-list"
 
@@ -172,9 +173,15 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### POWER GENERATION ####
   const generationByYear = data.allPowerGenerationJson.edges[0].node.generation
-  const latestGeneration = generationByYear.filter(v => v.year === 2020)
-  // for Viktor: this is the data you need to use for the power generation graph
-  console.log(latestGeneration)
+
+  // Sort by newest first and grab the first record to get the latest generation
+  const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0]
+
+  const carbonFreePercent =
+    latestGeneration.all_solar_percent +
+    latestGeneration.hydro_electric_percent +
+    latestGeneration.nuclear_percent +
+    latestGeneration.wind_percent
 
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
@@ -263,6 +270,29 @@ export default function StateDetailsPage({ location, data }) {
     plant => plant.fossil_fuel_category === "OIL"
   )
 
+  /**
+   * The section IDs that are scrollable - it's important this reflects the
+   * actual sections or tracking gets real wacky
+   */
+  let scrollableSectionIds = [
+    "buildings",
+    "buildings-end",
+    "transport",
+    "transport-end",
+    "power",
+    "power-end",
+    "other",
+  ]
+
+  if (powerPrcnt === "0") {
+    scrollableSectionIds = scrollableSectionIds.filter(
+      sect => sect !== "power-end"
+    )
+  }
+
+  /**
+   * Restyles the side graph as we scroll through the page, given a new target
+   */
   function scrollTargetUpdated(scrollTarget) {
     let activeKey = "buildings"
     let greenKeys = []
@@ -280,25 +310,25 @@ export default function StateDetailsPage({ location, data }) {
       return
     }
 
-    if (targetId === "bld-main") {
+    if (targetId === "buildings") {
       activeKey = "buildings"
       greenKeys = []
-    } else if (targetId === "bld-end") {
+    } else if (targetId === "buildings-end") {
       activeKey = ""
       greenKeys = ["buildings"]
-    } else if (targetId === "transport-main") {
+    } else if (targetId === "transport") {
       activeKey = "transportation"
       greenKeys = ["buildings"]
     } else if (targetId === "transport-end") {
       activeKey = ""
       greenKeys = ["buildings", "transportation"]
-    } else if (targetId === "power-main") {
+    } else if (targetId === "power") {
       activeKey = "dirty_power"
       greenKeys = ["buildings", "transportation"]
     } else if (targetId === "power-end") {
       activeKey = ""
       greenKeys = ["buildings", "transportation", "dirty_power"]
-    } else if (targetId === "other-main") {
+    } else if (targetId === "other") {
       activeKey = "dumps_farms_industrial_other"
       greenKeys = ["buildings", "transportation", "dirty_power"]
     }
@@ -367,7 +397,7 @@ export default function StateDetailsPage({ location, data }) {
         <hr className="mt-7 mb-7" />
       </div>
 
-      <div className="row state-details-main">
+      <div className="row state-details-main" id="state-details-main">
         {/**
          * Our main chart for desktop ONLY (others are hidden) this chart
          * should update as you scroll
@@ -396,21 +426,13 @@ export default function StateDetailsPage({ location, data }) {
         <Scrollspy
           offset={-300}
           scrolledPastClassName={"scrolled-past"}
-          items={[
-            "bld-main",
-            "bld-end",
-            "transport-main",
-            "transport-end",
-            "power-main",
-            "power-end",
-            "other-main",
-          ]}
+          items={scrollableSectionIds}
           currentClassName="is-current"
           onUpdate={scrollTargetUpdated}
           className="col-12 col-xl-7"
         >
           {/* Buildings Section */}
-          <div id="bld-main" className="scrollable-sect mt-5">
+          <div id="buildings" className="scrollable-sect mt-5">
             <h2 className="h1 mb-6">Decarbonize Our Buildings</h2>
 
             <div className="row mt-5">
@@ -509,7 +531,10 @@ export default function StateDetailsPage({ location, data }) {
             </span>
           </div>
 
-          <div id="bld-end" className="scrollable-sect change-text mt-8 mb-4">
+          <div
+            id="buildings-end"
+            className="scrollable-sect change-text mt-8 mb-4"
+          >
             <p className="h1 font-weight-bold text-center mt-6 mb-6">
               Electrifying all buildings cuts {buildingsPrcnt}% of the
               pollution.
@@ -526,7 +551,7 @@ export default function StateDetailsPage({ location, data }) {
           </div>
 
           {/* Transportation Section */}
-          <div id="transport-main" className="scrollable-sect mt-5">
+          <div id="transport" className="scrollable-sect mt-5">
             <h2 className="h1 mb-6">Decarbonize Our Transport</h2>
 
             <div className="row mt-5">
@@ -619,7 +644,7 @@ export default function StateDetailsPage({ location, data }) {
           {/* Power Section */}
           {/* Show normal intro section if power emissions > 0 */}
           {powerPrcnt > 0 && (
-            <div id="power-main" className="scrollable-sect mt-5">
+            <div id="power" className="scrollable-sect mt-5">
               <h2 className="h1 mb-6">Decarbonize Our Power</h2>
 
               <div className="row mt-5">
@@ -642,7 +667,7 @@ export default function StateDetailsPage({ location, data }) {
 
                   <div className="mt-5 text-center">
                     <img
-                      className="img-fluid col-6"
+                      className="img-fluid col-5"
                       src={DirtyPowerPlantImg}
                       alt="Dirty power plant"
                     />
@@ -650,20 +675,33 @@ export default function StateDetailsPage({ location, data }) {
                 </div>
               </div>
 
-              <p className="mt-6">To cut this pollution...</p>
-
-              <p className="mt-4 mb-6 text-right">
-                Put <strong>solar panels</strong> on your roof!
+              <p className="mt-5">
+                That's because of how power is generated in {placeTitle}{" "}
+                <em>today</em>.
               </p>
 
-              <div className="d-flex justify-content-center">
-                <div className="building-sheet -house -clean col-10"></div>
-              </div>
+              <h3 className="h6 mt-5 mb-4">
+                Power Generation in the State of {placeTitle} (
+                {latestGeneration.year})
+              </h3>
+
+              <PowerSourcesChart
+                latestGeneration={latestGeneration}
+                placeTitle={placeTitle}
+              ></PowerSourcesChart>
+
+              {carbonFreePercent > 0 && (
+                <p className="mt-6">
+                  But there's already{" "}
+                  <strong>{carbonFreePercent}% carbon-free</strong> electricity
+                  generation in {placeTitle}!
+                </p>
+              )}
 
               <p className="mt-6">
-                Then, we'll replace{" "}
-                <strong>all fossil fuel power plants</strong> with solar and
-                wind farms.
+                To clean up the emissions from the polluting power plants we
+                need to replace <strong>all fossil fuel power plants</strong>{" "}
+                with solar and wind farms.
               </p>
 
               <p className="mt-5 mb-0">
@@ -820,15 +858,31 @@ export default function StateDetailsPage({ location, data }) {
 
           {/* Show special section if power emissions are zero */}
           {powerPrcnt === "0" && (
-            <div id="power-main" className="scrollable-sect mt-5 mb-7">
+            <div id="power" className="scrollable-sect mt-5 mb-7">
               <h2 className="h1">Power</h2>
-              <div className="mt-6 mb-8 text-center">
-                <p className="font-weight-bold">
-                  {placeTitle} produces all of it's power without making any
-                  climate pollution! 😎
-                </p>
+              <div className="mt-6 mb-4 text-center">
+                {/* DC generates no power, and so has 0% carbon free % */}
+                {carbonFreePercent === 0 && (
+                  <p className="font-weight-bold">
+                    {placeTitle} doesn't produce any power that creates climate
+                    pollution! 😎
+                  </p>
+                )}
 
-                <p className="h5 mt-3">
+                {carbonFreePercent > 0 && (
+                  <>
+                    <p className="font-weight-bold">
+                      {placeTitle} already produces {carbonFreePercent || 100}%
+                      of it's power without making any climate pollution! 😎
+                    </p>
+                    <p className="h6 mb-5">
+                      This means power accounts for &lt; 1% of their total
+                      emissions.
+                    </p>
+                  </>
+                )}
+
+                <p className="h6 mt-3">
                   Check out another state to see how they can cut their power
                   emissions to zero.
                 </p>
@@ -839,7 +893,7 @@ export default function StateDetailsPage({ location, data }) {
           )}
 
           {/* Other Section */}
-          <div id="other-main" className="scrollable-sect mt-5">
+          <div id="other" className="scrollable-sect mt-5">
             <h2 className="h1 mb-6">Other Emissions</h2>
 
             <div className="row mt-5">

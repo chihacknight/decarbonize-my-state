@@ -41,7 +41,7 @@ body {
   background-color: #fffffb;
   font-family: "Source Serif Pro", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  color: #33342e;
+  color: var(--text-color-main);
 }
 
 /* Make links blue and underlined by default for clarity */
@@ -199,6 +199,10 @@ caption {
   background: #aaa;
 }
 
+/**
+ * NOTE: Make sure to update StateEmissionsMap.showTooltip if this is changed,
+ * since the tooltip height and width are hard-coded there
+ */
 .map-tooltip {
   display: block;
   position: fixed;
@@ -213,8 +217,13 @@ caption {
   left: 48%;
 }
 
+.map-tooltip .arrow::before {
+  border-top-color: rgba(0, 0, 0, 0.8);
+}
+
 .map-tooltip .tooltip-inner {
-  width: 150px;
+  width: 180px;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /**
@@ -357,9 +366,20 @@ footer a {
   fill: #181818;
 }
 
-/** Animate graph color changes */
+/** Animate graph color changes and hover filter */
 .single-bar-chart .recharts-rectangle {
-  transition: fill 0.4s;
+  transition: fill 0.4s, filter 0.3s;
+}
+
+/** Make clear state details bar chart is clickable */
+.single-bar-chart.-state .recharts-rectangle {
+  cursor: pointer;
+}
+
+.single-bar-chart.-state .recharts-rectangle:hover {
+  filter: brightness(0.9);
+  outline: solid 0.125rem rgb(0 0 0 / 50%);
+  outline-offset: -0.125rem;
 }
 
 @media (max-width: 991px) {

@@ -65,27 +65,34 @@ function showTooltip(targetElem, setTooltipStyle) {
   // These two values are absolute, so they will move the tooltip the same
   // number of pixels for tiny states (like DC) and large ones (like Texas)
   let tooltipYOffsetPx = 0
-  let tooltipXOffsetPx = -2
+  let tooltipXOffsetPx = -3
 
   // We subtract these from the coords to align by top center by default
-  const tooltipHeight = 62
-  const tooltipWidth = 150
+  const tooltipHeight = 88
+  const tooltipWidth = 180
 
   const stateWidth = targetRect.width
   const stateHeight = targetRect.height
 
-  const partialStateHeight = stateHeight * 0.3
+  const partialStateHeight = stateHeight * 0.5
 
-  // Move Florida's tooltip to the right relative to its width since it's center
-  // is in the gulf
+  // Custom offsets for certain states whose tooltip pointerss end up in
+  // spots (like the ocean or another state)
   if (targetElem.id === "florida") {
     tooltipXOffsetPx += stateWidth * 0.25
+  } else if (targetElem.id === "louisiana" || targetElem.id === "california") {
+    tooltipXOffsetPx -= stateWidth * 0.15
+  } else if (targetElem.id === "maryland") {
+    tooltipYOffsetPx -= stateHeight * 0.25
+  } else if (targetElem.id === "michigan") {
+    tooltipXOffsetPx += stateWidth * 0.3
+    tooltipYOffsetPx += stateHeight * 0.3
   }
 
   const centerX = targetRect.x + stateWidth / 2 - tooltipWidth / 2
   const topY = targetRect.y - tooltipHeight
 
-  const x = centerX - stateWidth * 0.1 + tooltipXOffsetPx
+  const x = centerX + tooltipXOffsetPx
   const y = topY + partialStateHeight + tooltipYOffsetPx
 
   const newTooltipStyle = {
@@ -118,7 +125,14 @@ function blur(event, setTooltipStyle) {
  * to that state
  */
 function handleClick(event, activeRegion) {
-  navigate(`/${activeRegion.id}`)
+  const newUrl = `/${activeRegion.id}`
+
+  // If Ctrl is held, open a new tab, otherwise navigate this page
+  if (event.ctrlKey) {
+    window.open(newUrl)
+  } else {
+    navigate(newUrl)
+  }
 }
 
 function handleKeydown(event, activeRegion) {
@@ -132,7 +146,7 @@ function getBuckets(emissions, numBuckets) {
   return buckets
 }
 
-const ChoroplethMap = ({
+const StateEmissionsMap = ({
   emissions,
   sidebar = true,
   selected_location = {},
@@ -202,7 +216,9 @@ const ChoroplethMap = ({
       <Row className="map-row">
         {emissions && sidebar ? (
           <Col lg={3} className="map-legend">
-            <div className="h6 mt-4 font-weight-bold">Climate pollution</div>
+            <div className="h6 mt-4 font-weight-bold">
+              Annaul Climate Pollution
+            </div>
             <div className="legendKey">
               <span className="keyText">
                 In millions of metric tons of CO<sub>2</sub> equivalent
@@ -270,4 +286,4 @@ const ChoroplethMap = ({
   )
 }
 
-export default ChoroplethMap
+export default StateEmissionsMap

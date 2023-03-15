@@ -11,6 +11,14 @@ const getLabel = (entry, total, field, label) => {
   return `${label} ${getPct(entry[field], total)}%`
 }
 
+const Selectors = {
+  stateDetailsMain: "state-details-main",
+  otherMain: "other",
+  transportMain: "transport",
+  buildingsMain: "buildings",
+  powerMain: "power",
+}
+
 /**
  * Create constants for bar and graph dimensions for calculating lines
  */
@@ -18,6 +26,9 @@ let BarWidth
 let GraphWidth
 let GraphHeight
 let LineWidth = 50
+
+/** Don't render graph chunks that get rounded to 0% */
+const MinPercentToRender = 0.49
 
 /**
  * A vertically stacked bar chart intended to show the groups of different
@@ -68,13 +79,21 @@ export default function SingleBarChart({
 
   const activeFill = "#ff5722"
 
+  /** The keys of the relevant data */
+  const DataKeys = {
+    other: "dumps_farms_industrial_other",
+    transport: "transportation",
+    buildings: "buildings",
+    power: "dirty_power",
+  }
+
   /**
    * Configuration for the colors for each bar graph bar as well as their data
    * key and label text
    */
   const BarsConfig = {
     other: {
-      key: "dumps_farms_industrial_other",
+      key: DataKeys.other,
       text: "🏭 Farms, Industry & Other:",
       fill: "#ad8669",
       // This category cannot be electrified so make the greenFill red to be
@@ -82,23 +101,69 @@ export default function SingleBarChart({
       greenFill: "#ff0000",
     },
     transport: {
-      key: "transportation",
+      key: DataKeys.transport,
       text: "🚗 Transportation:",
       fill: "#c2c2c2",
       greenFill: "#6ebf70",
     },
     buildings: {
-      key: "buildings",
+      key: DataKeys.buildings,
       text: "🏠 Buildings:",
       fill: "#dcdcdc",
       greenFill: "#a3d7a4",
     },
     power: {
-      key: "dirty_power",
+      key: DataKeys.power,
       text: "🔌 Dirty Power:",
       fill: "#a6a6a6",
       greenFill: "#4caf50",
     },
+  }
+
+  function handleClick(event) {
+    // Do nothing if not on state details
+    if (homeView) {
+      return
+    }
+
+    const clickedDataKey = event.tooltipPayload[0].name
+
+    // A fudge factor for scrolling to account for the top header
+    const scrollOffset = -100
+
+    let targetAnchor = ""
+
+    if (clickedDataKey === DataKeys.other) {
+      targetAnchor = Selectors.otherMain
+    } else if (clickedDataKey === DataKeys.transport) {
+      targetAnchor = Selectors.transportMain
+    } else if (clickedDataKey === DataKeys.buildings) {
+      targetAnchor = Selectors.buildingsMain
+    } else if (clickedDataKey === DataKeys.power) {
+      targetAnchor = Selectors.powerMain
+    }
+
+    const targetAnchorElem = document.getElementById(targetAnchor)
+
+    if (targetAnchorElem) {
+      const targetOffsetTop = document.getElementById(targetAnchor).offsetTop
+
+      const stateDetailsMainOffset = document.getElementById(
+        Selectors.stateDetailsMain
+      ).offsetTop
+
+      const scrollValue =
+        targetOffsetTop + stateDetailsMainOffset + scrollOffset
+
+      // Smooth scroll to anchor element, and update URL so users can share
+      window.history.pushState(null, null, `#${targetAnchor}`)
+      document.documentElement.scrollTo({
+        top: scrollValue,
+        behavior: "smooth",
+      })
+    } else {
+      console.error(`Couldn't find element with ID "${targetAnchor}"`)
+    }
   }
 
   let LabelOffset = 12
@@ -178,7 +243,7 @@ export default function SingleBarChart({
   }
 
   return (
-    <div className="single-bar-chart">
+    <div className={"single-bar-chart" + (homeView ? " -home" : " -state")}>
       <BarChart
         barSize={BarWidth}
         width={GraphWidth}
@@ -188,13 +253,14 @@ export default function SingleBarChart({
       >
         {/* Make sure the y-axis matches the data exactly so the bars take up 100% of the height */}
         <YAxis domain={["dataMin", "dataMax"]} hide={true} />
-        {// Only show other bar if it's non-zero
-        emissionsData[BarsConfig.other.key] && (
+        {// Only show other bar if it's greater than our min
+        emissionsData[BarsConfig.other.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.other.key}
             fill={BarsConfig.other.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
@@ -210,13 +276,14 @@ export default function SingleBarChart({
             />
           </Bar>
         )}
-        {// Only show power bar if it's non-zero
-        emissionsData[BarsConfig.power.key] && (
+        {// Only show power bar if it's greater than our min
+        emissionsData[BarsConfig.power.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.power.key}
             fill={BarsConfig.power.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
@@ -232,13 +299,14 @@ export default function SingleBarChart({
             />
           </Bar>
         )}
-        {// Only show transport bar if it's non-zero
-        emissionsData[BarsConfig.transport.key] && (
+        {// Only show transport bar if it's greater than our min
+        emissionsData[BarsConfig.transport.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.transport.key}
             fill={BarsConfig.transport.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
@@ -254,13 +322,14 @@ export default function SingleBarChart({
             />
           </Bar>
         )}
-        {// Only show buildings bar if it's non-zero
-        emissionsData[BarsConfig.buildings.key] && (
+        {// Only show buildings bar if it's greater than our min
+        emissionsData[BarsConfig.buildings.key] > MinPercentToRender && (
           <Bar
             dataKey={BarsConfig.buildings.key}
             fill={BarsConfig.buildings.fill}
             isAnimationActive={false}
             stackId="main"
+            onClick={handleClick}
           >
             <LabelList
               valueAccessor={entry =>
