@@ -119,7 +119,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
    * - Missouri (1% Solar, then 5% Wind)
    * - West Virginia (3% Wind then 3% Hydro)
    * - Maryland (5% Hydropower bumps 9% Coal at bottom)
-   * - California (a bucnh of renewables, labels stack bottom right)
+   * - California (a bunch of renewables, labels stack bottom right)
    */
   function renderCustomizedLabel({
     cx,
@@ -133,7 +133,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
 
     // How far out the default label should be compared to the chart radius -
     // this should be lower than our ideal so we can push out if needed
-    const LabelRadiusMult = 1.5
+    const LabelRadiusMult = 1.8
     // A multiplier to make labels further out vertically and horizontally
     const YRadiusMult = 1.05
     const XRadiusMult = 1
@@ -194,7 +194,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               label={renderCustomizedLabel}
               startAngle={GraphStartAngle}
               endAngle={GraphEndAngle}
-              innerRadius={"58%"}
+              innerRadius={"65%"} /* 58% - 75% */
               outerRadius={"75%"}
               paddingAngle={OuterPaddingAngle}
               dataKey="value"
@@ -212,8 +212,8 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               labelLine={false}
               startAngle={GraphStartAngle}
               endAngle={GraphEndAngle}
-              innerRadius={"52%"}
-              outerRadius={"56%"}
+              innerRadius={"45%"} /* 52 % */
+              outerRadius={"62%"}
               paddingAngle={OuterPaddingAngle}
               dataKey="value"
             >

@@ -99,7 +99,7 @@
  * we tune fossil fuel colors to be darker
  */
 .state-details-main .power-sources-chart path[name="Wind"] {
-  fill: #5d9732;
+  fill: #1fc3d9;
 }
 .state-details-main .power-sources-chart path[name="Solar"] {
   fill: #ffc702;
