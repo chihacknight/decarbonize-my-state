@@ -71,4 +71,39 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
       }
     })
   })
+
+  const result = await graphql(
+    `
+  query MyQuery {
+    allPowerPlantsJson {
+      edges {
+        node {
+          power_plants {
+            slug
+          }
+        }
+      }
+    }
+  }
+  `
+  )
+  
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+
+  const powerPlantDetail = path.resolve(`src/components/power_plant_detail.js`)
+  result.data.allPowerPlantsJson.edges[0].node.power_plants.forEach(({ p }) => {
+    console.log(p)
+    const path = 'power_plant/' + p['slug']
+    // console.log(p['slug'])
+    createPage({
+      path,
+      component: jobDetailTemplate,
+      context: {
+        pagePath: p['slug']
+      },
+    })
+  })
 }
