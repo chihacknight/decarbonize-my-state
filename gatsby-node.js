@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
     "washington",
     "west_virginia",
     "wisconsin",
-    "wyoming"
+    "wyoming",
   ]
 
   const StateDetailsTemplate = path.resolve(`src/components/state-details.js`)
@@ -67,43 +67,47 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
       path,
       component: StateDetailsTemplate,
       context: {
-        state: name
-      }
+        state: name,
+      },
     })
   })
 
   const result = await graphql(
     `
-  query MyQuery {
-    allPowerPlantsJson {
-      edges {
-        node {
-          power_plants {
-            slug
+      query MyQuery {
+        allPowerPlantsJson {
+          edges {
+            node {
+              power_plants {
+                slug
+              }
+            }
           }
         }
       }
-    }
-  }
-  `
+    `
   )
-  
+
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
 
   const powerPlantDetail = path.resolve(`src/components/power_plant_detail.js`)
-  result.data.allPowerPlantsJson.edges[0].node.power_plants.forEach(({ p }) => {
-    console.log(p)
-    const path = 'power_plant/' + p['slug']
-    // console.log(p['slug'])
+  allPlants = result.data.allPowerPlantsJson.edges[0].node.power_plants
+
+  console.log(allPlants[1]['slug'])
+  for(let index=0; index<allPlants.length; index++)
+  {
+    curSlug = allPlants[index]['slug']
+    const path = "power_plant/" + curSlug
+    console.log(curSlug)
     createPage({
       path,
-      component: jobDetailTemplate,
+      component: powerPlantDetail,
       context: {
-        pagePath: p['slug']
+        pagePath: curSlug
       },
     })
-  })
+  }
 }
