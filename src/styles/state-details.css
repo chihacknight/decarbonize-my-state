@@ -39,7 +39,8 @@
   }
 
   .state-graph-section .table-btn-cont {
-    text-align: center;
+    text-align: center !important;
+    align-items: center;
   }
 }
 
