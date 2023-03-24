@@ -106,7 +106,7 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
       path,
       component: powerPlantDetail,
       context: {
-        pagePath: curSlug
+        powerPlant: curSlug
       },
     })
   }
