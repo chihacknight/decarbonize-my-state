@@ -30,6 +30,10 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
    or
 
    ```shell
+   yarn install
+   ```
+   to install dependencies, then
+   ```shell
    yarn develop
    ```
 
