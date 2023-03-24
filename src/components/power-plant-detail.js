@@ -2,8 +2,7 @@ import Layout from "./layout"
 import SEO from "../components/seo"
 import { useStaticQuery } from "gatsby"
 
-const PowerPlantDetailPage = ({ data }) => {
-  const { allPowerPlantsJSON } = useStaticQuery(result)
+export default function PowerPlantDetailPage({ location, data }) {
   const {
     slug,
     Latitude,
@@ -20,19 +19,25 @@ const PowerPlantDetailPage = ({ data }) => {
     fossil_fuel_category,
     plant_name,
     utility_name,
-  } = allPowerPlantsJSON.edges[0].node
+  } = data.allPowerPlantsJSON.edges[0].node
 
   return (
     <Layout>
-      <SEO></SEO>
+      <SEO>
+        title={`${placeTitle} | Decarb My State`}
+        description={descriptionText}
+        image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
+      </SEO>
+      <div style={{ backgroundColor: "red" }}>
+        <p>{slug}</p>
+      </div>
     </Layout>
   )
 }
 
-const result = graphql(
-  `
-    query MyQuery {
-      allPowerPlantsJson(filter: { slug: { eq: $powerPlant } }) {
+export const result = graphql`
+    query PowerPlantQuery {
+      allPowerPlantsJson(filter: {power_plants: {elemMatch: {slug: {eq: powerPlant}}}}) {
         edges {
           node {
             power_plants {
@@ -56,5 +61,4 @@ const result = graphql(
         }
       }
     }
-  `
-)
+  
