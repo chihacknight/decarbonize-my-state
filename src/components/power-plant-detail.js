@@ -1,8 +1,7 @@
 import Layout from "./layout"
 import SEO from "../components/seo"
-import { useStaticQuery } from "gatsby"
 
-export default function PowerPlantDetailPage({ location, data }) {
+const PowerPlantDetailPage = ({ data }) => {
   const {
     slug,
     Latitude,
@@ -19,14 +18,16 @@ export default function PowerPlantDetailPage({ location, data }) {
     fossil_fuel_category,
     plant_name,
     utility_name,
-  } = data.allPowerPlantsJSON.edges[0].node
+  } = data.allPowerPlantsJSON.edges[0].node.power_plants[0]
+
+  console.log(data)
+  console.log(slug)
 
   return (
     <Layout>
       <SEO>
         title={`${placeTitle} | Decarb My State`}
         description={descriptionText}
-        image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       </SEO>
       <div style={{ backgroundColor: "red" }}>
         <p>{slug}</p>
@@ -35,30 +36,34 @@ export default function PowerPlantDetailPage({ location, data }) {
   )
 }
 
-export const result = graphql`
-    query PowerPlantQuery {
-      allPowerPlantsJson(filter: {power_plants: {elemMatch: {slug: {eq: powerPlant}}}}) {
-        edges {
-          node {
-            power_plants {
-              slug
-              Latitude
-              Longitude
-              Plant_annual_CH4_emissions__lbs_
-              Plant_annual_CO2_emissions__tons_
-              Plant_annual_CO2_equivalent_emissions__tons_
-              Plant_annual_N2O_emissions__lbs_
-              Plant_annual_NOx_emissions__tons_
-              Plant_annual_SO2_emissions__tons_
-              Plant_annual_net_generation__MWh_
-              capacity_mw
-              county
-              fossil_fuel_category
-              plant_name
-              utility_name
-            }
+export default PowerPlantDetailPage
+
+export const query = graphql`
+  query PowerPlantQuery {
+    allPowerPlantsJson(
+      filter: { power_plants: { elemMatch: { slug: { eq: "allen" } } } }
+    ) {
+      edges {
+        node {
+          power_plants {
+            slug
+            Latitude
+            Longitude
+            Plant_annual_CH4_emissions__lbs_
+            Plant_annual_CO2_emissions__tons_
+            Plant_annual_CO2_equivalent_emissions__tons_
+            Plant_annual_N2O_emissions__lbs_
+            Plant_annual_NOx_emissions__tons_
+            Plant_annual_SO2_emissions__tons_
+            Plant_annual_net_generation__MWh_
+            capacity_mw
+            county
+            fossil_fuel_category
+            plant_name
+            utility_name
           }
         }
       }
     }
-  
+  }
+`
