@@ -93,18 +93,19 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
     return
   }
 
-  const PowerPlantDetailTemplate = path.resolve(`src/components/power_plant_detail.js`)
+  const PowerPlantDetailTemplate = path.resolve(
+    `src/components/power-plant-detail.js`
+  )
   allPlants = result.data.allPowerPlantsJson.edges[0].node.power_plants
 
-  for(let index=0; index<allPlants.length; index++)
-  {
-    curSlug = allPlants[index]['slug']
+  for (let index = 0; index < allPlants.length; index++) {
+    curSlug = allPlants[index]["slug"]
     const path = "power_plant/" + curSlug
     createPage({
       path,
       component: PowerPlantDetailTemplate,
       context: {
-        powerPlant: curSlug
+        powerPlant: curSlug,
       },
     })
   }
