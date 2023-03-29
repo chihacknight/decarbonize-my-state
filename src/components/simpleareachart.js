@@ -137,8 +137,8 @@ export default function SimpleAreaChart({ emissionsData, title }) {
             name="Emissions"
             isAnimationActive={false}
           />
-          <Area 
-            strokeDasharray="4 4" 
+          <Area
+            strokeDasharray="4 4"
             type="monotone"
             dataKey="missingData"
             stackId="3"
@@ -158,10 +158,10 @@ export default function SimpleAreaChart({ emissionsData, title }) {
           />
           <ReferenceDot
             y={dataMidPoint}
-            x={currYear-20}
+            x={currYear - 20}
             stroke="none"
             fill="none"
-            label={{ value: "Emissions", fontSize:"1.5rem", fill: "#b65c00" }}
+            label={{ value: "Emissions", fontSize: "1.5rem", fill: "#b65c00" }}
           />
           <ReferenceDot
             y={dataMidPoint}
@@ -171,16 +171,20 @@ export default function SimpleAreaChart({ emissionsData, title }) {
           />
           <ReferenceDot
             y={dataMidPoint}
-            x={currYear + 8} 
+            x={currYear + 8}
             stroke="none"
             fill="none"
-            label={{ value: "Projections", fontSize:"1.5rem", fill: "#36a654" }}
+            label={{
+              value: "Projections",
+              fontSize: "1.5rem",
+              fill: "#36a654",
+            }}
           />
         </AreaChart>
       </ResponsiveContainer>
 
-      <div className="table-btn-cont mt-2" >
-        <Button variant="secondary"  onClick={handleShowModal}>
+      <div className="table-btn-cont mt-2">
+        <Button variant="secondary" onClick={handleShowModal}>
           View Data Table
         </Button>
       </div>
