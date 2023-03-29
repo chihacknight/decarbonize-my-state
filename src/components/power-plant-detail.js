@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "./layout"
 import SEO from "./seo"
 import OilPlantImg from "../images/oil-plant.png"
+import { graphql } from "gatsby"
 
 const PowerPlantDetailPage = ({ pageContext, data }) => {
   const thisPlantDetails = data.allPowerPlantsJson.edges[0].node.power_plants.find(
