@@ -11,6 +11,7 @@
 @import "social-card.css";
 @import "state-details.css";
 @import "take-action.css";
+@import "power-plant-details.css";
 
 /* Import stateface for state icons */
 @import "stateface/stateface.css";

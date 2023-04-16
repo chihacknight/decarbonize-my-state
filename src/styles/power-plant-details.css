@@ -1,0 +1,7 @@
+/**
+ * Power Plant Page Styling
+ */
+
+.power-plant-page .fuel-category {
+  text-transform: capitalize;
+}

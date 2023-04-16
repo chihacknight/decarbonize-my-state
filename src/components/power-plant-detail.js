@@ -1,26 +1,74 @@
 import React from "react"
-import Layout from "./layout"
-import SEO from "./seo"
-import OilPlantImg from "../images/oil-plant.png"
 import { graphql } from "gatsby"
 
+import Layout from "./layout"
+import SEO from "./seo"
+
+import OilPlantImg from "../images/oil-plant.png"
+import NewTabIcon from "../components/new-tab-icon"
+
 const PowerPlantDetailPage = ({ pageContext, data }) => {
-  const thisPlantDetails = data.allPowerPlantsJson.edges[0].node.power_plants.find(
+  const PowerPlant = data.allPowerPlantsJson.edges[0].node.power_plants.find(
     plant => plant.slug === pageContext.powerPlantSlug
   )
 
+  // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
+  const GoogleMapsLink =
+    `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`;
+
   return (
     <Layout>
-      <SEO title="404: Not Found | Decarb My State" />
-      <div className="error-page">
+      <SEO title={ PowerPlant.plant_name + ' Power Plant | Decarb My State'} />
+
+      <div className="power-plant-page">
+
         <img src={OilPlantImg} alt="Oil power plant" />
+
         <div>
-          <h1 className="error-page-h" id="main">
-            {thisPlantDetails.plant_name}
+          <h1 id="main">
+            {PowerPlant.plant_name}
           </h1>
-          <p className="error-page-p">no</p>
+
+          <div className="fuel-category">
+            { PowerPlant.fossil_fuel_category.toLowerCase() } power plant
+          </div>
+
+          <a href={GoogleMapsLink}
+            href="https://communitysolar.energysage.com/"
+            target="_blank"
+            rel="noreferrer">
+            View on Google Maps
+            <NewTabIcon/>
+          </a>
+
+          <dl>
+            <dt>County:</dt><dd>{PowerPlant.county}</dd>
+
+            <dt>Capacity:</dt><dd>{PowerPlant.capacity_mw} Megawatts</dd>
+
+            <dt>Plant_annual_net_generation__MWh_</dt>
+            <dd>{PowerPlant.Plant_annual_net_generation__MWh_}</dd>
+
+            <dt>Plant_annual_SO2_emissions__tons_</dt>
+            <dd>{PowerPlant.Plant_annual_SO2_emissions__tons_}</dd>
+
+            <dt>Plant_annual_NOx_emissions__tons_</dt>
+            <dd>{PowerPlant.Plant_annual_NOx_emissions__tons_}</dd>
+
+            <dt>Plant_annual_N2O_emissions__lbs_</dt>
+            <dd>{PowerPlant.Plant_annual_N2O_emissions__lbs_}</dd>
+
+            <dt>Plant_annual_CH4_emissions__lbs_</dt>
+            <dd>{PowerPlant.Plant_annual_CH4_emissions__lbs_}</dd>
+
+            <dt>Plant_annual_CO2_emissions__tons_</dt>
+            <dd>{PowerPlant.Plant_annual_CO2_emissions__tons_}</dd>
+
+            <dt>Plant_annual_CO2_equivalent_emissions__tons_</dt>
+            <dd>{PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_}</dd>
+
+          </dl>
         </div>
-        <img src={OilPlantImg} alt="Oil power plant" />
       </div>
     </Layout>
   )
