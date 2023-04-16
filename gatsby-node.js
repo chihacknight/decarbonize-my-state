@@ -100,7 +100,7 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
 
   for (let index = 0; index < allPlants.length; index++) {
     curSlug = allPlants[index]["slug"]
-    const path = "power_plant/" + curSlug
+    const path = "power-plant/" + curSlug
     createPage({
       path,
       component: PowerPlantDetailTemplate,
