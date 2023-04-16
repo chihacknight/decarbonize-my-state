@@ -12,6 +12,8 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
     plant => plant.slug === pageContext.powerPlantSlug
   )
 
+  const curState = data.allPowerPlantsJson.edges[0].node.state
+
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
   const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`
 
@@ -98,6 +100,7 @@ export const query = graphql`
             Longitude
             Latitude
           }
+          state
         }
       }
     }
