@@ -13,38 +13,38 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
   )
 
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
-  const GoogleMapsLink =
-    `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`;
+  const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`
 
   return (
     <Layout>
-      <SEO title={ PowerPlant.plant_name + ' Power Plant | Decarb My State'} />
+      <SEO title={PowerPlant.plant_name + " Power Plant | Decarb My State"} />
 
       <div className="power-plant-page">
-
         <img src={OilPlantImg} alt="Oil power plant" />
 
         <div>
-          <h1 id="main">
-            {PowerPlant.plant_name}
-          </h1>
+          <h1 id="main">{PowerPlant.plant_name}</h1>
 
           <div className="fuel-category">
-            { PowerPlant.fossil_fuel_category.toLowerCase() } power plant
+            {PowerPlant.fossil_fuel_category.toLowerCase()} power plant
           </div>
 
-          <a href={GoogleMapsLink}
+          <a
+            href={GoogleMapsLink}
             href="https://communitysolar.energysage.com/"
             target="_blank"
-            rel="noreferrer">
+            rel="noreferrer"
+          >
             View on Google Maps
-            <NewTabIcon/>
+            <NewTabIcon />
           </a>
 
           <dl>
-            <dt>County:</dt><dd>{PowerPlant.county}</dd>
+            <dt>County:</dt>
+            <dd>{PowerPlant.county}</dd>
 
-            <dt>Capacity:</dt><dd>{PowerPlant.capacity_mw} Megawatts</dd>
+            <dt>Capacity:</dt>
+            <dd>{PowerPlant.capacity_mw} Megawatts</dd>
 
             <dt>Plant_annual_net_generation__MWh_</dt>
             <dd>{PowerPlant.Plant_annual_net_generation__MWh_}</dd>
@@ -66,7 +66,6 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
 
             <dt>Plant_annual_CO2_equivalent_emissions__tons_</dt>
             <dd>{PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_}</dd>
-
           </dl>
         </div>
       </div>
