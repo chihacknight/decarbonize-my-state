@@ -32,29 +32,30 @@ const DisplayPlants = ({ plants, plantImage }) => {
           }
         }
 
-        const title =
-          `Name: ${plant.plant_name}\n` +
-          `County: ${plant.county}\n` +
-          `Megawatt Capacity: ${formatNum(plant.capacity_mw)}\n` +
-          `Utility: ${plant.utility_name}\n`
-
         return (
-          <div className="col-lg-3 col-4 pl-0 pr-0" key={hash(plant)}>
+          <a
+            className="display-plant col-lg-3 col-4"
+            key={hash(plant)}
+            href={`/power-plant/${plant.slug}`}
+          >
+            {/* Since we list the power plant details below, the image is just
+                  decorative - removing it doesn't remove any information */}
             <img
               src={plantImage}
               className="img-fluid mx-auto d-block pl-3 pr-3"
-              title={title}
-              alt={title}
+              alt=""
             />
+
             <p className="font-weight-bold text-center h6">
-              {plant.plant_name} <br />
+              <div className="plant-title">{plant.plant_name}</div>
+
               <span className="small">
                 {plant.county} County
                 <br />
                 {formatNum(plant.capacity_mw)} MW
               </span>
             </p>
-          </div>
+          </a>
         )
       })}
     </div>

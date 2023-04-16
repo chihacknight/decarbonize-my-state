@@ -12,8 +12,8 @@ import CoalPlantImg from "../images/coal-plant.png"
 import NewTabIcon from "../components/new-tab-icon"
 
 const PowerPlantDetailPage = ({ pageContext, data }) => {
-  console.log('data', data);
-  const PowerPlantState = data.allPowerPlantsJson.edges[0].node.state;
+  console.log("data", data)
+  const PowerPlantState = data.allPowerPlantsJson.edges[0].node.state
   const PowerPlant = data.allPowerPlantsJson.edges[0].node.power_plants.find(
     plant => plant.slug === pageContext.powerPlantSlug
   )
@@ -28,23 +28,30 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
       <div className="power-plant-page">
         <div>
           <div className="top-row d-flex align-items-center">
-            { PowerPlant.fossil_fuel_category.toLowerCase() === 'oil' &&
-              <img src={OilPlantImg} alt="Oil power plant" /> }
-            { PowerPlant.fossil_fuel_category.toLowerCase() === 'gas' &&
-              <img src={GasPlantImg} alt="Gas power plant" /> }
-            { PowerPlant.fossil_fuel_category.toLowerCase() === 'coal' &&
-              <img src={CoalPlantImg} alt="Coal power plant" /> }
+            {PowerPlant.fossil_fuel_category.toLowerCase() === "oil" && (
+              <img src={OilPlantImg} alt="Oil power plant" />
+            )}
+            {PowerPlant.fossil_fuel_category.toLowerCase() === "gas" && (
+              <img src={GasPlantImg} alt="Gas power plant" />
+            )}
+            {PowerPlant.fossil_fuel_category.toLowerCase() === "coal" && (
+              <img src={CoalPlantImg} alt="Coal power plant" />
+            )}
 
             <div>
-              <h1 id="main" className="mb-0">{PowerPlant.plant_name}</h1>
+              <h1 id="main" className="mb-0">
+                {PowerPlant.plant_name}
+              </h1>
 
               <div className="h5 mb-0 font-weight-bold">
                 <span className="text-capitalize">
                   {PowerPlant.fossil_fuel_category.toLowerCase()}
-                </span> Power Plant
+                </span>{" "}
+                Power Plant
               </div>
               <div>
-                {PowerPlant.county} County, <span className="text-capitalize">{PowerPlantState}</span>
+                {PowerPlant.county} County,{" "}
+                <span className="text-capitalize">{PowerPlantState}</span>
               </div>
 
               <a
@@ -69,25 +76,33 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
               &nbsp;MWh (Megawatt Hours)
             </dd>
 
-            <dt>Annual CO<sub>2</sub>e emissions</dt>
+            <dt>
+              Annual CO<sub>2</sub>e emissions
+            </dt>
             <dd>
               {PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_}
               &nbsp;metric tons CO<sub>2</sub> equivalent
             </dd>
 
-            <dt>Annual CO<sub>2</sub> emissions</dt>
+            <dt>
+              Annual CO<sub>2</sub> emissions
+            </dt>
             <dd>
               {PowerPlant.Plant_annual_CO2_emissions__tons_}
               &nbsp;metrics tons CO<sub>2</sub>
             </dd>
 
-            <dt>Annual SO<sub>2</sub> (Sulfer Dioxide) emissions</dt>
+            <dt>
+              Annual SO<sub>2</sub> (Sulfer Dioxide) emissions
+            </dt>
             <dd>{PowerPlant.Plant_annual_SO2_emissions__tons_} tons</dd>
 
             <dt>Annual NOx (Nitrogen Oxide) emissions</dt>
             <dd>{PowerPlant.Plant_annual_NOx_emissions__tons_} tons</dd>
 
-            <dt>Annual N<sub>2</sub>O (Nitrous Oxide) emissions</dt>
+            <dt>
+              Annual N<sub>2</sub>O (Nitrous Oxide) emissions
+            </dt>
             <dd>{PowerPlant.Plant_annual_N2O_emissions__lbs_} lbs</dd>
 
             <dt>Annual CH4 (Methane) emissions</dt>

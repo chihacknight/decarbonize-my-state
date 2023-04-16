@@ -1030,10 +1030,11 @@ export const query = graphql`
       edges {
         node {
           power_plants {
-            plant_name
-            fossil_fuel_category
-            county
             capacity_mw
+            county
+            fossil_fuel_category
+            plant_name
+            slug
             utility_name
           }
         }
