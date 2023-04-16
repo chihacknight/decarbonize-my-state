@@ -100,9 +100,7 @@ h3 {
 }
 
 /* Make <strong> actually use bold (by default it's a medium weight) */
-strong {
-  font-weight: bold;
-}
+strong { font-weight: bold; }
 
 .link-icon {
   width: 1rem;

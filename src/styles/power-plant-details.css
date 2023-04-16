@@ -2,6 +2,14 @@
  * Power Plant Page Styling
  */
 
-.power-plant-page .fuel-category {
-  text-transform: capitalize;
+.power-plant-page .top-row {
+  gap: 3rem;
+}
+
+.power-plant-page .top-row img {
+  flex-shrink: 0;
+}
+
+.power-plant-page dl {
+  margin-top: 4rem;
 }
