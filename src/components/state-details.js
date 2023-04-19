@@ -89,10 +89,10 @@ export default function StateDetailsPage({ location, data }) {
   })
 
   // place info and string
-  const currentPlace = location.pathname.split("/")[1]
+  const currentStateSlug = location.pathname.split("/")[1]
   // clean up title as needed
-  const placeTitle = slugToTitle(currentPlace)
-  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-")
+  const placeTitle = slugToTitle(currentStateSlug)
+  const stateFaceClass = currentStateSlug.toLowerCase().replaceAll(" ", "-")
 
   // Each json loads in as an allSomethingJson and is filtered for
   // data relevant to this state, which is great!
@@ -734,6 +734,7 @@ export default function StateDetailsPage({ location, data }) {
                   <DisplayPlants
                     plants={coalPlants}
                     plantImage={CoalPlantImg}
+                    stateSlug={currentStateSlug}
                   />
                 </>
               )}
@@ -746,7 +747,11 @@ export default function StateDetailsPage({ location, data }) {
                       {gasPlants.length !== 1 && "s"}
                     </strong>
                   </p>
-                  <DisplayPlants plants={gasPlants} plantImage={GasPlantImg} />
+                  <DisplayPlants
+                    plants={gasPlants}
+                    plantImage={GasPlantImg}
+                    stateSlug={currentStateSlug}
+                  />
                 </>
               )}
 
@@ -758,7 +763,11 @@ export default function StateDetailsPage({ location, data }) {
                       {oilPlants.length !== 1 && "s"}
                     </strong>
                   </p>
-                  <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
+                  <DisplayPlants
+                    plants={oilPlants}
+                    plantImage={OilPlantImg}
+                    stateSlug={currentStateSlug}
+                  />
                 </>
               )}
 

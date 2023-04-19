@@ -1,7 +1,7 @@
 import React from "react"
 import hash from "object-hash"
 
-const DisplayPlants = ({ plants, plantImage }) => {
+const DisplayPlants = ({ plants, plantImage, stateSlug }) => {
   function formatNum(number) {
     return Math.round(number).toLocaleString()
   }
@@ -36,7 +36,7 @@ const DisplayPlants = ({ plants, plantImage }) => {
           <a
             className="display-plant col-lg-3 col-4"
             key={hash(plant)}
-            href={`/power-plant/${plant.slug}`}
+            href={`/${stateSlug}/power-plant/${plant.slug}`}
           >
             {/* Since we list the power plant details below, the image is just
                   decorative - removing it doesn't remove any information */}

@@ -81,6 +81,7 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
               power_plants {
                 slug
               }
+              state
             }
           }
         }
@@ -93,20 +94,30 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
     return
   }
 
+  /**
+   * Setup Power Plant Routes for Each Power Plant
+   */
   const PowerPlantDetailTemplate = path.resolve(
     `src/components/power-plant-detail.js`
   )
-  allPlants = result.data.allPowerPlantsJson.edges[0].node.power_plants
 
-  for (let index = 0; index < allPlants.length; index++) {
-    curSlug = allPlants[index]["slug"]
-    const path = "power-plant/" + curSlug
-    createPage({
-      path,
-      component: PowerPlantDetailTemplate,
-      context: {
-        powerPlantSlug: curSlug,
-      },
+  const powerPlantStates = result.data.allPowerPlantsJson.edges
+
+  powerPlantStates.forEach(stateEdge => {
+    let allPlants = stateEdge.node.power_plants
+    const state = stateEdge.node.state
+
+    allPlants.forEach(powerPlant => {
+      currSlug = powerPlant.slug
+      const path = `${state}/power-plant/${currSlug}`
+
+      createPage({
+        path,
+        component: PowerPlantDetailTemplate,
+        context: {
+          powerPlantSlug: currSlug,
+        },
+      })
     })
-  }
+  })
 }
