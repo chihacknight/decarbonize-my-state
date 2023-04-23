@@ -11,7 +11,7 @@ const DisplayPlants = ({ plants, plantImage, stateSlug }) => {
       {plants.map((plant, index) => {
         return (
           <a
-            className="display-plant col-lg-3 col-4"
+            className="display-plant col-lg-4 col-6"
             key={hash(plant)}
             href={`/${stateSlug}/power-plant/${plant.slug}`}
           >

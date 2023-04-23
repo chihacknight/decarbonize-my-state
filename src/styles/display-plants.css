@@ -2,14 +2,14 @@
  * CSS for DisplayPlants
  */
 .display-plants {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding: 1rem;
-    background-color: var(--light-grey);
-    border-radius: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: var(--light-grey);
+  border-radius: 0.5rem;
+  border: solid 0.0625rem var(--mid-grey);
 }
-
 
 a.display-plant {
   display: block;
@@ -27,6 +27,8 @@ a.display-plant {
 .display-plant p {
   color: var(--text-color-main);
 }
+
 .display-plant .plant-title {
   text-decoration: underline;
+  margin-bottom: 0.25rem;
 }

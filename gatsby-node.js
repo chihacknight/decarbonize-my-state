@@ -98,7 +98,7 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
    * Setup Power Plant Routes for Each Power Plant
    */
   const PowerPlantDetailTemplate = path.resolve(
-    `src/components/power-plant-detail.js`
+    `src/components/power-plant-details.js`
   )
 
   const powerPlantStates = result.data.allPowerPlantsJson.edges
