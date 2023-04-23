@@ -9,6 +9,8 @@ import CoalPlantImg from "../images/coal-plant.png"
 
 import PowerIcon from "../images/icons/power-cord.svg"
 import CloudIcon from "../images/icons/cloud.svg"
+import BackIcon from "../images/icons/arrow-left.svg"
+import BackIconWhite from "../images/icons/arrow-left-white.svg"
 
 import Layout from "./layout"
 import SEO from "./seo"
@@ -64,9 +66,13 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
       <div className="power-plant-page">
         <a
           href={`/${PowerPlantStateSlug}#power`}
-          className="btn btn-outline-dark"
+          className="btn btn-outline-dark font-weight-bold"
         >
-          &larr; Back to {PowerPlantStateTitle} Power Details
+          <div className="back-icon">
+            <img src={BackIcon} alt="" />
+            <img src={BackIconWhite} className="-white" alt="" />
+          </div>
+          Back to {PowerPlantStateTitle} Power Details
         </a>
         <div className="top-row">
           <div className="power-plant-profile">
@@ -122,7 +128,7 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
 
             <dl>
               <dt>Capacity</dt>
-              <dd>{PowerPlant.capacity_mw} Megawatts</dd>
+              <dd>{PowerPlant.capacity_mw.toLocaleString()} Megawatts</dd>
 
               <dt>Annual Net Generation</dt>
               <dd className="mb-0">
@@ -147,10 +153,10 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
               </p>
 
               <dt className="mt-4">
-                Annual CO<sub>2</sub>e emissions
+                Annual CO<sub>2</sub> equivalent emissions
               </dt>
               <dd className="mb-0">
-                {PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_}
+                {CO2eEmissionsInt.toLocaleString()}
                 &nbsp;metric tons CO<sub>2</sub> equivalent
               </dd>
 
@@ -158,7 +164,7 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
                 <strong>Context:</strong> That&apos;s equivalent to the annual
                 emissions of about{" "}
                 {Math.round(EmissionsEquivalentCars).toLocaleString()} American
-                cars (4.6 tons each,{" "}
+                cars (4.6 metric tons each,{" "}
                 <a
                   href={ContextStats.co2eEmissions.source}
                   target="_blank"
