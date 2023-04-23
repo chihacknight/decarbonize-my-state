@@ -10,10 +10,10 @@ import CoalPlantImg from "../images/coal-plant.png"
 import PowerIcon from "../images/icons/power-cord.svg"
 import CloudIcon from "../images/icons/cloud.svg"
 
-
 import Layout from "./layout"
 import SEO from "./seo"
 import NewTabIcon from "./new-tab-icon"
+import { getShortCitation } from "../constants/source-citations"
 
 /**
  * Helpful stats we use to provide context about power plant metrics
@@ -43,14 +43,23 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
   const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`
 
-  console.log(PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(',', ''));
-  const NetGenerationInt = parseInt(PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(',', ''));
-    console.log(NetGenerationInt, ContextStats.co2eEmissions.avgAmericanHomeMwhPerYear);
-  const NetGenerationEquivalentHomes = NetGenerationInt / ContextStats.netGeneration.avgAmericanHomeMwhPerYear;
+  console.log(PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(",", ""))
+  const NetGenerationInt = parseInt(
+    PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(",", "")
+  )
+  console.log(
+    NetGenerationInt,
+    ContextStats.co2eEmissions.avgAmericanHomeMwhPerYear
+  )
+  const NetGenerationEquivalentHomes =
+    NetGenerationInt / ContextStats.netGeneration.avgAmericanHomeMwhPerYear
 
-  const CO2eEmissionsInt = parseInt(PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_.replaceAll(',', ''));
-  const EmissionsEquivalentCars = CO2eEmissionsInt / ContextStats.co2eEmissions.avgAmericanCarEmissionsTonsPerYear;
-
+  const CO2eEmissionsInt = parseInt(
+    PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_.replaceAll(",", "")
+  )
+  const EmissionsEquivalentCars =
+    CO2eEmissionsInt /
+    ContextStats.co2eEmissions.avgAmericanCarEmissionsTonsPerYear
 
   return (
     <Layout>
@@ -63,8 +72,7 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
         >
           &larr; Back to {PowerPlantStateTitle} Power Details
         </a>
-
-        <div className="top-row d-flex align-items-center">
+        <div className="top-row">
           <div className="power-plant-profile">
             {PowerPlant.fossil_fuel_category.toLowerCase() === "oil" && (
               <img src={OilPlantImg} alt="Oil power plant" />
@@ -97,22 +105,22 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
               {PowerPlant.county} County, {PowerPlantStateTitle}
             </div>
 
-            <a
-              href={GoogleMapsLink}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={GoogleMapsLink} target="_blank" rel="noreferrer">
               View on Google Maps
               <NewTabIcon />
             </a>
           </div>
         </div>
 
+        <p className="mt-2 text-secondary">
+          Power Plant Data Source: {getShortCitation("power-plants")}
+        </p>
+
         <div className="stat-panel">
           <h2 className="h4">Quick Stats</h2>
 
           <div className="quick-stats-cont">
-            <img src={PowerIcon} className="stat-icon" alt=""/>
+            <img src={PowerIcon} className="stat-icon" alt="" />
 
             <img src={CloudIcon} className="stat-icon" alt="" />
 
@@ -127,9 +135,13 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
               </dd>
 
               <p className="context-msg">
-                <strong>Context:</strong> That&apos;s equivalent to the annual power demand of{" "}
-                {Math.round(NetGenerationEquivalentHomes).toLocaleString()} American homes{" "}
-                (<a href={ContextStats.netGeneration.source}>source</a>)
+                <strong>Context:</strong> That&apos;s equivalent to the annual
+                power demand of{" "}
+                {Math.round(NetGenerationEquivalentHomes).toLocaleString()}{" "}
+                American homes (11 MWh each,{" "}
+                <a href={ContextStats.netGeneration.source} target="_blank" rel="noreferrer">
+                  source: EIA<NewTabIcon/>
+                </a>)
               </p>
 
               <dt className="mt-4">
@@ -141,45 +153,56 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
               </dd>
 
               <p className="context-msg">
-                <strong>Context:</strong> That&apos;s equivalent to the annual emissions of about{" "}
-                {Math.round(EmissionsEquivalentCars).toLocaleString()} American cars{" "}
-                (<a href={ContextStats.co2eEmissions.source}>source</a>)
+                <strong>Context:</strong> That&apos;s equivalent to the annual
+                emissions of about{" "}
+                {Math.round(EmissionsEquivalentCars).toLocaleString()} American
+                cars (4.6 tons each,{" "}
+                  <a href={ContextStats.co2eEmissions.source} target="_blank" rel="noreferrer">
+                    source: EPA<NewTabIcon/>
+                </a>)
               </p>
             </dl>
           </div>
         </div>
-
         <div className="stat-panel">
           <h2 className="h4">Detailed Emissions</h2>
 
-          <dl>
-            <dt>
-              Annual CO<sub>2</sub> emissions
-            </dt>
-            <dd>
-              {PowerPlant.Plant_annual_CO2_emissions__tons_}
-              &nbsp;metrics tons CO<sub>2</sub>
-            </dd>
+          <dl className="detailed-emissions">
+            <div>
+              <dt>
+                Annual CO<sub>2</sub> emissions
+              </dt>
+              <dd>
+                {PowerPlant.Plant_annual_CO2_emissions__tons_}
+                &nbsp;metrics tons CO<sub>2</sub>
+              </dd>
+            </div>
 
-            <dt>
-              Annual SO<sub>2</sub> (Sulfer Dioxide) emissions
-            </dt>
-            <dd>{PowerPlant.Plant_annual_SO2_emissions__tons_} tons</dd>
+            <div>
+              <dt>
+                Annual SO<sub>2</sub> (Sulfer Dioxide) emissions
+              </dt>
+              <dd>{PowerPlant.Plant_annual_SO2_emissions__tons_} tons</dd>
+            </div>
 
-            <dt>Annual NOx (Nitrogen Oxide) emissions</dt>
-            <dd>{PowerPlant.Plant_annual_NOx_emissions__tons_} tons</dd>
+            <div>
+              <dt>Annual NOx (Nitrogen Oxide) emissions</dt>
+              <dd>{PowerPlant.Plant_annual_NOx_emissions__tons_} tons</dd>
+            </div>
 
-            <dt>
-              Annual N<sub>2</sub>O (Nitrous Oxide) emissions
-            </dt>
-            <dd>{PowerPlant.Plant_annual_N2O_emissions__lbs_} lbs</dd>
+            <div>
+              <dt>
+                Annual N<sub>2</sub>O (Nitrous Oxide) emissions
+              </dt>
+              <dd>{PowerPlant.Plant_annual_N2O_emissions__lbs_} lbs</dd>
+            </div>
 
-            <dt>Annual CH4 (Methane) emissions</dt>
-            <dd>{PowerPlant.Plant_annual_CH4_emissions__lbs_} lbs</dd>
+            <div>
+              <dt>Annual CH4 (Methane) emissions</dt>
+              <dd>{PowerPlant.Plant_annual_CH4_emissions__lbs_} lbs</dd>
+            </div>
           </dl>
         </div>
-
-        Source: {/* TODO: Add citation */}
       </div>
     </Layout>
   )
