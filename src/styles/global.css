@@ -13,6 +13,9 @@
 @import "take-action.css";
 @import "power-plant-details.css";
 
+/** Component styles */
+@import "display-plants.css";
+
 /* Import stateface for state icons */
 @import "stateface/stateface.css";
 
@@ -388,31 +391,6 @@ footer a {
     font-size: 0.8rem;
   }
 }
-
-/**
- * DisplayPlants
- */
-a.display-plant {
-  display: block;
-  background-color: #eee;
-  padding: 1rem 0.5rem;
-  margin: 1rem 0.5rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-}
-
-.display-plant:hover,
-.display-plant:focus {
-  background-color: #dcdcdc;
-}
-
-.display-plant p {
-  color: var(--text-color-main);
-}
-.display-plant .plant-title {
-  text-decoration: underline;
-}
-/*.display-plant .plant-title:hover { text-decoration-thickness: 0.125em; }*/
 
 /**
  * Both 404 and 500 error page styling

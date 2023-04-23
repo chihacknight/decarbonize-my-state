@@ -7,31 +7,8 @@ const DisplayPlants = ({ plants, plantImage, stateSlug }) => {
   }
 
   return (
-    <div className="row mt-4 pl-2 pr-2">
+    <div className="display-plants mt-4">
       {plants.map((plant, index) => {
-        // The number of power plants we have to be over to start cutting off -
-        // this is a bit away from our MaxIcons so we never say ...and 1 more
-        const TruncateThreshold = 14
-
-        // The maximum number of icons if we have a TON of power plants
-        // (like 80)
-        const MaxIcons = 4
-
-        if (plants.length > TruncateThreshold) {
-          if (index === MaxIcons) {
-            return (
-              <div
-                key={hash(plant)}
-                className="h4 text-center text-muted text-lg-left col-6 col-lg-5 pl-4 pt-2"
-              >
-                ...and {plants.length - MaxIcons} more
-              </div>
-            )
-          } else if (index > MaxIcons) {
-            return null
-          }
-        }
-
         return (
           <a
             className="display-plant col-lg-3 col-4"
