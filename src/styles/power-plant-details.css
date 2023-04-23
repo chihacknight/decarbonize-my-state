@@ -49,7 +49,9 @@
   margin-top: 2rem;
 }
 
-.power-plant-page .stat-panel h2 { margin-top: 0; }
+.power-plant-page .stat-panel h2 {
+  margin-top: 0;
+}
 
 .power-plant-page .stat-panel dl {
   margin: 0;

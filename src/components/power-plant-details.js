@@ -43,13 +43,9 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
   const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`
 
-  console.log(PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(",", ""))
+  /** Calculate comparison stats */
   const NetGenerationInt = parseInt(
     PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(",", "")
-  )
-  console.log(
-    NetGenerationInt,
-    ContextStats.co2eEmissions.avgAmericanHomeMwhPerYear
   )
   const NetGenerationEquivalentHomes =
     NetGenerationInt / ContextStats.netGeneration.avgAmericanHomeMwhPerYear
@@ -139,9 +135,15 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
                 power demand of{" "}
                 {Math.round(NetGenerationEquivalentHomes).toLocaleString()}{" "}
                 American homes (11 MWh each,{" "}
-                <a href={ContextStats.netGeneration.source} target="_blank" rel="noreferrer">
-                  source: EIA<NewTabIcon/>
-                </a>)
+                <a
+                  href={ContextStats.netGeneration.source}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  source: EIA
+                  <NewTabIcon />
+                </a>
+                )
               </p>
 
               <dt className="mt-4">
@@ -157,9 +159,15 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
                 emissions of about{" "}
                 {Math.round(EmissionsEquivalentCars).toLocaleString()} American
                 cars (4.6 tons each,{" "}
-                  <a href={ContextStats.co2eEmissions.source} target="_blank" rel="noreferrer">
-                    source: EPA<NewTabIcon/>
-                </a>)
+                <a
+                  href={ContextStats.co2eEmissions.source}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  source: EPA
+                  <NewTabIcon />
+                </a>
+                )
               </p>
             </dl>
           </div>

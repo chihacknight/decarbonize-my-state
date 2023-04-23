@@ -23,7 +23,7 @@ const DisplayPlants = ({ plants, plantImage, stateSlug }) => {
               alt=""
             />
 
-            <p className="font-weight-bold text-center h6">
+            <div className="plant-text font-weight-bold text-center h6">
               <div className="plant-title">{plant.plant_name}</div>
 
               <span className="small">
@@ -31,7 +31,7 @@ const DisplayPlants = ({ plants, plantImage, stateSlug }) => {
                 <br />
                 {formatNum(plant.capacity_mw)} MW
               </span>
-            </p>
+            </div>
           </a>
         )
       })}
