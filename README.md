@@ -27,6 +27,16 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
    docker-compose up --build
    ```
 
+   or
+
+   ```shell
+   yarn install
+   ```
+   to install dependencies, then
+   ```shell
+   yarn develop
+   ```
+
    Your site should now be up and running at `http://localhost:8000`!
 
 ## Dependencies
@@ -37,10 +47,22 @@ This starter has a minimal number of dependencies in order to stay lean, but you
 docker-compose run --rm app add <dependency name> --save
 ```
 
+or
+
+```shell
+yarn add <dependency name>
+```
+
 To remove a dependency:
 
 ```shell
 docker-compose run --rm app remove <dependency name>
+```
+
+or
+
+```shell
+yarn remove <dependency name>
 ```
 
 ## Testing & syntax linting
@@ -53,10 +75,22 @@ If you want to check the linter on its own you can run:
 docker-compose run --rm app run test
 ```
 
+or
+
+```shell
+yarn test
+```
+
 If you want to reformat with the linter, you can run:
 
 ```
 docker-compose run --rm app run format
+```
+
+or
+
+```shell
+yarn format
 ```
 
 ## Data processing
