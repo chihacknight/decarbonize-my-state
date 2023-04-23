@@ -69,6 +69,11 @@
   justify-self: center;
 }
 
+.context-msg {
+  font-size: 0.825rem;
+  margin-top: 0.25rem;
+}
+
 /** Tablet & mobile styling */
 @media (max-width: 991px) {
   .power-plant-page .power-plant-profile { padding: 1rem; }

@@ -20,12 +20,12 @@ import NewTabIcon from "./new-tab-icon"
  */
 const ContextStats = {
   netGeneration: {
-    avgAmericanHomeMwhPerYear: "11",
+    avgAmericanHomeMwhPerYear: 11,
     source:
       "https://www.eia.gov/energyexplained/use-of-energy/electricity-use-in-homes.php",
   },
   co2eEmissions: {
-    avgAmericanCarEmissionsTonsPerYear: "4.6",
+    avgAmericanCarEmissionsTonsPerYear: 4.6,
     source:
       "https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle",
   },
@@ -42,6 +42,15 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
 
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
   const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PowerPlant.Latitude},${PowerPlant.Longitude}`
+
+  console.log(PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(',', ''));
+  const NetGenerationInt = parseInt(PowerPlant.Plant_annual_net_generation__MWh_.replaceAll(',', ''));
+    console.log(NetGenerationInt, ContextStats.co2eEmissions.avgAmericanHomeMwhPerYear);
+  const NetGenerationEquivalentHomes = NetGenerationInt / ContextStats.netGeneration.avgAmericanHomeMwhPerYear;
+
+  const CO2eEmissionsInt = parseInt(PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_.replaceAll(',', ''));
+  const EmissionsEquivalentCars = CO2eEmissionsInt / ContextStats.co2eEmissions.avgAmericanCarEmissionsTonsPerYear;
+
 
   return (
     <Layout>
@@ -102,7 +111,7 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
         <div className="stat-panel">
           <h2 className="h4">Quick Stats</h2>
 
-          <div class="quick-stats-cont">
+          <div className="quick-stats-cont">
             <img src={PowerIcon} className="stat-icon" alt=""/>
 
             <img src={CloudIcon} className="stat-icon" alt="" />
@@ -112,10 +121,16 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
               <dd>{PowerPlant.capacity_mw} Megawatts</dd>
 
               <dt>Annual Net Generation</dt>
-              <dd>
+              <dd className="mb-0">
                 {PowerPlant.Plant_annual_net_generation__MWh_}
                 &nbsp;MWh (Megawatt Hours)
               </dd>
+
+              <p className="context-msg">
+                <strong>Context:</strong> That&apos;s equivalent to the annual power demand of{" "}
+                {Math.round(NetGenerationEquivalentHomes).toLocaleString()} American homes{" "}
+                (<a href={ContextStats.netGeneration.source}>source</a>)
+              </p>
 
               <dt className="mt-4">
                 Annual CO<sub>2</sub>e emissions
@@ -124,6 +139,12 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
                 {PowerPlant.Plant_annual_CO2_equivalent_emissions__tons_}
                 &nbsp;metric tons CO<sub>2</sub> equivalent
               </dd>
+
+              <p className="context-msg">
+                <strong>Context:</strong> That&apos;s equivalent to the annual emissions of about{" "}
+                {Math.round(EmissionsEquivalentCars).toLocaleString()} American cars{" "}
+                (<a href={ContextStats.co2eEmissions.source}>source</a>)
+              </p>
             </dl>
           </div>
         </div>
