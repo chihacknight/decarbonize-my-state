@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
     "washington",
     "west_virginia",
     "wisconsin",
-    "wyoming"
+    "wyoming",
   ]
 
   const StateDetailsTemplate = path.resolve(`src/components/state-details.js`)
@@ -67,8 +67,57 @@ exports.createPages = async ({ graphql, actions, reporter, location }) => {
       path,
       component: StateDetailsTemplate,
       context: {
-        state: name
+        state: name,
+      },
+    })
+  })
+
+  const result = await graphql(
+    `
+      query MyQuery {
+        allPowerPlantsJson {
+          edges {
+            node {
+              power_plants {
+                slug
+              }
+              state
+            }
+          }
+        }
       }
+    `
+  )
+
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+
+  /**
+   * Setup Power Plant Routes for Each Power Plant
+   */
+  const PowerPlantDetailTemplate = path.resolve(
+    `src/components/power-plant-details.js`
+  )
+
+  const powerPlantStates = result.data.allPowerPlantsJson.edges
+
+  powerPlantStates.forEach(stateEdge => {
+    let allPlants = stateEdge.node.power_plants
+    const state = stateEdge.node.state
+
+    allPlants.forEach(powerPlant => {
+      currSlug = powerPlant.slug
+      const path = `${state}/power-plant/${currSlug}`
+
+      createPage({
+        path,
+        component: PowerPlantDetailTemplate,
+        context: {
+          powerPlantSlug: currSlug,
+        },
+      })
     })
   })
 }

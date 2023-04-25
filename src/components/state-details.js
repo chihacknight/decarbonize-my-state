@@ -2,15 +2,18 @@ import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
+
+import { slugToTitle } from "../helper-functions"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import SimpleAreaChart from "../components/simpleareachart"
+import { getShortCitation } from "../constants/source-citations"
+import { getTerminologyHover } from "../constants/terminology-list"
+
 import AlreadyElectrifiedChart from "./already-electrified-chart"
 import PowerSourcesChart from "./power-sources-chart"
 import DisplayPlants from "./display-plants"
-import { getShortCitation } from "../constants/source-citations"
-import { getTerminologyHover } from "../constants/terminology-list"
 
 /**
  * Images - suffix with Img for clarity from actual JS files/variables
@@ -26,21 +29,6 @@ import PowerPlantMap from "../images/dirty-power-plants.jpg"
 
 // New images
 import DirtyPowerPlantImg from "../images/dirty-power-plant.png"
-
-const slugToTitle = placeName => {
-  const words = placeName.split("_")
-
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i]
-    if (word === "of") {
-      words[i] = word
-    } else {
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
-    }
-  }
-
-  return words.join(" ")
-}
 
 /**
  * Converts a very large number to a more readable string.
@@ -89,10 +77,10 @@ export default function StateDetailsPage({ location, data }) {
   })
 
   // place info and string
-  const currentPlace = location.pathname.split("/")[1]
+  const currentStateSlug = location.pathname.split("/")[1]
   // clean up title as needed
-  const placeTitle = slugToTitle(currentPlace)
-  const stateFaceClass = currentPlace.toLowerCase().replaceAll(" ", "-")
+  const placeTitle = slugToTitle(currentStateSlug)
+  const stateFaceClass = currentStateSlug.toLowerCase().replaceAll(" ", "-")
 
   // Each json loads in as an allSomethingJson and is filtered for
   // data relevant to this state, which is great!
@@ -734,6 +722,7 @@ export default function StateDetailsPage({ location, data }) {
                   <DisplayPlants
                     plants={coalPlants}
                     plantImage={CoalPlantImg}
+                    stateSlug={currentStateSlug}
                   />
                 </>
               )}
@@ -746,7 +735,11 @@ export default function StateDetailsPage({ location, data }) {
                       {gasPlants.length !== 1 && "s"}
                     </strong>
                   </p>
-                  <DisplayPlants plants={gasPlants} plantImage={GasPlantImg} />
+                  <DisplayPlants
+                    plants={gasPlants}
+                    plantImage={GasPlantImg}
+                    stateSlug={currentStateSlug}
+                  />
                 </>
               )}
 
@@ -758,7 +751,11 @@ export default function StateDetailsPage({ location, data }) {
                       {oilPlants.length !== 1 && "s"}
                     </strong>
                   </p>
-                  <DisplayPlants plants={oilPlants} plantImage={OilPlantImg} />
+                  <DisplayPlants
+                    plants={oilPlants}
+                    plantImage={OilPlantImg}
+                    stateSlug={currentStateSlug}
+                  />
                 </>
               )}
 
@@ -1030,10 +1027,11 @@ export const query = graphql`
       edges {
         node {
           power_plants {
-            plant_name
-            fossil_fuel_category
-            county
             capacity_mw
+            county
+            fossil_fuel_category
+            plant_name
+            slug
             utility_name
           }
         }

@@ -11,6 +11,10 @@
 @import "social-card.css";
 @import "state-details.css";
 @import "take-action.css";
+@import "power-plant-details.css";
+
+/** Component styles */
+@import "display-plants.css";
 
 /* Import stateface for state icons */
 @import "stateface/stateface.css";
@@ -65,6 +69,29 @@ a:hover .new-tab-icon:not(.-white) {
   width: 1em;
   position: relative;
   top: -0.3em;
+}
+
+.back-icon {
+  display: inline-block;
+  width: 1rem;
+  vertical-align: 0.1em;
+  margin-right: 0.5em;
+  line-height: 0;
+}
+
+.back-icon img {
+  width: 100%;
+}
+.back-icon img.-white {
+  display: none;
+}
+
+/* On the link hover, flip to the white icon */
+a:hover .back-icon img.-white {
+  display: inline;
+}
+a:hover .back-icon img:not(.-white) {
+  display: none;
 }
 
 /* Bold all heading elements by default */

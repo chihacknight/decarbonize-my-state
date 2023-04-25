@@ -1,0 +1,122 @@
+/**
+ * Power Plant Page Styling
+ */
+
+.power-plant-page .top-row {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.power-plant-page .power-plant-profile {
+  position: relative;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--light-grey);
+}
+
+.power-plant-page .power-plant-profile img {
+  width: 12rem;
+}
+
+.power-plant-page .power-plant-profile .state-icon {
+  display: inline-block;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  aspect-ratio: 1;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--white);
+  font-size: 3.5rem;
+  line-height: 1;
+  box-shadow: 0.125rem 0.125rem 0.125rem var(--light-shadow-color);
+}
+
+.power-plant-page .power-plant-profile .state-icon::before {
+  margin-right: 0;
+}
+
+.power-plant-page .top-row img {
+  flex-shrink: 0;
+}
+
+.power-plant-page .stat-panel {
+  background-color: var(--light-grey);
+  padding: 1.5rem 2rem 1rem 2rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.power-plant-page .stat-panel h2 {
+  margin-top: 0;
+}
+
+.power-plant-page .stat-panel dl {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.power-plant-page .stat-panel dl.detailed-emissions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+}
+
+.power-plant-page .stat-panel dl.detailed-emissions > div {
+  width: 48%;
+}
+
+.power-plant-page .quick-stats-cont {
+  display: grid;
+  grid-template-rows: 60% 30%;
+  grid-template-columns: 3rem auto;
+  gap: 10% 2rem;
+  margin: 1rem 0;
+}
+
+/* Make the list take up the right column */
+.power-plant-page .quick-stats-cont dl {
+  grid-column: 2/3;
+  grid-row: 1/3;
+}
+
+.power-plant-page .stat-icon {
+  width: 2.5rem;
+  align-self: center;
+  justify-self: center;
+}
+
+.context-msg {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+/** Tablet & mobile styling */
+@media (max-width: 991px) {
+  .power-plant-page .power-plant-profile {
+    padding: 1rem;
+  }
+  .power-plant-page .power-plant-profile img {
+    width: 6rem;
+  }
+  .power-plant-page .power-plant-profile .state-icon {
+    font-size: 2rem;
+    bottom: -15%;
+    right: -15%;
+  }
+
+  .power-plant-page .stat-panel dl.detailed-emissions > div {
+    width: 100%;
+  }
+}
+
+/** Mobile Styling */
+@media (max-width: 575px) {
+  .power-plant-page .top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0rem;
+  }
+}
