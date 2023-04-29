@@ -85,7 +85,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
   }
 
   var data = annualHistoricEmissions.concat(missing).concat(projection)
-  const dataMidPoint = reduceFrom / 2
+  const dataMidPoint = reduceFrom / 3
 
   // Data headers for the modal
   const dataHeaders = [
@@ -138,6 +138,7 @@ export default function SimpleAreaChart({ emissionsData, title }) {
             isAnimationActive={false}
           />
           <Area
+            strokeDasharray="4 4"
             type="monotone"
             dataKey="missingData"
             stackId="3"
@@ -157,10 +158,10 @@ export default function SimpleAreaChart({ emissionsData, title }) {
           />
           <ReferenceDot
             y={dataMidPoint}
-            x={currYear - 5}
+            x={currYear - 20}
             stroke="none"
             fill="none"
-            label={{ value: "Emissions", angle: 90, fill: "#b65c00" }}
+            label={{ value: "Emissions", fontSize: "1.5rem", fill: "#b65c00" }}
           />
           <ReferenceDot
             y={dataMidPoint}
@@ -170,10 +171,14 @@ export default function SimpleAreaChart({ emissionsData, title }) {
           />
           <ReferenceDot
             y={dataMidPoint}
-            x={currYear + 2}
+            x={currYear + 8}
             stroke="none"
             fill="none"
-            label={{ value: "Projections", angle: 90, fill: "#36a654" }}
+            label={{
+              value: "Projections",
+              fontSize: "1.5rem",
+              fill: "#36a654",
+            }}
           />
         </AreaChart>
       </ResponsiveContainer>
