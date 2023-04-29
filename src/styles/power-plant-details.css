@@ -20,6 +20,10 @@
   width: 12rem;
 }
 
+.power-plant-page .map-img {
+  width: 400px;
+}
+
 .power-plant-page .power-plant-profile .state-icon {
   display: inline-block;
   position: absolute;
