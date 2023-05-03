@@ -83,10 +83,9 @@ function rankState(data, CurrStateSlug) {
  * Make sure to load at a smaller screen size
  */
 const SocialCardPage = ({ location, data }) => {
-  //get the state data
   const params = new URLSearchParams(location.search)
 
-  // If no state selected, default to Illinois
+  // If no state param specified, default to Illinois
   const CurrStateSlug = params.get("state") || "illinois"
 
   let emissionsData = data.allEmissionsJson.edges.find(

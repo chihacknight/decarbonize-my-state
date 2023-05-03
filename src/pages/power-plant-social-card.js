@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 
 import SEO from "../components/seo"
@@ -13,26 +13,41 @@ import CoalPlantImg from "../images/coal-plant.png"
  */
 
 const PowerPlantSocialCardPage = ({ location, data }) => {
-  let params = new URLSearchParams(location.search)
+  /**
+   * Process data at runtime, so even the static preview site can process the power plant data and
+   * make a proper preview even on a prod build
+   */
+  const [FuelCategory, setFuelCategory] = useState()
+  const [FuelCategoryOther, setFuelCategoryOther] = useState()
+  const [PowerPlant, setPowerPlant] = useState({})
+  const [StateFaceClass, setStateFaceClass] = useState()
+  const [StateTitle, setStateTitle] = useState()
 
-  // Default to Baldwin Energy Complex in Illinois if no params specified
-  const CurrentStateSlug = params.get("state") || "illinois"
-  const CurrentPlantSlug = params.get("plant") || "baldwin-energy-complex"
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
 
-  const StateTitle = slugToTitle(CurrentStateSlug)
-  const StateFaceClass = CurrentStateSlug.toLowerCase().replaceAll(" ", "-")
+    // Default to Baldwin Energy Complex in Illinois if no params specified
+    const CurrentStateSlug = params.get("state") || "illinois"
+    const CurrentPlantSlug = params.get("plant") || "baldwin-energy-complex"
 
-  const StateData = data.allPowerPlantsJson.edges.find(
-    entry => entry.node.state === CurrentStateSlug
-  )
+    setStateTitle(slugToTitle(CurrentStateSlug))
+    setStateFaceClass(CurrentStateSlug.toLowerCase().replaceAll(" ", "-"))
 
-  const PowerPlant = StateData.node.power_plants.find(
-    plant => plant.slug === CurrentPlantSlug
-  )
+    const StateData = data.allPowerPlantsJson.edges.find(
+      entry => entry.node.state === CurrentStateSlug
+    )
 
-  const FuelCategory = PowerPlant.fossil_fuel_category.toLowerCase()
-  // If not coal, oil, or gas, we use the coal icon
-  const FuelCategoryOther = !["oil", "gas", "coal"].includes(FuelCategory)
+    const powerPlant = StateData.node.power_plants.find(
+      plant => plant.slug === CurrentPlantSlug
+    )
+
+    setPowerPlant(powerPlant)
+
+    const fuelCategory = powerPlant.fossil_fuel_category.toLowerCase()
+    setFuelCategory(fuelCategory)
+    // If not coal, oil, or gas, we use the coal icon
+    setFuelCategoryOther(!["oil", "gas", "coal"].includes(fuelCategory))
+  }, [location.search, data.allPowerPlantsJson.edges])
 
   return (
     <div className="social-card d-flex flex-column">
@@ -65,10 +80,8 @@ const PowerPlantSocialCardPage = ({ location, data }) => {
             <h1 className="h2 mb-0 mt-0">{PowerPlant.plant_name}</h1>
 
             <div className="h5 mb-0 font-weight-bold">
-              <span className="text-capitalize">
-                {PowerPlant.fossil_fuel_category.toLowerCase()}
-              </span>{" "}
-              Power Plant
+              <span className="text-capitalize">{FuelCategory}</span> Power
+              Plant
             </div>
             <div>
               {PowerPlant.county} County, {StateTitle}

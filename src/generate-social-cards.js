@@ -8,8 +8,6 @@ const fs = require("fs")
 const { placeNames } = require("./constants/state-names")
 const { powerPlantUrls } = require("./constants/power-plants")
 
-const PauseDelayMs = 500
-
 /**
  * Process command line flags to indicate we want to only generate state or power plants. Valid
  * options are:
@@ -23,10 +21,15 @@ const PauseDelayMs = 500
  */
 const CommandArguments = process.argv.slice(2)
 
-let shouldGenerateStates = true
-let shouldGeneratePowerPlants = true
-let isDebugging = false
-let useHeadless = true
+/**
+ * We default to localhost (like when you're updating the social card styling) but you may want to
+ * hit a Netlify preview so that your local machine isn't running `gatsby develop`, which has a bad
+ * habit of eating up all available Node memory
+ */
+const SiteDomain = "https://deploy-preview-205--decarb-my-state.netlify.app" // 'http://localhost:8000'
+
+/** A small delay between calls to captureScreenshot to prevent spamming */
+const PauseDelayMs = 150
 
 // Source: https://stackoverflow.com/a/41407246/2296368
 const CmdColorCyan = "\x1b[36m"
@@ -34,6 +37,11 @@ const CmdColorGreen = "\x1b[32m"
 const CmdColorYellow = "\x1b[33m"
 const CmdColorRed = "\x1b[31m"
 const CmdReset = "\x1b[0m"
+
+let shouldGenerateStates = true
+let shouldGeneratePowerPlants = true
+let isDebugging = false
+let useHeadless = true
 
 // Maintain one browser instance across all screenshots for better performance and to prevent
 // spamming
@@ -62,12 +70,13 @@ function debugLog(msg) {
 }
 
 async function generatePowerPlantSocialCards() {
-  // Start at index 875 (Georgia) where we left off
+  // Start at index 2000 (Missouri) where we left off
   // TODO: Reset to 0
   /** An index to start at generating power plants, useful when you had a partial run */
-  const StartIndex = 946
+  const StartIndex = 2000
 
-  // Map the URL (e.g. 'https://decarbmystate.com/illinois/power-plant/will-county')
+  // Map the URL (e.g. 'https://decarbmystate.com/illinois/power-plant/will-county') to the state
+  // slug and power plant slug
   const plantSlugsArr = powerPlantUrls
     .trim()
     .split("\n")
@@ -178,7 +187,7 @@ async function captureScreenshot(outputDir, url, fileName) {
     page.setDefaultNavigationTimeout(5000)
 
     //direct puppeteer to the social-card page for each state
-    await page.goto("http://localhost:8000" + url, {
+    await page.goto(SiteDomain + url, {
       waitUntil: "networkidle2",
     })
 
