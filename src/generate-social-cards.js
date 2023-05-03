@@ -107,7 +107,8 @@ async function generatePowerPlantSocialCards() {
 
     debugLog(
       `Start fetching screenshot for ${stateSlug} - ${powerPlantSlug} ` +
-        `(${index}/${plantSlugsArr.length}, real index ${index + StartIndex})`
+        `(${index}/${plantSlugsArr.length}, real index ${index +
+          PowerPlantStartIndex})`
     )
 
     const url = `/power-plant-social-card/?state=${stateSlug}&plant=${powerPlantSlug}`
