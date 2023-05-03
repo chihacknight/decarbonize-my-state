@@ -26,7 +26,7 @@ const CommandArguments = process.argv.slice(2)
  * hit a Netlify preview so that your local machine isn't running `gatsby develop`, which has a bad
  * habit of eating up all available Node memory
  */
-const SiteDomain = "https://deploy-preview-205--decarb-my-state.netlify.app" // 'http://localhost:8000'
+const SiteDomain = "http://localhost:8000"
 
 /** A small delay between calls to captureScreenshot to prevent spamming */
 const PauseDelayMs = 150
@@ -70,10 +70,8 @@ function debugLog(msg) {
 }
 
 async function generatePowerPlantSocialCards() {
-  // Start at index 2000 (Missouri) where we left off
-  // TODO: Reset to 0
   /** An index to start at generating power plants, useful when you had a partial run */
-  const StartIndex = 2000
+  const StartIndex = 0
 
   // Map the URL (e.g. 'https://decarbmystate.com/illinois/power-plant/will-county') to the state
   // slug and power plant slug
