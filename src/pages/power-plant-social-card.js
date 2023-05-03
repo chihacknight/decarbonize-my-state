@@ -29,6 +29,10 @@ const PowerPlantSocialCardPage = ({ location, data }) => {
     plant => plant.slug === CurrentPlantSlug
   )
 
+  const FuelCategory = PowerPlant.fossil_fuel_category.toLowerCase()
+  // If not coal, oil, or gas, we use the coal icon
+  const FuelCategoryOther = !["oil", "gas", "coal"].includes(FuelCategory)
+
   return (
     <div className="social-card d-flex flex-column">
       <SEO title="Power Plant Social Card" />
@@ -38,13 +42,13 @@ const PowerPlantSocialCardPage = ({ location, data }) => {
       >
         <div className="d-flex align-items-center p-5">
           <div className="power-plant-profile ml-2">
-            {PowerPlant.fossil_fuel_category.toLowerCase() === "oil" && (
+            {FuelCategory === "oil" && (
               <img src={OilPlantImg} alt="Oil power plant" />
             )}
-            {PowerPlant.fossil_fuel_category.toLowerCase() === "gas" && (
+            {FuelCategory === "gas" && (
               <img src={GasPlantImg} alt="Gas power plant" />
             )}
-            {PowerPlant.fossil_fuel_category.toLowerCase() === "coal" && (
+            {(FuelCategory === "coal" || FuelCategoryOther) && (
               <img src={CoalPlantImg} alt="Coal power plant" />
             )}
 

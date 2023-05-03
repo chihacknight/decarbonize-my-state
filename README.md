@@ -118,6 +118,11 @@ Then run `yarn generate-social-all` to generate all social images (~3,500), or r
 
 To then show progress logs, just tack on `--debugging`, e.g. `yarn generate social-power-plants --debugging`.
 
+**Finally:** Copy paste `/power-plant-social-out/social-cards/power-plant` directory into
+`static/social-cards`. You have to do this because writing a file to the `/static` directory causes
+Gatsby develop to rebuild, so we cannot have the power plant generation with (> 3K plants) to static
+while relying on develop.
+
 ### 🤖 What's inside?
 
 _Taken from `gatsby-starter-default`_
