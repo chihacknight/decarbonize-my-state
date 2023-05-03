@@ -21,6 +21,9 @@ const { powerPlantUrls } = require("./constants/power-plants")
  */
 const CommandArguments = process.argv.slice(2)
 
+/** An index to start at generating power plants, useful when you had a partial run */
+const PowerPlantStartIndex = 0
+
 /**
  * We default to localhost (like when you're updating the social card styling) but you may want to
  * hit a Netlify preview so that your local machine isn't running `gatsby develop`, which has a bad
@@ -70,9 +73,6 @@ function debugLog(msg) {
 }
 
 async function generatePowerPlantSocialCards() {
-  /** An index to start at generating power plants, useful when you had a partial run */
-  const StartIndex = 0
-
   // Map the URL (e.g. 'https://decarbmystate.com/illinois/power-plant/will-county') to the state
   // slug and power plant slug
   const plantSlugsArr = powerPlantUrls
@@ -87,7 +87,7 @@ async function generatePowerPlantSocialCards() {
         powerPlantSlug: afterDomainSegments[2],
       }
     })
-    .slice(StartIndex)
+    .slice(PowerPlantStartIndex)
 
   let index = 0
 
