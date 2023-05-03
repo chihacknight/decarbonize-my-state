@@ -19,10 +19,12 @@ async function captureScreenshot(name) {
   let browser = null
   waitingForReady = false
   let outputDir = "static/social-cards"
+
   // if screenshots directory is not exist then create one
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir)
   }
+
   try {
     // launch headless Chromium browser
     browser = await puppeteer.launch({ headless: false })
@@ -54,6 +56,7 @@ setTimeout(async function() {
     while (!waitingForReady) {
       setTimeout(function() {}, WaitDelayMS)
     }
+
     await captureScreenshot(name)
   }
 }, SocialPageDelayMS)

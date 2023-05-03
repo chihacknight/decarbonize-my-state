@@ -1,120 +1,123 @@
 import React from "react"
-import SEO from "../components/seo"
-import SingleBarChart from "../components/singlebar"
 import { graphql } from "gatsby"
 
-//TODO: move to shared file with state details
-const slugToTitle = placeName => {
-  const words = placeName.split("_")
+import SEO from "../components/seo"
+import SingleBarChart from "../components/singlebar"
+import { slugToTitle } from "../helper-functions"
 
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i]
-    if (word === "of") {
-      words[i] = word
-    } else {
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
+/**
+ * Rank a state
+ *
+ * Returns { statePosInArr: number, emitterSuffix: string }
+ *
+ * E.g. { statePosInArr: 5, emitterSuffix: 'th' }
+ */
+function rankState(data, CurrStateSlug) {
+    // used for ranking the states
+    var eachStateRecentEmissions = []
+    var counter = 0
+
+    // go through each of the states
+    for (const stateData of data.allEmissionsJson.edges) {
+      var tempState = stateData.node.state
+      var stateTotalEmissions = 0
+
+      if (tempState === "united_states") {
+        continue
+      }
+
+      // sum all the emission categories to get total emissions for the recent year
+      var mostRecentEmissions =
+        stateData.node.emissionsByYear[stateData.node.emissionsByYear.length - 1]
+      for (const v of Object.values(mostRecentEmissions)) {
+        stateTotalEmissions += v
+      }
+
+      // store in array of array containing state name, total emissions, and initial position
+      eachStateRecentEmissions[counter] = [
+        tempState,
+        stateTotalEmissions,
+        counter,
+      ]
+      counter += 1
     }
-  }
 
-  return words.join(" ")
+    // sort array by emissions
+    eachStateRecentEmissions.sort((a, b) => b[1] - a[1])
+
+    // change the position of each state to reflect their new position in sorted array
+    for (var i = 0; i < eachStateRecentEmissions.length; i++) {
+      eachStateRecentEmissions[i][2] = i
+    }
+
+    // find the data corresponding to the current page
+    let statePosInArr = eachStateRecentEmissions.find(
+      entry => entry[0] === CurrStateSlug
+    )[2]
+
+    // alter what the suffix of the number is
+    var emitterSuffix = "th" // default to th (e.g. 4th, 5th)
+    var finalDigitOfStatePos = statePosInArr % 10
+
+    // 1 -> 1st
+    if (finalDigitOfStatePos + 1 === 1) {
+      emitterSuffix = "st"
+    }
+    // 2 -> 2nd
+    else if (finalDigitOfStatePos + 1 === 2) {
+      emitterSuffix = "nd"
+    }
+    // 3 -> 3rd
+    else if (finalDigitOfStatePos + 1 === 3) {
+      emitterSuffix = "rd"
+    }
+
+    return { emitterSuffix, statePosInArr }
 }
 
+/**
+ * A page we take screenshots of to make the meta images. Example:
+ *
+ * /social-card?state=illinois
+ *
+ * Make sure to load at a smaller screen size
+ */
 const SocialCardPage = ({ location, data }) => {
   //get the state data
-  let params = new URLSearchParams(location.search)
-  let currentState = params.get("state")
+  const params = new URLSearchParams(location.search)
+
+  // If no state selected, default to Illinois
+  const CurrStateSlug = params.get("state") || 'illinois';
+
   let emissionsData = data.allEmissionsJson.edges.find(
-    entry => entry.node.state === currentState
+    entry => entry.node.state === CurrStateSlug
   )
 
-  if (emissionsData == null) {
-    emissionsData = data.allEmissionsJson.edges.find(
-      entry => entry.node.state === "illinois"
-    )
-    currentState = "illinois"
-  }
+  // Rank the state and get the
+  const { statePosInArr, emitterSuffix } = rankState(data, CurrStateSlug);
 
-  //used for ranking the states
-  var eachStateRecentEmissions = []
-  var counter = 0
-  var emitterSuffix = "th"
-
-  //go through each of the staes
-  for (const stateData of data.allEmissionsJson.edges) {
-    var tempState = stateData.node.state
-    var stateTotalEmissions = 0
-
-    if (tempState === "united_states") {
-      continue
-    }
-
-    //sum all the emission categories to get total emissions for the recent year
-    var mostRecentEmissions =
-      stateData.node.emissionsByYear[stateData.node.emissionsByYear.length - 1]
-    for (const v of Object.values(mostRecentEmissions)) {
-      stateTotalEmissions += v
-    }
-
-    //store in array of array containing state name, total emissions, and initial position
-    eachStateRecentEmissions[counter] = [
-      tempState,
-      stateTotalEmissions,
-      counter,
-    ]
-    counter += 1
-  }
-
-  //sort array by emisisons
-  eachStateRecentEmissions.sort((a, b) => b[1] - a[1])
-
-  //change the position of each state to reflect their new position in sorted array
-  for (var i = 0; i < eachStateRecentEmissions.length; i++) {
-    eachStateRecentEmissions[i][2] = i
-  }
-
-  //find the data correspoinding to the current page
-  let statePosInArr = eachStateRecentEmissions.find(
-    entry => entry[0] === currentState
-  )
-
-  //to be used for specifically checks with /social-card/ which dont have a ?state={}
-  if (statePosInArr == null) {
-    statePosInArr = eachStateRecentEmissions.find(
-      entry => entry[0] === "illinois"
-    )
-  }
-
-  //alter what the suffix of the number is
-  var finalDigitOfStatePos = statePosInArr[2] % 10
-  if (finalDigitOfStatePos + 1 === 1) {
-    emitterSuffix = "st"
-  } else if (finalDigitOfStatePos + 1 === 2) {
-    emitterSuffix = "nd"
-  } else if (finalDigitOfStatePos + 1 === 3) {
-    emitterSuffix = "rd"
-  }
-
-  const placeTitle = slugToTitle(currentState)
-  const stateFaceClass = currentState.toLowerCase().replaceAll(" ", "-")
+  const placeTitle = slugToTitle(CurrStateSlug)
+  const stateFaceClass = CurrStateSlug.toLowerCase().replaceAll(" ", "-")
 
   let nodeData = emissionsData.node.emissionsByYear
 
   var stateNameSize = 3.5
+
   if (
-    currentState === "tennessee" ||
-    currentState === "pennsylvania" ||
-    currentState === "washington" ||
-    currentState === "oklahoma" ||
-    currentState === "connecticut" ||
-    currentState === "maryland" ||
-    currentState === "north_carolina" ||
-    currentState === "colorado" ||
-    currentState === "kentucky" ||
-    currentState === "nebraska"
+    CurrStateSlug === "tennessee" ||
+    CurrStateSlug === "pennsylvania" ||
+    CurrStateSlug === "washington" ||
+    CurrStateSlug === "oklahoma" ||
+    CurrStateSlug === "connecticut" ||
+    CurrStateSlug === "maryland" ||
+    CurrStateSlug === "north_carolina" ||
+    CurrStateSlug === "colorado" ||
+    CurrStateSlug === "kentucky" ||
+    CurrStateSlug === "nebraska"
   ) {
     stateNameSize = 2.3
   }
-  if (currentState === "massachusetts") {
+  if (CurrStateSlug === "massachusetts") {
     stateNameSize = 1.6
   }
 
@@ -145,7 +148,7 @@ const SocialCardPage = ({ location, data }) => {
               </span>
             </h3>
 
-            <h4>{statePosInArr[2] + 1 + emitterSuffix} Highest Emitter</h4>
+            <h4>{statePosInArr + 1 + emitterSuffix} Highest Emitter</h4>
           </div>
         </div>
 
