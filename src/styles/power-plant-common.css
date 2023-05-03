@@ -1,0 +1,31 @@
+/**
+ * Common Power Plant styling for the social card and the power details page
+ */
+.power-plant-profile {
+  position: relative;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--light-grey);
+}
+
+.power-plant-profile img {
+  width: 12rem;
+}
+
+.power-plant-profile .state-icon {
+  display: inline-block;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  aspect-ratio: 1;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--white);
+  font-size: 3.5rem;
+  line-height: 1;
+  box-shadow: 0.125rem 0.125rem 0.125rem var(--light-shadow-color);
+}
+
+.power-plant-profile .state-icon::before {
+  margin-right: 0;
+}
