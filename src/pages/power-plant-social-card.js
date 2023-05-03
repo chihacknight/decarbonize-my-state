@@ -13,10 +13,11 @@ import CoalPlantImg from "../images/coal-plant.png"
  */
 
 const PowerPlantSocialCardPage = ({ location, data }) => {
-  //get the state data
   let params = new URLSearchParams(location.search)
-  const CurrentStateSlug = params.get("state")
-  const CurrentPlantSlug = params.get("plant")
+
+  // Default to Baldwin Energy Complex in Illinois if no params specified
+  const CurrentStateSlug = params.get("state") || "illinois"
+  const CurrentPlantSlug = params.get("plant") || "baldwin-energy-complex"
 
   const StateTitle = slugToTitle(CurrentStateSlug)
   const StateFaceClass = CurrentStateSlug.toLowerCase().replaceAll(" ", "-")

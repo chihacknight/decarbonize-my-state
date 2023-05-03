@@ -65,7 +65,7 @@ async function generatePowerPlantSocialCards() {
   // Start at index 875 (Georgia) where we left off
   // TODO: Reset to 0
   /** An index to start at generating power plants, useful when you had a partial run */
-  const StartIndex = 900
+  const StartIndex = 946
 
   // Map the URL (e.g. 'https://decarbmystate.com/illinois/power-plant/will-county')
   const plantSlugsArr = powerPlantUrls
