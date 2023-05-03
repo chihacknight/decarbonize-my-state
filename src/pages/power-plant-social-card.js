@@ -57,9 +57,7 @@ const PowerPlantSocialCardPage = ({ location, data }) => {
 
         <div className="d-flex flex-column justify-content-center flex-grow-1">
           <div>
-            <h1 className="h2 mb-0 mt-0">
-              {PowerPlant.plant_name}
-            </h1>
+            <h1 className="h2 mb-0 mt-0">{PowerPlant.plant_name}</h1>
 
             <div className="h5 mb-0 font-weight-bold">
               <span className="text-capitalize">
@@ -76,7 +74,9 @@ const PowerPlantSocialCardPage = ({ location, data }) => {
             <div>
               <strong>Capacity</strong>
               <br />
-              <span>{Math.round(PowerPlant.capacity_mw).toLocaleString()} Megawatts</span>
+              <span>
+                {Math.round(PowerPlant.capacity_mw).toLocaleString()} Megawatts
+              </span>
             </div>
 
             <div className="ml-4">

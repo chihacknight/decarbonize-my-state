@@ -111,7 +111,12 @@ We wanted the social cards to include what number emitter the state is and what 
 **To generate them:**
 
 First make sure `yarn develop` is running
-Then run `yarn generate-social`
+
+Then run `yarn generate-social-all` to generate all social images (~3,500), or run:
+- `yarn generate-social-states` for just state social images (50)
+- `yarn generate-social-power-plants` for just powerplants (~3,500)
+
+To then show progress logs, just tack on `--debugging`, e.g. `yarn generate social-power-plants --debugging`.
 
 ### 🤖 What's inside?
 
