@@ -72,3 +72,6 @@ yarn-error.log
 
 .yarn
 package-lock.json
+
+# Generate Temporary Power Plant Images - should be moved to static
+power-plant-social-out/

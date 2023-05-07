@@ -12,6 +12,7 @@
 @import "state-details.css";
 @import "take-action.css";
 @import "power-plant-details.css";
+@import "power-plant-common.css";
 
 /** Component styles */
 @import "display-plants.css";
