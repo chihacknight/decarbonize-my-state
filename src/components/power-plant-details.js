@@ -35,6 +35,7 @@ const ContextStats = {
 
 const PowerPlantDetailPage = ({ pageContext, data }) => {
   const PowerPlantStateSlug = data.allPowerPlantsJson.edges[0].node.state
+  const PowerPlantSlug = pageContext.powerPlantSlug
   const PowerPlant = data.allPowerPlantsJson.edges[0].node.power_plants.find(
     plant => plant.slug === pageContext.powerPlantSlug
   )
@@ -73,7 +74,10 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO title={PowerPlant.plant_name + " Power Plant | Decarb My State"} />
+      <SEO
+        title={PowerPlant.plant_name + " Power Plant | Decarb My State"}
+        image={`social-cards/power-plants/${PowerPlantStateSlug}/${PowerPlantSlug}.jpg`}
+      />
 
       <div className="power-plant-page">
         <a

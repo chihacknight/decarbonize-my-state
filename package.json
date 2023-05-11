@@ -54,7 +54,9 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "eslint src && prettier --check \"src/**/*.{js,jsx,json,md,css}\"",
-    "generate-social": "node src/generate-social-cards.js"
+    "generate-social-all": "node src/generate-social-cards.js",
+    "generate-social-states": "node src/generate-social-cards.js --states",
+    "generate-social-power-plants": "node src/generate-social-cards.js --power-plants"
   },
   "repository": {
     "type": "git",
