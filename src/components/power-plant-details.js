@@ -54,8 +54,8 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
     "&scale=2" +
     "&zoom=16" +
     "&size=400x400" +
-    "&maptype=satellite" +
-    "&key=${ApiKey}"
+    "&maptype=hybrid" +
+    `&key=${ApiKey}`
 
   /** Calculate comparison stats */
   const NetGenerationInt = parseInt(
@@ -125,7 +125,7 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
             </a>
           </div>
 
-          <img src={MapImgUrl} class="map-img"></img>
+          <img src={MapImgUrl} className="map-img"></img>
         </div>
 
         <p className="mt-2 text-secondary">
