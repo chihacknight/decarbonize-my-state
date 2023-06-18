@@ -211,7 +211,10 @@ const AboutPage = ({ data }) => {
 
           <p>
             All Decarb My State illustrations were created by{" "}
-            <a href="https://www.instagram.com/makepeacetanqueray/">Josephine Ferorelli</a>.
+            <a href="https://www.instagram.com/makepeacetanqueray/">
+              Josephine Ferorelli
+            </a>
+            .
           </p>
 
           <p>
