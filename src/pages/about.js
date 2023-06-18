@@ -210,9 +210,12 @@ const AboutPage = ({ data }) => {
           </p>
 
           <p>
-            Images of appliances and cars come from{" "}
-            <a href="https://electrifynow.net/">Electrify Now</a>. Images of
-            power plants are from{" "}
+            All Decarb My State illustrations were created by{" "}
+            <a href="https://www.instagram.com/makepeacetanqueray/">Josephine Ferorelli</a>.
+          </p>
+
+          <p>
+            Images of power plants are from{" "}
             <a href="http://en.wikipedia.org/wiki/SimCity_2000">
               Sim City 2000
             </a>{" "}
