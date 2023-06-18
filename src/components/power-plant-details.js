@@ -43,20 +43,12 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
   const StateFaceClass = PowerPlantStateSlug.toLowerCase().replaceAll(" ", "-")
   const PowerPlantStateTitle = slugToTitle(PowerPlantStateSlug)
 
-  const ApiKey = "" /** TODO: Set this up to be an ENV */
   const PlantCoords = `${PowerPlant.Latitude},${PowerPlant.Longitude}`
 
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
   const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PlantCoords}`
 
-  const MapImgUrl =
-    "https://maps.googleapis.com/maps/api/staticmap?" +
-    `markers=size:mid|${PlantCoords}` +
-    "&scale=2" +
-    "&zoom=16" +
-    "&size=400x400" +
-    "&maptype=hybrid" +
-    `&key=${ApiKey}`
+  const MapImgUrl = `/power-plant-satellite-imgs/${PowerPlantStateSlug}-${PowerPlantSlug}.png`;
 
   /** Calculate comparison stats */
   const NetGenerationInt = parseInt(
