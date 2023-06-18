@@ -1,7 +1,7 @@
 {
-  "name": "new-gatsby-app",
+  "name": "decarb-my-state",
   "private": true,
-  "description": "A multipurpose containerized Gatsby starter app",
+  "description": "A site showing emissions statistics and decarbonization actions state by state",
   "version": "0.1.0",
   "author": "DataMade",
   "engines": {"node" : ">=15"},
