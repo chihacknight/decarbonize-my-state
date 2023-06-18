@@ -48,7 +48,7 @@ const PowerPlantDetailPage = ({ pageContext, data }) => {
   // t=k sets the map to sattelite view, then we specify a query of  Lat,Long
   const GoogleMapsLink = `https://maps.google.com/?t=k&q=${PlantCoords}`
 
-  const MapImgUrl = `/power-plant-satellite-imgs/${PowerPlantStateSlug}-${PowerPlantSlug}.png`;
+  const MapImgUrl = `/power-plant-satellite-imgs/${PowerPlantStateSlug}-${PowerPlantSlug}.png`
 
   /** Calculate comparison stats */
   const NetGenerationInt = parseInt(
