@@ -11,6 +11,7 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
 
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- Node 16.X
 
 ### 🚀 Quick start
 

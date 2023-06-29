@@ -217,7 +217,7 @@ const StateEmissionsMap = ({
         {emissions && sidebar ? (
           <Col lg={3} className="map-legend">
             <div className="h6 mt-4 font-weight-bold">
-              Annaul Climate Pollution
+              Annual Climate Pollution
             </div>
             <div className="legendKey">
               <span className="keyText">
