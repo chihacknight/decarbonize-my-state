@@ -5,6 +5,7 @@
 .power-plant-page .top-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 3rem;
   margin-top: 2rem;
 }
@@ -18,6 +19,12 @@
 
 .power-plant-page .power-plant-profile img {
   width: 12rem;
+}
+
+.power-plant-page .map-img {
+  width: 20rem;
+  max-width: 100%;
+  margin-left: auto;
 }
 
 .power-plant-page .power-plant-profile .state-icon {
@@ -93,18 +100,37 @@
   margin-top: 0.25rem;
 }
 
+@media (max-width: 1199px) {
+  .power-plant-page .power-plant-profile img {
+    width: 8rem;
+  }
+}
+
 /** Tablet & mobile styling */
 @media (max-width: 991px) {
+  .power-plant-page .top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0rem;
+  }
+
   .power-plant-page .power-plant-profile {
     padding: 1rem;
   }
+
   .power-plant-page .power-plant-profile img {
     width: 6rem;
   }
+
   .power-plant-page .power-plant-profile .state-icon {
     font-size: 2rem;
     bottom: -15%;
     right: -15%;
+  }
+
+  .power-plant-page .map-img {
+    margin-top: 2rem;
+    margin-left: 0;
   }
 
   .power-plant-page .stat-panel dl.detailed-emissions > div {
@@ -114,9 +140,7 @@
 
 /** Mobile Styling */
 @media (max-width: 575px) {
-  .power-plant-page .top-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0rem;
+  .power-plant-page .map-img {
+    width: 14rem;
   }
 }
