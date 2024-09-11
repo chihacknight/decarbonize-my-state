@@ -1,5 +1,8 @@
 # Decarb My State
 
+> [!IMPORTANT]
+> Decarb My State isn't currently in active development - the climate change group at [Chi Hack Night](https://chihacknight.org/) is now working on other projects - see our [breakout group issue](https://github.com/chihacknight/breakout-groups/issues/215) to see what we're up to right now!
+
 Chi Hack Night data visualization project to measure the state and progress of decarbonization for all States in the USA.
 
 - [Running project notes](https://docs.google.com/document/d/14gs7gO9YmBgIWOMd7oGXmIF1XRwfBIt8jGTOpn8udjg/edit#heading=h.n9cfl96c3r81)
