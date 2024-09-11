@@ -1,7 +1,7 @@
 # Decarb My State
 
 > [!IMPORTANT]
-> Decarb My State isn't currently in active development - the climate change group at [Chi Hack Night](https://chihacknight.org/) is now working on [Electrify Chicago](https://github.com/vkoves/electrify-chicago) and other projects!
+> Decarb My State isn't currently in active development - the climate change group at [Chi Hack Night](https://chihacknight.org/) is now working on other projects - see our [breakout group issue](https://github.com/chihacknight/breakout-groups/issues/215) to see what we're up to right now!
 
 Chi Hack Night data visualization project to measure the state and progress of decarbonization for all States in the USA.
 
