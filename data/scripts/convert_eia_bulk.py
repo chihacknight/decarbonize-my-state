@@ -76,6 +76,13 @@ if __name__ == '__main__':
     generation = pd.DataFrame(records).pivot_table(index=['state', 'year'], columns='fuel',
                                                    values='value', aggfunc='sum', fill_value=0)
     generation = generation.reindex(columns=list(EIA_FUEL_COLUMNS.values()), fill_value=0)
+
+    # EIA's all solar (TSN) series starts in 2014, when small-scale solar
+    # estimates begin. Before that, fill it in from utility-scale + small-scale
+    generation['all_solar'] = generation['all_solar'].where(
+        generation['all_solar'] > 0,
+        generation['utility_scale_solar'] + generation['small_scale_photovoltaic'])
+
     generation = generation.reset_index().sort_values(['state', 'year'], ascending=[True, False])
 
     print(generation.round(5).to_csv(index=False), end='')

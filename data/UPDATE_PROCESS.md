@@ -41,6 +41,8 @@ Land use and forestry (LULUCF) carbon sinks and U.S. territories are left out. T
 
 The power generation mix (and the "% carbon-free" stat) comes from the EIA's annual net generation by state and energy source, for all sectors, currently covering **2001–2025** (bulk file updated September 2026). We use EIA's [bulk download](https://www.eia.gov/opendata/bulkfiles.php) because it includes small-scale (rooftop) solar, which is a large share of solar in many states. The [historical state data](https://www.eia.gov/electricity/data/state/) spreadsheets are utility-scale only.
 
+EIA only estimates small-scale solar from 2014 on, and its "all solar" series starts then too. For earlier years the conversion fills `all_solar` in from utility-scale solar, so solar shows a jump in 2014 when rooftop solar starts being counted.
+
 The bulk file (`ELEC.zip`) is ~300MB, so we convert it to `raw/eia_state_net_generation.csv` (~200KB) and commit that CSV instead. The conversion (`scripts/convert_eia_bulk.py`) keeps the annual all-sector net generation series (IDs like `ELEC.GEN.COW-IL-99.A`) for the 50 states + DC, one column per energy source. Values are in thousand megawatthours (GWh).
 
 ### Updating to a new EIA release
