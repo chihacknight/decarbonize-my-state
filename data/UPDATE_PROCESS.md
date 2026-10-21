@@ -61,3 +61,11 @@ The bulk file (`ELEC.zip`) is ~300MB, so we convert it to `raw/eia_state_net_gen
 ### How the site uses it
 
 `group_df_by_generation` in `scripts/utils.py` computes each source's share of generation from seven sources: coal, natural gas, petroleum liquids, nuclear, hydroelectric, all solar (utility-scale + small-scale) and wind. "% carbon-free" on the state page is nuclear + hydro + solar + wind. Other sources (biomass, wood, other gases, geothermal, pumped storage) are left out of the total, so states with a lot of those (e.g. Vermont's wood power) show a higher carbon-free share.
+
+## Wind and solar built
+
+The "MWs of Wind and Solar Built" stat compares each state's wind and solar targets (`raw/state_renewable_gen_targets.csv`) with how much wind and solar it generates today. `scripts/get_target_generations.py` takes "today" from the latest year of the [power generation](#power-generation) data (`all_solar`, which includes small-scale solar, and `wind`), so this updates automatically when the power generation data does. Run `make final/target_generation/target_generation.json` after updating it.
+
+Everything here is **generation in GWh per year**, not installed capacity. The site converts to "MW" by dividing by the hours in a year, so these are average MW. Don't compare them with nameplate capacity figures (e.g. state clean energy dashboards), which run about 3x higher for wind and 4-5x higher for solar.
+
+The targets (`total_gen_by_solar`, `total_gen_by_wind`) were added in April 2022 and their source isn't recorded. They appear to be sized to roughly double each state's electricity use. Percent built is current / target per source, capped at 100%, and the bar shows the average of the solar and wind percentages.

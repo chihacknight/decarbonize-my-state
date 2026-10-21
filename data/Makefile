@@ -43,5 +43,5 @@ update-generation-raw :
 	python scripts/convert_eia_bulk.py $(EIA_ZIP) > eia_state_net_generation.csv
 	mv eia_state_net_generation.csv raw/eia_state_net_generation.csv
 
-final/target_generation/target_generation.json : raw/state_renewable_gen_targets.csv
-	python scripts/get_target_generations.py $< > $@
+final/target_generation/target_generation.json : raw/state_renewable_gen_targets.csv raw/eia_state_net_generation.csv
+	python scripts/get_target_generations.py $^ > $@

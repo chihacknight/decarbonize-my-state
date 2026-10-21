@@ -81,14 +81,4 @@ const sourceCitations = [
     date: "Sep 2026",
     link: "https://www.eia.gov/opendata/bulkfiles.php",
   },
-  {
-    // Current wind and solar in state_renewable_gen_targets.csv is EIA 2021
-    // generation, separate from the power-generation data above
-    slug: "target-generation",
-    title: "Electric generation by source 2001-2021",
-    source: "U.S. Energy Information Administration (EIA)",
-    source_short: "EIA",
-    date: "Apr 2022",
-    link: "https://www.eia.gov/electricity/data/browser/",
-  },
 ]

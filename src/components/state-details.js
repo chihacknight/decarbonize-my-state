@@ -186,6 +186,7 @@ export default function StateDetailsPage({ location, data }) {
 
   // since we are referencing capacity, let's stay consistent and make sure
   // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
+  // TODO: These are average MW (GWh / hours per year), not capacity - label as such or show capacity?
   const everyDayPerYear = 24 * 365
   const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000
   const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
@@ -208,7 +209,7 @@ export default function StateDetailsPage({ location, data }) {
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
   // not 200%
-  const percToCleanTarget = percSolarTarget + percWindTarget / 2
+  const percToCleanTarget = (percSolarTarget + percWindTarget) / 2
   const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
@@ -238,6 +239,7 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### Number of Turbines and Football-fields of solar panels. ####
   // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
+  // TODO: Dividing average MW by peak capacity undercounts turbines ~3x, account for capacity factor
   const averageWindTurbineCapacityMw = 2.75
   const turbinesNeededNumber = numberToHumanString(
     Math.ceil(targetGenByWindMW / averageWindTurbineCapacityMw)
@@ -823,7 +825,7 @@ export default function StateDetailsPage({ location, data }) {
                 />
               </p>
               <span className="mt-4 text-secondary keyText">
-                Source: {getShortCitation("target-generation")}
+                Source: {getShortCitation("power-generation")}
               </span>
             </div>
           )}
