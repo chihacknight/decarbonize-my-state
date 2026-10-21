@@ -22,7 +22,7 @@ update-emissions-raw :
 	python scripts/convert_epa_workbook.py $(EPA_ZIP) > epa_state_ghg.csv
 	mv epa_state_ghg.csv raw/epa_state_ghg_by_econ_sector.csv
 
-final/buildings/buildings.json : raw/buildings_data.csv
+final/buildings/buildings.json : raw/acs_house_heating_fuel.dat
 	python scripts/get_buildings.py $< > $@
 	
 final/vehicles/vehicles.json : raw/afdc_vehicle_registrations.csv

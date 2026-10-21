@@ -93,3 +93,25 @@ AFDC only publishes the latest year as a table on that page (its downloadable sp
 4. Delete the HTML file from `data/`.
 5. Update the `vehicles` entry in `src/constants/source-citations.js` (title year and date).
 6. Update the year in the first paragraph of this section.
+
+## Home heating
+
+The buildings section ("X% of homes already heat without burning any fuel") comes from the Census Bureau's American Community Survey (ACS) 1-year estimates, table **B25040 House Heating Fuel**, currently **2024** (released September 2025). It's the number of occupied homes in each state by main heating fuel. The Census releases a new year every fall (2025 data is scheduled for October 29, 2026).
+
+We only track each home's **main heating source**, not stoves, water heaters or commercial buildings. Homes heated with electricity or solar, or that don't use any heating fuel (common in Hawaii and Florida), count as already fossil-free. Homes heated with gas, propane, fuel oil, coal, wood or other fuels count as still to electrify. See `get_buildings.py`.
+
+The file is small (~500KB), so we commit it as downloaded to `raw/acs_house_heating_fuel.dat`. No conversion step is needed.
+
+### Updating to a new ACS release
+
+1. Go to the [ACS table-based summary file](https://www2.census.gov/programs-surveys/acs/summary_file/) folder, then `<year>/table-based-SF/data/1YRData/`.
+2. Download `acsdt1y<year>-b25040.dat` and save it over `raw/acs_house_heating_fuel.dat`.
+3. Rebuild the final JSON:
+
+   ```bash
+   make final/buildings/buildings.json
+   ```
+
+   Or with Docker: `docker-compose run --rm --entrypoint "make final/buildings/buildings.json" make`
+4. Update the `home-heating` entry in `src/constants/source-citations.js` (title year, date and the `ACSDT1Y<year>` part of the link).
+5. Update the year and release dates in the first paragraph of this section.

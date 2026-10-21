@@ -140,23 +140,21 @@ export default function StateDetailsPage({ location, data }) {
   const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
+  // We track each home's main heating source, not every appliance
   const {
-    buildings,
-    weightedFossilBuildingsPct,
-    weightedEleBuildingsPct,
+    homes,
+    fossilHeatingPct,
+    fossilFreeHeatingPct,
   } = data.allBuildingsJson.edges[0].node
 
-  // calculate buildings remaining to electrify
-  const buildingsToElectrify =
-    weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0
-      ? buildings * (weightedFossilBuildingsPct / 100)
-      : buildings
+  // calculate homes whose heating is left to electrify
+  const homesToElectrify = homes * (fossilHeatingPct / 100)
 
   // string formatting
-  const buildingsCountStr = numberToHumanString(buildings)
-  const buildingsLeftToElectrifyStr = numberToHumanString(buildingsToElectrify)
-  const buildingsPerYear = numberToHumanString(
-    Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
+  const homesCountStr = numberToHumanString(homes)
+  const homesLeftToElectrifyStr = numberToHumanString(homesToElectrify)
+  const homesPerYear = numberToHumanString(
+    Math.ceil((homesToElectrify * cutPerYearPrcnt) / 100)
   )
 
   // #### POWER GENERATION ####
@@ -486,7 +484,7 @@ export default function StateDetailsPage({ location, data }) {
             </div>
 
             <p className="mt-0 mb-4 text-right">
-              ...in all of {placeTitle}'s {buildingsCountStr} buildings.
+              ...in all of {placeTitle}'s buildings.
             </p>
 
             <div className="d-flex align-items-end justify-content-around mt-5">
@@ -494,30 +492,32 @@ export default function StateDetailsPage({ location, data }) {
               <div className="col-6 building-sheet -apartments -clean"></div>
             </div>
 
-            {(weightedEleBuildingsPct !== 0 ||
-              weightedFossilBuildingsPct !== 0) && (
-              <p className="mt-7">
-                In fact, {weightedEleBuildingsPct.toFixed(1)}% of appliances in
-                buildings in {placeTitle} are already fossil fuel free!
-              </p>
-            )}
+            <p className="mt-7">
+              Heating burns the most fuel in our homes, so let's start there. Of{" "}
+              {placeTitle}'s {homesCountStr} homes,{" "}
+              {fossilFreeHeatingPct.toFixed(1)}% already heat without burning
+              any fuel, mostly with electricity!
+            </p>
 
             <p className="mt-5">
-              That means we only need to{" "}
+              That means we need to{" "}
               <strong>
-                electrify the remaining {buildingsLeftToElectrifyStr} dirty
-                buildings in {placeTitle}
+                electrify the heating in the remaining {homesLeftToElectrifyStr}{" "}
+                homes in {placeTitle}
               </strong>
-              . That's around {buildingsPerYear} per year.
+              . That's around {homesPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Appliances Electrified"}
-              electrifiedPct={weightedEleBuildingsPct}
-              fossilPct={weightedFossilBuildingsPct}
+              label={"Homes Heating Without Fuel"}
+              electrifiedPct={fossilFreeHeatingPct}
+              fossilPct={fossilHeatingPct}
             />
+            <p className="mt-4 h6 text-muted">
+              This counts each home's main heating source. Stoves, water
+              heaters, and businesses aren't included yet.
+            </p>
             <span className="mt-4 text-secondary keyText">
-              Source: {getShortCitation("building-footprints")};{" "}
-              {getShortCitation("building-energy")}
+              Source: {getShortCitation("home-heating")}
             </span>
           </div>
 
@@ -1010,9 +1010,9 @@ export const query = graphql`
     allBuildingsJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-          buildings
-          weightedFossilBuildingsPct
-          weightedEleBuildingsPct
+          homes
+          fossilHeatingPct
+          fossilFreeHeatingPct
         }
       }
     }
