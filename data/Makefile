@@ -10,8 +10,17 @@ OUT = final/emissions final/buildings final/vehicles final/power_plants final/ta
 
 $(shell   mkdir -p $(OUT))
 
-final/emissions/emissions.json : raw/us_emissions_2000_2018.csv
+final/emissions/emissions.json : raw/epa_state_ghg_by_econ_sector.csv
 	python scripts/get_emissions.py $< > $@
+
+# Not part of `all` - regenerates the raw CSV from a downloaded EPA state GHG
+# inventory zip, e.g. `make update-emissions-raw EPA_ZIP=allstateghgdata90-22_v082924.zip`
+# See UPDATE_PROCESS.md
+.PHONY : update-emissions-raw
+update-emissions-raw :
+	@test -n "$(EPA_ZIP)" || (echo "Set EPA_ZIP to the path of the downloaded EPA zip" && exit 1)
+	python scripts/convert_epa_workbook.py $(EPA_ZIP) > epa_state_ghg.csv
+	mv epa_state_ghg.csv raw/epa_state_ghg_by_econ_sector.csv
 
 final/buildings/buildings.json : raw/buildings_data.csv
 	python scripts/get_buildings.py $< > $@

@@ -33,12 +33,12 @@ function getCitation(slug) {
 const sourceCitations = [
   {
     slug: "emissions",
-    title: "Climate Watch - U.S. States Greenhouse Gas Emissions 1990 to 2018",
-    source: "World Resource Institute",
-    source_short: "WRI",
-    date: "Mar 2021",
-    link:
-      "https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions",
+    title:
+      "Inventory of U.S. Greenhouse Gas Emissions and Sinks by State 1990 to 2022",
+    source: "U.S. Environmental Protection Agency",
+    source_short: "EPA",
+    date: "Aug 2024",
+    link: "https://www.epa.gov/ghgemissions/state-ghg-emissions-and-removals",
   },
   {
     slug: "building-footprints",

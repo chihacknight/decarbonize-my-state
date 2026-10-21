@@ -108,6 +108,10 @@ cd data
 docker-compose up --build
 ```
 
+### Updating data
+
+To refresh a dataset with a newer release (sources, download steps and how each one maps onto the site), see [`data/UPDATE_PROCESS.md`](data/UPDATE_PROCESS.md).
+
 ### Social Cards
 
 We wanted the social cards to include what number emitter the state is and what their emissions breakdown is. To do this, we created a social card page and used puppeteer to take screenshots to output get the dynamic social cards. The new screenshots can be found in `/static/social-cards`

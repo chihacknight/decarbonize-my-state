@@ -1,6 +1,5 @@
-FROM nikolaik/python-nodejs:latest
-
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+# Pinned to Node 16 (see README requirements), the image already includes Node
+FROM nikolaik/python-nodejs:python3.10-nodejs16
 
 RUN mkdir /app
 WORKDIR /app
