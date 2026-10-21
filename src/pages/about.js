@@ -278,8 +278,11 @@ const AboutPage = ({ data }) => {
           <h3 className="pt-2 h4">Power Plants By State</h3>
           {getLongCitation("power-plants")}
 
-          <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
+          <h3 className="pt-2 h4">Power Generation By State</h3>
           {getLongCitation("power-generation")}
+
+          <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
+          {getLongCitation("target-generation")}
 
           <h2 className="pt-3">Source Code</h2>
           <p>

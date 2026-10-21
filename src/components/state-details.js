@@ -823,7 +823,7 @@ export default function StateDetailsPage({ location, data }) {
                 />
               </p>
               <span className="mt-4 text-secondary keyText">
-                Source: {getShortCitation("power-generation")}
+                Source: {getShortCitation("target-generation")}
               </span>
             </div>
           )}
@@ -878,7 +878,19 @@ export default function StateDetailsPage({ location, data }) {
                     </p>
                   </>
                 )}
+              </div>
 
+              <h3 className="h6 mt-5 mb-4">
+                Power Generation in the State of {placeTitle} (
+                {latestGeneration.year})
+              </h3>
+
+              <PowerSourcesChart
+                latestGeneration={latestGeneration}
+                placeTitle={placeTitle}
+              ></PowerSourcesChart>
+
+              <div className="mt-6 text-center">
                 <p className="h6 mt-3">
                   Check out another state to see how they can cut their power
                   emissions to zero.

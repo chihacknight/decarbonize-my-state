@@ -3,7 +3,7 @@ import json
 
 ### Setting Test DataFrames to more easily test functions
 #us_emissions = pd.read_csv('../raw/epa_state_ghg_by_econ_sector.csv')
-#us_generation = pd.read_csv('../raw/us_electric_generation_2001_20.csv')
+#us_generation = pd.read_csv('../raw/eia_state_net_generation.csv')
 
 # EPA reports waste (landfills, wastewater, composting) under the Commercial
 # economic sector. We count those as "other" rather than buildings, matching how
@@ -11,11 +11,19 @@ import json
 WASTE_SUBSECTORS = ['Landfills - Municipal', 'Wastewater Treatment', 'Composting',
                     'Anaerobic Digestion at Biogas Facilities']
 
+# EPA's Electric Power Industry sector also includes SF6 leaking from grid
+# equipment and carbonates used in scrubbers. We only count burning fuel as
+# dirty power and put the rest in "other", matching the WRI data we used before
+POWER_COMBUSTION_SUBSECTORS = ['Carbon Dioxide from Fossil Fuel Combustion', 'Stationary Combustion',
+                               'Incineration of Waste']
+
 # map an EPA economic sector + subsector to one of our four buckets. Anything
 # that returns None (LULUCF sinks) is left out, as forestry was before
 def get_emissions_bucket(econ_sector, econ_subsector):
     if econ_sector == 'Electric Power Industry':
-        return 'dirty_power'
+        if econ_subsector in POWER_COMBUSTION_SUBSECTORS:
+            return 'dirty_power'
+        return 'dumps_farms_industrial_other'
     if econ_sector == 'Transportation':
         return 'transportation'
     if econ_sector in ['Residential', 'Commercial']:
