@@ -69,3 +69,27 @@ The "MWs of Wind and Solar Built" stat compares each state's wind and solar targ
 Everything here is **generation in GWh per year**, not installed capacity. The site converts to "MW" by dividing by the hours in a year, so these are average MW. Don't compare them with nameplate capacity figures (e.g. state clean energy dashboards), which run about 3x higher for wind and 4-5x higher for solar.
 
 The targets (`total_gen_by_solar`, `total_gen_by_wind`) were added in April 2022 and their source isn't recorded. They appear to be sized to roughly double each state's electricity use. Percent built is current / target per source, capped at 100%, and the bar shows the average of the solar and wind percentages.
+
+## Vehicles
+
+The "Vehicles Electrified" stat comes from the AFDC's [Vehicle Registration Counts by State](https://afdc.energy.gov/vehicle-registration), currently **2025** (counts as of the end of the year). These are light-duty vehicles (cars, SUVs and pickups) by fuel type, derived by the National Laboratory of the Rockies from Experian registration data. AFDC adds a new year about once a year.
+
+We use AFDC for both numbers: EVs are the "Electric (EV)" column (all-electric only, plug-in hybrids aren't counted), and the total is every fuel type added up. Using one source keeps both numbers the same year and the same definition of a light-duty vehicle.
+
+AFDC only publishes the latest year as a table on that page (its downloadable spreadsheets lag a year or more behind), so we convert a saved copy of the page to `raw/afdc_vehicle_registrations.csv` with `scripts/convert_afdc_registrations.py`.
+
+### Updating to a new AFDC release
+
+1. Open the [AFDC vehicle registration page](https://afdc.energy.gov/vehicle-registration) and check that it shows the newest year.
+2. Save the page into this `data/` folder as `afdc_vehicle_registration.html` (in most browsers, File > Save Page As, "Webpage, HTML Only"). HTML files here are ignored by git.
+3. Convert the page into the raw CSV, then rebuild the final JSON:
+
+   ```bash
+   make update-vehicles-raw AFDC_HTML=afdc_vehicle_registration.html
+   make final/vehicles/vehicles.json
+   ```
+
+   Or with Docker: `docker-compose run --rm --entrypoint "make update-vehicles-raw final/vehicles/vehicles.json AFDC_HTML=afdc_vehicle_registration.html" make`
+4. Delete the HTML file from `data/`.
+5. Update the `vehicles` entry in `src/constants/source-citations.js` (title year and date).
+6. Update the year in the first paragraph of this section.

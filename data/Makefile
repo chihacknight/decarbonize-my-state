@@ -25,8 +25,17 @@ update-emissions-raw :
 final/buildings/buildings.json : raw/buildings_data.csv
 	python scripts/get_buildings.py $< > $@
 	
-final/vehicles/vehicles.json : raw/vehicles_data.csv
+final/vehicles/vehicles.json : raw/afdc_vehicle_registrations.csv
 	python scripts/get_vehicles.py $< > $@
+
+# Not part of `all` - regenerates the raw CSV from a saved copy of the AFDC
+# vehicle registration page, e.g. `make update-vehicles-raw AFDC_HTML=afdc_vehicle_registration.html`
+# See UPDATE_PROCESS.md
+.PHONY : update-vehicles-raw
+update-vehicles-raw :
+	@test -n "$(AFDC_HTML)" || (echo "Set AFDC_HTML to the path of the saved AFDC vehicle registration page" && exit 1)
+	python scripts/convert_afdc_registrations.py $(AFDC_HTML) > afdc_vehicle_registrations.csv
+	mv afdc_vehicle_registrations.csv raw/afdc_vehicle_registrations.csv
 
 final/power_plants/power_plants.json : raw/power_plants_and_communities.csv
 	python scripts/get_power_plants.py $< > $@

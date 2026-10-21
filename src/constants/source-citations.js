@@ -58,11 +58,11 @@ const sourceCitations = [
   },
   {
     slug: "vehicles",
-    title: "State Motor-Vehicle Registrations",
-    source: "U.S. Department of Transportation",
-    source_short: "DOT",
-    date: "Feb 2021",
-    link: "https://www.fhwa.dot.gov/policyinformation/statistics/2017/mv1.cfm",
+    title: "Light-Duty Vehicle Registration Counts by State and Fuel Type 2025",
+    source: "U.S. Department of Energy, Alternative Fuels Data Center",
+    source_short: "AFDC",
+    date: "2025",
+    link: "https://afdc.energy.gov/vehicle-registration",
   },
   {
     slug: "power-plants",
