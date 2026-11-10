@@ -14,7 +14,18 @@ import {
 
 import DataModal from "./data-modal"
 
-export default function SimpleAreaChart({ emissionsData, title }) {
+/**
+ * An area chart of emissions over time, with assumed emissions for years we
+ * don't have data for yet and a projection to zero by 2050.
+ *
+ * @param showProjection {boolean} Whether to show the assumed and projected
+ * emissions, defaults to true. When false, only real data is shown.
+ */
+export default function SimpleAreaChart({
+  emissionsData,
+  title,
+  showProjection = true,
+}) {
   const YearDataKey = "year"
   const EmissionsDataKey = "hist"
   const ProjectionDataKey = "projection"
@@ -84,7 +95,9 @@ export default function SimpleAreaChart({ emissionsData, title }) {
     }
   }
 
-  var data = annualHistoricEmissions.concat(missing).concat(projection)
+  var data = showProjection
+    ? annualHistoricEmissions.concat(missing).concat(projection)
+    : annualHistoricEmissions
   const dataMidPoint = reduceFrom / 3
 
   // Data headers for the modal
@@ -137,25 +150,29 @@ export default function SimpleAreaChart({ emissionsData, title }) {
             name="Emissions"
             isAnimationActive={false}
           />
-          <Area
-            strokeDasharray="4 4"
-            type="monotone"
-            dataKey="missingData"
-            stackId="3"
-            stroke="#505050"
-            fill="#ababab"
-            name="Assumed"
-            isAnimationActive={false}
-          />
-          <Area
-            type="monotone"
-            dataKey={ProjectionDataKey}
-            stackId="2"
-            stroke="#36a654"
-            fill="#c1e5cb"
-            name="Projection"
-            isAnimationActive={false}
-          />
+          {showProjection && (
+            <Area
+              strokeDasharray="4 4"
+              type="monotone"
+              dataKey="missingData"
+              stackId="3"
+              stroke="#505050"
+              fill="#ababab"
+              name="Assumed"
+              isAnimationActive={false}
+            />
+          )}
+          {showProjection && (
+            <Area
+              type="monotone"
+              dataKey={ProjectionDataKey}
+              stackId="2"
+              stroke="#36a654"
+              fill="#c1e5cb"
+              name="Projection"
+              isAnimationActive={false}
+            />
+          )}
           <ReferenceDot
             y={dataMidPoint}
             x={currYear - 20}
@@ -163,23 +180,27 @@ export default function SimpleAreaChart({ emissionsData, title }) {
             fill="none"
             label={{ value: "Emissions", fontSize: "1.5rem", fill: "#b65c00" }}
           />
-          <ReferenceDot
-            y={dataMidPoint}
-            x={1 + (currYear + lastYear) / 2}
-            stroke="none"
-            fill="none"
-          />
-          <ReferenceDot
-            y={dataMidPoint}
-            x={currYear + 8}
-            stroke="none"
-            fill="none"
-            label={{
-              value: "Projections",
-              fontSize: "1.5rem",
-              fill: "#36a654",
-            }}
-          />
+          {showProjection && (
+            <ReferenceDot
+              y={dataMidPoint}
+              x={1 + (currYear + lastYear) / 2}
+              stroke="none"
+              fill="none"
+            />
+          )}
+          {showProjection && (
+            <ReferenceDot
+              y={dataMidPoint}
+              x={currYear + 8}
+              stroke="none"
+              fill="none"
+              label={{
+                value: "Projections",
+                fontSize: "1.5rem",
+                fill: "#36a654",
+              }}
+            />
+          )}
         </AreaChart>
       </ResponsiveContainer>
 
