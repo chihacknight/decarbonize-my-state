@@ -1,0 +1,221 @@
+import React, { useState } from "react"
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  Area,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts"
+
+/**
+ * Power sources from the bottom of the stack up. Carbon-free sources are at
+ * the bottom, so the top of their band is the carbon-free share. Colors match
+ * the power sources pie chart (see state-details.css)
+ */
+const fuels = [
+  { key: "nuclear", name: "Nuclear", color: "#df554a", clean: true },
+  { key: "hydro_electric", name: "Hydropower", color: "#1983d7", clean: true },
+  { key: "wind", name: "Wind", color: "#1fc3d9", clean: true },
+  { key: "all_solar", name: "Solar", color: "#ffc702", clean: true },
+  { key: "natural_gas", name: "Natural Gas", color: "#90684b", clean: false },
+  { key: "coal", name: "Coal", color: "#333333", clean: false },
+  { key: "petro_liquids", name: "Petroleum", color: "#bd732a", clean: false },
+]
+
+// The same green as the carbon-free ring in the power sources pie chart
+const carbonFreeColor = "#28ac28"
+
+/** Each view's data key suffix, axis and value formatting */
+const modes = {
+  share: {
+    label: "Share (%)",
+    suffix: "Pct",
+    format: value => `${value.toFixed(1)}%`,
+    axis: {
+      domain: [0, 100],
+      ticks: [0, 25, 50, 75, 100],
+      tickFormatter: value => `${value}%`,
+    },
+  },
+  total: {
+    label: "Total (TWh)",
+    suffix: "Twh",
+    format: value => `${value.toFixed(1)} TWh`,
+    axis: { tickFormatter: value => `${value}` },
+  },
+}
+
+/** A compact tooltip listing each source, top of the stack first */
+const PowerMixTooltip = ({ active, payload, label, mode }) => {
+  if (!active || !payload || !payload.length) {
+    return null
+  }
+
+  const row = payload[0].payload
+  const { suffix, format } = modes[mode]
+
+  return (
+    <div className="chart-tooltip">
+      <div className="chart-tooltip-year">{label}</div>
+      <table>
+        <tbody>
+          <tr className="chart-tooltip-total">
+            <td>
+              <span
+                className="chart-tooltip-swatch"
+                style={{ background: carbonFreeColor }}
+              />
+              Carbon-Free
+            </td>
+            <td className="chart-tooltip-value">
+              {format(row[`carbonFree${suffix}`])}
+            </td>
+          </tr>
+          {/* A swatch rather than colored text, since solar's yellow and
+              wind's light blue are hard to read as text */}
+          {[...fuels].reverse().map(fuel => (
+            <tr key={fuel.key}>
+              <td>
+                <span
+                  className="chart-tooltip-swatch"
+                  style={{ background: fuel.color }}
+                />
+                {fuel.name}
+              </td>
+              <td className="chart-tooltip-value">
+                {format(row[`${fuel.key}${suffix}`])}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/**
+ * A filled area chart of each power source's generation over time, as a share
+ * of all generation or as a total, with a green line along the top of the
+ * carbon-free sources.
+ *
+ * Shares are calculated from generation (GWh) rather than the rounded
+ * `_percent` fields, so each year adds up to exactly 100%.
+ *
+ * @param generationByYear An array, in any order, of
+ *
+ * {
+ *   year: number;
+ *   coal: number;
+ *   natural_gas: number;
+ *   petro_liquids: number;
+ *   nuclear: number;
+ *   hydro_electric: number;
+ *   all_solar: number;
+ *   wind: number;
+ * }
+ */
+const PowerMixChart = ({ generationByYear }) => {
+  const [mode, setMode] = useState("share")
+  // Fading fossil fuels helps the carbon-free share stand out
+  const [fadeFossil, setFadeFossil] = useState(true)
+  const { suffix, axis } = modes[mode]
+
+  // Every source as a share (e.g. coalPct) and a total in TWh (e.g. coalTwh),
+  // plus the carbon-free sum of each
+  const data = [...generationByYear]
+    .sort((a, b) => a.year - b.year)
+    .map(row => {
+      const totalGwh = fuels.reduce((acc, { key }) => acc + row[key], 0)
+      const values = { year: row.year, carbonFreePct: 0, carbonFreeTwh: 0 }
+      fuels.forEach(({ key, clean }) => {
+        values[`${key}Pct`] = totalGwh > 0 ? (row[key] / totalGwh) * 100 : 0
+        values[`${key}Twh`] = row[key] / 1000
+        if (clean) {
+          values.carbonFreePct += values[`${key}Pct`]
+          values.carbonFreeTwh += values[`${key}Twh`]
+        }
+      })
+      return values
+    })
+
+  return (
+    <div>
+      <div className="power-mix-controls">
+        <div
+          className="power-mix-toggle"
+          role="group"
+          aria-label="Show power generation as"
+        >
+          {Object.entries(modes).map(([key, { label }]) => (
+            <button
+              key={key}
+              type="button"
+              className={mode === key ? "-active" : ""}
+              aria-pressed={mode === key}
+              onClick={() => setMode(key)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={fadeFossil}
+            onChange={event => setFadeFossil(event.target.checked)}
+          />
+          Fade fossil fuels
+        </label>
+      </div>
+
+      <div className="power-mix-chart">
+        <ResponsiveContainer>
+          <ComposedChart
+            data={data}
+            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="year" />
+            <YAxis {...axis} />
+            <Tooltip content={<PowerMixTooltip mode={mode} />} />
+            <Legend verticalAlign="bottom" />
+            {fuels.map(({ key, name, color, clean }) => {
+              const faded = fadeFossil && !clean
+              return (
+                <Area
+                  key={key}
+                  type="linear"
+                  dataKey={`${key}${suffix}`}
+                  name={name}
+                  stackId="mix"
+                  stroke={color}
+                  strokeOpacity={faded ? 0.3 : 1}
+                  fill={color}
+                  fillOpacity={faded ? 0.2 : 0.85}
+                  isAnimationActive={false}
+                />
+              )
+            })}
+            {/* Not stacked, so it sits along the top of the carbon-free band */}
+            <Line
+              type="linear"
+              dataKey={`carbonFree${suffix}`}
+              name="Carbon-Free"
+              stroke={carbonFreeColor}
+              strokeWidth={3}
+              dot={false}
+              isAnimationActive={false}
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+
+export default PowerMixChart
