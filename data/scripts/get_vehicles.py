@@ -18,7 +18,17 @@ if __name__ == '__main__':
     us_vehicles['Cars_All'] = us_vehicles[FUEL_COLS].sum(axis=1)
     us_vehicles['EV_Registration'] = us_vehicles['ev']
 
+    # The headline stats use the latest year
+    latest = us_vehicles[us_vehicles['year'] == us_vehicles['year'].max()]
     cols_to_keep = ["state", "Cars_All", "EV_Registration"]
-    output = json.dumps(json_data_builder(us_vehicles[cols_to_keep], 'vehicles', is_array=False))
+    vehicles = json_data_builder(latest[cols_to_keep], 'vehicles', is_array=False)
 
-    print(output)
+    # Every year for the EV growth chart, oldest first
+    by_year = json_data_builder(
+        us_vehicles.sort_values('year')[["state", "year", "Cars_All", "EV_Registration"]],
+        'vehicles', array_key='byYear')
+    by_year = {row['state']: row['byYear'] for row in by_year}
+    for row in vehicles:
+        row['byYear'] = by_year[row['state']]
+
+    print(json.dumps(vehicles))

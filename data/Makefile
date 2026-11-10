@@ -28,13 +28,14 @@ final/buildings/buildings.json : raw/acs_house_heating_fuel.dat
 final/vehicles/vehicles.json : raw/afdc_vehicle_registrations.csv
 	python scripts/get_vehicles.py $< > $@
 
-# Not part of `all` - regenerates the raw CSV from a saved copy of the AFDC
-# vehicle registration page, e.g. `make update-vehicles-raw AFDC_HTML=afdc_vehicle_registration.html`
+# Not part of `all` - adds or replaces years in the raw CSV from saved copies of
+# the AFDC vehicle registration page (one per year), keeping the other years, e.g.
+# `make update-vehicles-raw AFDC_HTML="afdc_2024.html afdc_2025.html"`
 # See UPDATE_PROCESS.md
 .PHONY : update-vehicles-raw
 update-vehicles-raw :
-	@test -n "$(AFDC_HTML)" || (echo "Set AFDC_HTML to the path of the saved AFDC vehicle registration page" && exit 1)
-	python scripts/convert_afdc_registrations.py $(AFDC_HTML) > afdc_vehicle_registrations.csv
+	@test -n "$(AFDC_HTML)" || (echo "Set AFDC_HTML to the path(s) of the saved AFDC vehicle registration pages" && exit 1)
+	python scripts/convert_afdc_registrations.py --existing raw/afdc_vehicle_registrations.csv $(AFDC_HTML) > afdc_vehicle_registrations.csv
 	mv afdc_vehicle_registrations.csv raw/afdc_vehicle_registrations.csv
 
 final/power_plants/power_plants.json : raw/power_plants_and_communities.csv

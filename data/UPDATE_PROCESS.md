@@ -78,13 +78,13 @@ The "Vehicles Electrified" stat comes from the AFDC's [Vehicle Registration Coun
 
 We use AFDC for both numbers: EVs are the "Electric (EV)" column (all-electric only, plug-in hybrids aren't counted), and the total is every fuel type added up. Using one source keeps both numbers the same year and the same definition of a light-duty vehicle.
 
-AFDC only publishes the latest year as a table on that page (its downloadable spreadsheets lag a year or more behind), so we convert a saved copy of the page to `raw/afdc_vehicle_registrations.csv` with `scripts/convert_afdc_registrations.py`.
+AFDC publishes each year as a table on that page, picked with `?year=` (its downloadable spreadsheets lag a year or more behind), so we convert saved copies of the page to `raw/afdc_vehicle_registrations.csv` with `scripts/convert_afdc_registrations.py`. The raw CSV keeps every year from **2016** (the first AFDC publishes) to the latest. The headline stats use the latest year, and the EV growth chart on each state page uses all of them (`byYear` in `vehicles.json`).
 
 ### Updating to a new AFDC release
 
 1. Open the [AFDC vehicle registration page](https://afdc.energy.gov/vehicle-registration) and check that it shows the newest year.
 2. Save the page into this `data/` folder as `afdc_vehicle_registration.html` (in most browsers, File > Save Page As, "Webpage, HTML Only"). HTML files here are ignored by git.
-3. Convert the page into the raw CSV, then rebuild the final JSON:
+3. Add the new year to the raw CSV, then rebuild the final JSON. Years already in the raw CSV are kept, and a year in the page replaces the same year in the CSV (AFDC sometimes revises past years):
 
    ```bash
    make update-vehicles-raw AFDC_HTML=afdc_vehicle_registration.html
@@ -92,8 +92,10 @@ AFDC only publishes the latest year as a table on that page (its downloadable sp
    ```
 
    Or with Docker: `docker-compose run --rm --entrypoint "make update-vehicles-raw final/vehicles/vehicles.json AFDC_HTML=afdc_vehicle_registration.html" make`
-4. Delete the HTML file from `data/`.
-5. Update the `vehicles` entry in `src/constants/source-citations.js` (title year and date).
+
+   To re-pull several years, save each one (`https://afdc.energy.gov/vehicle-registration?year=2016` and so on) and pass them all, e.g. `AFDC_HTML="afdc_2016.html afdc_2017.html"`.
+4. Delete the HTML files from `data/`.
+5. Update the `vehicles` entry in `src/constants/source-citations.js` (title year range and date).
 6. Update the year in the first paragraph of this section.
 
 ## Home heating
