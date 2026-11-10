@@ -13,6 +13,7 @@
 
 import { execFileSync } from "node:child_process"
 import { readFileSync, writeFileSync } from "node:fs"
+import { createRequire } from "node:module"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -377,7 +378,16 @@ const output = {
   places,
 }
 
-writeFileSync(join(ROOT, OUT_PATH), JSON.stringify(output, null, 1) + "\n")
+// Format with the repo's Prettier config, since `yarn test` checks src JSON
+const prettier = createRequire(import.meta.url)("prettier")
+const outFile = join(ROOT, OUT_PATH)
+writeFileSync(
+  outFile,
+  prettier.format(JSON.stringify(output), {
+    ...prettier.resolveConfig.sync(outFile),
+    parser: "json",
+  })
+)
 
 const top = [...ranked].sort((a, b) => a.rank - b.rank)
 console.log(`Wrote ${OUT_PATH} (${places.length} places)`)
