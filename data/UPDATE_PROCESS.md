@@ -119,3 +119,16 @@ The file is small (~500KB), so we commit it as downloaded to `raw/acs_house_heat
    Or with Docker: `docker-compose run --rm --entrypoint "make final/buildings/buildings.json" make`
 4. Update the `home-heating` entry in `src/constants/source-citations.js` (title year, date and the `ACSDT1Y<year>` part of the link).
 5. Update the year and release dates in the first paragraph of this section.
+
+## Data updates page
+
+The [data updates page](https://decarbmystate.com/data-updates) (`src/pages/data-updates.js`) shows how each state's key stats changed with the 2020 to 2025 data update. It reads a frozen snapshot, `src/data/data-updates/2020-2025.json`, made by `scripts/build-data-update.mjs`.
+
+The script compares the site's stats at `BASE_REF` (default `main`) with the working tree, so run it on a data update branch before it's merged:
+
+```bash
+node scripts/build-data-update.mjs
+```
+
+After the merge `main` already has the new data, so to rebuild the snapshot later set `BASE_REF` to the commit before the merge: `BASE_REF=<commit> node scripts/build-data-update.mjs`.
+
