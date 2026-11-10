@@ -609,10 +609,6 @@ footer a {
   font-size: 0.8rem;
 }
 
-.ev-growth-chart .recharts-yAxis text {
-  font-weight: bold;
-}
-
 /* The all vehicles legend entry (the last line) toggles its line */
 .ev-growth-chart .legend-item-2 {
   cursor: pointer;

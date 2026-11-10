@@ -12,6 +12,8 @@ import {
 
 // Darker than the site's electrified green so the axis labels are readable
 const evColor = "#2e7d32"
+// A separate blue so the share axis isn't confused with the EV count axis
+const shareColor = "#1565c0"
 const allVehiclesColor = "#7a7a7a"
 
 /** 164900 -> "165K", 10304900 -> "10.3M" */
@@ -34,7 +36,7 @@ const tooltipRows = [
   {
     key: "evSharePct",
     name: "EV Fleet Share",
-    color: evColor,
+    color: shareColor,
     format: value => `${value.toFixed(1)}%`,
   },
   {
@@ -104,6 +106,8 @@ const EvGrowthChart = ({ byYear }) => {
           <XAxis dataKey="year" />
           <YAxis
             yAxisId="count"
+            // Only the EV count axis is bold, the share axis stays regular
+            tick={{ fontWeight: "bold" }}
             tickFormatter={value => compactNumber.format(value)}
             stroke={evColor}
           />
@@ -113,7 +117,7 @@ const EvGrowthChart = ({ byYear }) => {
             domain={[0, 100]}
             ticks={[0, 25, 50, 75, 100]}
             tickFormatter={value => `${value}%`}
-            stroke={evColor}
+            stroke={shareColor}
           />
           <Tooltip content={<EvGrowthTooltip />} />
           <Legend
@@ -139,7 +143,7 @@ const EvGrowthChart = ({ byYear }) => {
             yAxisId="share"
             dataKey="evSharePct"
             name="EV Fleet Share (right axis)"
-            stroke={evColor}
+            stroke={shareColor}
             strokeWidth={2}
             strokeDasharray="6 4"
             dot={false}
