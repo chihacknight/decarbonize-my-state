@@ -13,6 +13,7 @@ import { getTerminologyHover } from "../constants/terminology-list"
 
 import AlreadyElectrifiedChart from "./already-electrified-chart"
 import PowerSourcesChart from "./power-sources-chart"
+import EvGrowthChart from "./ev-growth-chart"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -123,6 +124,7 @@ export default function StateDetailsPage({ location, data }) {
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
+    byYear: vehiclesByYear,
   } = data.allVehiclesJson.edges[0].node
 
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
@@ -607,9 +609,24 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={pctEv}
               fossilPct={pctNonEv}
             />
+
+            <h3 className="h6 mt-5 mb-3">
+              EV Growth in {placeTitle} ({vehiclesByYear[0].year}–
+              {vehiclesByYear[vehiclesByYear.length - 1].year})
+            </h3>
+            <EvGrowthChart byYear={vehiclesByYear} />
             <span className="mt-4 text-secondary keyText">
               Source: {getShortCitation("vehicles")}
             </span>
+            {/* Explains the asterisk on "All Vehicles" in the chart. A div, not
+                a p, so it matches the source line's size */}
+            <div className="mt-2 text-secondary keyText">
+              *All Vehicles counts every registered light-duty vehicle (cars,
+              SUVs, pickups and vans) of any fuel type. Heavy trucks, buses and
+              motorcycles aren't included. Light-duty vehicles make up the
+              majority of transportation emissions (about 57% nationally, per
+              the EPA).
+            </div>
           </div>
 
           <div
@@ -1034,6 +1051,11 @@ export const query = graphql`
         node {
           Cars_All
           EV_Registration
+          byYear {
+            year
+            Cars_All
+            EV_Registration
+          }
         }
       }
     }

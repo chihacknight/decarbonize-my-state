@@ -50,7 +50,8 @@ const sourceCitations = [
   },
   {
     slug: "vehicles",
-    title: "Light-Duty Vehicle Registration Counts by State and Fuel Type 2025",
+    title:
+      "Light-Duty Vehicle Registration Counts by State and Fuel Type 2016–2025",
     source: "U.S. Department of Energy, Alternative Fuels Data Center",
     source_short: "AFDC",
     date: "2025",
