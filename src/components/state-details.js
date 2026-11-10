@@ -14,6 +14,7 @@ import { getTerminologyHover } from "../constants/terminology-list"
 import AlreadyElectrifiedChart from "./already-electrified-chart"
 import PowerSourcesChart from "./power-sources-chart"
 import EvGrowthChart from "./ev-growth-chart"
+import PowerMixChart from "./power-mix-chart"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -164,6 +165,22 @@ export default function StateDetailsPage({ location, data }) {
 
   // Sort by newest first and grab the first record to get the latest generation
   const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0]
+
+  const firstGenerationYear = generationByYear[generationByYear.length - 1].year
+
+  // Shown under the latest year's pie chart in both power sections
+  const powerMixSection = (
+    <>
+      <h3 className="h6 mt-6 mb-3">
+        Power Generation Mix in {placeTitle} ({firstGenerationYear}–
+        {latestGeneration.year})
+      </h3>
+      <PowerMixChart generationByYear={generationByYear} />
+      <span className="mt-2 text-secondary keyText">
+        Source: {getShortCitation("power-generation")}
+      </span>
+    </>
+  )
 
   const carbonFreePercent =
     latestGeneration.all_solar_percent +
@@ -697,6 +714,8 @@ export default function StateDetailsPage({ location, data }) {
                 placeTitle={placeTitle}
               ></PowerSourcesChart>
 
+              {powerMixSection}
+
               {carbonFreePercent > 0 && (
                 <p className="mt-6">
                   But there's already{" "}
@@ -908,6 +927,8 @@ export default function StateDetailsPage({ location, data }) {
                 latestGeneration={latestGeneration}
                 placeTitle={placeTitle}
               ></PowerSourcesChart>
+
+              {powerMixSection}
 
               <div className="mt-6 text-center">
                 <p className="h6 mt-3">

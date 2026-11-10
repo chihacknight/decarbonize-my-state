@@ -2,12 +2,14 @@ import React, { useRef } from "react"
 
 import { slugToTitle } from "../../helper-functions"
 import SimpleAreaChart from "../simpleareachart"
+import PowerMixChart from "../power-mix-chart"
 import {
   SECTOR_LABELS,
   FUEL_LABELS,
   Chevron,
   Delta,
   EmissionsBars,
+  Lazy,
   PowerPies,
   ThreeWay,
   StatTile,
@@ -125,6 +127,12 @@ function Stats({
         labels={FUEL_LABELS}
         higherIsBetter={fuel => CLEAN_FUELS.includes(fuel)}
       />
+      {/* The same power mix chart as the state pages, from the new source */}
+      <Lazy height={320}>
+        <div className="power-mix-trend">
+          <PowerMixChart generationByYear={place.generationByYear} />
+        </div>
+      </Lazy>
 
       {/* Total generation is the carbon-free share's denominator, so growth
           in fossil generation can lower the share even as clean power grows */}

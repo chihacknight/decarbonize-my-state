@@ -57,14 +57,14 @@ const EvGrowthTooltip = ({ active, payload, label }) => {
   const row = payload[0].payload
 
   return (
-    <div className="ev-growth-tooltip">
-      <div className="ev-growth-tooltip-year">{label}</div>
+    <div className="chart-tooltip">
+      <div className="chart-tooltip-year">{label}</div>
       <table>
         <tbody>
           {tooltipRows.map(({ key, name, color, format }) => (
             <tr key={key} style={{ color }}>
               <td>{name}</td>
-              <td className="ev-growth-tooltip-value">{format(row[key])}</td>
+              <td className="chart-tooltip-value">{format(row[key])}</td>
             </tr>
           ))}
         </tbody>
