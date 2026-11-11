@@ -22,8 +22,15 @@ update-emissions-raw :
 	python scripts/convert_epa_workbook.py $(EPA_ZIP) > epa_state_ghg.csv
 	mv epa_state_ghg.csv raw/epa_state_ghg_by_econ_sector.csv
 
-final/buildings/buildings.json : raw/acs_house_heating_fuel.dat
+final/buildings/buildings.json : raw/acs_house_heating_fuel.csv
 	python scripts/get_buildings.py $< > $@
+
+# Not part of `all` - refetches every year of the raw heating fuel CSV from the
+# Census API, which needs CENSUS_API_KEY in data/.env. See UPDATE_PROCESS.md
+.PHONY : update-buildings-raw
+update-buildings-raw :
+	python scripts/fetch_acs_heating_fuel.py > acs_house_heating_fuel.csv
+	mv acs_house_heating_fuel.csv raw/acs_house_heating_fuel.csv
 	
 final/vehicles/vehicles.json : raw/afdc_vehicle_registrations.csv
 	python scripts/get_vehicles.py $< > $@

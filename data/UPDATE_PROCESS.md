@@ -68,9 +68,19 @@ The bulk file (`ELEC.zip`) is ~300MB, so we convert it to `raw/eia_state_net_gen
 
 The "MWs of Wind and Solar Built" stat compares each state's wind and solar targets (`raw/state_renewable_gen_targets.csv`) with how much wind and solar it generates today. `scripts/get_target_generations.py` takes "today" from the latest year of the [power generation](#power-generation) data (`all_solar`, which includes small-scale solar, and `wind`), so this updates automatically when the power generation data does. Run `make final/target_generation/target_generation.json` after updating it.
 
-Everything here is **generation in GWh per year**, not installed capacity. The site converts to "MW" by dividing by the hours in a year, so these are average MW. Don't compare them with nameplate capacity figures (e.g. state clean energy dashboards), which run about 3x higher for wind and 4-5x higher for solar.
+The targets and current values are **generation in GWh per year**. The MW the site shows are capacity estimated from them with national capacity factors (see below), so they're roughly comparable with nameplate capacity figures (e.g. state clean energy dashboards), but won't match exactly: real capacity factors vary by state and plant.
 
 The targets (`total_gen_by_solar`, `total_gen_by_wind`) were added in April 2022 and their source isn't recorded. They appear to be sized to roughly double each state's electricity use. Percent built is current / target per source, capped at 100%, and the bar shows the average of the solar and wind percentages.
+
+### Capacity (MW) estimates
+
+The targets and generation are yearly energy (GWh), but the state page talks about MW of capacity to build. `get_target_generations.py` converts each GWh value to capacity: GWh ÷ 8,760 hours gives average output, and dividing by the **capacity factor** (the share of its capacity a plant produces on average) gives the capacity needed. It writes the factors, the target and current MW, and each year's estimated capacity (`capacityByYear`, for the wind and solar built chart) to `target_generation.json`.
+
+We use national averages for utility-scale plants from EIA's [Electric Power Monthly, Table 6.07.B](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_b), currently **2025** (wind 33.8%, solar 24.0%). To update them once EIA finalizes a new year:
+
+1. Update `WIND_CAPACITY_FACTOR` and `SOLAR_CAPACITY_FACTOR` in `scripts/get_target_generations.py`, and the year in its comment.
+2. Run `make final/target_generation/target_generation.json`.
+3. Update the numbers and year in the FAQ answer "How do you figure out how many megawatts and turbines to build?" (`src/pages/faq.js`) and in this section.
 
 ## Vehicles
 
@@ -100,25 +110,34 @@ AFDC publishes each year as a table on that page, picked with `?year=` (its down
 
 ## Home heating
 
-The buildings section ("X% of homes already heat without burning any fuel") comes from the Census Bureau's American Community Survey (ACS) 1-year estimates, table **B25040 House Heating Fuel**, currently **2024** (released September 2025). It's the number of occupied homes in each state by main heating fuel. The Census releases a new year every fall (2025 data is scheduled for October 29, 2026).
+The buildings section ("X% of homes already heat without burning any fuel") and its chart over time come from the Census Bureau's American Community Survey (ACS) 1-year estimates, table **B25040 House Heating Fuel**, currently covering **2005–2025** (2025 released October 2026). It's the number of occupied homes in each state by main heating fuel. The headline stats use the latest year. The Census releases a new year every fall.
+
+There's no 2020: the Census didn't publish standard 1-year estimates that year because of COVID, so the chart draws a dashed line over it.
 
 We only track each home's **main heating source**, not stoves, water heaters or commercial buildings. Homes heated with electricity or solar, or that don't use any heating fuel (common in Hawaii and Florida), count as already fossil-free. Homes heated with gas, propane, fuel oil, coal, wood or other fuels count as still to electrify. See `get_buildings.py`.
 
-The file is small (~500KB), so we commit it as downloaded to `raw/acs_house_heating_fuel.dat`. No conversion step is needed.
+These are survey estimates, so each comes with a margin of error (90% confidence). We keep the margins in `raw/acs_house_heating_fuel.csv` and the chart shades them, since small states' year-to-year changes can be mostly noise.
 
 ### Updating to a new ACS release
 
-1. Go to the [ACS table-based summary file](https://www2.census.gov/programs-surveys/acs/summary_file/) folder, then `<year>/table-based-SF/data/1YRData/`.
-2. Download `acsdt1y<year>-b25040.dat` and save it over `raw/acs_house_heating_fuel.dat`.
-3. Rebuild the final JSON:
+The raw CSV comes from the [Census API](https://www.census.gov/data/developers/data-sets/acs-1year.html), one request per year for every state. It needs a free API key in `data/.env` (see [Environment variables](../README.md#environment-variables)).
+
+1. Refetch every year (re-fetching all of them picks up any Census revisions too):
+
+   ```bash
+   make update-buildings-raw
+   ```
+
+   This saves `raw/acs_house_heating_fuel.csv`, from last year back to 2005. If last year isn't released yet, it's skipped.
+2. Rebuild the final JSON:
 
    ```bash
    make final/buildings/buildings.json
    ```
 
    Or with Docker: `docker-compose run --rm --entrypoint "make final/buildings/buildings.json" make`
-4. Update the `home-heating` entry in `src/constants/source-citations.js` (title year, date and the `ACSDT1Y<year>` part of the link).
-5. Update the year and release dates in the first paragraph of this section.
+3. Update the `home-heating` entry in `src/constants/source-citations.js` (title years, date and the `ACSDT1Y<year>` part of the link).
+4. Update the years and release date in the first paragraph of this section.
 
 ## Data updates page
 

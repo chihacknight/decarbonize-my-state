@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
 
-import { slugToTitle } from "../helper-functions"
+import { slugToTitle, numberToHumanString } from "../helper-functions"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -15,6 +15,10 @@ import AlreadyElectrifiedChart from "./already-electrified-chart"
 import PowerSourcesChart from "./power-sources-chart"
 import EvGrowthChart from "./ev-growth-chart"
 import InfoHover from "./info-hover"
+import PowerMixChart from "./power-mix-chart"
+import RenewablesProgressChart from "./renewables-progress-chart"
+import HeatingTrendChart from "./heating-trend-chart"
+import ChartDetails from "./chart-details"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -31,34 +35,6 @@ import PowerPlantMap from "../images/dirty-power-plants.jpg"
 
 // New images
 import DirtyPowerPlantImg from "../images/dirty-power-plant.png"
-
-/**
- * Converts a very large number to a more readable string.
- *
- * 2_114_602 -> '2.1 million'
- * 76_125 -> '76 thousand'
- */
-function numberToHumanString(num) {
-  // Return clear error string if the number is null or undefined
-  if (num === undefined || num === null) {
-    return "?"
-  }
-
-  // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
-  // 76 thousand
-  if (num > 1_000 && num < 1_000_000) {
-    return `${Math.round(num / 1_000)},000`
-  }
-  // If in the millions return '${rounded_num_one_decimal} millions', e.g.
-  // 2_114_602 -> 2.1 million
-  else if (num > 1_000_000 && num < 1_000_000_000) {
-    return `${(num / 1_000_000).toFixed(1)} million`
-  }
-
-  // If in the hundreds or something else, return rounded to an integer
-  // (e.g 534.451312 -> 534)
-  return Math.round(num)
-}
 
 const currentYear = new Date().getFullYear()
 
@@ -148,6 +124,7 @@ export default function StateDetailsPage({ location, data }) {
     homes,
     fossilHeatingPct,
     fossilFreeHeatingPct,
+    byYear: heatingByYear,
   } = data.allBuildingsJson.edges[0].node
 
   // calculate homes whose heating is left to electrify
@@ -166,6 +143,25 @@ export default function StateDetailsPage({ location, data }) {
   // Sort by newest first and grab the first record to get the latest generation
   const latestGeneration = generationByYear.sort((a, b) => b.year - a.year)[0]
 
+  const firstGenerationYear = generationByYear[generationByYear.length - 1].year
+
+  // Shown under the latest year's pie chart in both power sections, with one
+  // source line under both, like the other sections
+  const powerMixSection = (
+    <>
+      <ChartDetails
+        className="mt-6"
+        label="View Power Generation Trends"
+        title={`Power Generation Mix in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
+      >
+        <PowerMixChart generationByYear={generationByYear} />
+      </ChartDetails>
+      <span className="mt-4 text-secondary keyText">
+        Source: {getShortCitation("power-generation")}
+      </span>
+    </>
+  )
+
   const carbonFreePercent =
     latestGeneration.all_solar_percent +
     latestGeneration.hydro_electric_percent +
@@ -175,35 +171,22 @@ export default function StateDetailsPage({ location, data }) {
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
 
-  // deconstruct object for simplicity
+  // deconstruct object for simplicity. The _mw values are the capacity it
+  // takes to generate each target or current GWh a year, estimated with
+  // national capacity factors in get_target_generations.py
   const {
-    total_gen_by_solar: targetGenBySolar,
     total_gen_by_wind: targetGenByWind,
-    current_solar: currentSolar,
-    current_wind: currentWind,
     perc_solar_target: percSolarTarget,
     perc_wind_target: percWindTarget,
+    wind_capacity_factor: windCapacityFactor,
+    solar_capacity_factor: solarCapacityFactor,
+    target_wind_mw: targetGenByWindMW,
+    target_solar_mw: targetGenBySolarMW,
+    current_wind_mw: currentWindMW,
+    current_solar_mw: currentSolarMW,
+    capacityByYear,
   } = targetBuilds
 
-  // The targets and current generation are yearly energy in GWh, but we talk
-  // about how many MW of wind and solar to build, which means capacity (the
-  // most a generator can produce at once). Spreading GWh over every hour of the
-  // year gives average output in MW. Wind and solar only produce a fraction of
-  // their capacity on average (their capacity factor), so divide by that to get
-  // the capacity needed. We use national averages, as capacity factors vary by
-  // state. Source: EIA Electric Power Monthly Table 6.07.B, 2025 utility scale.
-  const hoursPerYear = 24 * 365
-  const windCapacityFactor = 0.338
-  const solarCapacityFactor = 0.24
-  const gwhToCapacityMw = (gwh, capacityFactor) =>
-    ((gwh / hoursPerYear) * 1000) / capacityFactor
-  const targetGenBySolarMW = gwhToCapacityMw(
-    targetGenBySolar,
-    solarCapacityFactor
-  )
-  const targetGenByWindMW = gwhToCapacityMw(targetGenByWind, windCapacityFactor)
-  const currentSolarMW = gwhToCapacityMw(currentSolar, solarCapacityFactor)
-  const currentWindMW = gwhToCapacityMw(currentWind, windCapacityFactor)
   const solarToBuildMw = targetGenBySolarMW - currentSolarMW
   const windToBuildMw = targetGenByWindMW - currentWindMW
 
@@ -530,10 +513,24 @@ export default function StateDetailsPage({ location, data }) {
               . That's around {homesPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Homes Heating Without Fuel"}
+              label={"Homes With Electric Heating*"}
               electrifiedPct={fossilFreeHeatingPct}
               fossilPct={fossilHeatingPct}
             />
+            <ChartDetails
+              className="mt-5"
+              label="View Home Heating Trends"
+              title={`Homes With Electric Heating* in ${placeTitle} (${
+                heatingByYear[0].year
+              }–${heatingByYear[heatingByYear.length - 1].year})`}
+              note={
+                "The shaded bands are the survey's margin of error, and lines " +
+                "are dashed where 2020 data is missing. A falling share can " +
+                "mean more homes heating with fuel, not fewer with electric heat."
+              }
+            >
+              <HeatingTrendChart byYear={heatingByYear} />
+            </ChartDetails>
             <p className="mt-4 h6 text-muted">
               This counts each home's main heating source. Stoves, water
               heaters, and businesses aren't included yet.
@@ -541,6 +538,13 @@ export default function StateDetailsPage({ location, data }) {
             <span className="mt-4 text-secondary keyText">
               Source: {getShortCitation("home-heating")}
             </span>
+            {/* Explains the asterisk on "Electric Heating". A div, not a p, so
+                it matches the source line's size */}
+            <div className="mt-2 text-secondary keyText">
+              *Electric heating also counts homes heated by solar and homes with
+              no heating at all (common in Hawaii and Florida), since neither
+              burns fuel.
+            </div>
           </div>
 
           <div
@@ -630,23 +634,27 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={pctNonEv}
             />
 
-            <h3 className="h6 mt-5 mb-3">
-              EV Growth in {placeTitle} ({vehiclesByYear[0].year}–
-              {vehiclesByYear[vehiclesByYear.length - 1].year})
-            </h3>
-            <EvGrowthChart byYear={vehiclesByYear} />
+            <ChartDetails
+              className="mt-5"
+              label="View EV Growth Trends"
+              title={`EV Growth in ${placeTitle} (${vehiclesByYear[0].year}–${
+                vehiclesByYear[vehiclesByYear.length - 1].year
+              })`}
+            >
+              <EvGrowthChart byYear={vehiclesByYear} />
+              {/* Explains the asterisk on "All Vehicles" in the chart. A div,
+                  not a p, so it matches the source line's size */}
+              <div className="mt-2 text-secondary keyText">
+                *All Vehicles counts every registered light-duty vehicle (cars,
+                SUVs, pickups and vans) of any fuel type. Heavy trucks, buses
+                and motorcycles aren't included. Light-duty vehicles make up the
+                majority of transportation emissions (about 57% nationally, per
+                the EPA).
+              </div>
+            </ChartDetails>
             <span className="mt-4 text-secondary keyText">
               Source: {getShortCitation("vehicles")}
             </span>
-            {/* Explains the asterisk on "All Vehicles" in the chart. A div, not
-                a p, so it matches the source line's size */}
-            <div className="mt-2 text-secondary keyText">
-              *All Vehicles counts every registered light-duty vehicle (cars,
-              SUVs, pickups and vans) of any fuel type. Heavy trucks, buses and
-              motorcycles aren't included. Light-duty vehicles make up the
-              majority of transportation emissions (about 57% nationally, per
-              the EPA).
-            </div>
           </div>
 
           <div
@@ -707,7 +715,7 @@ export default function StateDetailsPage({ location, data }) {
                 <em>today</em>.
               </p>
 
-              <h3 className="h6 mt-5 mb-4">
+              <h3 className="chart-title mt-5">
                 Power Generation in the State of {placeTitle} (
                 {latestGeneration.year})
               </h3>
@@ -715,7 +723,10 @@ export default function StateDetailsPage({ location, data }) {
               <PowerSourcesChart
                 latestGeneration={latestGeneration}
                 placeTitle={placeTitle}
+                showSource={false}
               ></PowerSourcesChart>
+
+              {powerMixSection}
 
               {carbonFreePercent > 0 && (
                 <p className="mt-6">
@@ -875,6 +886,22 @@ export default function StateDetailsPage({ location, data }) {
                   fossilPct={totalRemaining}
                 />
               </p>
+              {targetGenByWind !== undefined && (
+                <ChartDetails
+                  className="mt-5"
+                  label="View Wind and Solar Progress"
+                  title={`Wind and Solar Built vs. Target in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
+                  note="Megawatts of capacity, estimated from generation with national capacity factors."
+                >
+                  <RenewablesProgressChart
+                    capacityByYear={capacityByYear}
+                    targetWindMw={targetGenByWindMW}
+                    targetSolarMw={targetGenBySolarMW}
+                    annualWindMw={windTurbinesBuildPerYear}
+                    annualSolarMw={solarPanelsBuildPerYear}
+                  />
+                </ChartDetails>
+              )}
               <span className="mt-4 text-secondary keyText">
                 Source: {getShortCitation("power-generation")}
               </span>
@@ -933,7 +960,7 @@ export default function StateDetailsPage({ location, data }) {
                 )}
               </div>
 
-              <h3 className="h6 mt-5 mb-4">
+              <h3 className="chart-title mt-5">
                 Power Generation in the State of {placeTitle} (
                 {latestGeneration.year})
               </h3>
@@ -941,7 +968,10 @@ export default function StateDetailsPage({ location, data }) {
               <PowerSourcesChart
                 latestGeneration={latestGeneration}
                 placeTitle={placeTitle}
+                showSource={false}
               ></PowerSourcesChart>
+
+              {powerMixSection}
 
               <div className="mt-6 text-center">
                 <p className="h6 mt-3">
@@ -1064,6 +1094,16 @@ export const query = graphql`
           homes
           fossilHeatingPct
           fossilFreeHeatingPct
+          byYear {
+            year
+            homes
+            fossilFreeHeatingPct
+            fossilFreeHeatingPctMoe
+            fossilFreeHomes
+            fossilFreeHomesMoe
+            fossilHomes
+            fossilHomesMoe
+          }
         }
       }
     }
@@ -1133,12 +1173,20 @@ export const query = graphql`
     allTargetGenerationJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-          total_gen_by_solar
           total_gen_by_wind
-          current_wind
-          current_solar
           perc_solar_target
           perc_wind_target
+          wind_capacity_factor
+          solar_capacity_factor
+          target_wind_mw
+          target_solar_mw
+          current_wind_mw
+          current_solar_mw
+          capacityByYear {
+            year
+            wind_mw
+            solar_mw
+          }
         }
       }
     }

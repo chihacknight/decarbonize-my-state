@@ -2,12 +2,14 @@ import React, { useRef } from "react"
 
 import { slugToTitle } from "../../helper-functions"
 import SimpleAreaChart from "../simpleareachart"
+import PowerMixChart from "../power-mix-chart"
 import {
   SECTOR_LABELS,
   FUEL_LABELS,
   Chevron,
   Delta,
   EmissionsBars,
+  Lazy,
   PowerPies,
   ThreeWay,
   StatTile,
@@ -125,6 +127,12 @@ function Stats({
         labels={FUEL_LABELS}
         higherIsBetter={fuel => CLEAN_FUELS.includes(fuel)}
       />
+      {/* The same power mix chart as the state pages, from the new source */}
+      <Lazy height={320}>
+        <div className="power-mix-trend">
+          <PowerMixChart generationByYear={place.generationByYear} />
+        </div>
+      </Lazy>
 
       {/* Total generation is the carbon-free share's denominator, so growth
           in fossil generation can lower the share even as clean power grows */}
@@ -167,7 +175,7 @@ function Stats({
           unit="%"
           caption={
             <>
-              NREL appliances <Chevron /> ACS 2024 heating
+              NREL appliances <Chevron /> Census 2025 heating
             </>
           }
         />
@@ -453,7 +461,7 @@ export default function DataUpdateReport({ data }) {
           <Chevron /> EIA {g.after}, fixed. <strong>EVs:</strong> AFDC 2020 /
           FHWA cars <Chevron /> AFDC 2025 / all light-duty.{" "}
           <strong>Homes:</strong> NREL appliances <Chevron />
-          Census ACS 2024 heating fuel.
+          Census American Community Survey 2025 heating fuel.
         </p>
         <p className="muted">Updated {data.generatedAt.slice(0, 10)}.</p>
       </footer>

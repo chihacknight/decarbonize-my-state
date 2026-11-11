@@ -1,0 +1,283 @@
+/**
+ * Styles shared by the trend charts on state pages (power mix, EV growth, wind
+ * and solar built, home heating): titles, collapsible panels, controls and
+ * tooltips, plus each chart's size
+ */
+
+/** EV growth chart, EVs vs all vehicles over time **/
+.ev-growth-chart {
+  width: 100%;
+  /* The legend is below this, outside the chart */
+  height: 16rem;
+  /* Keep a wide tooltip from pushing past the page edge on small screens */
+  overflow: hidden;
+}
+
+.ev-growth-chart text {
+  font-size: 0.8rem;
+}
+
+/** Power mix chart, each power source's share of generation over time **/
+.power-mix-chart {
+  width: 100%;
+  /* The legend is below this, outside the chart */
+  height: 17rem;
+  /* Keep a wide tooltip from pushing past the page edge on small screens */
+  overflow: hidden;
+}
+
+.power-mix-chart text {
+  font-size: 0.8rem;
+}
+
+/* A legend below a chart in even columns on a light grey background, see
+   ChartLegend. It sets --legend-columns to its item count, up to 4 */
+.chart-legend {
+  display: grid;
+  grid-template-columns: repeat(var(--legend-columns, 4), auto);
+  justify-content: space-evenly;
+  gap: 0.25rem 1rem;
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.75rem;
+  list-style: none;
+  font-size: 0.8rem;
+  background-color: var(--light-grey);
+  border-radius: 0.375rem;
+}
+
+.chart-legend li {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* The state page spaces out bulleted lists (li + li in state-details.css),
+   which would push every legend item but the first down */
+ul.chart-legend li + li {
+  margin-top: 0;
+}
+
+.chart-legend-swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.35rem;
+  border-radius: 0.125rem;
+}
+
+/* Lines rather than squares, for series drawn as lines */
+.chart-legend-swatch.-line {
+  width: 1rem;
+  height: 0.2rem;
+  border-radius: 0.1rem;
+}
+
+.chart-legend-swatch.-dashed {
+  width: 1rem;
+  height: 0;
+  border-top: 0.15rem dashed;
+  border-radius: 0;
+}
+
+@media (max-width: 420px) {
+  .chart-legend {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+/* Toggles and checkboxes above a chart, used by the power mix, home heating
+   and EV growth charts */
+.chart-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.chart-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  cursor: pointer;
+}
+
+.chart-toggle {
+  display: inline-flex;
+  border: 1px solid var(--mid-grey);
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.chart-toggle button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-color-main);
+  background: var(--white);
+  border: none;
+}
+
+.chart-toggle button + button {
+  border-left: 1px solid var(--mid-grey);
+}
+
+.chart-toggle button.-active {
+  font-weight: bold;
+  color: var(--white);
+  background: var(--text-color-main);
+}
+
+/** Compact chart tooltip with right-aligned values, used by the trend charts **/
+.chart-tooltip {
+  padding: 0.35rem 0.5rem;
+  background: var(--white);
+  border: 1px solid var(--mid-grey);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.5rem var(--light-shadow-color);
+  font-size: 0.8rem;
+}
+
+.chart-tooltip-year {
+  font-weight: bold;
+  margin-bottom: 0.15rem;
+}
+
+.chart-tooltip table {
+  /* No gaps between rows, so grouping bars on consecutive rows join up */
+  border-collapse: collapse;
+}
+
+.chart-tooltip td {
+  padding: 0;
+}
+
+.chart-tooltip-swatch {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 0.35rem;
+  border-radius: 0.125rem;
+}
+
+.chart-tooltip-total td {
+  padding-bottom: 0.15rem !important;
+  font-weight: bold;
+}
+
+/* A heading row for a group of rows, like each source's rows */
+.chart-tooltip-group td {
+  padding-top: 0.25rem !important;
+  font-weight: bold;
+}
+
+.chart-tooltip-group:first-child td {
+  padding-top: 0 !important;
+}
+
+/* Rows under a group heading, lined up with its name after the swatch */
+.chart-tooltip-indent {
+  padding-left: 0.95rem !important;
+}
+
+/* Context after a value, like "8% of target" or a margin of error */
+.chart-tooltip-note {
+  padding-left: 0.5rem !important;
+  color: #6c757d;
+  white-space: nowrap;
+}
+
+/* Separates a total row from the rows below it */
+.chart-tooltip-spacer td {
+  height: 0.4rem;
+}
+
+/* A source row, with a colored bar on the left to group related sources */
+.chart-tooltip-source {
+  padding-left: 0.35rem !important;
+  border-left: 3px solid transparent;
+}
+
+.chart-tooltip-value {
+  padding-left: 0.75rem !important;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+}
+
+/** Chart titles, with an optional note below in smaller grey text. The note
+    is a div, so the state page's large paragraph size doesn't apply */
+.chart-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.chart-note {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+
+/* Tuck a note up under its title */
+.chart-title + .chart-note {
+  margin-top: -0.5rem;
+}
+
+/* A chart collapsed into a panel with a call to action header, see
+   ChartDetails */
+.chart-details {
+  border: 1px solid var(--mid-grey);
+  border-radius: 0.5rem;
+}
+
+.chart-details > summary {
+  padding: 0.75rem 1rem;
+  font-size: 1.0625rem;
+  font-weight: bold;
+  background-color: var(--light-grey);
+  /* Round the header itself rather than clip the panel, which could cut off
+     chart tooltips */
+  border-radius: calc(0.5rem - 1px);
+  cursor: pointer;
+}
+
+.chart-details-label {
+  margin-left: 5px;
+}
+
+.chart-details > summary:hover {
+  background-color: var(--mid-grey);
+}
+
+.chart-details[open] > summary {
+  border-bottom: 1px solid var(--mid-grey);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.chart-details-body {
+  padding: 1rem;
+}
+
+.chart-details-body > .chart-title:first-child {
+  margin-top: 0;
+}
+
+/** Wind and solar built vs target on state pages */
+.renewables-progress-chart {
+  width: 100%;
+  /* The legend is below this, outside the chart */
+  height: 18rem;
+  margin-top: 1rem;
+}
+
+/** Homes with electric heating over time, on state pages */
+.heating-trend-chart {
+  width: 100%;
+  height: 16rem;
+  margin-top: 1rem;
+}

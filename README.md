@@ -108,6 +108,20 @@ cd data
 docker-compose up --build
 ```
 
+### Environment variables
+
+A few data scripts need API keys. They read them from `data/.env`, which is gitignored, so keys never get committed. To set it up, copy the example and fill in the keys you need:
+
+```bash
+cp data/.env.example data/.env
+```
+
+| Variable | Used by | How to get it |
+|---|---|---|
+| `CENSUS_API_KEY` | `make update-buildings-raw` (home heating, see [UPDATE_PROCESS.md](data/UPDATE_PROCESS.md#home-heating)) | Free at [api.census.gov/data/key_signup.html](https://api.census.gov/data/key_signup.html) |
+
+The regular pipeline (`docker-compose up --build`) doesn't need any keys.
+
 ### Updating data
 
 To refresh a dataset with a newer release (sources, download steps and how each one maps onto the site), see [`data/UPDATE_PROCESS.md`](data/UPDATE_PROCESS.md).

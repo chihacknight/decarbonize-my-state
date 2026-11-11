@@ -147,6 +147,20 @@ function generationFor(byState, state, year) {
   return byState[state]?.generation.find(r => r.year === year) || null
 }
 
+/** Every year's generation (GWh by fuel) from the new source, oldest first */
+function generationHistory(byState, state) {
+  const years = [
+    ...new Set(Object.values(byState)[0].generation.map(r => r.year)),
+  ].sort((a, b) => a - b)
+  return years.map(year => {
+    const row = generationFor(byState, state, year)
+    return Object.fromEntries([
+      ["year", year],
+      ...FUELS.map(f => [f, row ? row[f] : 0]),
+    ])
+  })
+}
+
 const generationYearBefore = latestYear(
   Object.values(before.generation)[0].generation
 )
@@ -265,6 +279,8 @@ function buildPlace(state) {
       totalTwh(gAfter),
       pctChange
     ),
+    // For the power mix chart
+    generationByYear: generationHistory(after.generation, state),
     carbonFree: {
       ...threeWay(
         carbonFree(gBefore),

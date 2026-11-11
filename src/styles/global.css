@@ -16,6 +16,7 @@
 
 /** Component styles */
 @import "display-plants.css";
+@import "charts.css";
 
 /* Import stateface for state icons */
 @import "stateface/stateface.css";
@@ -30,7 +31,7 @@ body,
   scroll-margin-top: 5rem;
 }
 
-body *:focus {
+body *:focus-visible {
   outline: dashed 0.25rem var(--outline-color);
 }
 
@@ -38,7 +39,7 @@ body *:focus {
   text-decoration: none;
 }
 
-.btn:focus {
+.btn:focus-visible {
   outline: dashed 0.25rem var(--outline-color);
 }
 
@@ -57,7 +58,7 @@ a {
 
 /* Make link underline thicken on hover or focus */
 a:hover,
-a:focus {
+a:focus-visible {
   text-decoration-thickness: 0.125em;
 }
 
@@ -147,7 +148,7 @@ caption {
   background-color: #198727;
   border-color: transparent;
 }
-.btn-success:focus,
+.btn-success:focus-visible,
 .btn-success:hover {
   background-color: #157021;
 }
@@ -257,7 +258,7 @@ caption {
 /**
  * Style focused <path> elements with border and darkening
  */
-path:focus,
+path:focus-visible,
 .mapSelected {
   stroke: #421b49;
   stroke-width: 3;
@@ -364,7 +365,7 @@ path:focus,
   max-width: calc(100% - 80px);
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
   position: absolute;
   padding: 0.5rem 1rem;
   top: 0;
@@ -645,51 +646,4 @@ footer a {
 
 .already-electrified-chart text {
   font-size: 0.9rem;
-}
-
-/** EV growth chart, EVs vs all vehicles over time **/
-.ev-growth-chart {
-  width: 100%;
-  height: 18rem;
-  /* Keep a wide tooltip from pushing past the page edge on small screens */
-  overflow: hidden;
-}
-
-.ev-growth-chart text,
-.ev-growth-chart .recharts-legend-item-text {
-  font-size: 0.8rem;
-}
-
-/* The all vehicles legend entry (the last line) toggles its line */
-.ev-growth-chart .legend-item-2 {
-  cursor: pointer;
-}
-
-.ev-growth-chart .legend-item-2 .recharts-legend-item-text {
-  text-decoration: underline;
-}
-
-.ev-growth-tooltip {
-  padding: 0.35rem 0.5rem;
-  background: var(--white);
-  border: 1px solid var(--mid-grey);
-  border-radius: 0.25rem;
-  box-shadow: 0 0.125rem 0.5rem var(--light-shadow-color);
-  font-size: 0.8rem;
-}
-
-.ev-growth-tooltip-year {
-  font-weight: bold;
-  margin-bottom: 0.15rem;
-}
-
-.ev-growth-tooltip td {
-  padding: 0;
-}
-
-.ev-growth-tooltip-value {
-  padding-left: 0.75rem !important;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-weight: bold;
 }

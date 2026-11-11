@@ -565,6 +565,11 @@
   flex-wrap: nowrap;
 }
 
+/** The site's power mix chart, under the power pies */
+.data-update .power-mix-trend {
+  margin-bottom: 0.5rem;
+}
+
 /** The site's emissions area chart, US summary only */
 .data-update .emissions-trend {
   margin-top: 1rem;

@@ -42,11 +42,12 @@ const sourceCitations = [
   },
   {
     slug: "home-heating",
-    title: "American Community Survey: House Heating Fuel (B25040) 2024",
+    title:
+      "American Community Survey 1-Year Estimates: House Heating Fuel (B25040) 2005–2025",
     source: "U.S. Census Bureau",
-    source_short: "Census ACS",
-    date: "Sep 2025",
-    link: "https://data.census.gov/table/ACSDT1Y2024.B25040",
+    source_short: "Census American Community Survey",
+    date: "Oct 2026",
+    link: "https://data.census.gov/table/ACSDT1Y2025.B25040",
   },
   {
     slug: "vehicles",
