@@ -55,7 +55,7 @@ Fetched Table 10 for every state from the per-state profile spreadsheets (no API
 - **Biggest net exporters (share of generation):** Wyoming 52%, Montana 38%, Pennsylvania 35% (84.7M MWh, the most of any state), Connecticut 34%, Alabama 32%.
 - **International trade matters.** Vermont exports to other states but imports more from Canada, so it's a net importer (42%). Washington is about even with other states but exports 7.5M MWh to Canada. So we count both.
 
-The state pages now show this under the power generation pie chart, with a bar of made in state vs imported (or used in state vs exported) and a note on which way it skews the state's power emissions. States within 2% either way read as generating about what they use.
+The state pages now show this under the power generation pie chart, with a bar of made in state vs imported (or used in state vs exported) and a note on which way it skews the state's power emissions. States within 2% either way read as generating about what they use, from 2% they're a **small** importer or exporter (their emissions are "slightly" off), and from 15% a **large** one. There's no natural break in the numbers, so 15% (about one kilowatt-hour in seven) is a judgment call.
 
 ## Steps
 

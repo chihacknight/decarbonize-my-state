@@ -235,7 +235,7 @@
   display: grid;
   gap: 0.5rem;
   max-width: 35rem;
-  margin: 0.5rem 0 1rem;
+  margin: 1rem 0 2rem;
 }
 
 .power-trade-text {
@@ -243,34 +243,51 @@
   line-height: 1.5;
 }
 
+.power-trade-chart {
+  display: grid;
+  gap: 0.35rem;
+}
+
 .power-trade-bar {
   display: flex;
-  height: 1.75rem;
+  gap: 2px;
+  height: 1rem;
   overflow: hidden;
   border-radius: 0.25rem;
-  font-size: 0.8rem;
-  font-weight: bold;
 }
 
 .power-trade-bar span {
-  display: flex;
-  align-items: center;
   flex-basis: 0;
-  min-width: 0;
-  padding: 0 0.5rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  /* Keep even a 2% share visible */
+  min-width: 4px;
 }
 
-.power-trade-bar .-home {
-  color: var(--text-color-main);
-  background-color: #dcdcdc;
+.power-trade-labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  font-size: 0.875rem;
 }
 
-.power-trade-bar .-traded {
-  justify-content: flex-end;
-  color: #fff;
+.power-trade-labels > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.power-trade-swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 0.125rem;
+}
+
+/* Electricity made or used in the state, and what's imported or exported */
+.power-trade .-home {
+  background-color: #c8c8c8;
+}
+
+.power-trade .-traded {
   background-color: #1983d7;
 }
 
@@ -280,7 +297,7 @@
 }
 
 .power-trade-source {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
 }
 
 /** Make sure focusing links works with both sticky headers */
