@@ -5,8 +5,7 @@ import {
   ActiveCategoryFill,
 } from "../constants/emissions-categories"
 
-/** Below this share a segment shows only its emoji, then nothing at all */
-const MinPrcntForPrcntLabel = 12
+/** Segments below this share are too narrow for their emoji */
 const MinPrcntForEmoji = 5
 
 /**
@@ -14,8 +13,8 @@ const MinPrcntForEmoji = 5
  * shown in the state page's sticky header. Each segment is a section sized by
  * its share of emissions, colored the same way: orange for the section you're
  * on and green for sections already covered. Segments link to their section.
- * The current section's name is written out below, since a narrow segment
- * only has room for an emoji.
+ * Segments show just their emoji, and the current section's name and share
+ * are written out below.
  *
  * @param percents   Emissions % for each emissions key, as numbers or strings
  * @param activeKey  The emissions key of the section you're on
@@ -61,9 +60,6 @@ export default function SectionProgressBar({ percents, activeKey, greenKeys }) {
                   <span className={`emoji -${sectionId}`} aria-hidden="true">
                     {emoji}
                   </span>
-                )}
-                {prcnt >= MinPrcntForPrcntLabel && (
-                  <span aria-hidden="true">{prcnt}%</span>
                 )}
               </a>
             )
