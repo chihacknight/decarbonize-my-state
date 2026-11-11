@@ -70,17 +70,24 @@ export default function SectionProgressBar({ percents, activeKey, greenKeys }) {
           }
         )}
       </div>
-      {currentSection && (
-        <div className="section-progress-label" aria-hidden="true">
-          <span className={`emoji -${currentSection.sectionId}`}>
-            {currentSection.emoji}
-          </span>
-          <span>{currentSection.name}</span>
-          <span className="section-progress-prcnt">
-            {Number(percents[currentSection.key])}%
-          </span>
-        </div>
-      )}
+      {/* Every section's label, stacked, so CSS can fade between them */}
+      <div className="section-progress-labels" aria-hidden="true">
+        {shownSections.map(({ sectionId, key, emoji, name }) => (
+          <div
+            key={key}
+            className={
+              "section-progress-label" +
+              (currentSection && currentSection.key === key ? " -current" : "")
+            }
+          >
+            <span className={`emoji -${sectionId}`}>{emoji}</span>
+            <span>{name}</span>
+            <span className="section-progress-prcnt">
+              {Number(percents[key])}%
+            </span>
+          </div>
+        ))}
+      </div>
     </nav>
   )
 }

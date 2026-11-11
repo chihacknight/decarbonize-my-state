@@ -221,14 +221,26 @@
 }
 
 /* Names the current section below the bar */
-.section-progress-label {
-  display: flex;
-  align-items: baseline;
-  gap: 0.35rem;
+.section-progress-labels {
+  display: grid;
   margin-top: 0.5rem;
   font-size: 1.125rem;
   font-weight: bold;
   line-height: 1.5;
+}
+
+/* Labels stack in one grid cell and cross-fade to the current section */
+.section-progress-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.section-progress-label.-current {
+  opacity: 1;
 }
 
 /* The section's share, since narrow segments don't have room for it */
@@ -237,6 +249,16 @@
   font-size: 0.875rem;
   font-weight: normal;
   color: #6c757d;
+}
+
+/**
+ * Smooth scroll on state pages, so jumping between sections from the progress
+ * bars shows the page moving. Skipped when people prefer reduced motion
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.state-details-main) {
+    scroll-behavior: smooth;
+  }
 }
 
 /** Make sure focusing links works with both sticky headers */
