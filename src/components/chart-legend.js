@@ -24,8 +24,9 @@ const ChartLegend = ({ items, marginLeft = 0, marginRight = 0 }) => (
   <ul
     className="chart-legend"
     style={{
-      marginLeft,
-      marginRight,
+      // As variables so charts.css can drop them on mobile
+      "--legend-margin-left": `${marginLeft}px`,
+      "--legend-margin-right": `${marginRight}px`,
       // Up to 4 columns, fewer when there are fewer items, see charts.css
       "--legend-columns": Math.min(items.length, 4),
     }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { graphql, Link } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
@@ -19,6 +19,7 @@ import PowerMixChart from "./power-mix-chart"
 import RenewablesProgressChart from "./renewables-progress-chart"
 import HeatingTrendChart from "./heating-trend-chart"
 import ChartDetails from "./chart-details"
+import SectionProgressBar from "./section-progress-bar"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -53,6 +54,43 @@ export default function StateDetailsPage({ location, data }) {
     active: "buildings",
     green: [],
   })
+
+  /**
+   * On mobile the sticky header starts as just a larger state name, then
+   * shrinks and shows the section progress bar once the line above the first
+   * section scrolls up under it. CSS transitions handle the change, see
+   * state-details.css
+   *
+   * This could be CSS only (a scroll-driven animation flipping a custom
+   * property, read by a container style query), but as of Firefox 160 style
+   * queries don't update when an animation changes the property
+   */
+  const stickyHeaderRef = useRef(null)
+  const sectionsStartRef = useRef(null)
+  const [isHeaderExpanded, setIsHeaderExpanded] = useState(true)
+
+  useEffect(() => {
+    const header = stickyHeaderRef.current
+    const line = sectionsStartRef.current
+    if (!header || !line || !("IntersectionObserver" in window)) {
+      setIsHeaderExpanded(false)
+      return
+    }
+
+    // Watch the line against everything below the sticky header (which sits
+    // under the site header, its sticky top), extending far past the bottom
+    // of the screen. The line is then "intersecting" whenever it's below the
+    // header, so even jumps past it (like following a link to a section)
+    // cross the area's edge and update the header
+    const headerBottom =
+      parseFloat(getComputedStyle(header).top) + header.offsetHeight
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHeaderExpanded(entry.isIntersecting),
+      { rootMargin: `-${headerBottom}px 0px 1000000px 0px` }
+    )
+    observer.observe(line)
+    return () => observer.disconnect()
+  }, [])
 
   // place info and string
   const currentStateSlug = location.pathname.split("/")[1]
@@ -150,7 +188,7 @@ export default function StateDetailsPage({ location, data }) {
   const powerMixSection = (
     <>
       <ChartDetails
-        className="mt-6"
+        className="mt-3"
         label="View Power Generation Trends"
         title={`Power Generation Mix in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
       >
@@ -339,18 +377,37 @@ export default function StateDetailsPage({ location, data }) {
         image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
 
-      <div className="sticky-header d-flex align-items-center">
-        <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
-          <span
-            className={"display-3 mr-4 sf-" + stateFaceClass}
-            aria-hidden="true"
-          ></span>
-          <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
-        </h1>
+      <div
+        ref={stickyHeaderRef}
+        className={"sticky-header" + (isHeaderExpanded ? " -expanded" : "")}
+      >
+        <div className="d-flex align-items-center">
+          <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
+            <span
+              className={"state-icon display-3 mr-4 sf-" + stateFaceClass}
+              aria-hidden="true"
+            ></span>
+            <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
+          </h1>
 
-        <a className="btn btn-outline-secondary ml-3" href="/">
-          Back <span className="d-none d-md-inline">to map</span>
-        </a>
+          <a className="btn btn-outline-secondary back-btn ml-3" href="/">
+            Back <span className="d-none d-md-inline">to map</span>
+          </a>
+        </div>
+
+        {/* Mobile and tablet only, desktop has the sticky side chart */}
+        <div className="d-xl-none">
+          <SectionProgressBar
+            percents={{
+              buildings: buildingsPrcnt,
+              transportation: transportPrcnt,
+              dirty_power: powerPrcnt,
+              dumps_farms_industrial_other: otherPrcnt,
+            }}
+            activeKey={scrollGraphSettings.active}
+            greenKeys={scrollGraphSettings.green}
+          />
+        </div>
       </div>
 
       {/* Intro Section */}
@@ -387,7 +444,8 @@ export default function StateDetailsPage({ location, data }) {
           This is how we're going to do it
         </p>
 
-        <hr className="mt-7 mb-7" />
+        {/* Scrolling past this shows the mobile section progress bar */}
+        <hr ref={sectionsStartRef} className="mt-7 mb-7" />
       </div>
 
       <div className="row state-details-main" id="state-details-main">

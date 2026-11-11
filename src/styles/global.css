@@ -440,6 +440,17 @@ footer a {
   fill: #181818;
 }
 
+/* State page bar labels show their emoji larger than the text */
+.single-bar-chart .bar-label-emoji {
+  font-size: 1.25em;
+}
+
+/* Which can push long labels past the chart's fixed width, so let them
+   overflow it rather than be cut off */
+.single-bar-chart.-state .recharts-surface {
+  overflow: visible;
+}
+
 /** Animate graph color changes and hover filter */
 .single-bar-chart .recharts-rectangle {
   transition: fill 0.4s, filter 0.3s;
@@ -646,4 +657,18 @@ footer a {
 
 .already-electrified-chart text {
   font-size: 0.9rem;
+}
+
+/** An emoji used as an icon next to text, tightened so its tall line box
+    doesn't push text around */
+.emoji {
+  line-height: 1;
+}
+
+/* The car emoji is drawn low in its box, so nudge it up to line up with text.
+   A relative offset rather than vertical-align, so it also works in flex
+   layouts. Emoji get their section ID as a modifier, see SectionProgressBar */
+.emoji.-transport {
+  position: relative;
+  top: -0.1em;
 }

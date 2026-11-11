@@ -45,8 +45,12 @@ const Layout = ({ children }) => {
         <a href="https://chihacknight.org" target="_blank" rel="noreferrer">
           Chi Hack Night
           <NewTabIcon />
-        </a>{" "}
-        · <Link to="/data-updates/">2020 to 2025 Data Updates</Link>
+        </a>
+        {/* On phones the data updates link gets its own line */}
+        <span className="d-none d-sm-inline"> · </span>
+        <span className="d-block d-sm-inline">
+          <Link to="/data-updates/">2020 to 2025 Data Updates</Link>
+        </span>
       </footer>
     </>
   )
