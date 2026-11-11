@@ -309,6 +309,51 @@ path:focus,
   text-decoration: none;
 }
 
+/* The current page's header link is bold */
+.sunrise-nav .nav-link.active {
+  font-weight: bold;
+  color: #000 !important;
+}
+
+/* Reserve each link's bold width with a hidden bold copy of its label, so
+   the links don't shift when the current page changes */
+.sunrise-nav .nav-link::before {
+  display: block;
+  content: attr(data-label);
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* When the nav is a single row, also underline the current page with an
+   orange bar sitting on the header's bottom border */
+@media (min-width: 992px) {
+  .sunrise-nav .navbar-collapse,
+  .sunrise-nav .navbar-nav {
+    align-self: stretch;
+  }
+
+  .sunrise-nav .nav-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sunrise-nav .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    /* Bootstrap's .navbar has 0.5rem of bottom padding */
+    bottom: -0.5rem;
+    height: 4px;
+    background-color: var(--accent-orange);
+  }
+}
+
 /** Style header title */
 .nav-text {
   text-decoration: none;
