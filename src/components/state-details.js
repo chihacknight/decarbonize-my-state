@@ -16,6 +16,7 @@ import PowerSourcesChart from "./power-sources-chart"
 import EvGrowthChart from "./ev-growth-chart"
 import InfoHover from "./info-hover"
 import PowerMixChart from "./power-mix-chart"
+import RenewablesProgressChart from "./renewables-progress-chart"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -894,6 +895,17 @@ export default function StateDetailsPage({ location, data }) {
                   fossilPct={totalRemaining}
                 />
               </p>
+              {targetGenByWind !== undefined && (
+                <RenewablesProgressChart
+                  generationByYear={generationByYear}
+                  targetWindGwh={targetGenByWind}
+                  targetSolarGwh={targetGenBySolar}
+                  windCapacityFactor={windCapacityFactor}
+                  solarCapacityFactor={solarCapacityFactor}
+                  annualWindMw={windTurbinesBuildPerYear}
+                  annualSolarMw={solarPanelsBuildPerYear}
+                />
+              )}
               <span className="mt-4 text-secondary keyText">
                 Source: {getShortCitation("power-generation")}
               </span>

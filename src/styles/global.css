@@ -764,3 +764,10 @@ power mix charts **/
   font-variant-numeric: tabular-nums;
   font-weight: bold;
 }
+
+/** Wind and solar built vs target on state pages */
+.renewables-progress-chart {
+  width: 100%;
+  height: 20rem;
+  margin-top: 1rem;
+}
