@@ -16,9 +16,6 @@ const Header = ({ siteTitle }) => (
       collapseOnSelect
       expand="lg"
       className="sunrise-nav"
-      style={{
-        marginBottom: `1.45rem`,
-      }}
     >
       <a
         className="sr-only sr-only-focusable skip-link btn btn-light"
