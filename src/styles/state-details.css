@@ -227,6 +227,62 @@
   }
 }
 
+/**
+ * Electricity imports or exports under the power generation pie chart, see
+ * PowerTradeNote. Divs rather than paragraphs, which are large on this page
+ */
+.power-trade {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 35rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.power-trade-text {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.power-trade-bar {
+  display: flex;
+  height: 1.75rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.power-trade-bar span {
+  display: flex;
+  align-items: center;
+  flex-basis: 0;
+  min-width: 0;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.power-trade-bar .-home {
+  color: var(--text-color-main);
+  background-color: #dcdcdc;
+}
+
+.power-trade-bar .-traded {
+  justify-content: flex-end;
+  color: #fff;
+  background-color: #1983d7;
+}
+
+.power-trade-note {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.power-trade-source {
+  font-size: 0.875rem;
+}
+
 /** Make sure focusing links works with both sticky headers */
 .state-details-main * {
   scroll-margin-top: 15rem;

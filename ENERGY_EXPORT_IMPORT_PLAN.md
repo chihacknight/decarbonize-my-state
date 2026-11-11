@@ -46,23 +46,30 @@ Ways to estimate the fuel mix of imports, for a possible phase 2:
 - **State lines, not grids.** Power flows across regional grids, and state totals are an accounting view of them.
 - **Net, not gross.** A state can import and export a lot at once and show a small net number.
 
+## Latest-year test (done)
+
+Fetched Table 10 for every state from the per-state profile spreadsheets (no API key needed), latest year **2024** (released November 2025):
+
+- **Checks out against EIA.** Virginia's 2023 net imports of 50.1M MWh, 35.5% of supply, match EIA's published figure. Interstate exports (394.9M MWh) and imports (399.0M MWh) balance within about 1%, and Alaska and Hawaii show exactly 0.
+- **Biggest net importers (share of supply):** D.C. 98%, Delaware 62%, Massachusetts 61%, Maryland 43%, Tennessee 31%, Virginia 31%. California is 21% counting imports from other countries.
+- **Biggest net exporters (share of generation):** Wyoming 52%, Montana 38%, Pennsylvania 35% (84.7M MWh, the most of any state), Connecticut 34%, Alabama 32%.
+- **International trade matters.** Vermont exports to other states but imports more from Canada, so it's a net importer (42%). Washington is about even with other states but exports 7.5M MWh to Canada. So we count both.
+
+The state pages now show this under the power generation pie chart, with a bar of made in state vs imported (or used in state vs exported) and a note on which way it skews the state's power emissions. States within 2% either way read as generating about what they use.
+
 ## Steps
 
-1. **Latest-year test.** Fetch net interstate trade and total supply for the latest year for every state, check the numbers against EIA's published figures (Virginia, California and Pennsylvania above), and look at the ranking. This decides whether it's worth building out.
-2. **Pipeline.** Following the other datasets:
-   - `data/scripts/fetch_eia_trade.py` saves `data/raw/eia_state_electricity_trade.csv` (all years, every state).
-   - `data/scripts/get_trade.py` builds `data/final/trade/trade.json`, with the latest year's values and a `byYear` array.
-   - `data/Makefile` targets and a section in `data/UPDATE_PROCESS.md`.
-   - An `EIA_API_KEY` in `data/.env` if we use the API (documented in `data/.env.example`, like the Census key).
-3. **Site.** The stat and note in the power section, then a trend chart if it's useful.
+1. **Latest-year test.** Done, see above.
+2. **Pipeline.** Done for the latest year: `data/scripts/fetch_eia_trade.py` saves `data/raw/eia_state_electricity_trade.csv`, `data/scripts/get_trade.py` builds `data/final/trade/trade.json`, with `make update-trade-raw` and a section in `data/UPDATE_PROCESS.md`. Next: keep every year (back to 1990) in a `byYear` array, like the other datasets.
+3. **Site.** The stat and note under the power pie chart are in. Next: a trend chart if it's useful.
 4. **Phase 2, maybe.** An estimated fuel mix or emissions including imports, using one of the approaches above.
 
 ## Open questions
 
-- API (needs a key) or the published spreadsheets (no key, but one file per state)?
-- Show trade as a share of supply, of in-state generation, or of sales? Share of supply matches how EIA reports it.
-- Include international trade (matters for border states like Vermont, Washington and Michigan), or interstate only?
-- How prominent should it be: a stat with a note, or something that adjusts how we present power emissions?
+- ~~API or spreadsheets?~~ Spreadsheets: no key needed, and 51 small downloads are fine.
+- ~~Share of what?~~ Imports as a share of supply (what a state uses), exports as a share of generation (what it makes).
+- ~~Include international trade?~~ Yes, it flips Vermont from exporter to importer.
+- How prominent should it be: a stat with a note (for now), or something that adjusts how we present power emissions?
 
 ## Sources
 

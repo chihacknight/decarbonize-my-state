@@ -75,4 +75,12 @@ const sourceCitations = [
     date: "Sep 2026",
     link: "https://www.eia.gov/opendata/bulkfiles.php",
   },
+  {
+    slug: "power-trade",
+    title: "State Electricity Profiles, supply and disposition of electricity",
+    source: "U.S. Energy Information Administration (EIA)",
+    source_short: "EIA",
+    date: "Nov 2025",
+    link: "https://www.eia.gov/electricity/state/",
+  },
 ]

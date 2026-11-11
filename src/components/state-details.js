@@ -19,6 +19,7 @@ import PowerMixChart from "./power-mix-chart"
 import RenewablesProgressChart from "./renewables-progress-chart"
 import HeatingTrendChart from "./heating-trend-chart"
 import ChartDetails from "./chart-details"
+import PowerTradeNote from "./power-trade-note"
 import SectionProgressBar from "./section-progress-bar"
 import DisplayPlants from "./display-plants"
 
@@ -183,10 +184,15 @@ export default function StateDetailsPage({ location, data }) {
 
   const firstGenerationYear = generationByYear[generationByYear.length - 1].year
 
+  // How much electricity the state imports or exports, if we have it
+  const tradeEdge = data.allTradeJson.edges[0]
+  const trade = tradeEdge ? tradeEdge.node : null
+
   // Shown under the latest year's pie chart in both power sections, with one
   // source line under both, like the other sections
   const powerMixSection = (
     <>
+      {trade && <PowerTradeNote trade={trade} placeTitle={placeTitle} />}
       <ChartDetails
         className="mt-3"
         label="View Power Generation Trends"
@@ -1202,6 +1208,18 @@ export const query = graphql`
             slug
             utility_name
           }
+        }
+      }
+    }
+    allTradeJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
+          year
+          netImports
+          interstateNetImports
+          internationalNetImports
+          netImportsPct
+          netExportsPct
         }
       }
     }
