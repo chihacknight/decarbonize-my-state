@@ -139,6 +139,33 @@ The raw CSV comes from the [Census API](https://www.census.gov/data/developers/d
 3. Update the `home-heating` entry in `src/constants/source-citations.js` (title years, date and the `ACSDT1Y<year>` part of the link).
 4. Update the years and release date in the first paragraph of this section.
 
+## Electricity imports and exports
+
+The note under each state's power generation pie chart ("Virginia is a net importer: about 31% of the electricity it uses comes from other states") comes from the EIA's [State Electricity Profiles](https://www.eia.gov/electricity/state/), Table 10 "Supply and disposition of electricity", currently the latest year only, **2024** (released November 2025). The EIA publishes a new profile year every November. See `ENERGY_EXPORT_IMPORT_PLAN.md` for why it matters and what's next.
+
+We count trade with other countries as well as other states, since border states can trade a lot of power with Canada (Vermont sends power to other states but imports more from Canada, so it's a net importer overall). Imports are shown as a share of the electricity a state uses (total supply) and exports as a share of what it generates. The data has no fuel breakdown, so it says how much power crossed state lines but not what made it. See `get_trade.py`.
+
+### Updating to a new EIA release
+
+Each state's profile is its own spreadsheet, so the fetch downloads 51 files. No API key is needed.
+
+1. Refetch the raw CSV:
+
+   ```bash
+   make update-trade-raw
+   ```
+
+   This saves `raw/eia_state_electricity_trade.csv`, with the latest year in the profiles.
+2. Rebuild the final JSON:
+
+   ```bash
+   make final/trade/trade.json
+   ```
+
+   Or with Docker: `docker-compose run --rm --entrypoint "make update-trade-raw final/trade/trade.json" make`
+3. Update the `power-trade` entry in `src/constants/source-citations.js` (date).
+4. Update the year and release date in the first paragraph of this section.
+
 ## Data updates page
 
 The [data updates page](https://decarbmystate.com/data-updates) (`src/pages/data-updates.js`) shows how each state's key stats changed with the 2020 to 2025 data update. It reads a frozen snapshot, `src/data/data-updates/2020-2025.json`, made by `scripts/build-data-update.mjs`.
