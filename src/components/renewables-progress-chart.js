@@ -7,11 +7,11 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ReferenceLine,
 } from "recharts"
 
 import { formatCompactNumber, formatNumber } from "../helper-functions"
+import ChartLegend from "./chart-legend"
 
 /**
  * Darker steps of the wind and solar colors in the power sources charts, so
@@ -21,6 +21,11 @@ const sources = [
   { key: "wind", name: "Wind", color: "#0f8fa3" },
   { key: "solar", name: "Solar", color: "#c98a00" },
 ]
+
+// The y-axis width and right margin, shared with the legend so it lines up
+// with the plot area
+const yAxisWidth = 45
+const chartRightMargin = 10
 
 const formatMw = value => `${formatNumber(value)} MW`
 
@@ -125,7 +130,10 @@ const RenewablesProgressChart = ({
     <>
       <div className="renewables-progress-chart">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 10, left: 0 }}>
+          <LineChart
+            data={data}
+            margin={{ top: 10, right: chartRightMargin, left: 0 }}
+          >
             <CartesianGrid stroke="#e5e5e5" vertical={false} />
             <XAxis dataKey="year" tickLine={false} />
             <YAxis
@@ -133,7 +141,7 @@ const RenewablesProgressChart = ({
               tickFormatter={formatCompactNumber}
               tickLine={false}
               axisLine={false}
-              width={45}
+              width={yAxisWidth}
             />
             <Tooltip
               content={
@@ -144,7 +152,6 @@ const RenewablesProgressChart = ({
               }
               cursor={{ stroke: "#999", strokeWidth: 1 }}
             />
-            <Legend />
             {sources.map(({ key, name, color }) => (
               <ReferenceLine
                 key={`${key}-target`}
@@ -176,6 +183,21 @@ const RenewablesProgressChart = ({
           </LineChart>
         </ResponsiveContainer>
       </div>
+      {/* The dashed target lines are labeled on the chart, so they're listed
+          once here as a dashed swatch */}
+      <ChartLegend
+        marginLeft={yAxisWidth}
+        marginRight={chartRightMargin}
+        items={[
+          ...sources.map(({ key, name, color }) => ({
+            key,
+            name: `${name} built`,
+            color,
+            type: "line",
+          })),
+          { key: "target", name: "Target", color: "#6c757d", type: "dashed" },
+        ]}
+      />
     </>
   )
 }

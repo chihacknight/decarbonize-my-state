@@ -145,18 +145,21 @@ export default function StateDetailsPage({ location, data }) {
 
   const firstGenerationYear = generationByYear[generationByYear.length - 1].year
 
-  // Shown under the latest year's pie chart in both power sections
+  // Shown under the latest year's pie chart in both power sections, with one
+  // source line under both, like the other sections
   const powerMixSection = (
-    <ChartDetails
-      className="mt-6"
-      label="View Power Generation Trends"
-      title={`Power Generation Mix in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
-    >
-      <PowerMixChart generationByYear={generationByYear} />
-      <span className="mt-2 text-secondary keyText">
+    <>
+      <ChartDetails
+        className="mt-6"
+        label="View Power Generation Trends"
+        title={`Power Generation Mix in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
+      >
+        <PowerMixChart generationByYear={generationByYear} />
+      </ChartDetails>
+      <span className="mt-4 text-secondary keyText">
         Source: {getShortCitation("power-generation")}
       </span>
-    </ChartDetails>
+    </>
   )
 
   const carbonFreePercent =
@@ -510,14 +513,14 @@ export default function StateDetailsPage({ location, data }) {
               . That's around {homesPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Homes With Electric Heating"}
+              label={"Homes With Electric Heating*"}
               electrifiedPct={fossilFreeHeatingPct}
               fossilPct={fossilHeatingPct}
             />
             <ChartDetails
               className="mt-5"
               label="View Home Heating Trends"
-              title={`Homes With Electric Heating in ${placeTitle} (${
+              title={`Homes With Electric Heating* in ${placeTitle} (${
                 heatingByYear[0].year
               }–${heatingByYear[heatingByYear.length - 1].year})`}
               note={
@@ -535,6 +538,13 @@ export default function StateDetailsPage({ location, data }) {
             <span className="mt-4 text-secondary keyText">
               Source: {getShortCitation("home-heating")}
             </span>
+            {/* Explains the asterisk on "Electric Heating". A div, not a p, so
+                it matches the source line's size */}
+            <div className="mt-2 text-secondary keyText">
+              *Electric heating also counts homes heated by solar and homes with
+              no heating at all (common in Hawaii and Florida), since neither
+              burns fuel.
+            </div>
           </div>
 
           <div
@@ -713,6 +723,7 @@ export default function StateDetailsPage({ location, data }) {
               <PowerSourcesChart
                 latestGeneration={latestGeneration}
                 placeTitle={placeTitle}
+                showSource={false}
               ></PowerSourcesChart>
 
               {powerMixSection}
@@ -957,6 +968,7 @@ export default function StateDetailsPage({ location, data }) {
               <PowerSourcesChart
                 latestGeneration={latestGeneration}
                 placeTitle={placeTitle}
+                showSource={false}
               ></PowerSourcesChart>
 
               {powerMixSection}

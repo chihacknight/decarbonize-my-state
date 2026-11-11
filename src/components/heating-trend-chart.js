@@ -8,10 +8,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts"
 
 import { formatCompactNumber, formatNumber } from "../helper-functions"
+import ChartLegend from "./chart-legend"
 
 // A darker step of the site's carbon-free green, so a thin line reads on white
 const electricColor = "#1f8a1f"
@@ -19,6 +19,11 @@ const electricColor = "#1f8a1f"
 // chart. A red or orange would be hard to tell from the green with red-green
 // color blindness
 const fuelColor = "#6b6b6b"
+
+// The y-axis width and right margin, shared with the legend so it lines up
+// with the plot area
+const yAxisWidth = 45
+const chartRightMargin = 10
 
 // The Census skipped standard 1-year estimates in 2020
 const missingYear = 2020
@@ -33,7 +38,7 @@ const modes = {
     series: [
       {
         key: "electric",
-        name: "Electric",
+        name: "Electric*",
         value: "fossilFreeHeatingPct",
         moe: "fossilFreeHeatingPctMoe",
         color: electricColor,
@@ -45,7 +50,7 @@ const modes = {
     series: [
       {
         key: "electric",
-        name: "Electric",
+        name: "Electric*",
         value: "fossilFreeHomes",
         moe: "fossilFreeHomesMoe",
         color: electricColor,
@@ -85,10 +90,10 @@ const HeatingTooltip = ({ active, payload, label, mode }) => {
       ? [
           {
             key: "electric",
-            name: "Electric",
+            name: "Electric*",
             color: electricColor,
             value: `${row.fossilFreeHeatingPct.toFixed(1)}%`,
-            moe: row.fossilFreeHeatingPctMoe,
+            moe: `${row.fossilFreeHeatingPctMoe}%`,
           },
         ]
       : modes.total.series.map(({ key, name, value, moe, color }) => ({
@@ -217,7 +222,10 @@ const HeatingTrendChart = ({ byYear }) => {
 
       <div className="heating-trend-chart">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 10, right: 10, left: 0 }}>
+          <ComposedChart
+            data={data}
+            margin={{ top: 10, right: chartRightMargin, left: 0 }}
+          >
             <CartesianGrid stroke="#e5e5e5" vertical={false} />
             <XAxis
               dataKey="year"
@@ -226,22 +234,16 @@ const HeatingTrendChart = ({ byYear }) => {
               ticks={yearTicks}
               tickLine={false}
             />
-            <YAxis {...yAxis} tickLine={false} axisLine={false} width={45} />
+            <YAxis
+              {...yAxis}
+              tickLine={false}
+              axisLine={false}
+              width={yAxisWidth}
+            />
             <Tooltip
               content={<HeatingTooltip mode={mode} />}
               cursor={{ stroke: "#999", strokeWidth: 1 }}
             />
-            {/* A legend only when there's more than one line to tell apart */}
-            {series.length > 1 && (
-              <Legend
-                payload={series.map(({ key, name, color }) => ({
-                  id: key,
-                  value: name,
-                  type: "line",
-                  color,
-                }))}
-              />
-            )}
             {series.map(({ key, color }) => (
               <Area
                 key={`${key}-range`}
@@ -281,6 +283,19 @@ const HeatingTrendChart = ({ byYear }) => {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
+      {/* A legend only when there's more than one line to tell apart */}
+      {series.length > 1 && (
+        <ChartLegend
+          marginLeft={yAxisWidth}
+          marginRight={chartRightMargin}
+          items={series.map(({ key, name, color }) => ({
+            key,
+            name,
+            color,
+            type: "line",
+          }))}
+        />
+      )}
     </>
   )
 }

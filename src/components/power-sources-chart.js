@@ -23,11 +23,16 @@ import { getShortCitation } from "../constants/source-citations"
  *
  * @param isAnimationActive {boolean} Whether to animate the pie slices in,
  * defaults to true
+ *
+ * @param showSource {boolean} Whether to show the source line under the chart,
+ * defaults to true. Pages that cite the source once for several charts turn it
+ * off
  */
 const PowerSourcesChart = ({
   placeTitle,
   latestGeneration,
   isAnimationActive = true,
+  showSource = true,
 }) => {
   // Start at 12 o'clock and go clockwise, rather than starting at 3 o'clock
   // and going counter clockwise like the default
@@ -255,9 +260,11 @@ const PowerSourcesChart = ({
         </ResponsiveContainer>
       </div>
 
-      <span className="text-secondary keyText">
-        Source: {getShortCitation("power-generation")}
-      </span>
+      {showSource && (
+        <span className="text-secondary keyText">
+          Source: {getShortCitation("power-generation")}
+        </span>
+      )}
     </div>
   )
 }

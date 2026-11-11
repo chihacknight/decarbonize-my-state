@@ -8,8 +8,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts"
+
+import ChartLegend from "./chart-legend"
 
 /**
  * Power sources from the bottom of the stack up. Carbon-free sources are at
@@ -28,6 +29,11 @@ const fuels = [
 
 // The same green as the carbon-free ring in the power sources pie chart
 const carbonFreeColor = "#28ac28"
+
+// The y-axis width and right margin, shared with the legend so it lines up
+// with the plot area rather than starting under the axis labels
+const yAxisWidth = 60
+const chartRightMargin = 10
 
 /** Each view's data key suffix, axis and value formatting */
 const modes = {
@@ -148,11 +154,18 @@ const PowerMixChart = ({ generationByYear }) => {
   const data = [...generationByYear]
     .sort((a, b) => a.year - b.year)
     .map(row => {
-      const totalGwh = fuels.reduce((acc, { key }) => acc + row[key], 0)
+      // EIA reports net generation, which can dip below zero when a plant
+      // uses more power than it makes in a year (e.g. Delaware's coal in
+      // 2023). Count those as zero so they don't eat into the stack above
+      const gwh = {}
+      fuels.forEach(({ key }) => {
+        gwh[key] = Math.max(0, row[key] || 0)
+      })
+      const totalGwh = fuels.reduce((acc, { key }) => acc + gwh[key], 0)
       const values = { year: row.year, carbonFreePct: 0, carbonFreeTwh: 0 }
       fuels.forEach(({ key, clean }) => {
-        values[`${key}Pct`] = totalGwh > 0 ? (row[key] / totalGwh) * 100 : 0
-        values[`${key}Twh`] = row[key] / 1000
+        values[`${key}Pct`] = totalGwh > 0 ? (gwh[key] / totalGwh) * 100 : 0
+        values[`${key}Twh`] = gwh[key] / 1000
         if (clean) {
           values.carbonFreePct += values[`${key}Pct`]
           values.carbonFreeTwh += values[`${key}Twh`]
@@ -196,13 +209,12 @@ const PowerMixChart = ({ generationByYear }) => {
         <ResponsiveContainer>
           <ComposedChart
             data={data}
-            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+            margin={{ top: 10, right: chartRightMargin, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis dataKey="year" />
-            <YAxis {...axis} />
+            <YAxis {...axis} width={yAxisWidth} />
             <Tooltip content={<PowerMixTooltip mode={mode} />} />
-            <Legend verticalAlign="bottom" />
             {fuels.map(({ key, name, color, clean }) => {
               const faded = fadeFossil && !clean
               return (
@@ -233,6 +245,27 @@ const PowerMixChart = ({ generationByYear }) => {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
+
+      {/* Carbon-free sources first, then fossil fuels and the carbon-free
+          line, fading fossil fuels along with the chart */}
+      <ChartLegend
+        marginLeft={yAxisWidth}
+        marginRight={chartRightMargin}
+        items={[
+          ...fuels.map(({ key, name, color, clean }) => ({
+            key,
+            name,
+            color,
+            faded: fadeFossil && !clean,
+          })),
+          {
+            key: "carbonFree",
+            name: "Carbon-Free",
+            color: carbonFreeColor,
+            type: "line",
+          },
+        ]}
+      />
     </div>
   )
 }
