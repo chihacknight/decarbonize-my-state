@@ -11,6 +11,8 @@ import {
   Legend,
 } from "recharts"
 
+import { formatCompactNumber, formatNumber } from "../helper-functions"
+
 // A darker step of the site's carbon-free green, so a thin line reads on white
 const electricColor = "#1f8a1f"
 // Homes burning fuel recede in gray, like faded fossil fuels in the power mix
@@ -59,17 +61,6 @@ const modes = {
   },
 }
 
-// 1,234,567 -> 1.2M, 56,789 -> 57k
-const formatHomesTick = value => {
-  if (value >= 1_000_000) {
-    return `${(value / 1_000_000).toFixed(value >= 10_000_000 ? 0 : 1)}M`
-  }
-  if (value >= 1_000) {
-    return `${Math.round(value / 1_000)}k`
-  }
-  return `${value}`
-}
-
 const HeatingTooltip = ({ active, payload, label, mode }) => {
   if (!active || !payload || !payload.length) {
     return null
@@ -79,44 +70,60 @@ const HeatingTooltip = ({ active, payload, label, mode }) => {
 
   if (row.homes === null) {
     return (
-      <div className="custom-tooltip">
-        <strong>{label}</strong>
-        <div className="small text-secondary">
+      <div className="chart-tooltip">
+        <div className="chart-tooltip-year">{label}</div>
+        <div className="chart-tooltip-note">
           No data, the Census skipped this year
         </div>
       </div>
     )
   }
 
-  if (mode === "share") {
-    return (
-      <div className="custom-tooltip">
-        <strong>{label}</strong>
-        <div className="small">
-          {row.fossilFreeHeatingPct.toFixed(1)}% electric{" "}
-          <span className="text-secondary">
-            ± {row.fossilFreeHeatingPctMoe}
-          </span>
-        </div>
-        <div className="small text-secondary">
-          of {row.homes.toLocaleString()} homes
-        </div>
-      </div>
-    )
-  }
+  // Each row is a swatch and name, the value, and its margin of error
+  const rows =
+    mode === "share"
+      ? [
+          {
+            key: "electric",
+            name: "Electric",
+            color: electricColor,
+            value: `${row.fossilFreeHeatingPct.toFixed(1)}%`,
+            moe: row.fossilFreeHeatingPctMoe,
+          },
+        ]
+      : modes.total.series.map(({ key, name, value, moe, color }) => ({
+          key,
+          name,
+          color,
+          value: formatNumber(row[value]),
+          moe: formatNumber(row[moe]),
+        }))
 
   return (
-    <div className="custom-tooltip">
-      <strong>{label}</strong>
-      {modes.total.series.map(({ key, name, value, moe, color }) => (
-        <div key={key} className="small">
-          <span style={{ color }}>■</span> {name}: {row[value].toLocaleString()}{" "}
-          <span className="text-secondary">± {row[moe].toLocaleString()}</span>
-        </div>
-      ))}
-      <div className="small text-secondary">
-        Total: {row.homes.toLocaleString()} homes
-      </div>
+    <div className="chart-tooltip">
+      <div className="chart-tooltip-year">{label}</div>
+      <table>
+        <tbody>
+          {rows.map(({ key, name, color, value, moe }) => (
+            <tr key={key}>
+              <td>
+                <span
+                  className="chart-tooltip-swatch"
+                  style={{ background: color }}
+                />
+                {name}
+              </td>
+              <td className="chart-tooltip-value">{value}</td>
+              <td className="chart-tooltip-note">± {moe}</td>
+            </tr>
+          ))}
+          <tr>
+            <td className="chart-tooltip-indent">All homes</td>
+            <td className="chart-tooltip-value">{formatNumber(row.homes)}</td>
+            <td />
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -160,6 +167,14 @@ const HeatingTrendChart = ({ byYear }) => {
   })
   const data = [...withSeries, emptyYear].sort((a, b) => a.year - b.year)
 
+  // A tick every 5 years, from the data so new years get labels
+  const firstYear = rows[0].year
+  const lastYear = rows[rows.length - 1].year
+  const yearTicks = []
+  for (let year = Math.ceil(firstYear / 5) * 5; year <= lastYear; year += 5) {
+    yearTicks.push(year)
+  }
+
   // Zoom the share axis to the data (with some room) rather than 0-100, where
   // small states' changes would look flat. Counts start at zero
   let yAxis
@@ -175,7 +190,7 @@ const HeatingTrendChart = ({ byYear }) => {
       allowDecimals: false,
     }
   } else {
-    yAxis = { domain: [0, "auto"], tickFormatter: formatHomesTick }
+    yAxis = { domain: [0, "auto"], tickFormatter: formatCompactNumber }
   }
 
   return (
@@ -208,7 +223,7 @@ const HeatingTrendChart = ({ byYear }) => {
               dataKey="year"
               type="number"
               domain={["dataMin", "dataMax"]}
-              ticks={[2005, 2010, 2015, 2020, 2025]}
+              ticks={yearTicks}
               tickLine={false}
             />
             <YAxis {...yAxis} tickLine={false} axisLine={false} width={45} />

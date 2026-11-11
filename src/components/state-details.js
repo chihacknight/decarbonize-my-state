@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import Scrollspy from "react-scrollspy"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
 
-import { slugToTitle } from "../helper-functions"
+import { slugToTitle, numberToHumanString } from "../helper-functions"
 import SingleBarChart from "../components/singlebar"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -35,34 +35,6 @@ import PowerPlantMap from "../images/dirty-power-plants.jpg"
 
 // New images
 import DirtyPowerPlantImg from "../images/dirty-power-plant.png"
-
-/**
- * Converts a very large number to a more readable string.
- *
- * 2_114_602 -> '2.1 million'
- * 76_125 -> '76 thousand'
- */
-function numberToHumanString(num) {
-  // Return clear error string if the number is null or undefined
-  if (num === undefined || num === null) {
-    return "?"
-  }
-
-  // If in the thousands, return '{rounded_num} thousands', e.g.76_126 ->
-  // 76 thousand
-  if (num > 1_000 && num < 1_000_000) {
-    return `${Math.round(num / 1_000)},000`
-  }
-  // If in the millions return '${rounded_num_one_decimal} millions', e.g.
-  // 2_114_602 -> 2.1 million
-  else if (num > 1_000_000 && num < 1_000_000_000) {
-    return `${(num / 1_000_000).toFixed(1)} million`
-  }
-
-  // If in the hundreds or something else, return rounded to an integer
-  // (e.g 534.451312 -> 534)
-  return Math.round(num)
-}
 
 const currentYear = new Date().getFullYear()
 
@@ -196,35 +168,22 @@ export default function StateDetailsPage({ location, data }) {
   // #### SOLAR PANELS & WIND TURBINES ####
   const targetBuilds = data.allTargetGenerationJson.edges[0].node
 
-  // deconstruct object for simplicity
+  // deconstruct object for simplicity. The _mw values are the capacity it
+  // takes to generate each target or current GWh a year, estimated with
+  // national capacity factors in get_target_generations.py
   const {
-    total_gen_by_solar: targetGenBySolar,
     total_gen_by_wind: targetGenByWind,
-    current_solar: currentSolar,
-    current_wind: currentWind,
     perc_solar_target: percSolarTarget,
     perc_wind_target: percWindTarget,
+    wind_capacity_factor: windCapacityFactor,
+    solar_capacity_factor: solarCapacityFactor,
+    target_wind_mw: targetGenByWindMW,
+    target_solar_mw: targetGenBySolarMW,
+    current_wind_mw: currentWindMW,
+    current_solar_mw: currentSolarMW,
+    capacityByYear,
   } = targetBuilds
 
-  // The targets and current generation are yearly energy in GWh, but we talk
-  // about how many MW of wind and solar to build, which means capacity (the
-  // most a generator can produce at once). Spreading GWh over every hour of the
-  // year gives average output in MW. Wind and solar only produce a fraction of
-  // their capacity on average (their capacity factor), so divide by that to get
-  // the capacity needed. We use national averages, as capacity factors vary by
-  // state. Source: EIA Electric Power Monthly Table 6.07.B, 2025 utility scale.
-  const hoursPerYear = 24 * 365
-  const windCapacityFactor = 0.338
-  const solarCapacityFactor = 0.24
-  const gwhToCapacityMw = (gwh, capacityFactor) =>
-    ((gwh / hoursPerYear) * 1000) / capacityFactor
-  const targetGenBySolarMW = gwhToCapacityMw(
-    targetGenBySolar,
-    solarCapacityFactor
-  )
-  const targetGenByWindMW = gwhToCapacityMw(targetGenByWind, windCapacityFactor)
-  const currentSolarMW = gwhToCapacityMw(currentSolar, solarCapacityFactor)
-  const currentWindMW = gwhToCapacityMw(currentWind, windCapacityFactor)
   const solarToBuildMw = targetGenBySolarMW - currentSolarMW
   const windToBuildMw = targetGenByWindMW - currentWindMW
 
@@ -924,11 +883,9 @@ export default function StateDetailsPage({ location, data }) {
                   note="Megawatts of capacity, estimated from generation with national capacity factors."
                 >
                   <RenewablesProgressChart
-                    generationByYear={generationByYear}
-                    targetWindGwh={targetGenByWind}
-                    targetSolarGwh={targetGenBySolar}
-                    windCapacityFactor={windCapacityFactor}
-                    solarCapacityFactor={solarCapacityFactor}
+                    capacityByYear={capacityByYear}
+                    targetWindMw={targetGenByWindMW}
+                    targetSolarMw={targetGenBySolarMW}
                     annualWindMw={windTurbinesBuildPerYear}
                     annualSolarMw={solarPanelsBuildPerYear}
                   />
@@ -1204,12 +1161,20 @@ export const query = graphql`
     allTargetGenerationJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-          total_gen_by_solar
           total_gen_by_wind
-          current_wind
-          current_solar
           perc_solar_target
           perc_wind_target
+          wind_capacity_factor
+          solar_capacity_factor
+          target_wind_mw
+          target_solar_mw
+          current_wind_mw
+          current_solar_mw
+          capacityByYear {
+            year
+            wind_mw
+            solar_mw
+          }
         }
       }
     }

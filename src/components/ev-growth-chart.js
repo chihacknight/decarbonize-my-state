@@ -10,17 +10,13 @@ import {
   Legend,
 } from "recharts"
 
+import { formatCompactNumber, formatNumber } from "../helper-functions"
+
 // Darker than the site's electrified green so the axis labels are readable
 const evColor = "#2e7d32"
 // A separate blue so the share axis isn't confused with the EV count axis
 const shareColor = "#1565c0"
 const allVehiclesColor = "#7a7a7a"
-
-/** 164900 -> "165K", 10304900 -> "10.3M" */
-const compactNumber = new Intl.NumberFormat("en-US", {
-  notation: "compact",
-  maximumFractionDigits: 1,
-})
 
 /**
  * Tooltip rows, always all three even when the all vehicles line is hidden.
@@ -31,7 +27,7 @@ const tooltipRows = [
     key: "EV_Registration",
     name: "EVs",
     color: evColor,
-    format: value => value.toLocaleString("en-US"),
+    format: formatNumber,
   },
   {
     key: "evSharePct",
@@ -43,7 +39,7 @@ const tooltipRows = [
     key: "Cars_All",
     name: "All Vehicles*",
     color: allVehiclesColor,
-    format: value => value.toLocaleString("en-US"),
+    format: formatNumber,
   },
 ]
 
@@ -119,7 +115,7 @@ const EvGrowthChart = ({ byYear }) => {
               yAxisId="count"
               // Only the EV count axis is bold, the share axis stays regular
               tick={{ fontWeight: "bold" }}
-              tickFormatter={value => compactNumber.format(value)}
+              tickFormatter={formatCompactNumber}
               stroke={evColor}
             />
             <YAxis
