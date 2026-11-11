@@ -1,6 +1,11 @@
 import React from "react"
 
 import { getShortCitation } from "../constants/source-citations"
+import NewTabIcon from "./new-tab-icon"
+
+/** Live map of electricity flows and carbon intensity between grid regions */
+const ElectricityMapsUrl =
+  "https://app.electricitymaps.com/map/fifteen_minutes?signal=carbon-intensity"
 
 /** Below this share either way, a state counts as using about what it makes */
 const MinTradePct = 2
@@ -149,6 +154,16 @@ export default function PowerTradeNote({ trade, placeTitle }) {
       </div>
 
       <div className="power-trade-note">{getNote()}</div>
+      <div className="power-trade-note">
+        <strong>
+          Learn more about how electricity flows between regions on{" "}
+          <a href={ElectricityMapsUrl} target="_blank" rel="noreferrer">
+            Electricity Maps
+            <NewTabIcon />
+          </a>
+          .
+        </strong>
+      </div>
       <Source year={year} />
     </div>
   )
