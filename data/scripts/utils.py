@@ -6,10 +6,14 @@ import json
 #us_generation = pd.read_csv('../raw/eia_state_net_generation.csv')
 
 # EPA reports waste (landfills, wastewater, composting) under the Commercial
-# economic sector. We count those as "other" rather than buildings, matching how
-# waste was treated in the WRI data we used before.
-WASTE_SUBSECTORS = ['Landfills - Municipal', 'Wastewater Treatment', 'Composting',
-                    'Anaerobic Digestion at Biogas Facilities']
+# economic sector, and refrigerant (HFC) leaks from air conditioning and
+# refrigeration ("Substitution of Ozone Depleting Substances") under both
+# Residential and Commercial. Electrifying buildings doesn't eliminate either, so
+# we count them as "other" rather than buildings, matching how the WRI data we
+# used before treated waste and HFCs.
+NON_BUILDING_SUBSECTORS = ['Landfills - Municipal', 'Wastewater Treatment', 'Composting',
+                           'Anaerobic Digestion at Biogas Facilities',
+                           'Substitution of Ozone Depleting Substances']
 
 # EPA's Electric Power Industry sector also includes SF6 leaking from grid
 # equipment and carbonates used in scrubbers. We only count burning fuel as
@@ -27,7 +31,7 @@ def get_emissions_bucket(econ_sector, econ_subsector):
     if econ_sector == 'Transportation':
         return 'transportation'
     if econ_sector in ['Residential', 'Commercial']:
-        if econ_subsector in WASTE_SUBSECTORS:
+        if econ_subsector in NON_BUILDING_SUBSECTORS:
             return 'dumps_farms_industrial_other'
         return 'buildings'
     if econ_sector in ['Industry', 'Agriculture']:

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T07:22:38.586Z",
+  "generatedAt": "2026-11-11T01:31:13.163Z",
   "baseRef": "main",
   "branch": "oct-2026-data-updates",
   "years": {
@@ -37,27 +37,27 @@
         },
         "same": {
           "dirty_power": 26.7,
-          "buildings": 10.2,
+          "buildings": 8.8,
           "transportation": 27.9,
-          "dumps_farms_industrial_other": 35.3
+          "dumps_farms_industrial_other": 36.7
         },
         "after": {
           "dirty_power": 24.8,
-          "buildings": 11.3,
+          "buildings": 9.5,
           "transportation": 28.5,
-          "dumps_farms_industrial_other": 35.3
+          "dumps_farms_industrial_other": 37.1
         },
         "sourceEffect": {
           "dirty_power": 0.9,
-          "buildings": 1.1,
+          "buildings": -0.3,
           "transportation": -1.4,
-          "dumps_farms_industrial_other": -0.6
+          "dumps_farms_industrial_other": 0.8
         },
         "realChange": {
           "dirty_power": -1.9,
-          "buildings": 1.1,
+          "buildings": 0.7,
           "transportation": 0.6,
-          "dumps_farms_industrial_other": 0
+          "dumps_farms_industrial_other": 0.4
         }
       },
       "charts": {
@@ -71,16 +71,16 @@
         "same": {
           "year": 2018,
           "dirty_power": 1790.21,
-          "buildings": 682.34,
+          "buildings": 592.86,
           "transportation": 1871.17,
-          "dumps_farms_industrial_other": 2373.13
+          "dumps_farms_industrial_other": 2462.61
         },
         "after": {
           "year": 2022,
           "dirty_power": 1567.22,
-          "buildings": 713.52,
+          "buildings": 599.61,
           "transportation": 1801.59,
-          "dumps_farms_industrial_other": 2228.85
+          "dumps_farms_industrial_other": 2342.76
         }
       }
     },
@@ -152,233 +152,233 @@
       {
         "year": 1990,
         "dirty_power": 1851.97,
-        "buildings": 575.45,
+        "buildings": 575.21,
         "transportation": 1521.42,
-        "dumps_farms_industrial_other": 2548.5
+        "dumps_farms_industrial_other": 2548.74
       },
       {
         "year": 1991,
         "dirty_power": 1847.55,
-        "buildings": 589.51,
+        "buildings": 589,
         "transportation": 1474.77,
-        "dumps_farms_industrial_other": 2520.99
+        "dumps_farms_industrial_other": 2521.5
       },
       {
         "year": 1992,
         "dirty_power": 1862.88,
-        "buildings": 591.44,
+        "buildings": 590.91,
         "transportation": 1533.75,
-        "dumps_farms_industrial_other": 2547.64
+        "dumps_farms_industrial_other": 2548.17
       },
       {
         "year": 1993,
         "dirty_power": 1939.13,
-        "buildings": 598,
+        "buildings": 597.19,
         "transportation": 1570.15,
-        "dumps_farms_industrial_other": 2537.51
+        "dumps_farms_industrial_other": 2538.31
       },
       {
         "year": 1994,
         "dirty_power": 1964.91,
-        "buildings": 591.54,
+        "buildings": 589.49,
         "transportation": 1624.38,
-        "dumps_farms_industrial_other": 2558.16
+        "dumps_farms_industrial_other": 2560.2
       },
       {
         "year": 1995,
         "dirty_power": 1982.09,
-        "buildings": 598.81,
+        "buildings": 588.62,
         "transportation": 1658.85,
-        "dumps_farms_industrial_other": 2579.88
+        "dumps_farms_industrial_other": 2590.06
       },
       {
         "year": 1996,
         "dirty_power": 2055.88,
-        "buildings": 641.53,
+        "buildings": 629.1,
         "transportation": 1714.21,
-        "dumps_farms_industrial_other": 2602.15
+        "dumps_farms_industrial_other": 2614.59
       },
       {
         "year": 1997,
         "dirty_power": 2122.85,
-        "buildings": 624.61,
+        "buildings": 609.83,
         "transportation": 1739.99,
-        "dumps_farms_industrial_other": 2577.98
+        "dumps_farms_industrial_other": 2592.77
       },
       {
         "year": 1998,
         "dirty_power": 2211.58,
-        "buildings": 574.5,
+        "buildings": 557.93,
         "transportation": 1782.08,
-        "dumps_farms_industrial_other": 2568.1
+        "dumps_farms_industrial_other": 2584.67
       },
       {
         "year": 1999,
         "dirty_power": 2224.26,
-        "buildings": 596.59,
+        "buildings": 578.06,
         "transportation": 1852.94,
-        "dumps_farms_industrial_other": 2502.39
+        "dumps_farms_industrial_other": 2520.92
       },
       {
         "year": 2000,
         "dirty_power": 2332.73,
-        "buildings": 635.08,
+        "buildings": 615.1,
         "transportation": 1902.99,
-        "dumps_farms_industrial_other": 2484.54
+        "dumps_farms_industrial_other": 2504.53
       },
       {
         "year": 2001,
         "dirty_power": 2293.62,
-        "buildings": 619.02,
+        "buildings": 597.84,
         "transportation": 1874.61,
-        "dumps_farms_industrial_other": 2426.52
+        "dumps_farms_industrial_other": 2447.69
       },
       {
         "year": 2002,
         "dirty_power": 2309.89,
-        "buildings": 619,
+        "buildings": 596.49,
         "transportation": 1915.36,
-        "dumps_farms_industrial_other": 2413.21
+        "dumps_farms_industrial_other": 2435.72
       },
       {
         "year": 2003,
         "dirty_power": 2342.57,
-        "buildings": 650.99,
+        "buildings": 627.01,
         "transportation": 1922.79,
-        "dumps_farms_industrial_other": 2394.2
+        "dumps_farms_industrial_other": 2418.18
       },
       {
         "year": 2004,
         "dirty_power": 2375.14,
-        "buildings": 639.08,
+        "buildings": 613.82,
         "transportation": 1955.28,
-        "dumps_farms_industrial_other": 2444.2
+        "dumps_farms_industrial_other": 2469.47
       },
       {
         "year": 2005,
         "dirty_power": 2441.36,
-        "buildings": 620.86,
+        "buildings": 592.86,
         "transportation": 1965.03,
-        "dumps_farms_industrial_other": 2395.22
+        "dumps_farms_industrial_other": 2423.22
       },
       {
         "year": 2006,
         "dirty_power": 2386.63,
-        "buildings": 572.27,
+        "buildings": 539.64,
         "transportation": 1965.45,
-        "dumps_farms_industrial_other": 2429.34
+        "dumps_farms_industrial_other": 2461.97
       },
       {
         "year": 2007,
         "dirty_power": 2453.73,
-        "buildings": 609.08,
+        "buildings": 570.88,
         "transportation": 1966.3,
-        "dumps_farms_industrial_other": 2429.76
+        "dumps_farms_industrial_other": 2467.96
       },
       {
         "year": 2008,
         "dirty_power": 2401.34,
-        "buildings": 627.17,
+        "buildings": 582.46,
         "transportation": 1862.56,
-        "dumps_farms_industrial_other": 2375.17
+        "dumps_farms_industrial_other": 2419.88
       },
       {
         "year": 2009,
         "dirty_power": 2185,
-        "buildings": 622.97,
+        "buildings": 570.95,
         "transportation": 1788.16,
-        "dumps_farms_industrial_other": 2213.65
+        "dumps_farms_industrial_other": 2265.67
       },
       {
         "year": 2010,
         "dirty_power": 2299.7,
-        "buildings": 625.48,
+        "buildings": 566.38,
         "transportation": 1794.33,
-        "dumps_farms_industrial_other": 2296.54
+        "dumps_farms_industrial_other": 2355.64
       },
       {
         "year": 2011,
         "dirty_power": 2197.96,
-        "buildings": 623.64,
+        "buildings": 558.32,
         "transportation": 1761.64,
-        "dumps_farms_industrial_other": 2279.34
+        "dumps_farms_industrial_other": 2344.66
       },
       {
         "year": 2012,
         "dirty_power": 2061.84,
-        "buildings": 560,
+        "buildings": 489.22,
         "transportation": 1742.86,
-        "dumps_farms_industrial_other": 2249.48
+        "dumps_farms_industrial_other": 2320.26
       },
       {
         "year": 2013,
         "dirty_power": 2079.39,
-        "buildings": 637.46,
+        "buildings": 561.37,
         "transportation": 1746.18,
-        "dumps_farms_industrial_other": 2341.64
+        "dumps_farms_industrial_other": 2417.72
       },
       {
         "year": 2014,
         "dirty_power": 2078.47,
-        "buildings": 668.25,
+        "buildings": 587.28,
         "transportation": 1780.45,
-        "dumps_farms_industrial_other": 2338.42
+        "dumps_farms_industrial_other": 2419.39
       },
       {
         "year": 2015,
         "dirty_power": 1940.07,
-        "buildings": 655,
+        "buildings": 569.87,
         "transportation": 1788.91,
-        "dumps_farms_industrial_other": 2312.22
+        "dumps_farms_industrial_other": 2397.34
       },
       {
         "year": 2016,
         "dirty_power": 1848.21,
-        "buildings": 618.99,
+        "buildings": 531.76,
         "transportation": 1823.97,
-        "dumps_farms_industrial_other": 2251.43
+        "dumps_farms_industrial_other": 2338.66
       },
       {
         "year": 2017,
         "dirty_power": 1768.8,
-        "buildings": 621.1,
+        "buildings": 532.94,
         "transportation": 1841.45,
-        "dumps_farms_industrial_other": 2283.16
+        "dumps_farms_industrial_other": 2371.32
       },
       {
         "year": 2018,
         "dirty_power": 1790.21,
-        "buildings": 682.34,
+        "buildings": 592.86,
         "transportation": 1871.17,
-        "dumps_farms_industrial_other": 2373.13
+        "dumps_farms_industrial_other": 2462.61
       },
       {
         "year": 2019,
         "dirty_power": 1640.2,
-        "buildings": 696.47,
+        "buildings": 602.52,
         "transportation": 1874.21,
-        "dumps_farms_industrial_other": 2344.72
+        "dumps_farms_industrial_other": 2438.67
       },
       {
         "year": 2020,
         "dirty_power": 1471.78,
-        "buildings": 648.66,
+        "buildings": 549.92,
         "transportation": 1624.93,
-        "dumps_farms_industrial_other": 2223.92
+        "dumps_farms_industrial_other": 2322.65
       },
       {
         "year": 2021,
         "dirty_power": 1574.16,
-        "buildings": 669.48,
+        "buildings": 561.45,
         "transportation": 1805.42,
-        "dumps_farms_industrial_other": 2246.57
+        "dumps_farms_industrial_other": 2354.6
       },
       {
         "year": 2022,
         "dirty_power": 1567.22,
-        "buildings": 713.52,
+        "buildings": 599.61,
         "transportation": 1801.59,
-        "dumps_farms_industrial_other": 2228.85
+        "dumps_farms_industrial_other": 2342.76
       }
     ],
     "powerSourcesDiffer": false
@@ -402,27 +402,27 @@
           },
           "same": {
             "dirty_power": 39.4,
-            "buildings": 4.2,
+            "buildings": 3.2,
             "transportation": 24,
-            "dumps_farms_industrial_other": 32.4
+            "dumps_farms_industrial_other": 33.4
           },
           "after": {
             "dirty_power": 37.7,
-            "buildings": 4.6,
+            "buildings": 3.3,
             "transportation": 27.7,
-            "dumps_farms_industrial_other": 30
+            "dumps_farms_industrial_other": 31.3
           },
           "sourceEffect": {
             "dirty_power": 1.1,
-            "buildings": 0.9,
+            "buildings": -0.1,
             "transportation": -0.4,
-            "dumps_farms_industrial_other": -1.6
+            "dumps_farms_industrial_other": -0.6
           },
           "realChange": {
             "dirty_power": -1.7,
-            "buildings": 0.4,
+            "buildings": 0.1,
             "transportation": 3.7,
-            "dumps_farms_industrial_other": -2.4
+            "dumps_farms_industrial_other": -2.1
           }
         },
         "charts": {
@@ -436,16 +436,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 54.59,
-            "buildings": 5.84,
+            "buildings": 4.5,
             "transportation": 33.24,
-            "dumps_farms_industrial_other": 44.99
+            "dumps_farms_industrial_other": 46.33
           },
           "after": {
             "year": 2022,
             "dirty_power": 50.94,
-            "buildings": 6.23,
+            "buildings": 4.5,
             "transportation": 37.38,
-            "dumps_farms_industrial_other": 40.47
+            "dumps_farms_industrial_other": 42.21
           }
         }
       },
@@ -535,25 +535,25 @@
           },
           "same": {
             "dirty_power": 8.1,
-            "buildings": 10.8,
+            "buildings": 10.3,
             "transportation": 22.1,
-            "dumps_farms_industrial_other": 58.9
+            "dumps_farms_industrial_other": 59.5
           },
           "after": {
             "dirty_power": 7.1,
-            "buildings": 9.8,
+            "buildings": 9.2,
             "transportation": 22.2,
-            "dumps_farms_industrial_other": 60.9
+            "dumps_farms_industrial_other": 61.5
           },
           "sourceEffect": {
             "dirty_power": 1.2,
-            "buildings": 1.6,
+            "buildings": 1.1,
             "transportation": -9.5,
-            "dumps_farms_industrial_other": 6.6
+            "dumps_farms_industrial_other": 7.2
           },
           "realChange": {
             "dirty_power": -1,
-            "buildings": -1,
+            "buildings": -1.1,
             "transportation": 0.1,
             "dumps_farms_industrial_other": 2
           }
@@ -569,16 +569,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 2.72,
-            "buildings": 3.64,
+            "buildings": 3.44,
             "transportation": 7.42,
-            "dumps_farms_industrial_other": 19.77
+            "dumps_farms_industrial_other": 19.97
           },
           "after": {
             "year": 2022,
             "dirty_power": 2.88,
-            "buildings": 4,
+            "buildings": 3.75,
             "transportation": 9.02,
-            "dumps_farms_industrial_other": 24.72
+            "dumps_farms_industrial_other": 24.97
           }
         }
       },
@@ -668,27 +668,27 @@
           },
           "same": {
             "dirty_power": 42,
-            "buildings": 6.2,
+            "buildings": 4.4,
             "transportation": 34.1,
-            "dumps_farms_industrial_other": 17.8
+            "dumps_farms_industrial_other": 19.5
           },
           "after": {
             "dirty_power": 33,
-            "buildings": 8.4,
+            "buildings": 5.8,
             "transportation": 39.2,
-            "dumps_farms_industrial_other": 19.4
+            "dumps_farms_industrial_other": 21.9
           },
           "sourceEffect": {
             "dirty_power": -2.5,
-            "buildings": 1.2,
+            "buildings": -0.6,
             "transportation": 1,
-            "dumps_farms_industrial_other": 0.4
+            "dumps_farms_industrial_other": 2.1
           },
           "realChange": {
             "dirty_power": -9,
-            "buildings": 2.2,
+            "buildings": 1.4,
             "transportation": 5.1,
-            "dumps_farms_industrial_other": 1.6
+            "dumps_farms_industrial_other": 2.4
           }
         },
         "charts": {
@@ -702,16 +702,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 47.41,
-            "buildings": 6.96,
+            "buildings": 5,
             "transportation": 38.49,
-            "dumps_farms_industrial_other": 20.11
+            "dumps_farms_industrial_other": 22.07
           },
           "after": {
             "year": 2022,
             "dirty_power": 33.08,
-            "buildings": 8.38,
+            "buildings": 5.86,
             "transportation": 39.35,
-            "dumps_farms_industrial_other": 19.46
+            "dumps_farms_industrial_other": 21.97
           }
         }
       },
@@ -801,27 +801,27 @@
           },
           "same": {
             "dirty_power": 37.1,
-            "buildings": 6.4,
+            "buildings": 5.6,
             "transportation": 20,
-            "dumps_farms_industrial_other": 36.5
+            "dumps_farms_industrial_other": 37.3
           },
           "after": {
             "dirty_power": 34.2,
-            "buildings": 7.3,
+            "buildings": 6.1,
             "transportation": 22.2,
-            "dumps_farms_industrial_other": 36.3
+            "dumps_farms_industrial_other": 37.4
           },
           "sourceEffect": {
             "dirty_power": -0.3,
-            "buildings": 0.6,
+            "buildings": -0.2,
             "transportation": -0.6,
-            "dumps_farms_industrial_other": 0.4
+            "dumps_farms_industrial_other": 1.2
           },
           "realChange": {
             "dirty_power": -2.9,
-            "buildings": 0.9,
+            "buildings": 0.5,
             "transportation": 2.2,
-            "dumps_farms_industrial_other": -0.2
+            "dumps_farms_industrial_other": 0.1
           }
         },
         "charts": {
@@ -835,16 +835,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 37.49,
-            "buildings": 6.46,
+            "buildings": 5.63,
             "transportation": 20.21,
-            "dumps_farms_industrial_other": 36.8
+            "dumps_farms_industrial_other": 37.62
           },
           "after": {
             "year": 2022,
             "dirty_power": 30.8,
-            "buildings": 6.54,
+            "buildings": 5.49,
             "transportation": 19.99,
-            "dumps_farms_industrial_other": 32.64
+            "dumps_farms_industrial_other": 33.68
           }
         }
       },
@@ -934,27 +934,27 @@
           },
           "same": {
             "dirty_power": 8.1,
-            "buildings": 12.7,
+            "buildings": 10.2,
             "transportation": 45.9,
-            "dumps_farms_industrial_other": 33.3
+            "dumps_farms_industrial_other": 35.8
           },
           "after": {
             "dirty_power": 9,
-            "buildings": 14.6,
+            "buildings": 11.2,
             "transportation": 43.4,
-            "dumps_farms_industrial_other": 33
+            "dumps_farms_industrial_other": 36.4
           },
           "sourceEffect": {
             "dirty_power": 0.6,
-            "buildings": 2.9,
+            "buildings": 0.4,
             "transportation": -2.7,
-            "dumps_farms_industrial_other": -0.8
+            "dumps_farms_industrial_other": 1.7
           },
           "realChange": {
             "dirty_power": 0.9,
-            "buildings": 1.9,
+            "buildings": 1,
             "transportation": -2.5,
-            "dumps_farms_industrial_other": -0.3
+            "dumps_farms_industrial_other": 0.6
           }
         },
         "charts": {
@@ -968,16 +968,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 34.36,
-            "buildings": 54.39,
+            "buildings": 43.59,
             "transportation": 195.95,
-            "dumps_farms_industrial_other": 142.1
+            "dumps_farms_industrial_other": 152.9
           },
           "after": {
             "year": 2022,
             "dirty_power": 36.02,
-            "buildings": 58.13,
+            "buildings": 44.79,
             "transportation": 173.16,
-            "dumps_farms_industrial_other": 131.82
+            "dumps_farms_industrial_other": 145.16
           }
         }
       },
@@ -1067,27 +1067,27 @@
           },
           "same": {
             "dirty_power": 26.5,
-            "buildings": 10.4,
+            "buildings": 9.2,
             "transportation": 23.6,
-            "dumps_farms_industrial_other": 39.5
+            "dumps_farms_industrial_other": 40.7
           },
           "after": {
             "dirty_power": 23.9,
-            "buildings": 12.2,
+            "buildings": 10.6,
             "transportation": 26.3,
-            "dumps_farms_industrial_other": 37.6
+            "dumps_farms_industrial_other": 39.2
           },
           "sourceEffect": {
             "dirty_power": -0.4,
-            "buildings": 0.5,
+            "buildings": -0.7,
             "transportation": -0.4,
-            "dumps_farms_industrial_other": 0.3
+            "dumps_farms_industrial_other": 1.5
           },
           "realChange": {
             "dirty_power": -2.6,
-            "buildings": 1.8,
+            "buildings": 1.4,
             "transportation": 2.7,
-            "dumps_farms_industrial_other": -1.9
+            "dumps_farms_industrial_other": -1.5
           }
         },
         "charts": {
@@ -1101,16 +1101,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 34.57,
-            "buildings": 13.56,
+            "buildings": 12,
             "transportation": 30.84,
-            "dumps_farms_industrial_other": 51.53
+            "dumps_farms_industrial_other": 53.09
           },
           "after": {
             "year": 2022,
             "dirty_power": 29.68,
-            "buildings": 15.18,
+            "buildings": 13.19,
             "transportation": 32.65,
-            "dumps_farms_industrial_other": 46.67
+            "dumps_farms_industrial_other": 48.67
           }
         }
       },
@@ -1200,27 +1200,27 @@
           },
           "same": {
             "dirty_power": 21.6,
-            "buildings": 29.5,
+            "buildings": 27.2,
             "transportation": 39.9,
-            "dumps_farms_industrial_other": 9
+            "dumps_farms_industrial_other": 11.4
           },
           "after": {
             "dirty_power": 24.4,
-            "buildings": 29.2,
+            "buildings": 26.2,
             "transportation": 37.7,
-            "dumps_farms_industrial_other": 8.8
+            "dumps_farms_industrial_other": 11.8
           },
           "sourceEffect": {
             "dirty_power": 2.4,
-            "buildings": 1.1,
+            "buildings": -1.2,
             "transportation": 2.3,
-            "dumps_farms_industrial_other": -5.8
+            "dumps_farms_industrial_other": -3.4
           },
           "realChange": {
             "dirty_power": 2.8,
-            "buildings": -0.3,
+            "buildings": -1,
             "transportation": -2.2,
-            "dumps_farms_industrial_other": -0.2
+            "dumps_farms_industrial_other": 0.4
           }
         },
         "charts": {
@@ -1234,16 +1234,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 8.93,
-            "buildings": 12.24,
+            "buildings": 11.26,
             "transportation": 16.52,
-            "dumps_farms_industrial_other": 3.74
+            "dumps_farms_industrial_other": 4.71
           },
           "after": {
             "year": 2022,
             "dirty_power": 10.08,
-            "buildings": 12.07,
+            "buildings": 10.83,
             "transportation": 15.57,
-            "dumps_farms_industrial_other": 3.63
+            "dumps_farms_industrial_other": 4.87
           }
         }
       },
@@ -1333,27 +1333,27 @@
           },
           "same": {
             "dirty_power": 16.3,
-            "buildings": 15,
+            "buildings": 13.3,
             "transportation": 35.7,
-            "dumps_farms_industrial_other": 33.1
+            "dumps_farms_industrial_other": 34.7
           },
           "after": {
             "dirty_power": 13.9,
-            "buildings": 14.9,
+            "buildings": 12.5,
             "transportation": 35.4,
-            "dumps_farms_industrial_other": 35.8
+            "dumps_farms_industrial_other": 38.1
           },
           "sourceEffect": {
             "dirty_power": -0.9,
-            "buildings": 0.5,
+            "buildings": -1.2,
             "transportation": 2.3,
-            "dumps_farms_industrial_other": -1.8
+            "dumps_farms_industrial_other": -0.2
           },
           "realChange": {
             "dirty_power": -2.4,
-            "buildings": -0.1,
+            "buildings": -0.8,
             "transportation": -0.3,
-            "dumps_farms_industrial_other": 2.7
+            "dumps_farms_industrial_other": 3.4
           }
         },
         "charts": {
@@ -1367,16 +1367,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 2.57,
-            "buildings": 2.36,
+            "buildings": 2.1,
             "transportation": 5.62,
-            "dumps_farms_industrial_other": 5.21
+            "dumps_farms_industrial_other": 5.47
           },
           "after": {
             "year": 2022,
             "dirty_power": 2.02,
-            "buildings": 2.16,
+            "buildings": 1.81,
             "transportation": 5.14,
-            "dumps_farms_industrial_other": 5.19
+            "dumps_farms_industrial_other": 5.53
           }
         }
       },
@@ -1466,27 +1466,27 @@
           },
           "same": {
             "dirty_power": 0,
-            "buildings": 46,
+            "buildings": 41.4,
             "transportation": 46.2,
-            "dumps_farms_industrial_other": 7.9
+            "dumps_farms_industrial_other": 12.4
           },
           "after": {
             "dirty_power": 0,
-            "buildings": 57.3,
+            "buildings": 50.2,
             "transportation": 33,
-            "dumps_farms_industrial_other": 9.7
+            "dumps_farms_industrial_other": 16.8
           },
           "sourceEffect": {
             "dirty_power": 0,
-            "buildings": -1.2,
+            "buildings": -5.8,
             "transportation": 16.4,
-            "dumps_farms_industrial_other": -15.2
+            "dumps_farms_industrial_other": -10.7
           },
           "realChange": {
             "dirty_power": 0,
-            "buildings": 11.3,
+            "buildings": 8.8,
             "transportation": -13.2,
-            "dumps_farms_industrial_other": 1.8
+            "dumps_farms_industrial_other": 4.4
           }
         },
         "charts": {
@@ -1500,16 +1500,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 0,
-            "buildings": 1.93,
+            "buildings": 1.74,
             "transportation": 1.94,
-            "dumps_farms_industrial_other": 0.33
+            "dumps_farms_industrial_other": 0.52
           },
           "after": {
             "year": 2022,
             "dirty_power": 0,
-            "buildings": 1.84,
+            "buildings": 1.61,
             "transportation": 1.06,
-            "dumps_farms_industrial_other": 0.31
+            "dumps_farms_industrial_other": 0.54
           }
         }
       },
@@ -1597,27 +1597,27 @@
           },
           "same": {
             "dirty_power": 37.5,
-            "buildings": 4.9,
+            "buildings": 2.8,
             "transportation": 39.7,
-            "dumps_farms_industrial_other": 17.8
+            "dumps_farms_industrial_other": 19.9
           },
           "after": {
             "dirty_power": 36.1,
-            "buildings": 5.9,
+            "buildings": 3.1,
             "transportation": 42.1,
-            "dumps_farms_industrial_other": 15.9
+            "dumps_farms_industrial_other": 18.7
           },
           "sourceEffect": {
             "dirty_power": 0.1,
-            "buildings": 1.8,
+            "buildings": -0.3,
             "transportation": -2,
-            "dumps_farms_industrial_other": 0
+            "dumps_farms_industrial_other": 2.1
           },
           "realChange": {
             "dirty_power": -1.4,
-            "buildings": 1,
+            "buildings": 0.3,
             "transportation": 2.4,
-            "dumps_farms_industrial_other": -1.9
+            "dumps_farms_industrial_other": -1.2
           }
         },
         "charts": {
@@ -1631,16 +1631,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 104.44,
-            "buildings": 13.67,
+            "buildings": 7.86,
             "transportation": 110.53,
-            "dumps_farms_industrial_other": 49.52
+            "dumps_farms_industrial_other": 55.34
           },
           "after": {
             "year": 2022,
             "dirty_power": 96.21,
-            "buildings": 15.75,
+            "buildings": 8.15,
             "transportation": 112.28,
-            "dumps_farms_industrial_other": 42.31
+            "dumps_farms_industrial_other": 49.92
           }
         }
       },
@@ -1730,27 +1730,27 @@
           },
           "same": {
             "dirty_power": 32.3,
-            "buildings": 9.3,
+            "buildings": 7.6,
             "transportation": 39.1,
-            "dumps_farms_industrial_other": 19.3
+            "dumps_farms_industrial_other": 21.1
           },
           "after": {
             "dirty_power": 27.9,
-            "buildings": 11.1,
+            "buildings": 8.5,
             "transportation": 40.5,
-            "dumps_farms_industrial_other": 20.5
+            "dumps_farms_industrial_other": 23.1
           },
           "sourceEffect": {
             "dirty_power": -1.6,
-            "buildings": 0.9,
+            "buildings": -0.8,
             "transportation": 2.1,
-            "dumps_farms_industrial_other": -1.4
+            "dumps_farms_industrial_other": 0.4
           },
           "realChange": {
             "dirty_power": -4.4,
-            "buildings": 1.8,
+            "buildings": 0.9,
             "transportation": 1.4,
-            "dumps_farms_industrial_other": 1.2
+            "dumps_farms_industrial_other": 2
           }
         },
         "charts": {
@@ -1764,16 +1764,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 52.88,
-            "buildings": 15.26,
+            "buildings": 12.38,
             "transportation": 64.1,
-            "dumps_farms_industrial_other": 31.66
+            "dumps_farms_industrial_other": 34.54
           },
           "after": {
             "year": 2022,
             "dirty_power": 40.93,
-            "buildings": 16.25,
+            "buildings": 12.52,
             "transportation": 59.53,
-            "dumps_farms_industrial_other": 30.17
+            "dumps_farms_industrial_other": 33.9
           }
         }
       },
@@ -1863,27 +1863,27 @@
           },
           "same": {
             "dirty_power": 35.2,
-            "buildings": 4.2,
+            "buildings": 2.1,
             "transportation": 48.9,
-            "dumps_farms_industrial_other": 11.7
+            "dumps_farms_industrial_other": 13.8
           },
           "after": {
             "dirty_power": 34.5,
-            "buildings": 5.3,
-            "transportation": 48.7,
-            "dumps_farms_industrial_other": 11.5
+            "buildings": 2.5,
+            "transportation": 48.6,
+            "dumps_farms_industrial_other": 14.3
           },
           "sourceEffect": {
             "dirty_power": 7.5,
-            "buildings": 1.6,
+            "buildings": -0.5,
             "transportation": -1.7,
-            "dumps_farms_industrial_other": -7.4
+            "dumps_farms_industrial_other": -5.3
           },
           "realChange": {
             "dirty_power": -0.7,
-            "buildings": 1.1,
-            "transportation": -0.2,
-            "dumps_farms_industrial_other": -0.2
+            "buildings": 0.4,
+            "transportation": -0.3,
+            "dumps_farms_industrial_other": 0.5
           }
         },
         "charts": {
@@ -1897,16 +1897,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 6.64,
-            "buildings": 0.79,
+            "buildings": 0.4,
             "transportation": 9.21,
-            "dumps_farms_industrial_other": 2.21
+            "dumps_farms_industrial_other": 2.6
           },
           "after": {
             "year": 2022,
             "dirty_power": 6.09,
-            "buildings": 0.94,
+            "buildings": 0.45,
             "transportation": 8.59,
-            "dumps_farms_industrial_other": 2.03
+            "dumps_farms_industrial_other": 2.53
           }
         }
       },
@@ -1996,27 +1996,27 @@
           },
           "same": {
             "dirty_power": 3.7,
-            "buildings": 10.7,
+            "buildings": 9.4,
             "transportation": 28.9,
-            "dumps_farms_industrial_other": 56.7
+            "dumps_farms_industrial_other": 58
           },
           "after": {
             "dirty_power": 4.6,
-            "buildings": 12.6,
+            "buildings": 10.9,
             "transportation": 28.7,
-            "dumps_farms_industrial_other": 54.1
+            "dumps_farms_industrial_other": 55.8
           },
           "sourceEffect": {
             "dirty_power": 0,
-            "buildings": 1,
+            "buildings": -0.3,
             "transportation": -3.5,
-            "dumps_farms_industrial_other": 2.6
+            "dumps_farms_industrial_other": 3.9
           },
           "realChange": {
             "dirty_power": 0.9,
-            "buildings": 1.9,
+            "buildings": 1.5,
             "transportation": -0.2,
-            "dumps_farms_industrial_other": -2.6
+            "dumps_farms_industrial_other": -2.2
           }
         },
         "charts": {
@@ -2030,16 +2030,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 1.3,
-            "buildings": 3.81,
+            "buildings": 3.33,
             "transportation": 10.26,
-            "dumps_farms_industrial_other": 20.11
+            "dumps_farms_industrial_other": 20.59
           },
           "after": {
             "year": 2022,
             "dirty_power": 1.78,
-            "buildings": 4.83,
+            "buildings": 4.17,
             "transportation": 11.02,
-            "dumps_farms_industrial_other": 20.8
+            "dumps_farms_industrial_other": 21.46
           }
         }
       },
@@ -2129,27 +2129,27 @@
           },
           "same": {
             "dirty_power": 26.5,
-            "buildings": 16.8,
+            "buildings": 15.5,
             "transportation": 26.1,
-            "dumps_farms_industrial_other": 30.6
+            "dumps_farms_industrial_other": 32
           },
           "after": {
             "dirty_power": 22.1,
-            "buildings": 19.7,
+            "buildings": 17.8,
             "transportation": 25.8,
-            "dumps_farms_industrial_other": 32.4
+            "dumps_farms_industrial_other": 34.3
           },
           "sourceEffect": {
             "dirty_power": 2,
-            "buildings": 1.6,
+            "buildings": 0.3,
             "transportation": -0.1,
-            "dumps_farms_industrial_other": -3.5
+            "dumps_farms_industrial_other": -2.1
           },
           "realChange": {
             "dirty_power": -4.4,
-            "buildings": 2.9,
+            "buildings": 2.3,
             "transportation": -0.3,
-            "dumps_farms_industrial_other": 1.8
+            "dumps_farms_industrial_other": 2.3
           }
         },
         "charts": {
@@ -2163,16 +2163,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 68,
-            "buildings": 43.2,
+            "buildings": 39.72,
             "transportation": 66.99,
-            "dumps_farms_industrial_other": 78.59
+            "dumps_farms_industrial_other": 82.08
           },
           "after": {
             "year": 2022,
             "dirty_power": 49.69,
-            "buildings": 44.49,
+            "buildings": 40.19,
             "transportation": 58.12,
-            "dumps_farms_industrial_other": 72.99
+            "dumps_farms_industrial_other": 77.29
           }
         }
       },
@@ -2262,27 +2262,27 @@
           },
           "same": {
             "dirty_power": 40.9,
-            "buildings": 7.4,
+            "buildings": 6.6,
             "transportation": 18.3,
-            "dumps_farms_industrial_other": 33.5
+            "dumps_farms_industrial_other": 34.3
           },
           "after": {
             "dirty_power": 36.4,
-            "buildings": 9.2,
+            "buildings": 8,
             "transportation": 20.7,
-            "dumps_farms_industrial_other": 33.8
+            "dumps_farms_industrial_other": 35
           },
           "sourceEffect": {
             "dirty_power": 3.8,
-            "buildings": 1,
+            "buildings": 0.2,
             "transportation": 0.2,
-            "dumps_farms_industrial_other": -5
+            "dumps_farms_industrial_other": -4.2
           },
           "realChange": {
             "dirty_power": -4.5,
-            "buildings": 1.8,
+            "buildings": 1.4,
             "transportation": 2.4,
-            "dumps_farms_industrial_other": 0.3
+            "dumps_farms_industrial_other": 0.7
           }
         },
         "charts": {
@@ -2296,16 +2296,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 91.88,
-            "buildings": 16.66,
+            "buildings": 14.82,
             "transportation": 41.06,
-            "dumps_farms_industrial_other": 75.22
+            "dumps_farms_industrial_other": 77.06
           },
           "after": {
             "year": 2022,
             "dirty_power": 70.25,
-            "buildings": 17.78,
+            "buildings": 15.45,
             "transportation": 39.95,
-            "dumps_farms_industrial_other": 65.27
+            "dumps_farms_industrial_other": 67.6
           }
         }
       },
@@ -2395,27 +2395,27 @@
           },
           "same": {
             "dirty_power": 22.5,
-            "buildings": 7.6,
+            "buildings": 6.9,
             "transportation": 16.4,
-            "dumps_farms_industrial_other": 53.6
+            "dumps_farms_industrial_other": 54.2
           },
           "after": {
             "dirty_power": 17.8,
-            "buildings": 9.6,
+            "buildings": 8.7,
             "transportation": 17.8,
-            "dumps_farms_industrial_other": 54.8
+            "dumps_farms_industrial_other": 55.7
           },
           "sourceEffect": {
             "dirty_power": 1.4,
-            "buildings": 0.4,
+            "buildings": -0.3,
             "transportation": 1.2,
-            "dumps_farms_industrial_other": -2.9
+            "dumps_farms_industrial_other": -2.3
           },
           "realChange": {
             "dirty_power": -4.7,
-            "buildings": 2,
+            "buildings": 1.8,
             "transportation": 1.4,
-            "dumps_farms_industrial_other": 1.2
+            "dumps_farms_industrial_other": 1.5
           }
         },
         "charts": {
@@ -2429,16 +2429,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 29.69,
-            "buildings": 10,
+            "buildings": 9.14,
             "transportation": 21.71,
-            "dumps_farms_industrial_other": 70.79
+            "dumps_farms_industrial_other": 71.65
           },
           "after": {
             "year": 2022,
             "dirty_power": 20.99,
-            "buildings": 11.35,
+            "buildings": 10.26,
             "transportation": 21,
-            "dumps_farms_industrial_other": 64.67
+            "dumps_farms_industrial_other": 65.77
           }
         }
       },
@@ -2528,27 +2528,27 @@
           },
           "same": {
             "dirty_power": 20.7,
-            "buildings": 6.7,
+            "buildings": 6,
             "transportation": 15.7,
-            "dumps_farms_industrial_other": 56.8
+            "dumps_farms_industrial_other": 57.5
           },
           "after": {
             "dirty_power": 21.1,
-            "buildings": 7.2,
+            "buildings": 6.3,
             "transportation": 15.5,
-            "dumps_farms_industrial_other": 56.1
+            "dumps_farms_industrial_other": 57
           },
           "sourceEffect": {
             "dirty_power": -0.3,
-            "buildings": 0.3,
+            "buildings": -0.4,
             "transportation": -2.5,
-            "dumps_farms_industrial_other": 2.4
+            "dumps_farms_industrial_other": 3.1
           },
           "realChange": {
             "dirty_power": 0.4,
-            "buildings": 0.5,
+            "buildings": 0.3,
             "transportation": -0.2,
-            "dumps_farms_industrial_other": -0.7
+            "dumps_farms_industrial_other": -0.5
           }
         },
         "charts": {
@@ -2562,16 +2562,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 23.49,
-            "buildings": 7.64,
+            "buildings": 6.85,
             "transportation": 17.8,
-            "dumps_farms_industrial_other": 64.44
+            "dumps_farms_industrial_other": 65.24
           },
           "after": {
             "year": 2022,
             "dirty_power": 23.77,
-            "buildings": 8.12,
+            "buildings": 7.11,
             "transportation": 17.43,
-            "dumps_farms_industrial_other": 63.15
+            "dumps_farms_industrial_other": 64.15
           }
         }
       },
@@ -2661,27 +2661,27 @@
           },
           "same": {
             "dirty_power": 44.7,
-            "buildings": 4.8,
+            "buildings": 4,
             "transportation": 20.9,
-            "dumps_farms_industrial_other": 29.6
+            "dumps_farms_industrial_other": 30.4
           },
           "after": {
             "dirty_power": 41.9,
-            "buildings": 5.8,
+            "buildings": 4.6,
             "transportation": 23.7,
-            "dumps_farms_industrial_other": 28.7
+            "dumps_farms_industrial_other": 29.8
           },
           "sourceEffect": {
             "dirty_power": 0.3,
-            "buildings": 0.5,
+            "buildings": -0.3,
             "transportation": -2.7,
-            "dumps_farms_industrial_other": 1.9
+            "dumps_farms_industrial_other": 2.7
           },
           "realChange": {
             "dirty_power": -2.8,
-            "buildings": 1,
+            "buildings": 0.6,
             "transportation": 2.8,
-            "dumps_farms_industrial_other": -0.9
+            "dumps_farms_industrial_other": -0.6
           }
         },
         "charts": {
@@ -2695,16 +2695,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 68.14,
-            "buildings": 7.37,
+            "buildings": 6.15,
             "transportation": 31.84,
-            "dumps_farms_industrial_other": 45.13
+            "dumps_farms_industrial_other": 46.36
           },
           "after": {
             "year": 2022,
             "dirty_power": 56.83,
-            "buildings": 7.82,
+            "buildings": 6.28,
             "transportation": 32.13,
-            "dumps_farms_industrial_other": 38.92
+            "dumps_farms_industrial_other": 40.46
           }
         }
       },
@@ -2794,27 +2794,27 @@
           },
           "same": {
             "dirty_power": 15.3,
-            "buildings": 2.6,
+            "buildings": 2,
             "transportation": 14.4,
-            "dumps_farms_industrial_other": 67.7
+            "dumps_farms_industrial_other": 68.3
           },
           "after": {
             "dirty_power": 14.6,
-            "buildings": 2.7,
+            "buildings": 2,
             "transportation": 18.7,
-            "dumps_farms_industrial_other": 64.1
+            "dumps_farms_industrial_other": 64.8
           },
           "sourceEffect": {
             "dirty_power": 1.6,
-            "buildings": 0.7,
+            "buildings": 0.1,
             "transportation": -5.7,
-            "dumps_farms_industrial_other": 3.4
+            "dumps_farms_industrial_other": 4
           },
           "realChange": {
             "dirty_power": -0.7,
-            "buildings": 0.1,
+            "buildings": 0,
             "transportation": 4.3,
-            "dumps_farms_industrial_other": -3.6
+            "dumps_farms_industrial_other": -3.5
           }
         },
         "charts": {
@@ -2828,16 +2828,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 34.23,
-            "buildings": 5.84,
+            "buildings": 4.57,
             "transportation": 32.11,
-            "dumps_farms_industrial_other": 151.44
+            "dumps_farms_industrial_other": 152.72
           },
           "after": {
             "year": 2022,
             "dirty_power": 32.4,
-            "buildings": 5.93,
+            "buildings": 4.36,
             "transportation": 41.67,
-            "dumps_farms_industrial_other": 142.64
+            "dumps_farms_industrial_other": 144.21
           }
         }
       },
@@ -2927,27 +2927,27 @@
           },
           "same": {
             "dirty_power": 7.3,
-            "buildings": 29.7,
+            "buildings": 27.5,
             "transportation": 42.5,
-            "dumps_farms_industrial_other": 20.5
+            "dumps_farms_industrial_other": 22.7
           },
           "after": {
             "dirty_power": 10.6,
-            "buildings": 27.3,
+            "buildings": 24.6,
             "transportation": 41.6,
-            "dumps_farms_industrial_other": 20.4
+            "dumps_farms_industrial_other": 23.2
           },
           "sourceEffect": {
             "dirty_power": 0.9,
-            "buildings": 0.6,
+            "buildings": -1.6,
             "transportation": -1.1,
-            "dumps_farms_industrial_other": -0.3
+            "dumps_farms_industrial_other": 1.9
           },
           "realChange": {
             "dirty_power": 3.3,
-            "buildings": -2.4,
+            "buildings": -2.9,
             "transportation": -0.9,
-            "dumps_farms_industrial_other": -0.1
+            "dumps_farms_industrial_other": 0.5
           }
         },
         "charts": {
@@ -2961,16 +2961,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 1.24,
-            "buildings": 5.06,
+            "buildings": 4.69,
             "transportation": 7.25,
-            "dumps_farms_industrial_other": 3.49
+            "dumps_farms_industrial_other": 3.86
           },
           "after": {
             "year": 2022,
             "dirty_power": 1.85,
-            "buildings": 4.75,
+            "buildings": 4.27,
             "transportation": 7.23,
-            "dumps_farms_industrial_other": 3.55
+            "dumps_farms_industrial_other": 4.03
           }
         }
       },
@@ -3060,27 +3060,27 @@
           },
           "same": {
             "dirty_power": 24.1,
-            "buildings": 18.6,
+            "buildings": 16.3,
             "transportation": 43.8,
-            "dumps_farms_industrial_other": 13.5
+            "dumps_farms_industrial_other": 15.8
           },
           "after": {
             "dirty_power": 18.4,
-            "buildings": 22.2,
-            "transportation": 43.9,
-            "dumps_farms_industrial_other": 15.6
+            "buildings": 18.7,
+            "transportation": 43.8,
+            "dumps_farms_industrial_other": 19
           },
           "sourceEffect": {
             "dirty_power": 1.2,
-            "buildings": 1.5,
+            "buildings": -0.8,
             "transportation": 2.7,
-            "dumps_farms_industrial_other": -5.4
+            "dumps_farms_industrial_other": -3.1
           },
           "realChange": {
             "dirty_power": -5.7,
-            "buildings": 3.6,
-            "transportation": 0.1,
-            "dumps_farms_industrial_other": 2.1
+            "buildings": 2.4,
+            "transportation": 0,
+            "dumps_farms_industrial_other": 3.2
           }
         },
         "charts": {
@@ -3094,16 +3094,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 17.17,
-            "buildings": 13.3,
+            "buildings": 11.65,
             "transportation": 31.25,
-            "dumps_farms_industrial_other": 9.6
+            "dumps_farms_industrial_other": 11.25
           },
           "after": {
             "year": 2022,
             "dirty_power": 11.18,
-            "buildings": 13.46,
+            "buildings": 11.36,
             "transportation": 26.63,
-            "dumps_farms_industrial_other": 9.45
+            "dumps_farms_industrial_other": 11.56
           }
         }
       },
@@ -3193,27 +3193,27 @@
           },
           "same": {
             "dirty_power": 13,
-            "buildings": 31.6,
+            "buildings": 29,
             "transportation": 45,
-            "dumps_farms_industrial_other": 10.3
+            "dumps_farms_industrial_other": 13
           },
           "after": {
             "dirty_power": 12.5,
-            "buildings": 34.2,
+            "buildings": 30.6,
             "transportation": 42.3,
-            "dumps_farms_industrial_other": 11
+            "dumps_farms_industrial_other": 14.6
           },
           "sourceEffect": {
             "dirty_power": 2.4,
-            "buildings": 2,
+            "buildings": -0.6,
             "transportation": 1.5,
-            "dumps_farms_industrial_other": -6
+            "dumps_farms_industrial_other": -3.3
           },
           "realChange": {
             "dirty_power": -0.5,
-            "buildings": 2.6,
+            "buildings": 1.6,
             "transportation": -2.7,
-            "dumps_farms_industrial_other": 0.7
+            "dumps_farms_industrial_other": 1.6
           }
         },
         "charts": {
@@ -3227,16 +3227,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 9.18,
-            "buildings": 22.32,
+            "buildings": 20.44,
             "transportation": 31.79,
-            "dumps_farms_industrial_other": 7.28
+            "dumps_farms_industrial_other": 9.17
           },
           "after": {
             "year": 2022,
             "dirty_power": 8.29,
-            "buildings": 22.76,
+            "buildings": 20.38,
             "transportation": 28.16,
-            "dumps_farms_industrial_other": 7.31
+            "dumps_farms_industrial_other": 9.7
           }
         }
       },
@@ -3326,27 +3326,27 @@
           },
           "same": {
             "dirty_power": 30.6,
-            "buildings": 18,
+            "buildings": 16.6,
             "transportation": 27.1,
-            "dumps_farms_industrial_other": 24.2
+            "dumps_farms_industrial_other": 25.6
           },
           "after": {
             "dirty_power": 30.7,
-            "buildings": 19.4,
+            "buildings": 17.6,
             "transportation": 25.6,
-            "dumps_farms_industrial_other": 24.3
+            "dumps_farms_industrial_other": 26.2
           },
           "sourceEffect": {
             "dirty_power": 0.3,
-            "buildings": 0.8,
+            "buildings": -0.6,
             "transportation": -0.4,
-            "dumps_farms_industrial_other": -0.8
+            "dumps_farms_industrial_other": 0.6
           },
           "realChange": {
             "dirty_power": 0.1,
-            "buildings": 1.4,
+            "buildings": 1,
             "transportation": -1.5,
-            "dumps_farms_industrial_other": 0.1
+            "dumps_farms_industrial_other": 0.6
           }
         },
         "charts": {
@@ -3360,16 +3360,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 60.13,
-            "buildings": 35.4,
+            "buildings": 32.67,
             "transportation": 53.18,
-            "dumps_farms_industrial_other": 47.51
+            "dumps_farms_industrial_other": 50.25
           },
           "after": {
             "year": 2022,
             "dirty_power": 57.01,
-            "buildings": 36.12,
+            "buildings": 32.69,
             "transportation": 47.58,
-            "dumps_farms_industrial_other": 45.22
+            "dumps_farms_industrial_other": 48.65
           }
         }
       },
@@ -3458,28 +3458,28 @@
             "dumps_farms_industrial_other": 40.8
           },
           "same": {
-            "dirty_power": 19.4,
-            "buildings": 13,
+            "dirty_power": 19.3,
+            "buildings": 12,
             "transportation": 23.2,
-            "dumps_farms_industrial_other": 44.4
+            "dumps_farms_industrial_other": 45.4
           },
           "after": {
             "dirty_power": 16.2,
-            "buildings": 16.2,
+            "buildings": 14.6,
             "transportation": 22.8,
-            "dumps_farms_industrial_other": 44.9
+            "dumps_farms_industrial_other": 46.4
           },
           "sourceEffect": {
-            "dirty_power": -1.3,
-            "buildings": -0.7,
+            "dirty_power": -1.4,
+            "buildings": -1.7,
             "transportation": -1.6,
-            "dumps_farms_industrial_other": 3.6
+            "dumps_farms_industrial_other": 4.6
           },
           "realChange": {
-            "dirty_power": -3.2,
-            "buildings": 3.2,
+            "dirty_power": -3.1,
+            "buildings": 2.6,
             "transportation": -0.4,
-            "dumps_farms_industrial_other": 0.5
+            "dumps_farms_industrial_other": 1
           }
         },
         "charts": {
@@ -3493,16 +3493,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 27.8,
-            "buildings": 18.73,
+            "buildings": 17.2,
             "transportation": 33.39,
-            "dumps_farms_industrial_other": 63.74
+            "dumps_farms_industrial_other": 65.28
           },
           "after": {
             "year": 2022,
             "dirty_power": 20.8,
-            "buildings": 20.75,
+            "buildings": 18.8,
             "transportation": 29.26,
-            "dumps_farms_industrial_other": 57.6
+            "dumps_farms_industrial_other": 59.55
           }
         }
       },
@@ -3592,27 +3592,27 @@
           },
           "same": {
             "dirty_power": 32.7,
-            "buildings": 5.2,
+            "buildings": 4.2,
             "transportation": 29.2,
-            "dumps_farms_industrial_other": 32.9
+            "dumps_farms_industrial_other": 33.9
           },
           "after": {
             "dirty_power": 33.4,
-            "buildings": 5.2,
+            "buildings": 4,
             "transportation": 29.4,
-            "dumps_farms_industrial_other": 32
+            "dumps_farms_industrial_other": 33.2
           },
           "sourceEffect": {
             "dirty_power": 2.6,
-            "buildings": 1.2,
+            "buildings": 0.2,
             "transportation": -5.3,
-            "dumps_farms_industrial_other": 1.5
+            "dumps_farms_industrial_other": 2.5
           },
           "realChange": {
             "dirty_power": 0.7,
-            "buildings": 0,
+            "buildings": -0.2,
             "transportation": 0.2,
-            "dumps_farms_industrial_other": -0.9
+            "dumps_farms_industrial_other": -0.7
           }
         },
         "charts": {
@@ -3626,16 +3626,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 25.96,
-            "buildings": 4.13,
+            "buildings": 3.31,
             "transportation": 23.13,
-            "dumps_farms_industrial_other": 26.06
+            "dumps_farms_industrial_other": 26.88
           },
           "after": {
             "year": 2022,
             "dirty_power": 27,
-            "buildings": 4.21,
+            "buildings": 3.21,
             "transportation": 23.81,
-            "dumps_farms_industrial_other": 25.89
+            "dumps_farms_industrial_other": 26.9
           }
         }
       },
@@ -3725,27 +3725,27 @@
           },
           "same": {
             "dirty_power": 40.3,
-            "buildings": 8.4,
+            "buildings": 7.4,
             "transportation": 23.9,
-            "dumps_farms_industrial_other": 27.4
+            "dumps_farms_industrial_other": 28.4
           },
           "after": {
             "dirty_power": 38.3,
-            "buildings": 9.1,
+            "buildings": 7.7,
             "transportation": 24.7,
-            "dumps_farms_industrial_other": 27.9
+            "dumps_farms_industrial_other": 29.3
           },
           "sourceEffect": {
             "dirty_power": 1,
-            "buildings": 0.8,
+            "buildings": -0.2,
             "transportation": 0.4,
-            "dumps_farms_industrial_other": -2.2
+            "dumps_farms_industrial_other": -1.2
           },
           "realChange": {
             "dirty_power": -2,
-            "buildings": 0.7,
+            "buildings": 0.3,
             "transportation": 0.8,
-            "dumps_farms_industrial_other": 0.5
+            "dumps_farms_industrial_other": 0.9
           }
         },
         "charts": {
@@ -3759,16 +3759,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 66.62,
-            "buildings": 13.9,
+            "buildings": 12.22,
             "transportation": 39.51,
-            "dumps_farms_industrial_other": 45.22
+            "dumps_farms_industrial_other": 46.9
           },
           "after": {
             "year": 2022,
             "dirty_power": 57.95,
-            "buildings": 13.76,
+            "buildings": 11.64,
             "transportation": 37.38,
-            "dumps_farms_industrial_other": 42.3
+            "dumps_farms_industrial_other": 44.41
           }
         }
       },
@@ -3858,27 +3858,27 @@
           },
           "same": {
             "dirty_power": 27.2,
-            "buildings": 6.8,
+            "buildings": 6.3,
             "transportation": 13.8,
-            "dumps_farms_industrial_other": 52.2
+            "dumps_farms_industrial_other": 52.7
           },
           "after": {
             "dirty_power": 25.7,
-            "buildings": 8,
+            "buildings": 7.3,
             "transportation": 14.8,
-            "dumps_farms_industrial_other": 51.5
+            "dumps_farms_industrial_other": 52.2
           },
           "sourceEffect": {
             "dirty_power": -3.8,
-            "buildings": -0.6,
+            "buildings": -1.1,
             "transportation": -3.2,
-            "dumps_farms_industrial_other": 7.5
+            "dumps_farms_industrial_other": 8
           },
           "realChange": {
             "dirty_power": -1.5,
-            "buildings": 1.2,
+            "buildings": 1,
             "transportation": 1,
-            "dumps_farms_industrial_other": -0.7
+            "dumps_farms_industrial_other": -0.5
           }
         },
         "charts": {
@@ -3892,16 +3892,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 15.39,
-            "buildings": 3.83,
+            "buildings": 3.54,
             "transportation": 7.82,
-            "dumps_farms_industrial_other": 29.49
+            "dumps_farms_industrial_other": 29.78
           },
           "after": {
             "year": 2022,
             "dirty_power": 13.6,
-            "buildings": 4.24,
+            "buildings": 3.85,
             "transportation": 7.83,
-            "dumps_farms_industrial_other": 27.21
+            "dumps_farms_industrial_other": 27.59
           }
         }
       },
@@ -3971,7 +3971,7 @@
       "fossilFreeHomes": { "before": 31.1, "after": 28.9, "total": -2.2 },
       "powerSourcesDiffer": false,
       "score": 0.45,
-      "rank": 29
+      "rank": 30
     },
     {
       "state": "nebraska",
@@ -3991,27 +3991,27 @@
           },
           "same": {
             "dirty_power": 25.8,
-            "buildings": 6,
+            "buildings": 5.4,
             "transportation": 14.3,
-            "dumps_farms_industrial_other": 53.9
+            "dumps_farms_industrial_other": 54.5
           },
           "after": {
             "dirty_power": 24,
-            "buildings": 6.2,
+            "buildings": 5.5,
             "transportation": 15.2,
-            "dumps_farms_industrial_other": 54.6
+            "dumps_farms_industrial_other": 55.3
           },
           "sourceEffect": {
             "dirty_power": 1.4,
-            "buildings": 0.6,
+            "buildings": 0,
             "transportation": -1.1,
-            "dumps_farms_industrial_other": -0.9
+            "dumps_farms_industrial_other": -0.3
           },
           "realChange": {
             "dirty_power": -1.8,
-            "buildings": 0.2,
+            "buildings": 0.1,
             "transportation": 0.9,
-            "dumps_farms_industrial_other": 0.7
+            "dumps_farms_industrial_other": 0.8
           }
         },
         "charts": {
@@ -4025,16 +4025,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 24.22,
-            "buildings": 5.63,
+            "buildings": 5.1,
             "transportation": 13.46,
-            "dumps_farms_industrial_other": 50.65
+            "dumps_farms_industrial_other": 51.17
           },
           "after": {
             "year": 2022,
             "dirty_power": 20.97,
-            "buildings": 5.43,
+            "buildings": 4.76,
             "transportation": 13.26,
-            "dumps_farms_industrial_other": 47.64
+            "dumps_farms_industrial_other": 48.32
           }
         }
       },
@@ -4110,10 +4110,10 @@
       "state": "nevada",
       "emissions": {
         "before": 44.1,
-        "same": 46.6,
+        "same": 46.7,
         "after": 46.5,
-        "sourceEffect": 5.7,
-        "realChange": -0.2,
+        "sourceEffect": 5.9,
+        "realChange": -0.4,
         "total": 5.4,
         "shares": {
           "before": {
@@ -4123,28 +4123,28 @@
             "dumps_farms_industrial_other": 22
           },
           "same": {
-            "dirty_power": 29.7,
-            "buildings": 12,
+            "dirty_power": 29.6,
+            "buildings": 10.2,
             "transportation": 39,
-            "dumps_farms_industrial_other": 19.3
+            "dumps_farms_industrial_other": 21.1
           },
           "after": {
             "dirty_power": 28.9,
-            "buildings": 13.4,
+            "buildings": 11.1,
             "transportation": 39.3,
-            "dumps_farms_industrial_other": 18.4
+            "dumps_farms_industrial_other": 20.7
           },
           "sourceEffect": {
-            "dirty_power": -1.3,
-            "buildings": 1,
+            "dirty_power": -1.4,
+            "buildings": -0.8,
             "transportation": 3,
-            "dumps_farms_industrial_other": -2.7
+            "dumps_farms_industrial_other": -0.9
           },
           "realChange": {
-            "dirty_power": -0.8,
-            "buildings": 1.4,
+            "dirty_power": -0.7,
+            "buildings": 0.9,
             "transportation": 0.3,
-            "dumps_farms_industrial_other": -0.9
+            "dumps_farms_industrial_other": -0.4
           }
         },
         "charts": {
@@ -4158,16 +4158,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 13.83,
-            "buildings": 5.59,
+            "buildings": 4.77,
             "transportation": 18.21,
-            "dumps_farms_industrial_other": 9.01
+            "dumps_farms_industrial_other": 9.84
           },
           "after": {
             "year": 2022,
             "dirty_power": 13.46,
-            "buildings": 6.25,
+            "buildings": 5.16,
             "transportation": 18.28,
-            "dumps_farms_industrial_other": 8.54
+            "dumps_farms_industrial_other": 9.63
           }
         }
       },
@@ -4236,8 +4236,8 @@
       "evPct": { "before": 1.1, "after": 3.3, "total": 2.2 },
       "fossilFreeHomes": { "before": 34.6, "after": 34.5, "total": -0.1 },
       "powerSourcesDiffer": false,
-      "score": 0.45,
-      "rank": 30
+      "score": 0.47,
+      "rank": 28
     },
     {
       "state": "new_hampshire",
@@ -4257,27 +4257,27 @@
           },
           "same": {
             "dirty_power": 13.3,
-            "buildings": 29.2,
+            "buildings": 26.9,
             "transportation": 43.6,
-            "dumps_farms_industrial_other": 13.9
+            "dumps_farms_industrial_other": 16.2
           },
           "after": {
             "dirty_power": 15.6,
-            "buildings": 27.2,
+            "buildings": 24.2,
             "transportation": 42.3,
-            "dumps_farms_industrial_other": 14.9
+            "dumps_farms_industrial_other": 17.9
           },
           "sourceEffect": {
             "dirty_power": 0.1,
-            "buildings": -0.3,
+            "buildings": -2.6,
             "transportation": -0.7,
-            "dumps_farms_industrial_other": 0.9
+            "dumps_farms_industrial_other": 3.2
           },
           "realChange": {
             "dirty_power": 2.3,
-            "buildings": -2,
+            "buildings": -2.7,
             "transportation": -1.3,
-            "dumps_farms_industrial_other": 1
+            "dumps_farms_industrial_other": 1.7
           }
         },
         "charts": {
@@ -4291,16 +4291,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 2.15,
-            "buildings": 4.72,
+            "buildings": 4.35,
             "transportation": 7.05,
-            "dumps_farms_industrial_other": 2.25
+            "dumps_farms_industrial_other": 2.62
           },
           "after": {
             "year": 2022,
             "dirty_power": 2.49,
-            "buildings": 4.34,
+            "buildings": 3.86,
             "transportation": 6.75,
-            "dumps_farms_industrial_other": 2.38
+            "dumps_farms_industrial_other": 2.85
           }
         }
       },
@@ -4390,27 +4390,27 @@
           },
           "same": {
             "dirty_power": 16.6,
-            "buildings": 25.7,
+            "buildings": 23.5,
             "transportation": 43.4,
-            "dumps_farms_industrial_other": 14.2
+            "dumps_farms_industrial_other": 16.4
           },
           "after": {
             "dirty_power": 15.4,
-            "buildings": 28.3,
+            "buildings": 25.1,
             "transportation": 40.6,
-            "dumps_farms_industrial_other": 15.7
+            "dumps_farms_industrial_other": 18.9
           },
           "sourceEffect": {
             "dirty_power": 2.2,
-            "buildings": 3.6,
+            "buildings": 1.4,
             "transportation": -3.1,
-            "dumps_farms_industrial_other": -2.8
+            "dumps_farms_industrial_other": -0.6
           },
           "realChange": {
             "dirty_power": -1.2,
-            "buildings": 2.6,
+            "buildings": 1.6,
             "transportation": -2.8,
-            "dumps_farms_industrial_other": 1.5
+            "dumps_farms_industrial_other": 2.5
           }
         },
         "charts": {
@@ -4424,16 +4424,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 18.45,
-            "buildings": 28.48,
+            "buildings": 26.05,
             "transportation": 48.14,
-            "dumps_farms_industrial_other": 15.78
+            "dumps_farms_industrial_other": 18.21
           },
           "after": {
             "year": 2022,
             "dirty_power": 15.38,
-            "buildings": 28.2,
+            "buildings": 25.04,
             "transportation": 40.47,
-            "dumps_farms_industrial_other": 15.67
+            "dumps_farms_industrial_other": 18.84
           }
         }
       },
@@ -4523,27 +4523,27 @@
           },
           "same": {
             "dirty_power": 23.9,
-            "buildings": 5.8,
+            "buildings": 5.1,
             "transportation": 20.2,
-            "dumps_farms_industrial_other": 50.1
+            "dumps_farms_industrial_other": 50.8
           },
           "after": {
             "dirty_power": 23.7,
-            "buildings": 6.5,
+            "buildings": 5.6,
             "transportation": 20.8,
-            "dumps_farms_industrial_other": 49
+            "dumps_farms_industrial_other": 49.9
           },
           "sourceEffect": {
             "dirty_power": -0.5,
-            "buildings": 0.4,
+            "buildings": -0.3,
             "transportation": -1.2,
-            "dumps_farms_industrial_other": 1.3
+            "dumps_farms_industrial_other": 2
           },
           "realChange": {
             "dirty_power": -0.2,
-            "buildings": 0.7,
+            "buildings": 0.5,
             "transportation": 0.6,
-            "dumps_farms_industrial_other": -1.1
+            "dumps_farms_industrial_other": -0.9
           }
         },
         "charts": {
@@ -4557,16 +4557,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 18.58,
-            "buildings": 4.54,
+            "buildings": 3.96,
             "transportation": 15.67,
-            "dumps_farms_industrial_other": 38.9
+            "dumps_farms_industrial_other": 39.47
           },
           "after": {
             "year": 2022,
             "dirty_power": 18.3,
-            "buildings": 5.02,
+            "buildings": 4.3,
             "transportation": 16.1,
-            "dumps_farms_industrial_other": 37.83
+            "dumps_farms_industrial_other": 38.56
           }
         }
       },
@@ -4656,27 +4656,27 @@
           },
           "same": {
             "dirty_power": 13.1,
-            "buildings": 31.6,
+            "buildings": 29,
             "transportation": 38.7,
-            "dumps_farms_industrial_other": 16.6
+            "dumps_farms_industrial_other": 19.2
           },
           "after": {
             "dirty_power": 15,
-            "buildings": 31.7,
+            "buildings": 28.3,
             "transportation": 37.5,
-            "dumps_farms_industrial_other": 15.9
+            "dumps_farms_industrial_other": 19.3
           },
           "sourceEffect": {
             "dirty_power": 1.1,
-            "buildings": 2.1,
+            "buildings": -0.5,
             "transportation": 1.2,
-            "dumps_farms_industrial_other": -4.3
+            "dumps_farms_industrial_other": -1.7
           },
           "realChange": {
             "dirty_power": 1.9,
-            "buildings": 0.1,
+            "buildings": -0.7,
             "transportation": -1.2,
-            "dumps_farms_industrial_other": -0.7
+            "dumps_farms_industrial_other": 0.1
           }
         },
         "charts": {
@@ -4690,16 +4690,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 26.42,
-            "buildings": 63.71,
+            "buildings": 58.36,
             "transportation": 77.96,
-            "dumps_farms_industrial_other": 33.36
+            "dumps_farms_industrial_other": 38.71
           },
           "after": {
             "year": 2022,
             "dirty_power": 29.18,
-            "buildings": 61.76,
+            "buildings": 55.04,
             "transportation": 72.97,
-            "dumps_farms_industrial_other": 30.9
+            "dumps_farms_industrial_other": 37.63
           }
         }
       },
@@ -4789,27 +4789,27 @@
           },
           "same": {
             "dirty_power": 32.6,
-            "buildings": 9,
+            "buildings": 7.1,
             "transportation": 37.4,
-            "dumps_farms_industrial_other": 21
+            "dumps_farms_industrial_other": 22.9
           },
           "after": {
             "dirty_power": 28.5,
-            "buildings": 11,
+            "buildings": 8.4,
             "transportation": 38.9,
-            "dumps_farms_industrial_other": 21.6
+            "dumps_farms_industrial_other": 24.2
           },
           "sourceEffect": {
             "dirty_power": -0.7,
-            "buildings": 1.4,
+            "buildings": -0.5,
             "transportation": 1.7,
-            "dumps_farms_industrial_other": -2.3
+            "dumps_farms_industrial_other": -0.4
           },
           "realChange": {
             "dirty_power": -4.1,
-            "buildings": 2,
+            "buildings": 1.3,
             "transportation": 1.5,
-            "dumps_farms_industrial_other": 0.6
+            "dumps_farms_industrial_other": 1.3
           }
         },
         "charts": {
@@ -4823,16 +4823,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 48.95,
-            "buildings": 13.46,
+            "buildings": 10.61,
             "transportation": 56.18,
-            "dumps_farms_industrial_other": 31.48
+            "dumps_farms_industrial_other": 34.32
           },
           "after": {
             "year": 2022,
             "dirty_power": 40.54,
-            "buildings": 15.64,
+            "buildings": 11.99,
             "transportation": 55.4,
-            "dumps_farms_industrial_other": 30.73
+            "dumps_farms_industrial_other": 34.39
           }
         }
       },
@@ -4922,27 +4922,27 @@
           },
           "same": {
             "dirty_power": 31.2,
-            "buildings": 2.4,
+            "buildings": 2.2,
             "transportation": 8.7,
-            "dumps_farms_industrial_other": 57.7
+            "dumps_farms_industrial_other": 57.9
           },
           "after": {
             "dirty_power": 32.3,
-            "buildings": 3.2,
+            "buildings": 2.9,
             "transportation": 9.5,
-            "dumps_farms_industrial_other": 55
+            "dumps_farms_industrial_other": 55.3
           },
           "sourceEffect": {
             "dirty_power": -2,
-            "buildings": -0.1,
+            "buildings": -0.3,
             "transportation": -1.4,
-            "dumps_farms_industrial_other": 3.5
+            "dumps_farms_industrial_other": 3.7
           },
           "realChange": {
             "dirty_power": 1.1,
-            "buildings": 0.8,
+            "buildings": 0.7,
             "transportation": 0.8,
-            "dumps_farms_industrial_other": -2.7
+            "dumps_farms_industrial_other": -2.6
           }
         },
         "charts": {
@@ -4956,16 +4956,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 30.79,
-            "buildings": 2.42,
+            "buildings": 2.21,
             "transportation": 8.55,
-            "dumps_farms_industrial_other": 57.04
+            "dumps_farms_industrial_other": 57.24
           },
           "after": {
             "year": 2022,
             "dirty_power": 28.53,
-            "buildings": 2.79,
+            "buildings": 2.53,
             "transportation": 8.36,
-            "dumps_farms_industrial_other": 48.53
+            "dumps_farms_industrial_other": 48.79
           }
         }
       },
@@ -5055,27 +5055,27 @@
           },
           "same": {
             "dirty_power": 31.5,
-            "buildings": 13.7,
+            "buildings": 12.4,
             "transportation": 25.3,
-            "dumps_farms_industrial_other": 29.5
+            "dumps_farms_industrial_other": 30.8
           },
           "after": {
             "dirty_power": 30.4,
-            "buildings": 14.8,
+            "buildings": 13.1,
             "transportation": 25,
-            "dumps_farms_industrial_other": 29.8
+            "dumps_farms_industrial_other": 31.5
           },
           "sourceEffect": {
             "dirty_power": 1.1,
-            "buildings": 1,
+            "buildings": -0.3,
             "transportation": -0.1,
-            "dumps_farms_industrial_other": -2.1
+            "dumps_farms_industrial_other": -0.8
           },
           "realChange": {
             "dirty_power": -1.1,
-            "buildings": 1.1,
+            "buildings": 0.7,
             "transportation": -0.3,
-            "dumps_farms_industrial_other": 0.3
+            "dumps_farms_industrial_other": 0.7
           }
         },
         "charts": {
@@ -5089,16 +5089,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 78.64,
-            "buildings": 34.26,
+            "buildings": 31.07,
             "transportation": 63.07,
-            "dumps_farms_industrial_other": 73.69
+            "dumps_farms_industrial_other": 76.89
           },
           "after": {
             "year": 2022,
             "dirty_power": 72.12,
-            "buildings": 35.16,
+            "buildings": 31.14,
             "transportation": 59.37,
-            "dumps_farms_industrial_other": 70.91
+            "dumps_farms_industrial_other": 74.93
           }
         }
       },
@@ -5168,7 +5168,7 @@
       "fossilFreeHomes": { "before": 26.8, "after": 27.1, "total": 0.3 },
       "powerSourcesDiffer": false,
       "score": 0.46,
-      "rank": 28
+      "rank": 29
     },
     {
       "state": "oklahoma",
@@ -5188,27 +5188,27 @@
           },
           "same": {
             "dirty_power": 22.5,
-            "buildings": 5.6,
+            "buildings": 4.9,
             "transportation": 20.9,
-            "dumps_farms_industrial_other": 51
+            "dumps_farms_industrial_other": 51.7
           },
           "after": {
             "dirty_power": 19.4,
-            "buildings": 6.4,
+            "buildings": 5.4,
             "transportation": 22.2,
-            "dumps_farms_industrial_other": 51.9
+            "dumps_farms_industrial_other": 53
           },
           "sourceEffect": {
             "dirty_power": -1.1,
-            "buildings": 0.2,
+            "buildings": -0.5,
             "transportation": -2.8,
-            "dumps_farms_industrial_other": 3.7
+            "dumps_farms_industrial_other": 4.4
           },
           "realChange": {
             "dirty_power": -3.1,
-            "buildings": 0.8,
+            "buildings": 0.5,
             "transportation": 1.3,
-            "dumps_farms_industrial_other": 0.9
+            "dumps_farms_industrial_other": 1.3
           }
         },
         "charts": {
@@ -5222,16 +5222,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 34.03,
-            "buildings": 8.47,
+            "buildings": 7.4,
             "transportation": 31.67,
-            "dumps_farms_industrial_other": 77.16
+            "dumps_farms_industrial_other": 78.24
           },
           "after": {
             "year": 2022,
             "dirty_power": 25.92,
-            "buildings": 8.56,
+            "buildings": 7.19,
             "transportation": 29.71,
-            "dumps_farms_industrial_other": 69.36
+            "dumps_farms_industrial_other": 70.73
           }
         }
       },
@@ -5321,27 +5321,27 @@
           },
           "same": {
             "dirty_power": 16,
-            "buildings": 12.1,
+            "buildings": 9.9,
             "transportation": 41.1,
-            "dumps_farms_industrial_other": 30.8
+            "dumps_farms_industrial_other": 33
           },
           "after": {
             "dirty_power": 14.8,
-            "buildings": 14.3,
+            "buildings": 11.5,
             "transportation": 39,
-            "dumps_farms_industrial_other": 31.9
+            "dumps_farms_industrial_other": 34.7
           },
           "sourceEffect": {
             "dirty_power": 0.2,
-            "buildings": 1.9,
+            "buildings": -0.3,
             "transportation": 0,
-            "dumps_farms_industrial_other": -2.1
+            "dumps_farms_industrial_other": 0.1
           },
           "realChange": {
             "dirty_power": -1.2,
-            "buildings": 2.2,
+            "buildings": 1.6,
             "transportation": -2.1,
-            "dumps_farms_industrial_other": 1.1
+            "dumps_farms_industrial_other": 1.7
           }
         },
         "charts": {
@@ -5355,16 +5355,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 8.52,
-            "buildings": 6.41,
+            "buildings": 5.27,
             "transportation": 21.82,
-            "dumps_farms_industrial_other": 16.39
+            "dumps_farms_industrial_other": 17.53
           },
           "after": {
             "year": 2022,
             "dirty_power": 7.54,
-            "buildings": 7.32,
+            "buildings": 5.87,
             "transportation": 19.95,
-            "dumps_farms_industrial_other": 16.29
+            "dumps_farms_industrial_other": 17.74
           }
         }
       },
@@ -5454,27 +5454,27 @@
           },
           "same": {
             "dirty_power": 27.5,
-            "buildings": 13,
+            "buildings": 11.8,
             "transportation": 22.4,
-            "dumps_farms_industrial_other": 37.2
+            "dumps_farms_industrial_other": 38.4
           },
           "after": {
             "dirty_power": 28.9,
-            "buildings": 13.6,
+            "buildings": 11.9,
             "transportation": 22.2,
-            "dumps_farms_industrial_other": 35.2
+            "dumps_farms_industrial_other": 36.9
           },
           "sourceEffect": {
             "dirty_power": 0,
-            "buildings": 0.2,
+            "buildings": -1,
             "transportation": -1.5,
-            "dumps_farms_industrial_other": 1.5
+            "dumps_farms_industrial_other": 2.7
           },
           "realChange": {
             "dirty_power": 1.4,
-            "buildings": 0.6,
+            "buildings": 0.1,
             "transportation": -0.2,
-            "dumps_farms_industrial_other": -2
+            "dumps_farms_industrial_other": -1.5
           }
         },
         "charts": {
@@ -5488,16 +5488,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 77.11,
-            "buildings": 36.54,
+            "buildings": 33.04,
             "transportation": 62.81,
-            "dumps_farms_industrial_other": 104.41
+            "dumps_farms_industrial_other": 107.92
           },
           "after": {
             "year": 2022,
             "dirty_power": 76.47,
-            "buildings": 36.03,
+            "buildings": 31.6,
             "transportation": 58.75,
-            "dumps_farms_industrial_other": 93.2
+            "dumps_farms_industrial_other": 97.63
           }
         }
       },
@@ -5587,27 +5587,27 @@
           },
           "same": {
             "dirty_power": 26.4,
-            "buildings": 28.4,
+            "buildings": 26,
             "transportation": 34.4,
-            "dumps_farms_industrial_other": 10.8
+            "dumps_farms_industrial_other": 13.2
           },
           "after": {
             "dirty_power": 25,
-            "buildings": 29.2,
+            "buildings": 25.8,
             "transportation": 35,
-            "dumps_farms_industrial_other": 10.9
+            "dumps_farms_industrial_other": 14.2
           },
           "sourceEffect": {
             "dirty_power": 0.7,
-            "buildings": 1.7,
+            "buildings": -0.7,
             "transportation": 0.4,
-            "dumps_farms_industrial_other": -2.7
+            "dumps_farms_industrial_other": -0.3
           },
           "realChange": {
             "dirty_power": -1.4,
-            "buildings": 0.8,
+            "buildings": -0.2,
             "transportation": 0.6,
-            "dumps_farms_industrial_other": 0.1
+            "dumps_farms_industrial_other": 1
           }
         },
         "charts": {
@@ -5621,16 +5621,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 3.18,
-            "buildings": 3.42,
+            "buildings": 3.13,
             "transportation": 4.14,
-            "dumps_farms_industrial_other": 1.3
+            "dumps_farms_industrial_other": 1.59
           },
           "after": {
             "year": 2022,
             "dirty_power": 2.79,
-            "buildings": 3.26,
+            "buildings": 2.89,
             "transportation": 3.91,
-            "dumps_farms_industrial_other": 1.22
+            "dumps_farms_industrial_other": 1.59
           }
         }
       },
@@ -5706,10 +5706,10 @@
       "state": "south_carolina",
       "emissions": {
         "before": 84.6,
-        "same": 85,
+        "same": 84.9,
         "after": 80.4,
-        "sourceEffect": 0.5,
-        "realChange": -5.4,
+        "sourceEffect": 0.4,
+        "realChange": -5.3,
         "total": -5,
         "shares": {
           "before": {
@@ -5720,27 +5720,27 @@
           },
           "same": {
             "dirty_power": 34.3,
-            "buildings": 6.6,
+            "buildings": 5,
             "transportation": 39.2,
-            "dumps_farms_industrial_other": 19.9
+            "dumps_farms_industrial_other": 21.5
           },
           "after": {
             "dirty_power": 31.2,
-            "buildings": 7.8,
+            "buildings": 5.5,
             "transportation": 40.4,
-            "dumps_farms_industrial_other": 20.6
+            "dumps_farms_industrial_other": 22.9
           },
           "sourceEffect": {
             "dirty_power": 1,
-            "buildings": 1.6,
+            "buildings": 0,
             "transportation": -0.3,
-            "dumps_farms_industrial_other": -2.2
+            "dumps_farms_industrial_other": -0.6
           },
           "realChange": {
             "dirty_power": -3.1,
-            "buildings": 1.2,
+            "buildings": 0.5,
             "transportation": 1.2,
-            "dumps_farms_industrial_other": 0.7
+            "dumps_farms_industrial_other": 1.4
           }
         },
         "charts": {
@@ -5754,16 +5754,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 29.16,
-            "buildings": 5.63,
+            "buildings": 4.23,
             "transportation": 33.27,
-            "dumps_farms_industrial_other": 16.9
+            "dumps_farms_industrial_other": 18.29
           },
           "after": {
             "year": 2022,
             "dirty_power": 25.07,
-            "buildings": 6.25,
+            "buildings": 4.45,
             "transportation": 32.5,
-            "dumps_farms_industrial_other": 16.56
+            "dumps_farms_industrial_other": 18.37
           }
         }
       },
@@ -5853,27 +5853,27 @@
           },
           "same": {
             "dirty_power": 6.4,
-            "buildings": 5,
+            "buildings": 4.5,
             "transportation": 15.5,
-            "dumps_farms_industrial_other": 73.1
+            "dumps_farms_industrial_other": 73.6
           },
           "after": {
             "dirty_power": 6.2,
-            "buildings": 5.4,
+            "buildings": 4.7,
             "transportation": 16.4,
-            "dumps_farms_industrial_other": 71.9
+            "dumps_farms_industrial_other": 72.6
           },
           "sourceEffect": {
             "dirty_power": -0.3,
-            "buildings": 0.2,
+            "buildings": -0.3,
             "transportation": -0.6,
-            "dumps_farms_industrial_other": 0.6
+            "dumps_farms_industrial_other": 1.1
           },
           "realChange": {
             "dirty_power": -0.2,
-            "buildings": 0.4,
+            "buildings": 0.2,
             "transportation": 0.9,
-            "dumps_farms_industrial_other": -1.2
+            "dumps_farms_industrial_other": -1
           }
         },
         "charts": {
@@ -5887,16 +5887,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 2.93,
-            "buildings": 2.27,
+            "buildings": 2.03,
             "transportation": 7.04,
-            "dumps_farms_industrial_other": 33.25
+            "dumps_farms_industrial_other": 33.49
           },
           "after": {
             "year": 2022,
             "dirty_power": 2.71,
-            "buildings": 2.37,
+            "buildings": 2.06,
             "transportation": 7.13,
-            "dumps_farms_industrial_other": 31.28
+            "dumps_farms_industrial_other": 31.59
           }
         }
       },
@@ -5986,27 +5986,27 @@
           },
           "same": {
             "dirty_power": 24,
-            "buildings": 9.6,
+            "buildings": 8,
             "transportation": 38.8,
-            "dumps_farms_industrial_other": 27.6
+            "dumps_farms_industrial_other": 29.3
           },
           "after": {
             "dirty_power": 22.1,
-            "buildings": 10.4,
+            "buildings": 8.1,
             "transportation": 40.9,
-            "dumps_farms_industrial_other": 26.6
+            "dumps_farms_industrial_other": 28.8
           },
           "sourceEffect": {
             "dirty_power": 2.6,
-            "buildings": 2.1,
+            "buildings": 0.5,
             "transportation": 0.8,
-            "dumps_farms_industrial_other": -5.5
+            "dumps_farms_industrial_other": -3.8
           },
           "realChange": {
             "dirty_power": -1.9,
-            "buildings": 0.8,
+            "buildings": 0.1,
             "transportation": 2.1,
-            "dumps_farms_industrial_other": -1
+            "dumps_farms_industrial_other": -0.5
           }
         },
         "charts": {
@@ -6020,16 +6020,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 26.48,
-            "buildings": 10.63,
+            "buildings": 8.77,
             "transportation": 42.77,
-            "dumps_farms_industrial_other": 30.42
+            "dumps_farms_industrial_other": 32.28
           },
           "after": {
             "year": 2022,
             "dirty_power": 24.06,
-            "buildings": 11.26,
+            "buildings": 8.85,
             "transportation": 44.45,
-            "dumps_farms_industrial_other": 28.89
+            "dumps_farms_industrial_other": 31.3
           }
         }
       },
@@ -6119,27 +6119,27 @@
           },
           "same": {
             "dirty_power": 23.4,
-            "buildings": 4.1,
+            "buildings": 3.2,
             "transportation": 23.9,
-            "dumps_farms_industrial_other": 48.6
+            "dumps_farms_industrial_other": 49.4
           },
           "after": {
             "dirty_power": 22.2,
-            "buildings": 4.5,
+            "buildings": 3.3,
             "transportation": 24.9,
-            "dumps_farms_industrial_other": 48.5
+            "dumps_farms_industrial_other": 49.7
           },
           "sourceEffect": {
             "dirty_power": 1.1,
-            "buildings": 1,
+            "buildings": 0.1,
             "transportation": -3.4,
-            "dumps_farms_industrial_other": 1.3
+            "dumps_farms_industrial_other": 2.1
           },
           "realChange": {
             "dirty_power": -1.2,
-            "buildings": 0.4,
+            "buildings": 0.1,
             "transportation": 1,
-            "dumps_farms_industrial_other": -0.1
+            "dumps_farms_industrial_other": 0.3
           }
         },
         "charts": {
@@ -6153,16 +6153,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 204.54,
-            "buildings": 35.7,
+            "buildings": 27.86,
             "transportation": 209.09,
-            "dumps_farms_industrial_other": 424.04
+            "dumps_farms_industrial_other": 431.88
           },
           "after": {
             "year": 2022,
             "dirty_power": 188.65,
-            "buildings": 38.45,
+            "buildings": 28.19,
             "transportation": 211.59,
-            "dumps_farms_industrial_other": 412.45
+            "dumps_farms_industrial_other": 422.71
           }
         }
       },
@@ -6239,10 +6239,10 @@
       "emissions": {
         "before": 71.1,
         "same": 75.3,
-        "after": 75.1,
+        "after": 75.2,
         "sourceEffect": 5.9,
-        "realChange": -0.3,
-        "total": 5.6,
+        "realChange": -0.1,
+        "total": 5.8,
         "shares": {
           "before": {
             "dirty_power": 39.1,
@@ -6252,27 +6252,27 @@
           },
           "same": {
             "dirty_power": 38.6,
-            "buildings": 10,
+            "buildings": 8.8,
             "transportation": 24.6,
-            "dumps_farms_industrial_other": 26.8
+            "dumps_farms_industrial_other": 28
           },
           "after": {
             "dirty_power": 36,
-            "buildings": 11.8,
+            "buildings": 10.3,
             "transportation": 24.9,
-            "dumps_farms_industrial_other": 27.3
+            "dumps_farms_industrial_other": 28.8
           },
           "sourceEffect": {
             "dirty_power": -0.5,
-            "buildings": 0.5,
+            "buildings": -0.7,
             "transportation": -1.3,
-            "dumps_farms_industrial_other": 1.3
+            "dumps_farms_industrial_other": 2.5
           },
           "realChange": {
             "dirty_power": -2.6,
-            "buildings": 1.8,
+            "buildings": 1.5,
             "transportation": 0.3,
-            "dumps_farms_industrial_other": 0.5
+            "dumps_farms_industrial_other": 0.8
           }
         },
         "charts": {
@@ -6286,16 +6286,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 29.09,
-            "buildings": 7.52,
+            "buildings": 6.65,
             "transportation": 18.5,
-            "dumps_farms_industrial_other": 20.21
+            "dumps_farms_industrial_other": 21.08
           },
           "after": {
             "year": 2022,
             "dirty_power": 27.05,
-            "buildings": 8.89,
+            "buildings": 7.74,
             "transportation": 18.72,
-            "dumps_farms_industrial_other": 20.48
+            "dumps_farms_industrial_other": 21.64
           }
         }
       },
@@ -6364,7 +6364,7 @@
       "evPct": { "before": 1.2, "after": 2.1, "total": 0.9 },
       "fossilFreeHomes": { "before": 20.6, "after": 17.3, "total": -3.3 },
       "powerSourcesDiffer": false,
-      "score": 0.43,
+      "score": 0.42,
       "rank": 31
     },
     {
@@ -6385,27 +6385,27 @@
           },
           "same": {
             "dirty_power": 0,
-            "buildings": 30,
+            "buildings": 28,
             "transportation": 36.6,
-            "dumps_farms_industrial_other": 33.4
+            "dumps_farms_industrial_other": 35.4
           },
           "after": {
             "dirty_power": 0.1,
-            "buildings": 30,
+            "buildings": 27.4,
             "transportation": 34.9,
-            "dumps_farms_industrial_other": 35
+            "dumps_farms_industrial_other": 37.6
           },
           "sourceEffect": {
             "dirty_power": -0.1,
-            "buildings": -1,
+            "buildings": -3,
             "transportation": -1.6,
-            "dumps_farms_industrial_other": 2.8
+            "dumps_farms_industrial_other": 4.8
           },
           "realChange": {
             "dirty_power": 0.1,
-            "buildings": 0,
+            "buildings": -0.6,
             "transportation": -1.7,
-            "dumps_farms_industrial_other": 1.6
+            "dumps_farms_industrial_other": 2.2
           }
         },
         "charts": {
@@ -6419,16 +6419,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 0,
-            "buildings": 2.59,
+            "buildings": 2.42,
             "transportation": 3.16,
-            "dumps_farms_industrial_other": 2.89
+            "dumps_farms_industrial_other": 3.06
           },
           "after": {
             "year": 2022,
             "dirty_power": 0.01,
-            "buildings": 2.49,
+            "buildings": 2.27,
             "transportation": 2.89,
-            "dumps_farms_industrial_other": 2.9
+            "dumps_farms_industrial_other": 3.12
           }
         }
       },
@@ -6518,27 +6518,27 @@
           },
           "same": {
             "dirty_power": 24.5,
-            "buildings": 11.6,
+            "buildings": 9.8,
             "transportation": 40.9,
-            "dumps_farms_industrial_other": 23
+            "dumps_farms_industrial_other": 24.8
           },
           "after": {
             "dirty_power": 20.5,
-            "buildings": 13.2,
+            "buildings": 10.7,
             "transportation": 42,
-            "dumps_farms_industrial_other": 24.2
+            "dumps_farms_industrial_other": 26.8
           },
           "sourceEffect": {
             "dirty_power": 0.5,
-            "buildings": 1.3,
+            "buildings": -0.5,
             "transportation": 2.1,
-            "dumps_farms_industrial_other": -3.9
+            "dumps_farms_industrial_other": -2.1
           },
           "realChange": {
             "dirty_power": -4,
-            "buildings": 1.6,
+            "buildings": 0.9,
             "transportation": 1.1,
-            "dumps_farms_industrial_other": 1.2
+            "dumps_farms_industrial_other": 2
           }
         },
         "charts": {
@@ -6552,16 +6552,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 31.83,
-            "buildings": 15.02,
+            "buildings": 12.69,
             "transportation": 53.05,
-            "dumps_farms_industrial_other": 29.85
+            "dumps_farms_industrial_other": 32.18
           },
           "after": {
             "year": 2022,
             "dirty_power": 23.88,
-            "buildings": 15.43,
+            "buildings": 12.46,
             "transportation": 48.97,
-            "dumps_farms_industrial_other": 28.19
+            "dumps_farms_industrial_other": 31.16
           }
         }
       },
@@ -6651,27 +6651,27 @@
           },
           "same": {
             "dirty_power": 11.5,
-            "buildings": 13.9,
+            "buildings": 11.6,
             "transportation": 43.5,
-            "dumps_farms_industrial_other": 31.1
+            "dumps_farms_industrial_other": 33.4
           },
           "after": {
             "dirty_power": 11.1,
-            "buildings": 16,
+            "buildings": 13,
             "transportation": 43.5,
-            "dumps_farms_industrial_other": 29.5
+            "dumps_farms_industrial_other": 32.5
           },
           "sourceEffect": {
             "dirty_power": 1.2,
-            "buildings": 3,
+            "buildings": 0.7,
             "transportation": -5.4,
-            "dumps_farms_industrial_other": 1.3
+            "dumps_farms_industrial_other": 3.6
           },
           "realChange": {
             "dirty_power": -0.4,
-            "buildings": 2.1,
+            "buildings": 1.4,
             "transportation": 0,
-            "dumps_farms_industrial_other": -1.6
+            "dumps_farms_industrial_other": -0.9
           }
         },
         "charts": {
@@ -6685,16 +6685,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 10.38,
-            "buildings": 12.48,
+            "buildings": 10.42,
             "transportation": 39.1,
-            "dumps_farms_industrial_other": 28.02
+            "dumps_farms_industrial_other": 30.08
           },
           "after": {
             "year": 2022,
             "dirty_power": 9.71,
-            "buildings": 14.05,
+            "buildings": 11.39,
             "transportation": 38.19,
-            "dumps_farms_industrial_other": 25.92
+            "dumps_farms_industrial_other": 28.58
           }
         }
       },
@@ -6784,27 +6784,27 @@
           },
           "same": {
             "dirty_power": 49.9,
-            "buildings": 3.3,
+            "buildings": 2.9,
             "transportation": 11,
-            "dumps_farms_industrial_other": 35.8
+            "dumps_farms_industrial_other": 36.2
           },
           "after": {
             "dirty_power": 45.7,
-            "buildings": 3.6,
+            "buildings": 3.1,
             "transportation": 11.6,
-            "dumps_farms_industrial_other": 39
+            "dumps_farms_industrial_other": 39.5
           },
           "sourceEffect": {
             "dirty_power": -1.9,
-            "buildings": 0.1,
+            "buildings": -0.3,
             "transportation": -0.4,
-            "dumps_farms_industrial_other": 2.1
+            "dumps_farms_industrial_other": 2.5
           },
           "realChange": {
             "dirty_power": -4.2,
-            "buildings": 0.3,
+            "buildings": 0.2,
             "transportation": 0.6,
-            "dumps_farms_industrial_other": 3.2
+            "dumps_farms_industrial_other": 3.3
           }
         },
         "charts": {
@@ -6818,16 +6818,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 62.29,
-            "buildings": 4.14,
+            "buildings": 3.64,
             "transportation": 13.7,
-            "dumps_farms_industrial_other": 44.7
+            "dumps_farms_industrial_other": 45.2
           },
           "after": {
             "year": 2022,
             "dirty_power": 52.52,
-            "buildings": 4.14,
+            "buildings": 3.53,
             "transportation": 13.37,
-            "dumps_farms_industrial_other": 44.78
+            "dumps_farms_industrial_other": 45.39
           }
         }
       },
@@ -6917,27 +6917,27 @@
           },
           "same": {
             "dirty_power": 30.3,
-            "buildings": 13.7,
+            "buildings": 12.5,
             "transportation": 24,
-            "dumps_farms_industrial_other": 31.9
+            "dumps_farms_industrial_other": 33.1
           },
           "after": {
             "dirty_power": 25.9,
-            "buildings": 16.6,
+            "buildings": 15,
             "transportation": 25.1,
-            "dumps_farms_industrial_other": 32.3
+            "dumps_farms_industrial_other": 34
           },
           "sourceEffect": {
             "dirty_power": -0.1,
-            "buildings": 0.6,
+            "buildings": -0.6,
             "transportation": -0.3,
-            "dumps_farms_industrial_other": -0.3
+            "dumps_farms_industrial_other": 0.9
           },
           "realChange": {
             "dirty_power": -4.4,
-            "buildings": 2.9,
+            "buildings": 2.5,
             "transportation": 1.1,
-            "dumps_farms_industrial_other": 0.4
+            "dumps_farms_industrial_other": 0.9
           }
         },
         "charts": {
@@ -6951,16 +6951,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 40.47,
-            "buildings": 18.32,
+            "buildings": 16.73,
             "transportation": 32.09,
-            "dumps_farms_industrial_other": 42.61
+            "dumps_farms_industrial_other": 44.2
           },
           "after": {
             "year": 2022,
             "dirty_power": 31.63,
-            "buildings": 20.29,
+            "buildings": 18.27,
             "transportation": 30.66,
-            "dumps_farms_industrial_other": 39.45
+            "dumps_farms_industrial_other": 41.46
           }
         }
       },
@@ -7050,27 +7050,27 @@
           },
           "same": {
             "dirty_power": 44.1,
-            "buildings": 2.2,
+            "buildings": 2.1,
             "transportation": 8,
-            "dumps_farms_industrial_other": 45.6
+            "dumps_farms_industrial_other": 45.8
           },
           "after": {
             "dirty_power": 43.2,
-            "buildings": 2.7,
+            "buildings": 2.5,
             "transportation": 8.3,
-            "dumps_farms_industrial_other": 45.8
+            "dumps_farms_industrial_other": 46.1
           },
           "sourceEffect": {
             "dirty_power": -0.8,
-            "buildings": 0,
+            "buildings": -0.1,
             "transportation": -1.1,
-            "dumps_farms_industrial_other": 1.8
+            "dumps_farms_industrial_other": 2
           },
           "realChange": {
             "dirty_power": -0.9,
-            "buildings": 0.5,
+            "buildings": 0.4,
             "transportation": 0.3,
-            "dumps_farms_industrial_other": 0.2
+            "dumps_farms_industrial_other": 0.3
           }
         },
         "charts": {
@@ -7084,16 +7084,16 @@
           "same": {
             "year": 2018,
             "dirty_power": 41.36,
-            "buildings": 2.1,
+            "buildings": 1.94,
             "transportation": 7.53,
-            "dumps_farms_industrial_other": 42.72
+            "dumps_farms_industrial_other": 42.88
           },
           "after": {
             "year": 2022,
             "dirty_power": 36.12,
-            "buildings": 2.28,
+            "buildings": 2.08,
             "transportation": 6.92,
-            "dumps_farms_industrial_other": 38.32
+            "dumps_farms_industrial_other": 38.52
           }
         }
       },

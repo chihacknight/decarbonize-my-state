@@ -31,9 +31,9 @@ The mapping lives in `get_emissions_bucket` in `scripts/utils.py`:
 | Site category | EPA economic sectors |
 |---|---|
 | Dirty power (`dirty_power`) | Electric Power Industry, fuel combustion only (fossil fuel CO2, stationary combustion, waste incineration) |
-| Buildings (`buildings`) | Residential, Commercial (except waste, below) |
+| Buildings (`buildings`) | Residential, Commercial (except waste and refrigerant leaks, below) |
 | Transportation (`transportation`) | Transportation |
-| Dumps, farms, industrial & other (`dumps_farms_industrial_other`) | Industry, Agriculture, the waste subsectors EPA files under Commercial (municipal landfills, wastewater treatment, composting, anaerobic digestion), and the non-combustion parts of Electric Power Industry (SF6 from electrical equipment, carbonates used in scrubbers) |
+| Dumps, farms, industrial & other (`dumps_farms_industrial_other`) | Industry, Agriculture, the waste subsectors EPA files under Commercial (municipal landfills, wastewater treatment, composting, anaerobic digestion), refrigerant (HFC) leaks EPA files under Residential and Commercial ("Substitution of Ozone Depleting Substances"), and the non-combustion parts of Electric Power Industry (SF6 from electrical equipment, carbonates used in scrubbers) |
 
 Land use and forestry (LULUCF) carbon sinks and U.S. territories are left out. The `united_states` totals are the sum of the 50 states + DC. EPA's "National" rows only contain unallocated leftovers, which are all zero.
 
