@@ -12,11 +12,7 @@ const navLinks = [
 
 const Header = ({ siteTitle }) => (
   <>
-    <Navbar
-      collapseOnSelect
-      expand="lg"
-      className="sunrise-nav"
-    >
+    <Navbar collapseOnSelect expand="lg" className="sunrise-nav">
       <a
         className="sr-only sr-only-focusable skip-link btn btn-light"
         href="#main"
