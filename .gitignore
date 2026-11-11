@@ -75,3 +75,9 @@ package-lock.json
 
 # Generate Temporary Power Plant Images - should be moved to static
 power-plant-social-out/
+
+# Downloaded source data too big for git, see README
+data/*.zip
+
+# Saved AFDC vehicle registration page, see data/UPDATE_PROCESS.md
+data/*.html

@@ -2,38 +2,75 @@ import pandas as pd
 import json
 
 ### Setting Test DataFrames to more easily test functions
-#us_emissions = pd.read_csv('../raw/us_emissions_2000_2018.csv')
-#us_generation = pd.read_csv('../raw/us_electric_generation_2001_20.csv')
+#us_emissions = pd.read_csv('../raw/epa_state_ghg_by_econ_sector.csv')
+#us_generation = pd.read_csv('../raw/eia_state_net_generation.csv')
 
-# define function to perform the grouping calculations on a dataframe
+# EPA reports waste (landfills, wastewater, composting) under the Commercial
+# economic sector, and refrigerant (HFC) leaks from air conditioning and
+# refrigeration ("Substitution of Ozone Depleting Substances") under both
+# Residential and Commercial. Electrifying buildings doesn't eliminate either, so
+# we count them as "other" rather than buildings, matching how the WRI data we
+# used before treated waste and HFCs.
+NON_BUILDING_SUBSECTORS = ['Landfills - Municipal', 'Wastewater Treatment', 'Composting',
+                           'Anaerobic Digestion at Biogas Facilities',
+                           'Substitution of Ozone Depleting Substances']
+
+# EPA's Electric Power Industry sector also includes SF6 leaking from grid
+# equipment and carbonates used in scrubbers. We only count burning fuel as
+# dirty power and put the rest in "other", matching the WRI data we used before
+POWER_COMBUSTION_SUBSECTORS = ['Carbon Dioxide from Fossil Fuel Combustion', 'Stationary Combustion',
+                               'Incineration of Waste']
+
+# map an EPA economic sector + subsector to one of our four buckets. Anything
+# that returns None (LULUCF sinks) is left out, as forestry was before
+def get_emissions_bucket(econ_sector, econ_subsector):
+    if econ_sector == 'Electric Power Industry':
+        if econ_subsector in POWER_COMBUSTION_SUBSECTORS:
+            return 'dirty_power'
+        return 'dumps_farms_industrial_other'
+    if econ_sector == 'Transportation':
+        return 'transportation'
+    if econ_sector in ['Residential', 'Commercial']:
+        if econ_subsector in NON_BUILDING_SUBSECTORS:
+            return 'dumps_farms_industrial_other'
+        return 'buildings'
+    if econ_sector in ['Industry', 'Agriculture']:
+        return 'dumps_farms_industrial_other'
+    return None
+
+# define function to perform the grouping calculations on a dataframe of the
+# EPA state inventory by economic sector (see scripts/convert_epa_workbook.py)
 # returns the cleaned grouped df
 def group_df_by_emissions(emissions_data):
-    dirty_power = ['emission_sub_electric']
-    buildings = ['emission_sub_residential', 'emission_sub_commercial']
-    transportation = ['emission_sub_transportation']
-    dumps_farms_industrial_other = ['emission_by_waste', 'emission_sub_industrial', 
-                                    'emission_by_industrial', 'emission_by_agriculture', 'emission_sub_fugitive']
+    emissions_data['bucket'] = emissions_data.apply(
+        lambda row: get_emissions_bucket(row['econ_sector'], row['econ_subsector']), axis=1)
+    emissions_data = emissions_data[emissions_data['bucket'].notnull()]
 
-    columns_list = [['dirty_power', dirty_power], 
-                    ['buildings', buildings],
-                    ['transportation', transportation], 
-                    ['dumps_farms_industrial_other', dumps_farms_industrial_other]]
+    # EPA has a column per year (Y1990, Y1991, ...), flip those into rows
+    year_cols = [col for col in emissions_data.columns if col.startswith('Y')]
+    emissions_data = emissions_data.melt(id_vars=['state', 'bucket'], value_vars=year_cols,
+                                         var_name='year', value_name='emissions')
+    emissions_data['year'] = emissions_data['year'].str[1:].astype(int)
 
-    # build each bucketed totals
-    for calc in columns_list: 
-        emissions_data[calc[0]] = emissions_data.loc[:, calc[1]].sum(axis=1)
-    
-    # this section is going to calculate `%_of_total`
-    # it's not currently being used, but can be accessed if you add '%_whatever_the_calculation_is' to the `cols_to_keep` object
-    buckets = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial_other'] # emitted fuels from the totals for now
-    # build the bucket % makeup for that year
+    # build each bucketed totals, one row per state and year
+    emissions_data = emissions_data.pivot_table(index=['state', 'year'], columns='bucket',
+                                                values='emissions', aggfunc='sum').reset_index()
+
+    # EPA has no U.S. rows with real values (state totals sum to the national
+    # inventory), so add up the 50 states + DC ourselves
+    us_totals = emissions_data.groupby('year').sum().reset_index()
+    us_totals['state'] = 'US'
+    emissions_data = pd.concat([emissions_data, us_totals], ignore_index=True)
+
+    buckets = ['dirty_power', 'buildings', 'transportation', 'dumps_farms_industrial_other']
     for bucket in buckets:
-        emissions_data['%_'+bucket] = round(emissions_data[bucket] / emissions_data[buckets].sum(axis=1), 2) * 100
-        # round the main value by it's nearest 1st decimal point
+        # round the main value by it's nearest 2nd decimal point
         emissions_data[bucket] = emissions_data[bucket].apply(lambda value: round(value,2))
-    
-    # rename state & year so they are lower case
-    emissions_data.rename(columns={'State':'state', 'Year':'year'}, inplace=True)
+
+    # replace the state abbreviations with their full name, lower case
+    us_abbrev_to_state = dict(map(reversed, us_state_to_abbrev.items()))
+    us_abbrev_to_state['US'] = 'United States'
+    emissions_data['state'] = emissions_data['state'].replace(us_abbrev_to_state)
     emissions_data['state'] = emissions_data['state'].apply(lambda state: state.lower())
     emissions_data['state'] = emissions_data['state'].apply(lambda state: state.replace(" ", "_"))
 

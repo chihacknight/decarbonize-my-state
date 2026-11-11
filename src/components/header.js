@@ -2,6 +2,14 @@ import React from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import { Link } from "gatsby"
 
+const navLinks = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/terminology", label: "Terminology" },
+  { to: "/faq", label: "FAQ" },
+  { to: "/take-action", label: "Take Action" },
+]
+
 const Header = ({ siteTitle }) => (
   <>
     <Navbar
@@ -24,21 +32,19 @@ const Header = ({ siteTitle }) => (
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
-          <Link className="nav-link" to="/about">
-            About
-          </Link>
-          <Link className="nav-link" to="/terminology">
-            Terminology
-          </Link>
-          <Link className="nav-link" to="/faq">
-            FAQ
-          </Link>
-          <Link className="nav-link" to="/take-action">
-            Take Action
-          </Link>
+          {navLinks.map(({ to, label }) => (
+            <Link
+              key={to}
+              className="nav-link"
+              activeClassName="active"
+              // Match "/faq/" too, but only highlight Home on the home page
+              partiallyActive={to !== "/"}
+              data-label={label}
+              to={to}
+            >
+              {label}
+            </Link>
+          ))}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

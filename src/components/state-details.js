@@ -13,6 +13,8 @@ import { getTerminologyHover } from "../constants/terminology-list"
 
 import AlreadyElectrifiedChart from "./already-electrified-chart"
 import PowerSourcesChart from "./power-sources-chart"
+import EvGrowthChart from "./ev-growth-chart"
+import InfoHover from "./info-hover"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -123,6 +125,7 @@ export default function StateDetailsPage({ location, data }) {
   const {
     Cars_All: carsAll,
     EV_Registration: evRegistration,
+    byYear: vehiclesByYear,
   } = data.allVehiclesJson.edges[0].node
 
   const pctEv = Math.round((evRegistration / carsAll) * 100 * 10) / 10
@@ -140,23 +143,21 @@ export default function StateDetailsPage({ location, data }) {
   const evCountStr = numberToHumanString(evRegistration)
 
   // #### BUILDINGS ####
+  // We track each home's main heating source, not every appliance
   const {
-    buildings,
-    weightedFossilBuildingsPct,
-    weightedEleBuildingsPct,
+    homes,
+    fossilHeatingPct,
+    fossilFreeHeatingPct,
   } = data.allBuildingsJson.edges[0].node
 
-  // calculate buildings remaining to electrify
-  const buildingsToElectrify =
-    weightedEleBuildingsPct !== 0 || weightedFossilBuildingsPct !== 0
-      ? buildings * (weightedFossilBuildingsPct / 100)
-      : buildings
+  // calculate homes whose heating is left to electrify
+  const homesToElectrify = homes * (fossilHeatingPct / 100)
 
   // string formatting
-  const buildingsCountStr = numberToHumanString(buildings)
-  const buildingsLeftToElectrifyStr = numberToHumanString(buildingsToElectrify)
-  const buildingsPerYear = numberToHumanString(
-    Math.ceil((buildingsToElectrify * cutPerYearPrcnt) / 100)
+  const homesCountStr = numberToHumanString(homes)
+  const homesLeftToElectrifyStr = numberToHumanString(homesToElectrify)
+  const homesPerYear = numberToHumanString(
+    Math.ceil((homesToElectrify * cutPerYearPrcnt) / 100)
   )
 
   // #### POWER GENERATION ####
@@ -184,13 +185,25 @@ export default function StateDetailsPage({ location, data }) {
     perc_wind_target: percWindTarget,
   } = targetBuilds
 
-  // since we are referencing capacity, let's stay consistent and make sure
-  // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
-  const everyDayPerYear = 24 * 365
-  const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000
-  const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
-  const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
-  const currentWindMW = (currentWind / everyDayPerYear) * 1000
+  // The targets and current generation are yearly energy in GWh, but we talk
+  // about how many MW of wind and solar to build, which means capacity (the
+  // most a generator can produce at once). Spreading GWh over every hour of the
+  // year gives average output in MW. Wind and solar only produce a fraction of
+  // their capacity on average (their capacity factor), so divide by that to get
+  // the capacity needed. We use national averages, as capacity factors vary by
+  // state. Source: EIA Electric Power Monthly Table 6.07.B, 2025 utility scale.
+  const hoursPerYear = 24 * 365
+  const windCapacityFactor = 0.338
+  const solarCapacityFactor = 0.24
+  const gwhToCapacityMw = (gwh, capacityFactor) =>
+    ((gwh / hoursPerYear) * 1000) / capacityFactor
+  const targetGenBySolarMW = gwhToCapacityMw(
+    targetGenBySolar,
+    solarCapacityFactor
+  )
+  const targetGenByWindMW = gwhToCapacityMw(targetGenByWind, windCapacityFactor)
+  const currentSolarMW = gwhToCapacityMw(currentSolar, solarCapacityFactor)
+  const currentWindMW = gwhToCapacityMw(currentWind, windCapacityFactor)
   const solarToBuildMw = targetGenBySolarMW - currentSolarMW
   const windToBuildMw = targetGenByWindMW - currentWindMW
 
@@ -208,7 +221,7 @@ export default function StateDetailsPage({ location, data }) {
   // getting percentages for chart
   // Note that we divide in half since 100% solar and 100% wind is 100% of total
   // not 200%
-  const percToCleanTarget = percSolarTarget + percWindTarget / 2
+  const percToCleanTarget = (percSolarTarget + percWindTarget) / 2
   const totalRemaining = 100 - percToCleanTarget
 
   // converting values to strings
@@ -238,10 +251,19 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### Number of Turbines and Football-fields of solar panels. ####
   // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
+  // targetGenByWindMW is already capacity, so this is like for like
   const averageWindTurbineCapacityMw = 2.75
   const turbinesNeededNumber = numberToHumanString(
     Math.ceil(targetGenByWindMW / averageWindTurbineCapacityMw)
   )
+
+  // Short version of the math above for the tooltip, the FAQ has the long one
+  const capacityMathStr =
+    `Wind and solar rarely run at full power: U.S. wind farms average ` +
+    `${(windCapacityFactor * 100).toFixed(1)}% of their capacity and solar ` +
+    `${(solarCapacityFactor * 100).toFixed(1)}% (EIA, 2025). So we divide ` +
+    `the average power needed by those, then the wind by ` +
+    `${averageWindTurbineCapacityMw} MW per turbine. Details in our FAQ.`
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -484,7 +506,7 @@ export default function StateDetailsPage({ location, data }) {
             </div>
 
             <p className="mt-0 mb-4 text-right">
-              ...in all of {placeTitle}'s {buildingsCountStr} buildings.
+              ...in all of {placeTitle}'s buildings.
             </p>
 
             <div className="d-flex align-items-end justify-content-around mt-5">
@@ -492,30 +514,32 @@ export default function StateDetailsPage({ location, data }) {
               <div className="col-6 building-sheet -apartments -clean"></div>
             </div>
 
-            {(weightedEleBuildingsPct !== 0 ||
-              weightedFossilBuildingsPct !== 0) && (
-              <p className="mt-7">
-                In fact, {weightedEleBuildingsPct.toFixed(1)}% of appliances in
-                buildings in {placeTitle} are already fossil fuel free!
-              </p>
-            )}
+            <p className="mt-7">
+              Heating burns the most fuel in our homes, so let's start there. Of{" "}
+              {placeTitle}'s {homesCountStr} homes,{" "}
+              {fossilFreeHeatingPct.toFixed(1)}% already heat without burning
+              any fuel, mostly with electricity!
+            </p>
 
             <p className="mt-5">
-              That means we only need to{" "}
+              That means we need to{" "}
               <strong>
-                electrify the remaining {buildingsLeftToElectrifyStr} dirty
-                buildings in {placeTitle}
+                electrify the heating in the remaining {homesLeftToElectrifyStr}{" "}
+                homes in {placeTitle}
               </strong>
-              . That's around {buildingsPerYear} per year.
+              . That's around {homesPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Appliances Electrified"}
-              electrifiedPct={weightedEleBuildingsPct}
-              fossilPct={weightedFossilBuildingsPct}
+              label={"Homes Heating Without Fuel"}
+              electrifiedPct={fossilFreeHeatingPct}
+              fossilPct={fossilHeatingPct}
             />
+            <p className="mt-4 h6 text-muted">
+              This counts each home's main heating source. Stoves, water
+              heaters, and businesses aren't included yet.
+            </p>
             <span className="mt-4 text-secondary keyText">
-              Source: {getShortCitation("building-footprints")};{" "}
-              {getShortCitation("building-energy")}
+              Source: {getShortCitation("home-heating")}
             </span>
           </div>
 
@@ -605,9 +629,24 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={pctEv}
               fossilPct={pctNonEv}
             />
+
+            <h3 className="h6 mt-5 mb-3">
+              EV Growth in {placeTitle} ({vehiclesByYear[0].year}–
+              {vehiclesByYear[vehiclesByYear.length - 1].year})
+            </h3>
+            <EvGrowthChart byYear={vehiclesByYear} />
             <span className="mt-4 text-secondary keyText">
               Source: {getShortCitation("vehicles")}
             </span>
+            {/* Explains the asterisk on "All Vehicles" in the chart. A div, not
+                a p, so it matches the source line's size */}
+            <div className="mt-2 text-secondary keyText">
+              *All Vehicles counts every registered light-duty vehicle (cars,
+              SUVs, pickups and vans) of any fuel type. Heavy trucks, buses and
+              motorcycles aren't included. Light-duty vehicles make up the
+              majority of transportation emissions (about 57% nationally, per
+              the EPA).
+            </div>
           </div>
 
           <div
@@ -795,7 +834,21 @@ export default function StateDetailsPage({ location, data }) {
                   {windTurbinesCountStr} {getTerminologyHover("megawatt")}
                 </strong>{" "}
                 of wind power and <strong>{solarPanelsCountStr} MW</strong> of
-                solar power.
+                solar {/* Keep the ? icon on the same line as the last word */}
+                <span className="text-nowrap">
+                  power.
+                  {targetGenByWind !== undefined && (
+                    <>
+                      &nbsp;
+                      <InfoHover
+                        wide
+                        ariaLabel={`How we got these numbers - ${capacityMathStr}`}
+                      >
+                        {capacityMathStr}
+                      </InfoHover>
+                    </>
+                  )}
+                </span>
               </p>
 
               <p className="mt-6">
@@ -878,7 +931,19 @@ export default function StateDetailsPage({ location, data }) {
                     </p>
                   </>
                 )}
+              </div>
 
+              <h3 className="h6 mt-5 mb-4">
+                Power Generation in the State of {placeTitle} (
+                {latestGeneration.year})
+              </h3>
+
+              <PowerSourcesChart
+                latestGeneration={latestGeneration}
+                placeTitle={placeTitle}
+              ></PowerSourcesChart>
+
+              <div className="mt-6 text-center">
                 <p className="h6 mt-3">
                   Check out another state to see how they can cut their power
                   emissions to zero.
@@ -996,9 +1061,9 @@ export const query = graphql`
     allBuildingsJson(filter: { state: { eq: $state } }) {
       edges {
         node {
-          buildings
-          weightedFossilBuildingsPct
-          weightedEleBuildingsPct
+          homes
+          fossilHeatingPct
+          fossilFreeHeatingPct
         }
       }
     }
@@ -1020,6 +1085,11 @@ export const query = graphql`
         node {
           Cars_All
           EV_Registration
+          byYear {
+            year
+            Cars_All
+            EV_Registration
+          }
         }
       }
     }

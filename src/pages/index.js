@@ -129,7 +129,7 @@ export const query = graphql`
     allBuildingsJson {
       edges {
         node {
-          buildings
+          homes
           state
         }
       }

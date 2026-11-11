@@ -33,36 +33,29 @@ function getCitation(slug) {
 const sourceCitations = [
   {
     slug: "emissions",
-    title: "Climate Watch - U.S. States Greenhouse Gas Emissions 1990 to 2018",
-    source: "World Resource Institute",
-    source_short: "WRI",
-    date: "Mar 2021",
-    link:
-      "https://datasets.wri.org/dataset/climate-watch-states-greenhouse-gas-emissions",
+    title:
+      "Inventory of U.S. Greenhouse Gas Emissions and Sinks by State 1990 to 2022",
+    source: "U.S. Environmental Protection Agency",
+    source_short: "EPA",
+    date: "Aug 2024",
+    link: "https://www.epa.gov/ghgemissions/state-ghg-emissions-and-removals",
   },
   {
-    slug: "building-footprints",
-    title: "U.S. Building Footprints",
-    source: "Microsoft Maps",
-    source_short: "Microsoft",
-    date: "Mar 2021",
-    link: "https://github.com/microsoft/USBuildingFootprints",
-  },
-  {
-    slug: "building-energy",
-    title: "U.S. Building Stock Characterization Study",
-    source: "The National Renewable Energy Laboratory (NREL)",
-    source_short: "NREL",
-    date: "Dec 2021",
-    link: "https://www.nrel.gov/docs/fy22osti/83063.pdf",
+    slug: "home-heating",
+    title: "American Community Survey: House Heating Fuel (B25040) 2024",
+    source: "U.S. Census Bureau",
+    source_short: "Census ACS",
+    date: "Sep 2025",
+    link: "https://data.census.gov/table/ACSDT1Y2024.B25040",
   },
   {
     slug: "vehicles",
-    title: "State Motor-Vehicle Registrations",
-    source: "U.S. Department of Transportation",
-    source_short: "DOT",
-    date: "Feb 2021",
-    link: "https://www.fhwa.dot.gov/policyinformation/statistics/2017/mv1.cfm",
+    title:
+      "Light-Duty Vehicle Registration Counts by State and Fuel Type 2016–2025",
+    source: "U.S. Department of Energy, Alternative Fuels Data Center",
+    source_short: "AFDC",
+    date: "2025",
+    link: "https://afdc.energy.gov/vehicle-registration",
   },
   {
     slug: "power-plants",
@@ -75,10 +68,10 @@ const sourceCitations = [
   },
   {
     slug: "power-generation",
-    title: "Electric generation by source 2001-2021",
+    title: "Electric generation by source 2001-2025",
     source: "U.S. Energy Information Administration (EIA)",
     source_short: "EIA",
-    date: "Apr 2022",
-    link: "https://www.eia.gov/opendata/v1/qb.php?category=1",
+    date: "Sep 2026",
+    link: "https://www.eia.gov/opendata/bulkfiles.php",
   },
 ]

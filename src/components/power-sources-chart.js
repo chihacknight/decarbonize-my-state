@@ -20,8 +20,15 @@ import { getShortCitation } from "../constants/source-citations"
  *   wind_percent: number;
  *   year: number;
  * }
+ *
+ * @param isAnimationActive {boolean} Whether to animate the pie slices in,
+ * defaults to true
  */
-const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
+const PowerSourcesChart = ({
+  placeTitle,
+  latestGeneration,
+  isAnimationActive = true,
+}) => {
   // Start at 12 o'clock and go clockwise, rather than starting at 3 o'clock
   // and going counter clockwise like the default
   const GraphStartAngle = 360 + 90
@@ -198,6 +205,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               outerRadius={"75%"}
               paddingAngle={OuterPaddingAngle}
               dataKey="value"
+              isAnimationActive={isAnimationActive}
             >
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} />
@@ -216,6 +224,7 @@ const PowerSourcesChart = ({ placeTitle, latestGeneration }) => {
               outerRadius={"62%"}
               paddingAngle={OuterPaddingAngle}
               dataKey="value"
+              isAnimationActive={isAnimationActive}
             >
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} />

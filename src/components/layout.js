@@ -7,13 +7,16 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import { Row, Col } from "react-bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
 import NewTabIcon from "../components/new-tab-icon"
 
 import "../styles/global.css"
 import Header from "../components/header"
+
+// The copyright runs from launch to the year the site was last built
+const currentYear = new Date().getFullYear()
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -38,11 +41,12 @@ const Layout = ({ children }) => {
       </main>
       <footer>
         <hr />
-        &#169; 2022 - A Project From{" "}
+        &#169; 2022–{currentYear} - A Project From{" "}
         <a href="https://chihacknight.org" target="_blank" rel="noreferrer">
           Chi Hack Night
           <NewTabIcon />
-        </a>
+        </a>{" "}
+        · <Link to="/data-updates/">2020 to 2025 Data Updates</Link>
       </footer>
     </>
   )

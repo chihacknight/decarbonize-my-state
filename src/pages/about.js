@@ -266,11 +266,8 @@ const AboutPage = ({ data }) => {
           <h3 className="pt-2 h4">U.S. Emissions By State</h3>
           {getLongCitation("emissions")}
 
-          <h3 className="pt-2 h4">
-            U.S. Building Footprints And Electrification
-          </h3>
-          {getLongCitation("building-footprints")}
-          {getLongCitation("building-energy")}
+          <h3 className="pt-2 h4">Home Heating By State</h3>
+          {getLongCitation("home-heating")}
 
           <h3 className="pt-2 h4">Vehicles By State</h3>
           {getLongCitation("vehicles")}
@@ -278,7 +275,9 @@ const AboutPage = ({ data }) => {
           <h3 className="pt-2 h4">Power Plants By State</h3>
           {getLongCitation("power-plants")}
 
-          <h3 className="pt-2 h4">State Renewable Generation Targets</h3>
+          <h3 className="pt-2 h4">
+            Power Generation And Renewable Targets By State
+          </h3>
           {getLongCitation("power-generation")}
 
           <h2 className="pt-3">Source Code</h2>
@@ -336,7 +335,7 @@ export const query = graphql`
     allBuildingsJson {
       edges {
         node {
-          buildings
+          homes
           state
         }
       }

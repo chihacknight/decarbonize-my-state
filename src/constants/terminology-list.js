@@ -1,8 +1,5 @@
 import React from "react"
-import OverlayTrigger from "react-bootstrap/OverlayTrigger"
-import Tooltip from "react-bootstrap/Tooltip"
-
-import QuestionIcon from "../images/icons/question-circle.svg"
+import InfoHover from "../components/info-hover"
 
 export function getTerminologyLink(slug) {
   const t = getTerminology(slug)
@@ -22,30 +19,22 @@ export function getTerminologyHover(slug) {
     return <span className="terminology">{slug}</span>
   }
 
-  const renderTooltip = props => (
-    <Tooltip id="button-tooltip" {...props}>
-      {t.definition}
-    </Tooltip>
-  )
+  // Keep the ? icon on the same line as the term's last word, browsers will
+  // otherwise wrap it onto a line of its own
+  const lastSpace = t.term.lastIndexOf(" ")
+  const termStart = t.term.slice(0, lastSpace + 1)
+  const termEnd = t.term.slice(lastSpace + 1)
 
   return (
     <span>
-      {t.term}&nbsp;
-      <OverlayTrigger
-        placement="top"
-        delay={{ show: 250, hide: 400 }}
-        overlay={renderTooltip}
-      >
+      {termStart}
+      <span className="text-nowrap">
+        {termEnd}&nbsp;
         {/* For screen readers, provide term as this button's label */}
-        <sup
-          tabIndex="0"
-          role="tooltip"
-          className="terminology-icon"
-          aria-label={t.term + " - " + t.definition}
-        >
-          <img src={QuestionIcon} alt="" />
-        </sup>
-      </OverlayTrigger>
+        <InfoHover ariaLabel={t.term + " - " + t.definition}>
+          {t.definition}
+        </InfoHover>
+      </span>
     </span>
   )
 }

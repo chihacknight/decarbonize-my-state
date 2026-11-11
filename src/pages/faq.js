@@ -96,6 +96,58 @@ const FAQ = () => {
           Ultra-high photovoltaic penetration: Where to deploy
         </a>{" "}
         by Perez et al.
+        <h3 id="wind-and-solar-math">
+          How do you figure out how many megawatts and turbines to build?
+        </h3>
+        <p>
+          We start with how much electricity each state needs from wind and
+          solar in a year, in gigawatt-hours (GWh). Spreading that over the
+          8,760 hours in a year gives the <strong>average</strong> power needed,
+          in megawatts (MW).
+        </p>
+        <p>
+          But power plants are measured by their <strong>capacity</strong>: the
+          most they can produce at once. Wind and solar farms produce less than
+          that on average, since the wind dies down and the sun sets. The share
+          of its capacity a plant produces over a year is its{" "}
+          <strong>capacity factor</strong>. In 2025, U.S. wind farms averaged
+          33.8% and utility-scale solar farms 24.0% (
+          <a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_6_07_b">
+            EIA Electric Power Monthly, Table 6.07.B
+          </a>
+          ).
+        </p>
+        <p>
+          So we divide the average power needed by the capacity factor. A state
+          that needs 1,000 MW of wind power on average needs about 3,000 MW of
+          wind turbines (1,000 ÷ 0.338). We estimate the wind and solar each
+          state already has the same way, from how much electricity it
+          generated. To count turbines, we divide the wind capacity by 2.75 MW,
+          the size of an average turbine according to the{" "}
+          <a href="https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power">
+            USGS
+          </a>
+          .
+        </p>
+        <p>
+          These are national averages, so they're rough estimates for any one
+          state. Some example variations:
+        </p>
+        <ul>
+          <li>
+            Capacity factors vary by state. Windy Great Plains states and sunny
+            Southwest states get more out of each megawatt, so they need less
+            capacity than we show. Less windy or sunny states need more.
+          </li>
+          <li>
+            New turbines are bigger and taller than the average one running
+            today, so fewer of them would be needed.
+          </li>
+          <li>
+            Rooftop solar usually has a lower capacity factor than solar farms,
+            so states that rely on it would need somewhat more solar capacity.
+          </li>
+        </ul>
         <h3>Why don't you feature nuclear power?</h3>
         <p>
           We are not against nuclear. On the contrary, our actually analysis

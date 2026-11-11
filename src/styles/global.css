@@ -309,6 +309,51 @@ path:focus,
   text-decoration: none;
 }
 
+/* The current page's header link is bold */
+.sunrise-nav .nav-link.active {
+  font-weight: bold;
+  color: #000 !important;
+}
+
+/* Reserve each link's bold width with a hidden bold copy of its label, so
+   the links don't shift when the current page changes */
+.sunrise-nav .nav-link::before {
+  display: block;
+  content: attr(data-label);
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* When the nav is a single row, also underline the current page with an
+   orange bar sitting on the header's bottom border */
+@media (min-width: 992px) {
+  .sunrise-nav .navbar-collapse,
+  .sunrise-nav .navbar-nav {
+    align-self: stretch;
+  }
+
+  .sunrise-nav .nav-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sunrise-nav .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    /* Bootstrap's .navbar has 0.5rem of bottom padding */
+    bottom: -0.5rem;
+    height: 4px;
+    background-color: var(--accent-orange);
+  }
+}
+
 /** Style header title */
 .nav-text {
   text-decoration: none;
@@ -585,6 +630,12 @@ footer a {
   height: 1rem;
 }
 
+/* InfoHover with a few sentences, Bootstrap's default is 200px wide */
+.info-hover-wide .tooltip-inner {
+  max-width: min(360px, calc(100vw - 32px));
+  text-align: left;
+}
+
 /** already electrified chart mobile **/
 @media (max-width: 575px) {
   .already-electrified-chart text {
@@ -594,4 +645,51 @@ footer a {
 
 .already-electrified-chart text {
   font-size: 0.9rem;
+}
+
+/** EV growth chart, EVs vs all vehicles over time **/
+.ev-growth-chart {
+  width: 100%;
+  height: 18rem;
+  /* Keep a wide tooltip from pushing past the page edge on small screens */
+  overflow: hidden;
+}
+
+.ev-growth-chart text,
+.ev-growth-chart .recharts-legend-item-text {
+  font-size: 0.8rem;
+}
+
+/* The all vehicles legend entry (the last line) toggles its line */
+.ev-growth-chart .legend-item-2 {
+  cursor: pointer;
+}
+
+.ev-growth-chart .legend-item-2 .recharts-legend-item-text {
+  text-decoration: underline;
+}
+
+.ev-growth-tooltip {
+  padding: 0.35rem 0.5rem;
+  background: var(--white);
+  border: 1px solid var(--mid-grey);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.5rem var(--light-shadow-color);
+  font-size: 0.8rem;
+}
+
+.ev-growth-tooltip-year {
+  font-weight: bold;
+  margin-bottom: 0.15rem;
+}
+
+.ev-growth-tooltip td {
+  padding: 0;
+}
+
+.ev-growth-tooltip-value {
+  padding-left: 0.75rem !important;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
 }
