@@ -19,13 +19,22 @@ export function getTerminologyHover(slug) {
     return <span className="terminology">{slug}</span>
   }
 
+  // Keep the ? icon on the same line as the term's last word, browsers will
+  // otherwise wrap it onto a line of its own
+  const lastSpace = t.term.lastIndexOf(" ")
+  const termStart = t.term.slice(0, lastSpace + 1)
+  const termEnd = t.term.slice(lastSpace + 1)
+
   return (
     <span>
-      {t.term}&nbsp;
-      {/* For screen readers, provide term as this button's label */}
-      <InfoHover ariaLabel={t.term + " - " + t.definition}>
-        {t.definition}
-      </InfoHover>
+      {termStart}
+      <span className="text-nowrap">
+        {termEnd}&nbsp;
+        {/* For screen readers, provide term as this button's label */}
+        <InfoHover ariaLabel={t.term + " - " + t.definition}>
+          {t.definition}
+        </InfoHover>
+      </span>
     </span>
   )
 }

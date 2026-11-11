@@ -834,18 +834,21 @@ export default function StateDetailsPage({ location, data }) {
                   {windTurbinesCountStr} {getTerminologyHover("megawatt")}
                 </strong>{" "}
                 of wind power and <strong>{solarPanelsCountStr} MW</strong> of
-                solar power.
-                {targetGenByWind !== undefined && (
-                  <>
-                    &nbsp;
-                    <InfoHover
-                      wide
-                      ariaLabel={`How we got these numbers - ${capacityMathStr}`}
-                    >
-                      {capacityMathStr}
-                    </InfoHover>
-                  </>
-                )}
+                solar {/* Keep the ? icon on the same line as the last word */}
+                <span className="text-nowrap">
+                  power.
+                  {targetGenByWind !== undefined && (
+                    <>
+                      &nbsp;
+                      <InfoHover
+                        wide
+                        ariaLabel={`How we got these numbers - ${capacityMathStr}`}
+                      >
+                        {capacityMathStr}
+                      </InfoHover>
+                    </>
+                  )}
+                </span>
               </p>
 
               <p className="mt-6">
