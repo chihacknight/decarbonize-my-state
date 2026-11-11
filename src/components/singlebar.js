@@ -1,6 +1,11 @@
 import React from "react"
 import { BarChart, Bar, LabelList, ReferenceArea, YAxis } from "recharts"
 
+import {
+  EmissionsCategories,
+  ActiveCategoryFill,
+} from "../constants/emissions-categories"
+
 /* Calculate a rounded percentage given a value and the total it's out of */
 const getPct = (value, total) => {
   return Math.round((value / total) * 100)
@@ -11,13 +16,7 @@ const getLabel = (entry, total, field, label) => {
   return `${label} ${getPct(entry[field], total)}%`
 }
 
-const Selectors = {
-  stateDetailsMain: "state-details-main",
-  otherMain: "other",
-  transportMain: "transport",
-  buildingsMain: "buildings",
-  powerMain: "power",
-}
+const StateDetailsMainId = "state-details-main"
 
 /**
  * Create constants for bar and graph dimensions for calculating lines
@@ -77,48 +76,27 @@ export default function SingleBarChart({
   )
   const electrificationPrcnt = 100 * (1 - nonElectrificationPrcnt / 100)
 
-  const activeFill = "#ff5722"
-
-  /** The keys of the relevant data */
-  const DataKeys = {
-    other: "dumps_farms_industrial_other",
-    transport: "transportation",
-    buildings: "buildings",
-    power: "dirty_power",
+  /**
+   * Label text: short names alone on the mobile homepage, short names with
+   * emoji on state pages, and full names with emoji on the desktop homepage
+   */
+  const getBarText = ({ emoji, name, longName }) => {
+    if (homeView && mobileView) {
+      return name
+    }
+    return `${emoji} ${homeView ? longName : name}:`
   }
 
   /**
-   * Configuration for the colors for each bar graph bar as well as their data
-   * key and label text
+   * Each bar's data key, label text and fill, copied from the shared
+   * categories so fills can be changed below for this render only
    */
-  const BarsConfig = {
-    other: {
-      key: DataKeys.other,
-      text: "🏭 Farms, Industry & Other:",
-      fill: "#ad8669",
-      // This category cannot be electrified so make the greenFill red to be
-      // clearly bad
-      greenFill: "#ff0000",
-    },
-    transport: {
-      key: DataKeys.transport,
-      text: "🚗 Transportation:",
-      fill: "#c2c2c2",
-      greenFill: "#6ebf70",
-    },
-    buildings: {
-      key: DataKeys.buildings,
-      text: "🏠 Buildings:",
-      fill: "#dcdcdc",
-      greenFill: "#a3d7a4",
-    },
-    power: {
-      key: DataKeys.power,
-      text: "🔌 Dirty Power:",
-      fill: "#a6a6a6",
-      greenFill: "#4caf50",
-    },
-  }
+  const BarsConfig = Object.fromEntries(
+    Object.entries(EmissionsCategories).map(([id, category]) => [
+      id,
+      { ...category, text: getBarText(category) },
+    ])
+  )
 
   function handleClick(event) {
     // Do nothing if not on state details
@@ -131,26 +109,18 @@ export default function SingleBarChart({
     // A fudge factor for scrolling to account for the top header
     const scrollOffset = -100
 
-    let targetAnchor = ""
-
-    if (clickedDataKey === DataKeys.other) {
-      targetAnchor = Selectors.otherMain
-    } else if (clickedDataKey === DataKeys.transport) {
-      targetAnchor = Selectors.transportMain
-    } else if (clickedDataKey === DataKeys.buildings) {
-      targetAnchor = Selectors.buildingsMain
-    } else if (clickedDataKey === DataKeys.power) {
-      targetAnchor = Selectors.powerMain
-    }
+    const clickedConfig = Object.values(BarsConfig).find(
+      ({ key }) => key === clickedDataKey
+    )
+    const targetAnchor = clickedConfig ? clickedConfig.sectionId : ""
 
     const targetAnchorElem = document.getElementById(targetAnchor)
 
     if (targetAnchorElem) {
       const targetOffsetTop = document.getElementById(targetAnchor).offsetTop
 
-      const stateDetailsMainOffset = document.getElementById(
-        Selectors.stateDetailsMain
-      ).offsetTop
+      const stateDetailsMainOffset = document.getElementById(StateDetailsMainId)
+        .offsetTop
 
       const scrollValue =
         targetOffsetTop + stateDetailsMainOffset + scrollOffset
@@ -191,12 +161,8 @@ export default function SingleBarChart({
       bottom: 0,
     }
 
-    // On mobile homeView use short text and smaller graph
+    // On mobile homeView use a smaller graph
     if (mobileView) {
-      BarsConfig.power.text = "Power"
-      BarsConfig.buildings.text = "Buildings"
-      BarsConfig.transport.text = "Transport"
-      BarsConfig.other.text = "Other"
       BarWidth = 30
       GraphWidth = 150
       GraphHeight = 300
@@ -206,18 +172,10 @@ export default function SingleBarChart({
       GraphMargin.left = 110
     }
   }
-  // If on state details, shorten text labels
-  else {
-    BarsConfig.power.text = "🔌 Power:"
-    BarsConfig.buildings.text = "🏠 Buildings:"
-    BarsConfig.transport.text = "🚗 Transport:"
-    BarsConfig.other.text = "🏭 Other:"
-
-    // On social card, make bar chart shorter
-    if (socialCardView) {
-      GraphHeight = 270
-      GraphWidth = 325
-    }
+  // On social card, make bar chart shorter
+  else if (socialCardView) {
+    GraphHeight = 270
+    GraphWidth = 325
   }
 
   // If greenKeys are specified, switch those bars' fill to their greenFill color
@@ -236,7 +194,7 @@ export default function SingleBarChart({
     )
 
     if (activeConfig) {
-      activeConfig.fill = activeFill
+      activeConfig.fill = ActiveCategoryFill
     } else {
       console.error("Bad activeKey!", activeKey)
     }

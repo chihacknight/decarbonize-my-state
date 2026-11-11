@@ -56,6 +56,87 @@
   padding: 0.5rem 1rem;
 }
 
+/**
+ * Compact sticky header on mobile and tablet, where it also holds the section
+ * progress bar
+ */
+@media (max-width: 1199px) {
+  .sticky-header {
+    padding: 0.35rem 1rem 0.5rem;
+  }
+
+  .sticky-header .state-icon {
+    font-size: 2.25rem;
+    margin-right: 0.75rem !important;
+  }
+
+  .sticky-header h1 .title {
+    font-size: 1.25rem;
+  }
+
+  .sticky-header .back-btn {
+    margin-left: auto !important;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.875rem;
+  }
+}
+
+/**
+ * Horizontal section progress bar, see SectionProgressBar. Each segment's
+ * width is set by its flex-grow
+ */
+.section-progress-bar {
+  display: flex;
+  height: 1.5rem;
+  margin-top: 0.35rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.section-progress-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  flex-basis: 0;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.75rem;
+  font-weight: bold;
+  white-space: nowrap;
+  color: var(--text-color-main);
+  text-decoration: none;
+  transition: background-color 0.4s;
+}
+
+/* Segments are flex items, where vertical-align doesn't apply, so nudge the
+   car up this way instead, see .emoji.-transport */
+.section-progress-bar .emoji.-transport {
+  position: relative;
+  top: -0.1em;
+}
+
+.section-progress-bar a:hover,
+.section-progress-bar a:focus {
+  color: var(--text-color-main);
+  text-decoration: none;
+  filter: brightness(0.95);
+}
+
+.section-progress-bar a.-active,
+.section-progress-bar a.-active:hover,
+.section-progress-bar a.-active:focus {
+  color: #fff;
+}
+
+/* Names the current section below the bar */
+.section-progress-label {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
 /** Make sure focusing links works with both sticky headers */
 .state-details-main * {
   scroll-margin-top: 15rem;

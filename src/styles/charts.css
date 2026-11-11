@@ -7,8 +7,6 @@
 /** EV growth chart, EVs vs all vehicles over time **/
 .ev-growth-chart {
   width: 100%;
-  /* The legend is below this, outside the chart */
-  height: 16rem;
   /* Keep a wide tooltip from pushing past the page edge on small screens */
   overflow: hidden;
 }
@@ -20,8 +18,6 @@
 /** Power mix chart, each power source's share of generation over time **/
 .power-mix-chart {
   width: 100%;
-  /* The legend is below this, outside the chart */
-  height: 17rem;
   /* Keep a wide tooltip from pushing past the page edge on small screens */
   overflow: hidden;
 }
@@ -37,7 +33,8 @@
   grid-template-columns: repeat(var(--legend-columns, 4), auto);
   justify-content: space-evenly;
   gap: 0.25rem 1rem;
-  margin: 0.5rem 0 0;
+  /* Lines up with the plot area, see ChartLegend */
+  margin: 0.5rem var(--legend-margin-right, 0) 0 var(--legend-margin-left, 0);
   padding: 0.5rem 0.75rem;
   list-style: none;
   font-size: 0.8rem;
@@ -80,9 +77,30 @@ ul.chart-legend li + li {
   border-radius: 0;
 }
 
+/* On phones use the full width and tighter spacing, since lining up with the
+   plot area costs too much room */
+@media (max-width: 575px) {
+  .chart-legend {
+    margin-left: 0;
+    margin-right: 0;
+    gap: 0.15rem 0.75rem;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
 @media (max-width: 420px) {
   .chart-legend {
     grid-template-columns: repeat(2, auto);
+  }
+}
+
+/* The power mix has many sources, so on phones fit as many per row as will
+   go, at a smaller size */
+@media (max-width: 575px) {
+  .power-mix-chart + .chart-legend {
+    grid-template-columns: repeat(auto-fit, minmax(4.5rem, max-content));
+    font-size: 10px;
   }
 }
 
@@ -269,15 +287,38 @@ ul.chart-legend li + li {
 
 /** Wind and solar built vs target on state pages */
 .renewables-progress-chart {
-  width: 100%;
-  /* The legend is below this, outside the chart */
-  height: 18rem;
   margin-top: 1rem;
 }
 
 /** Homes with electric heating over time, on state pages */
 .heating-trend-chart {
-  width: 100%;
-  height: 16rem;
   margin-top: 1rem;
+}
+
+/**
+ * Trend chart sizes: a fixed aspect ratio so charts scale with their width
+ * rather than turning tall and narrow on phones. The legend is below each
+ * chart, outside it
+ */
+.ev-growth-chart,
+.power-mix-chart,
+.renewables-progress-chart,
+.heating-trend-chart {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  min-height: 12rem;
+  max-height: 20rem;
+}
+
+/* On phones lock the height, as even a wide ratio is tall next to the text */
+@media (max-width: 575px) {
+  .ev-growth-chart,
+  .power-mix-chart,
+  .renewables-progress-chart,
+  .heating-trend-chart {
+    aspect-ratio: auto;
+    height: 200px;
+    min-height: 0;
+    max-height: none;
+  }
 }

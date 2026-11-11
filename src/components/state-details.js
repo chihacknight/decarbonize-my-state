@@ -19,6 +19,7 @@ import PowerMixChart from "./power-mix-chart"
 import RenewablesProgressChart from "./renewables-progress-chart"
 import HeatingTrendChart from "./heating-trend-chart"
 import ChartDetails from "./chart-details"
+import SectionProgressBar from "./section-progress-bar"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -150,7 +151,7 @@ export default function StateDetailsPage({ location, data }) {
   const powerMixSection = (
     <>
       <ChartDetails
-        className="mt-6"
+        className="mt-3"
         label="View Power Generation Trends"
         title={`Power Generation Mix in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
       >
@@ -339,18 +340,34 @@ export default function StateDetailsPage({ location, data }) {
         image={"social-cards/" + placeTitle.toLowerCase() + ".jpg"}
       />
 
-      <div className="sticky-header d-flex align-items-center">
-        <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
-          <span
-            className={"display-3 mr-4 sf-" + stateFaceClass}
-            aria-hidden="true"
-          ></span>
-          <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
-        </h1>
+      <div className="sticky-header">
+        <div className="d-flex align-items-center">
+          <h1 id="main" className="d-flex align-items-center mr-4 mt-0 mb-0">
+            <span
+              className={"state-icon display-3 mr-4 sf-" + stateFaceClass}
+              aria-hidden="true"
+            ></span>
+            <span className="title font-weight-bold h4 mb-0">{placeTitle}</span>
+          </h1>
 
-        <a className="btn btn-outline-secondary ml-3" href="/">
-          Back <span className="d-none d-md-inline">to map</span>
-        </a>
+          <a className="btn btn-outline-secondary back-btn ml-3" href="/">
+            Back <span className="d-none d-md-inline">to map</span>
+          </a>
+        </div>
+
+        {/* Mobile and tablet only, desktop has the sticky side chart */}
+        <div className="d-xl-none">
+          <SectionProgressBar
+            percents={{
+              buildings: buildingsPrcnt,
+              transportation: transportPrcnt,
+              dirty_power: powerPrcnt,
+              dumps_farms_industrial_other: otherPrcnt,
+            }}
+            activeKey={scrollGraphSettings.active}
+            greenKeys={scrollGraphSettings.green}
+          />
+        </div>
       </div>
 
       {/* Intro Section */}

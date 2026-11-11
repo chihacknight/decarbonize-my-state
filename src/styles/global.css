@@ -647,3 +647,15 @@ footer a {
 .already-electrified-chart text {
   font-size: 0.9rem;
 }
+
+/** An emoji used as an icon next to text, tightened so its tall line box
+    doesn't push text around */
+.emoji {
+  line-height: 1;
+}
+
+/* The car emoji is drawn low in its box, so nudge it up to line up with text.
+   Emoji get their section ID as a modifier, see SectionProgressBar */
+.emoji.-transport {
+  vertical-align: 0.15em;
+}
