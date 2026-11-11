@@ -49,7 +49,11 @@ const modes = {
   },
 }
 
-/** A compact tooltip listing each source, top of the stack first */
+/**
+ * A compact tooltip listing each source, biggest first, under the carbon-free
+ * total, with carbon-free sources marked by a green bar. Sources that would
+ * show as zero (often petroleum) are left out
+ */
 const PowerMixTooltip = ({ active, payload, label, mode }) => {
   if (!active || !payload || !payload.length) {
     return null
@@ -58,13 +62,20 @@ const PowerMixTooltip = ({ active, payload, label, mode }) => {
   const row = payload[0].payload
   const { suffix, format } = modes[mode]
 
+  // Both modes show one decimal, so anything under 0.05 would read as 0.0
+  const shownFuels = fuels
+    .map(fuel => ({ ...fuel, value: row[`${fuel.key}${suffix}`] }))
+    .filter(fuel => fuel.value >= 0.05)
+    .sort((a, b) => b.value - a.value)
+
   return (
     <div className="chart-tooltip">
       <div className="chart-tooltip-year">{label}</div>
       <table>
         <tbody>
           <tr className="chart-tooltip-total">
-            <td>
+            {/* Same indent as the source rows below, without a bar */}
+            <td className="chart-tooltip-source">
               <span
                 className="chart-tooltip-swatch"
                 style={{ background: carbonFreeColor }}
@@ -75,20 +86,28 @@ const PowerMixTooltip = ({ active, payload, label, mode }) => {
               {format(row[`carbonFree${suffix}`])}
             </td>
           </tr>
+          {/* A gap, since the total is its own value rather than a source */}
+          <tr className="chart-tooltip-spacer" aria-hidden="true">
+            <td colSpan={2} />
+          </tr>
           {/* A swatch rather than colored text, since solar's yellow and
-              wind's light blue are hard to read as text */}
-          {[...fuels].reverse().map(fuel => (
+              wind's light blue are hard to read as text. A green bar on the
+              left marks the sources that add up to the carbon-free total */}
+          {shownFuels.map(fuel => (
             <tr key={fuel.key}>
-              <td>
+              <td
+                className="chart-tooltip-source"
+                style={{
+                  borderLeftColor: fuel.clean ? carbonFreeColor : "transparent",
+                }}
+              >
                 <span
                   className="chart-tooltip-swatch"
                   style={{ background: fuel.color }}
                 />
                 {fuel.name}
               </td>
-              <td className="chart-tooltip-value">
-                {format(row[`${fuel.key}${suffix}`])}
-              </td>
+              <td className="chart-tooltip-value">{format(fuel.value)}</td>
             </tr>
           ))}
         </tbody>
@@ -144,9 +163,9 @@ const PowerMixChart = ({ generationByYear }) => {
 
   return (
     <div>
-      <div className="power-mix-controls">
+      <div className="chart-controls">
         <div
-          className="power-mix-toggle"
+          className="chart-toggle"
           role="group"
           aria-label="Show power generation as"
         >

@@ -77,7 +77,7 @@ const EvGrowthTooltip = ({ active, payload, label }) => {
  * A line chart of EVs over time, with a dashed line for EVs as a share of all
  * vehicles on a fixed 0-100% axis, so it shows how far the state is from fully
  * electric. All vehicles share the EV axis, but EVs are so small next to them
- * that the line is hidden until you click it in the legend.
+ * that the line is hidden until its checkbox is checked.
  *
  * @param byYear An array, oldest first, of
  *
@@ -96,74 +96,78 @@ const EvGrowthChart = ({ byYear }) => {
   }))
 
   return (
-    <div className="ev-growth-chart">
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="year" />
-          <YAxis
-            yAxisId="count"
-            // Only the EV count axis is bold, the share axis stays regular
-            tick={{ fontWeight: "bold" }}
-            tickFormatter={value => compactNumber.format(value)}
-            stroke={evColor}
+    <>
+      <div className="chart-controls">
+        <label>
+          <input
+            type="checkbox"
+            checked={showAllVehicles}
+            onChange={event => setShowAllVehicles(event.target.checked)}
           />
-          <YAxis
-            yAxisId="share"
-            orientation="right"
-            domain={[0, 100]}
-            ticks={[0, 25, 50, 75, 100]}
-            tickFormatter={value => `${value}%`}
-            stroke={shareColor}
-          />
-          <Tooltip content={<EvGrowthTooltip />} />
-          <Legend
-            verticalAlign="bottom"
-            // Keep the hidden line's "Show All Vehicles" readable
-            inactiveColor={allVehiclesColor}
-            onClick={entry => {
-              if (entry.dataKey === "Cars_All") {
-                setShowAllVehicles(show => !show)
-              }
-            }}
-          />
-          <Line
-            yAxisId="count"
-            dataKey="EV_Registration"
-            name="EVs"
-            stroke={evColor}
-            strokeWidth={3}
-            dot={false}
-            isAnimationActive={false}
-          />
-          <Line
-            yAxisId="share"
-            dataKey="evSharePct"
-            name="EV Fleet Share (right axis)"
-            stroke={shareColor}
-            strokeWidth={2}
-            strokeDasharray="6 4"
-            dot={false}
-            isAnimationActive={false}
-          />
-          {/* Hidden lines are greyed out in the legend and left out of the
-              axis range, so the axis fits EVs until this is shown */}
-          <Line
-            yAxisId="count"
-            dataKey="Cars_All"
-            name={showAllVehicles ? "All Vehicles*" : "Show All Vehicles*"}
-            hide={!showAllVehicles}
-            stroke={allVehiclesColor}
-            strokeWidth={2}
-            dot={false}
-            isAnimationActive={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
+          Show all vehicles*
+        </label>
+      </div>
+      <div className="ev-growth-chart">
+        <ResponsiveContainer>
+          <LineChart
+            data={data}
+            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="year" />
+            <YAxis
+              yAxisId="count"
+              // Only the EV count axis is bold, the share axis stays regular
+              tick={{ fontWeight: "bold" }}
+              tickFormatter={value => compactNumber.format(value)}
+              stroke={evColor}
+            />
+            <YAxis
+              yAxisId="share"
+              orientation="right"
+              domain={[0, 100]}
+              ticks={[0, 25, 50, 75, 100]}
+              tickFormatter={value => `${value}%`}
+              stroke={shareColor}
+            />
+            <Tooltip content={<EvGrowthTooltip />} />
+            <Legend verticalAlign="bottom" />
+            <Line
+              yAxisId="count"
+              dataKey="EV_Registration"
+              name="EVs"
+              stroke={evColor}
+              strokeWidth={3}
+              dot={false}
+              isAnimationActive={false}
+            />
+            <Line
+              yAxisId="share"
+              dataKey="evSharePct"
+              name="EV Fleet Share (right axis)"
+              stroke={shareColor}
+              strokeWidth={2}
+              strokeDasharray="6 4"
+              dot={false}
+              isAnimationActive={false}
+            />
+            {/* Only drawn when checked, so the axis fits EVs until then and the
+              legend only lists lines on the chart */}
+            {showAllVehicles && (
+              <Line
+                yAxisId="count"
+                dataKey="Cars_All"
+                name="All Vehicles*"
+                stroke={allVehiclesColor}
+                strokeWidth={2}
+                dot={false}
+                isAnimationActive={false}
+              />
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </>
   )
 }
 

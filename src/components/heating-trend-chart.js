@@ -126,7 +126,7 @@ const HeatingTooltip = ({ active, payload, label, mode }) => {
  * as a count next to the homes that do burn fuel. Shaded bands are the
  * survey's margin of error
  */
-const HeatingTrendChart = ({ byYear, placeTitle }) => {
+const HeatingTrendChart = ({ byYear }) => {
   const [mode, setMode] = useState("share")
 
   // byYear is oldest first, from buildings.json
@@ -180,19 +180,9 @@ const HeatingTrendChart = ({ byYear, placeTitle }) => {
 
   return (
     <>
-      <h3 className="chart-title mt-5">
-        Homes With Electric Heating in {placeTitle} ({rows[0].year}–
-        {rows[rows.length - 1].year})
-      </h3>
-      <div className="chart-note">
-        The shaded bands are the survey's margin of error, and lines are dashed
-        where 2020 data is missing. A falling share can mean more homes heating
-        with fuel, not fewer with electric heat.
-      </div>
-
-      <div className="power-mix-controls">
+      <div className="chart-controls">
         <div
-          className="power-mix-toggle"
+          className="chart-toggle"
           role="group"
           aria-label="Show homes with electric heating as"
         >

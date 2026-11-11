@@ -18,6 +18,7 @@ import InfoHover from "./info-hover"
 import PowerMixChart from "./power-mix-chart"
 import RenewablesProgressChart from "./renewables-progress-chart"
 import HeatingTrendChart from "./heating-trend-chart"
+import ChartDetails from "./chart-details"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -174,16 +175,16 @@ export default function StateDetailsPage({ location, data }) {
 
   // Shown under the latest year's pie chart in both power sections
   const powerMixSection = (
-    <>
-      <h3 className="chart-title mt-6">
-        Power Generation Mix in {placeTitle} ({firstGenerationYear}–
-        {latestGeneration.year})
-      </h3>
+    <ChartDetails
+      className="mt-6"
+      label="View Power Generation Trends"
+      title={`Power Generation Mix in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
+    >
       <PowerMixChart generationByYear={generationByYear} />
       <span className="mt-2 text-secondary keyText">
         Source: {getShortCitation("power-generation")}
       </span>
-    </>
+    </ChartDetails>
   )
 
   const carbonFreePercent =
@@ -554,7 +555,20 @@ export default function StateDetailsPage({ location, data }) {
               electrifiedPct={fossilFreeHeatingPct}
               fossilPct={fossilHeatingPct}
             />
-            <HeatingTrendChart byYear={heatingByYear} placeTitle={placeTitle} />
+            <ChartDetails
+              className="mt-5"
+              label="View Home Heating Trends"
+              title={`Homes With Electric Heating in ${placeTitle} (${
+                heatingByYear[0].year
+              }–${heatingByYear[heatingByYear.length - 1].year})`}
+              note={
+                "The shaded bands are the survey's margin of error, and lines " +
+                "are dashed where 2020 data is missing. A falling share can " +
+                "mean more homes heating with fuel, not fewer with electric heat."
+              }
+            >
+              <HeatingTrendChart byYear={heatingByYear} />
+            </ChartDetails>
             <p className="mt-4 h6 text-muted">
               This counts each home's main heating source. Stoves, water
               heaters, and businesses aren't included yet.
@@ -651,23 +665,27 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={pctNonEv}
             />
 
-            <h3 className="chart-title mt-5">
-              EV Growth in {placeTitle} ({vehiclesByYear[0].year}–
-              {vehiclesByYear[vehiclesByYear.length - 1].year})
-            </h3>
-            <EvGrowthChart byYear={vehiclesByYear} />
+            <ChartDetails
+              className="mt-5"
+              label="View EV Growth Trends"
+              title={`EV Growth in ${placeTitle} (${vehiclesByYear[0].year}–${
+                vehiclesByYear[vehiclesByYear.length - 1].year
+              })`}
+            >
+              <EvGrowthChart byYear={vehiclesByYear} />
+              {/* Explains the asterisk on "All Vehicles" in the chart. A div,
+                  not a p, so it matches the source line's size */}
+              <div className="mt-2 text-secondary keyText">
+                *All Vehicles counts every registered light-duty vehicle (cars,
+                SUVs, pickups and vans) of any fuel type. Heavy trucks, buses
+                and motorcycles aren't included. Light-duty vehicles make up the
+                majority of transportation emissions (about 57% nationally, per
+                the EPA).
+              </div>
+            </ChartDetails>
             <span className="mt-4 text-secondary keyText">
               Source: {getShortCitation("vehicles")}
             </span>
-            {/* Explains the asterisk on "All Vehicles" in the chart. A div, not
-                a p, so it matches the source line's size */}
-            <div className="mt-2 text-secondary keyText">
-              *All Vehicles counts every registered light-duty vehicle (cars,
-              SUVs, pickups and vans) of any fuel type. Heavy trucks, buses and
-              motorcycles aren't included. Light-duty vehicles make up the
-              majority of transportation emissions (about 57% nationally, per
-              the EPA).
-            </div>
           </div>
 
           <div
@@ -899,16 +917,22 @@ export default function StateDetailsPage({ location, data }) {
                 />
               </p>
               {targetGenByWind !== undefined && (
-                <RenewablesProgressChart
-                  placeTitle={placeTitle}
-                  generationByYear={generationByYear}
-                  targetWindGwh={targetGenByWind}
-                  targetSolarGwh={targetGenBySolar}
-                  windCapacityFactor={windCapacityFactor}
-                  solarCapacityFactor={solarCapacityFactor}
-                  annualWindMw={windTurbinesBuildPerYear}
-                  annualSolarMw={solarPanelsBuildPerYear}
-                />
+                <ChartDetails
+                  className="mt-5"
+                  label="View Wind and Solar Progress"
+                  title={`Wind and Solar Built vs. Target in ${placeTitle} (${firstGenerationYear}–${latestGeneration.year})`}
+                  note="Megawatts of capacity, estimated from generation with national capacity factors."
+                >
+                  <RenewablesProgressChart
+                    generationByYear={generationByYear}
+                    targetWindGwh={targetGenByWind}
+                    targetSolarGwh={targetGenBySolar}
+                    windCapacityFactor={windCapacityFactor}
+                    solarCapacityFactor={solarCapacityFactor}
+                    annualWindMw={windTurbinesBuildPerYear}
+                    annualSolarMw={solarPanelsBuildPerYear}
+                  />
+                </ChartDetails>
               )}
               <span className="mt-4 text-secondary keyText">
                 Source: {getShortCitation("power-generation")}

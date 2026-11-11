@@ -660,15 +660,6 @@ footer a {
   font-size: 0.8rem;
 }
 
-/* The all vehicles legend entry (the last line) toggles its line */
-.ev-growth-chart .legend-item-2 {
-  cursor: pointer;
-}
-
-.ev-growth-chart .legend-item-2 .recharts-legend-item-text {
-  text-decoration: underline;
-}
-
 /** Power mix chart, each power source's share of generation over time **/
 .power-mix-chart {
   width: 100%;
@@ -682,8 +673,9 @@ footer a {
   font-size: 0.8rem;
 }
 
-/* Share / total switch and display options above the power mix chart */
-.power-mix-controls {
+/* Toggles and checkboxes above a chart, used by the power mix, home heating
+   and EV growth charts */
+.chart-controls {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -692,7 +684,7 @@ footer a {
   font-size: 0.8rem;
 }
 
-.power-mix-controls label {
+.chart-controls label {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -700,14 +692,14 @@ footer a {
   cursor: pointer;
 }
 
-.power-mix-toggle {
+.chart-toggle {
   display: inline-flex;
   border: 1px solid var(--mid-grey);
   border-radius: 0.375rem;
   overflow: hidden;
 }
 
-.power-mix-toggle button {
+.chart-toggle button {
   padding: 0.25rem 0.75rem;
   font-size: 0.8rem;
   color: var(--text-color-main);
@@ -715,11 +707,11 @@ footer a {
   border: none;
 }
 
-.power-mix-toggle button + button {
+.chart-toggle button + button {
   border-left: 1px solid var(--mid-grey);
 }
 
-.power-mix-toggle button.-active {
+.chart-toggle button.-active {
   font-weight: bold;
   color: var(--white);
   background: var(--text-color-main);
@@ -741,6 +733,11 @@ power mix charts **/
   margin-bottom: 0.15rem;
 }
 
+.chart-tooltip table {
+  /* No gaps between rows, so grouping bars on consecutive rows join up */
+  border-collapse: collapse;
+}
+
 .chart-tooltip td {
   padding: 0;
 }
@@ -756,6 +753,17 @@ power mix charts **/
 .chart-tooltip-total td {
   padding-bottom: 0.15rem !important;
   font-weight: bold;
+}
+
+/* Separates a total row from the rows below it */
+.chart-tooltip-spacer td {
+  height: 0.4rem;
+}
+
+/* A source row, with a colored bar on the left to group related sources */
+.chart-tooltip-source {
+  padding-left: 0.35rem !important;
+  border-left: 3px solid transparent;
 }
 
 .chart-tooltip-value {
@@ -783,6 +791,46 @@ power mix charts **/
 /* Tuck a note up under its title */
 .chart-title + .chart-note {
   margin-top: -0.5rem;
+}
+
+/* A chart collapsed into a panel with a call to action header, see
+   ChartDetails */
+.chart-details {
+  border: 1px solid var(--mid-grey);
+  border-radius: 0.5rem;
+}
+
+.chart-details > summary {
+  padding: 0.75rem 1rem;
+  font-size: 1.0625rem;
+  font-weight: bold;
+  background-color: var(--light-grey);
+  /* Round the header itself rather than clip the panel, which could cut off
+     chart tooltips */
+  border-radius: calc(0.5rem - 1px);
+  cursor: pointer;
+}
+
+.chart-details-label {
+  margin-left: 5px;
+}
+
+.chart-details > summary:hover {
+  background-color: var(--mid-grey);
+}
+
+.chart-details[open] > summary {
+  border-bottom: 1px solid var(--mid-grey);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.chart-details-body {
+  padding: 1rem;
+}
+
+.chart-details-body > .chart-title:first-child {
+  margin-top: 0;
 }
 
 /** Wind and solar built vs target on state pages */
