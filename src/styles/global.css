@@ -585,6 +585,12 @@ footer a {
   height: 1rem;
 }
 
+/* InfoHover with a few sentences, Bootstrap's default is 200px wide */
+.info-hover-wide .tooltip-inner {
+  max-width: min(360px, calc(100vw - 32px));
+  text-align: left;
+}
+
 /** already electrified chart mobile **/
 @media (max-width: 575px) {
   .already-electrified-chart text {

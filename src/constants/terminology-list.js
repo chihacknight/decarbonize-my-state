@@ -1,8 +1,5 @@
 import React from "react"
-import OverlayTrigger from "react-bootstrap/OverlayTrigger"
-import Tooltip from "react-bootstrap/Tooltip"
-
-import QuestionIcon from "../images/icons/question-circle.svg"
+import InfoHover from "../components/info-hover"
 
 export function getTerminologyLink(slug) {
   const t = getTerminology(slug)
@@ -22,30 +19,13 @@ export function getTerminologyHover(slug) {
     return <span className="terminology">{slug}</span>
   }
 
-  const renderTooltip = props => (
-    <Tooltip id="button-tooltip" {...props}>
-      {t.definition}
-    </Tooltip>
-  )
-
   return (
     <span>
       {t.term}&nbsp;
-      <OverlayTrigger
-        placement="top"
-        delay={{ show: 250, hide: 400 }}
-        overlay={renderTooltip}
-      >
-        {/* For screen readers, provide term as this button's label */}
-        <sup
-          tabIndex="0"
-          role="tooltip"
-          className="terminology-icon"
-          aria-label={t.term + " - " + t.definition}
-        >
-          <img src={QuestionIcon} alt="" />
-        </sup>
-      </OverlayTrigger>
+      {/* For screen readers, provide term as this button's label */}
+      <InfoHover ariaLabel={t.term + " - " + t.definition}>
+        {t.definition}
+      </InfoHover>
     </span>
   )
 }

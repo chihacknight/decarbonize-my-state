@@ -14,6 +14,7 @@ import { getTerminologyHover } from "../constants/terminology-list"
 import AlreadyElectrifiedChart from "./already-electrified-chart"
 import PowerSourcesChart from "./power-sources-chart"
 import EvGrowthChart from "./ev-growth-chart"
+import InfoHover from "./info-hover"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -184,14 +185,25 @@ export default function StateDetailsPage({ location, data }) {
     perc_wind_target: percWindTarget,
   } = targetBuilds
 
-  // since we are referencing capacity, let's stay consistent and make sure
-  // everything is listed in MegaWatts... all of these numbers are in GigaWatts Hours
-  // TODO: These are average MW (GWh / hours per year), not capacity - label as such or show capacity?
-  const everyDayPerYear = 24 * 365
-  const targetGenBySolarMW = (targetGenBySolar / everyDayPerYear) * 1000
-  const targetGenByWindMW = (targetGenByWind / everyDayPerYear) * 1000
-  const currentSolarMW = (currentSolar / everyDayPerYear) * 1000
-  const currentWindMW = (currentWind / everyDayPerYear) * 1000
+  // The targets and current generation are yearly energy in GWh, but we talk
+  // about how many MW of wind and solar to build, which means capacity (the
+  // most a generator can produce at once). Spreading GWh over every hour of the
+  // year gives average output in MW. Wind and solar only produce a fraction of
+  // their capacity on average (their capacity factor), so divide by that to get
+  // the capacity needed. We use national averages, as capacity factors vary by
+  // state. Source: EIA Electric Power Monthly Table 6.07.B, 2025 utility scale.
+  const hoursPerYear = 24 * 365
+  const windCapacityFactor = 0.338
+  const solarCapacityFactor = 0.24
+  const gwhToCapacityMw = (gwh, capacityFactor) =>
+    ((gwh / hoursPerYear) * 1000) / capacityFactor
+  const targetGenBySolarMW = gwhToCapacityMw(
+    targetGenBySolar,
+    solarCapacityFactor
+  )
+  const targetGenByWindMW = gwhToCapacityMw(targetGenByWind, windCapacityFactor)
+  const currentSolarMW = gwhToCapacityMw(currentSolar, solarCapacityFactor)
+  const currentWindMW = gwhToCapacityMw(currentWind, windCapacityFactor)
   const solarToBuildMw = targetGenBySolarMW - currentSolarMW
   const windToBuildMw = targetGenByWindMW - currentWindMW
 
@@ -239,11 +251,19 @@ export default function StateDetailsPage({ location, data }) {
 
   // #### Number of Turbines and Football-fields of solar panels. ####
   // https://www.usgs.gov/faqs/how-many-homes-can-average-wind-turbine-power
-  // TODO: Dividing average MW by peak capacity undercounts turbines ~3x, account for capacity factor
+  // targetGenByWindMW is already capacity, so this is like for like
   const averageWindTurbineCapacityMw = 2.75
   const turbinesNeededNumber = numberToHumanString(
     Math.ceil(targetGenByWindMW / averageWindTurbineCapacityMw)
   )
+
+  // Short version of the math above for the tooltip, the FAQ has the long one
+  const capacityMathStr =
+    `Wind and solar rarely run at full power: U.S. wind farms average ` +
+    `${(windCapacityFactor * 100).toFixed(1)}% of their capacity and solar ` +
+    `${(solarCapacityFactor * 100).toFixed(1)}% (EIA, 2025). So we divide ` +
+    `the average power needed by those, then the wind by ` +
+    `${averageWindTurbineCapacityMw} MW per turbine. Details in our FAQ.`
 
   // #### POWER PLANTS ####
   const powerPlants = data.allPowerPlantsJson.edges[0].node.power_plants
@@ -815,6 +835,17 @@ export default function StateDetailsPage({ location, data }) {
                 </strong>{" "}
                 of wind power and <strong>{solarPanelsCountStr} MW</strong> of
                 solar power.
+                {targetGenByWind !== undefined && (
+                  <>
+                    &nbsp;
+                    <InfoHover
+                      wide
+                      ariaLabel={`How we got these numbers - ${capacityMathStr}`}
+                    >
+                      {capacityMathStr}
+                    </InfoHover>
+                  </>
+                )}
               </p>
 
               <p className="mt-6">
