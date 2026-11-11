@@ -19,6 +19,62 @@ const getLabel = (entry, total, field, label) => {
 const StateDetailsMainId = "state-details-main"
 
 /**
+ * Whether state page bar labels show each category's single-color SVG icon
+ * rather than its emoji. Emoji for now, since they're more detailed
+ */
+const UseIconLabels = false
+
+/** The icon's size and the gap between it and the label text, in px */
+const LabelIconSize = 18
+const LabelIconGap = 6
+
+/**
+ * A state page bar label, for the "right" label position, with the category's
+ * icon or a larger emoji before its text. Recharts passes the bar's position
+ * and size and the label's offset and value
+ */
+const StateBarLabel = ({ x, y, width, height, offset, value, icon, emoji }) => {
+  const labelX = x + width + offset
+  const centerY = y + height / 2
+
+  if (icon) {
+    return (
+      <g className="recharts-label">
+        <image
+          href={icon}
+          x={labelX}
+          y={centerY - LabelIconSize / 2}
+          width={LabelIconSize}
+          height={LabelIconSize}
+          preserveAspectRatio="xMidYMid meet"
+        />
+        <text
+          x={labelX + LabelIconSize + LabelIconGap}
+          y={centerY}
+          dominantBaseline="central"
+        >
+          <tspan>{value}</tspan>
+        </text>
+      </g>
+    )
+  }
+
+  return (
+    <text
+      className="recharts-label"
+      x={labelX}
+      y={centerY}
+      dominantBaseline="central"
+    >
+      <tspan className="bar-label-emoji">{emoji}</tspan>
+      {/* Text in a tspan, which picks up the smaller mobile size, spaced a bit
+          further from the emoji than a plain space */}
+      <tspan dx="0.4em">{value}</tspan>
+    </text>
+  )
+}
+
+/**
  * Create constants for bar and graph dimensions for calculating lines
  */
 let BarWidth
@@ -77,15 +133,28 @@ export default function SingleBarChart({
   const electrificationPrcnt = 100 * (1 - nonElectrificationPrcnt / 100)
 
   /**
-   * Label text: short names alone on the mobile homepage, short names with
-   * emoji on state pages, and full names with emoji on the desktop homepage
+   * Label text: short names alone on the mobile homepage, full names with
+   * emoji on the desktop homepage, and short names with a dash before the
+   * percentage on state pages, where StateBarLabel adds the icon or emoji
    */
   const getBarText = ({ emoji, name, longName }) => {
-    if (homeView && mobileView) {
-      return name
+    if (homeView) {
+      return mobileView ? name : `${emoji} ${longName}:`
     }
-    return `${emoji} ${homeView ? longName : name}:`
+    return `${name} -`
   }
+
+  /** State page labels draw their own icon or emoji, see StateBarLabel */
+  const getLabelContent = ({ emoji, icon }) =>
+    homeView
+      ? undefined
+      : props => (
+          <StateBarLabel
+            {...props}
+            emoji={emoji}
+            icon={UseIconLabels ? icon : undefined}
+          />
+        )
 
   /**
    * Each bar's data key, label text and fill, copied from the shared
@@ -231,6 +300,7 @@ export default function SingleBarChart({
               }
               position={LabelPosition}
               offset={LabelOffset}
+              content={getLabelContent(BarsConfig.other)}
             />
           </Bar>
         )}
@@ -254,6 +324,7 @@ export default function SingleBarChart({
               }
               position={LabelPosition}
               offset={LabelOffset}
+              content={getLabelContent(BarsConfig.power)}
             />
           </Bar>
         )}
@@ -277,6 +348,7 @@ export default function SingleBarChart({
               }
               position={LabelPosition}
               offset={LabelOffset}
+              content={getLabelContent(BarsConfig.transport)}
             />
           </Bar>
         )}
@@ -300,6 +372,7 @@ export default function SingleBarChart({
               }
               position={LabelPosition}
               offset={LabelOffset}
+              content={getLabelContent(BarsConfig.buildings)}
             />
           </Bar>
         )}

@@ -170,6 +170,22 @@
   color: #fff;
 }
 
+/* A section's single-color SVG icon, see SectionIcon. The icon is a mask over
+   the text color, so it's dark on grey and green segments and white on the
+   active one */
+.section-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1.25em;
+  height: 1em;
+  background-color: currentColor;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.section-progress-bar .section-icon {
+  font-size: 0.875rem;
+}
+
 /* Names the current section below the bar */
 .section-progress-labels {
   display: grid;

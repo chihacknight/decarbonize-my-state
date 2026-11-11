@@ -1,3 +1,8 @@
+import HomeIcon from "../images/icons/home.svg"
+import AutomobileIcon from "../images/icons/automobile.svg"
+import PlugIcon from "../images/icons/plug.svg"
+import IndustryIcon from "../images/icons/industry.svg"
+
 /**
  * The emissions categories, in the order they appear on state pages, shared by
  * the vertical SingleBarChart and the horizontal SectionProgressBar.
@@ -5,6 +10,9 @@
  * - key:       The category's field in the emissions data
  * - sectionId: The ID of its section on state pages
  * - emoji:     An icon, shown before the name
+ * - icon:      Optional single-color SVG icon (Font Awesome 4), which the
+ *              mobile section progress bar and state page bar chart can show
+ *              instead of the emoji
  * - name:      A short name, like "Power"
  * - longName:  A full name, used where there's room, like "Dirty Power"
  * - fill:      The bar's default fill
@@ -15,6 +23,7 @@ export const EmissionsCategories = {
     key: "buildings",
     sectionId: "buildings",
     emoji: "🏠",
+    icon: HomeIcon,
     name: "Buildings",
     longName: "Buildings",
     fill: "#dcdcdc",
@@ -24,6 +33,7 @@ export const EmissionsCategories = {
     key: "transportation",
     sectionId: "transport",
     emoji: "🚗",
+    icon: AutomobileIcon,
     name: "Transport",
     longName: "Transportation",
     fill: "#c2c2c2",
@@ -33,6 +43,7 @@ export const EmissionsCategories = {
     key: "dirty_power",
     sectionId: "power",
     emoji: "🔌",
+    icon: PlugIcon,
     name: "Power",
     longName: "Dirty Power",
     fill: "#a6a6a6",
@@ -42,6 +53,7 @@ export const EmissionsCategories = {
     key: "dumps_farms_industrial_other",
     sectionId: "other",
     emoji: "🏭",
+    icon: IndustryIcon,
     name: "Other",
     longName: "Farms, Industry & Other",
     fill: "#ad8669",
