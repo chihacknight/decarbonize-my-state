@@ -655,7 +655,9 @@ footer a {
 }
 
 /* The car emoji is drawn low in its box, so nudge it up to line up with text.
-   Emoji get their section ID as a modifier, see SectionProgressBar */
+   A relative offset rather than vertical-align, so it also works in flex
+   layouts. Emoji get their section ID as a modifier, see SectionProgressBar */
 .emoji.-transport {
-  vertical-align: 0.15em;
+  position: relative;
+  top: -0.1em;
 }

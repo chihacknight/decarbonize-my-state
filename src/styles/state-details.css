@@ -61,12 +61,17 @@
  * progress bar
  */
 @media (max-width: 1199px) {
+  :root {
+    --state-header-height: 7.5rem;
+  }
+
   .sticky-header {
     padding: 0.35rem 1rem 0.5rem;
   }
 
   .sticky-header .state-icon {
     font-size: 2.25rem;
+    line-height: 1;
     margin-right: 0.75rem !important;
   }
 
@@ -78,6 +83,99 @@
     margin-left: auto !important;
     padding: 0.2rem 0.6rem;
     font-size: 0.875rem;
+  }
+}
+
+/**
+ * Where scroll-driven animations are supported, the mobile header starts as
+ * just a larger state name, then shrinks and fades in the section progress bar
+ * once the line above the first section (Buildings) scrolls up under it. Both states share a
+ * fixed header height, so content below doesn't jump. Without support, the
+ * compact header above shows throughout.
+ *
+ * Scroll only triggers the change: the line's timeline flips
+ * --state-header-compact from 0 to 1, and a style query applies the compact
+ * styles, which play as ordinary transitions at a fixed speed
+ */
+@property --state-header-compact {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@supports (animation-timeline: view()) {
+  @media (max-width: 1199px) {
+    /* Let the header, elsewhere in the page, use the line's timeline */
+    body {
+      timeline-scope: --sections-start;
+    }
+
+    /* The timeline runs as the line passes the bottom of both sticky headers
+       (the site header is 55px), so inset the viewport by them. It sits above
+       the Buildings section, so jumping to that section triggers it too */
+    .sections-start {
+      view-timeline: --sections-start block;
+      view-timeline-inset: calc(55px + var(--state-header-height)) 0;
+    }
+
+    .sticky-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: var(--state-header-height);
+      /* Flips to 1 as the line passes under the header */
+      animation: state-header-compact linear both;
+      animation-timeline: --sections-start;
+      animation-range: exit;
+    }
+
+    /* The expanded header, before the line passes */
+    .sticky-header .state-icon {
+      font-size: 4rem;
+      transition: font-size 0.4s ease;
+    }
+
+    .sticky-header h1 .title {
+      font-size: 2rem;
+      transition: font-size 0.4s ease;
+    }
+
+    .sticky-header .section-progress {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease,
+        visibility 0s linear 0.4s;
+    }
+
+    /* The compact header. The query checks each element's parent, which
+       inherits the flag from the header */
+    @container style(--state-header-compact: 1) {
+      .sticky-header .state-icon {
+        font-size: 2.25rem;
+      }
+
+      .sticky-header h1 .title {
+        font-size: 1.25rem;
+      }
+
+      .sticky-header .section-progress {
+        max-height: 5rem;
+        opacity: 1;
+        visibility: visible;
+        transition: max-height 0.4s ease, opacity 0.4s ease 0.1s, visibility 0s;
+      }
+    }
+  }
+}
+
+@keyframes state-header-compact {
+  from {
+    --state-header-compact: 0;
+  }
+  to {
+    --state-header-compact: 1;
   }
 }
 
@@ -109,13 +207,6 @@
   transition: background-color 0.4s;
 }
 
-/* Segments are flex items, where vertical-align doesn't apply, so nudge the
-   car up this way instead, see .emoji.-transport */
-.section-progress-bar .emoji.-transport {
-  position: relative;
-  top: -0.1em;
-}
-
 .section-progress-bar a:hover,
 .section-progress-bar a:focus {
   color: var(--text-color-main);
@@ -131,10 +222,21 @@
 
 /* Names the current section below the bar */
 .section-progress-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
   margin-top: 0.5rem;
   font-size: 1.125rem;
   font-weight: bold;
   line-height: 1.5;
+}
+
+/* The section's share, since narrow segments don't have room for it */
+.section-progress-prcnt {
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: #6c757d;
 }
 
 /** Make sure focusing links works with both sticky headers */

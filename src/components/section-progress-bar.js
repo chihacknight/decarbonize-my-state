@@ -74,8 +74,11 @@ export default function SectionProgressBar({ percents, activeKey, greenKeys }) {
         <div className="section-progress-label" aria-hidden="true">
           <span className={`emoji -${currentSection.sectionId}`}>
             {currentSection.emoji}
-          </span>{" "}
-          {currentSection.name}
+          </span>
+          <span>{currentSection.name}</span>
+          <span className="section-progress-prcnt">
+            {Number(percents[currentSection.key])}%
+          </span>
         </div>
       )}
     </nav>

@@ -404,7 +404,8 @@ export default function StateDetailsPage({ location, data }) {
           This is how we're going to do it
         </p>
 
-        <hr className="mt-7 mb-7" />
+        {/* Its scroll position triggers the mobile section progress bar */}
+        <hr className="mt-7 mb-7 sections-start" />
       </div>
 
       <div className="row state-details-main" id="state-details-main">
