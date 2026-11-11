@@ -89,6 +89,7 @@ const ProgressTooltip = ({
  * `annualSolarMw`, the MW a year to build to reach the targets by 2050.
  */
 const RenewablesProgressChart = ({
+  placeTitle,
   generationByYear,
   targetWindGwh,
   targetSolarGwh,
@@ -128,12 +129,14 @@ const RenewablesProgressChart = ({
 
   return (
     <>
-      <p className="h6 mt-4 mb-0">
-        Wind and solar built vs. target{" "}
-        <span className="text-secondary font-weight-normal">
-          (megawatts of capacity)
-        </span>
-      </p>
+      <h3 className="chart-title mt-5">
+        Wind and Solar Built vs. Target in {placeTitle} ({data[0].year}–
+        {data[data.length - 1].year})
+      </h3>
+      <div className="chart-note">
+        Megawatts of capacity, estimated from generation with national capacity
+        factors.
+      </div>
       <div className="renewables-progress-chart">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 10, right: 10, left: 0 }}>

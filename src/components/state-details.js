@@ -17,6 +17,7 @@ import EvGrowthChart from "./ev-growth-chart"
 import InfoHover from "./info-hover"
 import PowerMixChart from "./power-mix-chart"
 import RenewablesProgressChart from "./renewables-progress-chart"
+import HeatingTrendChart from "./heating-trend-chart"
 import DisplayPlants from "./display-plants"
 
 /**
@@ -150,6 +151,7 @@ export default function StateDetailsPage({ location, data }) {
     homes,
     fossilHeatingPct,
     fossilFreeHeatingPct,
+    byYear: heatingByYear,
   } = data.allBuildingsJson.edges[0].node
 
   // calculate homes whose heating is left to electrify
@@ -173,7 +175,7 @@ export default function StateDetailsPage({ location, data }) {
   // Shown under the latest year's pie chart in both power sections
   const powerMixSection = (
     <>
-      <h3 className="h6 mt-6 mb-3">
+      <h3 className="chart-title mt-6">
         Power Generation Mix in {placeTitle} ({firstGenerationYear}–
         {latestGeneration.year})
       </h3>
@@ -548,10 +550,11 @@ export default function StateDetailsPage({ location, data }) {
               . That's around {homesPerYear} per year.
             </p>
             <AlreadyElectrifiedChart
-              label={"Homes Heating Without Fuel"}
+              label={"Homes With Electric Heating"}
               electrifiedPct={fossilFreeHeatingPct}
               fossilPct={fossilHeatingPct}
             />
+            <HeatingTrendChart byYear={heatingByYear} placeTitle={placeTitle} />
             <p className="mt-4 h6 text-muted">
               This counts each home's main heating source. Stoves, water
               heaters, and businesses aren't included yet.
@@ -648,7 +651,7 @@ export default function StateDetailsPage({ location, data }) {
               fossilPct={pctNonEv}
             />
 
-            <h3 className="h6 mt-5 mb-3">
+            <h3 className="chart-title mt-5">
               EV Growth in {placeTitle} ({vehiclesByYear[0].year}–
               {vehiclesByYear[vehiclesByYear.length - 1].year})
             </h3>
@@ -725,7 +728,7 @@ export default function StateDetailsPage({ location, data }) {
                 <em>today</em>.
               </p>
 
-              <h3 className="h6 mt-5 mb-4">
+              <h3 className="chart-title mt-5">
                 Power Generation in the State of {placeTitle} (
                 {latestGeneration.year})
               </h3>
@@ -897,6 +900,7 @@ export default function StateDetailsPage({ location, data }) {
               </p>
               {targetGenByWind !== undefined && (
                 <RenewablesProgressChart
+                  placeTitle={placeTitle}
                   generationByYear={generationByYear}
                   targetWindGwh={targetGenByWind}
                   targetSolarGwh={targetGenBySolar}
@@ -964,7 +968,7 @@ export default function StateDetailsPage({ location, data }) {
                 )}
               </div>
 
-              <h3 className="h6 mt-5 mb-4">
+              <h3 className="chart-title mt-5">
                 Power Generation in the State of {placeTitle} (
                 {latestGeneration.year})
               </h3>
@@ -1097,6 +1101,16 @@ export const query = graphql`
           homes
           fossilHeatingPct
           fossilFreeHeatingPct
+          byYear {
+            year
+            homes
+            fossilFreeHeatingPct
+            fossilFreeHeatingPctMoe
+            fossilFreeHomes
+            fossilFreeHomesMoe
+            fossilHomes
+            fossilHomesMoe
+          }
         }
       }
     }

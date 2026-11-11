@@ -100,25 +100,34 @@ AFDC publishes each year as a table on that page, picked with `?year=` (its down
 
 ## Home heating
 
-The buildings section ("X% of homes already heat without burning any fuel") comes from the Census Bureau's American Community Survey (ACS) 1-year estimates, table **B25040 House Heating Fuel**, currently **2024** (released September 2025). It's the number of occupied homes in each state by main heating fuel. The Census releases a new year every fall (2025 data is scheduled for October 29, 2026).
+The buildings section ("X% of homes already heat without burning any fuel") and its chart over time come from the Census Bureau's American Community Survey (ACS) 1-year estimates, table **B25040 House Heating Fuel**, currently covering **2005–2025** (2025 released October 2026). It's the number of occupied homes in each state by main heating fuel. The headline stats use the latest year. The Census releases a new year every fall.
+
+There's no 2020: the Census didn't publish standard 1-year estimates that year because of COVID, so the chart draws a dashed line over it.
 
 We only track each home's **main heating source**, not stoves, water heaters or commercial buildings. Homes heated with electricity or solar, or that don't use any heating fuel (common in Hawaii and Florida), count as already fossil-free. Homes heated with gas, propane, fuel oil, coal, wood or other fuels count as still to electrify. See `get_buildings.py`.
 
-The file is small (~500KB), so we commit it as downloaded to `raw/acs_house_heating_fuel.dat`. No conversion step is needed.
+These are survey estimates, so each comes with a margin of error (90% confidence). We keep the margins in `raw/acs_house_heating_fuel.csv` and the chart shades them, since small states' year-to-year changes can be mostly noise.
 
 ### Updating to a new ACS release
 
-1. Go to the [ACS table-based summary file](https://www2.census.gov/programs-surveys/acs/summary_file/) folder, then `<year>/table-based-SF/data/1YRData/`.
-2. Download `acsdt1y<year>-b25040.dat` and save it over `raw/acs_house_heating_fuel.dat`.
-3. Rebuild the final JSON:
+The raw CSV comes from the [Census API](https://www.census.gov/data/developers/data-sets/acs-1year.html), one request per year for every state. It needs a free API key in `data/.env` (see [Environment variables](../README.md#environment-variables)).
+
+1. Refetch every year (re-fetching all of them picks up any Census revisions too):
+
+   ```bash
+   make update-buildings-raw
+   ```
+
+   This saves `raw/acs_house_heating_fuel.csv`, from last year back to 2005. If last year isn't released yet, it's skipped.
+2. Rebuild the final JSON:
 
    ```bash
    make final/buildings/buildings.json
    ```
 
    Or with Docker: `docker-compose run --rm --entrypoint "make final/buildings/buildings.json" make`
-4. Update the `home-heating` entry in `src/constants/source-citations.js` (title year, date and the `ACSDT1Y<year>` part of the link).
-5. Update the year and release dates in the first paragraph of this section.
+3. Update the `home-heating` entry in `src/constants/source-citations.js` (title years, date and the `ACSDT1Y<year>` part of the link).
+4. Update the years and release date in the first paragraph of this section.
 
 ## Data updates page
 

@@ -30,7 +30,7 @@ body,
   scroll-margin-top: 5rem;
 }
 
-body *:focus {
+body *:focus-visible {
   outline: dashed 0.25rem var(--outline-color);
 }
 
@@ -38,7 +38,7 @@ body *:focus {
   text-decoration: none;
 }
 
-.btn:focus {
+.btn:focus-visible {
   outline: dashed 0.25rem var(--outline-color);
 }
 
@@ -57,7 +57,7 @@ a {
 
 /* Make link underline thicken on hover or focus */
 a:hover,
-a:focus {
+a:focus-visible {
   text-decoration-thickness: 0.125em;
 }
 
@@ -147,7 +147,7 @@ caption {
   background-color: #198727;
   border-color: transparent;
 }
-.btn-success:focus,
+.btn-success:focus-visible,
 .btn-success:hover {
   background-color: #157021;
 }
@@ -257,7 +257,7 @@ caption {
 /**
  * Style focused <path> elements with border and darkening
  */
-path:focus,
+path:focus-visible,
 .mapSelected {
   stroke: #421b49;
   stroke-width: 3;
@@ -364,7 +364,7 @@ path:focus,
   max-width: calc(100% - 80px);
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
   position: absolute;
   padding: 0.5rem 1rem;
   top: 0;
@@ -765,9 +765,36 @@ power mix charts **/
   font-weight: bold;
 }
 
+/** Chart titles, with an optional note below in smaller grey text. The note
+    is a div, so the state page's large paragraph size doesn't apply */
+.chart-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.chart-note {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+
+/* Tuck a note up under its title */
+.chart-title + .chart-note {
+  margin-top: -0.5rem;
+}
+
 /** Wind and solar built vs target on state pages */
 .renewables-progress-chart {
   width: 100%;
   height: 20rem;
+  margin-top: 1rem;
+}
+
+/** Homes with electric heating over time, on state pages */
+.heating-trend-chart {
+  width: 100%;
+  height: 16rem;
   margin-top: 1rem;
 }

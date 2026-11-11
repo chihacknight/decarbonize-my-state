@@ -175,7 +175,7 @@ function Stats({
           unit="%"
           caption={
             <>
-              NREL appliances <Chevron /> ACS 2024 heating
+              NREL appliances <Chevron /> Census 2025 heating
             </>
           }
         />
@@ -461,7 +461,7 @@ export default function DataUpdateReport({ data }) {
           <Chevron /> EIA {g.after}, fixed. <strong>EVs:</strong> AFDC 2020 /
           FHWA cars <Chevron /> AFDC 2025 / all light-duty.{" "}
           <strong>Homes:</strong> NREL appliances <Chevron />
-          Census ACS 2024 heating fuel.
+          Census American Community Survey 2025 heating fuel.
         </p>
         <p className="muted">Updated {data.generatedAt.slice(0, 10)}.</p>
       </footer>
