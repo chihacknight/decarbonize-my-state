@@ -21,6 +21,19 @@ const getSavedScrollY = ({ pathname, key }) => {
 }
 
 /**
+ * The element a URL hash like "#a%20b" points to, decoded like Gatsby's own
+ * scrollToHash, or null
+ */
+const getHashTarget = hash => {
+  try {
+    return document.getElementById(decodeURI(hash.slice(1)))
+  } catch (e) {
+    // A malformed escape like "%E0%A4%A"
+    return null
+  }
+}
+
+/**
  * Scroll handling on navigation. State pages scroll smoothly for in-page links
  * (CSS scroll-behavior in state-details.css), so:
  *
@@ -42,8 +55,7 @@ export const shouldUpdateScroll = ({
   }
 
   const savedY = getSavedScrollY(location)
-  const hashTarget =
-    location.hash && document.getElementById(location.hash.slice(1))
+  const hashTarget = location.hash && getHashTarget(location.hash)
   if (!savedY && hashTarget) {
     hashTarget.scrollIntoView({ behavior: "instant" })
   } else {

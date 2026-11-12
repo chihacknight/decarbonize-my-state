@@ -3,6 +3,10 @@ GENERATED_FILES = final/emissions/emissions.json final/buildings/buildings.json 
 
 all: $(GENERATED_FILES)
 
+# If a script fails partway, delete its half-written output so the next make
+# reruns it instead of treating it as up to date
+.DELETE_ON_ERROR:
+
 clean:
 	rm -rf final/*
 
@@ -71,5 +75,6 @@ final/trade/trade.json : raw/eia_state_electricity_trade.csv
 # See UPDATE_PROCESS.md
 .PHONY : update-trade-raw
 update-trade-raw :
-	python scripts/fetch_eia_trade.py > eia_state_electricity_trade.csv
+	python scripts/fetch_eia_trade.py > eia_state_electricity_trade.csv \
+		|| { rm -f eia_state_electricity_trade.csv; exit 1; }
 	mv eia_state_electricity_trade.csv raw/eia_state_electricity_trade.csv

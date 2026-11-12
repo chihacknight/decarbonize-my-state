@@ -57,7 +57,11 @@ def fetch_table(abbr):
     url = urllib.parse.quote(URL.format(abbr=abbr), safe=':/')
     with urllib.request.urlopen(url, timeout=60) as response:
         workbook = openpyxl.load_workbook(io.BytesIO(response.read()), read_only=True)
-    return [list(row) for row in workbook[SHEET].iter_rows(values_only=True)]
+    # Read-only workbooks stay open until closed
+    try:
+        return [list(row) for row in workbook[SHEET].iter_rows(values_only=True)]
+    finally:
+        workbook.close()
 
 
 def latest_year(rows):
