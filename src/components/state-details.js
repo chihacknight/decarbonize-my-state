@@ -73,7 +73,12 @@ export default function StateDetailsPage({ location, data }) {
   useEffect(() => {
     const header = stickyHeaderRef.current
     const line = sectionsStartRef.current
-    if (!header || !line || !("IntersectionObserver" in window)) {
+    if (
+      !header ||
+      !line ||
+      !("IntersectionObserver" in window) ||
+      !("ResizeObserver" in window)
+    ) {
       setIsHeaderExpanded(false)
       return
     }
@@ -83,14 +88,32 @@ export default function StateDetailsPage({ location, data }) {
     // of the screen. The line is then "intersecting" whenever it's below the
     // header, so even jumps past it (like following a link to a section)
     // cross the area's edge and update the header
-    const headerBottom =
-      parseFloat(getComputedStyle(header).top) + header.offsetHeight
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsHeaderExpanded(entry.isIntersecting),
-      { rootMargin: `-${headerBottom}px 0px 1000000px 0px` }
-    )
-    observer.observe(line)
-    return () => observer.disconnect()
+    let lineObserver = null
+    const observeLine = () => {
+      const headerBottom =
+        parseFloat(getComputedStyle(header).top) + header.offsetHeight
+      if (lineObserver) {
+        lineObserver.disconnect()
+      }
+      lineObserver = new IntersectionObserver(
+        ([entry]) => setIsHeaderExpanded(entry.isIntersecting),
+        { rootMargin: `-${headerBottom}px 0px 1000000px 0px` }
+      )
+      lineObserver.observe(line)
+    }
+
+    // The header's height changes across breakpoints (like rotating a tablet
+    // past 1200px), so re-measure whenever it resizes. This also runs once to
+    // start. Expanding doesn't loop it: on mobile both states share a fixed
+    // height, and on desktop expanding doesn't change the header
+    const headerObserver = new ResizeObserver(observeLine)
+    headerObserver.observe(header)
+    return () => {
+      headerObserver.disconnect()
+      if (lineObserver) {
+        lineObserver.disconnect()
+      }
+    }
   }, [])
 
   // place info and string
