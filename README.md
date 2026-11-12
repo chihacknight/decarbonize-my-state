@@ -28,7 +28,7 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
 2. Start developing
 
    ```shell
-   docker-compose up --build
+   docker compose up --build
    ```
 
    or
@@ -48,7 +48,7 @@ This is a Gatsby app built on top of the [DataMade Gatsby starter template](http
 This starter has a minimal number of dependencies in order to stay lean, but you'll likely want to add more to suit your needs. To add a dependency, run:
 
 ```shell
-docker-compose run --rm app add <dependency name> --save
+docker compose run --rm app add <dependency name> --save
 ```
 
 or
@@ -60,7 +60,7 @@ yarn add <dependency name>
 To remove a dependency:
 
 ```shell
-docker-compose run --rm app remove <dependency name>
+docker compose run --rm app remove <dependency name>
 ```
 
 or
@@ -71,12 +71,12 @@ yarn remove <dependency name>
 
 ## Testing & syntax linting
 
-When you run `docker-compose up` locally, ESLint makes sure you're following the right JS style conventions and not importing or exporting anything extraneously. If you are, the build will fail.
+When you run `docker compose up` locally, ESLint makes sure you're following the right JS style conventions and not importing or exporting anything extraneously. If you are, the build will fail.
 
 If you want to check the linter on its own you can run:
 
 ```
-docker-compose run --rm app run test
+docker compose run --rm app run test
 ```
 
 or
@@ -88,7 +88,7 @@ yarn test
 If you want to reformat with the linter, you can run:
 
 ```
-docker-compose run --rm app run format
+docker compose run --rm app run format
 ```
 
 or
@@ -105,7 +105,7 @@ To recreate the data, run:
 
 ```bash
 cd data
-docker-compose up --build
+docker compose up --build
 ```
 
 ### Environment variables
@@ -120,7 +120,7 @@ cp data/.env.example data/.env
 |---|---|---|
 | `CENSUS_API_KEY` | `make update-buildings-raw` (home heating, see [UPDATE_PROCESS.md](data/UPDATE_PROCESS.md#home-heating)) | Free at [api.census.gov/data/key_signup.html](https://api.census.gov/data/key_signup.html) |
 
-The regular pipeline (`docker-compose up --build`) doesn't need any keys.
+The regular pipeline (`docker compose up --build`) doesn't need any keys.
 
 ### Updating data
 

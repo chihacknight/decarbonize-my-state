@@ -304,6 +304,13 @@ path:focus-visible,
   background-color: #fff;
   border-bottom: 1px solid #aaaaaa;
   z-index: 100;
+  margin-bottom: 1.45rem;
+}
+
+/* State pages put their own sticky header right under it, see Layout's
+   flushHeader */
+.sunrise-nav.-flush {
+  margin-bottom: 0;
 }
 
 .nav-link {

@@ -19,6 +19,7 @@ import PowerMixChart from "./power-mix-chart"
 import RenewablesProgressChart from "./renewables-progress-chart"
 import HeatingTrendChart from "./heating-trend-chart"
 import ChartDetails from "./chart-details"
+import PowerTradeNote from "./power-trade-note"
 import SectionProgressBar from "./section-progress-bar"
 import DisplayPlants from "./display-plants"
 
@@ -72,7 +73,12 @@ export default function StateDetailsPage({ location, data }) {
   useEffect(() => {
     const header = stickyHeaderRef.current
     const line = sectionsStartRef.current
-    if (!header || !line || !("IntersectionObserver" in window)) {
+    if (
+      !header ||
+      !line ||
+      !("IntersectionObserver" in window) ||
+      !("ResizeObserver" in window)
+    ) {
       setIsHeaderExpanded(false)
       return
     }
@@ -82,14 +88,32 @@ export default function StateDetailsPage({ location, data }) {
     // of the screen. The line is then "intersecting" whenever it's below the
     // header, so even jumps past it (like following a link to a section)
     // cross the area's edge and update the header
-    const headerBottom =
-      parseFloat(getComputedStyle(header).top) + header.offsetHeight
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsHeaderExpanded(entry.isIntersecting),
-      { rootMargin: `-${headerBottom}px 0px 1000000px 0px` }
-    )
-    observer.observe(line)
-    return () => observer.disconnect()
+    let lineObserver = null
+    const observeLine = () => {
+      const headerBottom =
+        parseFloat(getComputedStyle(header).top) + header.offsetHeight
+      if (lineObserver) {
+        lineObserver.disconnect()
+      }
+      lineObserver = new IntersectionObserver(
+        ([entry]) => setIsHeaderExpanded(entry.isIntersecting),
+        { rootMargin: `-${headerBottom}px 0px 1000000px 0px` }
+      )
+      lineObserver.observe(line)
+    }
+
+    // The header's height changes across breakpoints (like rotating a tablet
+    // past 1200px), so re-measure whenever it resizes. This also runs once to
+    // start. Expanding doesn't loop it: on mobile both states share a fixed
+    // height, and on desktop expanding doesn't change the header
+    const headerObserver = new ResizeObserver(observeLine)
+    headerObserver.observe(header)
+    return () => {
+      headerObserver.disconnect()
+      if (lineObserver) {
+        lineObserver.disconnect()
+      }
+    }
   }, [])
 
   // place info and string
@@ -183,10 +207,15 @@ export default function StateDetailsPage({ location, data }) {
 
   const firstGenerationYear = generationByYear[generationByYear.length - 1].year
 
+  // How much electricity the state imports or exports, if we have it
+  const tradeEdge = data.allTradeJson.edges[0]
+  const trade = tradeEdge ? tradeEdge.node : null
+
   // Shown under the latest year's pie chart in both power sections, with one
   // source line under both, like the other sections
   const powerMixSection = (
     <>
+      {trade && <PowerTradeNote trade={trade} placeTitle={placeTitle} />}
       <ChartDetails
         className="mt-3"
         label="View Power Generation Trends"
@@ -370,7 +399,7 @@ export default function StateDetailsPage({ location, data }) {
   const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${cutPerYearPrcnt}% a year. Electrification can help us get there.`
 
   return (
-    <Layout>
+    <Layout flushHeader>
       <SEO
         title={`${placeTitle} | Decarb My State`}
         description={descriptionText}
@@ -1202,6 +1231,21 @@ export const query = graphql`
             slug
             utility_name
           }
+        }
+      }
+    }
+    allTradeJson(filter: { state: { eq: $state } }) {
+      edges {
+        node {
+          state
+          year
+          totalSupply
+          netGeneration
+          netImports
+          interstateNetImports
+          internationalNetImports
+          netImportsPct
+          netExportsPct
         }
       }
     }

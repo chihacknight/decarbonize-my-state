@@ -227,6 +227,79 @@
   }
 }
 
+/**
+ * Electricity imports or exports under the power generation pie chart, see
+ * PowerTradeNote. Divs rather than paragraphs, which are large on this page
+ */
+.power-trade {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 35rem;
+  margin: 1rem 0 2rem;
+}
+
+.power-trade-text {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.power-trade-chart {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.power-trade-bar {
+  display: flex;
+  gap: 2px;
+  height: 1rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+
+.power-trade-bar span {
+  flex-basis: 0;
+  /* Keep even a 2% share visible */
+  min-width: 4px;
+}
+
+.power-trade-labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+
+.power-trade-labels > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.power-trade-swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 0.125rem;
+}
+
+/* Electricity made or used in the state, and what's imported or exported */
+.power-trade .-home {
+  background-color: #c8c8c8;
+}
+
+.power-trade .-traded {
+  background-color: #1983d7;
+}
+
+.power-trade-note {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.power-trade-source {
+  font-size: 0.75rem;
+}
+
 /** Make sure focusing links works with both sticky headers */
 .state-details-main * {
   scroll-margin-top: 15rem;

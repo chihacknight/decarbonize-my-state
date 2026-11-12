@@ -1,12 +1,27 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import NewTabIcon from "../components/new-tab-icon"
+import { ElectricityMapsUrl } from "../constants/external-links"
 
 import LinkImg from "../images/icons/link.svg"
 
 const FAQ = () => {
+  // Example importer and exporter shares, from the same data as the state
+  // pages so they stay in sync when it's updated
+  const { virginia, wyoming } = useStaticQuery(graphql`
+    query FaqTradeQuery {
+      virginia: tradeJson(state: { eq: "virginia" }) {
+        netImportsPct
+      }
+      wyoming: tradeJson(state: { eq: "wyoming" }) {
+        netExportsPct
+      }
+    }
+  `)
+
   return (
     <Layout>
       <SEO title="FAQ | Decarb My State" />
@@ -148,6 +163,48 @@ const FAQ = () => {
             so states that rely on it would need somewhat more solar capacity.
           </li>
         </ul>
+        <h3 id="carbon-free-by-state">
+          Can you accurately track carbon-free power by state?
+        </h3>
+        <p>
+          Not exactly. A state's carbon-free share and power emissions on this
+          site are estimates, based on the power plants inside that state. But
+          electricity doesn't stop at state lines:
+        </p>
+        <ul>
+          <li>
+            <strong>Grids are regional, not statewide.</strong> Most states are
+            part of a larger grid run by a regional operator (like PJM in the
+            Mid-Atlantic or MISO in the Midwest), and power flows to wherever
+            it's needed across that region.
+          </li>
+          <li>
+            <strong>Many states import or export a lot of power.</strong>{" "}
+            Virginia imports about {Math.round(virginia.netImportsPct)}% of the
+            electricity it uses, while Wyoming exports about{" "}
+            {Math.round(wyoming.netExportsPct)}% of what it generates. An
+            importer's numbers leave out the power plants making its imported
+            electricity, and an exporter's include plants making power for other
+            states.
+          </li>
+          <li>
+            <strong>We don't know what made imported power.</strong> The EIA
+            reports how much electricity crosses state lines, but not which
+            fuels made it. So the carbon-free share of the electricity a state
+            actually uses could be higher or lower than what it generates.
+          </li>
+        </ul>
+        <p>
+          So think of these numbers as a picture of what's built in each state,
+          which is what state policy controls, rather than an exact measure of
+          the electricity people there use. Each state page notes how much
+          electricity it imports or exports, and{" "}
+          <a href={ElectricityMapsUrl} target="_blank" rel="noreferrer">
+            Electricity Maps
+            <NewTabIcon />
+          </a>{" "}
+          shows live electricity flows and carbon intensity between regions.
+        </p>
         <h3>Why don't you feature nuclear power?</h3>
         <p>
           We are not against nuclear. On the contrary, our actually analysis
