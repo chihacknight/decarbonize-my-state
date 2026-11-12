@@ -1,11 +1,8 @@
 import React from "react"
 
+import { ElectricityMapsUrl } from "../constants/external-links"
 import { getShortCitation } from "../constants/source-citations"
 import NewTabIcon from "./new-tab-icon"
-
-/** Live map of electricity flows and carbon intensity between grid regions */
-const ElectricityMapsUrl =
-  "https://app.electricitymaps.com/map/fifteen_minutes?signal=carbon-intensity"
 
 /** Below this share either way, a state counts as using about what it makes */
 const MinTradePct = 2

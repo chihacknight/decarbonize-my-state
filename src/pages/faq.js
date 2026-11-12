@@ -1,12 +1,27 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import NewTabIcon from "../components/new-tab-icon"
+import { ElectricityMapsUrl } from "../constants/external-links"
 
 import LinkImg from "../images/icons/link.svg"
 
 const FAQ = () => {
+  // Example importer and exporter shares, from the same data as the state
+  // pages so they stay in sync when it's updated
+  const { virginia, wyoming } = useStaticQuery(graphql`
+    query FaqTradeQuery {
+      virginia: tradeJson(state: { eq: "virginia" }) {
+        netImportsPct
+      }
+      wyoming: tradeJson(state: { eq: "wyoming" }) {
+        netExportsPct
+      }
+    }
+  `)
+
   return (
     <Layout>
       <SEO title="FAQ | Decarb My State" />
@@ -165,10 +180,12 @@ const FAQ = () => {
           </li>
           <li>
             <strong>Many states import or export a lot of power.</strong>{" "}
-            Virginia imports about 31% of the electricity it uses, while Wyoming
-            exports about half of what it generates. An importer's numbers leave
-            out the power plants making its imported electricity, and an
-            exporter's include plants making power for other states.
+            Virginia imports about {Math.round(virginia.netImportsPct)}% of the
+            electricity it uses, while Wyoming exports about{" "}
+            {Math.round(wyoming.netExportsPct)}% of what it generates. An
+            importer's numbers leave out the power plants making its imported
+            electricity, and an exporter's include plants making power for other
+            states.
           </li>
           <li>
             <strong>We don't know what made imported power.</strong> The EIA
@@ -182,8 +199,9 @@ const FAQ = () => {
           which is what state policy controls, rather than an exact measure of
           the electricity people there use. Each state page notes how much
           electricity it imports or exports, and{" "}
-          <a href="https://app.electricitymaps.com/map/fifteen_minutes?signal=carbon-intensity">
+          <a href={ElectricityMapsUrl} target="_blank" rel="noreferrer">
             Electricity Maps
+            <NewTabIcon />
           </a>{" "}
           shows live electricity flows and carbon intensity between regions.
         </p>
