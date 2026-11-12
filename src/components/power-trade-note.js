@@ -13,6 +13,12 @@ const MinTradePct = 2
 /** From this share up, a state is a large importer or exporter, below it small */
 const LargeTradePct = 15
 
+/** Below this share, trade with another country isn't worth naming */
+const MinCountryPct = 0.5
+
+/** States bordering Mexico, assumed to trade with it (EIA has no country split) */
+const MexicoBorderStates = ["arizona", "california", "new_mexico", "texas"]
+
 /**
  * How much electricity a state imports or exports, shown under its power
  * generation pie chart, as a small or large importer or exporter. An
@@ -28,7 +34,6 @@ export default function PowerTradeNote({ trade, placeTitle }) {
     year,
     netImports,
     interstateNetImports,
-    internationalNetImports,
     netImportsPct,
     netExportsPct,
   } = trade
@@ -61,18 +66,7 @@ export default function PowerTradeNote({ trade, placeTitle }) {
     )
   }
 
-  // Where traded power comes from or goes to: other states, other countries
-  // (Canada or Mexico) or both, by which way each kind of trade goes
-  const sameWay = value => (isImporter ? value > 0 : value < 0)
-  const viaStates = sameWay(interstateNetImports)
-  const viaCountries = sameWay(internationalNetImports)
-  const where =
-    viaStates && viaCountries
-      ? "other states or countries"
-      : viaCountries
-      ? "other countries"
-      : "other states"
-
+  const where = getTradePartners(trade, isImporter)
   const tradedPct = isImporter ? netImportsPct : netExportsPct
   const isLarge = tradedPct >= LargeTradePct
   const size = isLarge ? "large" : "small"
@@ -167,6 +161,40 @@ export default function PowerTradeNote({ trade, placeTitle }) {
       <Source year={year} />
     </div>
   )
+}
+
+/**
+ * Where a state's traded power comes from or goes to: "other states", the
+ * neighboring country, or "other states and" that country, by which way each
+ * kind of trade goes. Trade with another country only counts if it's a
+ * noticeable share, so Arizona's tiny exports to Mexico don't get a mention
+ *
+ * @param trade      The state's row from trade.json
+ * @param isImporter Whether the state is a net importer, otherwise an exporter
+ */
+const getTradePartners = (trade, isImporter) => {
+  const {
+    state,
+    totalSupply,
+    netGeneration,
+    interstateNetImports,
+    internationalNetImports,
+  } = trade
+
+  // Imports are a share of what a state uses, exports of what it generates
+  const tradeBase = isImporter ? totalSupply : netGeneration
+  const sameWay = value => (isImporter ? value > 0 : value < 0)
+
+  const viaStates = sameWay(interstateNetImports)
+  const viaCountry =
+    sameWay(internationalNetImports) &&
+    (100 * Math.abs(internationalNetImports)) / tradeBase >= MinCountryPct
+  const country = MexicoBorderStates.includes(state) ? "Mexico" : "Canada"
+
+  if (viaStates && viaCountry) {
+    return `other states and ${country}`
+  }
+  return viaCountry ? country : "other states"
 }
 
 const Source = ({ year }) => (

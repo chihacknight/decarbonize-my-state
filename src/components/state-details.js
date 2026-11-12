@@ -1214,7 +1214,10 @@ export const query = graphql`
     allTradeJson(filter: { state: { eq: $state } }) {
       edges {
         node {
+          state
           year
+          totalSupply
+          netGeneration
           netImports
           interstateNetImports
           internationalNetImports
