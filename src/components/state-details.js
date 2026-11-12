@@ -376,7 +376,7 @@ export default function StateDetailsPage({ location, data }) {
   const descriptionText = `To get to zero by 2050, ${placeTitle} must cut climate pollution by ${cutPerYearPrcnt}% a year. Electrification can help us get there.`
 
   return (
-    <Layout>
+    <Layout flushHeader>
       <SEO
         title={`${placeTitle} | Decarb My State`}
         description={descriptionText}

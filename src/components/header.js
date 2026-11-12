@@ -10,9 +10,18 @@ const navLinks = [
   { to: "/take-action", label: "Take Action" },
 ]
 
-const Header = ({ siteTitle }) => (
+/**
+ * @param siteTitle   Shown on the left, linking home
+ * @param flushHeader Whether to drop the gap under the header, for pages with
+ *                    their own sticky header right below it
+ */
+const Header = ({ siteTitle, flushHeader }) => (
   <>
-    <Navbar collapseOnSelect expand="lg" className="sunrise-nav">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className={"sunrise-nav" + (flushHeader ? " -flush" : "")}
+    >
       <a
         className="sr-only sr-only-focusable skip-link btn btn-light"
         href="#main"
