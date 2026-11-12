@@ -51,8 +51,10 @@ export default function PowerTradeNote({ trade, placeTitle }) {
     )
   }
 
-  const isImporter = netImportsPct >= MinTradePct
-  const isExporter = netExportsPct >= MinTradePct
+  // Compare the shares as shown (rounded), so the label always matches the
+  // number, e.g. 14.6% reads as "about 15%" and so counts as large
+  const isImporter = Math.round(netImportsPct) >= MinTradePct
+  const isExporter = Math.round(netExportsPct) >= MinTradePct
 
   if (!isImporter && !isExporter) {
     return (
@@ -68,12 +70,11 @@ export default function PowerTradeNote({ trade, placeTitle }) {
 
   const where = getTradePartners(trade, isImporter)
   const tradedPct = isImporter ? netImportsPct : netExportsPct
-  const isLarge = tradedPct >= LargeTradePct
-  const size = isLarge ? "large" : "small"
-
   // Rounded once, so the two shares always add up to 100%
   const tradedRounded = Math.round(tradedPct)
   const homePct = 100 - tradedRounded
+  const isLarge = tradedRounded >= LargeTradePct
+  const size = isLarge ? "large" : "small"
 
   /**
    * What trade means for the state's power emissions and carbon-free share,
@@ -127,9 +128,7 @@ export default function PowerTradeNote({ trade, placeTitle }) {
       <div
         className="power-trade-chart"
         role="img"
-        aria-label={`${homePct}% ${homeLabel.toLowerCase()}, ${Math.round(
-          tradedPct
-        )}% ${tradedLabel.toLowerCase()}`}
+        aria-label={`${homePct}% ${homeLabel.toLowerCase()}, ${tradedRounded}% ${tradedLabel.toLowerCase()}`}
       >
         <div className="power-trade-bar" aria-hidden="true">
           <span className="-home" style={{ flexGrow: 100 - tradedPct }} />

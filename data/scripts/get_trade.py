@@ -31,9 +31,11 @@ def build_row(row):
         'interstateNetImports': interstate,
         'internationalNetImports': international,
         # Imports as a share of the electricity a state uses (its supply), and
-        # exports as a share of what it generates
-        'netImportsPct': round(100 * net_imports / supply, 1) if net_imports > 0 else 0,
-        'netExportsPct': round(-100 * net_imports / generation, 1) if net_imports < 0 else 0,
+        # exports as a share of what it generates. The site rounds these to
+        # whole percents, so keep 3 decimals: rounding to 1 first could round
+        # wrong (2.46 to 2.5 to 3), and more digits than 3 add nothing
+        'netImportsPct': round(100 * net_imports / supply, 3) if net_imports > 0 else 0,
+        'netExportsPct': round(-100 * net_imports / generation, 3) if net_imports < 0 else 0,
     }
 
 
