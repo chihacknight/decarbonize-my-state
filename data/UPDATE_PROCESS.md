@@ -18,7 +18,7 @@ EPA publishes it as a zip containing a ~20MB Excel workbook, which is too big to
    make final/emissions/emissions.json
    ```
 
-   Or with Docker: `docker-compose run --rm --entrypoint "make update-emissions-raw final/emissions/emissions.json EPA_ZIP=allstateghgdata90-22_v082924.zip" make`
+   Or with Docker: `docker compose run --rm --entrypoint "make update-emissions-raw final/emissions/emissions.json EPA_ZIP=allstateghgdata90-22_v082924.zip" make`
 3. Delete the zip from `data/`.
 4. Update the `emissions` entry in `src/constants/source-citations.js` (title year range and date).
 5. Update the release years in the first paragraph of this section.
@@ -55,7 +55,7 @@ The bulk file (`ELEC.zip`) is ~300MB, so we convert it to `raw/eia_state_net_gen
    make final/power_generation/power_generation.json
    ```
 
-   Or with Docker: `docker-compose run --rm --entrypoint "make update-generation-raw final/power_generation/power_generation.json EIA_ZIP=ELEC.zip" make`
+   Or with Docker: `docker compose run --rm --entrypoint "make update-generation-raw final/power_generation/power_generation.json EIA_ZIP=ELEC.zip" make`
 3. Delete the zip from `data/`.
 4. Update the `power-generation` entry in `src/constants/source-citations.js` (title year range and date).
 5. Update the years in the first paragraph of this section.
@@ -101,7 +101,7 @@ AFDC publishes each year as a table on that page, picked with `?year=` (its down
    make final/vehicles/vehicles.json
    ```
 
-   Or with Docker: `docker-compose run --rm --entrypoint "make update-vehicles-raw final/vehicles/vehicles.json AFDC_HTML=afdc_vehicle_registration.html" make`
+   Or with Docker: `docker compose run --rm --entrypoint "make update-vehicles-raw final/vehicles/vehicles.json AFDC_HTML=afdc_vehicle_registration.html" make`
 
    To re-pull several years, save each one (`https://afdc.energy.gov/vehicle-registration?year=2016` and so on) and pass them all, e.g. `AFDC_HTML="afdc_2016.html afdc_2017.html"`.
 4. Delete the HTML files from `data/`.
@@ -135,7 +135,7 @@ The raw CSV comes from the [Census API](https://www.census.gov/data/developers/d
    make final/buildings/buildings.json
    ```
 
-   Or with Docker: `docker-compose run --rm --entrypoint "make final/buildings/buildings.json" make`
+   Or with Docker: `docker compose run --rm --entrypoint "make final/buildings/buildings.json" make`
 3. Update the `home-heating` entry in `src/constants/source-citations.js` (title years, date and the `ACSDT1Y<year>` part of the link).
 4. Update the years and release date in the first paragraph of this section.
 
@@ -162,7 +162,7 @@ Each state's profile is its own spreadsheet, so the fetch downloads 51 files. No
    make final/trade/trade.json
    ```
 
-   Or with Docker: `docker-compose run --rm --entrypoint "make update-trade-raw final/trade/trade.json" make`
+   Or with Docker: `docker compose run --rm --entrypoint "make update-trade-raw final/trade/trade.json" make`
 3. Update the `power-trade` entry in `src/constants/source-citations.js` (date).
 4. Update the year and release date in the first paragraph of this section.
 
