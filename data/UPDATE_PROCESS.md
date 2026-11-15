@@ -141,7 +141,7 @@ The raw CSV comes from the [Census API](https://www.census.gov/data/developers/d
 
 ## Electricity imports and exports
 
-The note under each state's power generation pie chart ("Virginia is a net importer: about 31% of the electricity it uses comes from other states") comes from the EIA's [State Electricity Profiles](https://www.eia.gov/electricity/state/), Table 10 "Supply and disposition of electricity", currently the latest year only, **2024** (released November 2025). The EIA publishes a new profile year every November. See `ENERGY_EXPORT_IMPORT_PLAN.md` for why it matters and what's next.
+The note under each state's power generation pie chart ("Note that Virginia is a large importer: about 31% of the electricity it uses comes from other states") comes from the EIA's [State Electricity Profiles](https://www.eia.gov/electricity/state/), Table 10 "Supply and disposition of electricity", currently the latest year only, **2024** (released November 2025). The EIA publishes a new profile year every November. See `ENERGY_EXPORT_IMPORT_PLAN.md` for why it matters and what's next.
 
 We count trade with other countries as well as other states, since border states can trade a lot of power with Canada (Vermont sends power to other states but imports more from Canada, so it's a net importer overall). Imports are shown as a share of the electricity a state uses (total supply) and exports as a share of what it generates. The data has no fuel breakdown, so it says how much power crossed state lines but not what made it. See `get_trade.py`.
 
