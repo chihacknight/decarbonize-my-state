@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 
 const navLinks = [
   { to: "/", label: "Home" },
+  { to: "/map", label: "Map" },
   { to: "/about", label: "About" },
   { to: "/terminology", label: "Terminology" },
   { to: "/faq", label: "FAQ" },
