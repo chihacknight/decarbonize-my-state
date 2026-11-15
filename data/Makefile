@@ -1,12 +1,16 @@
 
-GENERATED_FILES = final/emissions/emissions.json final/buildings/buildings.json final/vehicles/vehicles.json final/power_plants/power_plants.json final/target_generation/target_generation.json final/power_generation/power_generation.json
+GENERATED_FILES = final/emissions/emissions.json final/buildings/buildings.json final/vehicles/vehicles.json final/power_plants/power_plants.json final/target_generation/target_generation.json final/power_generation/power_generation.json final/trade/trade.json
 
 all: $(GENERATED_FILES)
+
+# If a script fails partway, delete its half-written output so the next make
+# reruns it instead of treating it as up to date
+.DELETE_ON_ERROR:
 
 clean:
 	rm -rf final/*
 
-OUT = final/emissions final/buildings final/vehicles final/power_plants final/target_generation final/power_generation
+OUT = final/emissions final/buildings final/vehicles final/power_plants final/target_generation final/power_generation final/trade
 
 $(shell   mkdir -p $(OUT))
 
@@ -62,3 +66,15 @@ update-generation-raw :
 
 final/target_generation/target_generation.json : raw/state_renewable_gen_targets.csv raw/eia_state_net_generation.csv
 	python scripts/get_target_generations.py $^ > $@
+
+final/trade/trade.json : raw/eia_state_electricity_trade.csv
+	python scripts/get_trade.py $< > $@
+
+# Not part of `all` - refetches the raw electricity trade CSV from each state's
+# EIA State Electricity Profile (one spreadsheet per state, no API key needed).
+# See UPDATE_PROCESS.md
+.PHONY : update-trade-raw
+update-trade-raw :
+	python scripts/fetch_eia_trade.py > eia_state_electricity_trade.csv \
+		|| { rm -f eia_state_electricity_trade.csv; exit 1; }
+	mv eia_state_electricity_trade.csv raw/eia_state_electricity_trade.csv

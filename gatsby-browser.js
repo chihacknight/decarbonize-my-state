@@ -21,12 +21,26 @@ const getSavedScrollY = ({ pathname, key }) => {
 }
 
 /**
+ * The element a URL hash like "#a%20b" points to, decoded like Gatsby's own
+ * scrollToHash, or null
+ */
+const getHashTarget = hash => {
+  try {
+    return document.getElementById(decodeURI(hash.slice(1)))
+  } catch (e) {
+    // A malformed escape like "%E0%A4%A"
+    return null
+  }
+}
+
+/**
  * Scroll handling on navigation. State pages scroll smoothly for in-page links
  * (CSS scroll-behavior in state-details.css), so:
  *
- * - In-page links (only the hash changes) are left to the browser, so they
+ * - In-page links (same page, to a hash) are left to the browser, so they
  *   scroll smoothly. Gatsby would otherwise scroll to the current position,
- *   cancelling it
+ *   cancelling it. Other same-page links, like the logo on the home page,
+ *   still go to the top
  * - Moving to another page jumps straight to its saved position (going back
  *   or forward), its hash's section, or the top, rather than smooth scrolling
  *   there from wherever the last page was scrolled to
@@ -36,13 +50,12 @@ export const shouldUpdateScroll = ({
   routerProps: { location },
 }) => {
   const prevPath = prevRouterProps && prevRouterProps.location.pathname
-  if (prevPath === location.pathname) {
+  if (prevPath === location.pathname && location.hash) {
     return false
   }
 
   const savedY = getSavedScrollY(location)
-  const hashTarget =
-    location.hash && document.getElementById(location.hash.slice(1))
+  const hashTarget = location.hash && getHashTarget(location.hash)
   if (!savedY && hashTarget) {
     hashTarget.scrollIntoView({ behavior: "instant" })
   } else {

@@ -280,6 +280,9 @@ const AboutPage = ({ data }) => {
           </h3>
           {getLongCitation("power-generation")}
 
+          <h3 className="pt-2 h4">Electricity Imports And Exports By State</h3>
+          {getLongCitation("power-trade")}
+
           <h2 className="pt-3">Source Code</h2>
           <p>
             All the code for this site is open source and available on{" "}

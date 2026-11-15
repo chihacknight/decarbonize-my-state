@@ -18,7 +18,7 @@ import Header from "../components/header"
 // The copyright runs from launch to the year the site was last built
 const currentYear = new Date().getFullYear()
 
-const Layout = ({ children }) => {
+const Layout = ({ children, flushHeader = false }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -31,7 +31,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header
+        siteTitle={data.site.siteMetadata.title}
+        flushHeader={flushHeader}
+      />
       <main role="main">
         <div className="container">
           <Row>
