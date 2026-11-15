@@ -1,0 +1,349 @@
+/**
+ * The /map page's maps of small charts over each state, see
+ * state-overlay-map.js, power-pies-map.js and emissions-bars-map.js
+ */
+.overlay-map-section {
+  margin-bottom: 4rem;
+}
+
+/* Switches between the emissions and power maps */
+.overlay-map-view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.overlay-map-view-toggle .chart-toggle button {
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+}
+
+.overlay-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay-map-state {
+  fill: var(--light-grey);
+  stroke: #fff;
+  stroke-width: 1;
+  outline: none;
+  cursor: pointer;
+}
+
+.overlay-map-state.-active,
+.overlay-map-state:focus {
+  fill: var(--mid-grey);
+  stroke: #421b49;
+  stroke-width: 2;
+}
+
+.overlay-map-marker {
+  cursor: pointer;
+}
+
+.overlay-map-leader line {
+  stroke: #888;
+  stroke-width: 0.75;
+}
+
+.overlay-map-leader circle {
+  fill: #888;
+}
+
+.overlay-map-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.overlay-map-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.overlay-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+}
+
+/* Legend items you can hover or click to highlight */
+.overlay-map-legend li[tabindex] {
+  padding: 0 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.overlay-map-legend li[tabindex].-active {
+  background: var(--light-grey);
+}
+
+/* Clicked to stay highlighted */
+.overlay-map-legend li[tabindex].-pinned {
+  border-color: var(--text-color-main);
+}
+
+.overlay-map-swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+  vertical-align: -0.05rem;
+}
+
+.overlay-map-swatch.-ring {
+  background: transparent;
+  border: 3px solid #28ac28;
+  border-radius: 50%;
+}
+
+.overlay-map-tooltip {
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+.overlay-map-tooltip-total {
+  margin-bottom: 0.25rem;
+}
+
+/* Parts of a marker other than the highlighted legend item fade out */
+.overlay-map-part {
+  transition: opacity 0.15s;
+}
+
+.overlay-map-part.-faded {
+  opacity: 0.15;
+}
+
+/* Power pies */
+.mini-pie-bg {
+  fill: #fff;
+  opacity: 0.85;
+}
+
+.mini-pie-label {
+  font-weight: bold;
+  fill: var(--text-color-main);
+  /* Let clicks through to the pie */
+  pointer-events: none;
+}
+
+/* Emissions bars */
+.mini-bar-bg {
+  fill: #fff;
+  opacity: 0.85;
+}
+
+.mini-bar-label {
+  font-weight: bold;
+  fill: var(--text-color-main);
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* Segments slide when a highlighted category moves to the bottom */
+.mini-bar-segment {
+  transition: transform 0.25s, opacity 0.15s;
+}
+
+/* Maps shading states by a share, see share-shade-map.js */
+.share-swatch {
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.share-legend {
+  width: 20rem;
+  max-width: 100%;
+  margin: 0 auto 1.5rem;
+  font-size: 0.875rem;
+}
+
+.share-legend-title {
+  margin-bottom: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.share-legend-scale {
+  position: relative;
+  /* Room for the outer tick labels, which center on the bar's ends */
+  margin: 0 1rem;
+}
+
+.share-legend-bar {
+  height: 0.75rem;
+  border-radius: 2px;
+  border: 1px solid var(--mid-grey);
+}
+
+.share-legend-ticks {
+  position: relative;
+  height: 1.25rem;
+}
+
+.share-legend-ticks span {
+  position: absolute;
+  top: 0.15rem;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+}
+
+/* A line through the bar marking the national share, labeled above */
+.share-legend-national {
+  position: absolute;
+  top: -0.3rem;
+  height: 1.35rem;
+  border-left: 2px solid var(--text-color-main);
+}
+
+.share-legend-national span {
+  position: absolute;
+  bottom: 100%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Trend indicators, see trends.js */
+.trend-glyph path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trend-glyph-outline {
+  stroke: #fff;
+  stroke-width: 4;
+}
+
+.trend-glyph-line {
+  stroke-width: 2;
+}
+
+.trend-icon {
+  margin-right: 0.3rem;
+  vertical-align: -0.15rem;
+}
+
+.trend-legend-title {
+  font-weight: bold;
+}
+
+.overlay-map-tooltip-trend {
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* The tooltip's background is dark, so lighten the icon's outline */
+.overlay-map-tooltip-trend .trend-glyph-outline {
+  stroke: transparent;
+}
+
+/* States without the trend picked in the trend legend */
+.overlay-map-state,
+.overlay-map-marker {
+  transition: opacity 0.15s;
+}
+
+.overlay-map-state.-dimmed {
+  opacity: 0.3;
+}
+
+.overlay-map-marker.-dimmed {
+  opacity: 0.15;
+}
+
+/* Sparklines in the map tooltips, see TrendSparkline in trends.js */
+.trend-sparkline {
+  margin-bottom: 0.35rem;
+}
+
+.trend-sparkline svg {
+  display: block;
+  overflow: visible;
+}
+
+.trend-sparkline-window {
+  fill: rgba(255, 255, 255, 0.1);
+}
+
+.trend-sparkline-state,
+.trend-sparkline-us {
+  fill: none;
+  stroke-linejoin: round;
+}
+
+.trend-sparkline-state {
+  stroke: #fff;
+  stroke-width: 1.75;
+}
+
+.trend-sparkline-us {
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 2;
+}
+
+.trend-sparkline-fit {
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.trend-sparkline-label {
+  fill: #fff;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.trend-sparkline-year {
+  fill: rgba(255, 255, 255, 0.7);
+  font-size: 9px;
+}
+
+.trend-sparkline-key {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.trend-sparkline-key .-state::before,
+.trend-sparkline-key .-us::before {
+  content: "";
+  display: inline-block;
+  width: 0.9rem;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+  border-top: 2px solid #fff;
+}
+
+.trend-sparkline-key .-us::before {
+  border-top: 1.5px dashed rgba(255, 255, 255, 0.6);
+}
